@@ -1,6 +1,6 @@
 The MIT License (MIT)
 
-Copyright (c) 2011-2013 Alessandro Arpetti, Daniela Baron, Fernando Luis de Oliveira Costa.
+Copyright (c) 2011-2013 Alessandro Arpetti, Daniela Baron, Fernando Luis de Oliveira Costa. http://www.professoreitaliano.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
