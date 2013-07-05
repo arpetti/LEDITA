@@ -2,13 +2,11 @@
 
 /* Controllers */
 
-angular.module('led-proto')
-.controller('AppCtrl',
-['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
-
-    $scope.getUserRoleText = function(role) {
-        return _.invert(Auth.userRoles)[role];
-    };
+angular.module('ledita-app')
+.controller('AppCtrl', ['$scope', '$location', 'Auth', function($scope, $location, Auth) {
+    $scope.user = Auth.user;
+    $scope.userRoles = Auth.userRoles;
+    $scope.accessLevels = Auth.accessLevels;
 
     $scope.logout = function() {
         Auth.logout(function() {
@@ -19,7 +17,7 @@ angular.module('led-proto')
     };
 }]);
 
-angular.module('led-proto')
+angular.module('ledita-app')
 .controller('LoginCtrl',
 ['$rootScope', '$scope', '$location', '$window', 'Auth', function($rootScope, $scope, $location, $window, Auth) {
 
@@ -41,19 +39,19 @@ angular.module('led-proto')
     $scope.loginOauth = function(provider) {
         $window.location.href = '/auth/' + provider;
     };
-
 }]);
 
-angular.module('led-proto')
+angular.module('ledita-app')
 .controller('HomeCtrl',
 ['$rootScope', function($rootScope) {
 
 }]);
 
-angular.module('led-proto')
+angular.module('ledita-app')
 .controller('RegisterCtrl',
 ['$rootScope', '$scope', '$location', 'Auth', function($rootScope, $scope, $location, Auth) {
-    $scope.role = routingConfig.userRoles.user;
+    $scope.role = Auth.userRoles.user;
+    $scope.userRoles = Auth.userRoles;
 
     $scope.register = function() {
         Auth.register({
@@ -61,28 +59,28 @@ angular.module('led-proto')
                 password: $scope.password,
                 role: $scope.role
             },
-            function(res) {
+            function() {
                 $scope.alertMsg = null; // clear the error message on successful registration
-                $rootScope.user = res;
                 $location.path('/');
             },
             function(err) {
+                $rootScope.error = err;
                 $scope.alertMsg = err;
             });
     };
-
 }]);
 
-angular.module('led-proto')
+angular.module('ledita-app')
 .controller('PrivateCtrl',
 ['$rootScope', function($rootScope) {
 }]);
 
 
-angular.module('led-proto')
+angular.module('ledita-app')
 .controller('AdminCtrl',
-['$rootScope', '$scope', 'Users', function($rootScope, $scope, Users) {
+['$rootScope', '$scope', 'Users', 'Auth', function($rootScope, $scope, Users, Auth) {
     $scope.loading = true;
+    $scope.userRoles = Auth.userRoles;
 
     Users.getAll(function(res) {
         $scope.users = res;

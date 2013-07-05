@@ -115,7 +115,6 @@ var routes = [
         path: '/*',
         httpMethod: 'GET',
         middleware: [function(req, res) {
-            console.log('all other req.url = ' + req.url);
             var role = userRoles.public, username = '';
             if(req.user) {
                 role = req.user.role;
@@ -165,7 +164,7 @@ function ensureAuthorized(req, res, next) {
     if(!req.user) return res.send(401);
 
     var accessLevel = _.findWhere(routes, { path: req.route.path }).accessLevel || accessLevels.public;
-    if(!(accessLevel & req.user.role)) return res.send(403);
+    if(!(accessLevel.bitMask & req.user.role.bitMask)) return res.send(403);
 
     return next();
 }

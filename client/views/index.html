@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="led-proto">
+<html lang="en" ng-app="ledita-app">
 <head>
   <meta charset="utf-8">
-  <title>LED Proto</title>
+  <title>LEDITA</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -21,7 +21,7 @@
 
 <body ng-controller="AppCtrl">
 
-  <!-- Nav Bar Anon View -->
+  <!-- Begin Nav Bar Anon View -->
   <div data-access-level='{{ accessLevels.anon }}' ng-controller="LoginCtrl" class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
@@ -40,9 +40,9 @@
         </div><!--/.nav-collapse -->
       </div>
     </div>
-  </div><!-- /.navbar (anon view) -->
+  </div><!-- End Nav Bar Anon View -->
 
-  <!-- Nav Bar User View -->
+  <!-- Begin Nav Bar User View -->
   <div data-access-level='{{ accessLevels.user }}' class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
@@ -78,15 +78,14 @@
       </div><!--/.nav-collapse -->
     </div>
   </div>
-</div><!-- /.navbar (user view) -->
+</div><!-- End Nav Bar User View -->
 
 <div ng-view class="container"></div>
 
 <!-- Vendor Lib -->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-cookies.js"></script>
-<script src="/js/lib/ui-bootstrap-tpls-0.4.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-cookies.js"></script>
 
 <!-- Client MVC -->
 <script src="/js/routingConfig.js"></script>

@@ -1,30 +1,47 @@
 'use strict';
 
-angular.module('led-proto')
-.directive('accessLevel', ['$rootScope', 'Auth', function($rootScope, Auth) {
+angular.module('ledita-app')
+.directive('accessLevel', ['Auth', function(Auth) {
     return {
         restrict: 'A',
-        link: function(scope, element, attrs) {
-            var prevDisp = element.css('display');
-            $rootScope.$watch('user.role', function(role) {
-                if(!Auth.authorize(attrs.accessLevel))
-                    element.css('display', 'none');
-                else
-                    element.css('display', prevDisp);
+        link: function($scope, element, attrs) {
+            var prevDisp = element.css('display')
+                , userRole
+                , accessLevel;
+
+            $scope.user = Auth.user;
+            $scope.$watch('user', function(user) {
+                if(user.role)
+                    userRole = user.role;
+                updateCSS();
+            }, true);
+
+            attrs.$observe('accessLevel', function(al) {
+                if(al) accessLevel = $scope.$eval(al);
+                updateCSS();
             });
+
+            function updateCSS() {
+                if(userRole && accessLevel) {
+                    if (!Auth.authorize(accessLevel, userRole))
+                        element.css('display', 'none');
+                    else  
+                        element.css('display', prevDisp);
+                    
+                }
+            }
         }
     };
 }]);
 
-// This is not used for now
-angular.module('led-proto').directive('activeNav', ['$location', function(location) {
+angular.module('ledita-app').directive('activeNav', ['$location', function($location) {
     return {
         restrict: 'A',
         link: function(scope, element, attrs) {
             var nestedA = element.find('a')[0];
             var path = nestedA.href;
 
-            scope.location = location;
+            scope.location = $location;
             scope.$watch('location.absUrl()', function(newPath) {
                 if (path === newPath) {
                     element.addClass('active');

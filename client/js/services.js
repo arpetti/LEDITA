@@ -1,50 +1,58 @@
 'use strict';
 
-angular.module('led-proto')
-.factory('Auth', function($http, $rootScope, $cookieStore){
+angular.module('ledita-app')
+.factory('Auth', function($http, $cookieStore){
 
     var accessLevels = routingConfig.accessLevels
-        , userRoles = routingConfig.userRoles;
+        , userRoles = routingConfig.userRoles
+        , currentUser = $cookieStore.get('user') || { username: '', role: userRoles.public };
 
-    $rootScope.user = $cookieStore.get('user') || { username: '', role: userRoles.public };
     $cookieStore.remove('user');
 
-    $rootScope.accessLevels = accessLevels;
-    $rootScope.userRoles = userRoles;
+    function changeUser(user) {
+        _.extend(currentUser, user);
+    };
 
     return {
         authorize: function(accessLevel, role) {
             if(role === undefined)
-                role = $rootScope.user.role;
-            return accessLevel & role;
+                role = currentUser.role;
+
+            return accessLevel.bitMask & role.bitMask;
         },
         isLoggedIn: function(user) {
             if(user === undefined)
-                user = $rootScope.user;
-            return user.role === userRoles.user || user.role === userRoles.admin;
+                user = currentUser;
+            return user.role == userRoles.user || user.role == userRoles.admin;
         },
         register: function(user, success, error) {
-            $http.post('/register', user).success(success).error(error);
+            $http.post('/register', user).success(function(res) {
+                changeUser(res);
+                success();
+            }).error(error);
         },
         login: function(user, success, error) {
             $http.post('/login', user).success(function(user){
-                $rootScope.user = user;
+                changeUser(user);
                 success(user);
             }).error(error);
         },
         logout: function(success, error) {
             $http.post('/logout').success(function(){
-                $rootScope.user.username = '';
-                $rootScope.user.role = userRoles.public;
+                changeUser({
+                    username: '',
+                    role: userRoles.public
+                });
                 success();
             }).error(error);
         },
         accessLevels: accessLevels,
-        userRoles: userRoles
+        userRoles: userRoles,
+        user: currentUser
     };
 });
 
-angular.module('led-proto')
+angular.module('ledita-app')
 .factory('Users', function($http) {
     return {
         getAll: function(success, error) {

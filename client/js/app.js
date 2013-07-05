@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('led-proto', ['ngCookies', 'ui.bootstrap'])
+angular.module('ledita-app', ['ngCookies'])
 
     .config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 
@@ -86,5 +86,4 @@ angular.module('led-proto', ['ngCookies', 'ui.bootstrap'])
             }
         });
 
-        $rootScope.appInitialized = true;
     }]);
