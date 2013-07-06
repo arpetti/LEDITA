@@ -62,7 +62,7 @@
           <ul class="nav pull-right">
             <li id="loggedInUserName" class="nav-username">{{ user.username }}</li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <a id="userActionsMenu" href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="img/avatar_sample.png" alt="User Avatar" class="img-rounded"/>
                 <b class="caret"></b>
               </a>
@@ -70,7 +70,7 @@
                 <li><a href="#"><i class="icon-cog"></i> Preferences</a></li>
                 <li><a href="#"><i class="icon-envelope"></i> Contact Support</a></li>
                 <li class="divider"></li>
-                <li><a ng-click="logout()" href=""><i class="icon-off"></i> Logout</a></li>
+                <li><a id="logoutLink" ng-click="logout()" href=""><i class="icon-off"></i> Logout</a></li>
               </ul>
             </li>
           </ul>

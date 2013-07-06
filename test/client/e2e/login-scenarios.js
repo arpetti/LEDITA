@@ -2,19 +2,19 @@
 
 /* http://docs.angularjs.org/guide/dev_guide.e2e-testing */
 
-//TODO: Add pageIds to top level div elements so tests can verify what page we're on
 describe('Login Flow', function() {
 
-  // FIXME: Angular-Karma-Scenario bug? Doesn't work for navigating to slash
-  // Follow issue at: https://github.com/angular/angular.js/issues/3149
   it('Non logged in user sees login or register page', function() {
     browser().navigateTo('/');
+    // This remains commented until have a fix - https://github.com/angular/angular.js/issues/3149
     // expect(browser().location().url()).toBe('/');
   });
 
   it('Non logged in user can navigate to login page', function() {
     browser().navigateTo('/login');
     expect(browser().location().url()).toBe('/login');
+    expect(element('#navBarAnon', 'anon nav is displayed for anon user').css('display')).toBe('block');
+    expect(element('#navBarUser', 'user nav is hidden for anon user').css('display')).toBe('none');
   });
 
   it('New user can register', function() {
@@ -23,6 +23,7 @@ describe('Login Flow', function() {
     browser().navigateTo('/login');
     expect(browser().location().url()).toBe('/login');
 
+    // Register
     input('firstname').enter('John');
     input('surname').enter('Smith');
     input('username').enter(userNameToRegister);
@@ -30,7 +31,18 @@ describe('Login Flow', function() {
     input('retypepassword').enter('123456');
     element('#signup').click();
 
-    expect(element('#loggedInUserName').text()).toBe(userNameToRegister);
+    // Verify logged in view
+    expect(element('#navBarUser', 'user nav is displayed for logged in user').css('display')).toBe('block');
+    expect(element('#navBarAnon', 'anon nav is hidden for logged in user').css('display')).toBe('none');
+    expect(element('#loggedInUserName', 'user name is displayed for logged in user').text()).toBe(userNameToRegister);
+
+    // Logout
+    element('#userActionsMenu').click();
+    element('#logoutLink').click();
+
+    // Verify anon view
+    expect(element('#navBarAnon', 'anon nav is displayed after user logs out').css('display')).toBe('block');
+    expect(element('#navBarUser', 'user nav is hidden after user logs out').css('display')).toBe('none');
   });
 
   it('Invalid path redirects to 404', function() {
