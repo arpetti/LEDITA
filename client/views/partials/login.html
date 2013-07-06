@@ -22,13 +22,13 @@
 
           <div class="control-group">
             <div class="controls">
-              <input id="firstName" name="firstName" type="text" placeholder="Name" class="input-xlarge" required="" />
+              <input ng-model="firstname" type="text" placeholder="Name" class="input-xlarge" required="" />
             </div>
           </div>
 
           <div class="control-group">
             <div class="controls">
-              <input id="lastName" name="lastName" type="text" placeholder="Surname" class="input-xlarge" required="" />
+              <input ng-model="surname" type="text" placeholder="Surname" class="input-xlarge" required="" />
             </div>
           </div>
 
@@ -46,7 +46,7 @@
 
           <div class="control-group">
             <div class="controls">
-              <input type="password" placeholder="Retype Password" class="input-xlarge" required="" />
+              <input ng-model="retypepassword" type="password" placeholder="Retype Password" class="input-xlarge" required="" />
             </div>
           </div>
 
@@ -62,7 +62,7 @@
         </div>
 
         <div class="form-actions">
-          <button type="submit" class="btn signup btn-large btn-signup">Sign Up</button>
+          <button id="signup" type="submit" class="btn signup btn-large btn-signup">Sign Up</button>
         </div>
 
       </fieldset>

@@ -3,6 +3,7 @@ basePath = '../';
 files = [
   ANGULAR_SCENARIO,
   ANGULAR_SCENARIO_ADAPTER,
+  'lib/custom/**/*.js',
   'e2e/**/*.js'
 ];
 
