@@ -11,6 +11,30 @@ Project Website: http://www.professoreitaliano.com
 ### Setup Instructions
 
 * If you don't already have it, install [Node.js](http://nodejs.org/)
+* Install Karma
+
+    ```
+    npm install -g karma
+    ```
+
+    Note: For Windows 64 bit, the default Karma Chrome launcher configuration points to the wrong location for Chrome.
+    Fix it by modifying the following file (check your environment variable for value of PATH)
+
+    ```
+    %PATH%\node_modules\karma\lib\launchers\Chrome.js
+    ```
+
+    Original line
+
+    ```
+    win32: process.env.LOCALAPPDATA + '\\Google\\Chrome\\Application\\chrome.exe'
+    ```
+
+    Change it to
+
+    ```
+    win32: process.env.ProgramFiles + ' (x86)\\Google\\Chrome\\Application\\chrome.exe'
+    ```
 * Clone this repo and cd to project directory, then run
 
     ```
@@ -42,8 +66,30 @@ Project Website: http://www.professoreitaliano.com
     * Retype password can be anything (not used yet)
     * Check or uncheck terms & conditions (not used yet)
 
-* Register with server side validation error
+### <a name="rune2e"/>Run End To End Tests
 
-    * Follow instructions as for registering a new user, but enter a password with less than 5 characters
+* Start Karma with e2e test config (from project root)
+    
+    Windows
+    ```
+    test\client\scripts\e2e-test.bat
+    ```
 
+    Linux
+    ```
+    test/client/scripts/e2e-test.sh
+    ```
 
+### Debug End To End Tests
+
+* Insert the following line in any end to end test code
+
+    ```
+    pause();
+    ```
+
+* Follow instructions to [Run End To End Tests](#rune2e)
+
+* Chrome browser will be launched to run tests, and when breakpoint is hit, will display the app at that point in time
+
+* Click resume in the browser to continue the test
