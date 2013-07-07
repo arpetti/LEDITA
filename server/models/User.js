@@ -7,7 +7,7 @@ var User
     , GoogleStrategy = require('passport-google').Strategy
     , LinkedInStrategy = require('passport-linkedin').Strategy
     , check =           require('validator').check
-    , userRoles =       require('../../client/js/Auth/authRoutingConfig').userRoles;
+    , userRoles =       require('../../client/js/routingConfig').userRoles;
 
 //FIXME: In real app, user info will come from datastore
 var users = [

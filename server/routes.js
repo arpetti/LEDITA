@@ -4,8 +4,8 @@ var _ =           require('underscore')
     , AuthCtrl =  require('./controllers/auth')
     , UserCtrl =  require('./controllers/user')
     , User =      require('./models/User.js')
-    , userRoles = require('../client/js/auth/AuthRoutingConfig').userRoles
-    , accessLevels = require('../client/js/auth/AuthRoutingConfig').accessLevels;
+    , userRoles = require('../client/js/routingConfig').userRoles
+    , accessLevels = require('../client/js/routingConfig').accessLevels;
 
 var routes = [
 
