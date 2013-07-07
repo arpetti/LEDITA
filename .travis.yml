@@ -7,7 +7,3 @@ before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
 
-
-script:
-  #- karma start config/karma.conf.js --no-auto-watch --single-run --reporters=dots --browsers=Firefox
-  - karma start test/client/config/karma-e2e.conf.js --reporters=dots --browsers=Firefox
