@@ -4,7 +4,7 @@ angular.module('ledita-app', ['ngCookies'])
 
     .config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 
-    var access = routingConfig.accessLevels;
+    var access = AuthRoutingConfig.accessLevels;
 
     $routeProvider.when('/',
         {

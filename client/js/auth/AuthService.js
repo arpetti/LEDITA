@@ -3,8 +3,8 @@
 angular.module('ledita-app')
 .factory('Auth', function($http, $cookieStore){
 
-    var accessLevels = routingConfig.accessLevels
-        , userRoles = routingConfig.userRoles
+    var accessLevels = AuthRoutingConfig.accessLevels
+        , userRoles = AuthRoutingConfig.userRoles
         , currentUser = $cookieStore.get('user') || { username: '', role: userRoles.public };
 
     $cookieStore.remove('user');
