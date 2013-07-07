@@ -31,13 +31,13 @@ describe('Registration', function() {
 	});
 
 	it('Password cannot be less than 5 characters', function() {
-		var userNameToRegister2 = userNameGenerator.buildUserName + 'a';
+		var userNameToRegister = userNameGenerator.buildUserName + 'a';
 
 		// Try to register
 		browser().navigateTo('/login');
 	    input('firstname').enter('John');
 	    input('surname').enter('Smith');
-	    input('username').enter(userNameToRegister2);
+	    input('username').enter(userNameToRegister);
 	    input('password').enter('abc');
 	    input('retypepassword').enter('abc');
 	    element('#signup').click();
@@ -54,7 +54,7 @@ describe('Registration', function() {
 	    // Verify logged in view
 	    expect(element('#navBarUser', 'user nav is displayed for logged in user').css('display')).toBe('block');
 	    expect(element('#navBarAnon', 'anon nav is hidden for logged in user').css('display')).toBe('none');
-	    expect(element('#loggedInUserName', 'user name is displayed for logged in user').text()).toBe(userNameToRegister2);
+	    expect(element('#loggedInUserName', 'user name is displayed for logged in user').text()).toBe(userNameToRegister);
 
 	    // Logout
 	    element('#userActionsMenu').click();
@@ -63,6 +63,24 @@ describe('Registration', function() {
 	    // Verify anon view
 	    expect(element('#navBarAnon', 'anon nav is displayed after user logs out').css('display')).toBe('block');
 	    expect(element('#navBarUser', 'user nav is hidden after user logs out').css('display')).toBe('none');
+	});
+
+	it('Cannot register a user that already exists', function() {
+		var existingUserName = testUsers.getUserName;
+
+		// Try to register
+		browser().navigateTo('/login');
+	    input('firstname').enter('John');
+	    input('surname').enter('Smith');
+	    input('username').enter(existingUserName);
+	    input('password').enter('12345');
+	    input('retypepassword').enter('12345');
+	    element('#signup').click();
+
+	    // Verify error message is displayed
+	    expect(element('#registrationErrors', 'Registration error is displayed').count()).toBe(1);
+	    expect(element('#registrationErrors').text()).toMatch('User already exists');
+
 	});
 
 }); 	
