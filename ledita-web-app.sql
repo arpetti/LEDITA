@@ -81,6 +81,101 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `ledita-web-app`.`students`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ledita-web-app`.`students` ;
+
+CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`students` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `type` CHAR(1) NOT NULL COMMENT 'TYPE:\n1=ALL\n2=INDIVIDUAL\n3=PAIR\n4=GROUP' ,
+  `group_number` INT UNSIGNED NULL ,
+  `people_per_group` INT UNSIGNED NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ledita-web-app`.`activity`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ledita-web-app`.`activity` ;
+
+CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`activity` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `students_id` INT NOT NULL ,
+  `name` VARCHAR(255) NOT NULL ,
+  `type` CHAR(1) NOT NULL ,
+  `duration` TIME NOT NULL DEFAULT 0 ,
+  `pract_descr` VARCHAR(2000) NULL ,
+  `edu_descr` VARCHAR(2000) NULL ,
+  `modality` CHAR(1) NOT NULL COMMENT 'Modality:\n1=Face to face\n2=Online\n3=Blanded' ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_activity_students1_idx` (`students_id` ASC) ,
+  CONSTRAINT `fk_activity_students1`
+    FOREIGN KEY (`students_id` )
+    REFERENCES `ledita-web-app`.`students` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ledita-web-app`.`resource`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ledita-web-app`.`resource` ;
+
+CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`resource` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `activity_id` INT NOT NULL ,
+  `name` VARCHAR(50) NOT NULL ,
+  `type` VARCHAR(50) NOT NULL ,
+  `descr` VARCHAR(1000) NULL ,
+  `link` VARCHAR(255) NULL ,
+  `copy` VARCHAR(255) NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_resource_activity1_idx` (`activity_id` ASC) ,
+  CONSTRAINT `fk_resource_activity1`
+    FOREIGN KEY (`activity_id` )
+    REFERENCES `ledita-web-app`.`activity` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ledita-web-app`.`technology`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ledita-web-app`.`technology` ;
+
+CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`technology` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(50) NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ledita-web-app`.`file`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ledita-web-app`.`file` ;
+
+CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`file` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `resource_id` INT NOT NULL ,
+  `name` VARCHAR(50) NOT NULL ,
+  `size` INT UNSIGNED NULL ,
+  `uri` VARCHAR(255) NULL ,
+  `mime` VARCHAR(50) NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_file_resource1_idx` (`resource_id` ASC) ,
+  CONSTRAINT `fk_file_resource1`
+    FOREIGN KEY (`resource_id` )
+    REFERENCES `ledita-web-app`.`resource` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `ledita-web-app`.`objective`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `ledita-web-app`.`objective` ;
@@ -88,6 +183,18 @@ DROP TABLE IF EXISTS `ledita-web-app`.`objective` ;
 CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`objective` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `descr` VARCHAR(200) NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ledita-web-app`.`qcer`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ledita-web-app`.`qcer` ;
+
+CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`qcer` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(50) NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
@@ -101,6 +208,88 @@ CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`subject` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(100) NULL ,
   PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ledita-web-app`.`comment`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ledita-web-app`.`comment` ;
+
+CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`comment` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `user_id` INT NOT NULL ,
+  `comment_father_id` INT NOT NULL DEFAULT 0 ,
+  `ld_id` INT NOT NULL ,
+  `content` VARCHAR(2000) NOT NULL ,
+  `creation_date` DATETIME NOT NULL ,
+  `last_edit_date` TIMESTAMP NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_comment_user1_idx` (`user_id` ASC) ,
+  INDEX `fk_comment_comment1_idx` (`comment_father_id` ASC) ,
+  INDEX `fk_comment_ld1_idx` (`ld_id` ASC) ,
+  CONSTRAINT `fk_comment_user1`
+    FOREIGN KEY (`user_id` )
+    REFERENCES `ledita-web-app`.`user` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_comment_comment1`
+    FOREIGN KEY (`comment_father_id` )
+    REFERENCES `ledita-web-app`.`comment` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_comment_ld1`
+    FOREIGN KEY (`ld_id` )
+    REFERENCES `ledita-web-app`.`ld` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ledita-web-app`.`activity_group`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ledita-web-app`.`activity_group` ;
+
+CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`activity_group` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ledita-web-app`.`tag`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ledita-web-app`.`tag` ;
+
+CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`tag` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(255) NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ledita-web-app`.`likes`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ledita-web-app`.`likes` ;
+
+CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`likes` (
+  `user_id` INT NOT NULL ,
+  `ld_id` INT NOT NULL ,
+  INDEX `fk_ld_has_user_user1_idx` (`user_id` ASC) ,
+  INDEX `fk_ld_has_user_ld1_idx` (`ld_id` ASC) ,
+  PRIMARY KEY (`user_id`, `ld_id`) ,
+  CONSTRAINT `fk_ld_has_user_ld1`
+    FOREIGN KEY (`ld_id` )
+    REFERENCES `ledita-web-app`.`ld` (`user_id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ld_has_user_user1`
+    FOREIGN KEY (`user_id` )
+    REFERENCES `ledita-web-app`.`user` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -125,6 +314,30 @@ CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`concerns` (
     REFERENCES `ledita-web-app`.`ld` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ledita-web-app`.`classificates`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ledita-web-app`.`classificates` ;
+
+CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`classificates` (
+  `qcer_id` INT NOT NULL ,
+  `ld_id` INT NOT NULL ,
+  PRIMARY KEY (`qcer_id`, `ld_id`) ,
+  INDEX `fk_qcer_has_ld_ld1_idx` (`ld_id` ASC) ,
+  INDEX `fk_qcer_has_ld_qcer1_idx` (`qcer_id` ASC) ,
+  CONSTRAINT `fk_qcer_has_ld_qcer1`
+    FOREIGN KEY (`qcer_id` )
+    REFERENCES `ledita-web-app`.`qcer` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_qcer_has_ld_ld1`
+    FOREIGN KEY (`ld_id` )
+    REFERENCES `ledita-web-app`.`ld` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -181,6 +394,134 @@ CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`aims` (
     REFERENCES `ledita-web-app`.`objective` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ledita-web-app`.`composes`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ledita-web-app`.`composes` ;
+
+CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`composes` (
+  `id` INT NOT NULL ,
+  `ld_id` INT NOT NULL ,
+  `activity_id` INT NULL ,
+  `ld_part_id` INT NULL ,
+  `activity_group_id` INT NULL ,
+  `order` INT UNSIGNED NULL ,
+  INDEX `fk_activity_has_ld_ld1_idx` (`ld_id` ASC) ,
+  INDEX `fk_activity_has_ld_activity1_idx` (`activity_id` ASC) ,
+  INDEX `fk_composes_activity_group1_idx` (`activity_group_id` ASC) ,
+  INDEX `fk_ld_is_part_of_ld1_idx` (`ld_part_id` ASC) ,
+  PRIMARY KEY (`id`) ,
+  CONSTRAINT `fk_activity_has_ld_activity1`
+    FOREIGN KEY (`activity_id` )
+    REFERENCES `ledita-web-app`.`activity` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_activity_has_ld_ld1`
+    FOREIGN KEY (`ld_id` )
+    REFERENCES `ledita-web-app`.`ld` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_composes_activity_group1`
+    FOREIGN KEY (`activity_group_id` )
+    REFERENCES `ledita-web-app`.`activity_group` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ld_is_part_of_ld1`
+    FOREIGN KEY (`ld_part_id` )
+    REFERENCES `ledita-web-app`.`ld` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ledita-web-app`.`participates`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ledita-web-app`.`participates` ;
+
+CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`participates` (
+  `id` INT NOT NULL ,
+  `activity_group_id` INT NOT NULL ,
+  `activity_id` INT NULL ,
+  `ld_is_part_id` INT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_activity_has_activity_group_activity_group1_idx` (`activity_group_id` ASC) ,
+  INDEX `fk_activity_has_activity_group_activity1_idx` (`activity_id` ASC) ,
+  INDEX `fk_ld_has_acitivty_group_idx` (`ld_is_part_id` ASC) ,
+  CONSTRAINT `fk_activity_has_activity_group_activity1`
+    FOREIGN KEY (`activity_id` )
+    REFERENCES `ledita-web-app`.`activity` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_activity_has_activity_group_activity_group1`
+    FOREIGN KEY (`activity_group_id` )
+    REFERENCES `ledita-web-app`.`activity_group` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ld_has_acitivty_group`
+    FOREIGN KEY (`ld_is_part_id` )
+    REFERENCES `ledita-web-app`.`ld` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ledita-web-app`.`supports`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ledita-web-app`.`supports` ;
+
+CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`supports` (
+  `technology_id` INT NOT NULL ,
+  `activity_id` INT NOT NULL ,
+  PRIMARY KEY (`technology_id`, `activity_id`) ,
+  INDEX `fk_technology_has_activity_activity1_idx` (`activity_id` ASC) ,
+  INDEX `fk_technology_has_activity_technology1_idx` (`technology_id` ASC) ,
+  CONSTRAINT `fk_technology_has_activity_technology1`
+    FOREIGN KEY (`technology_id` )
+    REFERENCES `ledita-web-app`.`technology` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_technology_has_activity_activity1`
+    FOREIGN KEY (`activity_id` )
+    REFERENCES `ledita-web-app`.`activity` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ledita-web-app`.`describes`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ledita-web-app`.`describes` ;
+
+CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`describes` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `tag_id` INT NOT NULL ,
+  `comment_id` INT NULL ,
+  `activity_id` INT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_activity_has_tag_tag1_idx` (`tag_id` ASC) ,
+  INDEX `fk_describes_comment1_idx` (`comment_id` ASC) ,
+  INDEX `fk_describes_activity1_idx` (`activity_id` ASC) ,
+  CONSTRAINT `fk_activity_has_tag_tag1`
+    FOREIGN KEY (`tag_id` )
+    REFERENCES `ledita-web-app`.`tag` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_describes_comment1`
+    FOREIGN KEY (`comment_id` )
+    REFERENCES `ledita-web-app`.`comment` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_describes_activity1`
+    FOREIGN KEY (`activity_id` )
+    REFERENCES `ledita-web-app`.`activity` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 USE `ledita-web-app` ;
