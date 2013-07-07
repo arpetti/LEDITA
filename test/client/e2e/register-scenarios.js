@@ -7,10 +7,8 @@ describe('Registration', function() {
 	it('New user can register', function() {
 		var userNameToRegister = userNameGenerator.buildUserName;
 
-		browser().navigateTo('/login');
-		expect(browser().location().url()).toBe('/login');
-
     	// Register
+		browser().navigateTo('/login');
 	    input('firstname').enter('John');
 	    input('surname').enter('Smith');
 	    input('username').enter(userNameToRegister);
@@ -22,6 +20,45 @@ describe('Registration', function() {
 	    expect(element('#navBarUser', 'user nav is displayed for logged in user').css('display')).toBe('block');
 	    expect(element('#navBarAnon', 'anon nav is hidden for logged in user').css('display')).toBe('none');
 	    expect(element('#loggedInUserName', 'user name is displayed for logged in user').text()).toBe(userNameToRegister);
+
+	    // Logout
+	    element('#userActionsMenu').click();
+	    element('#logoutLink').click();
+
+	    // Verify anon view
+	    expect(element('#navBarAnon', 'anon nav is displayed after user logs out').css('display')).toBe('block');
+	    expect(element('#navBarUser', 'user nav is hidden after user logs out').css('display')).toBe('none');
+	});
+
+	it('Password cannot be less than 5 characters', function() {
+		var userNameToRegister2 = userNameGenerator.buildUserName + 'a';
+
+		// Try to register
+		browser().navigateTo('/login');
+	    input('firstname').enter('John');
+	    input('surname').enter('Smith');
+	    input('username').enter(userNameToRegister2);
+	    input('password').enter('abc');
+	    input('retypepassword').enter('abc');
+	    element('#signup').click();
+
+	    // Verify error message is displayed
+	    expect(element('#registrationErrors', 'Registration error is displayed').count()).toBe(1);
+	    expect(element('#registrationErrors').text()).toMatch('Password must be 5-60 characters long');
+
+	    // Dismiss the error alert
+	    element('#dismissRegistrationError').click();
+	    expect(element('#registrationErrors').count()).toBe(0);
+
+	    // Provide a longer password
+	    input('password').enter('abcde');
+	    input('retypepassword').enter('abcde');
+	    element('#signup').click();
+
+	    // Verify logged in view
+	    expect(element('#navBarUser', 'user nav is displayed for logged in user').css('display')).toBe('block');
+	    expect(element('#navBarAnon', 'anon nav is hidden for logged in user').css('display')).toBe('none');
+	    expect(element('#loggedInUserName', 'user name is displayed for logged in user').text()).toBe(userNameToRegister2);
 
 	    // Logout
 	    element('#userActionsMenu').click();

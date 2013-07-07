@@ -7,8 +7,7 @@
   <div class="span6">
 
     <!-- The RegisterCtrl is specified here because this partial also has login form in top nav
-          and the route provides it with LoginCtrl. Perhaps a better way would be to combine the Login
-          and Registration functions into a single controller specified in the route, then don't need it here -->
+          and the route provides it with LoginCtrl -->
     <div ng-controller="RegisterCtrl" class="login-border">
       <form ng-submit="register()" class="form-horizontal">
         <fieldset>
@@ -16,7 +15,7 @@
           <legend id="signUpHeader">Sign Up</legend>
 
           <div id="registrationErrors" ng-show="alertMsg" class="alert alert-error">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <button id="dismissRegistrationError" type="button" class="close" data-dismiss="alert">&times;</button>
             {{ alertMsg }}
           </div>
 
