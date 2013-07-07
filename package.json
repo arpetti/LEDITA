@@ -1,5 +1,5 @@
 {
-    "name": "angular-client-side-auth",
+    "name": "ledita-web-app",
     "version": "0.0.1",
     "dependencies": {
         "express": "*",
@@ -14,19 +14,20 @@
         "passport-google": "~0.3.0",
         "passport-linkedin": "~0.1.3"
     },
-    "subdomain": "led-proto",
+
     "scripts": {
         "start": "server.js"
     },
     "engines": {
-        "node": "0.8.x"
+        "node": "0.10.x"
     },
     "devDependencies": {
         "sinon": "~1.7.2",
         "chai": "~1.6.1",
-        "mocha": "~1.10.0",
+        "mocha": "~1.10.0"
     },
     "scripts": {
         "test": "mocha server/tests --recursive",
+        "test": "karma start test/client/config/karma-e2e.conf.js --reporters=dots --browsers=Firefox"
     }
 }
