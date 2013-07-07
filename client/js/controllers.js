@@ -64,7 +64,7 @@ angular.module('ledita-app')
                 $location.path('/');
             },
             function(err) {
-                $rootScope.error = err;
+                debugger;
                 $scope.alertMsg = err;
             });
     };

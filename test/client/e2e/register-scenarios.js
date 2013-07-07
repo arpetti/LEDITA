@@ -46,10 +46,6 @@ describe('Registration', function() {
 	    expect(element('#registrationErrors', 'Registration error is displayed').count()).toBe(1);
 	    expect(element('#registrationErrors').text()).toMatch('Password must be 5-60 characters long');
 
-	    // Dismiss the error alert
-	    element('#dismissRegistrationError').click();
-	    expect(element('#registrationErrors').count()).toBe(0);
-
 	    // Provide a longer password
 	    input('password').enter('abcde');
 	    input('retypepassword').enter('abcde');
