@@ -67,17 +67,20 @@ Project Website: http://www.professoreitaliano.com
     * Check or uncheck terms & conditions (not used yet)
 
 ### Running Tests
+
 Before any pushes are made, please ensure all tests pass locally. Tests will also be run automatically on Travis after pushing.
 The instructions below explain how to run server and client tests locally.
 
 ## Run Server Unit Tests
 
     Windows
+
     ```
     node_modules\.bin\mocha server\tests --recursive
     ```
 
     Linux/Mac
+
     ```
     make test
     ```
@@ -100,6 +103,7 @@ Coming soon!
     ```
 
 ## Debug End To End Tests
+
 If you're having a test failure, you can insert a breakpoint to figure out what's going on.
 
 * Insert the following line in any end to end test code
