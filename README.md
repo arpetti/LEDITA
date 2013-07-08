@@ -8,7 +8,7 @@ Ledita is a web app that supports the learning design practice among teachers of
 Project Website: http://www.professoreitaliano.com
 
 
-### Setup Instructions
+## Setup Instructions
 
 * If you don't already have it, install [Node.js](http://nodejs.org/)
 * Install Karma, you will need this to run the Angular unit and e2e (end to end) tests
@@ -65,30 +65,30 @@ Project Website: http://www.professoreitaliano.com
     * Password must be at least 5 characters
     * Retype password can be anything (not used yet)
     * Check or uncheck terms & conditions (not used yet)
-    
 
-### Running Tests
+
+## Running Tests
 
 Before any pushes are made, please ensure all tests pass locally. Tests will also be run automatically on Travis after pushing.
 The instructions below explain how to run server and client tests locally.
 
-## Run Server Unit Tests
+### Run Server Unit Tests
 
     Windows
     ```
     node_modules\.bin\mocha server\tests --recursive
     ```
 
-    Linux
+    Linux or Mac
     ```
     make test
     ```
 
-## <a name="rununit"/>Run Client Unit Tests    
+### <a name="rununit"/>Run Client Unit Tests    
 
 Coming soon!
 
-## <a name="rune2e"/>Run Client End To End Tests
+### <a name="rune2e"/>Run Client End To End Tests
 
 * Start Karma with e2e test config (from project root)
     
@@ -102,7 +102,7 @@ Coming soon!
     test/client/scripts/e2e-test.sh
     ```
 
-## Debug End To End Tests
+### Debug End To End Tests
 
 If you're having a test failure, you can insert a breakpoint to figure out what's going on.
 
