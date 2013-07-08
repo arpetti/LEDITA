@@ -24,9 +24,9 @@
     "devDependencies": {
         "sinon": "~1.7.2",
         "chai": "~1.6.1",
-        "mocha": "~1.10.0",
+        "mocha": "~1.10.0"
     },
     "scripts": {
-        "test": "mocha server/tests --recursive",
+        "test": "mocha server/tests --recursive"
     }
 }
