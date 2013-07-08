@@ -65,6 +65,7 @@ Project Website: http://www.professoreitaliano.com
     * Password must be at least 5 characters
     * Retype password can be anything (not used yet)
     * Check or uncheck terms & conditions (not used yet)
+    
 
 ### Running Tests
 
@@ -74,18 +75,17 @@ The instructions below explain how to run server and client tests locally.
 ## Run Server Unit Tests
 
     Windows
-
     ```
     node_modules\.bin\mocha server\tests --recursive
     ```
 
-    Linux/Mac
-
+    Linux
     ```
     make test
     ```
 
 ## <a name="rununit"/>Run Client Unit Tests    
+
 Coming soon!
 
 ## <a name="rune2e"/>Run Client End To End Tests
