@@ -2,6 +2,7 @@
     "name": "ledita-web-app",
     "version": "0.0.1",
     "dependencies": {
+        "mysql": "~2.0.0-alpha8",
         "express": "*",
         "jade": "*",
         "ejs": "*",        
