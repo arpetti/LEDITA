@@ -1,3 +1,5 @@
+USE `ledita-web-app` ;
+
 INSERT INTO `ledita-web-app`.`image` (`id`, `name`, `size`, `uri`, `mime`)
 VALUES ('1', 'mario.png', '287', 'http://localhost/ledita/img/usr/mario.png', 'png'),
         ('2', 'lucia.png', '347', 'http://localhost/ledita/img/usr/lucia.png', 'png'),
