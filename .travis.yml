@@ -12,6 +12,7 @@ before_script:
   - sleep 3
 
 script:
+  - npm test
   # The below script is commented out because angular unit tests are not implemented yet
   #- karma start config/karma.conf.js --no-auto-watch --single-run --reporters=dots --browsers=Firefox
   - karma start test/client/config/karma-e2e.conf.js --reporters=dots --browsers=Firefox
