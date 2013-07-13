@@ -17,7 +17,9 @@ Project Website: http://www.professoreitaliano.com
     npm install -g karma
     ```
 
-    Note: For Windows 64 bit, the default Karma Chrome launcher configuration points to the wrong location for Chrome.
+    For Mac, use ```sudo```
+
+    For Windows 64 bit, the default Karma Chrome launcher configuration points to the wrong location for Chrome.
     Fix it by modifying the following file (check your environment variable for value of PATH)
 
     ```
@@ -40,10 +42,11 @@ Project Website: http://www.professoreitaliano.com
     ```
     npm install
     ```
+    
 * From project root directory, run
 
     ```
-    node server.js
+    NODE_ENV=dev node server.js
     ```
 
 * Browse to [http://localhost:8000](http://localhost:8000)
@@ -75,7 +78,7 @@ The instructions below explain how to run server and client tests locally.
 ### Run Server Unit Tests
 
     ```
-    npm test    
+    NODE_ENV=dev npm test    
     ```
 
 ### <a name="rununit"/>Run Client Unit Tests    

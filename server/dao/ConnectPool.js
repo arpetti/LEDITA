@@ -1,11 +1,13 @@
+var configHelper = require('../../config/configHelper');
+var config = configHelper.config();
 var mysql = require('mysql');
 
-// FIXME: Use environment variables from config, also configure pool size
+// TODO: Also configure pool size
 var pool  = mysql.createPool({
-  host     : 'localhost',
-  user     : 'ledita',
-  password : 'web*app01',
-  database : 'ledita-web-app'
+  host     : config.db_host,
+  user     : config.db_user,
+  password : config.db_pswd,
+  database : config.db_schema
 });
 
 module.exports = {
