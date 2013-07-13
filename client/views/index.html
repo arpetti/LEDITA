@@ -2,11 +2,11 @@
 <html lang="en" ng-app="ledita-app">
 <head>
   <meta charset="utf-8">
-  <title>LEDITA</title>
+  <title>LEDITA: Learning Design for Italian Language</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="">
-
+    <link href='http://fonts.googleapis.com/css?family=Kite+One' rel='stylesheet' type='text/css'>
   <link href="css/bootstrap.css" rel="stylesheet">
   <style type="text/css">
   body {
@@ -30,10 +30,15 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="brand" href="#"><img src="http://placehold.it/190x50" alt="Ledita Logo" class="img-rounded"/></a>
-        <div class="nav-collapse collapse">
+        <a class="brand" href="#"><img src="../img/logo.png" alt="Ledita Logo" /></a>
+          <div class="nav-collapse collapse">
+
           <form ng-submit="login()" class="navbar-form pull-right">
-            <input ng-model="username" class="span2" type="email" placeholder="Email" required="">
+            <span id="loginError" ng-show="error" class="alert alert-error centered">
+                  {{ error }}
+              </span>
+
+              <input ng-model="username" class="span2" type="email" placeholder="Email" required="">
             <input ng-model="password" class="span2" type="password" placeholder="Password" required="">
             <button id="loginButton" type="submit" class="btn">Login</button>
           </form>
@@ -51,7 +56,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="brand" href="#"><img src="http://placehold.it/190x50" alt="Ledita Logo" class="img-rounded"/></a>
+        <a class="brand" href="#"><img src="../img/logo.png" alt="Ledita Logo" /></a>
         <div class="nav-collapse collapse">
          <ul class="nav-top-pad nav">
           <li><button type="button" class="btn btn-small btn-signup">Explore LDs</button></li>
@@ -98,5 +103,6 @@
 <!-- Bootstrap: in theory could use angular-ui instead, but in practice, it has some problems, alerts for example are better handled in regular bootstrap -->
 <script src="/js/lib/jquery.js"></script>
 <script src="/js/lib/bootstrap.js"></script>
+<script src="/js/lib/ui-bootstrap-0.4.0.min.js"></script>
 </body>
 </html>

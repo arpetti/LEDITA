@@ -3912,9 +3912,10 @@ input[type="submit"].btn.btn-mini {
 
 .alert-danger,
 .alert-error {
-  color: #b94a48;
+  color: #CC0000;
   background-color: #f2dede;
   border-color: #eed3d7;
+
 }
 
 .alert-danger h4,
@@ -4420,6 +4421,12 @@ input[type="submit"].btn.btn-mini {
   font-weight: 200;
   color: #777777;
   text-shadow: 0 1px 0 #ffffff;
+}
+
+
+.brand img{
+    margin-top: -5px;
+
 }
 
 .navbar .brand:hover,
