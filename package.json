@@ -28,6 +28,6 @@
         "mocha": "~1.10.0"
     },
     "scripts": {
-        "test": "mocha server/tests --recursive"
+        "test": "mocha server/tests -R spec --recursive"
     }
 }
