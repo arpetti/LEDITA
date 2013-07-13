@@ -74,19 +74,13 @@ The instructions below explain how to run server and client tests locally.
 
 ### Run Server Unit Tests
 
-    Windows
     ```
-    node_modules\.bin\mocha server\tests --recursive
-    ```
-
-    Linux or Mac
-    ```
-    make test
+    npm test    
     ```
 
 ### <a name="rununit"/>Run Client Unit Tests    
 
-Coming soon!
+Not implemented yet, but should be soon.
 
 ### <a name="rune2e"/>Run Client End To End Tests
 
