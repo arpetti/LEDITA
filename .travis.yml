@@ -4,7 +4,7 @@ node_js:
    - "0.8"
 
 before_script:
-  - mysql -e 'create database ledita-web-app;'
+  - mysql -e 'create database ledita_test;'
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
   - npm install --quiet -g karma
