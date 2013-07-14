@@ -4,20 +4,19 @@
 
 describe('Learning Design', function() {
 
-  it('Logged in user is can see all learning designs', function() {
+  it('Logged in user can see all learning designs', function() {
     var existingUserName = testUsers.getUserName;
     var existingUserPassword = testUsers.getUserPassword;
 
     browser().navigateTo('/login');
-    expect(browser().location().url()).toBe('/login');
     input('username').enter(existingUserName);
     input('password').enter(existingUserPassword);
     element('#loginButton').click();
 
-    // TODO Verify results
+    // Verify results
+    expect(repeater('.ld-item').count()).toBe(8);
 
     // Logout
-    browser().navigateTo('/login');
     element('#userActionsMenu').click();
     element('#logoutLink').click();
 

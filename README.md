@@ -8,7 +8,7 @@ Ledita is a web app that supports the learning design practice among teachers of
 Project Website: http://www.professoreitaliano.com
 
 
-## Setup Instructions
+## <a name="setupInstructions" />Setup Instructions
 
 * Install [MySQL 5.5.24](http://downloads.mysql.com/archives.php?p=mysql-5.5&v=5.5.24)
 * Connect to mysql as root and run the following scripts to create the database, user, and populate sample data
@@ -81,14 +81,15 @@ Project Website: http://www.professoreitaliano.com
 
 ## Running Tests
 
-Before any pushes are made, please ensure all tests pass locally. Tests will also be run automatically on Travis after pushing.
-The instructions below explain how to run server and client tests locally.
-
-### Run Server Unit Tests
+Before any pushes are made, please ensure all tests pass locally. Tests will also be run automatically on Travis after pushing. The instructions below explain how to run server and client tests locally.
+ 
+### Run Server Tests
 
     ```
     npm test    
     ```
+
+This runs unit and DAO tests. If you have any DAO tests failing locally, reset your database by running the sql scripts as described in the [Setup Instructions](#setupInstructions). A more ideal solution would be to have a separate test database schema used only by the local tests, together with an automated process that recreates and populates the database prior to each test run. That way work done in the local database would not interfere with the test database and vice versa. A developer should look into this when there's time.
 
 ### <a name="rununit"/>Run Client Unit Tests    
 
@@ -107,6 +108,8 @@ Not implemented yet, but should be soon.
     ```
     test/client/scripts/e2e-test.sh
     ```
+
+The e2e tests are also dependent on the database. If you have any local failures, reset your database by running the sql scripts as described in the [Setup Instructions](#setupInstructions).
 
 ### Debug End To End Tests
 

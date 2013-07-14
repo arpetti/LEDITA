@@ -66,12 +66,6 @@ angular.module('ledita-app')
 }]);
 
 angular.module('ledita-app')
-.controller('PrivateCtrl',
-['$rootScope', function($rootScope) {
-}]);
-
-
-angular.module('ledita-app')
 .controller('AdminCtrl',
 ['$rootScope', '$scope', 'Users', 'Auth', function($rootScope, $scope, Users, Auth) {
     $scope.loading = true;
