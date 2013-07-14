@@ -7,7 +7,7 @@ module.exports = {
       var learningDesigns = [];
       dao.getConnectionPool().getConnection(function(err, connection) {
         connection.query('SELECT id, name, scope from ld', function(err, rows) {
-          if (err) { throw err; }
+          if (err) { callback(err); }
           for (var i = 0; i < rows.length; i++) {            
             learningDesigns.push(rows[i]);
           }

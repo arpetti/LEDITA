@@ -3,6 +3,7 @@ var _ =           require('underscore')
     , passport =  require('passport')
     , AuthCtrl =  require('./controllers/auth')
     , UserCtrl =  require('./controllers/user')
+    , LearningDesignCtrl = require('./controllers/learningDesign')
     , User =      require('./models/User.js')
     , userRoles = require('../client/js/auth/AuthRoutingConfig').userRoles
     , accessLevels = require('../client/js/auth/AuthRoutingConfig').accessLevels;
@@ -100,6 +101,15 @@ var routes = [
         httpMethod: 'POST',
         middleware: [AuthCtrl.logout],
         accessLevel: accessLevels.public
+    },
+
+    // TODO: Break up routes into separate files by functional areas, this is getting too big
+    // Learning Design
+    {
+        path: '/learningdesigns',
+        httpMethod: 'GET',
+        middleware: [ensureAuthenticated, ensureAuthorized, LearningDesignCtrl.index],
+        accessLevel: accessLevels.user
     },
 
     // User resource
