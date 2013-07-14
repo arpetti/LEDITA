@@ -6,6 +6,8 @@ describe('Login Flow', function() {
 
     it('Non logged in user sees anon view on login page', function() {
         browser().navigateTo('/login');
+        sleep(2);
+        expect(browser().location().url()).toBe('/login');
         expect(element('#navBarAnon', 'anon nav is displayed for anon user').css('display')).toBe('block');
         expect(element('#navBarUser', 'user nav is hidden for anon user').css('display')).toBe('none');
     });
@@ -35,23 +37,23 @@ describe('Login Flow', function() {
 
     });
 
-    // it('User cannot log in with invalid password', function() {
-    //     var existingUserName = testUsers.getUserName;
-    //     var invalidPassword = "garbage";
+    it('User cannot log in with invalid password', function() {
+        var userName = testUsers.getUserName;
+        var invalidPassword = "garbage";
 
-    //     browser().navigateTo('/login');
-    //     input('username').enter(existingUserName);
-    //     input('password').enter(invalidPassword);
-    //     element('#loginButton').click();
+        browser().navigateTo('/login');
+        input('username').enter(userName);
+        input('password').enter(invalidPassword);
+        element('#loginButton').click();
 
-    //     // Verify login error
-    //     expect(element('#loginError', 'Login error is displayed').count()).toBe(1);
-    //     expect(element('#loginError').text()).toMatch('Failed to login');
+        // Verify login error
+        expect(element('#loginError', 'Login error is displayed').count()).toBe(1);
+        expect(element('#loginError').text()).toMatch('Failed to login');
 
-    //     // Verify user is still in anon view
-    //     expect(element('#navBarAnon', 'anon nav is displayed after user fails to log in').css('display')).toBe('block');
-    //     expect(element('#navBarUser', 'user nav is hidden after user fails to log in').css('display')).toBe('none');
+        // Verify user is still in anon view
+        expect(element('#navBarAnon', 'anon nav is displayed after user fails to log in').css('display')).toBe('block');
+        expect(element('#navBarUser', 'user nav is hidden after user fails to log in').css('display')).toBe('none');
 
-    // });
+    });
 
 }); 
