@@ -1,10 +1,9 @@
 language: node_js
 node_js:
    - "0.10"
-   - "0.8"
+#   - "0.8"
 
 before_script:
-#FIXME These scripts need to be reorganized to work in dev vs ci envs
   - mysql -e 'create database ledita_test;'
   - mysql < database/ci/ledita-test.sql --verbose
   - mysql < database/ci/test-data.sql --verbose  
