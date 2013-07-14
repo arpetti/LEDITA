@@ -1,8 +1,7 @@
 <div id="ldlist" class="row top-margin">
 
-  <!-- FIXME: inside of box is not responsive, try to use grid inside to layout the 5 elements -->
   <!-- LD BOX START -->
-  <div class="span3 ld-border">
+  <div ng-repeat="learningDesign in learningDesigns" class="span3 ld-border">
     <div class="ld-top-left">
       A1
     </div>
@@ -11,216 +10,17 @@
     </div>
     <hr />
     <div class="ld-center text-center">
-      <h4>LD Name</h4>
+      <h4>{{ learningDesign.name }}</h4>
     </div>
     <div class="ld-bottom-left">
-      Scope
+      {{ learningDesign.scope }}
     </div>
     <div class="ld-bottom-right pull-right">
       Wile E Coyote
     </div>
   </div>
   <!-- LD BOX END -->
-
-  <!-- Manually repeat for 11 more LD's, this will be a repeater in the real app -->
-  <div class="span3 ld-border">
-    <div class="ld-top-left">
-      A1
-    </div>
-    <div class="ld-top-right pull-right">
-      <a href="#"><i class="icon-arrow-right"></i></a>
-    </div>
-    <hr>
-    <div class="ld-center text-center">
-      <h4>LD Name</h4>
-    </div>
-    <div class="ld-bottom-left">
-      Scope
-    </div>
-    <div class="ld-bottom-right pull-right">
-      Wile E Coyote
-    </div>
-  </div>
-  <div class="span3 ld-border">
-    <div class="ld-top-left">
-      A1
-    </div>
-    <div class="ld-top-right pull-right">
-      <a href="#"><i class="icon-arrow-right"></i></a>
-    </div>
-    <hr>
-    <div class="ld-center text-center">
-      <h4>LD Name</h4>
-    </div>
-    <div class="ld-bottom-left">
-      Scope
-    </div>
-    <div class="ld-bottom-right pull-right">
-      Wile E Coyote
-    </div>
-  </div>
-  <div class="span3 ld-border">
-    <div class="ld-top-left">
-      A1
-    </div>
-    <div class="ld-top-right pull-right">
-      <a href="#"><i class="icon-arrow-right"></i></a>
-    </div>
-    <hr>
-    <div class="ld-center text-center">
-      <h4>LD Name</h4>
-    </div>
-    <div class="ld-bottom-left">
-      Scope
-    </div>
-    <div class="ld-bottom-right pull-right">
-      Wile E Coyote
-    </div>
-  </div>
-  <div class="span3 ld-border">
-    <div class="ld-top-left">
-      A1
-    </div>
-    <div class="ld-top-right pull-right">
-      <a href="#"><i class="icon-arrow-right"></i></a>
-    </div>
-    <hr>
-    <div class="ld-center text-center">
-      <h4>LD Name</h4>
-    </div>
-    <div class="ld-bottom-left">
-      Scope
-    </div>
-    <div class="ld-bottom-right pull-right">
-      Wile E Coyote
-    </div>
-  </div>
-  <div class="span3 ld-border">
-    <div class="ld-top-left">
-      A1
-    </div>
-    <div class="ld-top-right pull-right">
-      <a href="#"><i class="icon-arrow-right"></i></a>
-    </div>
-    <hr>
-    <div class="ld-center text-center">
-      <h4>LD Name</h4>
-    </div>
-    <div class="ld-bottom-left">
-      Scope
-    </div>
-    <div class="ld-bottom-right pull-right">
-      Wile E Coyote
-    </div>
-  </div>
-  <div class="span3 ld-border">
-    <div class="ld-top-left">
-      A1
-    </div>
-    <div class="ld-top-right pull-right">
-      <a href="#"><i class="icon-arrow-right"></i></a>
-    </div>
-    <hr>
-    <div class="ld-center text-center">
-      <h4>LD Name</h4>
-    </div>
-    <div class="ld-bottom-left">
-      Scope
-    </div>
-    <div class="ld-bottom-right pull-right">
-      Wile E Coyote
-    </div>
-  </div>
-  <div class="span3 ld-border">
-    <div class="ld-top-left">
-      A1
-    </div>
-    <div class="ld-top-right pull-right">
-      <a href="#"><i class="icon-arrow-right"></i></a>
-    </div>
-    <hr>
-    <div class="ld-center text-center">
-      <h4>LD Name</h4>
-    </div>
-    <div class="ld-bottom-left">
-      Scope
-    </div>
-    <div class="ld-bottom-right pull-right">
-      Wile E Coyote
-    </div>
-  </div>
-  <div class="span3 ld-border">
-    <div class="ld-top-left">
-      A1
-    </div>
-    <div class="ld-top-right pull-right">
-      <a href="#"><i class="icon-arrow-right"></i></a>
-    </div>
-    <hr>
-    <div class="ld-center text-center">
-      <h4>LD Name</h4>
-    </div>
-    <div class="ld-bottom-left">
-      Scope
-    </div>
-    <div class="ld-bottom-right pull-right">
-      Wile E Coyote
-    </div>
-  </div>
-  <div class="span3 ld-border">
-    <div class="ld-top-left">
-      A1
-    </div>
-    <div class="ld-top-right pull-right">
-      <a href="#"><i class="icon-arrow-right"></i></a>
-    </div>
-    <hr>
-    <div class="ld-center text-center">
-      <h4>LD Name</h4>
-    </div>
-    <div class="ld-bottom-left">
-      Scope
-    </div>
-    <div class="ld-bottom-right pull-right">
-      Wile E Coyote
-    </div>
-  </div>
-  <div class="span3 ld-border">
-    <div class="ld-top-left">
-      A1
-    </div>
-    <div class="ld-top-right pull-right">
-      <a href="#"><i class="icon-arrow-right"></i></a>
-    </div>
-    <hr>
-    <div class="ld-center text-center">
-      <h4>LD Name</h4>
-    </div>
-    <div class="ld-bottom-left">
-      Scope
-    </div>
-    <div class="ld-bottom-right pull-right">
-      Wile E Coyote
-    </div>
-  </div>
-  <div class="span3 ld-border">
-    <div class="ld-top-left">
-      A1
-    </div>
-    <div class="ld-top-right pull-right">
-      <a href="#"><i class="icon-arrow-right"></i></a>
-    </div>
-    <hr>
-    <div class="ld-center text-center">
-      <h4>LD Name</h4>
-    </div>
-    <div class="ld-bottom-left">
-      Scope
-    </div>
-    <div class="ld-bottom-right pull-right">
-      Wile E Coyote
-    </div>
-  </div>
+  
 </div><!-- row -->
 
 <!-- HACK: span10 to make the pagination appear centered relative to grid above -->

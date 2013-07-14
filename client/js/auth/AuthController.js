@@ -41,11 +41,6 @@ angular.module('ledita-app')
     };
 }]);
 
-angular.module('ledita-app')
-.controller('HomeCtrl',
-['$rootScope', function($rootScope) {
-
-}]);
 
 angular.module('ledita-app')
 .controller('RegisterCtrl',
