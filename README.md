@@ -10,6 +10,15 @@ Project Website: http://www.professoreitaliano.com
 
 ## Setup Instructions
 
+* Install [MySQL 5.5.24](http://downloads.mysql.com/archives.php?p=mysql-5.5&v=5.5.24)
+* Connect to mysql as root and run the following scripts to create the database, user, and populate sample data
+
+    ```
+    source %PROJECT_ROOT%\LEDITA\database\ledita-web-app.sql
+    source %PROJECT_ROOT%\LEDITA\database\demo-data.sql
+    source %PROJECT_ROOT%\LEDITA\database\user.sql
+    ```    
+
 * If you don't already have it, install [Node.js](http://nodejs.org/)
 * Install Karma, you will need this to run the Angular unit and e2e (end to end) tests
 
@@ -46,7 +55,7 @@ Project Website: http://www.professoreitaliano.com
 * From project root directory, run
 
     ```
-    NODE_ENV=dev node server.js
+    node server.js
     ```
 
 * Browse to [http://localhost:8000](http://localhost:8000)
@@ -78,7 +87,7 @@ The instructions below explain how to run server and client tests locally.
 ### Run Server Unit Tests
 
     ```
-    NODE_ENV=dev npm test    
+    npm test    
     ```
 
 ### <a name="rununit"/>Run Client Unit Tests    
