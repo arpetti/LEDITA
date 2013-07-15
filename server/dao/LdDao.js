@@ -8,8 +8,15 @@ module.exports = {
 	getLearningDesigns: function(callback) {
       var learningDesigns = [];
       dao.getConnectionPool().getConnection(function(err, connection) {
+        if (err) {
+          callback(err);
+          return;
+        }
         connection.query(QUERY_GET_LEARNING_DESIGNS, function(err, rows) {
-          if (err) { callback(err); }
+          if (err) {
+            callback(err);
+            return;
+          }
           for (var i = 0; i < rows.length; i++) {            
             learningDesigns.push(rows[i]);
           }

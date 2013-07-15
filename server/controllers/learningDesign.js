@@ -5,13 +5,18 @@ var _ =           require('underscore')
 module.exports = {
     
     index: function(req, res) {
-        var learningDesigns = LdDao.getLearningDesigns(function(err, learningDesigns){
-            if(err) {
-                return res.send(500); 
-            } else { 
-                res.json(learningDesigns);
-            }
-        });
+        try {
+            var learningDesigns = LdDao.getLearningDesigns(function(err, learningDesigns){
+                if(err) {
+                    return res.send(500, err.message); 
+                } else { 
+                    res.json(learningDesigns);
+                }
+            });
+        }
+        catch(err) {
+            return res.send(500, err.message);
+        }
     }    
 
 };
