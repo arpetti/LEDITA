@@ -6,7 +6,7 @@ describe('Login Flow', function() {
 
     it('Non logged in user sees anon view on login page', function() {
         browser().navigateTo('/login');
-        sleep(2);
+        sleep(3);
         expect(browser().location().url()).toBe('/login');
         expect(element('#navBarAnon', 'anon nav is displayed for anon user').css('display')).toBe('block');
         expect(element('#navBarUser', 'user nav is hidden for anon user').css('display')).toBe('none');
