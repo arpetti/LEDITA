@@ -10,20 +10,20 @@
     </div>
     <hr />
     <div class="ld-center text-center">
-      <h4>{{ learningDesign.name }}</h4>
+      <h4>{{ learningDesign.ld_name }}</h4>
     </div>
     <div class="ld-bottom-left">
-      {{ learningDesign.scope }}
+      {{ learningDesign.ld_scope }}
     </div>
     <div class="ld-bottom-right pull-right">
-      Wile E Coyote
+      {{ learningDesign.user_name }}&nbsp;{{ learningDesign.user_last_name }}
     </div>
   </div>
   <!-- LD BOX END -->
   
 </div><!-- row -->
 
-<!-- HACK: span10 to make the pagination appear centered relative to grid above -->
+<!-- TODO If we go with infinite scroll, will not need pagination -->
 <div class="row span10">
   <div class="pagination pagination-large pagination-centered">
     <ul>

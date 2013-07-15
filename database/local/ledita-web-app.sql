@@ -524,6 +524,27 @@ CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`describes` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Views
+-- -----------------------------------------------------
+
+CREATE OR REPLACE VIEW vw_ld_user AS 
+  SELECT ld.id as ld_id
+    , ld.ld_model_id
+    , ld.name as ld_name
+    , ld.scope as ld_scope
+    , ld.publication as ld_publication
+    , ld.students_profile as ld_students_profile
+    , ld.creation_date as ld_creation_date
+    , ld.last_edit_date as ld_last_edi_date
+    , user.id as user_id 
+    , user.name as user_name
+    , user.last_name as user_last_name
+  FROM ld
+    , user
+  WHERE ld.user_id = user.id;
+
 USE `ledita-web-app` ;
 
 

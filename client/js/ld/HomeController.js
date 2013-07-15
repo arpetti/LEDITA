@@ -1,8 +1,7 @@
 angular.module('ledita-app')
 .controller('HomeCtrl',
-['$scope', 'Home', 'Auth', function($scope, Home, Auth) {
+['$scope', 'Home', function($scope, Home) {
     $scope.loading = true;
-    $scope.userRoles = Auth.userRoles;
 
     Home.getLearningDesigns(function(res) {
         $scope.learningDesigns = res;

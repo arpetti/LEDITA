@@ -14,9 +14,9 @@ Project Website: http://www.professoreitaliano.com
 * Connect to mysql as root and run the following scripts to create the database, user, and populate sample data
 
     ```
-    source %PROJECT_ROOT%\LEDITA\database\ledita-web-app.sql
-    source %PROJECT_ROOT%\LEDITA\database\demo-data.sql
-    source %PROJECT_ROOT%\LEDITA\database\user.sql
+    source %PROJECT_ROOT%\LEDITA\database\local\ledita-web-app.sql
+    source %PROJECT_ROOT%\LEDITA\database\local\demo-data.sql
+    source %PROJECT_ROOT%\LEDITA\database\local\user.sql
     ```    
 
 * If you don't already have it, install [Node.js](http://nodejs.org/)
