@@ -13,15 +13,15 @@ var pool  = mysql.createPool({
 module.exports = {
     
     //TODO: Also support array of queryParams
-    findAll: function(queryString, callback) {
+    findAll: function(queryString, queryParams, callback) {
 		var results = [];
       	pool.getConnection(function(err, connection) {
       	if (err) {
-      		console.log('db connection error', err);
-			callback(err);
-          	return;
+          console.log('db connection error', err);
+			    callback(err);
+          return;
         }
-        connection.query(queryString, function(err, rows) {
+        connection.query(queryString, queryParams, function(err, rows) {
 			if (err) {
 				console.log('db query error', err);
             	callback(err);
@@ -32,7 +32,7 @@ module.exports = {
           	}
           	connection.end();
           	callback(null, results);
-		});
+		    });
       });
   	}
 
