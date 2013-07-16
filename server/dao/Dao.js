@@ -11,7 +11,29 @@ var pool  = mysql.createPool({
 });
 
 module.exports = {
-    getConnectionPool: function() {
-       return pool;
-    }
+    
+    //TODO: Also support array of queryParams
+    findAll: function(queryString, callback) {
+		var results = [];
+      	pool.getConnection(function(err, connection) {
+      	if (err) {
+      		console.log('db connection error', err);
+			callback(err);
+          	return;
+        }
+        connection.query(queryString, function(err, rows) {
+			if (err) {
+				console.log('db query error', err);
+            	callback(err);
+            	return;
+          	}
+          	for (var i = 0; i < rows.length; i++) {            
+            	results.push(rows[i]);
+          	}
+          	connection.end();
+          	callback(null, results);
+		});
+      });
+  	}
+
 };

@@ -5,26 +5,14 @@ var QUERY_GET_LEARNING_DESIGNS = 'SELECT ld_id, ld_name, ld_scope, ld_publicatio
 
 module.exports = {
 
-	getLearningDesigns: function(callback) {
-      var learningDesigns = [];
-      dao.getConnectionPool().getConnection(function(err, connection) {
-        if (err) {
-          callback(err);
-          return;
-        }
-        connection.query(QUERY_GET_LEARNING_DESIGNS, function(err, rows) {
-          if (err) {
-            callback(err);
-            return;
-          }
-          for (var i = 0; i < rows.length; i++) {            
-            learningDesigns.push(rows[i]);
-          }
-          connection.end();
-          callback(null, learningDesigns);
-		    });
-      });
-      
+  getLearningDesigns: function(callback) {
+    dao.findAll(QUERY_GET_LEARNING_DESIGNS, function(err, rows) {
+      if (err) {
+        callback(err);
+        return;
+      }
+      callback(null, rows);
+    });
   }
 
 };
