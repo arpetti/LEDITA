@@ -14,10 +14,13 @@ Project Website: http://www.professoreitaliano.com
 * Connect to mysql as root and run the following scripts to create the database, user, and populate sample data
 
     ```
-    source %PROJECT_ROOT%\LEDITA\database\local\ledita-web-app.sql
-    source %PROJECT_ROOT%\LEDITA\database\local\demo-data.sql
-    source %PROJECT_ROOT%\LEDITA\database\local\user.sql
+    mysql -u root
+    source database\local\ledita-web-app.sql
+    source database\local\demo-data.sql
+    source database\local\user.sql
     ```    
+
+    For Mac or Linux, switch the ```\``` to ```/```
 
 * If you don't already have it, install [Node.js](http://nodejs.org/)
 * Install Karma, you will need this to run the Angular unit and e2e (end to end) tests
@@ -46,6 +49,9 @@ Project Website: http://www.professoreitaliano.com
     ```
     win32: process.env.ProgramFiles + ' (x86)\\Google\\Chrome\\Application\\chrome.exe'
     ```
+
+* Optionally, install Chrome Extension [AngularJS Batarang](https://chrome.google.com/webstore/detail/angularjs-batarang/ighdmehidhipcmcojjgiloacoafjmpfk/related?hl=en)
+
 * Clone this repo and cd to project directory, then run
 
     ```
