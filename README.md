@@ -11,6 +11,7 @@ Project Website: http://www.professoreitaliano.com
 ## <a name="setupInstructions" />Setup Instructions
 
 * Install [MySQL 5.5.24](http://downloads.mysql.com/archives.php?p=mysql-5.5&v=5.5.24)
+
 * Connect to mysql as root and run the following scripts to create the database, user, and populate sample data
 
     ```
@@ -23,6 +24,41 @@ Project Website: http://www.professoreitaliano.com
     For Mac or Linux, switch the ```\``` to ```/```
 
 * If you don't already have it, install [Node.js](http://nodejs.org/)
+
+* Install [node-gyp](https://github.com/TooTallNate/node-gyp), this is a required dependency for [bcrypt](https://github.com/ncb000gt/node.bcrypt.js/) which is used by this project for password hashing.
+
+    ```
+    npm install -g node-gyp
+    ```
+
+    For Mac, use ```sudo```
+
+* Install other required dependencies for [bcrypt](https://github.com/ncb000gt/node.bcrypt.js/)
+
+    * Max OS X
+
+        * Install XCode 
+
+        * Open XCode, start a project (it doesn't matter what kind), then select Preferences -> Downloads -> Install Command Line Tools
+
+    * Windows 7 64 bit: Estimated total installation time ~2 hours
+
+        * Install [Python 2.7.3](http://www.python.org/download/releases/2.7.3/#download)
+
+        * Install [Microsoft Visual Studio C++ 2010 Express](http://go.microsoft.com/?linkid=9709949)
+
+        * Install [Windows 7 64-bit SDK](http://www.microsoft.com/en-us/download/details.aspx?id=8279)
+
+        * Install [Compiler update for the Windows SDK 7.1](http://www.microsoft.com/en-us/download/details.aspx?id=4422)
+
+        * Install [Microsoft Visual Studio C++ 2012 for Windows Desktop](http://go.microsoft.com/?linkid=9816758)
+
+        * Install [Win64 OpenSSL v1.0.1e](http://slproweb.com/products/Win32OpenSSL.html)
+
+    * Other environments
+
+        * See README's for [bcrypt](https://github.com/ncb000gt/node.bcrypt.js/) and [node-gyp](https://github.com/TooTallNate/node-gyp)
+
 * Install Karma, you will need this to run the Angular unit and e2e (end to end) tests
 
     ```
@@ -56,6 +92,12 @@ Project Website: http://www.professoreitaliano.com
 
     ```
     npm install
+    ```
+    
+    For Windows, set Visual Studio version first, before running npm install
+    
+    ```
+    SET VisualStudioVersion=11.0
     ```
     
 * From project root directory, run
