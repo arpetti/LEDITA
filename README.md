@@ -55,6 +55,12 @@ Project Website: http://www.professoreitaliano.com
 
         * Install [Win64 OpenSSL v1.0.1e](http://slproweb.com/products/Win32OpenSSL.html)
 
+        * Add Python and OpenSSL paths to PATH environment variable, for example
+
+        ```
+        C:\app\Python27;C:\OpenSSL-Win64\bin
+        ```
+
     * Other environments
 
         * See README's for [bcrypt](https://github.com/ncb000gt/node.bcrypt.js/) and [node-gyp](https://github.com/TooTallNate/node-gyp)
