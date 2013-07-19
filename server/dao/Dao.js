@@ -1,4 +1,4 @@
-var configHelper = require('../../config/configHelper');
+var configHelper = require('../util/ConfigHelper');
 var config = configHelper.config();
 var mysql = require('mysql');
 

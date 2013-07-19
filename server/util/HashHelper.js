@@ -1,5 +1,5 @@
 var bcrypt = require('bcrypt');
-var configHelper = require('../../config/configHelper');
+var configHelper = require('./ConfigHelper');
 var config = configHelper.config();
 
 module.exports = {
