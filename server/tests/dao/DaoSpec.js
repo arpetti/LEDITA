@@ -3,11 +3,11 @@ var expect = require('chai').expect
 
 describe('DAO', function() {    
 
-	it('Find all users returns five results', function(done) {
+	it('Find all users returns results', function(done) {
         var queryString = 'select id, name, last_name, gender, email from user';
         var queryParams = [];
 		Dao.findAll(queryString, queryParams, function(err, results){
-			expect(results).to.have.length(5);
+			expect(results).to.have.length.above(4);
             done();
 		});
     });
