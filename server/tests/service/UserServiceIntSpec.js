@@ -5,10 +5,14 @@ var expect = require('chai').expect
 
 describe('User Service Integration', function() {    
 
+    var goodUsername = 'sara@email.it';
+    var goodPassword = 'passw0rD';
+    
+    var badUsername = 'nosuchuser@email.it';
+    var badPassword = 'passworD';
+    
 	it('User that provides correct password can successfully authenticate', function(done) {
-        var username = 'sara@email.it';
-        var password = 'passw0rD';
-        UserService.authenticateUser(username, password, function(err, user, info){
+        UserService.authenticateUser(goodUsername, goodPassword, function(err, user, info){
             
             // Verify no errors
             expect(err).to.be.null;
@@ -20,9 +24,29 @@ describe('User Service Integration', function() {
             expect(user.name).to.equal('Sara');
             expect(user.last_name).to.equal('Neri');
             expect(user.gender).to.equal('F');
-            expect(user.email).to.equal(username);
+            expect(user.email).to.equal(goodUsername);
             expect(user.hash).to.be.null;
             expect(user.role).not.to.be.null;
+            done();
+        });
+    });
+
+    it('User that provides wrong password fails authentication', function(done) {
+    	UserService.authenticateUser(goodUsername, badPassword, function(err, user, info){
+            expect(user).to.be.null;
+            expect(err).to.be.null;
+            expect(info).not.to.be.null;
+            expect(info.message).to.be.equal('invalid username or password');
+            done();
+        });
+    });
+
+    it('User that provides invalid username fails authentication', function(done) {
+    	UserService.authenticateUser(badUsername, goodPassword, function(err, user, info){
+            expect(user).to.be.null;
+            expect(err).to.be.null;
+            expect(info).not.to.be.null;
+            expect(info.message).to.be.equal('invalid username or password');
             done();
         });
     });
