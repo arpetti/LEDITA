@@ -7,12 +7,12 @@ VALUES ('1', 'mario.png', '287', 'http://localhost/ledita/img/usr/mario.png', 'p
 ('4', 'sara.png', '287', 'http://localhost/ledita/img/usr/sara.png', 'gif'),
 ('5', 'silvia.png', '287', 'http://localhost/ledita/img/usr/silvia.png', 'png');
 
-INSERT INTO `ledita-web-app`.`user` (`id`, `image_id`, `name`, `last_name`, `gender`, `email`, `salt`, `hash`, `workplace`, `city`, `country`)
-VALUES ('1', '1', 'Mario', 'Rossi', 'M', 'mario@email.it', 'salt', 'hash', 'Scuola A', 'Roma', 'Italia'),
-('2', '2', 'Lucia', 'Bianchi', 'F', 'lucia@email.it', 'salt', 'hash', 'Scuola B', 'Parigi', 'Francia'),
-('3', '3', 'Antonio', 'Verdi', 'M', 'antonio@email.it', 'salt', 'hash', 'Scuola C', 'Berlino', 'Germania'),
-('4', '4', 'Sara', 'Neri', 'F', 'sara@email.it', 'salt', 'hash', 'Scuola D', 'Los Angeles', 'Stati Uniti'),
-('5', '5', 'Silvia', 'Rosa', 'F', 'silvia@email.it', 'salt', 'hash', 'Scuola E', 'Pechino', 'Cina');
+INSERT INTO `ledita-web-app`.`user` (`id`, `image_id`, `name`, `last_name`, `gender`, `email`, `hash`, `workplace`, `city`, `country`)
+VALUES ('1', '1', 'Mario', 'Rossi', 'M', 'mario@email.it', '$2a$10$/MWGZW7cmwNdle.jiFJb9OiWqVZjxbgJxYNpEraHkwzZ2muBHL7Gm', 'Scuola A', 'Roma', 'Italia'),
+('2', '2', 'Lucia', 'Bianchi', 'F', 'lucia@email.it', '$2a$10$/MWGZW7cmwNdle.jiFJb9OiWqVZjxbgJxYNpEraHkwzZ2muBHL7Gm', 'Scuola B', 'Parigi', 'Francia'),
+('3', '3', 'Antonio', 'Verdi', 'M', 'antonio@email.it', '$2a$10$/MWGZW7cmwNdle.jiFJb9OiWqVZjxbgJxYNpEraHkwzZ2muBHL7Gm', 'Scuola C', 'Berlino', 'Germania'),
+('4', '4', 'Sara', 'Neri', 'F', 'sara@email.it', '$2a$10$/MWGZW7cmwNdle.jiFJb9OiWqVZjxbgJxYNpEraHkwzZ2muBHL7Gm', 'Scuola D', 'Los Angeles', 'Stati Uniti'),
+('5', '5', 'Silvia', 'Rosa', 'F', 'silvia@email.it', '$2a$10$/MWGZW7cmwNdle.jiFJb9OiWqVZjxbgJxYNpEraHkwzZ2muBHL7Gm', 'Scuola E', 'Pechino', 'Cina');
 
 INSERT INTO `ld`(`id`, `user_id`, `ld_model_id`, `name`, `scope`, `publication`, `students_profile`, `creation_date`, `last_edit_date`)
 VALUES ('1','1', NULL,'LD Demo 1','Lesson','1','20 studenti adolescenti di livello B1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),

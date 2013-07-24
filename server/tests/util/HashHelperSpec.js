@@ -3,13 +3,22 @@ var expect = require('chai').expect
 
 describe('Hash Helper', function() { 
 
-    var password = 'MyL#ttleP0ny';
-    var wrongPassword = 'MyL#ttlePony';
+    var password = 'passw0rD';
+    var wrongPassword = 'passworD';
+    var longPassword = 'ThisIsMySuperDuperLongPasswordButEasyToRemember';
 
 	it('Hashes a password', function(done) {
         HashHelper.generateHash(password, function(err, result) {
             expect(err).to.be.null;
-            expect(result).to.have.length.above(30);
+            expect(result.length).to.equal(60);
+            done();
+        });
+    });
+
+    it('Hashed password length is same size regardless of input size', function(done) {
+        HashHelper.generateHash(longPassword, function(err, result) {
+            expect(err).to.be.null;
+            expect(result.length).to.equal(60);
             done();
         });
     });

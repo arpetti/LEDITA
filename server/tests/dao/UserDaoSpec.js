@@ -32,9 +32,7 @@ describe('User DAO', function() {
         var userData = {
             name: 'Bugs',
             last_name: 'Bunny',
-            gender: 'M',
             email: emailToInsert,
-            salt: 'saltNotNeeded',
             hash: 'hashedPasswordGobbledyGook&='
 
         };
