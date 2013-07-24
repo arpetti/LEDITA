@@ -114,12 +114,10 @@ Project Website: http://www.professoreitaliano.com
 
 * Browse to [http://localhost:8000](http://localhost:8000)
 
-* Login using one of the predefined users
+* Login using any of the [demo users](database/local/demo-data.sql)
 
-    ```
-    user@test.com/123
-    admin@test.com/456
-    ```
+    * username is the email address
+    * passw0rD
 
 * Logout from dropdown menu under avatar image
 
@@ -131,6 +129,8 @@ Project Website: http://www.professoreitaliano.com
     * Password must be at least 5 characters
     * Retype password can be anything (not used yet)
     * Check or uncheck terms & conditions (not used yet)
+
+    Registration is in-memory for now, upcoming work will hook it up to the database.
 
 
 ## Running Tests
