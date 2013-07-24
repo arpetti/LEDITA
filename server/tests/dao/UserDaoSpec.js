@@ -20,12 +20,32 @@ describe('User DAO', function() {
         });
     });
 
-    it('Looking for user that does not exist returns no rows', function(done) {
+    it('Find existing user by id', function(done) {
+        var userId = 3;
+        UserDao.getUserById(userId, function(err, results){
+            expect(results).to.have.length(1);
+            expect(results[0].id).to.equal(userId);
+            expect(results[0].email).to.equal('antonio@email.it');
+            expect(results[0].name).to.equal('Antonio');
+            expect(results[0].last_name).to.equal('Verdi');
+            done();
+        });
+    });
+
+    it('Looking for user by email that does not exist returns no rows', function(done) {
         var email = 'nonExistingUser@test.com';
 		UserDao.getUserByEmail(email, function(err, results){
 			expect(results).to.have.length(0);
             done();
 		});
+    });
+
+    it('Looking for user by id that does not exist returns no rows', function(done) {
+        var userId = 999;
+        UserDao.getUserById(userId, function(err, results){
+            expect(results).to.have.length(0);
+            done();
+        });
     });
 
     it('Insert a new user returns newly created user id', function(done) {

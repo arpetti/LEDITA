@@ -166,13 +166,17 @@ module.exports = function(app) {
 }
 
 function ensureAuthenticated(req, res, next) {
-    if(req.isAuthenticated()) return next();
-    else                      return res.send(401);
+    if(req.isAuthenticated()) {
+        return next();
+    } else {
+        return res.send(401);
+    }                      
 }
 
 function ensureAuthorized(req, res, next) {
-    if(!req.user) return res.send(401);
-
+    if(!req.user) {
+        return res.send(401);
+    } 
     var accessLevel = _.findWhere(routes, { path: req.route.path }).accessLevel || accessLevels.public;
     if(!(accessLevel.bitMask & req.user.role.bitMask)) return res.send(403);
 

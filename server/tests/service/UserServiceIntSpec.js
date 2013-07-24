@@ -10,6 +10,9 @@ describe('User Service Integration', function() {
     
     var badUsername = 'nosuchuser@email.it';
     var badPassword = 'passworD';
+
+    var validUserId = 3;
+    var invalidUserId = 999;
     
 	it('User that provides correct password can successfully authenticate', function(done) {
         UserService.authenticateUser(goodUsername, goodPassword, function(err, user, info){
@@ -25,6 +28,7 @@ describe('User Service Integration', function() {
             expect(user.last_name).to.equal('Neri');
             expect(user.gender).to.equal('F');
             expect(user.email).to.equal(goodUsername);
+            expect(user.username).to.equal(goodUsername);
             expect(user.hash).to.be.null;
             expect(user.role).not.to.be.null;
             done();
@@ -42,11 +46,26 @@ describe('User Service Integration', function() {
     });
 
     it('User that provides invalid username fails authentication', function(done) {
-    	UserService.authenticateUser(badUsername, goodPassword, function(err, user, info){
+        UserService.authenticateUser(badUsername, goodPassword, function(err, user, info){
             expect(user).to.be.null;
             expect(err).to.be.null;
             expect(info).not.to.be.null;
             expect(info.message).to.be.equal('invalid username or password');
+            done();
+        });
+    });
+
+    it('Find user by id for valid id returns a result', function(done) {
+        UserService.findUserById(validUserId, function(user){
+            expect(user).not.to.be.null;
+            expect(user.id).to.be.equal(validUserId);
+            done();
+        });
+    });
+
+    it('Find user by id for invalid id returns null', function(done) {
+    	UserService.findUserById(invalidUserId, function(user){
+            expect(user).to.be.null;
             done();
         });
     });

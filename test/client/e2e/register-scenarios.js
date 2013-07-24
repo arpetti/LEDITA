@@ -66,7 +66,7 @@ describe('Registration', function() {
 	});
 
 	it('Cannot register a user that already exists', function() {
-		var existingUserName = testUsers.getUserName;
+		var existingUserName = testUsers.getOldUserName;
 
 		// Try to register
 		browser().navigateTo('/login');

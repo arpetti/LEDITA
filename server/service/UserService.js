@@ -30,11 +30,28 @@ module.exports = {
 				}
 				
 				user.role = UserRoles.user; // temp hack till get user roles in the database:
+				user.username = user.email; // TODO: Figure out Passport mechanism for using email as username
 				user.hash = null; // do not expose hash
 				callback(null, user, null);
             });
         });
-		
+	},
+
+	// callback(user)
+	findUserById: function(userId, callback) {
+		UserDao.getUserById(userId, function(err, results) {
+			if (err) {
+				callback(null);
+				return;
+			}
+			if (results.length === 0) {
+				callback(null);
+				return;
+			}
+			var user = results[0];
+			user.role = UserRoles.user; // temp hack till get user roles in the database:
+			callback(user);
+		});
 	}
 
 };  

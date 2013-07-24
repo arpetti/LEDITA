@@ -2,6 +2,7 @@ var User
     , _ =               require('underscore')
     , passport =        require('passport')
     , LocalStrategy =   require('passport-local').Strategy
+    , UserService =     require('../service/UserService')
     , TwitterStrategy = require('passport-twitter').Strategy
     , FacebookStrategy = require('passport-facebook').Strategy
     , GoogleStrategy = require('passport-google').Strategy
@@ -28,7 +29,6 @@ var users = [
 //FIXME: In real app, user registration function will write to datastore
 module.exports = {
     addUser: function(username, password, role, callback) {
-        console.log('addUser function is called on server side');
         if(this.findByUsername(username) !== undefined)  return callback("UserAlreadyExists");
 
         // Clean up when 500 users reached
@@ -66,8 +66,10 @@ module.exports = {
         return _.map(users, function(user) { return _.clone(user); });
     },
 
-    findById: function(id) {
-        return _.clone(_.find(users, function(user) { return user.id === id }));
+    findById: function(id, callback) {
+        UserService.findUserById(id, function(user) {
+            callback(user);
+        });
     },
 
     findByUsername: function(username) {
@@ -94,19 +96,9 @@ module.exports = {
 
     localStrategy: new LocalStrategy(
         function(username, password, done) {
-
-            var user = module.exports.findByUsername(username);
-
-            if(!user) {
-                done(null, false, { message: 'Incorrect username.' });
-            }
-            else if(user.password != password) {
-                done(null, false, { message: 'Incorrect username.' });
-            }
-            else {
-                return done(null, user);
-            }
-
+            UserService.authenticateUser(username, password, function(err, user, info) {
+                return done(err, user, info);
+            });
         }
     ),
 
@@ -167,14 +159,18 @@ module.exports = {
           }
         );
     },
+
+    // Called by Passport
     serializeUser: function(user, done) {
         done(null, user.id);
     },
 
+    // Called by Passport
     deserializeUser: function(id, done) {
-        var user = module.exports.findById(id);
-
-        if(user)    { done(null, user); }
-        else        { done(null, false); }
+        module.exports.findById(id, function(user) {
+            if(user)    { done(null, user); }
+            else        { done(null, false); }
+        });
+        
     }
 };
