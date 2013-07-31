@@ -21,18 +21,20 @@
           <div class="control-group">
             <div class="controls">
                 <span class="errorTip" ng-show="registrationForm.firstname.$dirty && registrationForm.firstname.$error.required">Required!</span>
+                <span class="errorTip" ng-show="registrationForm.firstname.$error.pattern">Your name can contain only letters.</span>
                 <span class="errorTip" ng-show="registrationForm.firstname.$error.minlength">Your name is required to be at least 2 characters.</span>
                 <span class="errorTip" ng-show="registrationForm.firstname.$error.maxlength">Your name cannot be longer than 20 characters.</span><br>
-                <input ng-model="firstname" name="firstname" type="text" placeholder="Name" class="input-xlarge" required ng-minlength="2" ng-maxlength="20"  />
+                <input ng-model="firstname" name="firstname" type="text" placeholder="Name" class="input-xlarge" required ng-minlength="2" ng-maxlength="20" ng-pattern="/^[a-zA-Z]+$/"  />
                 </div>
           </div>
 
           <div class="control-group">
             <div class="controls">
                 <span class="errorTip" ng-show="registrationForm.surname.$dirty && registrationForm.surname.$error.required">Required!</span>
+                <span class="errorTip" ng-show="registrationForm.surname.$error.pattern">Your surname can contain only letters.</span>
                 <span class="errorTip" ng-show="registrationForm.surname.$error.minlength">Your surname is required to be at least 2 characters.</span>
                 <span class="errorTip" ng-show="registrationForm.surname.$error.maxlength">Your surname cannot be longer than 20 characters.</span><br>
-                <input ng-model="surname" name="surname" type="text" placeholder="Surname" class="input-xlarge" required="" ng-minlength="2" ng-maxlength="20" />
+                <input ng-model="surname" name="surname" type="text" placeholder="Surname" class="input-xlarge" required="" ng-minlength="2" ng-maxlength="20" ng-pattern="/^[a-zA-Z]+$/" />
             </div>
           </div>
 
@@ -54,15 +56,15 @@
           </div>
 
           <div class="control-group">
-            <div class="controls2">
-                <span class="errorTip" ng-show="registrationForm.retypepassword.$error.passwordVerify">Passwords do not match.</span>
+            <div class="controls">
+                <span class="errorTip" ng-show="registrationForm.retypepassword.$error.passwordVerify">Passwords do not match.</span><br>
                 <input ng-model="retypepassword" name="retypepassword" type="password" placeholder="Retype Password" class="input-xlarge" required="" data-password-verify="password" />
             </div>
           </div>
 
           <div class="control-group">
-            <div class="controls2">
-                <span class="errorTip" ng-show="registrationForm.terms.$dirty && registrationForm.terms.$error.required">Required!</span>
+            <div class="controls">
+                <span class="errorTip" ng-show="registrationForm.terms.$dirty && registrationForm.terms.$error.required">Required!</span><br>
                 <label class="checkbox, whiteText">
                 <input type="checkbox" ng-model="terms"  name="terms"  required=""  />
                 I agree to the <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>
@@ -73,7 +75,7 @@
         </div>
 
         <div class="form-actions">
-          <button id="signup" type="submit" ng-disabled="!registrationForm.$valid" class="btn signup btn-large btn-signup">Sign Up</button>
+          <button id="signup" type="submit" ng-disabled="registrationForm.$invalid" class="btn signup btn-large btn-signup">Sign Up</button>
         </div>
 
       </fieldset>
