@@ -3,14 +3,13 @@
     <h1 class="homeHeader">The Learning Design Tool for Italian Language Teachers</h1>
     <p class="centered"><img src="../img/toolbox.png" class="toolbox"></p>
       <p>Maecenas blandit, neque sit amet imperdiet sodales, nisl orci tempor nibh, vel eleifend massa leo adipiscing dui. Donec vitae mi nisi. Ut sed porta velit. Aliquam at vestibulum tortor. Nullam suscipit lacus vel diam consectetur, ac scelerisque massa faucibus. In vitae sapien in tortor iaculis vestibulum. Donec eget fringilla elit, eget cursus turpis. </p>
-    <p>In ultricies commodo est quis varius. Aenean metus orci, convallis a libero eu, pharetra mattis nisi. Donec vulputate convallis sapien a scelerisque. Aliquam consequat feugiat hendrerit. Aliquam ac lectus sit amet sapien accumsan congue a ut massa. In suscipit mi id mi pellentesque, non posuere turpis molestie. </p>
-  </div>
+      </div>
   <div class="span6">
 
     <!-- The RegisterCtrl is specified here because this partial also has login form in top nav
           and the route provides it with LoginCtrl -->
     <div ng-controller="RegisterCtrl" class="login-border">
-      <form ng-submit="register()" class="form-horizontal">
+      <form name="registrationForm" novalidate ng-submit="register()" class="form-horizontal">
         <fieldset>
 
           <legend id="signUpHeader">Create a New Account</legend>
@@ -21,38 +20,51 @@
 
           <div class="control-group">
             <div class="controls">
-              <input ng-model="firstname" type="text" placeholder="Name" class="input-xlarge" required="" />
+                <span class="errorTip" ng-show="registrationForm.firstname.$dirty && registrationForm.firstname.$error.required">Required!</span>
+                <span class="errorTip" ng-show="registrationForm.firstname.$error.minlength">Your name is required to be at least 2 characters.</span>
+                <span class="errorTip" ng-show="registrationForm.firstname.$error.maxlength">Your name cannot be longer than 20 characters.</span><br>
+                <input ng-model="firstname" name="firstname" type="text" placeholder="Name" class="input-xlarge" required ng-minlength="2" ng-maxlength="20"  />
+                </div>
+          </div>
+
+          <div class="control-group">
+            <div class="controls">
+                <span class="errorTip" ng-show="registrationForm.surname.$dirty && registrationForm.surname.$error.required">Required!</span>
+                <span class="errorTip" ng-show="registrationForm.surname.$error.minlength">Your surname is required to be at least 2 characters.</span>
+                <span class="errorTip" ng-show="registrationForm.surname.$error.maxlength">Your surname cannot be longer than 20 characters.</span><br>
+                <input ng-model="surname" name="surname" type="text" placeholder="Surname" class="input-xlarge" required="" ng-minlength="2" ng-maxlength="20" />
             </div>
           </div>
 
           <div class="control-group">
             <div class="controls">
-              <input ng-model="surname" type="text" placeholder="Surname" class="input-xlarge" required="" />
+                <span class="errorTip" ng-show="registrationForm.email.$dirty && registrationForm.email.$error.required">Required!</span>
+                <span class="errorTip" ng-show="registrationForm.email.$error.email">Please, input a valid email.</span><br>
+                <input ng-model="username" name="email" type="email" placeholder="E-mail" class="input-xlarge" required="" />
             </div>
           </div>
 
           <div class="control-group">
             <div class="controls">
-              <input ng-model="username" type="email" placeholder="E-mail" class="input-xlarge" required="" />
+                <span class="errorTip" ng-show="registrationForm.password.$dirty && registrationForm.password.$error.required">Required!</span>
+                <span class="errorTip" ng-show="registrationForm.password.$error.minlength">Your password is required to be at least 8 characters.</span>
+                <span class="errorTip" ng-show="registrationForm.password.$error.maxlength">Your password cannot be longer than 40 characters.</span><br>
+                <input ng-model="password" name="password" type="password" placeholder="Password" class="input-xlarge" required="" ng-minlength="8" ng-maxlength="40" />
             </div>
           </div>
 
           <div class="control-group">
-            <div class="controls">
-              <input ng-model="password" type="password" placeholder="Password" class="input-xlarge" required="" />
+            <div class="controls2">
+                <span class="errorTip" ng-show="registrationForm.retypepassword.$error.passwordVerify">Passwords do not match.</span>
+                <input ng-model="retypepassword" name="retypepassword" type="password" placeholder="Retype Password" class="input-xlarge" required="" data-password-verify="password" />
             </div>
           </div>
 
           <div class="control-group">
-            <div class="controls">
-              <input ng-model="retypepassword" type="password" placeholder="Retype Password" class="input-xlarge" required="" />
-            </div>
-          </div>
-
-          <div class="control-group">
-            <div class="controls">
-              <label class="checkbox, whiteText">
-                <input type="checkbox" value="agreeTermsPrivacy" />
+            <div class="controls2">
+                <span class="errorTip" ng-show="registrationForm.terms.$dirty && registrationForm.terms.$error.required">Required!</span>
+                <label class="checkbox, whiteText">
+                <input type="checkbox" ng-model="terms"  name="terms"  required=""  />
                 I agree to the <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>
               </label>
             </label>
@@ -61,7 +73,7 @@
         </div>
 
         <div class="form-actions">
-          <button id="signup" type="submit" class="btn signup btn-large btn-signup">Sign Up</button>
+          <button id="signup" type="submit" ng-disabled="!registrationForm.$valid" class="btn signup btn-large btn-signup">Sign Up</button>
         </div>
 
       </fieldset>

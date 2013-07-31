@@ -14,7 +14,7 @@ body {
 
 /* top right bottom left */
 .navbar .nav-top-pad {
-	margin: 15px 0px 0 0;
+	margin: 15px 0 0 0;
 }
 
 .navbar .nav > li {
@@ -31,13 +31,12 @@ body {
 	font-size: 18px;
     color: #FFFFFF;
     text-shadow: 0 -1px 1px rgba(255, 255, 255, 0.75);
-    text-shadow: 0 -1px 1px rgba(155, 155, 155, 0.75);
 
 }
 
 .navbar-inverse .nav li.dropdown > .dropdown-toggle .caret {
 	border-top-color: #333333;
-	border-bottom-color: ##333333;
+	border-bottom-color: #333333;
 }
 
 .input-xlarge {
@@ -100,8 +99,7 @@ input[type="checkbox"] {
     text-shadow: 0 1px 1px rgba(155, 155, 155, 0.65);
 }
 #signUpHeader {
-	padding-top: 20px;
-    color: #FFFFFF;
+ color: #FFFFFF;
     font-weight: bold;
     font-family: verdana, geneva, sans-serif;
     font-size: 24px;
@@ -118,7 +116,7 @@ input[type="checkbox"] {
 }
 
 .ld-grid {
-	margin-left: 0px;
+	margin-left: 0;
 }
 
 .ld-border {
@@ -182,10 +180,29 @@ input[type="checkbox"] {
 
 h1.homeHeader {
     font-family: 'Kite One', sans-serif;
-    color: ;
     font-size: 28px;
     text-align: center;
     text-shadow: 0 -2px 1px rgba(255, 255, 255, 0.75);
     text-shadow: 0 1px 1px rgba(155, 155, 155, 0.75);
 
+}
+
+.errorTip {
+    font-size: 11px;
+    color: #FFFFFF;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border: 1px solid #CC0000;
+    background-color: #CC0000;
+    padding: 2px;
+}
+
+.controls {
+    margin-top: -20px;
+    padding-top: 0;
+}
+
+.controls2 {
+    margin-left: 60px;
 }
