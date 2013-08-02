@@ -50,6 +50,7 @@ module.exports = {
 			}
 			var user = results[0];
 			user.role = UserRoles.user; // temp hack till get user roles in the database:
+			user.username = user.email; // TODO: Figure out Passport mechanism for using email as username
 			callback(user);
 		});
 	}
