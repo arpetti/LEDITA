@@ -21,7 +21,7 @@
           <div class="control-group">
             <div class="controls">
                 <span class="errorTip" ng-show="registrationForm.firstname.$dirty && registrationForm.firstname.$error.required">Required!</span>
-                <span class="errorTip" ng-show="registrationForm.firstname.$error.pattern">Your name can contain only letters.</span>
+                <span id="firstNameLetters" class="errorTip" ng-show="registrationForm.firstname.$error.pattern">Your name can contain only letters.</span>
                 <span class="errorTip" ng-show="registrationForm.firstname.$error.minlength">Your name is required to be at least 2 characters.</span>
                 <span class="errorTip" ng-show="registrationForm.firstname.$error.maxlength">Your name cannot be longer than 20 characters.</span><br>
                 <input ng-model="firstname" name="firstname" type="text" placeholder="Name" class="input-xlarge" required ng-minlength="2" ng-maxlength="20" ng-pattern="/^[a-zA-Z]+$/"  />
@@ -49,7 +49,7 @@
           <div class="control-group">
             <div class="controls">
                 <span class="errorTip" ng-show="registrationForm.password.$dirty && registrationForm.password.$error.required">Required!</span>
-                <span class="errorTip" ng-show="registrationForm.password.$error.minlength">Your password is required to be at least 8 characters.</span>
+                <span id="passwordMinLength" class="errorTip" ng-show="registrationForm.password.$error.minlength">Your password is required to be at least 8 characters.</span>
                 <span class="errorTip" ng-show="registrationForm.password.$error.maxlength">Your password cannot be longer than 40 characters.</span><br>
                 <input ng-model="password" name="password" type="password" placeholder="Password" class="input-xlarge" required="" ng-minlength="8" ng-maxlength="40" />
             </div>

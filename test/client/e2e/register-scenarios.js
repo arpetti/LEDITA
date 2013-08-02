@@ -31,26 +31,34 @@ describe('Registration', function() {
 	    expect(element('#navBarUser', 'user nav is hidden after user logs out').css('display')).toBe('none');
 	});
 
-	// TODO: Verify all the client side validation errors or that submit button is disabled when form error
-	it('Password cannot be less than 8 characters', function() {
+	// TODO: Nest a describe and have individual tests to verify each client side validation rule
+	it('Client side validation rules', function() {
 		var userNameToRegister = userNameGenerator.buildUserName + 'a';
 
-		// Try to register
 		browser().navigateTo('/login');
+	    
+	    // First Name
+	    input('firstname').enter('John123');
+	    expect(element('#firstNameLetters').css('display')).toBe("inline");
+	    expect(element('#firstNameLetters').text()).toMatch('Your name can contain only letters');
 	    input('firstname').enter('John');
+	    expect(element('#firstNameLetters').css('display')).toBe("none");
+	    
+	    // Surname
 	    input('surname').enter('Smith');
+	    
+	    // Email (a.k.a. username)
 	    input('username').enter(userNameToRegister);
+	    
+	    // Password
 	    input('password').enter('1234567');
-	    input('retypepassword').enter('1234567');
-	    input('terms').check();
-	    element('#signup').click();
-
-	    // Verify error message is displayed
-	    expect(element('.errorTip').text()).toMatch('Your password is required to be at least 8 characters');
-
-	    // Provide a longer password
+	    expect(element('#passwordMinLength').css('display')).toBe("inline");
+	    expect(element('#passwordMinLength').text()).toMatch('Your password is required to be at least 8 characters');
 	    input('password').enter('12345678');
+	    expect(element('#passwordMinLength').css('display')).toBe("none");
 	    input('retypepassword').enter('12345678');
+
+	    input('terms').check();
 	    element('#signup').click();
 
 	    // Verify logged in view
