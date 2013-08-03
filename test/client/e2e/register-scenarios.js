@@ -42,6 +42,7 @@ describe('Registration', function() {
 	    expect(element('#firstNameLetters').css('display')).toBe("inline");
 	    expect(element('#firstNameLetters').text()).toMatch('Your name can contain only letters');
 	    input('firstname').enter('John');
+	    sleep(1);
 	    expect(element('#firstNameLetters').css('display')).toBe("none");
 	    
 	    // Surname
