@@ -1,5 +1,6 @@
 var HashHelper = require('../util/HashHelper')
   , UserDao = require('../dao/UserDao')
+  , UserValidator = require('./UserValidator')
   , UserRoles = require('../../client/js/auth/AuthRoutingConfig').userRoles;
 
 module.exports = {

@@ -39,6 +39,7 @@ describe('Registration', function() {
 	    
 	    // First Name
 	    input('firstname').enter('John123');
+	    sleep(1);
 	    expect(element('#firstNameLetters').css('display')).toBe("inline");
 	    expect(element('#firstNameLetters').text()).toMatch('Your name can contain only letters');
 	    input('firstname').enter('John');
@@ -53,9 +54,11 @@ describe('Registration', function() {
 	    
 	    // Password
 	    input('password').enter('1234567');
+	    sleep(1);
 	    expect(element('#passwordMinLength').css('display')).toBe("inline");
 	    expect(element('#passwordMinLength').text()).toMatch('Your password is required to be at least 8 characters');
 	    input('password').enter('12345678');
+	    sleep(1);
 	    expect(element('#passwordMinLength').css('display')).toBe("none");
 	    input('retypepassword').enter('12345678');
 
