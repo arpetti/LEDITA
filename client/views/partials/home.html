@@ -1,24 +1,18 @@
 <div id="ldlist" class="row top-margin">
 
   <!-- LD BOX START -->
-  <div ng-repeat="learningDesign in learningDesigns" class="span3 ld-border ld-item">
-    <div class="ld-top-left">
-      A1
+  <div ng-repeat="learningDesign in learningDesigns" class="ld-border ld-item">
+    <div class="ld-top">
+      A1<a href="#" class="float-right"><i class="icon-arrow-right icon-white"></i></a>
     </div>
-    <div class="ld-top-right pull-right">
-      <a href="#"><i class="icon-arrow-right"></i></a>
-    </div>
-    <hr />
     <div class="ld-center text-center">
-      <h4>{{ learningDesign.ld_name }}</h4>
+      <h4 class="ld-name-text"><a href="#">{{ learningDesign.ld_name }}</a></h4>
     </div>
-    <div class="ld-bottom-left">
-      {{ learningDesign.ld_scope }}
+    <div class="ld-bottom">
+      {{ learningDesign.ld_scope }}<span class="float-right">   {{ learningDesign.user_name }}&nbsp;{{ learningDesign.user_last_name }}
+   </span>
     </div>
-    <div class="ld-bottom-right pull-right">
-      {{ learningDesign.user_name }}&nbsp;{{ learningDesign.user_last_name }}
-    </div>
-  </div>
+   </div>
   <!-- LD BOX END -->
   
 </div><!-- row -->

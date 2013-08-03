@@ -13,11 +13,9 @@
         <fieldset>
 
           <legend id="signUpHeader">Create a New Account</legend>
-
-          <div id="registrationErrors" ng-show="alertMsg" class="alert alert-error">
-            {{ alertMsg }}
-          </div>
-
+            <div id="registrationErrors" ng-show="alertMsg" class="alert alert-error">
+                           {{ alertMsg }}
+                </div>
           <div class="control-group">
             <div class="controls">
                 <span class="errorTip" ng-show="registrationForm.firstname.$dirty && registrationForm.firstname.$error.required">Required!</span>
@@ -69,7 +67,7 @@
                 <input type="checkbox" ng-model="terms"  name="terms"  required=""  />
                 I agree to the <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>
               </label>
-            </label>
+
           </div>
 
         </div>
