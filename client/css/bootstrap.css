@@ -223,7 +223,6 @@ textarea {
 
 body {
   margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 20px;
   color: #333333;
@@ -1061,13 +1060,6 @@ textarea {
   line-height: 20px;
 }
 
-input,
-button,
-select,
-textarea {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
 label {
   display: block;
   margin-bottom: 5px;
@@ -1626,6 +1618,7 @@ select:focus:invalid:focus {
           box-shadow: 0 0 6px #f8b9b7;
 }
 
+/*
 .form-actions {
   padding: 19px 20px 20px;
   margin-top: 20px;
@@ -1646,6 +1639,7 @@ select:focus:invalid:focus {
   clear: both;
 }
 
+*/
 .help-block,
 .help-inline {
   color: #595959;
