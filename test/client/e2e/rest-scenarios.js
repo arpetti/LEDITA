@@ -14,4 +14,9 @@ describe('REST resources', function() {
     expect(element('pre').text()).toBe('Unauthorized');
   });
 
+  it('GET learning design by id', function() {
+    browser().navigateTo('/learningdesigns/1');
+    expect(element('pre').text()).toBe('Unauthorized');
+  });
+
 }); 
