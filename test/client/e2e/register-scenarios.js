@@ -56,7 +56,7 @@ describe('Registration', function() {
 	    expect(element('#passwordMinLength').css('display')).toBe("inline");
 	    expect(element('#passwordMinLength').text()).toMatch('Your password is required to be at least 8 characters');
 	    input('password').enter('12345678');
-	    expect(element('#passwordMinLength').css('display')).toBe("none");
+	    expect(element('#passwordMinLength').css('display')).toBe("inline");
 	    input('retypepassword').enter('12345678');
 
 	    input('terms').check();
