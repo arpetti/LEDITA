@@ -1,6 +1,5 @@
 var expect = require('chai').expect
-    , LdDao = require('../../dao/LdDao')
-    , Dao = require('../../dao/Dao');
+    , LdDao = require('../../dao/LdDao');
 
 describe('Learning Design DAO', function() {    
 
