@@ -13,7 +13,9 @@
         <fieldset>
 
           <legend id="signUpHeader">Create a New Account</legend>
-
+            <div id="registrationErrors" ng-show="alertMsg" class="alert alert-error">
+                           {{ alertMsg }}
+                </div>
           <div class="control-group">
             <div class="controls">
                 <span class="errorTip" ng-show="registrationForm.firstname.$dirty && registrationForm.firstname.$error.required">Required!</span>
