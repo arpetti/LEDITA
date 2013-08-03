@@ -42,4 +42,20 @@ describe('Learning Design DAO', function() {
         });
     });
 
+    it('Get learning design for null id returns no results', function(done) {
+        var learningDesignId = null;
+        LdDao.getLearningDesign(learningDesignId, function(err, learningDesigns){
+            expect(learningDesigns).to.have.length(0);
+            done();
+        });
+    });
+
+    it('Get learning design for undefined id returns no results', function(done) {
+        var learningDesignId;
+        LdDao.getLearningDesign(learningDesignId, function(err, learningDesigns){
+            expect(learningDesigns).to.have.length(0);
+            done();
+        });
+    });
+
 });	

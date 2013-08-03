@@ -111,6 +111,12 @@ var routes = [
         middleware: [ensureAuthenticated, ensureAuthorized, LearningDesignCtrl.index],
         accessLevel: accessLevels.user
     },
+    {
+        path: '/learningdesigns/:id',
+        httpMethod: 'GET',
+        middleware: [ensureAuthenticated, ensureAuthorized, LearningDesignCtrl.findById],
+        accessLevel: accessLevels.user
+    },
 
     // User resource
     {
