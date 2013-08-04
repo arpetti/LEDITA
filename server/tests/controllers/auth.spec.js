@@ -3,7 +3,9 @@ var expect = require('chai').expect
     , sinon = require('sinon')
     , AuthCtrl = require('../../controllers/auth')
     , User = require('../../models/User')
-    , UserValidator = require('../../service/UserValidator');
+    , UserValidator = require('../../service/UserValidator')
+    , HashHelper = require('../../util/HashHelper')
+    , UserService = require('../../service/UserService');
 
 describe('Auth controller', function() {
 
@@ -34,12 +36,20 @@ describe('Auth controller', function() {
         });
 
         it('returns a 400 when user validation fails', function(done) {
+            
             var errorMessages = ["some error"];
             var userValidateStub = sandbox.stub(UserValidator, "validate").returns(errorMessages);
             
+            var userValidateExistsStub = sandbox.stub(UserValidator, "validateExists");
+            var hashHelperStub = sandbox.stub(HashHelper, "generateHash");
+            var userServiceStub = sandbox.stub(UserService, "addNewUser");
+
             res.send = function(httpStatus) {
                 expect(httpStatus).to.equal(400);
                 assert.isTrue(userValidateStub.calledOnce);
+                assert.equal(userValidateExistsStub.callCount, 0, "user exists check is not called when there are validation errors");
+                assert.equal(hashHelperStub.callCount, 0, "password hash is not generated when there are validation errors");
+                assert.equal(userServiceStub.callCount, 0, "user is not added when there are validation errors");
                 done();
             };
 
@@ -47,16 +57,51 @@ describe('Auth controller', function() {
         });
 
         it('returns a 403 when user already exists', function(done) {
+            
+            var errorMessages = [];
+            var userValidateStub = sandbox.stub(UserValidator, "validate").returns(errorMessages);
+            
             var userExistsMessage = "user already exists"
-            var myFunc = function(username, callback) {
+            var userExistsFunction = function(username, callback) {
                 callback(null, userExistsMessage);
             }
-            var userValidateStub = sandbox.stub(UserValidator, "validateExists", myFunc);
+            var userValidateExistsStub = sandbox.stub(UserValidator, "validateExists", userExistsFunction);
+
+            var hashHelperStub = sandbox.stub(HashHelper, "generateHash");
+            var userServiceStub = sandbox.stub(UserService, "addNewUser");
 
             res.send = function(httpStatus, message) {
                 expect(httpStatus).to.equal(403);
                 expect(message).to.equal(userExistsMessage);
                 assert.isTrue(userValidateStub.calledOnce);
+                assert.isTrue(userValidateExistsStub.calledOnce);
+                assert.equal(hashHelperStub.callCount, 0, "password hash is not generated when user already exists");
+                assert.equal(userServiceStub.callCount, 0, "user is not added when user already exists");
+                done();
+            };
+
+            AuthCtrl.registerNewUser(req, res, next);
+        });
+
+        it('returns a 500 when checking for existing user encounters unexpected error', function(done) {
+
+            var errorMessages = [];
+            var userValidateStub = sandbox.stub(UserValidator, "validate").returns(errorMessages);
+
+            var userExistsFunction = function(username, callback) {
+                callback(new Error("something went wrong"));
+            }
+            var userValidateExistsStub = sandbox.stub(UserValidator, "validateExists", userExistsFunction);
+
+            var hashHelperStub = sandbox.stub(HashHelper, "generateHash");
+            var userServiceStub = sandbox.stub(UserService, "addNewUser");
+
+            res.send = function(httpStatus) {
+                expect(httpStatus).to.equal(500);
+                assert.isTrue(userValidateStub.calledOnce);
+                assert.isTrue(userValidateExistsStub.calledOnce);
+                assert.equal(hashHelperStub.callCount, 0, "password hash is not generated when error occurs checking if user exists");
+                assert.equal(userServiceStub.callCount, 0, "user is not added when error occurs checking if user exists");
                 done();
             };
 
