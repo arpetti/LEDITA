@@ -11,22 +11,6 @@ var User
     , check =           require('validator').check
     , userRoles =       require('../../client/js/auth/AuthRoutingConfig').userRoles;
 
-//FIXME: In real app, user info will come from datastore
-var users = [
-    {
-        id:         1,
-        username:   "user@test.com",
-        password:   "123",
-        role:   userRoles.user
-    },
-    {
-        id:         2,
-        username:   "admin@test.com",
-        password:   "456",
-        role:   userRoles.admin
-    }
-];
-
 //FIXME: In real app, user registration function will write to datastore
 module.exports = {
     addUser: function(username, password, role, callback) {

@@ -46,6 +46,23 @@ describe('Auth controller', function() {
             AuthCtrl.registerNewUser(req, res, next);
         });
 
+        it('returns a 403 when user already exists', function(done) {
+            var userExistsMessage = "user already exists"
+            var myFunc = function(username, callback) {
+                callback(null, userExistsMessage);
+            }
+            var userValidateStub = sandbox.stub(UserValidator, "validateExists", myFunc);
+
+            res.send = function(httpStatus, message) {
+                expect(httpStatus).to.equal(403);
+                expect(message).to.equal(userExistsMessage);
+                assert.isTrue(userValidateStub.calledOnce);
+                done();
+            };
+
+            AuthCtrl.registerNewUser(req, res, next);
+        });
+
     });
 
     describe('register()', function() {
