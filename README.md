@@ -23,6 +23,10 @@ Project Website: http://www.professoreitaliano.com
 
     For Mac or Linux, switch the ```\``` to ```/```
 
+    Add mysql bin to your PATH, this is required for running e2e tests. 
+    For Windows, add for example ```C:\Program Files\MySQL\MySQL Server 5.5\bin``` to the ```PATH``` environment variable.
+    For Mac/Linux, edit your ```~.bash_profile```, for example ```export PATH=/usr/local/mysql/bin:$PATH```
+
 * If you don't already have it, install [Node.js](http://nodejs.org/)
 
 * Install [node-gyp](https://github.com/TooTallNate/node-gyp), this is a required dependency for [bcrypt](https://github.com/ncb000gt/node.bcrypt.js/) which is used by this project for password hashing.
@@ -119,8 +123,6 @@ Project Website: http://www.professoreitaliano.com
     * username is the email address
     * passw0rD
 
-* Logout from dropdown menu under avatar image
-
 ## Running Tests
 
 Before any pushes are made, please ensure all tests pass locally. Tests will also be run automatically on Travis after pushing. The instructions below explain how to run server and client tests locally.
@@ -140,23 +142,23 @@ Not implemented yet.
 ### <a name="rune2e"/>Run Client End To End Tests
 
 * Start Karma with e2e test config (from project root)
+
+    The e2e tests are also dependent on the database. 
+    To ensure a clean start each time, the database is reset prior to the e2e test run. 
+    For Windows, the script assumes you have a mysql root user password set. 
+    For example, if your mysql root password is ```catswillruletheworld```, then run the script as follows
     
     Windows
     ```
-    test\client\scripts\local-e2e-test.bat
+    test\client\scripts\local-e2e-test.bat catswillruletheworld
     ```
 
-    Linux
+    For Mac or Linux, the script assumes no mysql root user password is set.
+
+    Mac or Linux
     ```
     test/client/scripts/local-e2e-test.sh
     ```
-
-The e2e tests are also dependent on the database. To ensure a clean start each time, the local database is reset prior to the e2e test run. 
-
-For Mac and Linux,
-see [local-e2e-test.sh](test/client/scripts/local-e2e-test.sh) for instructions to set the mysql path in profile.
-
-For windows, see [local-e2e-test.bat](test/client/scripts/local-e2e-test.bat) for corresponding instructions.
 
 ### Debug End To End Tests
 

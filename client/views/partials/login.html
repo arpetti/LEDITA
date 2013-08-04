@@ -29,7 +29,7 @@
           <div class="control-group">
             <div class="controls">
                 <span class="errorTip" ng-show="registrationForm.surname.$dirty && registrationForm.surname.$error.required">Required!</span>
-                <span class="errorTip" ng-show="registrationForm.surname.$error.pattern">Your surname can contain only letters.</span>
+                <span id="surnameLetters" class="errorTip" ng-show="registrationForm.surname.$error.pattern">Your surname can contain only letters.</span>
                 <span class="errorTip" ng-show="registrationForm.surname.$error.minlength">Your surname is required to be at least 2 characters.</span>
                 <span class="errorTip" ng-show="registrationForm.surname.$error.maxlength">Your surname cannot be longer than 20 characters.</span><br>
                 <input ng-model="surname" name="surname" type="text" placeholder="Surname" class="input-xlarge" required="" ng-minlength="2" ng-maxlength="20" ng-pattern="/^[a-zA-Z]+$/" />
@@ -39,7 +39,7 @@
           <div class="control-group">
             <div class="controls">
                 <span class="errorTip" ng-show="registrationForm.email.$dirty && registrationForm.email.$error.required">Required!</span>
-                <span class="errorTip" ng-show="registrationForm.email.$error.email">Please, input a valid email.</span><br>
+                <span id="emailFormat" class="errorTip" ng-show="registrationForm.email.$error.email">Please, input a valid email.</span><br>
                 <input ng-model="username" name="email" type="email" placeholder="E-mail" class="input-xlarge" required="" />
             </div>
           </div>
@@ -55,7 +55,7 @@
 
           <div class="control-group">
             <div class="controls">
-                <span class="errorTip" ng-show="registrationForm.retypepassword.$error.passwordVerify">Passwords do not match.</span><br>
+                <span id="passwordNotMatch" class="errorTip" ng-show="registrationForm.retypepassword.$error.passwordVerify">Passwords do not match.</span><br>
                 <input ng-model="retypepassword" name="retypepassword" type="password" placeholder="Retype Password" class="input-xlarge" required="" data-password-verify="password" />
             </div>
           </div>
