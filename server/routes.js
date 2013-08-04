@@ -90,6 +90,13 @@ var routes = [
         middleware: [AuthCtrl.register],
         accessLevel: accessLevels.public
     },
+    // TODO: Get rid of old register when get this one working
+    {
+        path: '/registernewuser',
+        httpMethod: 'POST',
+        middleware: [AuthCtrl.registerNewUser],
+        accessLevel: accessLevels.public
+    },
     {
         path: '/login',
         httpMethod: 'POST',

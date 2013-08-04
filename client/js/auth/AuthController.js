@@ -50,8 +50,11 @@ angular.module('ledita-app')
 
     $scope.register = function() {
         Auth.register({
+                firstname: $scope.firstname,
+                surname: $scope.surname,
                 username: $scope.username,
                 password: $scope.password,
+                terms: $scope.terms,
                 role: $scope.role
             },
             function() {
@@ -59,7 +62,6 @@ angular.module('ledita-app')
                 $location.path('/');
             },
             function(err) {
-                debugger;
                 $scope.alertMsg = err;
             });
     };

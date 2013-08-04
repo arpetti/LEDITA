@@ -166,18 +166,18 @@ describe('User Validator', function() {
         expect(errorMessages[0]).to.equal(messages.PASSWORD_LENGTH);
     }); 
 
-    it('Error message when passwords do not match', function() {
-        var user = {
-            firstname: "Mickey",
-            surname: "Mouse",
-            username: "mickey.mouse@disney.com",
-            password: "12345678",
-            retypepassword: "12345677"
-        };
+    // it('Error message when passwords do not match', function() {
+    //     var user = {
+    //         firstname: "Mickey",
+    //         surname: "Mouse",
+    //         username: "mickey.mouse@disney.com",
+    //         password: "12345678",
+    //         retypepassword: "12345677"
+    //     };
 
-        var errorMessages = UserValidator.validate(user);
-        expect(errorMessages).to.have.length(1);
-        expect(errorMessages[0]).to.equal(messages.PASSWORD_MATCH);
-    }); 
+    //     var errorMessages = UserValidator.validate(user);
+    //     expect(errorMessages).to.have.length(1);
+    //     expect(errorMessages[0]).to.equal(messages.PASSWORD_MATCH);
+    // }); 
 
 });	

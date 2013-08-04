@@ -1,6 +1,5 @@
 var HashHelper = require('../util/HashHelper')
   , UserDao = require('../dao/UserDao')
-  , UserValidator = require('./UserValidator')
   , UserRoles = require('../../client/js/auth/AuthRoutingConfig').userRoles;
 
 module.exports = {
@@ -53,6 +52,26 @@ module.exports = {
 			user.role = UserRoles.user; // temp hack till get user roles in the database:
 			user.username = user.email; // TODO: Figure out Passport mechanism for using email as username
 			callback(user);
+		});
+	},
+
+	// callback(err, addedUser)
+	addNewUser: function(user, hash, callback) {
+		var userToBeAdded = {
+			name: user.firstname,
+			last_name: user.surname,
+			email: user.username,
+			hash: hash
+		};
+
+		UserDao.addUser(userToBeAdded, function(err, addedUserId) {
+			if (err) {
+				callback(err);
+				return;
+			}
+			module.exports.findUserById(addedUserId, function(foundUser) {
+				callback(null, foundUser);
+			});
 		});
 	}
 

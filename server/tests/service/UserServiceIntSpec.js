@@ -1,7 +1,8 @@
 // This is an integration test because the dependencies are not mocked out
 
 var expect = require('chai').expect
-    , UserService = require('../../service/UserService');
+    , UserService = require('../../service/UserService')
+    , UserDao = require('../../dao/UserDao');
 
 describe('User Service Integration', function() {    
 
@@ -13,6 +14,14 @@ describe('User Service Integration', function() {
 
     var validUserId = 3;
     var invalidUserId = 999;
+
+    var emailToInsert = 'daffy.duck@looney.com';
+
+    afterEach(function(done) {
+        UserDao.deleteUser({email: emailToInsert}, function(err, result) {
+            done();
+        });
+    });
     
 	it('User that provides correct password can successfully authenticate', function(done) {
         UserService.authenticateUser(goodUsername, goodPassword, function(err, user, info){
@@ -64,8 +73,26 @@ describe('User Service Integration', function() {
     });
 
     it('Find user by id for invalid id returns null', function(done) {
-    	UserService.findUserById(invalidUserId, function(user){
+        UserService.findUserById(invalidUserId, function(user){
             expect(user).to.be.null;
+            done();
+        });
+    });
+
+    it('Add new user returns newly added user object', function(done) {
+        var hash = "quackquackhashedpassword";
+        var userIn = {
+            username: emailToInsert,
+            firstname: "Daffy",
+            surname: "Duck"
+        };
+    	UserService.addNewUser(userIn, hash, function(err, userOut){
+            expect(err).to.be.null;
+            expect(userOut).not.to.be.null;
+            expect(userOut.id).to.be.above(5);
+            expect(userOut.email).to.equal(userIn.username);
+            expect(userOut.name).to.equal(userIn.firstname);
+            expect(userOut.last_name).to.equal(userIn.surname);
             done();
         });
     });

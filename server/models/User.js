@@ -3,9 +3,10 @@ var User
     , passport =        require('passport')
     , LocalStrategy =   require('passport-local').Strategy
     , UserService =     require('../service/UserService')
+    , UserValidator =   require('../service/UserValidator')
     , TwitterStrategy = require('passport-twitter').Strategy
     , FacebookStrategy = require('passport-facebook').Strategy
-    , GoogleStrategy = require('passport-google').Strategy
+    , GoogleStrategy =   require('passport-google').Strategy
     , LinkedInStrategy = require('passport-linkedin').Strategy
     , check =           require('validator').check
     , userRoles =       require('../../client/js/auth/AuthRoutingConfig').userRoles;
@@ -80,6 +81,7 @@ module.exports = {
         return _.find(users, function(user) { return user[provider] === id; });
     },
 
+    //TODO: Remove this when have real registration service hooked up
     validate: function(user) {
         check(user.username, 'Username must be 1-20 characters long').len(1, 20);
         check(user.password, 'Password must be 5-60 characters long').len(5, 60);

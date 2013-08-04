@@ -26,7 +26,7 @@ angular.module('ledita-app')
             return user.role == userRoles.user || user.role == userRoles.admin;
         },
         register: function(user, success, error) {
-            $http.post('/register', user).success(function(res) {
+            $http.post('/registernewuser', user).success(function(res) {
                 changeUser(res);
                 success();
             }).error(error);

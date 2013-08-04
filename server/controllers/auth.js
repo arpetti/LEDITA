@@ -1,5 +1,8 @@
 var passport =  require('passport')
-    , User = require('../models/User.js');
+    , User = require('../models/User.js')
+    , UserValidator = require('../service/UserValidator')
+    , UserService = require('../service/UserService')
+    , HashHelper = require('../util/HashHelper');
 
 module.exports = {
     register: function(req, res, next) {
@@ -21,6 +24,41 @@ module.exports = {
                 else        { res.json(200, { "role": user.role, "username": user.username }); }
             });
         });
+    },
+
+    //TODO: When get this working, remove original register and tests
+    registerNewUser: function(req, res, next) {
+        var user = req.body;
+        var registrationErrors = UserValidator.validate(user);
+        if (registrationErrors.length > 0) {
+            return res.send(400, registrationErrors);
+        }
+
+        UserValidator.validateExists(user.username, function(err, message) {
+            if(err) {
+                return res.send(500);
+            }
+            if (message) {
+                return res.send(403, message);
+            } else {
+                HashHelper.generateHash(user.password, function(err, hash) {
+                    if(err) {
+                        return res.send(500);
+                    }
+                    UserService.addNewUser(user, hash, function(err, addedUser) {
+                        if(err) {
+                            return res.send(500);
+                        }
+                        req.logIn(addedUser, function(err) {
+                            if(err)     { next(err); }
+                            else        { res.json(200, { "role": addedUser.role, "username": addedUser.username }); }
+                        });
+                    });
+                });
+            }
+        });
+
+
     },
 
     //TODO: Consider extracting message from info if available and send along with 400

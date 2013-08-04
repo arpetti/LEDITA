@@ -1,5 +1,6 @@
 var check = require('validator').check
 	, messages = require('./ValidationMessages')
+	, UserDao = require('../dao/UserDao')
 	, _ = require('underscore');
 
 var validateNullEmpty = function(field, message) {
@@ -20,6 +21,7 @@ var validateEmail = function(field, message) {
 }
 
 var validateEquality = function(field1, field2, message) {
+	console.log('validateEquality, field1: ' + field1 + ', field2; ' + field2);
 	if (field1 !== field2) {
 		return message;
 	}
@@ -70,10 +72,25 @@ module.exports = {
 			validateAny(validateNullEmpty, [user.password, messages.PASSWORD_REQUIRED]));
 		errorMessages.push(
 			validateAny(validateLength, [user.password, messages.PASSWORD_LENGTH, 8, 40]));
-		errorMessages.push(
-			validateEquality(user.password, user.retypepassword, messages.PASSWORD_MATCH));
+		// errorMessages.push(
+		// 	validateEquality(user.password, user.retypepassword, messages.PASSWORD_MATCH));
 		
         return _.filter(errorMessages, function(message){ return message !== null; });
+	},
+
+	// callback(err, message)
+	validateExists: function(username, callback) {
+		UserDao.getUserByEmail(username, function(err, results){
+			if (err) {
+				callback(err);
+				return;
+			}
+			if (results.length > 0) {
+				callback(null, messages.USERNAME_EXISTS);
+				return;
+			}
+			callback(null, null);
+        });
 	}
 
 };
