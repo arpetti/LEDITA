@@ -152,7 +152,7 @@ h1, h2, h3, h4 {
     border: none;
     text-align: center;
     padding-top: 30px;
-    margin: 0 auto;
+    margin: 0 auto 15px auto;
 }
 .btn-signup {
     color: #0099cc;
@@ -190,6 +190,15 @@ h1, h2, h3, h4 {
     margin: -20px 0 0 0;
     padding: 0;
     width: 100%;
+}
+
+#registrationErrors {
+    width: 65%;
+    margin: 0 auto 10px auto;
+    color: #FFFFFF;
+    font-weight: bold;
+    background-color: #FF0000;
+    text-align: center;
 }
 
 /* form elements
