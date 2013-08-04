@@ -29,6 +29,7 @@ module.exports = {
     //TODO: When get this working, remove original register and tests
     registerNewUser: function(req, res, next) {
         var user = req.body;
+        
         var registrationErrors = UserValidator.validate(user);
         if (registrationErrors.length > 0) {
             return res.send(400, registrationErrors);

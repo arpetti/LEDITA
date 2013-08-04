@@ -1,7 +1,9 @@
 var expect = require('chai').expect
+    , assert = require('chai').assert
     , sinon = require('sinon')
     , AuthCtrl = require('../../controllers/auth')
-    , User = require('../../models/User');
+    , User = require('../../models/User')
+    , UserValidator = require('../../service/UserValidator');
 
 describe('Auth controller', function() {
 
@@ -16,6 +18,34 @@ describe('Auth controller', function() {
 
     afterEach(function() {
         sandbox.restore();
+    });
+
+    describe('registerNewUser', function() {
+
+        beforeEach(function() {
+            req.body = {
+                firstname: "John",
+                surname: "Smith",
+                username: "testa@test.com",
+                password: "12345678",
+                terms: true,
+                role: {bitMask: 2, title: "user"}
+            };
+        });
+
+        it('returns a 400 when user validation fails', function(done) {
+            var errorMessages = ["some error"];
+            var userValidateStub = sandbox.stub(UserValidator, "validate").returns(errorMessages);
+            
+            res.send = function(httpStatus) {
+                expect(httpStatus).to.equal(400);
+                assert.isTrue(userValidateStub.calledOnce);
+                done();
+            };
+
+            AuthCtrl.registerNewUser(req, res, next);
+        });
+
     });
 
     describe('register()', function() {
