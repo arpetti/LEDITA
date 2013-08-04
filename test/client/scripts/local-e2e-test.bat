@@ -10,9 +10,9 @@ REM - NodeJS (http://nodejs.org/)
 REM - Karma (npm install -g karma)
 
 set BASE_DIR=%~dp0
-set SQL_DIR=%BASE_DIR\..\..\..\database\local
+set SQL_DIR=%BASE_DIR%..\..\..\database\local
 
-mysql -u root < %SQL_DIR\ledita-web-app.sql
-mysql -u root < %SQL_DIR\demo-data.sql
+mysql -u root -p%1 < %SQL_DIR%\ledita-web-app.sql
+mysql -u root -p%1 < %SQL_DIR%\demo-data.sql
 
 karma start "%BASE_DIR%\..\config\karma-e2e.conf.js" %*
