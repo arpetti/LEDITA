@@ -83,7 +83,7 @@ describe('Registration', function() {
 	describe('Server side validation', function() {
 
 		it('Cannot register a user that already exists', function() {
-			var existingUserName = 'sara@email.it';
+			var existingUserName = testUsers.getUserName;
 
 			browser().navigateTo('/login');
 			expect(element('#registrationErrors').css('display')).toBe("none");
@@ -98,6 +98,24 @@ describe('Registration', function() {
 		    sleep(2);
 		    expect(element('#registrationErrors').css('display')).toBe("block");
 		    expect(element('#registrationErrors').text()).toMatch('Username already exists');
+
+		});
+
+		it('Email cannot be too long', function() {
+
+			browser().navigateTo('/login');
+			expect(element('#registrationErrors').css('display')).toBe("none");
+
+		    input('firstname').enter('Tweety');
+		    input('surname').enter('Bird');
+		    input('username').enter(testUsers.buildLongEmailAddress);
+		    input('password').enter('12345678');
+		    input('retypepassword').enter('12345678');
+		    input('terms').check();
+		    element('#signup').click();
+		    sleep(2);
+		    expect(element('#registrationErrors').css('display')).toBe("block");
+		    expect(element('#registrationErrors').text()).toMatch('Email must be less than 255 characters long');
 
 		});
 

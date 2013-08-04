@@ -10,6 +10,7 @@
 
 	exports.getUserName = getUserName(users[0]);
 	exports.getUserPassword = getUserPassword(users[0]);
+	exports.buildLongEmailAddress = buildLongEmailAddress();
 
 	function getUserName(user) {
 		return user.username;
@@ -19,5 +20,13 @@
 		return user.password;
 	};
 
+	function buildLongEmailAddress() {
+		var tempArray = [];
+        for (var i=0; i<150; i++) {
+            tempArray.push('a');
+        };
+        var tempString = tempArray.join("");
+        return tempString + "." + tempString + "@test.com";
+	};
 
 })(typeof exports === 'undefined' ? this['testUsers'] = {} : exports);	
