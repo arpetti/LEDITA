@@ -121,18 +121,6 @@ Project Website: http://www.professoreitaliano.com
 
 * Logout from dropdown menu under avatar image
 
-* Register a new user
-
-    * Name can be anything (not used yet)
-    * Surname can be anything (not used yet)
-    * Email is used as the username, enter a valid format (eg: user1@test.com)
-    * Password must be at least 5 characters
-    * Retype password can be anything (not used yet)
-    * Check or uncheck terms & conditions (not used yet)
-
-    Registration is in-memory for now, upcoming work will hook it up to the database.
-
-
 ## Running Tests
 
 Before any pushes are made, please ensure all tests pass locally. Tests will also be run automatically on Travis after pushing. The instructions below explain how to run server and client tests locally.
@@ -147,7 +135,7 @@ This runs unit and DAO tests. If you have any DAO tests failing locally, reset y
 
 ### <a name="rununit"/>Run Client Unit Tests    
 
-Not implemented yet, but should be soon.
+Not implemented yet.
 
 ### <a name="rune2e"/>Run Client End To End Tests
 
@@ -155,15 +143,20 @@ Not implemented yet, but should be soon.
     
     Windows
     ```
-    test\client\scripts\e2e-test.bat
+    test\client\scripts\local-e2e-test.bat
     ```
 
     Linux
     ```
-    test/client/scripts/e2e-test.sh
+    test/client/scripts/local-e2e-test.sh
     ```
 
-The e2e tests are also dependent on the database. If you have any local failures, reset your database by running the sql scripts as described in the [Setup Instructions](#setupInstructions).
+The e2e tests are also dependent on the database. To ensure a clean start each time, the local database is reset prior to the e2e test run. 
+
+For Mac and Linux,
+see [local-e2e-test.sh](test/client/scripts/local-e2e-test.sh) for instructions to set the mysql path in profile.
+
+For windows, see [local-e2e-test.bat](test/client/scripts/local-e2e-test.bat) for corresponding instructions.
 
 ### Debug End To End Tests
 
