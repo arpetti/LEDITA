@@ -80,23 +80,26 @@ describe('Registration', function() {
 
 	});
 
-	//TODO: Nest this inside a describe 'Server side validation'
-	it('Cannot register a user that already exists', function() {
-		var existingUserName = testUsers.getUserName;
+	describe('Server side validation', function() {
 
-		// Try to register
-		browser().navigateTo('/login');
-	    input('firstname').enter('John');
-	    input('surname').enter('Smith');
-	    input('username').enter(existingUserName);
-	    input('password').enter('12345678');
-	    input('retypepassword').enter('12345678');
-	    input('terms').check();
-	    element('#signup').click();
+		it('Cannot register a user that already exists', function() {
+			var existingUserName = 'sara@email.it';
 
-	    // Verify error message is displayed
-	    expect(element('#registrationErrors', 'Registration error is displayed').count()).toBe(1);
-	    expect(element('#registrationErrors').text()).toMatch('Username already exists');
+			browser().navigateTo('/login');
+			expect(element('#registrationErrors').css('display')).toBe("none");
+
+		    input('firstname').enter('John');
+		    input('surname').enter('Smith');
+		    input('username').enter(existingUserName);
+		    input('password').enter('12345678');
+		    input('retypepassword').enter('12345678');
+		    input('terms').check();
+		    element('#signup').click();
+		    sleep(2);
+		    expect(element('#registrationErrors').css('display')).toBe("block");
+		    expect(element('#registrationErrors').text()).toMatch('Username already exists');
+
+		});
 
 	});
 
