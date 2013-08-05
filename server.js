@@ -1,5 +1,7 @@
 var express =       require('express')
     , http =        require('http')
+    , configHelper = require('./server/util/ConfigHelper')
+    , config = configHelper.config()
     , passport =    require('passport')
     , path =        require('path')
     , User =        require('./server/models/User.js');
@@ -18,7 +20,7 @@ app.set("view options", {layout: false});
 app.use(express.static(path.join(__dirname, 'client')));
 app.use(express.cookieSession(
     {
-        secret: process.env.COOKIE_SECRET || "Superdupersecret"
+        secret: config.cookie_secret
     }));
 app.use(passport.initialize());
 app.use(passport.session());
