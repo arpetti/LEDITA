@@ -29,18 +29,10 @@ module.exports = {
         return user;
     },
 
-    findAll: function() {
-        return _.map(users, function(user) { return _.clone(user); });
-    },
-
     findById: function(id, callback) {
         UserService.findUserById(id, function(user) {
             callback(user);
         });
-    },
-
-    findByUsername: function(username) {
-        return _.clone(_.find(users, function(user) { return user.username === username; }));
     },
 
     findByProviderId: function(provider, id) {
