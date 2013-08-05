@@ -85,13 +85,6 @@ var routes = [
 
     // Local Auth
     {
-        path: '/register',
-        httpMethod: 'POST',
-        middleware: [AuthCtrl.register],
-        accessLevel: accessLevels.public
-    },
-    // TODO: Get rid of old register when get this one working
-    {
         path: '/registernewuser',
         httpMethod: 'POST',
         middleware: [AuthCtrl.registerNewUser],
