@@ -6,7 +6,6 @@ var passport =  require('passport')
 
 module.exports = {
     
-    //TODO: When get this working, remove original register and tests
     registerNewUser: function(req, res, next) {
         var user = req.body;
         
