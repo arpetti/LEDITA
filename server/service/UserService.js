@@ -1,6 +1,7 @@
 var HashHelper = require('../util/HashHelper')
   , UserDao = require('../dao/UserDao')
-  , UserRoles = require('../../client/js/auth/AuthRoutingConfig').userRoles;
+  , UserRoles = require('../../client/js/auth/AuthRoutingConfig').userRoles
+  , messages = require('./ValidationMessages');
 
 module.exports = {
 
@@ -9,11 +10,11 @@ module.exports = {
 
 		UserDao.getUserByEmail(username, function(err, results){
 			if (err) {
-				callback(err, null, {message: 'unable to retrieve user details at this time, please try again later'});
+				callback(err, null, {message: messages.UNABLE_TO_RETRIEVE_USER});
 				return;
 			}
 			if (results.length === 0) {
-				callback(null, null, {message: 'invalid username or password'});
+				callback(null, null, {message: messages.INVALID_USERNAME_PASSWORD});
 				return;
 			}
 			
@@ -21,18 +22,18 @@ module.exports = {
 
 			HashHelper.compareHash(password, user.hash, function(err, compareResult) {
 				if (err) {
-					callback(err, null, {message: 'unable to retrieve user details at this time, please try again later'});
+					callback(err, null, {message: messages.UNABLE_TO_RETRIEVE_USER});
 					return;
 				}
 				if (!compareResult) {
-					callback(null, null, {message: 'invalid username or password'});
+					callback(null, null, {message: messages.INVALID_USERNAME_PASSWORD});
 					return;
 				}
 				
 				user.role = UserRoles.user; // temp hack till get user roles in the database:
 				user.username = user.email; // TODO: Figure out Passport mechanism for using email as username
 				user.hash = null; // do not expose hash
-				callback(null, user, null);
+				callback(null, user, {message: messages.LOGIN_SUCCESS});
             });
         });
 	},

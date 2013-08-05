@@ -2,7 +2,8 @@
 
 var expect = require('chai').expect
     , UserService = require('../../service/UserService')
-    , UserDao = require('../../dao/UserDao');
+    , UserDao = require('../../dao/UserDao')
+    , messages = require('../../service/ValidationMessages');
 
 describe('User Service Integration', function() {    
 
@@ -28,7 +29,7 @@ describe('User Service Integration', function() {
             
             // Verify no errors
             expect(err).to.be.null;
-            expect(info).to.be.null;
+            expect(info.message).to.equal(messages.LOGIN_SUCCESS);
             expect(user).not.to.be.null;
             
             // Verify returned user
@@ -49,7 +50,7 @@ describe('User Service Integration', function() {
             expect(user).to.be.null;
             expect(err).to.be.null;
             expect(info).not.to.be.null;
-            expect(info.message).to.be.equal('invalid username or password');
+            expect(info.message).to.be.equal(messages.INVALID_USERNAME_PASSWORD);
             done();
         });
     });
@@ -59,7 +60,7 @@ describe('User Service Integration', function() {
             expect(user).to.be.null;
             expect(err).to.be.null;
             expect(info).not.to.be.null;
-            expect(info.message).to.be.equal('invalid username or password');
+            expect(info.message).to.be.equal(messages.INVALID_USERNAME_PASSWORD);
             done();
         });
     });

@@ -12,8 +12,11 @@ module.exports.EMAIL_FORMAT = 'Please input a valid email address.';
 
 module.exports.PASSWORD_REQUIRED = 'Password is required.';
 module.exports.PASSWORD_LENGTH = 'Password must be 8-40 characters long.';
-// module.exports.PASSWORD_MATCH = 'Passwords do not match.';
 
 module.exports.TERMS = 'You must agree the terms and conditions and privacy policy.';
 
 module.exports.USERNAME_EXISTS = 'Username already exists'
+
+module.exports.UNABLE_TO_RETRIEVE_USER = 'Unable to retrieve user details at this time, please try again later.';
+module.exports.INVALID_USERNAME_PASSWORD = 'Invalid username or password.';
+module.exports.LOGIN_SUCCESS = "Login successful."
