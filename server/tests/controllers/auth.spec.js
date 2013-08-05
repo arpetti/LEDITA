@@ -28,11 +28,50 @@ describe('Auth controller', function() {
             req.body = {
                 firstname: "John",
                 surname: "Smith",
-                username: "testa@test.com",
+                username: "john.smith@test.com",
                 password: "12345678",
                 terms: true,
                 role: {bitMask: 2, title: "user"}
             };
+        });
+
+        it('returns a 200 when user registration is successful', function(done) {
+            
+            var errorMessages = [];
+            var userValidateStub = sandbox.stub(UserValidator, "validate").returns(errorMessages);
+
+            var userValidateExistsStub = sandbox.stub(UserValidator, "validateExists", function(username, callback) {
+                callback(null, null);
+            });
+            
+            var hashedPassword = "its-a-hash";
+            var hashHelperStub = sandbox.stub(HashHelper, "generateHash", function(password, callback) {
+                callback(null, hashedPassword);
+            });
+
+            var addedUser = {
+                id: 999,
+                name: "John",
+                last_name: "Smith",
+                email: "john.smith@test.com",
+                role: {"bitMask":2,"title":"user"},
+                username: "john.smith@test.com"
+            };
+            var userServiceStub = sandbox.stub(UserService, "addNewUser", function(user, hash, callback) {
+                callback(null, addedUser);
+            });
+
+            req.logIn = function(user, callback) { return callback(null); };
+
+            res.json = function(httpStatus, user) {
+                expect(httpStatus).to.equal(200);
+                expect(user.username).to.equal(addedUser.username);
+                expect(user.role).to.exist;
+                done();
+            };
+
+            AuthCtrl.registerNewUser(req, res, next);
+
         });
 
         it('returns a 400 when user validation fails', function(done) {
@@ -62,10 +101,9 @@ describe('Auth controller', function() {
             var userValidateStub = sandbox.stub(UserValidator, "validate").returns(errorMessages);
             
             var userExistsMessage = "user already exists"
-            var userExistsFunction = function(username, callback) {
+            var userValidateExistsStub = sandbox.stub(UserValidator, "validateExists", function(username, callback) {
                 callback(null, userExistsMessage);
-            }
-            var userValidateExistsStub = sandbox.stub(UserValidator, "validateExists", userExistsFunction);
+            });
 
             var hashHelperStub = sandbox.stub(HashHelper, "generateHash");
             var userServiceStub = sandbox.stub(UserService, "addNewUser");
@@ -88,10 +126,9 @@ describe('Auth controller', function() {
             var errorMessages = [];
             var userValidateStub = sandbox.stub(UserValidator, "validate").returns(errorMessages);
 
-            var userExistsFunction = function(username, callback) {
+            var userValidateExistsStub = sandbox.stub(UserValidator, "validateExists", function(username, callback) {
                 callback(new Error("something went wrong"));
-            }
-            var userValidateExistsStub = sandbox.stub(UserValidator, "validateExists", userExistsFunction);
+            });
 
             var hashHelperStub = sandbox.stub(HashHelper, "generateHash");
             var userServiceStub = sandbox.stub(UserService, "addNewUser");
