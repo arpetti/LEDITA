@@ -44,6 +44,7 @@ describe('User DAO', function() {
     it('Looking for user by id that does not exist returns no rows', function(done) {
         var userId = 999;
         UserDao.getUserById(userId, function(err, results){
+            expect(results).not.to.be.null;
             expect(results).to.have.length(0);
             done();
         });

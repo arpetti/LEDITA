@@ -18,6 +18,63 @@ describe('User Service', function() {
         sandbox.restore();
     });
 
+    describe('Find user by id', function() {
+
+        it('Calls back with null if unexpected error occurs retrieving user from dao', function(done) {
+
+            var userId = 78;
+
+            var userDaoStub = sandbox.stub(UserDao, "getUserById", function(id, callback) {
+                callback(new Error("something went wrong"));
+            });
+
+            var findUserCallback = function(user) {
+                expect(user).to.be.null;
+                assert.isTrue(userDaoStub.withArgs(userId).calledOnce);
+                done();
+            }
+
+            UserService.findUserById(userId, findUserCallback);
+        });
+
+        it('Calls back with null if user not found by id', function(done) {
+
+            var userId = 78;
+
+            var userDaoStub = sandbox.stub(UserDao, "getUserById", function(id, callback) {
+                callback(null, []);
+            });
+
+            var findUserCallback = function(user) {
+                expect(user).to.be.null;
+                assert.isTrue(userDaoStub.withArgs(userId).calledOnce);
+                done();
+            }
+
+            UserService.findUserById(userId, findUserCallback);
+        });
+
+        it('Calls back with user object when user found by id', function(done) {
+
+            var userId = 78;
+            
+            var userResults = [{id: userId, name: "James", last_name: "Jones", email: "james.jones@test.com"}];
+            var userDaoStub = sandbox.stub(UserDao, "getUserById", function(id, callback) {
+                callback(null, userResults);
+            });
+
+            var findUserCallback = function(user) {
+                expect(user).not.to.be.null;
+                expect(user.username).to.equal(userResults[0].email);
+                assert.isTrue(userDaoStub.withArgs(userId).calledOnce);
+                done();
+            }
+
+            UserService.findUserById(userId, findUserCallback);
+        });
+
+    });
+
     describe('Authenticate User', function() {
 
     	it('Calls back with error if unexpected error occurs getting user by email', function(done) {
