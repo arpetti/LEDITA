@@ -2,7 +2,9 @@ var passport =  require('passport')
     , User = require('../models/User.js')
     , UserValidator = require('../service/UserValidator')
     , UserService = require('../service/UserService')
-    , HashHelper = require('../util/HashHelper');
+    , HashHelper = require('../util/HashHelper')
+    , ConfigHelper = require('../util/ConfigHelper')
+    , config = ConfigHelper.config();
 
 module.exports = {
     
@@ -57,9 +59,8 @@ module.exports = {
                     return next(err);
                 }
 
-                //TODO: Cookie maxage should be configurable via env.json
                 if(req.body.rememberme) {
-                    req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 7;
+                    req.session.cookie.maxAge = config.remember_me_ms;
                 }
                 res.json(200, { "role": user.role, "username": user.username });
             });
