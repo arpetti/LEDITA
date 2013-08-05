@@ -67,6 +67,11 @@ describe('Auth controller', function() {
                 expect(httpStatus).to.equal(200);
                 expect(user.username).to.equal(addedUser.username);
                 expect(user.role).to.exist;
+                
+                assert.isTrue(userValidateStub.withArgs(req.body).calledOnce);
+                assert.isTrue(userValidateExistsStub.withArgs(req.body.username).calledOnce);
+                assert.isTrue(hashHelperStub.withArgs(req.body.password).calledOnce);
+                assert.isTrue(userServiceStub.withArgs(req.body).calledOnce);
                 done();
             };
 
@@ -85,7 +90,8 @@ describe('Auth controller', function() {
 
             res.send = function(httpStatus) {
                 expect(httpStatus).to.equal(400);
-                assert.isTrue(userValidateStub.calledOnce);
+                
+                assert.isTrue(userValidateStub.withArgs(req.body).calledOnce);
                 assert.equal(userValidateExistsStub.callCount, 0, "user exists check is not called when there are validation errors");
                 assert.equal(hashHelperStub.callCount, 0, "password hash is not generated when there are validation errors");
                 assert.equal(userServiceStub.callCount, 0, "user is not added when there are validation errors");
@@ -111,8 +117,9 @@ describe('Auth controller', function() {
             res.send = function(httpStatus, message) {
                 expect(httpStatus).to.equal(403);
                 expect(message).to.equal(userExistsMessage);
-                assert.isTrue(userValidateStub.calledOnce);
-                assert.isTrue(userValidateExistsStub.calledOnce);
+                
+                assert.isTrue(userValidateStub.withArgs(req.body).calledOnce);
+                assert.isTrue(userValidateExistsStub.withArgs(req.body.username).calledOnce);
                 assert.equal(hashHelperStub.callCount, 0, "password hash is not generated when user already exists");
                 assert.equal(userServiceStub.callCount, 0, "user is not added when user already exists");
                 done();
@@ -135,8 +142,9 @@ describe('Auth controller', function() {
 
             res.send = function(httpStatus) {
                 expect(httpStatus).to.equal(500);
-                assert.isTrue(userValidateStub.calledOnce);
-                assert.isTrue(userValidateExistsStub.calledOnce);
+                
+                assert.isTrue(userValidateStub.withArgs(req.body).calledOnce);
+                assert.isTrue(userValidateExistsStub.withArgs(req.body.username).calledOnce);
                 assert.equal(hashHelperStub.callCount, 0, "password hash is not generated when error occurs checking if user exists");
                 assert.equal(userServiceStub.callCount, 0, "user is not added when error occurs checking if user exists");
                 done();
