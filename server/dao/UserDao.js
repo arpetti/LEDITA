@@ -3,7 +3,6 @@ var mysql = require('mysql')
 
 var GET_USER_BY_EMAIL = 'SELECT id, name, last_name, gender, email, hash, workplace, city, country FROM user WHERE email = ?';
 var GET_USER_BY_ID = 'SELECT id, name, last_name, gender, email, workplace, city, country FROM user WHERE id = ?';
-//TODO: Add constraint on user table to ensure email is unique
 var ADD_USER = 'INSERT INTO user SET ?';
 var DELETE_USER = 'DELETE FROM user WHERE ?';
 
