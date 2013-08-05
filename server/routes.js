@@ -2,7 +2,6 @@ var _ =           require('underscore')
     , path =      require('path')
     , passport =  require('passport')
     , AuthCtrl =  require('./controllers/auth')
-    , UserCtrl =  require('./controllers/user')
     , LearningDesignCtrl = require('./controllers/learningDesign')
     , User =      require('./models/User.js')
     , userRoles = require('../client/js/auth/AuthRoutingConfig').userRoles
@@ -53,14 +52,6 @@ var routes = [
         httpMethod: 'GET',
         middleware: [ensureAuthenticated, ensureAuthorized, LearningDesignCtrl.findById],
         accessLevel: accessLevels.user
-    },
-
-    // User resource
-    {
-        path: '/users',
-        httpMethod: 'GET',
-        middleware: [ensureAuthenticated, ensureAuthorized, UserCtrl.index],
-        accessLevel: accessLevels.admin
     },
 
     // All other get requests should be handled by AngularJS's client-side routing system
