@@ -21,68 +21,6 @@ var routes = [
         accessLevel: accessLevels.public
     },
 
-    // OAUTH
-    {
-        path: '/auth/twitter',
-        httpMethod: 'GET',
-        middleware: [passport.authenticate('twitter')],
-        accessLevel: accessLevels.public
-    },
-    {
-        path: '/auth/twitter/callback',
-        httpMethod: 'GET',
-        middleware: [passport.authenticate('twitter', {
-            successRedirect: '/',
-            failureRedirect: '/login'
-        })],
-        accessLevel: accessLevels.public
-    },
-    {
-        path: '/auth/facebook',
-        httpMethod: 'GET',
-        middleware: [passport.authenticate('facebook')],
-        accessLevel: accessLevels.public
-    },
-    {
-        path: '/auth/facebook/callback',
-        httpMethod: 'GET',
-        middleware: [passport.authenticate('facebook', {
-            successRedirect: '/',
-            failureRedirect: '/login'
-        })],
-        accessLevel: accessLevels.public
-    },
-    {
-        path: '/auth/google',
-        httpMethod: 'GET',
-        middleware: [passport.authenticate('google')],
-        accessLevel: accessLevels.public
-    },
-    {
-        path: '/auth/google/return',
-        httpMethod: 'GET',
-        middleware: [passport.authenticate('google', {
-            successRedirect: '/',
-            failureRedirect: '/login'
-        })],
-        accessLevel: accessLevels.public
-    },
-    {
-        path: '/auth/linkedin',
-        httpMethod: 'GET',
-        middleware: [passport.authenticate('linkedin')],
-        accessLevel: accessLevels.public
-    },
-    {
-        path: '/auth/linkedin/callback',
-        httpMethod: 'GET',
-        middleware: [passport.authenticate('linkedin', {
-            successRedirect: '/',
-            failureRedirect: '/login'
-        })],
-        accessLevel: accessLevels.public
-    },
-
     // Local Auth
     {
         path: '/registernewuser',
@@ -103,7 +41,6 @@ var routes = [
         accessLevel: accessLevels.public
     },
 
-    // TODO: Break up routes into separate files by functional areas, this is getting too big
     // Learning Design
     {
         path: '/learningdesigns',
