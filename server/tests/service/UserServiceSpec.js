@@ -20,6 +20,31 @@ describe('User Service', function() {
 
     describe('Add new user', function() {
 
+        it('Returns error when dao add new user fails', function(done) {
+
+            var hash = "jamespasswordhash";
+            var userToBeAdded = {firstname: "James", surname: "Jones", username: "james.jones@test.com", hash: hash};
+
+            var userDaoError = new Error("something went wrong");
+            var userDaoAddUserStub = sandbox.stub(UserDao, "addUser", function(userJsonData, callback) {
+                callback(userDaoError);
+            })
+
+            var userDaoGetUserStub = sandbox.stub(UserDao, "getUserById");
+
+            var addUserCallback = function(err, user) {
+                expect(err).to.equal(userDaoError);
+                expect(user).to.be.undefined;
+
+                assert.isTrue(userDaoAddUserStub.calledOnce);
+                assert.equal(userDaoGetUserStub.callCount, 0, "does not call get user by id when add user fails");
+                done();
+            };
+
+            UserService.addNewUser(userToBeAdded, hash, addUserCallback);
+
+        });
+
         it('Returns newly added user object when successful', function(done) {
 
             var hash = "jamespasswordhash";
