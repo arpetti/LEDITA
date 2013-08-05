@@ -42,8 +42,7 @@ describe('User Service', function() {
     			done();
     		}
             
-            UserService.authenticateUser(username, password, authCallback)
-
+            UserService.authenticateUser(username, password, authCallback);
     	});
 
     	it('Calls back with message if user cannot be found by email', function(done) {
@@ -68,9 +67,97 @@ describe('User Service', function() {
     			done();
     		}
             
-            UserService.authenticateUser(username, password, authCallback)
-
+            UserService.authenticateUser(username, password, authCallback);
     	});
+
+        it('Calls back with error if unexpected error occurs checking password', function(done) {
+
+            var username = 'jane.doe@test.com';
+            var password = 'janespassword';
+            var passwordHash = 'password$hash$gobbledy$gook';
+
+            var userResults = [{id: 111, name: "Jane", last_name: "Doe", email: username, hash: passwordHash}];
+            var userDaoStub = sandbox.stub(UserDao, "getUserByEmail", function(email, callback) {
+                callback(null, userResults);
+            });
+
+            var hashError = new Error("something went wrong");
+            var hashHelperStub = sandbox.stub(HashHelper, "compareHash", function(password, hash, callback) {
+                callback(hashError);
+            });
+
+            
+            var authCallback = function(err, user, info) {
+                expect(err).to.equal(hashError);
+                expect(user).to.be.null;
+                expect(info.message).to.equal(messages.UNABLE_TO_RETRIEVE_USER);
+
+                assert.isTrue(userDaoStub.withArgs(username).calledOnce);
+                assert.isTrue(hashHelperStub.withArgs(password, passwordHash).calledOnce);
+                done();
+            }
+            
+            UserService.authenticateUser(username, password, authCallback);
+        });
+
+        it('Calls back with message if provided password does not match saved password', function(done) {
+
+            var username = 'jane.doe@test.com';
+            var password = 'janespassword';
+            var passwordHash = 'password$hash$gobbledy$gook';
+
+            var userResults = [{id: 111, name: "Jane", last_name: "Doe", email: username, hash: passwordHash}];
+            var userDaoStub = sandbox.stub(UserDao, "getUserByEmail", function(email, callback) {
+                callback(null, userResults);
+            });
+
+            var hashHelperStub = sandbox.stub(HashHelper, "compareHash", function(password, hash, callback) {
+                callback(null, false);
+            });
+
+            
+            var authCallback = function(err, user, info) {
+                expect(err).to.be.null;
+                expect(user).to.be.null;
+                expect(info.message).to.equal(messages.INVALID_USERNAME_PASSWORD);
+
+                assert.isTrue(userDaoStub.withArgs(username).calledOnce);
+                assert.isTrue(hashHelperStub.withArgs(password, passwordHash).calledOnce);
+                done();
+            }
+            
+            UserService.authenticateUser(username, password, authCallback);
+        });
+
+        it('Calls back with user object when authentication succeeds', function(done) {
+
+            var username = 'jane.doe@test.com';
+            var password = 'janespassword';
+            var passwordHash = 'password$hash$gobbledy$gook';
+
+            var userResults = [{id: 111, name: "Jane", last_name: "Doe", email: username, hash: passwordHash}];
+            var userDaoStub = sandbox.stub(UserDao, "getUserByEmail", function(email, callback) {
+                callback(null, userResults);
+            });
+
+            var hashHelperStub = sandbox.stub(HashHelper, "compareHash", function(password, hash, callback) {
+                callback(null, true);
+            });
+
+            
+            var authCallback = function(err, user, info) {
+                expect(err).to.be.null;
+                expect(user).not.to.be.null;
+                expect(user.username).to.equal(userResults[0].email);
+                expect(info.message).to.equal(messages.LOGIN_SUCCESS);
+
+                assert.isTrue(userDaoStub.withArgs(username).calledOnce);
+                assert.isTrue(hashHelperStub.withArgs(password, passwordHash).calledOnce);
+                done();
+            }
+            
+            UserService.authenticateUser(username, password, authCallback);
+        });
 
     });
 
