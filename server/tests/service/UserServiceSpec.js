@@ -18,6 +18,48 @@ describe('User Service', function() {
         sandbox.restore();
     });
 
+    describe('Add new user', function() {
+
+        it('Returns newly added user object when successful', function(done) {
+
+            var hash = "jamespasswordhash";
+            var userToBeAdded = {firstname: "James", surname: "Jones", username: "james.jones@test.com", hash: hash};
+
+            var addedUserId = 65;
+            var userDaoAddUserStub = sandbox.stub(UserDao, "addUser", function(userJsonData, callback) {
+                callback(null, addedUserId);
+            })
+
+            var userResults = [{id: addedUserId, name: "James", last_name: "Jones", email: "james.jones@test.com"}];
+            var userDaoGetUserStub = sandbox.stub(UserDao, "getUserById", function(id, callback) {
+                callback(null, userResults);
+            });
+
+            var userMatcher = sinon.match({
+                name: userToBeAdded.firstname,
+                last_name: userToBeAdded.surname,
+                email: userToBeAdded.username,
+                hash: hash
+            });
+
+            var addUserCallback = function(err, user) {
+                expect(err).to.be.null;
+                expect(user.id).to.equal(userResults[0].id);
+                expect(user.name).to.equal(userResults[0].name);
+                expect(user.last_name).to.equal(userResults[0].last_name);
+                expect(user.email).to.equal(userResults[0].email);
+                expect(user.username).to.equal(user.email);
+
+                assert.isTrue(userDaoAddUserStub.withArgs(userMatcher).calledOnce);
+                assert.isTrue(userDaoGetUserStub.withArgs(addedUserId).calledOnce);
+                done();
+            };
+
+            UserService.addNewUser(userToBeAdded, hash, addUserCallback);
+        });
+
+    });
+
     describe('Find user by id', function() {
 
         it('Calls back with null if unexpected error occurs retrieving user from dao', function(done) {
