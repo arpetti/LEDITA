@@ -4,6 +4,7 @@ var expect = require('chai').expect
 describe('User DAO', function() {    
 
     var emailToInsert = 'bugs.bunny@looney.com';
+    var emailExists = 'mario@email.it';
 
     afterEach(function(done) {
         UserDao.deleteUser({email: emailToInsert}, function(err, result) {
@@ -59,6 +60,21 @@ describe('User DAO', function() {
         UserDao.addUser(userData, function(err, result) {
             expect(result).not.to.be.null;
             expect(result).to.be.above(5);
+            done();
+        });
+    });
+
+    it('Insert user with email that already exists returns error', function(done) {
+        var userData = {
+            name: 'Bugs',
+            last_name: 'Bunny',
+            email: emailExists,
+            hash: 'hashedPasswordGobbledyGook&='
+
+        };
+        UserDao.addUser(userData, function(err, result) {
+            expect(err).not.to.be.null;
+            expect(result).to.be.undefined;
             done();
         });
     });

@@ -39,6 +39,7 @@ CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`user` (
   `city` VARCHAR(50) NULL ,
   `country` VARCHAR(50) NULL ,
   PRIMARY KEY (`id`) ,
+  UNIQUE KEY `UNIQ_EMAIL` (`email`) ,
   INDEX `fk_user_image1_idx` (`image_id` ASC) ,
   CONSTRAINT `fk_user_image1`
     FOREIGN KEY (`image_id` )
