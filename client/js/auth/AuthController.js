@@ -32,7 +32,11 @@ angular.module('ledita-app')
                 $location.path('/');
             },
             function(err) {
-                $rootScope.error = "Failed to login";
+                if (err && err.message) {
+                    $rootScope.error = err.message;
+                } else {
+                    $rootScope.error = "Failed to login.";
+                }
             });
     };
 

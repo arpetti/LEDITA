@@ -42,23 +42,18 @@ module.exports = {
 
     },
 
-    //TODO: Consider extracting message from info if available and send along with 400
     login: function(req, res, next) {
         passport.authenticate('local', function(err, user, info) {
-
-            if(err)  {
+            if(err) {
                 return next(err); 
             }
-            
             if(!user) { 
-                return res.send(400); 
+                return res.send(400, info); 
             }
-
             req.logIn(user, function(err) {
                 if(err) {
                     return next(err);
                 }
-
                 if(req.body.rememberme) {
                     req.session.cookie.maxAge = config.remember_me_ms;
                 }
