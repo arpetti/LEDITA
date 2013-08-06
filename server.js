@@ -1,4 +1,5 @@
 var express =       require('express')
+    , helmet =      require('helmet')
     , http =        require('http')
     , configHelper = require('./server/util/ConfigHelper')
     , config = configHelper.config()
@@ -19,6 +20,12 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.set("view options", {layout: false});
 app.use(express.static(path.join(__dirname, 'client')));
+
+// security headers
+app.use(helmet.xframe('sameorigin'));   // only allow frame and iframe from same origin (do not DENY - breaks e2e tests)
+app.use(helmet.iexss());                // enable IE8+ anti-cross-site scripting filter
+app.use(helmet.contentTypeOptions());   // stop browser from guessing MIME type via content sniffing
+app.use(helmet.cacheControl());         // no-store, no-cache
 
 app.use(express.cookieSession(
     {

@@ -5,6 +5,7 @@
         "mysql": "~2.0.0-alpha8",
         "bcrypt": "*",
         "express": "*",
+        "helmet": "*",
         "jade": "*",
         "ejs": "*",        
         "passport": "*",
