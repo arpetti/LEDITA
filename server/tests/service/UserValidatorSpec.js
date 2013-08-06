@@ -10,7 +10,8 @@ describe('User Validator', function() {
             surname: "Mouse",
             username: "mickey.mouse@disney.com",
             password: "12345678",
-            retypepassword: "12345678"
+            retypepassword: "12345678",
+            terms: true
         };
 
         var errorMessages = UserValidator.validate(user);
@@ -23,7 +24,8 @@ describe('User Validator', function() {
             surname: "Mouse",
             username: "mickey.mouse@disney.com",
             password: "12345678",
-            retypepassword: "12345678"
+            retypepassword: "12345678",
+            terms: true
         };
         var errorMessages = UserValidator.validate(user);
         expect(errorMessages).to.have.length(3);
@@ -38,7 +40,8 @@ describe('User Validator', function() {
             surname: "Mouse",
             username: "mickey.mouse@disney.com",
             password: "12345678",
-            retypepassword: "12345678"
+            retypepassword: "12345678",
+            terms: true
         };
         var errorMessages = UserValidator.validate(user);
         expect(errorMessages).to.have.length(2);
@@ -52,7 +55,8 @@ describe('User Validator', function() {
             surname: "Mouse",
             username: "mickey.mouse@disney.com",
             password: "12345678",
-            retypepassword: "12345678"
+            retypepassword: "12345678",
+            terms: true
         };
         var errorMessages = UserValidator.validate(user);
         expect(errorMessages).to.have.length(1);
@@ -65,7 +69,8 @@ describe('User Validator', function() {
             surname: "M",
             username: "mickey.mouse@disney.com",
             password: "12345678",
-            retypepassword: "12345678"
+            retypepassword: "12345678",
+            terms: true
         };
         var errorMessages = UserValidator.validate(user);
         expect(errorMessages).to.have.length(2);
@@ -79,7 +84,8 @@ describe('User Validator', function() {
             surname: "M0use123",
             username: "mickey.mouse@disney.com",
             password: "12345678",
-            retypepassword: "12345678"
+            retypepassword: "12345678",
+            terms: true
         };
         
         var errorMessages = UserValidator.validate(user);
@@ -93,7 +99,8 @@ describe('User Validator', function() {
             surname: "Mouse",
             username: "",
             password: "12345678",
-            retypepassword: "12345678"
+            retypepassword: "12345678",
+            terms: true
         };
 
         var errorMessages = UserValidator.validate(user);
@@ -108,7 +115,8 @@ describe('User Validator', function() {
             firstname: "Mickey",
             surname: "Mouse",
             password: "12345678",
-            retypepassword: "12345678"
+            retypepassword: "12345678",
+            terms: true
         };
 
         var tempArray = [];
@@ -129,7 +137,8 @@ describe('User Validator', function() {
             surname: "Mouse",
             username: "mickey_dot_mouse_at_disney_dot_com",
             password: "12345678",
-            retypepassword: "12345678"
+            retypepassword: "12345678",
+            terms: true
         };
 
         var errorMessages = UserValidator.validate(user);
@@ -143,7 +152,8 @@ describe('User Validator', function() {
             surname: "Mouse",
             username: "mickey.mouse@disney.com",
             password: " ",
-            retypepassword: " "
+            retypepassword: " ",
+            terms: true
         };
 
         var errorMessages = UserValidator.validate(user);
@@ -158,7 +168,8 @@ describe('User Validator', function() {
             surname: "Mouse",
             username: "mickey.mouse@disney.com",
             password: "1234567",
-            retypepassword: "1234567"
+            retypepassword: "1234567",
+            terms: true
         };
 
         var errorMessages = UserValidator.validate(user);
@@ -166,18 +177,19 @@ describe('User Validator', function() {
         expect(errorMessages[0]).to.equal(messages.PASSWORD_LENGTH);
     }); 
 
-    // it('Error message when passwords do not match', function() {
-    //     var user = {
-    //         firstname: "Mickey",
-    //         surname: "Mouse",
-    //         username: "mickey.mouse@disney.com",
-    //         password: "12345678",
-    //         retypepassword: "12345677"
-    //     };
+    it('Error message when terms not accepted', function() {
+        var user = {
+            firstname: "Mickey",
+            surname: "Mouse",
+            username: "mickey.mouse@disney.com",
+            password: "12345678",
+            retypepassword: "12345678",
+            terms: false
+        };
 
-    //     var errorMessages = UserValidator.validate(user);
-    //     expect(errorMessages).to.have.length(1);
-    //     expect(errorMessages[0]).to.equal(messages.PASSWORD_MATCH);
-    // }); 
+        var errorMessages = UserValidator.validate(user);
+        expect(errorMessages).to.have.length(1);
+        expect(errorMessages[0]).to.equal(messages.TERMS);
+    }); 
 
 });	

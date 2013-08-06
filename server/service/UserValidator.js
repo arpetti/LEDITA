@@ -20,9 +20,8 @@ var validateEmail = function(field, message) {
 	check(field, message).isEmail();
 }
 
-var validateEquality = function(field1, field2, message) {
-	console.log('validateEquality, field1: ' + field1 + ', field2; ' + field2);
-	if (field1 !== field2) {
+var validateTrue = function(field, message) {
+	if (!field) {
 		return message;
 	}
 	return null;
@@ -72,8 +71,9 @@ module.exports = {
 			validateAny(validateNullEmpty, [user.password, messages.PASSWORD_REQUIRED]));
 		errorMessages.push(
 			validateAny(validateLength, [user.password, messages.PASSWORD_LENGTH, 8, 40]));
-		// errorMessages.push(
-		// 	validateEquality(user.password, user.retypepassword, messages.PASSWORD_MATCH));
+
+		// Terms
+		errorMessages.push(validateTrue(user.terms, messages.TERMS));
 		
         return _.filter(errorMessages, function(message){ return message !== null; });
 	},
