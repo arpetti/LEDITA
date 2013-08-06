@@ -1,40 +1,30 @@
 var LdDao =      require('../dao/LdDao.js')
-    , userRoles = require('../../client/js/auth/AuthRoutingConfig').userRoles;
+    , messages = require('../service/ValidationMessages');
 
 module.exports = {
     
     index: function(req, res) {
-        try {
-            LdDao.getLearningDesigns(function(err, learningDesigns){
-                if(err) {
-                    return res.send(500, err.message); 
-                } else { 
-                    res.json(learningDesigns);
-                }
-            });
-        }
-        catch(err) {
-            return res.send(500, err.message);
-        }
+        LdDao.getLearningDesigns(function(err, learningDesigns){
+            if(err) {
+                return res.send(500, err.message); 
+            } else { 
+                res.json(200, learningDesigns);
+            }
+        });
     },
 
     findById: function(req, res) {
-        try {
-            var id = req.params.id;
-            LdDao.getLearningDesign(id, function(err, learningDesign) {
-                if(err) {
-                    return res.send(500, err.message); 
-                } else { 
-                    if (learningDesign.length === 0) {
-                        return res.send(404, "Learning Design not found");
-                    }
-                    res.json(learningDesign[0]);
+        var id = req.params.id;
+        LdDao.getLearningDesign(id, function(err, learningDesign) {
+            if(err) {
+                return res.send(500, err.message); 
+            } else { 
+                if (learningDesign.length === 0) {
+                    return res.send(404, messages.LD_NOT_FOUND);
                 }
-            });
-        }
-        catch(err) {
-            return res.send(500, err.message);
-        }
+                res.json(200, learningDesign[0]);
+            }
+        });
     }    
 
 };
