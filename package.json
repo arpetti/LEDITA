@@ -10,7 +10,8 @@
         "ejs": "*",        
         "passport": "*",
         "passport-local": "*",
-        "underscore": "*"
+        "underscore": "*",
+        "validator": "~1.1.1"
     },
 
     "scripts": {
