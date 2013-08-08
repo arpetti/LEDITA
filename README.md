@@ -85,11 +85,11 @@ Project Website: http://www.professoreitaliano.com
     
 * Fix Karma installation (Windows 7 64 bit only)
 
-    For Windows 64 bit, the default Karma Chrome launcher configuration points to the wrong location for Chrome.
-    Fix it by modifying the following file (check your environment variable for value of PATH)
+    For Windows 64 bit, the Karma launcher configuration points to the wrong location for Chrome.
+    Fix it by modifying the following file, located inside the project folder:
 
     ```
-    %PATH%\node_modules\karma\lib\launchers\Chrome.js
+    node_modules\karma-chrome-launcher\index.js
     ```
 
     Original line
