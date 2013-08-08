@@ -69,13 +69,21 @@ Project Website: http://www.professoreitaliano.com
 
         * See README's for [bcrypt](https://github.com/ncb000gt/node.bcrypt.js/) and [node-gyp](https://github.com/TooTallNate/node-gyp)
 
-* Install Karma, you will need this to run the Angular unit and e2e (end to end) tests
+* Optionally, install Chrome Extension [AngularJS Batarang](https://chrome.google.com/webstore/detail/angularjs-batarang/ighdmehidhipcmcojjgiloacoafjmpfk/related?hl=en)
+
+* Clone this repo and cd to project directory, then run
 
     ```
-    npm install -g karma
+    npm install
     ```
-
-    For Mac, use ```sudo```
+    
+    For Windows, set Visual Studio version first, before running npm install
+    
+    ```
+    SET VisualStudioVersion=11.0
+    ```
+    
+* Fix Karma installation (Windows 7 64 bit only)
 
     For Windows 64 bit, the default Karma Chrome launcher configuration points to the wrong location for Chrome.
     Fix it by modifying the following file (check your environment variable for value of PATH)
@@ -96,27 +104,13 @@ Project Website: http://www.professoreitaliano.com
     win32: process.env.ProgramFiles + ' (x86)\\Google\\Chrome\\Application\\chrome.exe'
     ```
 
-* Optionally, install Chrome Extension [AngularJS Batarang](https://chrome.google.com/webstore/detail/angularjs-batarang/ighdmehidhipcmcojjgiloacoafjmpfk/related?hl=en)
-
-* Clone this repo and cd to project directory, then run
-
-    ```
-    npm install
-    ```
-    
-    For Windows, set Visual Studio version first, before running npm install
-    
-    ```
-    SET VisualStudioVersion=11.0
-    ```
-    
 * From project root directory, run
 
     ```
     node server.js
     ```
 
-* Browse to [http://localhost:8000](http://localhost:8000)
+* Browse to [https://localhost:8443](https://localhost:8443)
 
 * Login using any of the [demo users](database/local/demo-data.sql)
 
