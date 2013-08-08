@@ -1,28 +1,27 @@
-basePath = '../';
+var sharedConfig = require('./karma-shared.conf');
 
-files = [
-  ANGULAR_SCENARIO,
-  ANGULAR_SCENARIO_ADAPTER,
-  'lib/custom/**/*.js',
-  'e2e/**/*.js'
-];
+module.exports = function(config) {
+  sharedConfig(config);
 
-autoWatch = false;
+  config.set({
+  	basePath: '../',
+  	proxyValidateSSL: false,
+  	singleRun: true,
+    frameworks: [],
+    files: [
+      '../../node_modules/karma-ng-scenario/lib/angular-scenario.js',
+      '../../node_modules/karma-ng-scenario/lib/adapter.js',
+      'lib/custom/**/*.js',
+  	  'e2e/**/*.js'
+    ],
 
-browsers = ['Chrome'];
+    proxies: {
+      '/': 'https://localhost:8443'
+    },
 
-singleRun = true;
-
-proxies = {
-  '/': 'http://localhost:8000'
-};
-
-reporters = [
-	'progress',
-	'dots'
-];
-
-junitReporter = {
-  outputFile: 'test_out/e2e.xml',
-  suite: 'e2e'
+    junitReporter: {
+      outputFile: 'test_out/e2e.xml',
+      suite: 'E2E'
+    }
+  });
 };

@@ -23,7 +23,9 @@
     "devDependencies": {
         "sinon": "~1.7.2",
         "chai": "~1.6.1",
-        "mocha": "~1.10.0"
+        "mocha": "~1.10.0",
+        "karma": "~0.10",
+        "karma-ng-scenario": "~0.1"
     },
     "scripts": {
         "test": "mocha server/tests -R spec --recursive"
