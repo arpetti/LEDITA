@@ -45,13 +45,13 @@ app.use(helmet.cacheControl());         // no-store, no-cache
 app.use(express.cookieSession(
     {
         secret: config.cookie_secret,
-        cookie: {secure: false}
+        cookie: {secure: config.encrypt_cookie}
     }));
 app.use(express.csrf({value: csrfValue}));
 
 // Middleware to set a CSRF cookie for Angular
 app.use(function(req, res, next) {
-  res.cookie('XSRF-TOKEN', req.session._csrf, {secure: false});
+  res.cookie('XSRF-TOKEN', req.session._csrf, {secure: config.encrypt_cookie});
   next();
 });
 
