@@ -5,6 +5,7 @@ var express =       require('express')
     , https =        require('https')
     , configHelper = require('./server/util/ConfigHelper')
     , config = configHelper.config()
+    , csrfHelper = require('./server/util/CsrfHelper')
     , passport =    require('passport')
     , path =        require('path')
     , User =        require('./server/models/User.js');
@@ -14,15 +15,6 @@ var app = express();
 var options = {
   key: fs.readFileSync(path.resolve(__dirname, 'server/cert/key.pem')),
   cert: fs.readFileSync(path.resolve(__dirname, 'server/cert/cert.pem'))
-};
-
-// Configure Express to look for x-xsrf-token sent by Angular
-var csrfValue = function(req) {
-  var token = (req.body && req.body._csrf)
-    || (req.query && req.query._csrf)
-    || (req.headers['x-csrf-token'])
-    || (req.headers['x-xsrf-token']);
-  return token;
 };
 
 app.set('views', __dirname + '/client/views');
@@ -47,13 +39,9 @@ app.use(express.cookieSession(
         secret: config.cookie_secret,
         cookie: {secure: config.encrypt_cookie}
     }));
-app.use(express.csrf({value: csrfValue}));
 
-// Middleware to set a CSRF cookie for Angular
-app.use(function(req, res, next) {
-  res.cookie('XSRF-TOKEN', req.session._csrf, {secure: config.encrypt_cookie});
-  next();
-});
+app.use(express.csrf({value: csrfHelper.csrfValue}));
+app.use(csrfHelper.angularCsrf());
 
 // Passport Local Strategy
 app.use(passport.initialize());
