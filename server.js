@@ -11,13 +11,12 @@ var express =       require('express')
 
 var app = express();
 
-// HTTPS
 var options = {
   key: fs.readFileSync(path.resolve(__dirname, 'server/cert/key.pem')),
   cert: fs.readFileSync(path.resolve(__dirname, 'server/cert/cert.pem'))
 };
 
-// CSRF: Configure Express to look for x-xsrf-token sent by Angular
+// Configure Express to look for x-xsrf-token sent by Angular
 var csrfValue = function(req) {
   var token = (req.body && req.body._csrf)
     || (req.query && req.query._csrf)
@@ -43,8 +42,6 @@ app.use(helmet.iexss());                // enable IE8+ anti-cross-site scripting
 app.use(helmet.contentTypeOptions());   // stop browser from guessing MIME type via content sniffing
 app.use(helmet.cacheControl());         // no-store, no-cache
 
-// TODO: Set cookie secure to true after upgrade to Karma 10.x so we can have 
-//       https with self signed cert for dev, and Karma e2e working
 app.use(express.cookieSession(
     {
         secret: config.cookie_secret,
@@ -52,9 +49,7 @@ app.use(express.cookieSession(
     }));
 app.use(express.csrf({value: csrfValue}));
 
-// CSRF: Use custom middleware to set a cookie for Angular
-// TODO: Set cookie secure to true after upgrade to Karma 10.x so we can have 
-//       https with self signed cert for dev, and Karma e2e working
+// Middleware to set a CSRF cookie for Angular
 app.use(function(req, res, next) {
   res.cookie('XSRF-TOKEN', req.session._csrf, {secure: false});
   next();
@@ -69,14 +64,6 @@ passport.deserializeUser(User.deserializeUser);
 
 require('./server/routes.js')(app);
 
-// HTTP
-// TODO: Remove this section after upgrade to Karma 10.x
-app.set('port', process.env.PORT || 8000);
-http.createServer(app).listen(app.get('port'), function(){
-    console.log("Express http server listening on port " + app.get('port'));
-});
-
-// HTTPS
 app.set('port_https', process.env.PORT_HTTPS || 8443);
 https.createServer(options, app).listen(app.get('port_https'), function(){
     console.log("Express https server listening on port " + app.get('port_https'));
