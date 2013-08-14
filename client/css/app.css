@@ -28,6 +28,7 @@ body {
     font: 14px 'Raleway', sans-serif;
     line-height: 22px;
     color: #666666;
+    background-image: url("../img/cream_dust.png");
 }
 
 h1, h2, h3, h4 {
@@ -68,9 +69,36 @@ h1, h2, h3, h4 {
 }
 
 .navbar .nav-top-pad {
-    margin: 15px 0 0 0;
+    margin: 5px 0 0 0;
 }
 
+.btn-menu {
+    width: 180px;
+    height: 45px;
+    margin: 0 0 0 22px;
+    line-height: 16px;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 16px;
+    text-shadow: 0 -1px 1px #999999, 0 1px 1px #CCCCCC;
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    /*    box-shadow: 0 1px 2px rgba(255,255,255, 0.65), 0 -2px 2px #CCCCCC; */
+    border: none;
+    border-right: 2px solid #FFFFFF;
+    border-left: 2px solid #FFFFFF;
+    background-image: none;
+    background-color: transparent;
+}
+
+.btn-menu:hover {
+    color: #FF0000;
+    background-color: #FFFFFF;
+    text-shadow: 0 -1px 1px #FFFFFF, 0 1px 1px #CCCCCC;
+    box-shadow: 0 -1px 2px rgba(255,255,255, 0.65), 0 2px 2px #CCCCCC;
+
+}
 .navbar .nav > li {
     margin-right: 5px;
     margin-left: 5px;
@@ -80,16 +108,60 @@ h1, h2, h3, h4 {
     margin-top: 10px;
 }
 
-.navbar-inverse .nav li.dropdown > .dropdown-toggle .caret {
-    border-top-color: #333333;
-    border-bottom-color: #333333;
+.nav .dropdown-toggle .caret {
+    border-top-color: #FFFFFF;
+    border-bottom-color: #FFFFFF;
 }
 
 .nav-username {
     margin-top: 22px;
-    font-size: 18px;
+    font-size: 14px;
     color: #FFFFFF;
-    text-shadow: 0 -1px 1px rgba(255, 255, 255, 0.75);
+    text-shadow: 0 -1px 1px #999999;
+    display: inline;
+}
+
+.nav-closed:hover .nav-username {
+    color: #0099CC;
+    text-shadow: 0 -1px 1px #FFFFFF, 0 1px 1px #CCCCCC;
+
+}
+
+.nav-closed:hover .user-pic {
+    border-color: #0099CC;
+}
+
+.nav-closed:hover .caret {
+    border-top-color: #0099CC;
+    border-bottom-color: #0099CC;
+}
+
+.caret {
+    border-top-color: #0099CC;
+}
+
+.nav-closed {
+    margin: 10px 10px 0 0 ;
+
+}
+
+#userActionsMenu:hover {
+    text-decoration: none;
+}
+
+
+.navbar-inverse .nav li.dropdown.open > .dropdown-toggle {
+    background-color: transparent;
+}
+
+.navbar-inverse .nav li.dropdown > .dropdown-toggle .caret {
+    border-top-color: #FFFFFF;
+    border-bottom-color: #FFFFFF;
+}
+
+.user-pic {
+    border: 2px solid #FFFFFF;
+    margin-top:-2px;
 }
 
 /* login form
@@ -130,6 +202,20 @@ h1, h2, h3, h4 {
 #loggedInUserName {
     font-weight: bold;
 }
+
+.dropdown-menu {
+    border: 3px solid #FFFFFF;
+}
+
+.dropdown-menu > li > a:hover {
+    background-color: #0099CC;
+    background-image: none;
+}
+
+.dropdown-menu > li > a {
+    color: #666666;
+}
+
 
 /* registration form
 ===================== */
@@ -239,6 +325,15 @@ input[type="checkbox"] {
     clear: both;
 }
 
+.user-avatar {
+    border: 2px solid #FFFFFF;
+    margin-top: -3px;
+}
+
+.caret {
+    border-top-color: #FFFFFF;
+    border-bottom-color:#FFFFFF;
+}
 /* LDs view
 ===================== */
 
@@ -309,6 +404,11 @@ input[type="checkbox"] {
         overflow: hidden;
         text-overflow: ellipsis;
         width: 90%;
+    }
+
+    .btn-menu {
+        width: 130px;
+        margin: 0 0 0 8px;
     }
 }
 
@@ -391,6 +491,60 @@ input[type="checkbox"] {
 
     }
 
+    .nav-collapse {
+        background-color: #0099CC;
+        margin: 2px 0 0 0;
+        border: none;
+    }
+
+    .btn-menu {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    ul.nav-top-pad.nav {
+        float: left;
+        width: 60%;
+    }
+
+    div.pull-right.nav-closed {
+        float: right;
+        width: 35%;
+        text-align: right;
+    }
+
+    .navbar-inverse .nav-collapse .dropdown-menu {
+        background-color: #FFFFFF;
+        border-radius: 6px;
+        -moz-border-radius: 6px;
+        -webkit-border-radius: 6px;
+        border: 2px solid #FFFFFF;
+        margin-top: 5px;
+
+    }
+
+
+    .navbar-inverse .nav-collapse .dropdown-menu a{
+        color: #666666;
+        font-weight: normal;
+
+    }
+
+
+    .navbar-inverse .nav-collapse .dropdown-menu > li > a:hover{
+       background-color: #0099CC;
+        color: #FFFFFF;
+    }
+
+    .nav-closed:hover .nav-username {
+        color: #FFFFFF;
+    text-shadow: none;
+        text-decoration: underline;
+    }
+
+    .nav-closed:hover .user-pic {
+        border-color: #FFFFFF;
+    }
 }
 
 @media (max-width: 767px) {
@@ -414,7 +568,23 @@ input[type="checkbox"] {
     .ld-border {
         width: 43%;
     }
-}
+
+    ul.nav-top-pad.nav {
+        float: none;
+        width: 92%;
+    }
+
+    div.pull-right.nav-closed {
+        float: none;
+        width: 92%;
+    }
+    .navbar-inverse .nav-collapse .dropdown-menu {
+        width: 40%;
+        margin-left: 58%;
+    }
+
+
+    }
 
 @media (max-width: 480px){
     .control-group {

@@ -53,16 +53,16 @@
         <a class="brand" href="#"><img src="../img/logo.png" alt="Ledita Logo" /></a>
         <div class="nav-collapse collapse">
          <ul class="nav-top-pad nav">
-          <li><button type="button" class="btn btn-small btn-signup">Explore LDs</button></li>
-          <li><button type="button" class="btn btn-small btn-signup">Find Users</button></li>
-          <li><button type="button" class="btn btn-small btn-signup">Create a New LD</button></li>
+          <li><button type="button" class="btn btn-small btn-menu">Explore LDs</button></li>
+          <li><button type="button" class="btn btn-small btn-menu">Find Users</button></li>
+          <li><button type="button" class="btn btn-small btn-menu">Create a New LD</button></li>
         </ul>
-        <div class="pull-right">
+        <div class="pull-right nav-closed">
           <ul class="nav pull-right">
-            <li id="loggedInUserName" class="nav-username">{{ user.username }}</li>
-            <li class="dropdown">
               <a id="userActionsMenu" href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="img/avatar_sample.png" alt="User Avatar" class="img-rounded"/>
+            <li class="dropdown">
+                  <li id="loggedInUserName" class="nav-username">{{ user.username }}</li>
+                  <img src="img/avatar_sample.png" alt="User Avatar" class="img-rounded user-pic"/>
                 <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
