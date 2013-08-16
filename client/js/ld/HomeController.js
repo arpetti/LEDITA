@@ -3,6 +3,8 @@ angular.module('ledita-app')
 ['$scope', 'Home', function($scope, Home) {
     $scope.loading = true;
 
+    // TODO: Infinite Scroll http://binarymuse.github.io/ngInfiniteScroll/demo_basic.html
+
     Home.getLearningDesigns(function(res) {
         $scope.learningDesigns = res;
         $scope.loading = false;

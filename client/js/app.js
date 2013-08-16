@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ledita-app', ['ngCookies'])
+angular.module('ledita-app', ['ngCookies', 'infinite-scroll'])
 
     .config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 
