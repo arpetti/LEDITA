@@ -15,14 +15,14 @@ VALUES ('1', '1', 'Mario', 'Rossi', 'M', 'mario@email.it', '$2a$10$/MWGZW7cmwNdl
 ('5', '5', 'Silvia', 'Rosa', 'F', 'silvia@email.it', '$2a$10$/MWGZW7cmwNdle.jiFJb9OiWqVZjxbgJxYNpEraHkwzZ2muBHL7Gm', 'Scuola E', 'Pechino', 'Cina');
 
 INSERT INTO `ld`(`id`, `user_id`, `ld_model_id`, `name`, `scope`, `publication`, `students_profile`, `creation_date`, `last_edit_date`)
-VALUES ('1','1', NULL,'LD Demo 1','Lesson','1','20 studenti adolescenti di livello B1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('2','1', '1','LD Demo 2','Module','0','20 studenti adolescenti di livello B1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('3','2', NULL,'LD Demo 3','Semester','1','20 studenti adolescenti di livello B1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('4','3', NULL,'LD Demo 4','Lesson','1','20 studenti adolescenti di livello B1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('5','4', NULL,'LD Demo 5','Semester','1','20 studenti adolescenti di livello B1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('6','4', NULL,'LD Demo 6','Module','0','20 studenti adolescenti di livello B1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('7','4', '5','LD Demo 7','Lesson','1','20 studenti adolescenti di livello B1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('8','5', NULL,'LD Demo 8','Lesson','1','20 studenti adolescenti di livello B1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+VALUES ('1','1', NULL,'Learning Design Title Demo 1','Lesson','1','20 studenti adolescenti di livello B1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('2','1', '1','Learning Design Title Demo 2','Module','0','20 studenti adolescenti di livello B1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('3','2', NULL,'Learning Design Title Demo 3','Semester','1','20 studenti adolescenti di livello B1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('4','3', NULL,'Learning Design Title Demo 4','Lesson','1','20 studenti adolescenti di livello B1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('5','4', NULL,'Learning Design Title Demo 5','Semester','1','20 studenti adolescenti di livello B1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('6','4', NULL,'Learning Design Title Demo 6','Module','0','20 studenti adolescenti di livello B1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('7','4', '5','Learning Design Title Demo 7','Lesson','1','20 studenti adolescenti di livello B1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('8','5', NULL,'Learning Design Title Demo 8','Lesson','1','20 studenti adolescenti di livello B1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('9','1', NULL,'Learning Design Title Demo 9','Lesson','1','20 studenti adolescenti di livello B1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('10','1', '1','Learning Design Title Demo 10','Module','0','20 studenti adolescenti di livello B1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('11','2', NULL,'Learning Design Title Demo 11','Semester','1','20 studenti adolescenti di livello B1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
