@@ -29,8 +29,8 @@ describe('DAO', function() {
         var queryString = 'select name, scope, ld_model_id from ld where scope = ? and ld_model_id = ?';
         var queryParams = ['Lesson', 5];
         Dao.findAll(queryString, queryParams, function(err, results){
-            expect(results).to.have.length(1);
-            expect(results[0].name).to.equal('LD Demo 7');
+            expect(results).to.have.length(3);
+            expect(results[0].name).to.equal('Learning Design Title Demo 7');
             expect(results[0].scope).to.equal('Lesson');
             expect(results[0].ld_model_id).to.equal(5);
             done();

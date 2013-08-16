@@ -15,7 +15,7 @@ describe('Learning Design', function() {
     sleep(2);
 
     // Verify results
-    expect(repeater('.ld-item').count()).toBe(8);
+    expect(repeater('.ld-item').count()).toBeGreaterThan(8);
 
     // Logout
     element('#userActionsMenu').click();
