@@ -28,8 +28,11 @@ describe('Learning Design DAO', function() {
             expect(learningDesigns[0].ld_id).to.equal(1);
             expect(learningDesigns[0].ld_name).to.equal('Learning Design Title Demo 1');
             expect(learningDesigns[0].ld_scope).to.equal('Lesson');
+            expect(learningDesigns[0].ld_students_profile).to.equal('20 studenti adolescenti di livello B1');
             expect(learningDesigns[0].user_name).to.equal('Mario');
             expect(learningDesigns[0].user_last_name).to.equal('Rossi');
+            expect(learningDesigns[0].ld_creation_date).not.to.be.null;
+            expect(learningDesigns[0].ld_last_edit_date).not.to.be.null;
             done();
         });
     });

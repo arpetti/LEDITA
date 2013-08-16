@@ -537,7 +537,7 @@ CREATE OR REPLACE VIEW vw_ld_user AS
     , ld.publication as ld_publication
     , ld.students_profile as ld_students_profile
     , ld.creation_date as ld_creation_date
-    , ld.last_edit_date as ld_last_edi_date
+    , ld.last_edit_date as ld_last_edit_date
     , user.id as user_id 
     , user.name as user_name
     , user.last_name as user_last_name
