@@ -105,14 +105,34 @@ input.sidebarInput {
 list-style: none;
     float: left;
     margin: 0 5px 2px 0;
-    background-color: #0099CC;
+    background-color: #dddddd;
     border-radius: 4px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     padding:0 4px;
-    color: #FFFFFF;
     line-height: 18px;
 }
+
+.sidebarItemLink {
+    font-weight: normal;
+    color: #666666;
+}
+
+
+.sidebarItemLink:hover {
+    background-color: #0099CC;
+    color: #FFFFFF;
+   width: 100%;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    font-size: 12px;
+    padding: 0;
+    margin: 0  -2px;
+    border: 2px solid #0099CC;
+}
+
+
 
 #content {
     min-height: 550px;
@@ -234,7 +254,7 @@ list-style: none;
 }
 
 #contentHeader {
-    margin: 2px 5px;
+    margin: 5px 5px;
     height: 20px;
     padding: 5px 10px;
     background-color: #990000;
