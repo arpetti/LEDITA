@@ -12,7 +12,7 @@ angular.module('ledita-app', ['ngCookies', 'infinite-scroll'])
                 controller: 'HomeCtrl',
                 access: access.user
             });
-        $routeProvider.when('/ld/:id',
+        $routeProvider.when('/ld/:ldid',
             {
                 templateUrl: '/partials/ldView',
                 controller: 'LdViewCtrl',
