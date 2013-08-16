@@ -3,10 +3,10 @@
   <!-- LD BOX START -->
   <div ng-repeat="learningDesign in learningDesigns" class="ld-border ld-item">
     <div class="ld-top">
-      A1<a href="#" class="float-right"><i class="icon-arrow-right icon-white"></i></a>
+      A1<a ng-href="ld/{{ learningDesign.ld_id }}" class="float-right"><i class="icon-arrow-right icon-white"></i></a>
     </div>
     <div class="ld-center text-center">
-      <h4 class="ld-name-text"><a href="#">{{ learningDesign.ld_name }}</a></h4>
+      <h4 class="ld-name-text"><a ng-href="ld/{{ learningDesign.ld_id }}" >{{ learningDesign.ld_name }}</a></h4>
     </div>
     <div class="ld-bottom">
       {{ learningDesign.ld_scope }}<span class="float-right">   {{ learningDesign.user_name }}&nbsp;{{ learningDesign.user_last_name }}
