@@ -18,7 +18,7 @@
             -->
             <div>
                 <h5 class="zeroMargin ">Author:</h5>
-                <a href="#" class="zeroMargin">Firstname Lastname</a>
+                <a href="#" class="zeroMargin">{{ learningDesign.user_name}} {{ learningDesign.user_last_name}}</a>
             </div>
             <div>
                 <h5 class="zeroMargin ">Created in:</h5>
@@ -81,10 +81,10 @@
             <div id="contentBody">
             <div id="contentHeader">
                 <div class="float-left">
-                    <h4 class="inline"><a href="#"><img ng-src="../img/emptyStar.png" class="star"></img></a>Title of the Learning Design</h4>
+                    <h4 class="inline"><a href="#"><img ng-src="../img/emptyStar.png" class="star"></img></a>{{ learningDesign.ld_name }}</h4>
                 </div>
                 <div class="float-right">
-                     <h4><span class="round">A1</span> Lesson</h4>
+                     <h4><span class="round">A1</span> {{ learningDesign.ld_scope }}</h4>
                 </div>
             </div>
 
