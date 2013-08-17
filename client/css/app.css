@@ -102,16 +102,22 @@ input.sidebarInput {
 }
 
 .sidebarItem {
-list-style: none;
     float: left;
+
+    list-style: none;
+}
+
+.sidebarItem a {
     margin: 0 5px 2px 0;
     background-color: #dddddd;
     border-radius: 4px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
-    padding:0 4px;
+    padding:1px 4px;
     line-height: 18px;
 }
+
+
 
 .sidebarItemLink {
     font-weight: normal;
@@ -122,14 +128,7 @@ list-style: none;
 .sidebarItemLink:hover {
     background-color: #0099CC;
     color: #FFFFFF;
-   width: 100%;
-    border-radius: 4px;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    font-size: 12px;
-    padding: 0;
-    margin: 0  -2px;
-    border: 2px solid #0099CC;
+
 }
 
 
