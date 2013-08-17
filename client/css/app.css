@@ -20,6 +20,9 @@ img {
     border: none;
 }
 
+.row {
+    margin-left: 0;
+}
 /* body & type
 ===================== */
 body {
@@ -70,11 +73,10 @@ a:hover {
 /* main layout
 ===================== */
 #sidebar {
-    min-height: 550px;
     background: url("../img/book.png") no-repeat 100% 100%;
     background-size: 100% 100%;
     padding: 10px 10px 10px 35px;
-
+    min-height: 350px;
 }
 
 .sidebarInput {
@@ -134,7 +136,7 @@ input.sidebarInput {
 
 
 #content {
-    min-height: 550px;
+
     border-radius: 6px;
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
@@ -191,9 +193,7 @@ input.sidebarInput {
     box-shadow: none;
 }
 
-#tabContent {
 
-}
 
 .textarea {
     width: 90%;
@@ -239,7 +239,6 @@ input.sidebarInput {
 
 #contentBody {
     border: 1px solid #CCCCCC;
-    min-height: 509px;
     background-color: #FFFFFF;
     width: 99%;
     border-radius: 6px;
@@ -250,6 +249,7 @@ input.sidebarInput {
     -webkit-border-top-left-radius: 0px;
     margin: 0;
     padding: 0;
+    min-height: 400px;
 }
 
 #contentHeader {
@@ -305,6 +305,11 @@ padding: 3px;
     padding: 0 10px;
     text-align: right;
     color: #FFFFFF;
+}
+
+.date {
+    float: left;
+    padding-right: 5px;
 }
 /* navbar
 ===================== */
@@ -841,6 +846,7 @@ input[type="checkbox"] {
 
     div.container {
         width: 95%;
+
     }
 
 
@@ -859,14 +865,15 @@ input[type="checkbox"] {
     }
 
     .ld-border {
-        width: 44%;
+        width: 43%;
         margin-left: 1%;
     }
 }
 
 @media (max-width: 620px) {
     .ld-border {
-        width: 43%;
+        width: 42%;
+        margin-right: 0;
     }
 
     ul.nav-top-pad.nav {
@@ -900,7 +907,7 @@ input[type="checkbox"] {
         width: 85%;
     }
     .ld-border {
-        width: 90%;
+        width: 92%;
     }
 
 }
