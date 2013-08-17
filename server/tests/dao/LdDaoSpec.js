@@ -61,28 +61,26 @@ describe('Learning Design DAO', function() {
         });
     });
 
-    it('Get learning design subjects returns results', function(done) {
-        var learningDesignId = 1;
-        LdDao.getLearningDesignSubjects(learningDesignId, function(err, results){
-            expect(results).to.have.length(2);
-            expect(results[0].ld_id).to.equal(1);
-            expect(results[0].ld_name).to.equal('Learning Design Title Demo 1');
-            expect(results[0].subject_id).to.equal(1);
-            expect(results[0].subject_name).to.equal('Subject 1');
-            expect(results[1].ld_id).to.equal(1);
-            expect(results[1].ld_name).to.equal('Learning Design Title Demo 1');
-            expect(results[1].subject_id).to.equal(2);
-            expect(results[1].subject_name).to.equal('Subject 2');
-            done();
-        });
-    });
+    describe('Subjects', function() {
 
-    it('Get learning design subjects returns no results when LD has no subjects', function(done) {
-        var learningDesignId = 9;
-        LdDao.getLearningDesignSubjects(learningDesignId, function(err, results){
-            expect(results).to.have.length(0);
-            done();
+        it('Get learning design subjects returns results', function(done) {
+            var learningDesignId = 1;
+            LdDao.getLearningDesignSubjects(learningDesignId, function(err, results){
+                expect(results).to.have.length(2);
+                expect(results[0].subject_name).to.equal('Subject 1');
+                expect(results[1].subject_name).to.equal('Subject 2');
+                done();
+            });
         });
+
+        it('Get learning design subjects returns no results when LD has no subjects', function(done) {
+            var learningDesignId = 9;
+            LdDao.getLearningDesignSubjects(learningDesignId, function(err, results){
+                expect(results).to.have.length(0);
+                done();
+            });
+        });
+
     });
 
 });	
