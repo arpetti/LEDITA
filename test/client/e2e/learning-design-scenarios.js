@@ -39,8 +39,8 @@ describe('Learning Design', function() {
 
     // Verify detail view
     // This is brittle because order by last edit date where all dates are same is unpredictable
-    expect(browser().location().url()).toBe('/ld/28');
-    expect(binding('learningDesign.ld_name')).toBe('Learning Design Title Demo 28');
+    expect(browser().location().url()).toBe('/ld/1');
+    expect(binding('learningDesign.ld_name')).toBe('Learning Design Title Demo 1');
     expect(binding('learningDesign.ld_students_profile')).toBe('20 studenti adolescenti di livello B1');
 
     // Logout
