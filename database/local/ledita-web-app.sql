@@ -545,6 +545,17 @@ CREATE OR REPLACE VIEW vw_ld_user AS
     , user
   WHERE ld.user_id = user.id;
 
+CREATE OR REPLACE VIEW vw_ld_subject AS
+  SELECT ld.id as ld_id
+    , ld.name as ld_name
+    , subject.id as subject_id
+    , subject.name as subject_name
+  FROM ld
+  INNER JOIN concerns
+  ON ld.id = concerns.ld_id
+  INNER JOIN subject
+  ON concerns.subject_id = subject.id;  
+
 USE `ledita-web-app` ;
 
 
