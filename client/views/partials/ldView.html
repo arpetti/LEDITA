@@ -22,7 +22,7 @@
             </div>
             <div>
                 <h5 class="zeroMargin ">Created in:</h5>
-                <span class="zeroMargin">01/01/2013</span>
+                <span class="zeroMargin">{{learningDesign.ld_creation_date | date:'yyyy-MM-dd'}}</span>
               </div>
             <div class="clear marginTop"><h5 class="zeroMargin">Subject:</h5>
 
@@ -51,7 +51,7 @@
             </div>
             <div class="clear marginTop">
                 <h5 class="zeroMargin">Students' Description:</h5>
-                <span class="sidebarItem">Here comes the text that describes the students' profile, including age, number, location, etc.</span>
+                <span class="sidebarItem">{{ learningDesign.ld_students_profile }}</span>
             </div>
             <div class="clear marginTop"><h5 class=" zeroMargin">Tags:</h5>
 
