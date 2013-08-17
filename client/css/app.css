@@ -285,6 +285,27 @@ padding: 3px;
     margin: -2px 0 0 0;
     vertical-align: middle;
 }
+
+#model {
+    background-color: #0099CC;
+    margin: 8px 0 0 0;
+    padding: 5px 0;
+    height: 80px;
+    border: 2px dotted #FFFFFF;
+
+}
+
+.btnModelImg {
+  width: 80px;
+    float: left;
+
+}
+
+.btnModel {
+    padding: 0 10px;
+    text-align: right;
+    color: #FFFFFF;
+}
 /* navbar
 ===================== */
 .navbar-inverse .navbar-inner {
