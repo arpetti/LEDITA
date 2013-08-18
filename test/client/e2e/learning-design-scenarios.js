@@ -48,6 +48,7 @@ describe('Learning Design', function() {
 
     // Verify objectives
     expect(repeater('.objectives li').count()).toBe(2);
+    expect(repeater('.objectives li').column('objective.objective_descr')).toEqual(["Objective 1", "Objective 6"]);
 
     // Logout
     element('#userActionsMenu').click();
