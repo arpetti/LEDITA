@@ -67,14 +67,15 @@ describe('Learning Design DAO', function() {
             var learningDesignId = 1;
             LdDao.getLearningDesignSubjects(learningDesignId, function(err, results){
                 expect(results).to.have.length(2);
-                expect(results[0].subject_name).to.equal('Subject 1');
-                expect(results[1].subject_name).to.equal('Subject 2');
+                expect(results[0].subject_name).to.equal('Topic 1');
+                expect(results[1].subject_name).to.equal('Topic 5');
                 done();
             });
         });
 
         it('Get learning design subjects returns no results when LD has no subjects', function(done) {
-            var learningDesignId = 9;
+            // All LD's have subjects, therefore only way to test this is with non existing LD ID
+            var learningDesignId = 999;
             LdDao.getLearningDesignSubjects(learningDesignId, function(err, results){
                 expect(results).to.have.length(0);
                 done();
@@ -89,14 +90,15 @@ describe('Learning Design DAO', function() {
             var learningDesignId = 3;
             LdDao.getLearningDesignObjectives(learningDesignId, function(err, results){
                 expect(results).to.have.length(2);
-                expect(results[0].objective_descr).to.equal('Objective 2');
-                expect(results[1].objective_descr).to.equal('Objective 3');
+                expect(results[0].objective_descr).to.equal('Objective 3');
+                expect(results[1].objective_descr).to.equal('Objective 6');
                 done();
             });
         });
 
         it('Get learning design objectives returns no results when LD has no objectives', function(done) {
-            var learningDesignId = 9;
+            // All LD's have objectives, therefore only way to test this is with non existing LD ID
+            var learningDesignId = 999;
             LdDao.getLearningDesignObjectives(learningDesignId, function(err, results){
                 expect(results).to.have.length(0);
                 done();
