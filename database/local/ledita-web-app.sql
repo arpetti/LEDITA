@@ -556,6 +556,17 @@ CREATE OR REPLACE VIEW vw_ld_subject AS
   INNER JOIN subject
   ON concerns.subject_id = subject.id;  
 
+CREATE OR REPLACE VIEW vw_ld_objective AS
+  SELECT ld.id as ld_id
+    , ld.name as ld_name
+    , objective.id as objective_id
+    , objective.descr as objective_descr
+  FROM ld
+  INNER JOIN aims
+    ON ld.id = aims.ld_id
+  INNER JOIN objective
+    ON aims.objective_id = objective.id;
+
 USE `ledita-web-app` ;
 
 

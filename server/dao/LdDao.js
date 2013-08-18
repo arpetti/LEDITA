@@ -5,6 +5,7 @@ var GET_LEARNING_DESIGNS = 'SELECT ld_id, ld_name, ld_scope, ld_publication, ld_
 var GET_LEARNING_DESIGN = GET_LEARNING_DESIGNS + ' where ld_id = ?';
 
 var GET_LEARNING_DESIGN_SUBJECTS = 'select subject_name from vw_ld_subject where ld_id = ?';
+var GET_LEARNING_DESIGN_OBJECTIVES = 'select objective_descr from vw_ld_objective where ld_id = ?';
 
 module.exports = {
 
@@ -30,6 +31,16 @@ module.exports = {
 
   getLearningDesignSubjects: function(ldid, callback) {
     dao.findAll(GET_LEARNING_DESIGN_SUBJECTS, [ldid], function(err, rows) {
+      if (err) {
+        callback(err);
+        return;
+      }
+      callback(null, rows);
+    });
+  },
+
+  getLearningDesignObjectives: function(ldid, callback) {
+    dao.findAll(GET_LEARNING_DESIGN_OBJECTIVES, [ldid], function(err, rows) {
       if (err) {
         callback(err);
         return;

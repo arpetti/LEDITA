@@ -83,4 +83,26 @@ describe('Learning Design DAO', function() {
 
     });
 
+    describe('Objectives', function() {
+
+        it('Get learning design objectives returns results', function(done) {
+            var learningDesignId = 3;
+            LdDao.getLearningDesignObjectives(learningDesignId, function(err, results){
+                expect(results).to.have.length(2);
+                expect(results[0].objective_descr).to.equal('Objective 2');
+                expect(results[1].objective_descr).to.equal('Objective 3');
+                done();
+            });
+        });
+
+        it('Get learning design subjects returns no results when LD has no subjects', function(done) {
+            var learningDesignId = 9;
+            LdDao.getLearningDesignObjectives(learningDesignId, function(err, results){
+                expect(results).to.have.length(0);
+                done();
+            });
+        });
+
+    });
+
 });	
