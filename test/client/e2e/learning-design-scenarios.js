@@ -44,6 +44,7 @@ describe('Learning Design', function() {
 
     // Verify subjects
     expect(repeater('.subjects li').count()).toBe(2);
+    expect(repeater('.subjects li').column('subject.subject_name')).toEqual(["Topic 1", "Topic 5"]);
 
     // Verify objectives
     expect(repeater('.objectives li').count()).toBe(2);
