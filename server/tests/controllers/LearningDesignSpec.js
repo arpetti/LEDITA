@@ -68,17 +68,17 @@ describe('Learning Design Controller', function() {
     		var learningDesignId = 956;
     		req.params = {id: learningDesignId};
 
-    		var ldResult = [{ld_id: 956, ld_name: "Demo 956"}];
-    		var daoStub = sandbox.stub(LearningDesignDao, "getLearningDesign", function(id, callback) {
-                callback(null, ldResult);
+    		var ldDetail = [{ld_id: 956, ld_name: "Demo 956"}];
+    		var serviceStub = sandbox.stub(LearningDesignService, "getLearningDesignDetail", function(ldid, callback) {
+                callback(null, null, ldDetail);
             });
 
             res.json = function(httpStatus, result) {
             	expect(httpStatus).to.equal(200);
-            	expect(result.ld_id).to.equal(ldResult[0].ld_id);
-            	expect(result.ld_name).to.equal(ldResult[0].ld_name);
+            	expect(result.ld_id).to.equal(ldDetail.ld_id);
+            	expect(result.ld_name).to.equal(ldDetail.ld_name);
 
-            	assert.isTrue(daoStub.withArgs(learningDesignId).calledOnce);
+            	assert.isTrue(serviceStub.withArgs(learningDesignId).calledOnce);
             	done();
             }
 
