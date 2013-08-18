@@ -20,3 +20,4 @@ module.exports.LOGIN_SUCCESS = "Login successful."
 
 // Learning Design
 module.exports.LD_NOT_FOUND = "Unable to find learning design."
+module.exports.LD_DETAIL_NOT_FOUND = "Learning Design details could not be found"

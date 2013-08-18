@@ -10,12 +10,27 @@ var LdDao = require('../dao/LdDao')
 */
 module.exports = {
 
+    LD_NUMBER_OF_DATA_ELEMENTS: 3,
+
+    getLearningDesignPromise: function(ldid) {
+        var promiseDaoGetLd = nodefn.call(LdDao.getLearningDesign, ldid);
+        var promiseDaoGetLdSubjects = nodefn.call(LdDao.getLearningDesignSubjects, ldid);
+        var promiseDaoGetLdObjectives = nodefn.call(LdDao.getLearningDesignObjectives, ldid);
+
+        var joinedPromise = when.join(promiseDaoGetLd, promiseDaoGetLdSubjects, promiseDaoGetLdObjectives);
+        return joinedPromise;
+    },
+
+    //TODO: make this work with mocha async style testing
     // callback(err, message, learningDesignDetail)
     getLearningDesignDetail: function(ldid, callback) {
         var learningDesignDetail = {};
         
         var promiseDaoGetLd = nodefn.call(LdDao.getLearningDesign, ldid);
         var promiseDaoGetLdSubjects = nodefn.call(LdDao.getLearningDesignSubjects, ldid);
+        var promiseDaoGetLdObjectives = nodefn.call(LdDao.getLearningDesignObjectives, ldid);
+
+        var joinedPromise = when.join(promiseDaoGetLdSubjects, promiseDaoGetLdObjectives);
 
         promiseDaoGetLd.then(function(results) {
             if (results.length === 0) {
@@ -28,13 +43,28 @@ module.exports = {
             return;
         });
 
-        promiseDaoGetLdSubjects.then(function(results) {
-            learningDesignDetail.subjects = results;
+        joinedPromise.then(function (values) {
+            learningDesignDetail.subjects = values[0];
+            learningDesignDetail.objectives = values[1];
             callback(null, null, learningDesignDetail);
         }, function(err) {
             callback(err);
             return;
         });
+
+        // promiseDaoGetLdSubjects.then(function(results) {
+        //     learningDesignDetail.subjects = results;
+        // }, function(err) {
+        //     callback(err);
+        //     return;
+        // });
+
+        // promiseDaoGetLdObjectives.then(function(results) {
+        //     learningDesignDetail.objectives = results;
+        //     callback(null, null, learningDesignDetail);
+        // }, function(err) {
+        //     callback(err);
+        // });
 
     }
 };
