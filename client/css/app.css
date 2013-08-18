@@ -73,8 +73,9 @@ a:hover {
 /* main layout
 ===================== */
 #sidebar {
-    background: url("../img/book.png") no-repeat 100% 100%;
+  background: url("../img/book.png") no-repeat 100% 100%;
     background-size: 100% 100%;
+
     padding: 10px 10px 10px 35px;
     min-height: 350px;
 }
@@ -256,12 +257,9 @@ input.sidebarInput {
     margin: 5px 5px;
     height: 20px;
     padding: 5px 10px;
-    background-color: #990000;
+    background-color: #0099CC;
     color: #FFFFFF;
-    border-radius: 6px;
-    -moz-border-radius: 6px;
-    -webkit-border-radius: 6px;
-    border: 1px dotted #FFFFFF;
+    border: 2px dotted #FFFFFF;
 }
 
 #contentHeader h4 {
