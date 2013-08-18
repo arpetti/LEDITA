@@ -3,11 +3,12 @@ var expect = require('chai').expect
     , sinon = require('sinon')
     , LearningDesignCtrl = require('../../controllers/learningDesign')
     , LearningDesignDao = require('../../dao/LdDao')
+    , LearningDesignService = require('../../service/LDService')
     , messages = require('../../service/ValidationMessages');
 
 describe('Learning Design Controller', function() {
 
-	var req = {}
+    var req = {}
         , res = {}
         , sandbox = sinon.sandbox.create();
 
@@ -26,16 +27,16 @@ describe('Learning Design Controller', function() {
     		var learningDesignId = 956;
     		req.params = {id: learningDesignId};
 
-    		var daoError = new Error("something went wrong");
-    		var daoStub = sandbox.stub(LearningDesignDao, "getLearningDesign", function(id, callback) {
-                callback(daoError);
+    		var serviceError = new Error("something went wrong");
+    		var serviceStub = sandbox.stub(LearningDesignService, "getLearningDesignDetail", function(ldid, callback) {
+                callback(serviceError);
             });
 
             res.send = function(httpStatus, errMessage) {
                 expect(httpStatus).to.equal(500);
-                expect(errMessage).to.equal(daoError.message);
+                expect(errMessage).to.equal(serviceError.message);
                 
-                assert.isTrue(daoStub.withArgs(learningDesignId).calledOnce);
+                assert.isTrue(serviceStub.withArgs(learningDesignId).calledOnce);
                 done();
             };
 
@@ -47,15 +48,16 @@ describe('Learning Design Controller', function() {
     		var learningDesignId = 956;
     		req.params = {id: learningDesignId};
 
-    		var daoStub = sandbox.stub(LearningDesignDao, "getLearningDesign", function(id, callback) {
-                callback(null, []);
+            var notFoundMessage = 'ld not found';
+    		var serviceStub = sandbox.stub(LearningDesignService, "getLearningDesignDetail", function(ldid, callback) {
+                callback(null, notFoundMessage);
             });
 
             res.send = function(httpStatus, errMessage) {
                 expect(httpStatus).to.equal(404);
-                expect(errMessage).to.equal(messages.LD_NOT_FOUND);
+                expect(errMessage).to.equal(notFoundMessage);
                 
-                assert.isTrue(daoStub.withArgs(learningDesignId).calledOnce);
+                assert.isTrue(serviceStub.withArgs(learningDesignId).calledOnce);
                 done();
             };
 
