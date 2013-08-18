@@ -184,7 +184,8 @@ VALUES
 ('30','1');
 
 INSERT INTO `needs` (`id`, `ld_id`, `ld_requisite_id`,`objective_id`)
-VALUES ('1', '1', NULL , '1' ),
+VALUES
+('1', '1', NULL , '1' ),
 ('2', '1', NULL , '2' ),
 ('3', '2', '1' , NULL ),
 ('4', '3', NULL , '3' ),
