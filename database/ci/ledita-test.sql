@@ -282,7 +282,7 @@ CREATE  TABLE IF NOT EXISTS `ledita-test`.`likes` (
   PRIMARY KEY (`user_id`, `ld_id`) ,
   CONSTRAINT `fk_ld_has_user_ld1`
     FOREIGN KEY (`ld_id` )
-    REFERENCES `ledita-test`.`ld` (`user_id` )
+    REFERENCES `ledita-test`.`ld` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_ld_has_user_user1`
