@@ -95,7 +95,7 @@ describe('Learning Design DAO', function() {
             });
         });
 
-        it('Get learning design subjects returns no results when LD has no subjects', function(done) {
+        it('Get learning design objectives returns no results when LD has no objectives', function(done) {
             var learningDesignId = 9;
             LdDao.getLearningDesignObjectives(learningDesignId, function(err, results){
                 expect(results).to.have.length(0);
