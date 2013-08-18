@@ -26,10 +26,8 @@
               </div>
             <div class="clear marginTop"><h5 class="zeroMargin">Subject:</h5>
 
-                <ul class="zeroMargin">
-                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
-                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
-                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
+                <ul ng-repeat="subject in learningDesign.subjects" class="zeroMargin subjects">
+                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{subject.subject_name}}</a></li>
                 </ul>
 
             </div>
