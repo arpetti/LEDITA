@@ -33,20 +33,5 @@ module.exports = {
         }, function(err) {
             return res.send(500, err.message); 
         });
-    },  
-
-    // TODO Get rid of this if get the promise version above working
-    findByIdAsync: function(req, res) {
-        var id = req.params.id;
-        LDService.getLearningDesignDetail(id, function(err, message, learningDesignDetail) {
-            if(err) {
-                return res.send(500, err.message); 
-            } else if(message) { 
-                return res.send(404, message);
-            } else {
-                res.json(200, learningDesignDetail);
-            }
-        });
-    }    
-
+    }
 };
