@@ -45,6 +45,9 @@ describe('Learning Design', function() {
     // Verify subjects
     expect(repeater('.subjects li').count()).toBe(2);
 
+    // Verify objectives
+    expect(repeater('.objectives li').count()).toBe(2);
+
     // Logout
     element('#userActionsMenu').click();
     element('#logoutLink').click();

@@ -25,18 +25,13 @@
                 <span class="zeroMargin">{{learningDesign.ld_creation_date | date:'yyyy-MM-dd'}}</span>
               </div>
             <div class="clear marginTop"><h5 class="zeroMargin">Topics:</h5>
-
                 <ul ng-repeat="subject in learningDesign.subjects" class="zeroMargin subjects">
                     <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{subject.subject_name}}</a></li>
                 </ul>
-
             </div>
             <div class="clear marginTop"><h5 class="zeroMargin">Objectives:</h5>
-
-                <ul class="zeroMargin">
-                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
-                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
-                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
+                <ul ng-repeat="objective in learningDesign.objectives" class="zeroMargin objectives">
+                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{objective.objective_descr}}</a></li>
                 </ul>
             </div>
             <div class="clear marginTop"><h5 class="zeroMargin">Pre-Requisites:</h5>
