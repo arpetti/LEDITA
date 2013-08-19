@@ -43,15 +43,20 @@ describe('Learning Design Controller', function() {
             LearningDesignCtrl.findById(req, res);
     	});
 
-    	it.skip('Returns a 404 when learning design not found', function(done) {
+    	it('Returns a 404 when learning design not found', function(done) {
 
     		var learningDesignId = 956;
     		req.params = {id: learningDesignId};
 
-            var notFoundMessage = 'ld not found';
-    		var serviceStub = sandbox.stub(LearningDesignService, "getLearningDesignDetail", function(ldid, callback) {
-                callback(null, notFoundMessage);
-            });
+            var serviceResponse = [
+                    [],
+                    [],
+                    []
+                ]
+            var serviceStub = sandbox.stub(LearningDesignService, 'getLearningDesignPromise').
+                returns(when(serviceResponse).then(function(results) {
+                    done(); 
+                }));
 
             res.send = function(httpStatus, errMessage) {
                 expect(httpStatus).to.equal(404);
@@ -64,19 +69,29 @@ describe('Learning Design Controller', function() {
             LearningDesignCtrl.findById(req, res);
     	});
 
-    	it.skip('Returns a 200 when learning design is found', function(done) {
+    	it('Returns a 200 when learning design is found', function(done) {
     		var learningDesignId = 956;
     		req.params = {id: learningDesignId};
 
-    		var ldDetail = [{ld_id: 956, ld_name: "Demo 956"}];
-    		var serviceStub = sandbox.stub(LearningDesignService, "getLearningDesignDetail", function(ldid, callback) {
-                callback(null, null, ldDetail);
-            });
+            var serviceResponse = [
+                    [{"ld_id":1,"ld_name":"Learning Design Title Demo 1"}],
+                    [{"subject_name":"Topic 1"},{"subject_name":"Topic 5"}],
+                    [{"objective_descr":"Objective 1"},{"objective_descr":"Objective 6"}]
+                ]
+            var serviceStub = sandbox.stub(LearningDesignService, 'getLearningDesignPromise').
+                returns(when(serviceResponse).then(function(results) {
+                    done(); 
+                }));
 
             res.json = function(httpStatus, result) {
             	expect(httpStatus).to.equal(200);
-            	expect(result.ld_id).to.equal(ldDetail.ld_id);
-            	expect(result.ld_name).to.equal(ldDetail.ld_name);
+                expect(results).to.have.length(3);
+            	expect(result[0][0].ld_id).to.equal(1);
+            	expect(result[0][0].ld_name).to.equal('Learning Design Title Demo 1');
+                expect(result[1][0].subject_name).to.equal('Topic 1');
+                expect(result[1][1].subject_name).to.equal('Topic 5');
+                expect(result[2][0].objective_descr).to.equal('Objective 1');
+                expect(result[2][1].objective_descr).to.equal('Objective 6');
 
             	assert.isTrue(serviceStub.withArgs(learningDesignId).calledOnce);
             	done();
