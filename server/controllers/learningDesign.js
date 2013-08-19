@@ -18,7 +18,7 @@ module.exports = {
         var ldid = req.params.id;
         var learningDesignDetail = {};
         
-        LDService.getLearningDesignPromise(ldid).then(function(results) {
+        return LDService.getLearningDesignPromise(ldid).then(function(results) {
             if (results.length !== LDService.LD_NUMBER_OF_DATA_ELEMENTS) {
                 return res.send(400, messages.LD_DETAIL_NOT_FOUND);
             }
