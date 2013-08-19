@@ -1,101 +1,290 @@
 <div class="container top-margin ">
-    <div class="row-fluid">
-        <div id="sidebar" class="span3">
-            <h4 class="red centered zeroMargin">General Info</h4>
-            <!--
-              <div id="ldName">
-                  <a href="#"><span class="float-right icon-white icon-star-empty"></span> </a>
-                  <h4>Learning Design Title Demo 25</h4>
-              </div>
-              <div id="langLev">
-                  <span class="langLev langLevSel">A1</span>
-                  <span class="langLev">A2</span>
-                  <span class="langLev">B1</span>
-                  <span class="langLev">B2</span>
-                  <span class="langLev">C1</span>
-                  <span class="langLev">C2</span>
-              </div>
-            -->
-            <div>
-                <h5 class="zeroMargin date">Author:</h5>
-                <a href="#" class="zeroMargin">{{ learningDesign.user_name}} {{ learningDesign.user_last_name}}</a>
-            </div>
-            <div>
-                <h5 class="zeroMargin date ">Created in:</h5>
-                <span class="zeroMargin">{{learningDesign.ld_creation_date | date:'yyyy-MM-dd'}}</span>
-              </div>
-            <div class="clear marginTop"><h5 class="zeroMargin">Topics:</h5>
-                <ul ng-repeat="subject in learningDesign.subjects" class="zeroMargin subjects">
-                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{subject.subject_name}}</a></li>
-                </ul>
-            </div>
-            <div class="clear marginTop"><h5 class="zeroMargin">Objectives:</h5>
-                <ul ng-repeat="objective in learningDesign.objectives" class="zeroMargin objectives">
-                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{objective.objective_descr}}</a></li>
-                </ul>
-            </div>
-            <div class="clear marginTop"><h5 class="zeroMargin">Pre-Requisites:</h5>
+<div class="row-fluid">
+<div id="sidebar" class="span3">
+    <h4 class="red centered zeroMargin">General Info</h4>
 
-                <ul class="zeroMargin">
-                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
-                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
-                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
-                </ul>
-            </div>
-            <div class="clear marginTop">
-                <h5 class="zeroMargin">Students' Description:</h5>
-                <span >{{ learningDesign.ld_students_profile }}</span>
-            </div>
-            <div class="clear marginTop"><h5 class=" zeroMargin">Tags:</h5>
+    <div>
+        <h5 class="zeroMargin date">Author:</h5>
+        <a href="#" class="zeroMargin">{{ learningDesign.user_name}} {{ learningDesign.user_last_name}}</a>
+    </div>
+    <div>
+        <h5 class="zeroMargin date ">Created in:</h5>
+        <span class="zeroMargin">{{learningDesign.ld_creation_date | date:'yyyy-MM-dd'}}</span>
+    </div>
+    <div class="clear marginTop"><h5 class="zeroMargin">Topics:</h5>
+        <ul ng-repeat="subject in learningDesign.subjects" class="zeroMargin subjects">
+            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{subject.subject_name}}</a></li>
+        </ul>
+    </div>
+    <div class="clear marginTop"><h5 class="zeroMargin">Objectives:</h5>
+        <ul ng-repeat="objective in learningDesign.objectives" class="zeroMargin objectives">
+            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{objective.objective_descr}}</a></li>
+        </ul>
+    </div>
+    <div class="clear marginTop"><h5 class="zeroMargin">Pre-Requisites:</h5>
 
-                <ul class="zeroMargin">
-                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
-                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
-                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
-                </ul>
+        <ul class="zeroMargin">
+            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
+            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
+            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
+        </ul>
+    </div>
+    <div class="clear marginTop">
+        <h5 class="zeroMargin">Students' Description:</h5>
+        <span>{{ learningDesign.ld_students_profile }}</span>
+    </div>
+    <div class="clear marginTop"><h5 class=" zeroMargin">Tags:</h5>
 
+        <ul class="zeroMargin">
+            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
+            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
+            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
+        </ul>
+
+    </div>
+    <div class="clear marginTop"><h5 class="zeroMargin">Related Designs:</h5>
+        <ul class="zeroMargin">
+            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
+            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
+            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
+            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
+            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
+            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
+        </ul>
+    </div>
+    <div class="clearfix"></div>
+    <div id="model">
+        <a href="#">
+            <img src="../../img/model.png" class="btnModelImg">
+            <h5 class="btnModel">USE THIS DESIGN AS A MODEL</h5>
+        </a>
+    </div>
+    <!--Sidebar content-->
+</div>
+<div id="content" class="span9">
+    <div id="contentButtons">
+        <button class="btnContent btnActive"><img src="../../img/board.png" class="btnImage"> Global View</button>
+        <button class="btnContent"><img src="../../img/teacher.png" class="btnImage"> Teacher View</button>
+        <button class="btnContent"><img src="../../img/student.png" class="btnImage"> Student View</button>
+    </div>
+    <div id="contentBody">
+        <div id="contentHeader">
+            <div class="float-left">
+                <h4 class="inline"><a href="#"><img ng-src="../img/emptyStar.png" class="star"></a>{{
+                    learningDesign.ld_name }}</h4>
             </div>
-            <div class="clear marginTop"><h5 class="zeroMargin">Related Designs:</h5>
-                <ul class="zeroMargin">
-                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
-                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
-                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
-                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
-                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
-                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
-                </ul>
+            <div class="float-right">
+                <h4><span class="round">A1</span> {{ learningDesign.ld_scope }}</h4>
             </div>
-            <div class="clearfix"></div>
-            <div id="model">
-                <a href="#">
-                <img src="../../img/model.png" class="btnModelImg">
-                <h5 class="btnModel">USE THIS DESIGN AS A MODEL</h5>
-                    </a>
-            </div>
-            <!--Sidebar content-->
         </div>
-        <div id="content" class="span9">
-            <div id="contentButtons">
-            <button class="btnContent btnActive" ><img src="../../img/board.png" class="btnImage"> Global View</button>
-            <button class="btnContent" ><img src="../../img/teacher.png" class="btnImage"> Teacher View</button>
-            <button class="btnContent" ><img src="../../img/student.png" class="btnImage"> Student View</button>
-            </div>
-            <div id="contentBody">
-            <div id="contentHeader">
-                <div class="float-left">
-                    <h4 class="inline"><a href="#"><img ng-src="../img/emptyStar.png" class="star"></a>{{ learningDesign.ld_name }}</h4>
-                </div>
-                <div class="float-right">
-                     <h4><span class="round">A1</span> {{ learningDesign.ld_scope }}</h4>
-                </div>
-            </div>
 
 
-            <div id="tabContent">
-                          <div></div>
+        <div id="tabContent">
+            <div class="span3 bc clearfix offset5 lt">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
             </div>
+            <div class="vLine posV-4"></div>
+            <div class="span3 bc clearfix offset5 lt">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
             </div>
-            <!--Body content-->
+
+            <div class="dlLine2 pos2-3"></div>
+            <div class="drLine2 pos2"></div>
+            <div class="span3 bc clear offset3 lt ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="span3  bc  ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="vLine posV-3"></div>
+            <div class="vLine posV"></div>
+
+
+            <div class="span3 bc clear offset3 lt ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="span3  bc  ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="dlLine2 pos2-2"></div>
+            <div class="drLine2 pos2"></div>
+            <div class="dlLine2 pos2"></div>
+            <div class="drLine2 pos2"></div>
+            <div class="span3 bc clear offset1 lt ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="span3  bc ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="span3  bc">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="vLine posV-2"></div>
+            <div class="vLine posV"></div>
+            <div class="vLine posV"></div>
+            <div class="span3 bc clear offset1 lt ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="span3  bc ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="span3  bc">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="dlLine2 pos2-1"></div>
+            <div class="drLine2 pos2"></div>
+            <div class="dlLine2 pos2"></div>
+            <div class="drLine2 pos2"></div>
+            <div class="dlLine2 pos2"></div>
+            <div class="drLine2 pos2"></div>
+
+
+            <div class="span3 bc clear ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="span3  bc ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="span3  bc">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="span3 bc ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="vLine posV-1"></div>
+            <div class="vLine posV"></div>
+            <div class="vLine posV"></div>
+            <div class="vLine posV"></div>
+            <div class="span3 bc clear ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="span3  bc ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="span3  bc">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="span3 bc ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="drLine2 pos2-1"></div>
+            <div class="dlLine2 pos2"></div>
+            <div class="drLine2 pos2"></div>
+            <div class="dlLine2 pos2"></div>
+            <div class="drLine2 pos2"></div>
+            <div class="dlLine2 pos2"></div>
+            <div class="span3 bc clear offset1 lt ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="span3  bc ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="span3  bc">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="drLine2 pos2-2"></div>
+            <div class="dlLine2 pos2"></div>
+            <div class="drLine2 pos2"></div>
+            <div class="dlLine2 pos2"></div>
+            <div class="span3 bc clear offset3 lt ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="span3  bc ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="drLine2 pos2-3"></div>
+            <div class="dlLine2 pos2"></div>
+            <div class="span3 bc clear offset5 ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="dlLine3 pos3-3"></div>
+            <div class="vLine posV3"></div>
+            <div class="drLine3 pos3"></div>
+
+            <div class="span3 bc clear offset1 ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="span3 bc ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="span3 bc  ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="drLine3 pos3-3"></div>
+            <div class="vLine posV3"></div>
+            <div class="dlLine3 pos3"></div>
+
+            <div class="span3 bc clear offset5 ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+
+            <div class="dlLine4   pos4-3"></div>
+            <div class="dlLine2 pos4"></div>
+            <div class="drLine2 pos4"></div>
+            <div class="drLine4 pos4"></div>
+
+
+
+
+            <div class="span3 bc clear ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="span3  bc ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="span3  bc">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="span3 bc ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+            <div class="drLine4   pos4-3"></div>
+            <div class="drLine2 pos4"></div>
+            <div class="dlLine2 pos4"></div>
+            <div class="dlLine4 pos4"></div>
+            <div class="span3 bc clear offset5 ">
+                <span class="actId">1</span>
+                <h6 class="actName">Activity number one in the sequence</h6>
+            </div>
+
+            <div class="clearfix"></div>
         </div>
     </div>
+    <!--Body content-->
+</div>
+</div>
 </div>
