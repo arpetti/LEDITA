@@ -1,6 +1,7 @@
 var expect = require('chai').expect
     , assert = require('chai').assert
     , sinon = require('sinon')
+    , when   = require('when')
     , LearningDesignCtrl = require('../../controllers/learningDesign')
     , LearningDesignDao = require('../../dao/LdDao')
     , LearningDesignService = require('../../service/LDService')
@@ -23,20 +24,18 @@ describe('Learning Design Controller', function() {
 
     describe('find by id', function() {
 
-    	it.skip('Returns a 500 when unexpected error occurs getting learning design from dao', function(done) {
+    	it('Returns a 500 when unexpected error occurs getting learning design from dao', function(done) {
 
     		var learningDesignId = 956;
     		req.params = {id: learningDesignId};
 
-    		var serviceError = new Error("something went wrong");
-    		var serviceStub = sandbox.stub(LearningDesignService, "getLearningDesignDetail", function(ldid, callback) {
-                callback(serviceError);
-            });
+            var serviceError = new Error("something went wrong");
+            var serviceStub = sandbox.stub(LearningDesignService, 'getLearningDesignPromise').
+                returns(when.reject(serviceError));
 
             res.send = function(httpStatus, errMessage) {
                 expect(httpStatus).to.equal(500);
                 expect(errMessage).to.equal(serviceError.message);
-                
                 assert.isTrue(serviceStub.withArgs(learningDesignId).calledOnce);
                 done();
             };
