@@ -1,281 +1,509 @@
 <div class="container top-margin ">
-<div class="row-fluid">
-<div id="sidebar" class="span3">
-    <h4 class="red centered zeroMargin">General Info</h4>
+    <div class="row-fluid">
+        <div id="sidebar" class="span3">
+            <h4 class="red centered zeroMargin">General Info</h4>
 
-    <div>
-        <h5 class="zeroMargin date">Author:</h5>
-        <a href="#" class="zeroMargin">{{ learningDesign.user_name}} {{ learningDesign.user_last_name}}</a>
-    </div>
-    <div>
-        <h5 class="zeroMargin date ">Created in:</h5>
-        <span class="zeroMargin">{{learningDesign.ld_creation_date | date:'yyyy-MM-dd'}}</span>
-    </div>
-    <div class="clear marginTop"><h5 class="zeroMargin">Topics:</h5>
-        <ul ng-repeat="subject in learningDesign.subjects" class="zeroMargin subjects">
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{subject.subject_name}}</a></li>
-        </ul>
-    </div>
-    <div class="clear marginTop"><h5 class="zeroMargin">Objectives:</h5>
-        <ul ng-repeat="objective in learningDesign.objectives" class="zeroMargin objectives">
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{objective.objective_descr}}</a></li>
-        </ul>
-    </div>
-    <div class="clear marginTop"><h5 class="zeroMargin">Pre-Requisites:</h5>
-
-        <ul class="zeroMargin">
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
-        </ul>
-    </div>
-    <div class="clear marginTop">
-        <h5 class="zeroMargin">Students' Description:</h5>
-        <span>{{ learningDesign.ld_students_profile }}</span>
-    </div>
-    <div class="clear marginTop"><h5 class=" zeroMargin">Tags:</h5>
-
-        <ul class="zeroMargin">
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
-        </ul>
-
-    </div>
-    <div class="clear marginTop"><h5 class="zeroMargin">Related Designs:</h5>
-        <ul class="zeroMargin">
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
-        </ul>
-    </div>
-    <div class="clearfix"></div>
-    <div id="model">
-        <a href="#">
-            <img src="../../img/model.png" class="btnModelImg">
-            <h5 class="btnModel">USE THIS DESIGN AS A MODEL</h5>
-        </a>
-    </div>
-    <!--Sidebar content-->
-</div>
-<div id="content" class="span9">
-    <div id="contentButtons">
-        <button class="btnContent btnActive"><img src="../../img/board.png" class="btnImage"> Global View</button>
-        <button class="btnContent"><img src="../../img/teacher.png" class="btnImage"> Teacher View</button>
-        <button class="btnContent"><img src="../../img/student.png" class="btnImage"> Student View</button>
-    </div>
-    <div id="contentBody">
-        <div id="contentHeader">
-            <div class="float-left">
-                <h4 class="inline"><a href="#"><img ng-src="../img/emptyStar.png" class="star"></a>{{
-                    learningDesign.ld_name }}</h4>
+            <div>
+                <h5 class="zeroMargin date">Author:</h5>
+                <a href="#" class="zeroMargin">{{ learningDesign.user_name}} {{ learningDesign.user_last_name}}</a>
             </div>
-            <div class="float-right">
-                <h4><span class="round">A1</span> {{ learningDesign.ld_scope }}</h4>
+            <div>
+                <h5 class="zeroMargin date ">Created in:</h5>
+                <span class="zeroMargin">{{learningDesign.ld_creation_date | date:'yyyy-MM-dd'}}</span>
             </div>
-        </div>
+            <div class="clear marginTop"><h5 class="zeroMargin">Topics:</h5>
+                <ul ng-repeat="subject in learningDesign.subjects" class="zeroMargin subjects">
+                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{subject.subject_name}}</a></li>
+                </ul>
+            </div>
+            <div class="clear marginTop"><h5 class="zeroMargin">Objectives:</h5>
+                <ul ng-repeat="objective in learningDesign.objectives" class="zeroMargin objectives">
+                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{objective.objective_descr}}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="clear marginTop"><h5 class="zeroMargin">Pre-Requisites:</h5>
 
+                <ul class="zeroMargin">
+                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
+                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
+                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
+                </ul>
+            </div>
+            <div class="clear marginTop">
+                <h5 class="zeroMargin">Students' Description:</h5>
+                <span>{{ learningDesign.ld_students_profile }}</span>
+            </div>
+            <div class="clear marginTop"><h5 class=" zeroMargin">Tags:</h5>
 
-        <div id="tabContent">
-            <div class="levelBox">
-                <div class="actBox">
-                    <span class="actId">1</span>
-                    <h6 class="actName">Activity number one in the sequence</h6>
-                </div>
+                <ul class="zeroMargin">
+                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
+                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
+                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
+                </ul>
 
             </div>
-             <div class="levelBox">
-            <div class="groupBox4">
-                <div class="groupName">Group Name</div>
-                <div class="clearfix"></div>
-                <div>
-                    <div class="actBox">
-                        <span class="actId">1</span>
-                        <h6 class="actName">Activity number one in the sequence</h6>
-                    </div>
-                    <div class="actBox">
-                        <span class="actId">1</span>
-                        <h6 class="actName">Activity number one in the sequence</h6>
-                    </div>
-                    <div class="actBox">
-                        <span class="actId">1</span>
-                        <h6 class="actName">Activity number one in the sequence</h6>
-                    </div>
-                    <div class="actBox">
-                        <span class="actId">1</span>
-                        <h6 class="actName">Activity number one in the sequence</h6>
-                    </div>
-
-                </div>
-                <div>
-                    <div class="actBox">
-                        <span class="actId">1</span>
-                        <h6 class="actName">Activity number one in the sequence</h6>
-                    </div>
-                    <div class="actBox">
-                        <span class="actId">1</span>
-                        <h6 class="actName">Activity number one in the sequence</h6>
-                    </div>
-                    <div class="actBox">
-                        <span class="actId">1</span>
-                        <h6 class="actName">Activity number one in the sequence</h6>
-                    </div>
-
-                </div>
-            </div>
-                 </div>
-            <div class="levelBox">
-            <div class="groupBox1">
-                <div class="groupName">Group Name</div>
-                <div class="clearfix"></div>
-                <div>
-                    <div class="actBox">
-                        <span class="actId">1</span>
-                        <h6 class="actName">Activity number one in the sequence</h6>
-                    </div>
-                </div>
-                <div>
-                    <div class="actBox">
-                        <span class="actId">1</span>
-                        <h6 class="actName">Activity number one in the sequence</h6>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="groupBox1">
-                <div class="groupName">Group Name</div>
-                <div class="clearfix"></div>
-                <div>
-                    <div class="actBox">
-                        <span class="actId">1</span>
-                        <h6 class="actName">Activity number one in the sequence</h6>
-                    </div>
-                </div>
-                <div>
-                    <div class="actBox">
-                        <span class="actId">1</span>
-                        <h6 class="actName">Activity number one in the sequence</h6>
-                    </div>
-
-                </div>
-            </div>
-            <div class="groupBox1">
-                <div class="groupName">Group Name</div>
-                <div class="clearfix"></div>
-                <div>
-                    <div class="actBox">
-                        <span class="actId">1</span>
-                        <h6 class="actName">Activity number one in the sequence</h6>
-                    </div>
-                </div>
-                <div>
-                    <div class="actBox">
-                        <span class="actId">1</span>
-                        <h6 class="actName">Activity number one in the sequence</h6>
-                    </div>
-
-                </div>
-            </div>
-            <div class="groupBox1">
-                <div class="groupName">Group Name</div>
-                <div class="clearfix"></div>
-                <div>
-                    <div class="actBox">
-                        <span class="actId">1</span>
-                        <h6 class="actName">Activity number one in the sequence</h6>
-                    </div>
-                </div>
-                <div>
-                    <div class="actBox">
-                        <span class="actId">1</span>
-                        <h6 class="actName">Activity number one in the sequence</h6>
-                    </div>
-
-                </div>
-            </div>
-                </div>
-            <div class="levelBox">
-            <div class="groupBox2">
-                <div class="groupName">Group Name</div>
-                <div class="clearfix"></div>
-                <div>
-                <div class="actBox">
-                    <span class="actId">1</span>
-                    <h6 class="actName">Activity number one in the sequence</h6>
-                </div>
-                <div class="actBox">
-                    <span class="actId">1</span>
-                    <h6 class="actName">Activity number one in the sequence</h6>
-                </div>
-                    </div>
-
-                <div>
-                    <div class="actBox">
-                        <span class="actId">1</span>
-                        <h6 class="actName">Activity number one in the sequence</h6>
-                    </div>
-
-                </div>
-            </div>
-            </div>
-            <div class="levelBox">
-                <div class="groupBox3">
-                <div class="groupName">Group Name</div>
-                <div class="clearfix"></div>
-                <div class="actBox">
-                    <span class="actId">1</span>
-                    <h6 class="actName">Activity number one in the sequence</h6>
-                </div>
-                <div class="actBox">
-                    <span class="actId">1</span>
-                    <h6 class="actName">Activity number one in the sequence</h6>
-                </div> <div class="actBox">
-                <span class="actId">1</span>
-                <h6 class="actName">Activity number one in the sequence</h6>
-            </div>
-            </div>
-                </div>
-
-                <div class="levelBox">
-                <div class="actBox">
-                    <span class="actId">1</span>
-                    <h6 class="actName">Activity number one in the sequence</h6>
-                </div>
-                <div class="actBox">
-                    <span class="actId">1</span>
-                    <h6 class="actName">Activity number one in the sequence</h6>
-                </div>
-
-            </div>
-            <div class="">
-                <div class="actBox">
-                    <span class="actId">1</span>
-                    <h6 class="actName">Activity number one in the sequence</h6>
-                </div>
-                <div class="actBox">
-                    <span class="actId">1</span>
-                    <h6 class="actName">Activity number one in the sequence</h6>
-                </div>
-                <div class="actBox">
-                    <span class="actId">1</span>
-                    <h6 class="actName">Activity number one in the sequence</h6>
-                </div>
-                <div class="actBox">
-                    <span class="actId">1</span>
-                    <h6 class="actName">Activity number one in the sequence</h6>
-                </div>
+            <div class="clear marginTop"><h5 class="zeroMargin">Related Designs:</h5>
+                <ul class="zeroMargin">
+                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
+                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
+                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
+                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
+                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
+                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
+                </ul>
             </div>
             <div class="clearfix"></div>
+            <div id="model">
+                <a href="#">
+                    <img src="../../img/model.png" class="btnModelImg">
+                    <h5 class="btnModel">USE THIS DESIGN AS A MODEL</h5>
+                </a>
+            </div>
+            <!--Sidebar content-->
         </div>
+        <div id="content" class="span9">
+
+
+            <tabset type="pills">
+                <div id="contentButtons">
+                    <tab-heading>
+                        <button class="btnContent btnActive" ng-click="data.static1 = true"><img
+                                src="../../img/board.png" class="btnImage"> Global View
+                        </button>
+                    </tab-heading>
+                    <tab-heading>
+                        <button class="btnContent" ng-click="data.static2 = true"><img src="../../img/teacher.png"
+                                                                                       class="btnImage"> Teacher View
+                        </button>
+                    </tab-heading>
+                    <button class="btnContent" ng-click="data.static3 = true"><img src="../../img/student.png"
+                                                                                   class="btnImage"> Student View
+                    </button>
+                </div>
+
+                <tab active="data.static1">
+                    <div id="contentBody">
+                        <div id="contentHeader">
+
+
+                            <div class="float-left">
+                                <h4 class="inline"><a href="#"><img ng-src="../img/emptyStar.png" class="star"></a>{{
+                                    learningDesign.ld_name }}</h4>
+                            </div>
+                            <div class="float-right">
+                                <h4><span class="round">A1</span> {{ learningDesign.ld_scope }}</h4>
+                            </div>
+                        </div>
 
 
 
+                        <div id="tabContent">
+                            <div class="levelBox">
+                                <div class="actBox">
+                                    <span class="actId">1</span>
+                                    <h6 class="actName">Activity number one in the sequence</h6>
+                                </div>
+
+                            </div>
+                            <div class="levelBox">
+                                <div class="groupBox4">
+                                    <div class="groupName">Group Name</div>
+                                    <div class="clearfix"></div>
+                                    <div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="levelBox">
+                                <div class="groupBox1">
+                                    <div class="groupName">Group Name</div>
+                                    <div class="clearfix"></div>
+                                    <div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="groupBox1">
+                                    <div class="groupName">Group Name</div>
+                                    <div class="clearfix"></div>
+                                    <div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="groupBox1">
+                                    <div class="groupName">Group Name</div>
+                                    <div class="clearfix"></div>
+                                    <div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="groupBox1">
+                                    <div class="groupName">Group Name</div>
+                                    <div class="clearfix"></div>
+                                    <div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="levelBox">
+                                <div class="groupBox2">
+                                    <div class="groupName">Group Name</div>
+                                    <div class="clearfix"></div>
+                                    <div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="levelBox">
+                                <div class="groupBox3">
+                                    <div class="groupName">Group Name</div>
+                                    <div class="clearfix"></div>
+                                    <div class="actBox">
+                                        <span class="actId">1</span>
+                                        <h6 class="actName">Activity number one in the sequence</h6>
+                                    </div>
+                                    <div class="actBox">
+                                        <span class="actId">1</span>
+                                        <h6 class="actName">Activity number one in the sequence</h6>
+                                    </div> <div class="actBox">
+                                    <span class="actId">1</span>
+                                    <h6 class="actName">Activity number one in the sequence</h6>
+                                </div>
+                                </div>
+                            </div>
+
+                            <div class="levelBox">
+                                <div class="actBox">
+                                    <span class="actId">1</span>
+                                    <h6 class="actName">Activity number one in the sequence</h6>
+                                </div>
+                                <div class="actBox">
+                                    <span class="actId">1</span>
+                                    <h6 class="actName">Activity number one in the sequence</h6>
+                                </div>
+
+                            </div>
+                            <div class="levelBox last">
+                                <div class="actBox">
+                                    <span class="actId">1</span>
+                                    <h6 class="actName">Activity number one in the sequence</h6>
+                                </div>
+                                <div class="actBox">
+                                    <span class="actId">1</span>
+                                    <h6 class="actName">Activity number one in the sequence</h6>
+                                </div>
+                                <div class="actBox">
+                                    <span class="actId">1</span>
+                                    <h6 class="actName">Activity number one in the sequence</h6>
+                                </div>
+                                <div class="actBox">
+                                    <span class="actId">1</span>
+                                    <h6 class="actName">Activity number one in the sequence</h6>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </tab>
+                <tab active="data.static2">
+                    <div id="contentBody">
+                        <div id="contentHeader">
+
+
+                            <div class="float-left">
+                                <h4 class="inline"><a href="#"><img ng-src="../img/emptyStar.png" class="star"></a>{{
+                                    learningDesign.ld_name }}</h4>
+                            </div>
+                            <div class="float-right">
+                                <h4><span class="round">A11111</span> {{ learningDesign.ld_scope }}</h4>
+                            </div>
+                        </div>
+
+                        <div id="tabContent">
+                            <div class="levelBox">
+                                <div class="actBox">
+                                    <span class="actId">1</span>
+                                    <h6 class="actName">Activity number one in the sequence</h6>
+                                </div>
+
+                            </div>
+                            <div class="levelBox">
+                                <div class="groupBox2">
+                                    <div class="groupName">Group Name</div>
+                                    <div class="clearfix"></div>
+                                    <div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+
+
+                                    </div>
+                                    <div>
+
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="levelBox last">
+                                <div class="actBox">
+                                    <span class="actId">1</span>
+                                    <h6 class="actName">Activity number one in the sequence</h6>
+                                </div>
+
+
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+
+                </tab>
+                <tab active="data.static3">
+                    <div id="contentBody">
+                        <div id="contentHeader">
+
+
+                            <div class="float-left">
+                                <h4 class="inline"><a href="#"><img ng-src="../img/emptyStar.png" class="star"></a>{{
+                                    learningDesign.ld_name }}</h4>
+                            </div>
+                            <div class="float-right">
+                                <h4><span class="round">A1</span> {{ learningDesign.ld_scope }}</h4>
+                            </div>
+                        </div>
+                        <div id="tabContent">
+                            <div class="levelBox">
+                                <div class="actBox">
+                                    <span class="actId">1</span>
+                                    <h6 class="actName">Activity number one in the sequence</h6>
+                                </div>
+
+                            </div>
+                            <div class="levelBox">
+                                <div class="groupBox3">
+                                    <div class="groupName">Group Name</div>
+                                    <div class="clearfix"></div>
+                                    <div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+
+
+                                    </div>
+                                    <div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="levelBox">
+                                <div class="groupBox1">
+                                    <div class="groupName">Group Name</div>
+                                    <div class="clearfix"></div>
+                                    <div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="groupBox1">
+                                    <div class="groupName">Group Name</div>
+                                    <div class="clearfix"></div>
+                                    <div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="groupBox1">
+                                    <div class="groupName">Group Name</div>
+                                    <div class="clearfix"></div>
+                                    <div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="groupBox1">
+                                    <div class="groupName">Group Name</div>
+                                    <div class="clearfix"></div>
+                                    <div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="actBox">
+                                            <span class="actId">1</span>
+                                            <h6 class="actName">Activity number one in the sequence</h6>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                            </div>
+                        <div class="levelBox last">
+                            <div class="actBox">
+                                <span class="actId">1</span>
+                                <h6 class="actName">Activity number one in the sequence</h6>
+                            </div>
+
+                        </div>
+
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </tab>
+
+        </div>
+        </tabset>
+        <!--Body content-->
     </div>
-    <!--Body content-->
-</div>
 </div>
 </div>

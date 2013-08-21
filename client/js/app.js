@@ -96,3 +96,13 @@ angular.module('ledita-app', ['ngCookies', 'infinite-scroll', 'ui.bootstrap'])
         });
 
     }]);
+
+function Tabs ($scope, $timeout) {
+    $scope.data = {};
+    $timeout(function() {
+        $scope.data.static1 = true;
+    }, 0)
+
+};
+
+

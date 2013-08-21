@@ -148,6 +148,7 @@ input.sidebarInput {
     width: 100%;
     margin: 0;
     text-align: justify;
+    margin-bottom: -20px;
 }
 
 .btnContent {
@@ -330,8 +331,14 @@ padding: 3px;
 }
 
 .levelBox {
+    text-align: center;
   padding-bottom: 20px;
-    background: url("../img/arw.png") no-repeat bottom center;
+    background: url("../img/arw.png") no-repeat bottom ;
+}
+
+.levelBox.last {
+    padding-bottom: 20px;
+    background: none;
 }
 
 .actId {
