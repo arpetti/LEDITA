@@ -23,6 +23,7 @@ img {
 .zeroLeft {
     margin-left: 0;
 }
+
 /* body & type
 ===================== */
 body {
@@ -37,7 +38,7 @@ body {
 
 h1, h2, h3, h4 {
 
-    }
+}
 
 a {
     color: #0099cc;
@@ -49,7 +50,7 @@ a:hover {
     text-decoration: none;
 }
 
-.whiteText, .whiteText a{
+.whiteText, .whiteText a {
     color: #FFFFFF;
 }
 
@@ -61,7 +62,7 @@ a:hover {
     text-shadow: 0 -2px 2px #FFFFFF, 0 2px 2px #CCCCCC;
     text-align: center;
     font-family: Allan, sans-serif;
-    font-style: italic ;
+    font-style: italic;
     font-size: 32px;
 
 }
@@ -73,7 +74,7 @@ a:hover {
 /* main layout
 ===================== */
 #sidebar {
-  background: url("../img/book.png") no-repeat 100% 100%;
+    background: url("../img/book.png") no-repeat 100% 100%;
     background-size: 100% 100%;
 
     padding: 10px 10px 10px 35px;
@@ -116,25 +117,20 @@ input.sidebarInput {
     border-radius: 4px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
-    padding:1px 4px;
+    padding: 1px 4px;
     line-height: 18px;
 }
-
-
 
 .sidebarItemLink {
     font-weight: normal;
     color: #666666;
 }
 
-
 .sidebarItemLink:hover {
     background-color: #0099CC;
     color: #FFFFFF;
 
 }
-
-
 
 #content {
 
@@ -171,7 +167,6 @@ input.sidebarInput {
     -moz-border-bottom-right-radius: 0px;
     -webkit-border-bottom-right-radius: 0px;
 
-
     border-bottom: none;
     border-top: none;
     box-shadow: inset 0 1px 0 rgba(235, 235, 235, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -180,22 +175,21 @@ input.sidebarInput {
 
 .btnContent:hover {
     background-color: #990000;
-    color:#FFFFFF;
+    color: #FFFFFF;
 }
 
 .btnContent.btnActive:hover {
     background-color: #FFFFFF;
     color: #990000;
 }
+
 .btnActive {
     background-color: #FFFFFF;
     color: #990000;
     border-bottom: 2px solid #FFFFFF;
-    margin-bottom:-2px;
+    margin-bottom: -2px;
     box-shadow: none;
 }
-
-
 
 .textarea {
     width: 90%;
@@ -203,7 +197,7 @@ input.sidebarInput {
     margin: 0 0 5px 0;
     font-size: 12px;
     line-height: 14px;
-    color:#555555;
+    color: #555555;
 }
 
 #ldName {
@@ -214,11 +208,9 @@ input.sidebarInput {
     border: 2px dotted #F5F4ED;
 }
 
-
-
 #langLev {
     text-align: center;
-    margin: 3px ;
+    margin: 3px;
 
 }
 
@@ -271,10 +263,10 @@ input.sidebarInput {
 .round {
     background-color: #FFFFFF;
     color: #990000;
-    border-radius:14px;
+    border-radius: 14px;
     -moz-border-radius: 14px;
     -webkit-border-radius: 14px;
-padding: 3px;
+    padding: 3px;
     margin-right: 15px;
 
 }
@@ -295,7 +287,7 @@ padding: 3px;
 }
 
 .btnModelImg {
-  width: 80px;
+    width: 80px;
     float: left;
 
 }
@@ -332,8 +324,8 @@ padding: 3px;
 
 .levelBox {
     text-align: center;
-  padding-bottom: 20px;
-    background: url("../img/arw.png") no-repeat bottom ;
+    padding-bottom: 20px;
+    background: url("../img/arw.png") no-repeat bottom;
 }
 
 .levelBox.last {
@@ -342,7 +334,7 @@ padding: 3px;
 }
 
 .actId {
-float: left;
+    float: left;
     background-color: #FFFFFF;
     padding: 2px;
     height: 12px;
@@ -354,14 +346,13 @@ float: left;
     margin: 5px;
 }
 
-
 .actName {
     clear: left;
     padding: 2px 5px;
-    line-height: 1.3em}
+    line-height: 1.3em
+}
 
-
-.groupBox1, .groupBox2,.groupBox3,.groupBox4 {
+.groupBox1, .groupBox2, .groupBox3, .groupBox4 {
     background-color: #dddddd;
     margin: 10px 0.5%;
     border-radius: 6px;
@@ -369,7 +360,6 @@ float: left;
     display: inline-block;
 
 }
-
 
 .groupBox1 {
     width: 22.5%;
@@ -386,7 +376,6 @@ float: left;
 .groupBox4 {
     width: 96%;
 }
-
 
 .groupName {
     float: left;
@@ -409,6 +398,7 @@ float: left;
     width: 30%;
     background-color: #00A000;
 }
+
 /* navbar
 ===================== */
 .navbar-inverse .navbar-inner {
@@ -444,9 +434,10 @@ float: left;
     color: #990000;
     background-color: #FFFFFF;
     text-shadow: 0 -1px 1px #FFFFFF, 0 1px 1px #CCCCCC;
-    box-shadow: 0 -1px 2px rgba(255,255,255, 0.65), 0 2px 2px #CCCCCC;
+    box-shadow: 0 -1px 2px rgba(255, 255, 255, 0.65), 0 2px 2px #CCCCCC;
 
 }
+
 .navbar .nav > li {
     margin-right: 5px;
     margin-left: 5px;
@@ -466,7 +457,7 @@ float: left;
     font-size: 14px;
     color: #FFFFFF;
     text-shadow: 0 -1px 1px #999999;
-display: inline;
+    display: inline;
 }
 
 .nav-closed:hover .nav-username {
@@ -489,16 +480,13 @@ display: inline;
 }
 
 .nav-closed {
-    margin: 10px 10px 0 0 ;
+    margin: 10px 10px 0 0;
 
 }
-
-
 
 #userActionsMenu:hover {
     text-decoration: none;
 }
-
 
 .navbar-inverse .nav li.dropdown.open > .dropdown-toggle {
     background-color: transparent;
@@ -511,7 +499,7 @@ display: inline;
 
 .user-pic {
     border: 2px solid #FFFFFF;
-    margin-top:-2px;
+    margin-top: -2px;
 }
 
 /* login form
@@ -537,10 +525,10 @@ display: inline;
     text-align: right;
     padding-right: 75px;
     display: block;
-    font-size: 12px ;
+    font-size: 12px;
     font-weight: bold;
     color: #FFFFFF;
-    text-shadow: 0 1px 1px rgba(155, 155, 155, 0.65), 0 -1px 1px rgba(155, 155, 155, 0.75) ;
+    text-shadow: 0 1px 1px rgba(155, 155, 155, 0.65), 0 -1px 1px rgba(155, 155, 155, 0.75);
 }
 
 #pwRec a:hover {
@@ -564,7 +552,6 @@ li#loggedInUserName.nav-username {
     padding-top: 0;
 }
 
-
 .dropdown-menu {
     border: 3px solid #FFFFFF;
 }
@@ -578,7 +565,6 @@ li#loggedInUserName.nav-username {
     color: #666666;
 }
 
-
 /* registration form
 ===================== */
 .form-horizontal {
@@ -589,7 +575,7 @@ li#loggedInUserName.nav-username {
     margin: 30px 0 0 0;
 }
 
-.login-border  {
+.login-border {
 }
 
 #signUpHeader {
@@ -602,6 +588,7 @@ li#loggedInUserName.nav-username {
     padding-top: 30px;
     margin: 0 auto 15px auto;
 }
+
 .btn-signup {
     color: #0099cc;
     font-weight: bold;
@@ -609,6 +596,7 @@ li#loggedInUserName.nav-username {
     text-shadow: 0 -1px 1px rgba(255, 255, 255, 0.75), 0 1px 1px rgba(155, 155, 155, 0.75);
     margin: -30px auto 0 auto;
 }
+
 .btn-signup:hover,
 .btn-signup:active,
 .btn-signup.active,
@@ -673,6 +661,7 @@ input[type="checkbox"] {
     background-color: #990000;
     padding: 3px;
 }
+
 /* misc
 ===================== */
 .top-margin {
@@ -706,7 +695,7 @@ input[type="checkbox"] {
 
 .caret {
     border-top-color: #FFFFFF;
-    border-bottom-color:#FFFFFF;
+    border-bottom-color: #FFFFFF;
 }
 
 .red {
@@ -716,7 +705,6 @@ input[type="checkbox"] {
 .padding-right {
     padding-right: 10px;
 }
-
 
 /* LDs view
 ===================== */
@@ -739,6 +727,7 @@ input[type="checkbox"] {
     color: #FFFFFF;
     height: 140px;
 }
+
 .ld-top {
     height: 25px;
     border-bottom: 1px solid #FFFFFF;
@@ -750,7 +739,6 @@ input[type="checkbox"] {
 
 .ld-bottom {
 }
-
 
 .ld-name-text {
     font-size: 22px;
@@ -778,10 +766,10 @@ input[type="checkbox"] {
 
     }
 
-    .ld-border {width: 19%}
+    .ld-border {
+        width: 19%
+    }
 }
-
-
 
 @media (min-width: 700px) and (max-width: 1200px) {
     .control-group {
@@ -811,10 +799,12 @@ input[type="checkbox"] {
         padding: 0;
         margin: 0;
     }
+
     .ld-border {
         width: 28%;
         margin-left: 1%;
     }
+
     .navbar .brand {
         margin: 0;
         padding: 5px 5px 5px 30px;
@@ -824,7 +814,7 @@ input[type="checkbox"] {
         background-color: #0099CC;
     }
 
-    .navbar-inverse .btn-navbar{
+    .navbar-inverse .btn-navbar {
         background-color: #0099CC;
         background-image: none;
         margin: 10px 30px;
@@ -862,7 +852,6 @@ input[type="checkbox"] {
         text-decoration: underline;
         text-shadow: none;
     }
-
 
     p {
         padding: 0 20px;
@@ -917,22 +906,20 @@ input[type="checkbox"] {
 
     }
 
-
-    .navbar-inverse .nav-collapse .dropdown-menu a{
+    .navbar-inverse .nav-collapse .dropdown-menu a {
         color: #666666;
         font-weight: normal;
 
     }
 
-
-    .navbar-inverse .nav-collapse .dropdown-menu > li > a:hover{
-       background-color: #0099CC;
+    .navbar-inverse .nav-collapse .dropdown-menu > li > a:hover {
+        background-color: #0099CC;
         color: #FFFFFF;
     }
 
     .nav-closed:hover .nav-username {
         color: #FFFFFF;
-    text-shadow: none;
+        text-shadow: none;
         text-decoration: underline;
     }
 
@@ -948,8 +935,6 @@ input[type="checkbox"] {
         width: 95%;
 
     }
-
-
 
 }
 
@@ -985,15 +970,15 @@ input[type="checkbox"] {
         float: none;
         width: 92%;
     }
+
     .navbar-inverse .nav-collapse .dropdown-menu {
         width: 40%;
         margin-left: 58%;
     }
 
+}
 
-    }
-
-@media (max-width: 480px){
+@media (max-width: 480px) {
     .control-group {
         margin: 0;
     }
@@ -1003,9 +988,10 @@ input[type="checkbox"] {
     }
 
     label {
-        margin:0 auto;
+        margin: 0 auto;
         width: 85%;
     }
+
     .ld-border {
         width: 92%;
     }

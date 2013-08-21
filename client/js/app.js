@@ -97,9 +97,9 @@ angular.module('ledita-app', ['ngCookies', 'infinite-scroll', 'ui.bootstrap'])
 
     }]);
 
-function Tabs ($scope, $timeout) {
+function Tabs($scope, $timeout) {
     $scope.data = {};
-    $timeout(function() {
+    $timeout(function () {
         $scope.data.static1 = true;
     }, 0)
 
