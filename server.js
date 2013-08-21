@@ -22,6 +22,7 @@ app.engine('html', require('jade').renderFile);
 app.set('view engine', 'jade');
 app.engine('html', require('ejs').renderFile);
 app.use(express.logger('dev'))
+app.use(express.compress());
 app.use(express.cookieParser());
 app.use(express.bodyParser());
 app.use(express.methodOverride());

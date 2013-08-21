@@ -169,3 +169,41 @@ If you're having a test failure, you can insert a breakpoint to figure out what'
 * Chrome browser will be launched to run tests, and when breakpoint is hit, will display the app at that point in time
 
 * Click resume in the browser to continue the test
+
+## Production Deployment
+
+These instructions are a work in progress. Grunt.js should be considered for automating some of these steps where possible.
+
+* Copy the server directory, minus the tests folder to the production server.
+
+* Copy the client directory to the production server.
+
+* Copy ```env.json``` from root of git project, and add ```prod``` section, for example:
+    ```
+    {
+        "prod" : {
+            "db_host" : "prod-db-host",
+            "db_schema" : "ledita-web-app",
+            "db_user" : "ledita",
+            "db_pswd" : "prod-db-pswd",
+            "db_pool_connection_limit" : 10,
+            "hash_work_factor" : 10,
+            "_comment_remember_me_ms" : "7 days in ms: 1000 * 60 * 60 * 24 * 7 = 604800000",
+            "remember_me_ms" : 604800000,
+            "cookie_secret" : "cookie-secret-for-production",
+            "_comment_encrypt_cookie" : "Set encrypt_cookie to true for production",
+            "encrypt_cookie" : true
+        }
+    }
+    ```
+* Install and initialize the MYSQL database using ```ledita-web-app.sql``` on a production database server (not the same server where the app will run of course). Create a db user as per ```user.sql``` but modify the password to match what's defined in ```env.json```.
+
+* For SSL, get real ```cert.pem``` and ```key.pem``` files and copy them to ```server/cert```
+
+* On the production server where node will be running, run ```npm install -g node-gyp```, then ```npm install```
+
+* Start the server ```NODE_ENV=prod node server.js > /dev/null &```
+
+* TODO: Configure monitoring tool such as forever?
+
+* TODO: Configure logging?
