@@ -568,7 +568,7 @@ CREATE OR REPLACE VIEW vw_ld_subject AS
     ON aims.objective_id = objective.id; 
 
 CREATE OR REPLACE VIEW vw_ld_prerequisite AS
-  SELECT ld.id as ld_id
+  (SELECT ld.id as ld_id
     , ld.name as ld_name
     , objective.id as prereq_id
     , objective.descr as prereq_name
@@ -576,12 +576,10 @@ CREATE OR REPLACE VIEW vw_ld_prerequisite AS
   FROM ld
   INNER JOIN needs
     ON ld.id = needs.ld_id
-  INNER JOIN OBJECTIVE
-    on needs.objective_id = objective.id  
-
+  INNER JOIN objective
+    on needs.objective_id = objective.id ) 
   UNION
-
-  SELECT ldsource.id as ld_id
+  (SELECT ldsource.id as ld_id
     , ldsource.name as ld_name
     , ldtarget.id as prereq_id
     , ldtarget.name as prereq_name
@@ -590,7 +588,7 @@ CREATE OR REPLACE VIEW vw_ld_prerequisite AS
   INNER JOIN needs
     ON ldsource.id = needs.ld_id
   INNER JOIN ld ldtarget
-    on needs.ld_requisite_id = ldtarget.id;      
+    on needs.ld_requisite_id = ldtarget.id);     
 
 USE `ledita-test` ;
 
