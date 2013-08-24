@@ -111,14 +111,14 @@
 
                                         <li ng-repeat="child in node.children">
                                             <div class="childBox">
-                                                <span class="actId">{{ child.subtype }}</span>
+                                                <span class="actId">{{ child.activityid }}</span>
                                                 <h6 class="actName">{{ child.name }}</h6>
                                             </div>
                                         </li><!-- End Children -->
                                     </ul>
 
                                     <!-- If it's NOT a group:  -->
-                                    <span ng-show="!node.children" class="actId">{{ node.subtype }}</span>
+                                    <span ng-show="!node.children" class="actId">{{ node.activityid }}</span>
                                     <h6 ng-show="!node.children" class="actName">{{ node.name }}</h6>
 
                                 </div><!-- End Activity or Group Box -->

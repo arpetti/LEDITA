@@ -4,6 +4,7 @@
 		"nodes": 
 			[
 				{
+					"activityid": 1,
 					"name": "Hardware Component Identification",
 					"type": "simple",
 					"subtype": "activity",
@@ -23,26 +24,31 @@
 					"children": 
 						[
 							{
+								"activityid": 2,
 								"name": "Bus",
 								"type": "simple",
 								"subtype": "activity"
 							},
 							{
+								"activityid": 3,
 								"name": "CPU",
 								"type": "simple",
 								"subtype": "activity"
 							},
 							{
+								"activityid": 4,
 								"name": "Devices",
 								"type": "simple",
 								"subtype": "activity"
 							},
 							{
+								"activityid": 5,
 								"name": "Device Controller",
 								"type": "simple",
 								"subtype": "activity"
 							},
 							{
+								"activityid": 6,
 								"name": "Memmory",
 								"type": "simple",
 								"subtype": "activity"
@@ -63,11 +69,13 @@
 					"children": 
 						[
 							{
+								"activityid": 7,
 								"name": "Input Devices",
 								"type": "simple",
 								"subtype": "activity"
 							},
 							{
+								"activityid": 8,
 								"name": "Output Devices",
 								"type": "simple",
 								"subtype": "activity"
@@ -82,11 +90,13 @@
 					"children": 
 						[
 							{
+								"activityid": 9,
 								"name": "Flash",
 								"type": "simple",
 								"subtype": "activity"
 							},
 							{
+								"activityid": 10,
 								"name": "USB",
 								"type": "simple",
 								"subtype": "activity"
@@ -101,11 +111,13 @@
 					"children": 
 						[
 							{
+								"activityid": 11,
 								"name": "Types of power supplies",
 								"type": "simple",
 								"subtype": "activity"
 							},
 							{
+								"activityid": 12,
 								"name": "Different power supply form factors",
 								"type": "simple",
 								"subtype": "activity"
@@ -120,11 +132,13 @@
 					"children": 
 						[
 							{
+								"activityid": 13,
 								"name": "Surge protection and battery backup",
 								"type": "simple",
 								"subtype": "activity"
 							},
 							{
+								"activityid": 14,
 								"name": "Power requirement calculation",
 								"type": "simple",
 								"subtype": "activity"
@@ -145,16 +159,19 @@
 					"children": 
 						[
 							{
+								"activityid": 15,
 								"name": "Processor History",
 								"type": "simple",
 								"subtype": "activity"
 							},
 							{
+								"activityid": 16,
 								"name": "Introduction to cache memory",
 								"type": "simple",
 								"subtype": "activity"
 							},
 							{
+								"activityid": 17,
 								"name": "CPU specifics",
 								"type": "simple",
 								"subtype": "activity"
@@ -168,6 +185,7 @@
 		"nodes":
 			[
 				{
+					"activityid": 18,
 					"name": "PC Databus Architecture ",
 					"type": "simple",
 					"subtype": "LD",

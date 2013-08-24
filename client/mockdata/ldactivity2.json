@@ -4,6 +4,7 @@
 		"nodes": 
 			[
 				{
+					"activityid": 18,
 					"name": "Introduction",
 					"type": "simple",
 					"subtype": "activity",
