@@ -99,6 +99,32 @@
 
 
                         <div id="tabContent">
+                            
+                            <!-- BEGIN DYNAMIC ACTIVITY CONTENT --> 
+                            <div ng-repeat="level in levels" class="levelBox">
+                                <div ng-repeat="node in level.nodes" ng-class="getBoxClass(node)">
+
+                                    <!-- If it's a group:  -->
+                                    <ul ng-show="node.children" class="children">
+                                        <div class="groupName">{{ node.name }}</div>
+                                        <div class="clearfix"></div>
+
+                                        <li ng-repeat="child in node.children">
+                                            <div class="childBox">
+                                                <span class="actId">{{ child.subtype }}</span>
+                                                <h6 class="actName">{{ child.name }}</h6>
+                                            </div>
+                                        </li><!-- End Children -->
+                                    </ul>
+
+                                    <!-- If it's NOT a group:  -->
+                                    <span ng-show="!node.children" class="actId">{{ node.subtype }}</span>
+                                    <h6 ng-show="!node.children" class="actName">{{ node.name }}</h6>
+
+                                </div><!-- End Activity or Group Box -->
+                            </div><!-- End Level Box -->
+                            <!-- END DYNAMIC ACTIVITY CONTENT-->
+
                             <div class="levelBox">
                                 <div class="actBox">
                                     <span class="actId">1</span>

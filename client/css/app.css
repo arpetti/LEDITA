@@ -322,6 +322,46 @@ input.sidebarInput {
     display: inline-block;
 }
 
+.childBox {
+    background-color: #0099CC;
+    border-radius: 6px;
+    color: #FFF;
+    min-height: 40px;
+    margin: 10px 1%;
+    display: inline-block;
+}
+
+
+.groupBox2 .childBox {
+    width: 48%;
+    float: left;
+}
+
+.groupBox2 .childBox {
+    width: 48%;
+    float: left;
+}
+
+
+.groupBox4 .childBox, .groupBox4 .first {
+    width: 23%;
+    float: left;
+}
+
+.groupBox3 .childBox {
+    width: 31%;
+    float: left;
+}
+
+ul.children li {
+    list-style: none ;
+}
+
+
+ul.children > li:last-child > div.childBox {
+    float: none;
+}
+
 .levelBox {
     text-align: center;
     padding-bottom: 20px;

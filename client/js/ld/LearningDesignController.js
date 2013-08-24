@@ -16,6 +16,7 @@ angular.module('ledita-app')
         $scope.error = "Failed to fetch learning design activities.";
     });
 
+    //TODO Determine when is groupBox2 needed?
   	$scope.getBoxClass = function (node) {
   		if (node.children) {
   			if (node.children.length >= 4)
@@ -24,7 +25,7 @@ angular.module('ledita-app')
   				return "groupBox3";
   			if (node.children.length >= 2)
   				return "groupBox1";
-  			if (node.children.lenght >= 1)
+  			if (node.children.length >= 1)
   				return "groupBox1";
   		}
   		return "actBox";
