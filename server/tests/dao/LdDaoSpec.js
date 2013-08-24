@@ -107,4 +107,40 @@ describe('Learning Design DAO', function() {
 
     });
 
+    describe('Prerequisites', function() {
+
+        it('Get learning design prerequisites returns OBJECTIVE types', function(done) {
+            var learningDesignId = 1;
+            LdDao.getPrerequisites(learningDesignId, function(err, results){
+                expect(results).to.have.length(2);
+                expect(results[0].prereq_name).to.equal('Objective 1');
+                expect(results[0].prereq_type).to.equal('OBJECTIVE');
+                expect(results[1].prereq_name).to.equal('Objective 2');
+                expect(results[1].prereq_type).to.equal('OBJECTIVE');
+                done();
+            });
+        });
+
+        it('Get learning design prerequisites returns OBJECTIVE and LD types', function(done) {
+            var learningDesignId = 5;
+            LdDao.getPrerequisites(learningDesignId, function(err, results){
+                expect(results).to.have.length(2);
+                expect(results[0].prereq_name).to.equal('Objective 4');
+                expect(results[0].prereq_type).to.equal('OBJECTIVE');
+                expect(results[1].prereq_name).to.equal('Learning Design Title Demo 3');
+                expect(results[1].prereq_type).to.equal('LD');
+                done();
+            });
+        });
+
+        it('Get learning design prerequisites returns no results when LD has no prerequisites', function(done) {
+            var learningDesignId = 10;
+            LdDao.getPrerequisites(learningDesignId, function(err, results){
+                expect(results).to.have.length(0);
+                done();
+            });
+        });
+
+    });
+
 });	
