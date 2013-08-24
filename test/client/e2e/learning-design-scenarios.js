@@ -50,6 +50,10 @@ describe('Learning Design', function() {
     expect(repeater('.objectives li').count()).toBe(2);
     expect(repeater('.objectives li').column('objective.objective_descr')).toEqual(["Objective 1", "Objective 6"]);
 
+    // Verify prerequisites
+    expect(repeater('.prerequisites li').count()).toBe(2);
+    expect(repeater('.prerequisites li').column('prereq.prereq_name')).toEqual(["Objective 1", "Objective 2"]);
+
     // Logout
     element('#userActionsMenu').click();
     element('#logoutLink').click();

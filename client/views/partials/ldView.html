@@ -23,11 +23,9 @@
                 </ul>
             </div>
             <div class="clear marginTop"><h5 class="zeroMargin">Pre-Requisites:</h5>
-
-                <ul class="zeroMargin">
-                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
-                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
-                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
+                <ul ng-repeat="prereq in learningDesign.prerequisites" class="zeroMargin prerequisites">
+                    <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{prereq.prereq_name}}</a>
+                    </li>
                 </ul>
             </div>
             <div class="clear marginTop">
