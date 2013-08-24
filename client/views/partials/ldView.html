@@ -103,17 +103,15 @@
                                 <div ng-repeat="node in level.nodes" ng-class="getBoxClass(node)">
 
                                     <!-- If it's a group:  -->
-                                    <ul ng-show="node.children" class="children">
-                                        <div class="groupName">{{ node.name }}</div>
+                                        <div ng-show="node.children" class="groupName">{{ node.name }}</div>
                                         <div class="clearfix"></div>
 
-                                        <li ng-repeat="child in node.children">
-                                            <div class="childBox">
+                                            <div ng-repeat="child in node.children" class="actBox">
                                                 <span class="actId">{{ child.activityid }}</span>
                                                 <h6 class="actName">{{ child.name }}</h6>
                                             </div>
-                                        </li><!-- End Children -->
-                                    </ul>
+                                        <!-- End Children -->
+
 
                                     <!-- If it's NOT a group:  -->
                                     <span ng-show="!node.children" class="actId">{{ node.activityid }}</span>
