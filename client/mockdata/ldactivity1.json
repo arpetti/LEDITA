@@ -1,0 +1,178 @@
+[
+	{
+		"levelnum": 1,
+		"nodes": 
+			[
+				{
+					"name": "Hardware Component Identification",
+					"type": "simple",
+					"subtype": "activity",
+					"position": 1 
+				}
+			]
+	},
+	{
+		"levelnum": 2,
+		"nodes" :
+			[
+				{
+					"name": "Main Components",
+					"type": "complex",
+					"subtype": "group",
+					"position": 1,
+					"children": 
+						[
+							{
+								"name": "Bus",
+								"type": "simple",
+								"subtype": "activity"
+							},
+							{
+								"name": "CPU",
+								"type": "simple",
+								"subtype": "activity"
+							},
+							{
+								"name": "Devices",
+								"type": "simple",
+								"subtype": "activity"
+							},
+							{
+								"name": "Device Controller",
+								"type": "simple",
+								"subtype": "activity"
+							},
+							{
+								"name": "Memmory",
+								"type": "simple",
+								"subtype": "activity"
+							}
+						]
+				}
+			]
+	},
+	{
+		"levelnum": 3,
+		"nodes": 
+			[
+				{
+					"name": "I/O Devices",
+					"type": "complex",
+					"subtype": "group",
+					"position": 1,
+					"children": 
+						[
+							{
+								"name": "Input Devices",
+								"type": "simple",
+								"subtype": "activity"
+							},
+							{
+								"name": "Output Devices",
+								"type": "simple",
+								"subtype": "activity"
+							}	
+						]
+				},
+				{
+					"name": "Storage Devices",
+					"type": "complex",
+					"subtype": "group",
+					"position": 2,
+					"children": 
+						[
+							{
+								"name": "Flash",
+								"type": "simple",
+								"subtype": "activity"
+							},
+							{
+								"name": "USB",
+								"type": "simple",
+								"subtype": "activity"
+							}	
+						]
+				},
+				{
+					"name": "Power Supplies",
+					"type": "complex",
+					"subtype": "group",
+					"position": 3,
+					"children": 
+						[
+							{
+								"name": "Types of power supplies",
+								"type": "simple",
+								"subtype": "activity"
+							},
+							{
+								"name": "Different power supply form factors",
+								"type": "simple",
+								"subtype": "activity"
+							}	
+						]
+				},
+				{
+					"name": "Power Connectors",
+					"type": "complex",
+					"subtype": "group",
+					"position": 4,
+					"children": 
+						[
+							{
+								"name": "Surge protection and battery backup",
+								"type": "simple",
+								"subtype": "activity"
+							},
+							{
+								"name": "Power requirement calculation",
+								"type": "simple",
+								"subtype": "activity"
+							}	
+						]
+				}
+			]
+	},
+	{
+		"levelnum": 4,
+		"nodes": 
+			[
+				{
+					"name": "Introduction to Processors",
+					"type": "complex",
+					"subtype": "group",
+					"position": 1,
+					"children": 
+						[
+							{
+								"name": "Processor History",
+								"type": "simple",
+								"subtype": "activity"
+							},
+							{
+								"name": "Introduction to cache memory",
+								"type": "simple",
+								"subtype": "activity"
+							},
+							{
+								"name": "CPU specifics",
+								"type": "simple",
+								"subtype": "activity"
+							}
+						]
+				}
+			]
+	},
+	{
+		"levelnum": 5,
+		"nodes":
+			[
+				{
+					"name": "PC Databus Architecture ",
+					"type": "simple",
+					"subtype": "LD",
+					"position": 1
+				}
+			]
+	}
+]
