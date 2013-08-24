@@ -6,7 +6,7 @@ var expect = require('chai').expect
 
 describe('LD Service Integration', function() {
 
-	it('Gets a learning design with subjects and objectives', function(done) {
+	it('Gets a learning design with subjects, objectives, prerequisites', function(done) {
 		var learningDesignId = 1;
 		LDService.getLearningDesignPromise(learningDesignId).then(function(result) {
 			expect(result).to.have.length(LDService.LD_NUMBER_OF_DATA_ELEMENTS);
@@ -32,6 +32,16 @@ describe('LD Service Integration', function() {
             expect(objectives).to.have.length(2);
             expect(objectives[0].objective_descr).to.equal('Objective 1');
             expect(objectives[1].objective_descr).to.equal('Objective 6');
+
+            var prerequisites = result[3];
+            expect(prerequisites).to.have.length(2);
+
+            /*
+            expect(results[0].prereq_name).to.equal('Objective 1');
+            expect(results[0].prereq_type).to.equal('OBJECTIVE');
+            expect(results[1].prereq_name).to.equal('Objective 2');
+            expect(results[1].prereq_type).to.equal('OBJECTIVE');
+            */
 		}).then(done, done);
 	});
 

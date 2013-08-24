@@ -7,7 +7,6 @@ var expect = require('chai').expect
     , LearningDesignService = require('../../service/LDService')
     , messages = require('../../service/ValidationMessages');
 
-//FIXME make the tests work with promises!
 describe('Learning Design Controller', function() {
 
     var req = {}
@@ -51,6 +50,7 @@ describe('Learning Design Controller', function() {
             var serviceResponse = [
                     [],
                     [],
+                    [],
                     []
                 ];
             var serviceStub = sandbox.stub(LearningDesignService, 'getLearningDesignPromise').
@@ -75,8 +75,9 @@ describe('Learning Design Controller', function() {
                     [{"ld_id":1,"ld_name":"Learning Design Title Demo 1"}],
                     [{"subject_name":"Topic 1"},{"subject_name":"Topic 5"}],
                     [{"objective_descr":"Objective 1"},{"objective_descr":"Objective 6"}],
-                    [{"something":"does not belong"}]
-                ]
+                    [{"prereq_name":"prereq1", "prereq_type": "OBJECTIVE"}],
+                    [{"something": "does not belong here"}]
+                ];
             var serviceStub = sandbox.stub(LearningDesignService, 'getLearningDesignPromise').
                 returns(when(serviceResponse));
 
