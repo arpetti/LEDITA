@@ -567,6 +567,31 @@ CREATE OR REPLACE VIEW vw_ld_objective AS
   INNER JOIN objective
     ON aims.objective_id = objective.id;
 
+CREATE OR REPLACE VIEW vw_ld_prerequisite AS
+  SELECT ld.id as ld_id
+    , ld.name as ld_name
+    , objective.id as prereq_id
+    , objective.descr as prereq_name
+    , 'OBJECTIVE' as prereq_type
+  FROM ld
+  INNER JOIN needs
+    ON ld.id = needs.ld_id
+  INNER JOIN OBJECTIVE
+    on needs.objective_id = objective.id  
+
+  UNION
+
+  SELECT ldsource.id as ld_id
+    , ldsource.name as ld_name
+    , ldtarget.id as prereq_id
+    , ldtarget.name as prereq_name
+    , 'LD' as prereq_type
+  FROM ld ldsource
+  INNER JOIN needs
+    ON ldsource.id = needs.ld_id
+  INNER JOIN ld ldtarget
+    on needs.ld_requisite_id = ldtarget.id;  
+
 USE `ledita-web-app` ;
 
 
