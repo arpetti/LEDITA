@@ -337,13 +337,10 @@ input.sidebarInput {
     float: left;
 }
 
-.groupBox2 .childBox {
-    width: 48%;
-    float: left;
-}
 
 
-.groupBox4 .childBox, .groupBox4 .first {
+
+.groupBox4 .childBox  {
     width: 23%;
     float: left;
 }
