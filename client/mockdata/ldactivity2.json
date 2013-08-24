@@ -1,0 +1,14 @@
+[
+	{
+		"levelnum": 1,
+		"nodes": 
+			[
+				{
+					"name": "Introduction",
+					"type": "simple",
+					"subtype": "activity",
+					"position": 1 
+				}
+			]
+	}
+]

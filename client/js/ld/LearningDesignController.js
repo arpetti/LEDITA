@@ -1,6 +1,6 @@
 angular.module('ledita-app')
 .controller('LdViewCtrl',
-['$scope', '$routeParams', 'LDService', '$http', function($scope, $routeParams, LDService, $http) {
+['$scope', '$routeParams', 'LDService', function($scope, $routeParams, LDService) {
 
 	$scope.ldid = $routeParams.ldid;
 
@@ -10,10 +10,11 @@ angular.module('ledita-app')
         $scope.error = "Failed to fetch learning design.";
     });
 
-    $http.get('/mockdata/ldactivity1.json').success(function(data) {
-    	console.log(JSON.stringify(data));
-    	$scope.levels = data;
-  	}); 
+    LDService.getActivities($scope.ldid, function(res) {
+        $scope.levels = res;
+    }, function(err) {
+        $scope.error = "Failed to fetch learning design activities.";
+    });
 
   	$scope.getBoxClass = function (node) {
   		if (node.children) {
