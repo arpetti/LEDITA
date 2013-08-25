@@ -104,6 +104,10 @@ Project Website: http://www.professoreitaliano.com
     win32: process.env.ProgramFiles + ' (x86)\\Google\\Chrome\\Application\\chrome.exe'
     ```
 
+* Create server logs directory
+
+    This project is using [log4js-node](https://github.com/nomiddlename/log4js-node). This module expects that the configured logs directory already exists. Switch to project root directory, then ```mkdir logs```
+
 * From project root directory, run
 
     ```
