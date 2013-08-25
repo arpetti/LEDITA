@@ -7,6 +7,7 @@ before_script:
   - mysql < database/ci/ledita-test.sql --verbose
   - mysql < database/ci/test-data.sql --verbose  
   - npm install -g node-gyp
+  - mkdir logs
   - NODE_ENV=ci node server.js > /dev/null &
   - sleep 3
 
