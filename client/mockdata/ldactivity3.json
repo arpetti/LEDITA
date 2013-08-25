@@ -1,1 +1,58 @@
-[]
+[
+	{
+		"levelnum": 1,
+		"nodes": 
+			[
+				{
+					"activityid": 100,
+					"name": "Alphabet",
+					"type": "simple",
+					"subtype": "LD",
+					"position": 1 
+				},
+				{
+					"activityid": 101,
+					"name": "Pronunciation",
+					"type": "simple",
+					"subtype": "LD",
+					"position": 2 
+				},
+				{
+					"activityid": 102,
+					"name": "Introduction",
+					"type": "complex",
+					"subtype": "group",
+					"position": 3,
+					"children": 
+						[
+							{
+								"activityid": 1021,
+								"name": "Telling time",
+								"type": "simple",
+								"subtype": "activity"
+							},
+							{
+								"activityid": 1022,
+								"name": "Present tense of verbs",
+								"type": "simple",
+								"subtype": "activity"
+							},
+							{
+								"activityid": 1023,
+								"name": "Pronouns",
+								"type": "simple",
+								"subtype": "activity"
+							}
+						] 
+				},
+				{
+					"activityid": 103,
+					"name": "Numbers",
+					"type": "simple",
+					"subtype": "Activity",
+					"position": 4 
+				}
+
+			]
+	}
+]
