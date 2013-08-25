@@ -1,4 +1,5 @@
 var configHelper = require('../util/ConfigHelper');
+var logWrapper = require('../util/LogWrapper');
 var config = configHelper.config();
 var mysql = require('mysql');
 
@@ -16,13 +17,13 @@ module.exports = {
     var results = [];
     pool.getConnection(function(err, connection) {
       if (err) {
-        console.log('db connection error', err);
+        logWrapper.log().error('db connection error', err);
         callback(err);
         return;
       }
       connection.query(queryString, queryParams, function(err, rows) {
         if (err) {
-          console.log('db query error', err);
+          logWrapper.log().error('db query error', err);
           callback(err);
           return;
         }
@@ -39,13 +40,13 @@ module.exports = {
     var insertedRowId;
     pool.getConnection(function(err, connection) {
       if (err) {
-        console.log('db connection error', err);
+        logWrapper.log().error('db connection error', err);
         callback(err);
         return;
       }
       connection.query(queryString, jsonData, function(err, result) {
         if (err) {
-          console.log('db insert error', err);
+          logWrapper.log().error('db insert error', err);
           callback(err);
           return;
         }
@@ -58,13 +59,13 @@ module.exports = {
   deleteRecord: function(queryString, jsonData, callback) {
     pool.getConnection(function(err, connection) {
       if (err) {
-        console.log('db connection error', err);
+        logWrapper.log().error('db connection error', err);
         callback(err);
         return;
       }
       connection.query(queryString, jsonData, function(err, result) {
         if (err) {
-          console.log('db delete error', err);
+          logWrapper.log().error('db delete error', err);
           callback(err);
           return;
         }

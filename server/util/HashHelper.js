@@ -1,4 +1,5 @@
 var bcrypt = require('bcrypt');
+var logWrapper = require('./LogWrapper');
 var configHelper = require('./ConfigHelper');
 var config = configHelper.config();
 
@@ -8,13 +9,13 @@ module.exports = {
 	generateHash: function(password, callback) {
   		bcrypt.genSalt(config.hash_work_factor, function(err, salt) {
   			if (err) {
-          		console.log('bcrypt gen salt error', err);
+          		logWrapper.log().error('bcrypt gen salt error', err);
 			    callback(err);
           		return;
         	}
     		bcrypt.hash(password, salt, function(err, hash) {
         		if (err) {
-        			console.log('bcrypt hash error', err);
+        			logWrapper.log().error('bcrypt hash error', err);
         			callback(err);
         			return;
         		}
@@ -26,7 +27,7 @@ module.exports = {
   	compareHash: function(password, hash, callback) {
   		bcrypt.compare(password, hash, function(err, res) {
     		if (err) {
-    			console.log('bcrypt compare error', err);
+    			logWrapper.log().error('bcrypt compare error', err);
     			callback(err);
     			return;
     		}

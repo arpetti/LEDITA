@@ -1,0 +1,13 @@
+{
+  "appenders": [
+    { 
+      "type": "console"
+    },
+    { 
+      "type": "file", 
+      "filename": "logs/server.log",
+      "maxLogSize": 52428800,
+      "backups": 10
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 var express =       require('express')
+    , log4js =       require('log4js')
     , helmet =      require('helmet')
     , fs =          require('fs')
     , http =        require('http')
@@ -12,6 +13,12 @@ var express =       require('express')
 
 var app = express();
 
+log4js.configure('./express-log-cfg.json');
+var logger = log4js.getLogger('express-log');
+app.configure(function() {
+    app.use(log4js.connectLogger(logger, { level: 'auto' }));
+});
+
 var options = {
   key: fs.readFileSync(path.resolve(__dirname, 'server/cert/key.pem')),
   cert: fs.readFileSync(path.resolve(__dirname, 'server/cert/cert.pem'))
@@ -21,7 +28,7 @@ app.set('views', __dirname + '/client/views');
 app.engine('html', require('jade').renderFile);
 app.set('view engine', 'jade');
 app.engine('html', require('ejs').renderFile);
-app.use(express.logger('dev'))
+// app.use(express.logger('dev'))
 app.use(express.compress());
 app.use(express.cookieParser());
 app.use(express.bodyParser());
