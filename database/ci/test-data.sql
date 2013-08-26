@@ -1,13 +1,13 @@
-USE `ledita-test` ;
+USE `ledita-web-app` ;
 
-INSERT INTO `ledita-test`.`image` (`id`, `name`, `size`, `uri`, `mime`)
+INSERT INTO `ledita-web-app`.`image` (`id`, `name`, `size`, `uri`, `mime`)
 VALUES ('1', 'mario.png', '287', 'http://localhost/ledita/img/usr/mario.png', 'png'),
         ('2', 'lucia.png', '347', 'http://localhost/ledita/img/usr/lucia.png', 'png'),
 ('3', 'antonio.png', '287', 'http://localhost/ledita/img/usr/antonio.png', 'jpg'),
 ('4', 'sara.png', '287', 'http://localhost/ledita/img/usr/sara.png', 'gif'),
 ('5', 'silvia.png', '287', 'http://localhost/ledita/img/usr/silvia.png', 'png');
 
-INSERT INTO `ledita-test`.`user` (`id`, `image_id`, `name`, `last_name`, `gender`, `email`, `hash`, `workplace`, `city`, `country`)
+INSERT INTO `ledita-web-app`.`user` (`id`, `image_id`, `name`, `last_name`, `gender`, `email`, `hash`, `workplace`, `city`, `country`)
 VALUES ('1', '1', 'Mario', 'Rossi', 'M', 'mario@email.it', '$2a$10$/MWGZW7cmwNdle.jiFJb9OiWqVZjxbgJxYNpEraHkwzZ2muBHL7Gm', 'Scuola A', 'Roma', 'Italia'),
 ('2', '2', 'Lucia', 'Bianchi', 'F', 'lucia@email.it', '$2a$10$/MWGZW7cmwNdle.jiFJb9OiWqVZjxbgJxYNpEraHkwzZ2muBHL7Gm', 'Scuola B', 'Parigi', 'Francia'),
 ('3', '3', 'Antonio', 'Verdi', 'M', 'antonio@email.it', '$2a$10$/MWGZW7cmwNdle.jiFJb9OiWqVZjxbgJxYNpEraHkwzZ2muBHL7Gm', 'Scuola C', 'Berlino', 'Germania'),
@@ -184,7 +184,8 @@ VALUES
 ('30','1');
 
 INSERT INTO `needs` (`id`, `ld_id`, `ld_requisite_id`,`objective_id`)
-VALUES ('1', '1', NULL , '1' ),
+VALUES
+('1', '1', NULL , '1' ),
 ('2', '1', NULL , '2' ),
 ('3', '2', '1' , NULL ),
 ('4', '3', NULL , '3' ),
@@ -195,6 +196,7 @@ VALUES ('1', '1', NULL , '1' ),
 ('9', '7', NULL , '5' ),
 ('10', '8', '2' , NULL ),
 ('11', '8', NULL , '6' );
+
 
 INSERT INTO `likes` (`user_id`, `ld_id`)
 VALUES
@@ -228,3 +230,160 @@ VALUES
 ('3','28'),
 ('4','29'),
 ('5','30');
+
+
+
+
+INSERT INTO `students` (`id`, `type`, `group_number`, `people_per_group`)
+VALUES
+('1','1',NULL,NULL),
+('2','2',NULL,NULL),
+('3','3',NULL,NULL),
+('4','4','3',NULL),
+('5','4','4',NULL),
+('6','4',NULL,'3'),
+('7','4',NULL,'4'),
+('8','4','2','6'),
+('9','4','3','4'),
+('10','4','5','3');
+
+INSERT INTO `activity` (`id`, `students_id`, `name`, `type`, `dur_min`, `dur_hh`, `dur_dd`, `dur_mon`, `pract_descr`, `edu_descr`, `modality`)
+VALUES
+('1','1','Learning Activity 1','1','15','0','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('2','1','Learning Activity 2','1','0','2','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('3','1','Learning Activity 3','1','30','0','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','2'),
+('4','1','Learning Activity 4','1','0','0','2','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('5','1','Support Activity 1','2','0','0','15','1','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','2'),
+('6','1','Learning Activity 5','1','30','0','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('7','1','Learning Activity 6','1','30','3','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('8','1','Learning Activity 7','1','0','0','5','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('9','1','Support Activity 2','2','0','0','0','1','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','2'),
+('10','1','Evaluation Activity 1','3','0','2','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('11','2','Learning Activity 5','1','15','0','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('12','2','Learning Activity 6','1','0','2','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('13','2','Learning Activity 7','1','30','0','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','2'),
+('14','2','Learning Activity 8','1','0','0','2','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('15','2','Support Activity 2','2','0','0','15','1','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','2'),
+('16','2','Learning Activity 8','1','30','0','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('17','2','Learning Activity 9','1','30','3','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('18','2','Learning Activity 10','1','0','0','5','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('19','2','Support Activity 3','2','0','0','0','1','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','2'),
+('20','2','Evaluation Activity 2','3','0','2','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('21','3','Learning Activity 9','1','15','0','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('22','3','Learning Activity 10','1','0','2','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('23','3','Learning Activity 11','1','30','0','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','2'),
+('24','3','Learning Activity 12','1','0','0','2','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('25','3','Support Activity 3','2','0','0','15','1','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','2'),
+('26','3','Learning Activity 11','1','30','0','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('27','3','Learning Activity 12','1','30','3','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('28','3','Learning Activity 13','1','0','0','5','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('29','3','Support Activity 4','2','0','0','0','1','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','2'),
+('30','3','Evaluation Activity 3','3','0','2','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('31','4','Learning Activity 13','1','15','0','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('32','4','Learning Activity 14','1','0','2','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('33','4','Learning Activity 15','1','30','0','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','2'),
+('34','4','Learning Activity 16','1','0','0','2','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('35','4','Support Activity 4','2','0','0','15','1','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','2'),
+('36','4','Learning Activity 14','1','30','0','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('37','4','Learning Activity 15','1','30','3','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('38','4','Learning Activity 16','1','0','0','5','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('39','4','Support Activity 5','2','0','0','0','1','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','2'),
+('40','4','Evaluation Activity 4','3','0','2','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('41','5','Learning Activity 17','1','15','0','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('42','5','Learning Activity 18','1','0','2','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('43','5','Learning Activity 19','1','30','0','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','2'),
+('44','5','Learning Activity 20','1','0','0','2','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('45','5','Support Activity 5','2','0','0','15','1','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','2'),
+('46','5','Learning Activity 17','1','30','0','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('47','5','Learning Activity 18','1','30','3','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('48','5','Learning Activity 19','1','0','0','5','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('49','5','Support Activity 6','2','0','0','0','1','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','2'),
+('50','5','Evaluation Activity 5','3','0','2','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1');
+
+INSERT INTO `activity_group` (`id`, `name`)
+VALUES
+('1',NULL),
+('2','Group 2 Name'),
+('3',NULL),
+('4','Group 3 Name'),
+('5','Group 4 Name'),
+('6',NULL),
+('7','Group 5 Name'),
+('8',NULL),
+('9','Group 6 Name'),
+('10','Group 7 Name');
+
+INSERT INTO `participates` (`id`, `activity_group_id`, `activity_id`, `ld_is_part_id`, `level`, `position`)
+VALUES
+('1','1','1',NULL,'1','1'),
+('2','1','2',NULL,'1','2'),
+('3','1','3',NULL,'2','1'),
+('4','1','4',NULL,'2','2'),
+('5','2',NULL,'7','1','1'),
+('6','2','6',NULL,'2','1'),
+('7','2','7',NULL,'2','2'),
+('8','3','11',NULL,'1','1'),
+('9','3','12',NULL,'2','1'),
+('10','4','13',NULL,'1','1'),
+('11','4','14',NULL,'2','1'),
+('12','5','21',NULL,'1','1'),
+('13','5','22',NULL,'1','2'),
+('14','5','23',NULL,'1','3'),
+('15','5',NULL,'2','2','1'),
+('16','5','24',NULL,'3','1'),
+('17','5','26',NULL,'3','2'),
+('18','6','31',NULL,'1','1'),
+('19','6','32',NULL,'1','2'),
+('20','6','33',NULL,'1','3'),
+('21','6','34',NULL,'1','4'),
+('22','7',NULL,'1','1','1'),
+('23','7',NULL,'3','1','2'),
+('24','7','35',NULL,'2','1'),
+('25','7','36',NULL,'2','2'),
+('26','7','37',NULL,'2','3'),
+('27','7','38',NULL,'2','4'),
+('28','8','39',NULL,'1','1'),
+('29','8','40',NULL,'1','2'),
+('30','9',NULL,'5','1','1'),
+('31','10','42',NULL,'1','1'),
+('32','10','43',NULL,'1','2'),
+('33','10',NULL,'9','1','3');
+
+INSERT INTO `composes` (`id`, `ld_id`, `activity_id`, `ld_part_id`, `activity_group_id`, `level`, `position`)
+VALUES
+('1','1','5',NULL,NULL,'1','1'),
+('2','1',NULL,NULL,'1','2','1'),
+('3','1','9',NULL,NULL,'3','1'),
+('4','1','8',NULL,NULL,'3','2'),
+('5','1',NULL,'2',NULL,'4','1'),
+('6','1',NULL,NULL,'2','5','1'),
+('7','1','10',NULL,NULL,'6','1'),
+('8','2',NULL,NULL,'3','1','1'),
+('9','2',NULL,NULL,'4','1','2'),
+('10','2','15',NULL,NULL,'2','1'),
+('11','2','16',NULL,NULL,'2','2'),
+('12','2','17',NULL,NULL,'2','3'),
+('13','2','18',NULL,NULL,'2','4'),
+('14','2','19',NULL,NULL,'3','1'),
+('15','2','20',NULL,NULL,'4','1'),
+('16','3','25',NULL,NULL,'1','1'),
+('17','3',NULL,NULL,'5','2','1'),
+('18','3','27',NULL,NULL,'3','1'),
+('19','3','28',NULL,NULL,'3','2'),
+('20','3','29',NULL,NULL,'4','1'),
+('21','3','30',NULL,NULL,'4','2'),
+('22','4',NULL,NULL,'6','1','1'),
+('23','4',NULL,NULL,'7','2','1'),
+('24','4',NULL,NULL,'8','3','1'),
+('25','5','41',NULL,NULL,'1','1'),
+('26','5',NULL,'7',NULL,'2','1'),
+('27','5',NULL,NULL,'9','2','2'),
+('28','5','44',NULL,NULL,'3','1'),
+('29','5','45',NULL,NULL,'4','1'),
+('30','5','46',NULL,NULL,'4','2'),
+('31','5','47',NULL,NULL,'4','3'),
+('32','5','48',NULL,NULL,'5','1'),
+('33','5',NULL,NULL,'10','5','2'),
+('34','5','49',NULL,NULL,'6','1'),
+('35','5','50',NULL,NULL,'6','3'),
+('36','5',NULL,'2',NULL,'6','2');
