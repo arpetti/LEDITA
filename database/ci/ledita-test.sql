@@ -2,16 +2,16 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-DROP SCHEMA IF EXISTS `ledita-web-app` ;
-CREATE SCHEMA IF NOT EXISTS `ledita-web-app` DEFAULT CHARACTER SET utf8 ;
-USE `ledita-web-app` ;
+DROP SCHEMA IF EXISTS `ledita-test` ;
+CREATE SCHEMA IF NOT EXISTS `ledita-test` DEFAULT CHARACTER SET utf8 ;
+USE `ledita-test` ;
 
 -- -----------------------------------------------------
--- Table `ledita-web-app`.`students`
+-- Table `ledita-test`.`students`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ledita-web-app`.`students` ;
+DROP TABLE IF EXISTS `ledita-test`.`students` ;
 
-CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`students` (
+CREATE  TABLE IF NOT EXISTS `ledita-test`.`students` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `type` CHAR(1) NOT NULL COMMENT 'TYPE:\n1=ALL\n2=INDIVIDUAL\n3=PAIR\n4=GROUP' ,
   `group_number` INT(10) UNSIGNED NULL DEFAULT NULL ,
@@ -22,11 +22,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ledita-web-app`.`activity`
+-- Table `ledita-test`.`activity`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ledita-web-app`.`activity` ;
+DROP TABLE IF EXISTS `ledita-test`.`activity` ;
 
-CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`activity` (
+CREATE  TABLE IF NOT EXISTS `ledita-test`.`activity` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `students_id` INT(11) NOT NULL ,
   `name` VARCHAR(255) NOT NULL ,
@@ -42,7 +42,7 @@ CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`activity` (
   INDEX `fk_activity_students1_idx` (`students_id` ASC) ,
   CONSTRAINT `fk_activity_students1`
     FOREIGN KEY (`students_id` )
-    REFERENCES `ledita-web-app`.`students` (`id` )
+    REFERENCES `ledita-test`.`students` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -50,11 +50,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ledita-web-app`.`activity_group`
+-- Table `ledita-test`.`activity_group`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ledita-web-app`.`activity_group` ;
+DROP TABLE IF EXISTS `ledita-test`.`activity_group` ;
 
-CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`activity_group` (
+CREATE  TABLE IF NOT EXISTS `ledita-test`.`activity_group` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(255) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) )
@@ -63,11 +63,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ledita-web-app`.`image`
+-- Table `ledita-test`.`image`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ledita-web-app`.`image` ;
+DROP TABLE IF EXISTS `ledita-test`.`image` ;
 
-CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`image` (
+CREATE  TABLE IF NOT EXISTS `ledita-test`.`image` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(50) NOT NULL ,
   `size` INT(8) UNSIGNED NOT NULL ,
@@ -81,11 +81,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ledita-web-app`.`user`
+-- Table `ledita-test`.`user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ledita-web-app`.`user` ;
+DROP TABLE IF EXISTS `ledita-test`.`user` ;
 
-CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`user` (
+CREATE  TABLE IF NOT EXISTS `ledita-test`.`user` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `image_id` INT(11) NULL DEFAULT NULL ,
   `name` VARCHAR(50) NOT NULL ,
@@ -101,7 +101,7 @@ CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`user` (
   INDEX `fk_user_image1_idx` (`image_id` ASC) ,
   CONSTRAINT `fk_user_image1`
     FOREIGN KEY (`image_id` )
-    REFERENCES `ledita-web-app`.`image` (`id` )
+    REFERENCES `ledita-test`.`image` (`id` )
     ON DELETE SET NULL
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -110,11 +110,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ledita-web-app`.`ld`
+-- Table `ledita-test`.`ld`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ledita-web-app`.`ld` ;
+DROP TABLE IF EXISTS `ledita-test`.`ld` ;
 
-CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`ld` (
+CREATE  TABLE IF NOT EXISTS `ledita-test`.`ld` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `user_id` INT(11) NULL DEFAULT NULL ,
   `ld_model_id` INT(11) NULL DEFAULT NULL ,
@@ -129,12 +129,12 @@ CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`ld` (
   INDEX `fk_ld_ld1_idx` (`ld_model_id` ASC) ,
   CONSTRAINT `fk_ld_ld1`
     FOREIGN KEY (`ld_model_id` )
-    REFERENCES `ledita-web-app`.`ld` (`id` )
+    REFERENCES `ledita-test`.`ld` (`id` )
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `fk_ld_user1`
     FOREIGN KEY (`user_id` )
-    REFERENCES `ledita-web-app`.`user` (`id` )
+    REFERENCES `ledita-test`.`user` (`id` )
     ON DELETE SET NULL
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -143,11 +143,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ledita-web-app`.`objective`
+-- Table `ledita-test`.`objective`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ledita-web-app`.`objective` ;
+DROP TABLE IF EXISTS `ledita-test`.`objective` ;
 
-CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`objective` (
+CREATE  TABLE IF NOT EXISTS `ledita-test`.`objective` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `descr` VARCHAR(200) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) )
@@ -157,11 +157,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ledita-web-app`.`aims`
+-- Table `ledita-test`.`aims`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ledita-web-app`.`aims` ;
+DROP TABLE IF EXISTS `ledita-test`.`aims` ;
 
-CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`aims` (
+CREATE  TABLE IF NOT EXISTS `ledita-test`.`aims` (
   `ld_id` INT(11) NOT NULL ,
   `objective_id` INT(11) NOT NULL ,
   PRIMARY KEY (`ld_id`, `objective_id`) ,
@@ -169,12 +169,12 @@ CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`aims` (
   INDEX `fk_ld_has_objective_ld2_idx` (`ld_id` ASC) ,
   CONSTRAINT `fk_ld_has_objective_ld2`
     FOREIGN KEY (`ld_id` )
-    REFERENCES `ledita-web-app`.`ld` (`id` )
+    REFERENCES `ledita-test`.`ld` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_ld_has_objective_objective2`
     FOREIGN KEY (`objective_id` )
-    REFERENCES `ledita-web-app`.`objective` (`id` )
+    REFERENCES `ledita-test`.`objective` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -182,11 +182,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ledita-web-app`.`qcer`
+-- Table `ledita-test`.`qcer`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ledita-web-app`.`qcer` ;
+DROP TABLE IF EXISTS `ledita-test`.`qcer` ;
 
-CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`qcer` (
+CREATE  TABLE IF NOT EXISTS `ledita-test`.`qcer` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(50) NOT NULL ,
   PRIMARY KEY (`id`) )
@@ -195,11 +195,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ledita-web-app`.`classificates`
+-- Table `ledita-test`.`classificates`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ledita-web-app`.`classificates` ;
+DROP TABLE IF EXISTS `ledita-test`.`classificates` ;
 
-CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`classificates` (
+CREATE  TABLE IF NOT EXISTS `ledita-test`.`classificates` (
   `qcer_id` INT(11) NOT NULL ,
   `ld_id` INT(11) NOT NULL ,
   PRIMARY KEY (`qcer_id`, `ld_id`) ,
@@ -207,12 +207,12 @@ CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`classificates` (
   INDEX `fk_qcer_has_ld_qcer1_idx` (`qcer_id` ASC) ,
   CONSTRAINT `fk_qcer_has_ld_ld1`
     FOREIGN KEY (`ld_id` )
-    REFERENCES `ledita-web-app`.`ld` (`id` )
+    REFERENCES `ledita-test`.`ld` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_qcer_has_ld_qcer1`
     FOREIGN KEY (`qcer_id` )
-    REFERENCES `ledita-web-app`.`qcer` (`id` )
+    REFERENCES `ledita-test`.`qcer` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -220,11 +220,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ledita-web-app`.`comment`
+-- Table `ledita-test`.`comment`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ledita-web-app`.`comment` ;
+DROP TABLE IF EXISTS `ledita-test`.`comment` ;
 
-CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`comment` (
+CREATE  TABLE IF NOT EXISTS `ledita-test`.`comment` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `user_id` INT(11) NOT NULL ,
   `comment_father_id` INT(11) NOT NULL DEFAULT '0' ,
@@ -238,17 +238,17 @@ CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`comment` (
   INDEX `fk_comment_ld1_idx` (`ld_id` ASC) ,
   CONSTRAINT `fk_comment_comment1`
     FOREIGN KEY (`comment_father_id` )
-    REFERENCES `ledita-web-app`.`comment` (`id` )
+    REFERENCES `ledita-test`.`comment` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_comment_ld1`
     FOREIGN KEY (`ld_id` )
-    REFERENCES `ledita-web-app`.`ld` (`id` )
+    REFERENCES `ledita-test`.`ld` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_comment_user1`
     FOREIGN KEY (`user_id` )
-    REFERENCES `ledita-web-app`.`user` (`id` )
+    REFERENCES `ledita-test`.`user` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -256,11 +256,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ledita-web-app`.`composes`
+-- Table `ledita-test`.`composes`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ledita-web-app`.`composes` ;
+DROP TABLE IF EXISTS `ledita-test`.`composes` ;
 
-CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`composes` (
+CREATE  TABLE IF NOT EXISTS `ledita-test`.`composes` (
   `id` INT(11) NOT NULL ,
   `ld_id` INT(11) NOT NULL ,
   `activity_id` INT(11) NULL DEFAULT NULL ,
@@ -275,22 +275,22 @@ CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`composes` (
   INDEX `fk_ld_is_part_of_ld1_idx` (`ld_part_id` ASC) ,
   CONSTRAINT `fk_activity_has_ld_activity1`
     FOREIGN KEY (`activity_id` )
-    REFERENCES `ledita-web-app`.`activity` (`id` )
+    REFERENCES `ledita-test`.`activity` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_activity_has_ld_ld1`
     FOREIGN KEY (`ld_id` )
-    REFERENCES `ledita-web-app`.`ld` (`id` )
+    REFERENCES `ledita-test`.`ld` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_composes_activity_group1`
     FOREIGN KEY (`activity_group_id` )
-    REFERENCES `ledita-web-app`.`activity_group` (`id` )
+    REFERENCES `ledita-test`.`activity_group` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_ld_is_part_of_ld1`
     FOREIGN KEY (`ld_part_id` )
-    REFERENCES `ledita-web-app`.`ld` (`id` )
+    REFERENCES `ledita-test`.`ld` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -298,11 +298,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ledita-web-app`.`subject`
+-- Table `ledita-test`.`subject`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ledita-web-app`.`subject` ;
+DROP TABLE IF EXISTS `ledita-test`.`subject` ;
 
-CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`subject` (
+CREATE  TABLE IF NOT EXISTS `ledita-test`.`subject` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(100) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) )
@@ -312,11 +312,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ledita-web-app`.`concerns`
+-- Table `ledita-test`.`concerns`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ledita-web-app`.`concerns` ;
+DROP TABLE IF EXISTS `ledita-test`.`concerns` ;
 
-CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`concerns` (
+CREATE  TABLE IF NOT EXISTS `ledita-test`.`concerns` (
   `subject_id` INT(11) NOT NULL ,
   `ld_id` INT(11) NOT NULL ,
   PRIMARY KEY (`subject_id`, `ld_id`) ,
@@ -324,12 +324,12 @@ CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`concerns` (
   INDEX `fk_subject_has_ld_subject1_idx` (`subject_id` ASC) ,
   CONSTRAINT `fk_subject_has_ld_ld1`
     FOREIGN KEY (`ld_id` )
-    REFERENCES `ledita-web-app`.`ld` (`id` )
+    REFERENCES `ledita-test`.`ld` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_subject_has_ld_subject1`
     FOREIGN KEY (`subject_id` )
-    REFERENCES `ledita-web-app`.`subject` (`id` )
+    REFERENCES `ledita-test`.`subject` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -337,11 +337,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ledita-web-app`.`tag`
+-- Table `ledita-test`.`tag`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ledita-web-app`.`tag` ;
+DROP TABLE IF EXISTS `ledita-test`.`tag` ;
 
-CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`tag` (
+CREATE  TABLE IF NOT EXISTS `ledita-test`.`tag` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(255) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) )
@@ -350,11 +350,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ledita-web-app`.`describes`
+-- Table `ledita-test`.`describes`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ledita-web-app`.`describes` ;
+DROP TABLE IF EXISTS `ledita-test`.`describes` ;
 
-CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`describes` (
+CREATE  TABLE IF NOT EXISTS `ledita-test`.`describes` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `tag_id` INT(11) NOT NULL ,
   `comment_id` INT(11) NULL DEFAULT NULL ,
@@ -365,17 +365,17 @@ CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`describes` (
   INDEX `fk_describes_activity1_idx` (`activity_id` ASC) ,
   CONSTRAINT `fk_activity_has_tag_tag1`
     FOREIGN KEY (`tag_id` )
-    REFERENCES `ledita-web-app`.`tag` (`id` )
+    REFERENCES `ledita-test`.`tag` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_describes_activity1`
     FOREIGN KEY (`activity_id` )
-    REFERENCES `ledita-web-app`.`activity` (`id` )
+    REFERENCES `ledita-test`.`activity` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_describes_comment1`
     FOREIGN KEY (`comment_id` )
-    REFERENCES `ledita-web-app`.`comment` (`id` )
+    REFERENCES `ledita-test`.`comment` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -383,11 +383,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ledita-web-app`.`resource`
+-- Table `ledita-test`.`resource`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ledita-web-app`.`resource` ;
+DROP TABLE IF EXISTS `ledita-test`.`resource` ;
 
-CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`resource` (
+CREATE  TABLE IF NOT EXISTS `ledita-test`.`resource` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `activity_id` INT(11) NOT NULL ,
   `name` VARCHAR(50) NOT NULL ,
@@ -399,7 +399,7 @@ CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`resource` (
   INDEX `fk_resource_activity1_idx` (`activity_id` ASC) ,
   CONSTRAINT `fk_resource_activity1`
     FOREIGN KEY (`activity_id` )
-    REFERENCES `ledita-web-app`.`activity` (`id` )
+    REFERENCES `ledita-test`.`activity` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -407,11 +407,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ledita-web-app`.`file`
+-- Table `ledita-test`.`file`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ledita-web-app`.`file` ;
+DROP TABLE IF EXISTS `ledita-test`.`file` ;
 
-CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`file` (
+CREATE  TABLE IF NOT EXISTS `ledita-test`.`file` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `resource_id` INT(11) NOT NULL ,
   `name` VARCHAR(50) NOT NULL ,
@@ -422,7 +422,7 @@ CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`file` (
   INDEX `fk_file_resource1_idx` (`resource_id` ASC) ,
   CONSTRAINT `fk_file_resource1`
     FOREIGN KEY (`resource_id` )
-    REFERENCES `ledita-web-app`.`resource` (`id` )
+    REFERENCES `ledita-test`.`resource` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -430,11 +430,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ledita-web-app`.`likes`
+-- Table `ledita-test`.`likes`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ledita-web-app`.`likes` ;
+DROP TABLE IF EXISTS `ledita-test`.`likes` ;
 
-CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`likes` (
+CREATE  TABLE IF NOT EXISTS `ledita-test`.`likes` (
   `user_id` INT(11) NOT NULL ,
   `ld_id` INT(11) NOT NULL ,
   PRIMARY KEY (`user_id`, `ld_id`) ,
@@ -442,12 +442,12 @@ CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`likes` (
   INDEX `fk_ld_has_user_ld1_idx` (`ld_id` ASC) ,
   CONSTRAINT `fk_ld_has_user_ld1`
     FOREIGN KEY (`ld_id` )
-    REFERENCES `ledita-web-app`.`ld` (`id` )
+    REFERENCES `ledita-test`.`ld` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_ld_has_user_user1`
     FOREIGN KEY (`user_id` )
-    REFERENCES `ledita-web-app`.`user` (`id` )
+    REFERENCES `ledita-test`.`user` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -455,11 +455,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ledita-web-app`.`needs`
+-- Table `ledita-test`.`needs`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ledita-web-app`.`needs` ;
+DROP TABLE IF EXISTS `ledita-test`.`needs` ;
 
-CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`needs` (
+CREATE  TABLE IF NOT EXISTS `ledita-test`.`needs` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `ld_id` INT(11) NOT NULL ,
   `ld_requisite_id` INT(11) NULL DEFAULT NULL ,
@@ -470,17 +470,17 @@ CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`needs` (
   INDEX `fk_needs_ld1_idx` (`ld_requisite_id` ASC) ,
   CONSTRAINT `fk_ld_has_objective_ld1`
     FOREIGN KEY (`ld_id` )
-    REFERENCES `ledita-web-app`.`ld` (`id` )
+    REFERENCES `ledita-test`.`ld` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_ld_has_objective_objective1`
     FOREIGN KEY (`objective_id` )
-    REFERENCES `ledita-web-app`.`objective` (`id` )
+    REFERENCES `ledita-test`.`objective` (`id` )
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_needs_ld1`
     FOREIGN KEY (`ld_requisite_id` )
-    REFERENCES `ledita-web-app`.`ld` (`id` )
+    REFERENCES `ledita-test`.`ld` (`id` )
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 12
@@ -488,11 +488,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ledita-web-app`.`participates`
+-- Table `ledita-test`.`participates`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ledita-web-app`.`participates` ;
+DROP TABLE IF EXISTS `ledita-test`.`participates` ;
 
-CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`participates` (
+CREATE  TABLE IF NOT EXISTS `ledita-test`.`participates` (
   `id` INT(11) NOT NULL ,
   `activity_group_id` INT(11) NOT NULL ,
   `activity_id` INT(11) NULL DEFAULT NULL ,
@@ -505,17 +505,17 @@ CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`participates` (
   INDEX `fk_ld_has_acitivty_group_idx` (`ld_is_part_id` ASC) ,
   CONSTRAINT `fk_activity_has_activity_group_activity1`
     FOREIGN KEY (`activity_id` )
-    REFERENCES `ledita-web-app`.`activity` (`id` )
+    REFERENCES `ledita-test`.`activity` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_activity_has_activity_group_activity_group1`
     FOREIGN KEY (`activity_group_id` )
-    REFERENCES `ledita-web-app`.`activity_group` (`id` )
+    REFERENCES `ledita-test`.`activity_group` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_ld_has_acitivty_group`
     FOREIGN KEY (`ld_is_part_id` )
-    REFERENCES `ledita-web-app`.`ld` (`id` )
+    REFERENCES `ledita-test`.`ld` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -523,11 +523,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ledita-web-app`.`technology`
+-- Table `ledita-test`.`technology`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ledita-web-app`.`technology` ;
+DROP TABLE IF EXISTS `ledita-test`.`technology` ;
 
-CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`technology` (
+CREATE  TABLE IF NOT EXISTS `ledita-test`.`technology` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(50) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) )
@@ -536,11 +536,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ledita-web-app`.`supports`
+-- Table `ledita-test`.`supports`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ledita-web-app`.`supports` ;
+DROP TABLE IF EXISTS `ledita-test`.`supports` ;
 
-CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`supports` (
+CREATE  TABLE IF NOT EXISTS `ledita-test`.`supports` (
   `technology_id` INT(11) NOT NULL ,
   `activity_id` INT(11) NOT NULL ,
   PRIMARY KEY (`technology_id`, `activity_id`) ,
@@ -548,18 +548,18 @@ CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`supports` (
   INDEX `fk_technology_has_activity_technology1_idx` (`technology_id` ASC) ,
   CONSTRAINT `fk_technology_has_activity_activity1`
     FOREIGN KEY (`activity_id` )
-    REFERENCES `ledita-web-app`.`activity` (`id` )
+    REFERENCES `ledita-test`.`activity` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_technology_has_activity_technology1`
     FOREIGN KEY (`technology_id` )
-    REFERENCES `ledita-web-app`.`technology` (`id` )
+    REFERENCES `ledita-test`.`technology` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-USE `ledita-web-app` ;
+USE `ledita-test` ;
 -- -----------------------------------------------------
 -- Views
 -- -----------------------------------------------------
@@ -625,7 +625,7 @@ CREATE OR REPLACE VIEW vw_ld_prerequisite AS
   INNER JOIN ld ldtarget
     on needs.ld_requisite_id = ldtarget.id);
 
-USE `ledita-web-app` ;
+USE `ledita-test` ;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
