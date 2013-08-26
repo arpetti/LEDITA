@@ -1,13 +1,13 @@
-USE `ledita-web-app` ;
+USE `ledita-test` ;
 
-INSERT INTO `ledita-web-app`.`image` (`id`, `name`, `size`, `uri`, `mime`)
+INSERT INTO `ledita-test`.`image` (`id`, `name`, `size`, `uri`, `mime`)
 VALUES ('1', 'mario.png', '287', 'http://localhost/ledita/img/usr/mario.png', 'png'),
         ('2', 'lucia.png', '347', 'http://localhost/ledita/img/usr/lucia.png', 'png'),
 ('3', 'antonio.png', '287', 'http://localhost/ledita/img/usr/antonio.png', 'jpg'),
 ('4', 'sara.png', '287', 'http://localhost/ledita/img/usr/sara.png', 'gif'),
 ('5', 'silvia.png', '287', 'http://localhost/ledita/img/usr/silvia.png', 'png');
 
-INSERT INTO `ledita-web-app`.`user` (`id`, `image_id`, `name`, `last_name`, `gender`, `email`, `hash`, `workplace`, `city`, `country`)
+INSERT INTO `ledita-test`.`user` (`id`, `image_id`, `name`, `last_name`, `gender`, `email`, `hash`, `workplace`, `city`, `country`)
 VALUES ('1', '1', 'Mario', 'Rossi', 'M', 'mario@email.it', '$2a$10$/MWGZW7cmwNdle.jiFJb9OiWqVZjxbgJxYNpEraHkwzZ2muBHL7Gm', 'Scuola A', 'Roma', 'Italia'),
 ('2', '2', 'Lucia', 'Bianchi', 'F', 'lucia@email.it', '$2a$10$/MWGZW7cmwNdle.jiFJb9OiWqVZjxbgJxYNpEraHkwzZ2muBHL7Gm', 'Scuola B', 'Parigi', 'Francia'),
 ('3', '3', 'Antonio', 'Verdi', 'M', 'antonio@email.it', '$2a$10$/MWGZW7cmwNdle.jiFJb9OiWqVZjxbgJxYNpEraHkwzZ2muBHL7Gm', 'Scuola C', 'Berlino', 'Germania'),
