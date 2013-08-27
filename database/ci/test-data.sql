@@ -387,3 +387,84 @@ VALUES
 ('34','5','49',NULL,NULL,'6','1'),
 ('35','5','50',NULL,NULL,'6','3'),
 ('36','5',NULL,'2',NULL,'6','2');
+
+
+
+INSERT INTO `technology` (`id`, `name`)
+VALUES
+('1','Tablet'),
+('2','PC'),
+('3','Smartphone'),
+('4','Whiteboard'),
+('5','Internet');
+
+
+INSERT INTO `supports` (`technology_id`,`activity_id`)
+VALUES
+('1','1'),
+('2','2'),
+('3','2'),
+('4','3'),
+('5','5'),
+('1','6'),
+('2','7'),
+('3','7'),
+('4','8'),
+('5','10'),
+('1','12'),
+('2','12'),
+('3','12'),
+('4','15'),
+('5','16'),
+('1','19'),
+('2','22'),
+('3','25'),
+('4','25'),
+('5','29'),
+('1','31'),
+('2','37'),
+('3','37'),
+('4','38'),
+('5','44'),
+('1','46'),
+('2','46'),
+('3','47'),
+('4','47'),
+('5','50');
+
+INSERT INTO `resource` (`id`, `activity_id`, `name`, `type`, `descr`, `link`, `copy`)
+VALUES
+('1','1','Didactical resource name 1','website','Description of the didactical resource number 1','http://#',NULL),
+('2','2','Didactical resource name 2','document','Description of the didactical resource number 2',NULL,'Carlo Neri'),
+('3','5','Didactical resource name 3','video','Description of the didactical resource number 3','http://#',NULL),
+('4','7','Didactical resource name 4','audio','Description of the didactical resource number 4',NULL,NULL),
+('5','12','Didactical resource name 5','website','Description of the didactical resource number 5','http://#','www.copy.com'),
+('6','14','Didactical resource name 6','image','Description of the didactical resource number 6','http://#',NULL),
+('7','18','Didactical resource name 7','document','Description of the didactical resource number 7',NULL,NULL),
+('8','22','Didactical resource name 8','website','Description of the didactical resource number 8','http://#',NULL),
+('9','24','Didactical resource name 9','video','Description of the didactical resource number 9',NULL,'Mario lorci'),
+('10','29','Didactical resource name 10','website','Description of the didactical resource number 10','http://#',NULL),
+('11','33','Didactical resource name 11','document','Description of the didactical resource number 11','http://#',NULL),
+('12','34','Didactical resource name 12','audio','Description of the didactical resource number 12',NULL,NULL),
+('13','37','Didactical resource name 13','document','Description of the didactical resource number 13','http://#',NULL),
+('14','40','Didactical resource name 14','audio','Description of the didactical resource number 14',NULL,'©LOL'),
+('15','41','Didactical resource name 15','website','Description of the didactical resource number 15','http://#','Edu ltd.'),
+('16','43','Didactical resource name 16','website','Description of the didactical resource number 16','http://#',NULL),
+('17','45','Didactical resource name 17','document','Description of the didactical resource number 17',NULL,'© www.ioi.com'),
+('18','48','Didactical resource name 18','video','Description of the didactical resource number 18','http://#',NULL),
+('19','49','Didactical resource name 19','website','Description of the didactical resource number 19','http://#',NULL),
+('20','50','Didactical resource name 20','document','Description of the didactical resource number 20',NULL,NULL);
+
+
+INSERT INTO `file` (`id`, `resource_id`, `name`, `size`, `uri`, `mime` )
+VALUES
+('1','2','Name of the file number 1','148','','application/pdf'),
+('2','5','Name of the file number 2','2212','','audio/mpeg'),
+('3','6','Name of the file number 3','348','','image/gif'),
+('4','9','Name of the file number 4','46','','application/pdf'),
+('5','10','Name of the file number 5','10100','','text/plain'),
+('6','11','Name of the file number 6','2435','','audio/mpeg'),
+('7','15','Name of the file number 7','6757','','image/gif'),
+('8','18','Name of the file number 8','434567','','application/pdf'),
+('9','19','Name of the file number 9','5455','','video/mpeg'),
+('10','20','Name of the file number 10','355','','text/plain');
