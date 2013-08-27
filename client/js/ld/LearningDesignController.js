@@ -29,6 +29,10 @@ angular.module('ledita-app')
   				return "groupBox1";
   		}
   		return "actBox";
-    };  
+    };
 
+   $scope.isBtnActive = function (data) {
+       if (data == true)
+       return "btnActive";
+   }                      ;
 }]);

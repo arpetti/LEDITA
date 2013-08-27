@@ -66,16 +66,16 @@
 <tabset type="pills">
 <div id="contentButtons">
     <tab-heading>
-        <button class="btnContent btnActive" ng-click="data.static1 = true"><img
+        <button class="btnContent" ng-class="isBtnActive(data.static1)"  ng-click="data.static1 = true"><img
                 src="../../img/board.png" class="btnImage"> Global View
         </button>
     </tab-heading>
     <tab-heading>
-        <button class="btnContent" ng-click="data.static2 = true"><img src="../../img/teacher.png"
+        <button class="btnContent" ng-class="isBtnActive(data.static2)" ng-click="data.static2 = true"><img src="../../img/teacher.png"
                                                                        class="btnImage"> Teacher View
         </button>
     </tab-heading>
-    <button class="btnContent" ng-click="data.static3 = true"><img src="../../img/student.png"
+    <button class="btnContent" ng-class="isBtnActive(data.static3)" ng-click="data.static3 = true"><img src="../../img/student.png"
                                                                    class="btnImage"> Student View
     </button>
 </div>
@@ -104,7 +104,6 @@
         <!-- If it's a group:  -->
         <div ng-show="node.children" class="groupName">{{ node.name }}</div>
         <div class="clearfix"></div>
-
         <div ng-repeat="child in node.children" class="actBox">
             <span class="actId">{{ child.activityid }}</span>
             <h6 class="actName">{{ child.name }}</h6>
@@ -142,7 +141,7 @@
                 <span class="actId">2b</span>
                 <h6 class="actName">Activity number one in the sequence</h6>
             </div>
-            <div class="actBox">
+            <div class="actBox clear-left">
                 <span class="actId">3b</span>
                 <h6 class="actName">Activity number one in the sequence</h6>
             </div>
@@ -151,8 +150,6 @@
                 <h6 class="actName">Activity number one in the sequence</h6>
             </div>
 
-        </div>
-        <div>
             <div class="actBox">
                 <span class="actId">5b</span>
                 <h6 class="actName">Activity number one in the sequence</h6>
