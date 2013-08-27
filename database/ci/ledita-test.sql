@@ -625,6 +625,46 @@ CREATE OR REPLACE VIEW vw_ld_prerequisite AS
   INNER JOIN ld ldtarget
     on needs.ld_requisite_id = ldtarget.id);
 
+CREATE OR REPLACE VIEW vw_ld_activity AS
+  (SELECT ldsource.id as source_id
+    , ldsource.name as source_name
+    , composes.level as level
+    , composes.position as position
+    , ldtarget.id as target_id
+    , ldtarget.name as target_name
+    , 'LD' as type
+  FROM ld ldsource
+  INNER JOIN composes
+    ON ldsource.id = composes.ld_id
+  INNER JOIN ld ldtarget
+    on composes.ld_part_id = ldtarget.id)
+  UNION
+  (SELECT ldsource.id as source_id
+    , ldsource.name as source_name
+    , composes.level as level
+    , composes.position as position
+    , activity.id as target_id
+    , activity.name as target_name
+    , 'ACTIVITY' as type
+  FROM ld ldsource
+  INNER JOIN composes
+    ON ldsource.id = composes.ld_id
+  INNER JOIN activity
+    on composes.activity_id = activity.id)
+  UNION
+  (SELECT ldsource.id as source_id
+    , ldsource.name as source_name
+    , composes.level as level
+    , composes.position as position
+    , activity_group.id as target_id
+    , activity_group.name as target_name
+    , 'ACTIVITY_GROUP' as type
+  FROM ld ldsource
+  INNER JOIN composes
+    ON ldsource.id = composes.ld_id
+  INNER JOIN activity_group
+    on composes.activity_group_id = activity_group.id);    
+
 USE `ledita-test` ;
 
 SET SQL_MODE=@OLD_SQL_MODE;
