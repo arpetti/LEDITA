@@ -294,7 +294,7 @@ input.sidebarInput {
     padding-right: 5px;
 }
 
-/* activities
+/* activities diagram
 ===================== */
 #tabContent {
     margin: 0;
@@ -302,8 +302,6 @@ input.sidebarInput {
     text-align: center;
     clear: both;
 }
-
-
 
 .actBox {
     background-color: #0099CC;
@@ -314,13 +312,6 @@ input.sidebarInput {
     margin: 10px 1%;
     display: inline-block;
 }
-
-
-
-
-
-
-
 
 .levelBox {
     text-align: center;
@@ -397,6 +388,29 @@ input.sidebarInput {
 .groupBox3 .actBox {
     width: 30%;
     background-color: #00A000;
+}
+
+
+/* activity text
+===================== */
+.nodeText {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px dashed #990000;
+}
+
+.groupNameText {
+    padding-left: 20px;
+    color: #0099CC;
+    font-weight: bold;
+}
+
+.nodeNameText {
+    color: #990000;
+}
+
+.tabText {
+    padding: 0;
 }
 
 /* navbar

@@ -34,19 +34,19 @@
     </div>
 
     <!-- TODO: 2nd phase - Tag system -->
-       <!--
+    <!--
 
-    <div class="clear marginTop"><h5 class=" zeroMargin">Tags:</h5>
+ <div class="clear marginTop"><h5 class=" zeroMargin">Tags:</h5>
 
-        <ul class="zeroMargin">
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
-        </ul>
+     <ul class="zeroMargin">
+         <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
+         <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
+         <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
+     </ul>
 
-    </div>
+ </div>
 
-    -->
+ -->
 
     <!-- TODO: 1st phase - Service for name of father and children LDs -->
 
@@ -81,242 +81,59 @@
     </tab-heading>
     <tab-heading>
         <button class="btnContent" ng-class="isBtnActive(data.static2)" ng-click="data.static2 = true"><img src="../../img/teacher.png"
-                                                                       class="btnImage"> Teacher View
+                                                                                                            class="btnImage"> Teacher View
         </button>
     </tab-heading>
     <button class="btnContent" ng-class="isBtnActive(data.static3)" ng-click="data.static3 = true"><img src="../../img/student.png"
-                                                                   class="btnImage"> Student View
+                                                                                                        class="btnImage"> Student View
     </button>
 </div>
 
 <tab active="data.static1">
-<div id="contentBody">
-<div id="contentHeader">
+    <div id="contentBody">
+        <div id="contentHeader">
 
 
-    <div class="float-left">
-        <h4 class="inline"><a href="#"><img ng-src="../img/emptyStar.png" class="star"></a>{{
-            learningDesign.ld_name }}</h4>
-    </div>
-    <div class="float-right">
-        <h4><span class="round">A1</span> {{ learningDesign.ld_scope }}</h4>
-    </div>
-</div>
-
-
-<div id="tabContent">
-
-<!-- BEGIN DYNAMIC ACTIVITY CONTENT -->
-<div ng-repeat="level in levels" class="levelBox">
-    <div ng-repeat="node in level.nodes" ng-class="getBoxClass(node)">
-
-        <!-- If it's a group:  -->
-        <div ng-show="node.children" class="groupName">{{ node.name }}</div>
-        <div class="clearfix"></div>
-        <div ng-repeat="child in node.children" class="actBox">
-            <span class="actId">{{ child.activityid }}</span>
-            <h6 class="actName">{{ child.name }}</h6>
-        </div>
-        <!-- End Children -->
-
-
-        <!-- If it's NOT a group:  -->
-        <span ng-show="!node.children" class="actId">{{ node.activityid }}</span>
-        <h6 ng-show="!node.children" class="actName">{{ node.name }}</h6>
-
-    </div>
-    <!-- End Activity or Group Box -->
-</div>
-<!-- End Level Box -->
-<!-- END DYNAMIC ACTIVITY CONTENT-->
-
-<div class="levelBox">
-    <div class="actBox">
-        <span class="actId">1</span>
-        <h6 class="actName">Activity number one in the sequence</h6>
-    </div>
-
-</div>
-<div class="levelBox">
-    <div class="groupBox4">
-        <div class="groupName">Group Name</div>
-        <div class="clearfix"></div>
-        <div>
-            <div class="actBox">
-                <span class="actId">1b</span>
-                <h6 class="actName">Activity number one in the sequence</h6>
+            <div class="float-left">
+                <h4 class="inline"><a href="#"><img ng-src="../img/emptyStar.png" class="star"></a>{{
+                    learningDesign.ld_name }}</h4>
             </div>
-            <div class="actBox">
-                <span class="actId">2b</span>
-                <h6 class="actName">Activity number one in the sequence</h6>
-            </div>
-            <div class="actBox clear-left">
-                <span class="actId">3b</span>
-                <h6 class="actName">Activity number one in the sequence</h6>
-            </div>
-            <div class="actBox">
-                <span class="actId">4b</span>
-                <h6 class="actName">Activity number one in the sequence</h6>
-            </div>
-
-            <div class="actBox">
-                <span class="actId">5b</span>
-                <h6 class="actName">Activity number one in the sequence</h6>
-            </div>
-            <div class="actBox">
-                <span class="actId">6b</span>
-                <h6 class="actName">Activity number one in the sequence</h6>
-            </div>
-
-        </div>
-    </div>
-</div>
-<div class="levelBox">
-    <div class="groupBox1">
-        <div class="groupName">Group Name</div>
-        <div class="clearfix"></div>
-        <div>
-            <div class="actBox">
-                <span class="actId">1</span>
-                <h6 class="actName">Activity number one in the sequence</h6>
-            </div>
-        </div>
-        <div>
-            <div class="actBox">
-                <span class="actId">1</span>
-                <h6 class="actName">Activity number one in the sequence</h6>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="groupBox1">
-        <div class="groupName">Group Name</div>
-        <div class="clearfix"></div>
-        <div>
-            <div class="actBox">
-                <span class="actId">1</span>
-                <h6 class="actName">Activity number one in the sequence</h6>
-            </div>
-        </div>
-        <div>
-            <div class="actBox">
-                <span class="actId">1</span>
-                <h6 class="actName">Activity number one in the sequence</h6>
-            </div>
-
-        </div>
-    </div>
-    <div class="groupBox1">
-        <div class="groupName">Group Name</div>
-        <div class="clearfix"></div>
-        <div>
-            <div class="actBox">
-                <span class="actId">1</span>
-                <h6 class="actName">Activity number one in the sequence</h6>
-            </div>
-        </div>
-        <div>
-            <div class="actBox">
-                <span class="actId">1</span>
-                <h6 class="actName">Activity number one in the sequence</h6>
-            </div>
-
-        </div>
-    </div>
-    <div class="groupBox1">
-        <div class="groupName">Group Name</div>
-        <div class="clearfix"></div>
-        <div>
-            <div class="actBox">
-                <span class="actId">1</span>
-                <h6 class="actName">Activity number one in the sequence</h6>
-            </div>
-        </div>
-        <div>
-            <div class="actBox">
-                <span class="actId">1</span>
-                <h6 class="actName">Activity number one in the sequence</h6>
-            </div>
-
-        </div>
-    </div>
-</div>
-<div class="levelBox">
-    <div class="groupBox2">
-        <div class="groupName">Group Name</div>
-        <div class="clearfix"></div>
-        <div>
-            <div class="actBox">
-                <span class="actId">1</span>
-                <h6 class="actName">Activity number one in the sequence</h6>
-            </div>
-            <div class="actBox">
-                <span class="actId">1</span>
-                <h6 class="actName">Activity number one in the sequence</h6>
+            <div class="float-right">
+                <h4><span class="round">A1</span> {{ learningDesign.ld_scope }}</h4>
             </div>
         </div>
 
-        <div>
-            <div class="actBox">
-                <span class="actId">1</span>
-                <h6 class="actName">Activity number one in the sequence</h6>
+
+        <div id="tabContent">
+
+            <!-- BEGIN DYNAMIC ACTIVITY CONTENT -->
+            <div ng-repeat="level in levels" class="levelBox">
+                <div ng-repeat="node in level.nodes" ng-class="getBoxClass(node)">
+
+                    <!-- If it's a group:  -->
+                    <div ng-show="node.children" class="groupName">{{ node.name }}</div>
+                    <div class="clearfix"></div>
+                    <div ng-repeat="child in node.children" class="actBox">
+                        <span class="actId">{{ child.activityid }}</span>
+                        <h6 class="actName">{{ child.name }}</h6>
+                    </div>
+                    <!-- End Children -->
+
+
+                    <!-- If it's NOT a group:  -->
+                    <span ng-show="!node.children" class="actId">{{ node.activityid }}</span>
+                    <h6 ng-show="!node.children" class="actName">{{ node.name }}</h6>
+
+                </div>
+                <!-- End Activity or Group Box -->
             </div>
+            <!-- End Level Box -->
+            <!-- END DYNAMIC ACTIVITY CONTENT-->
 
-        </div>
-    </div>
-</div>
-<div class="levelBox">
-    <div class="groupBox3">
-        <div class="groupName">Group Name</div>
-        <div class="clearfix"></div>
-        <div class="actBox">
-            <span class="actId">1</span>
-            <h6 class="actName">Activity number one in the sequence</h6>
-        </div>
-        <div class="actBox">
-            <span class="actId">1</span>
-            <h6 class="actName">Activity number one in the sequence</h6>
-        </div>
-        <div class="actBox">
-            <span class="actId">1</span>
-            <h6 class="actName">Activity number one in the sequence</h6>
-        </div>
-    </div>
-</div>
 
-<div class="levelBox">
-    <div class="actBox">
-        <span class="actId">1</span>
-        <h6 class="actName">Activity number one in the sequence</h6>
+            <div class="clearfix"></div>
+        </div>
     </div>
-    <div class="actBox">
-        <span class="actId">1</span>
-        <h6 class="actName">Activity number one in the sequence</h6>
-    </div>
-
-</div>
-<div class="levelBox last">
-    <div class="actBox">
-        <span class="actId">1</span>
-        <h6 class="actName">Activity number one in the sequence</h6>
-    </div>
-    <div class="actBox">
-        <span class="actId">1</span>
-        <h6 class="actName">Activity number one in the sequence</h6>
-    </div>
-    <div class="actBox">
-        <span class="actId">1</span>
-        <h6 class="actName">Activity number one in the sequence</h6>
-    </div>
-    <div class="actBox">
-        <span class="actId">1</span>
-        <h6 class="actName">Activity number one in the sequence</h6>
-    </div>
-</div>
-<div class="clearfix"></div>
-</div>
-</div>
 </tab>
 <tab active="data.static2">
     <div id="contentBody">
@@ -333,54 +150,69 @@
         </div>
 
         <div id="tabContent">
-            <div class="levelBox">
-                <div class="actBox">
-                    <span class="actId">1</span>
-                    <h6 class="actName">Activity number one in the sequence</h6>
-                </div>
 
-            </div>
-            <div class="levelBox">
-                <div class="groupBox2">
-                    <div class="groupName">Group Name</div>
+            <!-- BEGIN DYNAMIC ACTIVITY CONTENT -->
+            <div ng-repeat="level in levels">
+                <div ng-repeat="node in level.nodes" class="nodeText">
+
+                    <!-- If it's a group:  -->
+                    <div ng-show="node.children" class="groupNameText"> < {{ node.name }} > </div>
                     <div class="clearfix"></div>
-                    <div>
-                        <div class="actBox">
-                            <span class="actId">1</span>
-                            <h6 class="actName">Activity number one in the sequence</h6>
-                        </div>
-                        <div class="actBox">
-                            <span class="actId">1</span>
-                            <h6 class="actName">Activity number one in the sequence</h6>
-                        </div>
+                    <div ng-repeat="child in node.children">
+                        <h5 class="nodeNameText">< {{ child.name }} ></h5>
+                        <p class="tabText">Modality:<br> <strong>{ { activity.modality } }</strong></p>
+                        <p class="tabText">Duration:<br> <strong>{ { activity.dur_mon, activity.dur_dd, activity.dur_hh, activity.dur_min } }</strong></p>
+                        <p class="tabText">Students' organization:<br> <strong>{ { students.type } }</strong></p>
+                        <p class="tabText">Used Technologies:<br> <strong>{ { technology.name } }</strong></p>
+                        <p class="tabText">Didactical Resources:
+                        <ul>
+                            <li> { { resource.name } }</li>
+                            <ul>
+                                <li>Type: { { resource.type } } | Copyright: { { resource.copy } } | <a ng-href="{ { resource.link } }">Link</a> </li>
+                                <li>Description: { { resource.descr } }</li>
+                                <li>Attached Files:</li>
+                                <ul>
+                                    <li>Name: { { file.name } } | Size: { { file.size } } | Extension: { { file.mime } } | <a ng-href="{ { file.uri } }">Link</a></li>
+                                </ul>
 
+                            </ul>
+                        </ul>
+                        </p>
+                        <p class="tabText">Practical Description:<br> { { activity.pract_descr } }</p>
+                        <p class="tabText">Pedagogical Description:<br>{ { activity.edu_descr } }</p>
 
                     </div>
-                    <div>
+                    <!-- End Children -->
 
-                        <div class="actBox">
-                            <span class="actId">1</span>
-                            <h6 class="actName">Activity number one in the sequence</h6>
-                        </div>
-                        <div class="actBox">
-                            <span class="actId">1</span>
-                            <h6 class="actName">Activity number one in the sequence</h6>
-                        </div>
 
-                    </div>
+                    <!-- If it's NOT a group:  -->
+                    <h5 ng-show="!node.children" class="nodeNameText">< {{ node.name }} ></h5>
+                    <p class="tabText">Modality:<br> <strong>{ { activity.modality } }</strong></p>
+                    <p class="tabText">Duration:<br> <strong>{ { activity.dur_mon, activity.dur_dd, activity.dur_hh, activity.dur_min } }</strong></p>
+                    <p class="tabText">Students' organization:<br> <strong>{ { students.type } }</strong></p>
+                    <p class="tabText">Used Technologies:<br> <strong>{ { technology.name } }</strong></p>
+                    <p class="tabText">Didactical Resources:
+                    <ul>
+                        <li> { { resource.name } }</li>
+                        <ul>
+                            <li>Type: { { resource.type } } | Copyright: { { resource.copy } } | <a ng-href="{ { resource.link } }">Link</a> </li>
+                            <li>Description: { { resource.descr } }</li>
+                            <li>Attached Files:</li>
+                            <ul>
+                                <li>Name: { { file.name } } | Size: { { file.size } } | Extension: { { file.mime } } | <a ng-href="{ { file.uri } }">Link</a></li>
+                            </ul>
+
+                        </ul>
+                    </ul>
+                    </p>
+                    <p class="tabText">Practical Description:<br> { { activity.pract_descr } }</p>
+                    <p class="tabText">Pedagogical Description:<br>{ { activity.edu_descr } }</p>
+
                 </div>
+                <!-- End Activity or Group Box -->
             </div>
-
-
-            <div class="levelBox last">
-                <div class="actBox">
-                    <span class="actId">1</span>
-                    <h6 class="actName">Activity number one in the sequence</h6>
-                </div>
-
-
-            </div>
-
+            <!-- End Level Box -->
+            <!-- END DYNAMIC ACTIVITY CONTENT-->
             <div class="clearfix"></div>
         </div>
     </div>
@@ -400,123 +232,66 @@
             </div>
         </div>
         <div id="tabContent">
-            <div class="levelBox">
-                <div class="actBox">
-                    <span class="actId">1</span>
-                    <h6 class="actName">Activity number one in the sequence</h6>
-                </div>
+            <!-- BEGIN DYNAMIC ACTIVITY CONTENT -->
+            <div ng-repeat="level in levels">
+                <div ng-repeat="node in level.nodes" class="nodeText">
 
+                    <!-- If it's a group:  -->
+                    <div ng-show="node.children" class="groupNameText"> < {{ node.name }} > </div>
+                    <div class="clearfix"></div>
+                    <div ng-repeat="child in node.children">
+                        <h5 class="nodeNameText">< {{ child.name }} ></h5>
+                        <p class="tabText">Modality:<br> <strong>{ { activity.modality } }</strong></p>
+                        <p class="tabText">Duration:<br> <strong>{ { activity.dur_mon, activity.dur_dd, activity.dur_hh, activity.dur_min } }</strong></p>
+                        <p class="tabText">Students' organization:<br> <strong>{ { students.type } }</strong></p>
+                        <p class="tabText">Used Technologies:<br> <strong>{ { technology.name } }</strong></p>
+                        <p class="tabText">Didactical Resources:
+                        <ul>
+                            <li> { { resource.name } }</li>
+                            <ul>
+                                <li>Type: { { resource.type } } | Copyright: { { resource.copy } } | <a ng-href="{ { resource.link } }">Link</a> </li>
+                                <li>Description: { { resource.descr } }</li>
+                                <li>Attached Files:</li>
+                                <ul>
+                                    <li>Name: { { file.name } } | Size: { { file.size } } | Extension: { { file.mime } } | <a ng-href="{ { file.uri } }">Link</a></li>
+                                </ul>
+
+                            </ul>
+                        </ul>
+                        </p>
+                        <p class="tabText">Activity Description:<br> { { activity.pract_descr } }</p>
+
+                    </div>
+                    <!-- End Children -->
+
+
+                    <!-- If it's NOT a group:  -->
+                    <h5 ng-show="!node.children" class="nodeNameText">< {{ node.name }} ></h5>
+                    <p class="tabText">Modality:<br> <strong>{ { activity.modality } }</strong></p>
+                    <p class="tabText">Duration:<br> <strong>{ { activity.dur_mon, activity.dur_dd, activity.dur_hh, activity.dur_min } }</strong></p>
+                    <p class="tabText">Students' organization:<br> <strong>{ { students.type } }</strong></p>
+                    <p class="tabText">Used Technologies:<br> <strong>{ { technology.name } }</strong></p>
+                    <p class="tabText">Didactical Resources:
+                    <ul>
+                        <li> { { resource.name } }</li>
+                        <ul>
+                            <li>Type: { { resource.type } } | Copyright: { { resource.copy } } | <a ng-href="{ { resource.link } }">Link</a> </li>
+                            <li>Description: { { resource.descr } }</li>
+                            <li>Attached Files:</li>
+                            <ul>
+                                <li>Name: { { file.name } } | Size: { { file.size } } | Extension: { { file.mime } } | <a ng-href="{ { file.uri } }">Link</a></li>
+                            </ul>
+
+                        </ul>
+                    </ul>
+                    </p>
+                    <p class="tabText">Activity Description:<br> { { activity.pract_descr } }</p>
+
+                </div>
+                <!-- End Activity or Group Box -->
             </div>
-            <div class="levelBox">
-                <div class="groupBox3">
-                    <div class="groupName">Group Name</div>
-                    <div class="clearfix"></div>
-                    <div>
-                        <div class="actBox">
-                            <span class="actId">1</span>
-                            <h6 class="actName">Activity number one in the sequence</h6>
-                        </div>
-
-
-                    </div>
-                    <div>
-                        <div class="actBox">
-                            <span class="actId">1</span>
-                            <h6 class="actName">Activity number one in the sequence</h6>
-                        </div>
-                        <div class="actBox">
-                            <span class="actId">1</span>
-                            <h6 class="actName">Activity number one in the sequence</h6>
-                        </div>
-                        <div class="actBox">
-                            <span class="actId">1</span>
-                            <h6 class="actName">Activity number one in the sequence</h6>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="levelBox">
-                <div class="groupBox1">
-                    <div class="groupName">Group Name</div>
-                    <div class="clearfix"></div>
-                    <div>
-                        <div class="actBox">
-                            <span class="actId">1</span>
-                            <h6 class="actName">Activity number one in the sequence</h6>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="actBox">
-                            <span class="actId">1</span>
-                            <h6 class="actName">Activity number one in the sequence</h6>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="groupBox1">
-                    <div class="groupName">Group Name</div>
-                    <div class="clearfix"></div>
-                    <div>
-                        <div class="actBox">
-                            <span class="actId">1</span>
-                            <h6 class="actName">Activity number one in the sequence</h6>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="actBox">
-                            <span class="actId">1</span>
-                            <h6 class="actName">Activity number one in the sequence</h6>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="groupBox1">
-                    <div class="groupName">Group Name</div>
-                    <div class="clearfix"></div>
-                    <div>
-                        <div class="actBox">
-                            <span class="actId">1</span>
-                            <h6 class="actName">Activity number one in the sequence</h6>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="actBox">
-                            <span class="actId">1</span>
-                            <h6 class="actName">Activity number one in the sequence</h6>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="groupBox1">
-                    <div class="groupName">Group Name</div>
-                    <div class="clearfix"></div>
-                    <div>
-                        <div class="actBox">
-                            <span class="actId">1</span>
-                            <h6 class="actName">Activity number one in the sequence</h6>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="actBox">
-                            <span class="actId">1</span>
-                            <h6 class="actName">Activity number one in the sequence</h6>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-        <div class="levelBox last">
-            <div class="actBox">
-                <span class="actId">1</span>
-                <h6 class="actName">Activity number one in the sequence</h6>
-            </div>
-
-        </div>
+            <!-- End Level Box -->
+            <!-- END DYNAMIC ACTIVITY CONTENT-->
 
         <div class="clearfix"></div>
     </div>
