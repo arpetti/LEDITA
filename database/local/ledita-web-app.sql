@@ -664,7 +664,20 @@ CREATE OR REPLACE VIEW vw_ld_activity AS
   INNER JOIN composes
     ON ldsource.id = composes.ld_id
   INNER JOIN activity_group
-    on composes.activity_group_id = activity_group.id);  
+    on composes.activity_group_id = activity_group.id); 
+
+CREATE OR REPLACE VIEW vw_activity_group AS
+  SELECT activity_group.id as activity_group_id
+    , activity_group.name as activity_group_name
+    , participates.level as level
+    , participates.position as position
+    , activity.id as activity_id
+    , activity.name as activity_name
+  FROM activity_group
+  INNER JOIN participates
+    ON activity_group.id = participates.activity_group_id
+  INNER JOIN activity
+    ON participates.activity_id = activity.id;
 
 USE `ledita-web-app` ;
 
