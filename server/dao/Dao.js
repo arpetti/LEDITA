@@ -8,7 +8,8 @@ var pool = mysql.createPool({
   user: config.db_user,
   password: config.db_pswd,
   database: config.db_schema,
-  connectionLimit: config.db_pool_connection_limit
+  connectionLimit: config.db_pool_connection_limit,
+  debug: config.db_debug_sql
 });
 
 module.exports = {
