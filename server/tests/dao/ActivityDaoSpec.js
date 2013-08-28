@@ -15,10 +15,10 @@ describe('Activity DAO', function() {
     			expect(activities[0].target_name).to.equal('Support Activity 3');
     			expect(activities[0].type).to.equal('ACTIVITY');
 	            
-    			expect(activities[5].level).to.equal(2);
-    			expect(activities[5].position).to.equal(1);
-    			expect(activities[5].target_name).to.equal('Group 4 Name');
-    			expect(activities[5].type).to.equal('ACTIVITY_GROUP');
+    			expect(activities[1].level).to.equal(2);
+    			expect(activities[1].position).to.equal(1);
+    			expect(activities[1].target_name).to.equal('Group 4 Name');
+    			expect(activities[1].type).to.equal('ACTIVITY_GROUP');
 
 	            done();
         	});
