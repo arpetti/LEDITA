@@ -9,11 +9,17 @@ describe('Activity DAO', function() {
 			var ldid = 3;
     		ActivityDao.getLdActivities(ldid, function(err, activities){
     			expect(activities).to.have.length(6);
-	            // expect(learningDesigns[0].ld_id).to.equal(1);
-	            // expect(learningDesigns[0].ld_name).to.equal('Learning Design Title Demo 1');
-	            // expect(learningDesigns[0].ld_scope).to.equal('Lesson');
-	            // expect(learningDesigns[0].user_name).to.equal('Mario');
-	            // expect(learningDesigns[0].user_last_name).to.equal('Rossi');
+    			
+    			expect(activities[0].level).to.equal(1);
+    			expect(activities[0].position).to.equal(1);
+    			expect(activities[0].target_name).to.equal('Support Activity 3');
+    			expect(activities[0].type).to.equal('ACTIVITY');
+	            
+    			expect(activities[5].level).to.equal(2);
+    			expect(activities[5].position).to.equal(1);
+    			expect(activities[5].target_name).to.equal('Group 4 Name');
+    			expect(activities[5].type).to.equal('ACTIVITY_GROUP');
+
 	            done();
         	});
     	});
