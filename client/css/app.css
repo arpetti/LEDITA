@@ -438,6 +438,29 @@ line-height: 18px;
     background-color: #00A000;
 }
 
+.actLabel {
+    font-size: 11px;
+    font-weight: bold;
+    font-family: 'arial', sans-serif;
+    text-align: center;
+    border-bottom: 1px dashed #FFFFFF;
+}
+
+.timeLabel {
+    float: left;
+    padding: 5px ;
+}
+
+.orgLabel {
+    float: right;
+    padding: 5px;
+
+}
+
+a.whiteText:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
 /* activity text
 ===================== */
 .nodeText {
@@ -553,7 +576,7 @@ ul.listNode li {
 }
 
 .nav-closed:hover .nav-username {
-    color: #999;
+    color: #0099CC;
     text-shadow: 0 -1px 1px #FFFFFF, 0 1px 1px #CCCCCC;
 
 }
@@ -638,6 +661,7 @@ li#loggedInUserName.nav-username {
     text-align: right;
     padding-right: 3px;
 }
+
 
 .navbar .nav.pull-right {
     margin-top: -10px;
