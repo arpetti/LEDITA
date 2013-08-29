@@ -28,10 +28,10 @@ img {
 ===================== */
 body {
     padding: 60px 0 40px;
-    font: 12px 'Raleway', sans-serif;
+    font: 14px 'Raleway', sans-serif;
     line-height: 22px;
     color: #666666;
-    background: #F5F4ED url("../img/creampaper.png");
+    background: url("../img/old_mathematics.png");
 
 }
 
@@ -72,12 +72,26 @@ a:hover {
 
 /* main layout
 ===================== */
-#sidebar {
-    background: url("../img/book.png") no-repeat 100% 100%;
-    background-size: 100% 100%;
 
-    padding: 10px 10px 10px 35px;
+#sidebar {
+   background-color: #FFF;
+    border: 6px solid #990000 ;
+    border-radius: 6px;
+    padding: 10px;
     min-height: 350px;
+}
+
+#sidebarHeader {
+    background-color: #990000;
+    color: #FFFFFF;
+    border: 2px dotted #FFFFFF;
+    text-align: center;
+    padding: 5px;
+    margin: 0 0 10px 0;
+}
+
+.marginTopSidebar {
+    padding-top: 15px;
 }
 
 .sidebarInput {
@@ -117,7 +131,7 @@ input.sidebarInput {
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     padding: 1px 4px;
-    line-height: 18px;
+    line-height: 24px;
 }
 
 .sidebarItemLink {
@@ -239,7 +253,7 @@ input.sidebarInput {
 
 #contentHeader {
     margin: 5px 5px;
-    height: 20px;
+    min-height: 20px;
     padding: 5px 10px;
     background-color: #0099CC;
     color: #FFFFFF;
@@ -296,6 +310,14 @@ input.sidebarInput {
 
 /* activities diagram
 ===================== */
+.titleRight {
+    float: right;
+}
+
+.titleLeft {
+    float: left;
+}
+
 #tabContent {
     margin: 0;
     padding: 0;
@@ -304,19 +326,20 @@ input.sidebarInput {
 }
 
 .actBox {
-    background-color: #0099CC;
+    background-color: #00A000;
     border-radius: 6px;
     color: #FFF;
     min-height: 40px;
     width: 22%;
     margin: 10px 1%;
     display: inline-block;
+    border: 2px solid #FFFFFF;
 }
 
 .levelBox {
     text-align: center;
-    padding-bottom: 20px;
-    background: url("../img/arw.png") no-repeat bottom;
+    padding-top: 20px;
+    background: url("../img/arw.png") no-repeat top;
 }
 
 .levelBox.last {
@@ -340,7 +363,7 @@ input.sidebarInput {
 .actName {
     clear: left;
     padding: 2px 5px;
-    line-height: 1.3em
+    line-height: 1.3em;
 }
 
 .groupBox1, .groupBox2, .groupBox3, .groupBox4 {
@@ -395,29 +418,61 @@ input.sidebarInput {
 ===================== */
 .nodeText {
     text-align: left;
-    padding: 10px;
-    border-bottom: 1px dashed #990000;
+    padding: 10px 25px;
+    border: 1px dashed #dddddd;
+    border-radius: 6px;
+    font-size: 14px;
+    margin: 10px 5px;
 }
 
-.groupNameText {
+.groupBoxText {
     padding-left: 20px;
-    color: #0099CC;
     font-weight: bold;
+    border: 1px dashed #0099CC;
+    border-radius: 6px;
+    margin: 0 -10px;
 }
 
+.groupNameText{
+    color: #0099CC;
+    padding: 0 25px 0 0;
+    text-align: right;
+
+
+}
 .nodeNameText {
     color: #990000;
+    text-align: center;
+    text-transform: uppercase;
+font-size: 22px;
+    padding-top: 15px;
 }
 
 .tabText {
     padding: 0;
+    font-weight: bold;
+}
+
+.nodeBodyText {
+    padding: 3px;
+    font-weight: normal;
+
+}
+
+ul.listNode li {
+    list-style: none;
+    line-height: 28px;
+    margin: 0;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 /* navbar
 ===================== */
 .navbar-inverse .navbar-inner {
-    background: url('../img/header.jpg') repeat-x;
-    border: none;
+   background: url('../img/wood.png') ;
+
+    border-bottom: 3px solid #CCCCCC;
 }
 
 .navbar .nav-top-pad {
@@ -444,7 +499,7 @@ input.sidebarInput {
 }
 
 .btn-menu:hover {
-    color: #990000;
+    color: #999;
     background-color: #FFFFFF;
     text-shadow: 0 -1px 1px #FFFFFF, 0 1px 1px #CCCCCC;
     box-shadow: 0 -1px 2px rgba(255, 255, 255, 0.65), 0 2px 2px #CCCCCC;
@@ -474,18 +529,18 @@ input.sidebarInput {
 }
 
 .nav-closed:hover .nav-username {
-    color: #0099CC;
-    text-shadow: 0 -2px 2px #FFFFFF, 0 1px 1px #CCCCCC;
+    color: #999;
+    text-shadow: 0 -1px 1px #FFFFFF, 0 1px 1px #CCCCCC;
 
 }
 
 .nav-closed:hover .user-pic {
-    border-color: #0099CC;
+    border-color: #999;
 }
 
 .nav-closed:hover .caret {
-    border-top-color: #0099CC;
-    border-bottom-color: #0099CC;
+    border-top-color: #999;
+    border-bottom-color: #999;
 }
 
 .caret {
@@ -580,12 +635,15 @@ li#loggedInUserName.nav-username {
 /* registration form
 ===================== */
 .form-horizontal {
-    background-size: 100% 100%;
-    background: url("../img/signup.png") no-repeat center;
-    margin: 30px 0 0 0;
+  background-color: #0099CC;
+    border-radius: 14px;
+    margin: 0;
+    border: 3px solid #CCCCCC;
+    box-shadow: inset 0 1px 0 rgba(235, 235, 235, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .login-border {
+    margin-top: 40px;
 }
 
 #signUpHeader {
@@ -595,7 +653,7 @@ li#loggedInUserName.nav-username {
     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75), 0 -2px 1px rgba(155, 155, 155, 0.75);
     border: none;
     text-align: center;
-    padding-top: 30px;
+    padding-top: 45px;
     margin: 0 auto 15px auto;
 }
 
@@ -650,7 +708,7 @@ li#loggedInUserName.nav-username {
 /* form elements
 ===================== */
 .input-xlarge {
-    width: 80%;
+    width: 77%;
 }
 
 legend {
@@ -771,13 +829,18 @@ input[type="checkbox"] {
 /* Responsive Rules
 ================ */
 @media (min-width:1200px) {
-    #sidebar {
-        padding: 10px 10px 10px 45px;
 
-    }
 
     .ld-border {
-        width: 19%
+        margin-right: 0.6%;
+    }
+    .btnModel {
+        font-size: 18px;
+    }
+
+    .btnModelImg {
+        width: 80px;
+        margin: 5px;
     }
 }
 
@@ -827,6 +890,7 @@ input[type="checkbox"] {
     .navbar-inverse .btn-navbar {
         background: #0099CC none;
         margin: 10px 30px;
+        border: 2px solid #FFFFFF;
     }
 
     .navbar-inverse .nav-collapse .navbar-form {
@@ -945,6 +1009,31 @@ input[type="checkbox"] {
 
     }
 
+    .btnModel {
+        font-size: 12px;
+        line-height: 16px;
+        margin-top: 10px;
+    }
+
+    .btnModelImg {
+        width: 60px;
+        margin: 10px;
+    }
+
+}
+
+@media (max-width: 885px) and (min-width: 767px) {
+    .btnModel {
+        font-size: 12px;
+        line-height: 16px;
+        margin-top: 5px;
+    }
+
+    .btnModelImg {
+        width: 60px;
+        margin: 10px 2px;
+    }
+
 }
 
 @media (max-width: 767px) {
@@ -961,6 +1050,26 @@ input[type="checkbox"] {
     .ld-border {
         width: 43%;
         margin-left: 1%;
+    }
+    #model {
+        width: 200px;
+        height: 40px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .btnModel {
+        font-size: 14px;
+        margin: 5px  ;
+    }
+
+    .btnModelImg {
+        width: 32px;
+        margin: 5px;
+    }
+
+    #sidebar {
+        margin-bottom: 20px;
     }
 }
 
@@ -985,6 +1094,12 @@ input[type="checkbox"] {
         margin-left: 58%;
     }
 
+    .btnContent {
+        width: 130px;
+        font-size: 12px;
+        line-height: 12px;
+    }
+
 }
 
 @media (max-width: 480px) {
@@ -1005,6 +1120,52 @@ input[type="checkbox"] {
         width: 92%;
     }
 
+    .btnContent {
+        width: 60px;
+        font-size: 0;
+
+    }
+
+    .btnImage {
+        margin: 0;
+        padding: 0;
+        width: 24px;
+    }
+
+    .titleRight {
+        float: none;
+        text-align: center;
+        margin: 10px;
+    }
+
+    .titleLeft {
+        float: none;
+        text-align: center;
+    }
+    .actBox {
+        text-overflow: ellipsis;
+    }
+
+    .actName {
+        font-size: 10px;
+    }
+
+}
+
+@media (max-width: 290px) {
+    #model {
+        width: 85%;
+    }
+    .btnModel {
+        font-size: 12px;
+        line-height: 14px;
+        margin-top: 0;
+    }
+
+    .btnModelImg {
+        width: 32px;
+        margin: 3px;
+    }
 }
 
 
