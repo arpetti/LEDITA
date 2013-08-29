@@ -311,10 +311,15 @@ input.sidebarInput {
 /* footer
 ==================== */
 #footer {
-    margin: 25px;
+    margin: 0;
+    padding: 0;
+text-align: center;
 }
 
 #copyInfo {
+ padding: 20px 0 0 5%;
+    font-size: 12px;
+line-height: 18px;
 }
 
 .scrollup {
