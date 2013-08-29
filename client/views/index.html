@@ -25,7 +25,7 @@
             <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="icon-white icon-user"></span>
             </button>
-            <a class="brand" href="#"><img src="../img/logo.png" alt="Ledita Logo"/></a>
+            <a class="brand" href="#" name="top"><img src="../img/logo.png" alt="Ledita Logo"/></a>
 
             <div class="nav-collapse collapse">
 
@@ -95,7 +95,10 @@
 <!-- End Nav Bar User View -->
 
 <div ng-view class="container"></div>
-
+<div id="footer">
+    <div id="copyInfo">&copy; LEDITA</div>
+    <a class="scrollup" href="#">Scroll</a>
+</div>
 <!-- Vendor Lib -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.js"></script>
@@ -121,5 +124,25 @@
 <!-- Util -->
 <script src="/js/lib/ng-infinite-scroll.min.js"></script>
 
+
+<script>
+
+    // scroll-to-top button show and hide
+    jQuery(document).ready(function () {
+        jQuery(window).scroll(function () {
+            if (jQuery(this).scrollTop() > 100) {
+                jQuery('.scrollup').fadeIn();
+            } else {
+                jQuery('.scrollup').fadeOut();
+            }
+        });
+// scroll-to-top animate
+        jQuery('.scrollup').click(function () {
+            jQuery("html, body").animate({ scrollTop: 0 }, 600);
+            return false;
+        });
+    });
+
+</script>
 </body>
 </html>

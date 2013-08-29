@@ -74,8 +74,8 @@ a:hover {
 ===================== */
 
 #sidebar {
-   background-color: #FFF;
-    border: 6px solid #990000 ;
+    background-color: #FFF;
+    border: 6px solid #990000;
     border-radius: 6px;
     padding: 10px;
     min-height: 350px;
@@ -172,7 +172,7 @@ input.sidebarInput {
     border-radius: 6px 6px 0 0;
 
     -moz-border-bottom-right-radius: 0;
-    -webkit-border-radius: 6px 6px 0px 0px;
+    -webkit-border-radius: 6px 6px 0 0;
 
     border-bottom: none;
     border-top: none;
@@ -245,7 +245,7 @@ input.sidebarInput {
     -moz-border-radius: 6px;
     border-radius: 0 6px 6px 6px;
     -moz-border-top-left-radius: 0;
-    -webkit-border-radius: 0px 6px 6px 6px;
+    -webkit-border-radius: 0 6px 6px 6px;
     margin: 0;
     padding: 0;
     min-height: 400px;
@@ -306,6 +306,26 @@ input.sidebarInput {
 .date {
     float: left;
     padding-right: 5px;
+}
+
+/* footer
+==================== */
+#footer {
+    margin: 25px;
+}
+
+#copyInfo {
+}
+
+.scrollup {
+    background: url("../img/icon_gototop.png") no-repeat scroll 0 0 transparent;
+    bottom: 10px;
+    display: none;
+    height: 40px;
+    position: fixed;
+    right: 10px;
+    text-indent: -9999px;
+    width: 40px;
 }
 
 /* activities diagram
@@ -413,7 +433,6 @@ input.sidebarInput {
     background-color: #00A000;
 }
 
-
 /* activity text
 ===================== */
 .nodeText {
@@ -433,18 +452,18 @@ input.sidebarInput {
     margin: 0 -10px;
 }
 
-.groupNameText{
+.groupNameText {
     color: #0099CC;
     padding: 0 25px 0 0;
     text-align: right;
 
-
 }
+
 .nodeNameText {
     color: #990000;
     text-align: center;
     text-transform: uppercase;
-font-size: 22px;
+    font-size: 22px;
     padding-top: 15px;
 }
 
@@ -470,7 +489,7 @@ ul.listNode li {
 /* navbar
 ===================== */
 .navbar-inverse .navbar-inner {
-   background: url('../img/wood.png') ;
+    background: url('../img/wood.png');
 
     border-bottom: 3px solid #CCCCCC;
 }
@@ -635,7 +654,7 @@ li#loggedInUserName.nav-username {
 /* registration form
 ===================== */
 .form-horizontal {
-  background-color: #0099CC;
+    background-color: #0099CC;
     border-radius: 14px;
     margin: 0;
     border: 3px solid #CCCCCC;
@@ -830,10 +849,10 @@ input[type="checkbox"] {
 ================ */
 @media (min-width:1200px) {
 
-
     .ld-border {
         margin-right: 0.6%;
     }
+
     .btnModel {
         font-size: 18px;
     }
@@ -1051,6 +1070,7 @@ input[type="checkbox"] {
         width: 43%;
         margin-left: 1%;
     }
+
     #model {
         width: 200px;
         height: 40px;
@@ -1060,7 +1080,7 @@ input[type="checkbox"] {
 
     .btnModel {
         font-size: 14px;
-        margin: 5px  ;
+        margin: 5px;
     }
 
     .btnModelImg {
@@ -1142,6 +1162,7 @@ input[type="checkbox"] {
         float: none;
         text-align: center;
     }
+
     .actBox {
         text-overflow: ellipsis;
     }
@@ -1156,6 +1177,7 @@ input[type="checkbox"] {
     #model {
         width: 85%;
     }
+
     .btnModel {
         font-size: 12px;
         line-height: 14px;
