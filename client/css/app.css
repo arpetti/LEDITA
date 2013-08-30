@@ -856,12 +856,12 @@ input[type="checkbox"] {
     min-width: 200px;
     float: left;
     color: #FFFFFF;
-    height: 140px;
+    height: 160px;
 }
 
 .ld-top {
     height: 25px;
-    border-bottom: 1px solid #FFFFFF;
+    margin: 5px auto 10px auto;
 }
 
 .ld-center {
@@ -869,23 +869,58 @@ input[type="checkbox"] {
 }
 
 .ld-bottom {
+    margin: 5px auto 0 auto;
 }
+
+.ld-bottom a {
+    color: #FFF;
+    font-weight: normal;
+}
+.qcer {
+    float: left;
+background-color: #990000;
+    border-radius: 12px;
+    width: 22px;
+    height: 22px;
+    color: #FFF;
+    text-align: center;
+    font-weight: bold;
+
+}
+
+
+.starIcon {
+    float: right;
+    background-color: #990000;
+    border-radius: 12px;
+    width: 22px;
+    height: 22px;
+    color: #FFF;
+    text-align: center;
+    font-weight: bold;
+
+}
+
 
 .ld-name-text {
     font-size: 22px;
     line-height: 26px;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 90%;
+    width: 95%;
+    background-color: #FFFFFF;
+    margin: 0 auto ;
+    border: 2px dotted #0099CC;
+    padding: 10px 5px;
 }
 
 .ld-name-text a {
-    color: #FFFFFF;
+    color: #990000;
 }
 
 .ld-name-text a:hover {
     text-decoration: none;
-    text-shadow: 0 -2px 2px #666666, 0 1px 1px #F5F4ED;
+    text-shadow: 0 -1px 1px #CCCCCC, 0 1px 1px #F5F4ED;
 
 }
 
