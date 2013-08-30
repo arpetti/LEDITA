@@ -17,32 +17,42 @@ module.exports = {
 
 	// callback(err, result, message)
 	getLDActivityStructure: function(ldid, callback) {
-		ActivityDao.getLdActivities(ldid, function(err, results) {
+		ActivityDao.getLdActivities(ldid, function(err, ldLevelResults) {
 			if (err) {
 				callback(err, null, {message: messages.UNABLE_TO_RETRIEVE_ACTIVITIES});
 				return;
 			}
-			if (results.length === 0) {
+			if (ldLevelResults.length === 0) {
 				callback(null, null, {message: messages.NO_ACTIVITIES_FOUND});
 				return;
 			}
-			var byLevel = _.groupBy(results, function(result){ return result.level; });
-			var activityGroupIds = _.pluck(_.where(results, {type: "ACTIVITY_GROUP"}), 'target_id');
-			ActivityDao.getActivityGroups(activityGroupIds, function(err, results) {
+			
+			// var byLevel = _.groupBy(ldLevelResults, function(result){ return result.level; });
+			var activityGroupIds = _.pluck(_.where(ldLevelResults, {type: "ACTIVITY_GROUP"}), 'target_id');
+			
+			ActivityDao.getActivityGroups(activityGroupIds, function(err, activityGroupResults) {
 				if (err) {
 					callback(err, null, {message: messages.UNABLE_TO_RETRIEVE_ACTIVITIES});
 					return;
 				}
-				if (results.length === 0) {
+				if (activityGroupResults.length === 0) {
 					callback(null, null, {message: messages.NO_ACTIVITIES_FOUND});
 					return;
 				}
-				// Group results by activity_group_id, then level
-				var testMultiGroup = _.groupByMulti(results, ['activity_group_id', 'level']);
+				
+				var testMultiGroup = _.groupByMulti(activityGroupResults, ['activity_group_id', 'level']);
 
-				// temp debug
-				var allTogether = [byLevel, testMultiGroup];
-				callback(null, allTogether, null);
+				var enrichLdLevels = _.map(ldLevelResults, function(element) {
+					if (element.type === 'ACTIVITY_GROUP') {
+						element.children = testMultiGroup[element.target_id];
+						return element;
+					} else {
+						return element;
+					}
+				});
+
+				var groupEnrichedLdLevels = _.groupBy(enrichLdLevels, function(result){ return result.level; });
+				callback(null, groupEnrichedLdLevels, null);
 			});
 		});
 	}

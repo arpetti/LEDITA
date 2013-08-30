@@ -31,6 +31,20 @@ angular.module('ledita-app')
   		return "actBox";
     };
 
+    // experiment
+    $scope.getBoxClassExperiment = function(node) {
+      if (node.type === 'ACTIVITY') {
+        return 'actBox';
+      }
+      if (node.type === 'LD') {
+        return 'actBox'; //FIXME Alessandro what is correct class for LD box?
+      }
+      if (node.type === 'ACTIVITY_GROUP') {
+        return 'groupBox3'; //FIXME different style based on number of children?
+      }
+
+    };
+
    $scope.isBtnActive = function (data) {
        if (data == true)
        return "btnActive";
