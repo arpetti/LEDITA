@@ -1,6 +1,7 @@
 <div class="container top-margin">
 <div class="row-fluid">
-<div id="sidebar" class="span3">
+<div class="span3">
+<div id="sidebar">
     <h4 id="sidebarHeader">General Info</h4>
 
     <div>
@@ -70,7 +71,14 @@
     <!--Sidebar content-->
 
 </div>
-
+    <!-- TODO: IF liked -> class likedButton, ELSE class likeButton -->
+  <div class="centered">
+    <div class="likeButton">
+        <!-- TODO: Like button. If the LD is already liked, add class 'icon-white'.-->
+        <a ng-href="#" >Like <i class="icon-thumbs-up "></i></a>
+    </div>
+                        </div>
+</div>
 
 
 <div id="content" class="span9">
@@ -109,12 +117,6 @@
         </div>
 
         <div id="tabContent">
-            <!-- TODO: IF liked -> class likedButton, ELSE class likeButton -->
-            <div class="likeButton">
-                <!-- TODO: Like button. If the LD is already liked, add class 'icon-white'.-->
-                <a ng-href="#" >Like <i class="icon-thumbs-up "></i></a>
-            </div>
-              <div class="clearfix"></div>
             <!-- BEGIN DYNAMIC ACTIVITY CONTENT -->
             <div ng-repeat="level in levels" class="levelBox">
                 <div ng-repeat="node in level.nodes" ng-class="getBoxClass(node)">

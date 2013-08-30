@@ -470,11 +470,11 @@ a.whiteText:hover {
     border-radius: 35px;
     text-align: center;
     display: inline-block;
-    float: left;
     height: 40px;
     width: 40px;
-    margin: 5px 0 -70px 15px;
+   margin: 20px auto;
     padding: 10px;
+    border: 3px solid #999;
 
 }
 
@@ -483,11 +483,12 @@ a.whiteText:hover {
     border-radius: 35px;
     text-align: center;
     display: inline-block;
-    float: left;
     height: 40px;
     width: 40px;
-    margin: 5px 0 -70px 15px;
+    margin: 20px auto;
     padding: 10px;
+    border: 3px solid #FFFFFF;
+
 
 }
 
@@ -504,6 +505,7 @@ a.whiteText:hover {
 
 .likeButton:hover  {
     background-color: #0099CC;
+    border-color: #FFFFFF;
 }
 .likeButton:hover a {
     color: #ffffff;
