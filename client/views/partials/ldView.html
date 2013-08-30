@@ -98,11 +98,6 @@
 <tab active="data.static1">
     <div id="contentBody">
         <div id="contentHeader">
-<!-- TODO: IF liked -> class likedButton, ELSE class likeButton -->
-                <div class="likedButton">
-                    <!-- TODO: Like button. If the LD is already liked, add class 'icon-white'.-->
-                    <a ng-href="#" >Like <i class="icon-thumbs-up icon-white"></i></a>
-                </div>
 
             <div class="titleLeft">
                 <h4 class="inline">{{learningDesign.ld_name }}</h4>
@@ -114,7 +109,12 @@
         </div>
 
         <div id="tabContent">
-
+            <!-- TODO: IF liked -> class likedButton, ELSE class likeButton -->
+            <div class="likeButton">
+                <!-- TODO: Like button. If the LD is already liked, add class 'icon-white'.-->
+                <a ng-href="#" >Like <i class="icon-thumbs-up "></i></a>
+            </div>
+              <div class="clearfix"></div>
             <!-- BEGIN DYNAMIC ACTIVITY CONTENT -->
             <div ng-repeat="level in levels" class="levelBox">
                 <div ng-repeat="node in level.nodes" ng-class="getBoxClass(node)">
@@ -269,7 +269,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-info cancel" ng-click="close()">Close</button>
+                    <button class="btn modalButton" ng-click="close()">Close</button>
                 </div>
             </div>
 

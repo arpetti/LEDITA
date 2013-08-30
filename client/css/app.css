@@ -467,46 +467,52 @@ a.whiteText:hover {
 }
 .likeButton {
     background-color: #ddd;
-    border-radius: 4px;
-        text-align: center;
+    border-radius: 35px;
+    text-align: center;
     display: inline-block;
-float: left;
-    margin: 0 10px 5px 0;
-    height: 20px;
+    float: left;
+    height: 40px;
+    width: 40px;
+    margin: 5px 0 -70px 15px;
+    padding: 10px;
+
+}
+
+.likedButton {
+    background-color: #990000;
+    border-radius: 35px;
+    text-align: center;
+    display: inline-block;
+    float: left;
+    height: 40px;
+    width: 40px;
+    margin: 5px 0 -70px 15px;
+    padding: 10px;
 
 }
 
 .likeButton a{
-    border-radius: 6px;
-    padding: 5px 8px 5px 5px;
     font-weight: normal;
-color: #666666;
-}
-
-
-.likedButton {
-    background-color: #990000;
-    border-radius: 4px;
-    text-align: center;
-    display: inline-block;
-    float: left;
-    margin: -1px 10px 5px 0;
-    height: 20px;
-    border: 1px solid #FFFFFF;
-
+    color: #666666;
 }
 
 .likedButton a{
-    border-radius: 6px;
-    padding: 5px 8px 5px 5px;
     font-weight: normal;
     color: #FFFFFF;
 }
 
 
 .likeButton:hover  {
-    background-color: #FFFFFF}
+    background-color: #0099CC;
+}
+.likeButton:hover a {
+    color: #ffffff;
+}
+.likeButton:hover i {
+    background-color: #ffffff;
+    border-radius: 10px;
 
+}
 
 .likedButton:hover  {
     background-color: #dddddd}
@@ -703,12 +709,14 @@ ul.listNode li {
     margin: 10px;
 }
 
-#loginButton {
+#loginButton, .modalButton, .modalButton:hover {
     background: #0099CC none;
     color: #FFFFFF;
     font-weight: bold;
     text-shadow: 0 1px 1px rgba(155, 155, 155, 0.65);
 }
+
+
 
 #pwRec a {
     text-align: right;
