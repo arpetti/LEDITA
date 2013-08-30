@@ -856,12 +856,13 @@ input[type="checkbox"] {
     min-width: 200px;
     float: left;
     color: #FFFFFF;
-    height: 160px;
+    height: 155px;
 }
 
 .ld-top {
     height: 25px;
-    margin: 5px auto 10px auto;
+    margin: 5px auto 5px auto;
+    padding: 0 5px;
 }
 
 .ld-center {
@@ -870,10 +871,10 @@ input[type="checkbox"] {
 
 .ld-bottom {
     margin: 5px auto 0 auto;
+
 }
 
 .ld-bottom a {
-    color: #FFF;
     font-weight: normal;
 }
 
@@ -882,34 +883,69 @@ input[type="checkbox"] {
 }
 .qcer {
     float: left;
-background-color: #990000;
-    border-radius: 12px;
     width: 22px;
     height: 22px;
     color: #FFF;
-    text-align: center;
-    font-weight: bold;
 
 }
 
-
-.starIcon {
+.authorName a{
     float: right;
-    background-color: #990000;
-    border-radius: 12px;
-    width: 22px;
-    height: 22px;
-    color: #FFF;
     text-align: center;
-    font-weight: bold;
+    margin: 0 5px 2px 0;
+    background-color: #dddddd;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    padding: 1px 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 24px;
+    height: 24px;
+    width: 60%;
+    display: inline-block;
+    color: #666666;
 
 }
 
-.starIcon:hover {
-    box-shadow: 0 -2px 2px #CCCCCC, 0 2px 2px #F5F4ED;
+.likes a{
+    float: left;
+    text-align: center;
+    margin: 0 5px 2px 0;
+    background-color: #dddddd;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    padding: 1px 4px;
+    line-height: 24px;
+    width: 25%;
+    color: #666666;
+}
+
+.liked a{
+    float: left;
+    text-align: center;
+    margin: 0 5px 2px 0;
+    background-color: #990000;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    padding: 1px 4px;
+    line-height: 20px;
+    color: #FFFFFF;
+    width: 25%;
+    border:  2px solid #FFFFFF;
+}
+
+.likes:hover, .authorName:hover  {
+    box-shadow: 0 -1px 1px #CCCCCC, 0 1px 1px #F5F4ED;
 
 }
 
+.liked a:hover {
+    color: #dddddd;
+    text-decoration: none;
+}
 
 .ld-name-text {
     font-size: 22px;
