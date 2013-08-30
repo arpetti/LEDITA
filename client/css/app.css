@@ -472,6 +472,12 @@ a.whiteText:hover {
     margin: 10px 5px;
 }
 
+.nodeTextDetails {
+    border: none;
+    margin: 0;
+    padding-top: 0px;
+}
+
 .groupBoxText {
     padding-left: 20px;
     font-weight: bold;
@@ -495,6 +501,13 @@ a.whiteText:hover {
     padding-top: 15px;
 }
 
+.nodeNameTextDetails {
+    color: #990000;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 22px;
+    padding-top: 0;
+}
 .tabText {
     padding: 0;
     font-weight: bold;
@@ -513,7 +526,19 @@ ul.listNode li {
     font-size: 12px;
     font-weight: bold;
 }
+.modal-header {
+    color: #FFFFFF;
+    background-color: #0099CC;
+    padding: 5px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    text-align: center;
+    border-bottom: 2px solid #CCCCCC;
+}
 
+.modal-footer {
+    padding: 10px;
+}
 /* navbar
 ===================== */
 .navbar-inverse .navbar-inner {
