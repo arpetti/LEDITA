@@ -1,0 +1,9 @@
+<!-- BEGIN EXPERIMENT -->
+<div ng-repeat="(level, nodes) in levels" class="levelBox">
+    <!-- FIXME Conditional class based on group vs activity-->
+    <div ng-repeat="node in nodes" class="actBox">
+        <span class="actId">{{ node.type }}</span>
+        <h6 class="actName">{{ node.name }}</h6>
+    </div>
+</div>
+<!-- END EXPERIMENT -->

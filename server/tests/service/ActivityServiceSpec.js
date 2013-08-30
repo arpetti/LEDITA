@@ -25,20 +25,38 @@ describe('Activity Service', function() {
 
     		var activities = 
     			[
-    				{"level": 1, "position": 1, "target_id": 111, "target_name": "support", "type": "ACTIVITY"},
-    				{"level": 1, "position": 2, "target_id": 222, "target_name": "lab", "type": "ACTIVITY"},
-    				{"level": 2, "position": 1, "target_id": 333, "target_name": "evaluation", "type": "ACTIVITY_GROUP"},
+    				{"level": 1, "position": 1, "target_id": 5, "target_name": "Support Activity 1", "type": "ACTIVITY"},
+    				{"level": 2, "position": 2, "target_id": 1, "target_name": "N/A", "type": "ACTIVITY_GROUP"},
+                    {"level": 3, "position": 1, "target_id": 9, "target_name": "Support Activity 2", "type": "ACTIVITY"},
+                    {"level": 3, "position": 2, "target_id": 8, "target_name": "Learning Activity 7", "type": "ACTIVITY"},
+                    {"level": 4, "position": 1, "target_id": 2, "target_name": "Learning Design Title Demo 2", "type": "LD"},
+                    {"level": 5, "position": 1, "target_id": 2, "target_name": "Group 2 Name", "type": "ACTIVITY_GROUP"},
+    				{"level": 6, "position": 1, "target_id": 10, "target_name": "Evaluation Activity 1", "type": "ACTIVITY"}
     			];
             var activityDaoStub = sandbox.stub(ActivityDao, "getLdActivities", function(id, callback) {
                 callback(null, activities);
             });
+
+            var activityGroups = 
+                [
+                    {"activity_group_id": 1, "activity_group_name": null, "level": 1, "position": 1, "activity_id": 1, "activity_name": "Learning Activity 1"},
+                    {"activity_group_id": 1, "activity_group_name": null, "level": 1, "position": 2, "activity_id": 2, "activity_name": "Learning Activity 2"},
+                    {"activity_group_id": 1, "activity_group_name": null, "level": 2, "position": 2, "activity_id": 2, "activity_name": "Learning Activity 3"},
+                    {"activity_group_id": 1, "activity_group_name": null, "level": 2, "position": 2, "activity_id": 4, "activity_name": "Learning Activity 4"},
+                    {"activity_group_id": 2, "activity_group_name": "Group 2 Name", "level": 2, "position": 1, "activity_id": 5, "activity_name": "Learning Activity 5"},
+                    {"activity_group_id": 2, "activity_group_name": "Group 2 Name", "level": 2, "position": 2, "activity_id": 7, "activity_name": "Learning Activity 6"},
+                ];
+            var activityGroupDaoStub = sandbox.stub(ActivityDao, "getActivityGroups", function(groupids, callback) {
+                callback(null, activityGroups);
+            })
 
             var activityCallback = function(err, result, message) {
             	expect(err).to.be.null;
             	expect(message).to.be.null;
             	console.log(JSON.stringify(result));
 
-            	assert.isTrue(activityDaoStub.withArgs(ldid).calledOnce);
+                assert.isTrue(activityDaoStub.withArgs(ldid).calledOnce);
+            	assert.isTrue(activityGroupDaoStub.withArgs([1,2]).calledOnce);
             	done();
             };
 
