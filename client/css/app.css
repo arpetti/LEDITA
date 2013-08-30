@@ -876,6 +876,10 @@ input[type="checkbox"] {
     color: #FFF;
     font-weight: normal;
 }
+
+.ld-bottom a:hover {
+    text-decoration: underline;
+}
 .qcer {
     float: left;
 background-color: #990000;
@@ -901,6 +905,11 @@ background-color: #990000;
 
 }
 
+.starIcon:hover {
+    box-shadow: 0 -2px 2px #CCCCCC, 0 2px 2px #F5F4ED;
+
+}
+
 
 .ld-name-text {
     font-size: 22px;
@@ -920,7 +929,7 @@ background-color: #990000;
 
 .ld-name-text a:hover {
     text-decoration: none;
-    text-shadow: 0 -1px 1px #CCCCCC, 0 1px 1px #F5F4ED;
+    text-shadow: 0 -1px 1px #CCC, 0 1px 1px #999;
 
 }
 

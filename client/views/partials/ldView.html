@@ -116,11 +116,12 @@
                     <div ng-show="node.children" class="groupName">{{ node.name }}</div>
                     <div class="clearfix"></div>
                     <div ng-repeat="child in node.children" class="actBox">
-                        <h6 class="actName">{{ child.name }}</h6>
+                        <a ng-href="#" class="whiteText"> <h6 class="actName">{{ child.name }}</h6>
                         <div class="actLabel">
                             <span class="timeLabel"><i class="icon-time icon-white"></i> 15 min </span>
                             <span class="orgLabel"><i class="icon-th-large icon-white"></i> ALL</span>
                         </div>
+                            </a>
                     </div>
                     <!-- End Children -->
 
