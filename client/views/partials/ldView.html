@@ -68,7 +68,11 @@
         </a>
     </div>
     <!--Sidebar content-->
+
 </div>
+
+
+
 <div id="content" class="span9">
 
 
@@ -94,11 +98,14 @@
 <tab active="data.static1">
     <div id="contentBody">
         <div id="contentHeader">
-
+<!-- TODO: IF liked -> class likedButton, ELSE class likeButton -->
+                <div class="likedButton">
+                    <!-- TODO: Like button. If the LD is already liked, add class 'icon-white'.-->
+                    <a ng-href="#" >Like <i class="icon-thumbs-up icon-white"></i></a>
+                </div>
 
             <div class="titleLeft">
-                <h4 class="inline"><a href="#"><img ng-src="../img/emptyStar.png" class="star"></a>{{
-                    learningDesign.ld_name }}</h4>
+                <h4 class="inline">{{learningDesign.ld_name }}</h4>
             </div>
             <div class="titleRight">
                 <h4><span class="round">A1</span> {{ learningDesign.ld_scope }}</h4>
