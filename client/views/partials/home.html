@@ -1,19 +1,31 @@
 <div id="ldlist" class="row top-margin zeroLeft">
 
-  <!-- LD BOX START -->
-  <div ng-repeat="learningDesign in learningDesigns | orderBy:'ld_last_edit_date':true" class="ld-border ld-item">
-    <div class="ld-top">
-      A1<a ng-href="#/ld/{{learningDesign.ld_id}}" class="float-right"><i class="icon-arrow-right icon-white"></i></a>
+    <!-- LD BOX START -->
+    <div ng-repeat="learningDesign in learningDesigns | orderBy:'ld_last_edit_date':true" class="ld-border ld-item">
+        <div class="ld-top">
+
+            <div class="qcer">A2</div>
+            <div class="float-right">
+                {{ learningDesign.ld_scope }}
+            </div>
+        </div>
+        <div class="ld-center text-center">
+            <h4 class="ld-name-text"><a ng-href="ld/{{ learningDesign.ld_id }}">
+                {{ learningDesign.ld_name }}</a></h4>
+        </div>
+        <div class="ld-bottom">
+            <div class="authorName">
+            <a ng-href="#" > {{ learningDesign.user_name }}&nbsp;{{ learningDesign.user_last_name
+                }} </a>
+            </div>
+<!-- TODO: Like button. If the LD is already liked, put class 'liked'. Else, put class 'likes'.-->
+            <div class="likes">
+                <!-- TODO: Like button. If the LD is already liked, add class 'icon-white'.-->
+            <a ng-href="#" >Like <i class="icon-thumbs-up"></i></a>
+            </div>
+        </div>
     </div>
-    <div class="ld-center text-center">
-      <h4 class="ld-name-text"><a ng-href="ld/{{ learningDesign.ld_id }}" >{{ learningDesign.ld_name }}</a></h4>
-    </div>
-    <div class="ld-bottom">
-      {{ learningDesign.ld_scope }}<span class="float-right">   {{ learningDesign.user_name }}&nbsp;{{ learningDesign.user_last_name }}
-   </span>
-    </div>
-   </div>
-  <!-- LD BOX END -->
+    <!-- LD BOX END -->
 
 </div><!-- row -->
 

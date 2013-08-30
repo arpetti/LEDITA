@@ -10,6 +10,7 @@
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/css/bootstrap.icon-large.min.css" rel="stylesheet">
     <link href="/css/app.css" rel="stylesheet">
 
 </head>
@@ -24,7 +25,7 @@
             <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="icon-white icon-user"></span>
             </button>
-            <a class="brand" href="#"><img src="../img/logo.png" alt="Ledita Logo"/></a>
+            <a class="brand" href="#" name="top"><img src="../img/logo.png" alt="Ledita Logo"/></a>
 
             <div class="nav-collapse collapse">
 
@@ -74,7 +75,7 @@
                             <li class="dropdown">
 
                             <li id="loggedInUserName" class="nav-username">{{ user.username }}</li>
-                            <img src="/img/avatar_sample.png" alt="User Avatar" class="img-rounded user-pic"/>
+                            <img src="/img/user.png" alt="User Avatar" class="img-rounded user-pic"/>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
@@ -94,7 +95,12 @@
 <!-- End Nav Bar User View -->
 
 <div ng-view class="container"></div>
+<div id="footer">
+    <a class="scrollup" href="#">Scroll</a>
 
+    <div id="copyInfo">LEDITA is distributed under <a href="http://opensource.org/licenses/MIT" target="_blank">MIT
+        Licence</a><br>&copy; 2011-2013 <a href="https://github.com/arpetti" target="_blank">Alessandro Arpetti</a> and <a href="https://github.com/danielabar" target="_blank">Daniela Baron</a></div>
+</div>
 <!-- Vendor Lib -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.js"></script>
@@ -120,5 +126,25 @@
 <!-- Util -->
 <script src="/js/lib/ng-infinite-scroll.min.js"></script>
 
+
+<script>
+
+    // scroll-to-top button show and hide
+    jQuery(document).ready(function () {
+        jQuery(window).scroll(function () {
+            if (jQuery(this).scrollTop() > 100) {
+                jQuery('.scrollup').fadeIn();
+            } else {
+                jQuery('.scrollup').fadeOut();
+            }
+        });
+// scroll-to-top animate
+        jQuery('.scrollup').click(function () {
+            jQuery("html, body").animate({ scrollTop: 0 }, 600);
+            return false;
+        });
+    });
+
+</script>
 </body>
 </html>
