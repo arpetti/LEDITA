@@ -2,6 +2,17 @@ var ActivityDao = require('../dao/ActivityDao');
 var messages = require('./ValidationMessages');
 var _ = require('underscore');
 
+_.groupByMulti = function (obj, values, context) {
+    if (!values.length)
+        return obj;
+    var byFirst = _.groupBy(obj, values[0], context),
+        rest = values.slice(1);
+    for (var prop in byFirst) {
+        byFirst[prop] = _.groupByMulti(byFirst[prop], rest, context);
+    }
+    return byFirst;
+};
+
 module.exports = {
 
 	// callback(err, result, message)
@@ -26,9 +37,11 @@ module.exports = {
 					callback(null, null, {message: messages.NO_ACTIVITIES_FOUND});
 					return;
 				}
-				var byActivityGroupId = _.groupBy(results, function(result){ return result.activity_group_id; });
-				
-				var allTogether = [byLevel, byActivityGroupId];
+				// Group results by activity_group_id, then level
+				var testMultiGroup = _.groupByMulti(results, ['activity_group_id', 'level']);
+
+				// temp debug
+				var allTogether = [byLevel, testMultiGroup];
 				callback(null, allTogether, null);
 			});
 		});
