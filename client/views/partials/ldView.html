@@ -119,7 +119,7 @@
         <div id="tabContent">
             <!-- BEGIN DYNAMIC ACTIVITY CONTENT -->
             <div ng-repeat="(level, nodes) in levels" class="levelBox">
-                <div ng-repeat="node in nodes" ng-class="getBoxClassExperiment(node)">
+                <div ng-repeat="node in nodes" ng-class="getBoxClass(node)">
 
                     <!-- If it's a group:  -->
                     <div ng-show="node.children" class="groupName">{{ node.node_name }}</div>
