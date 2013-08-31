@@ -37,10 +37,10 @@ angular.module('ledita-app')
         return 'actBox';
       }
       if (node.type === 'LD') {
-        return 'actBox'; //FIXME Alessandro what is correct class for LD box?
+        return 'ldBox';
       }
       if (node.type === 'ACTIVITY_GROUP') {
-        return 'groupBox3'; //FIXME different style based on number of children?
+        return 'groupBox3'; //FIXME different style based on MAXIMUM number of children IN A LEVEL
       }
 
     };
