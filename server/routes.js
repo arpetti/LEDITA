@@ -3,6 +3,7 @@ var _ =           require('underscore')
     , passport =  require('passport')
     , AuthCtrl =  require('./controllers/auth')
     , LearningDesignCtrl = require('./controllers/learningDesign')
+    , ActivityCtrl       = require('./controllers/ActivityController')
     , User =      require('./models/User.js')
     , userRoles = require('../client/js/auth/AuthRoutingConfig').userRoles
     , accessLevels = require('../client/js/auth/AuthRoutingConfig').accessLevels;
@@ -51,6 +52,14 @@ var routes = [
         path: '/learningdesigns/:id',
         httpMethod: 'GET',
         middleware: [ensureAuthenticated, ensureAuthorized, LearningDesignCtrl.findById],
+        accessLevel: accessLevels.user
+    },
+
+    // Activity
+    {
+        path: '/learningdesignstructure/:id',
+        httpMethod: 'GET',
+        middleware: [ensureAuthenticated, ensureAuthorized, ActivityCtrl.getLDNodes],
         accessLevel: accessLevels.user
     },
 
