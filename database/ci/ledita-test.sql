@@ -625,13 +625,13 @@ CREATE OR REPLACE VIEW vw_ld_prerequisite AS
   INNER JOIN ld ldtarget
     on needs.ld_requisite_id = ldtarget.id);
 
-CREATE OR REPLACE VIEW vw_ld_activity AS
-  (SELECT ldsource.id as source_id
-    , ldsource.name as source_name
+CREATE OR REPLACE VIEW vw_ld_node AS
+  (SELECT ldsource.id as ld_id
+    , ldsource.name as ld_name
     , composes.level as level
     , composes.position as position
-    , ldtarget.id as target_id
-    , ldtarget.name as target_name
+    , ldtarget.id as node_id
+    , ldtarget.name as node_name
     , 'LD' as type
   FROM ld ldsource
   INNER JOIN composes
@@ -639,12 +639,12 @@ CREATE OR REPLACE VIEW vw_ld_activity AS
   INNER JOIN ld ldtarget
     on composes.ld_part_id = ldtarget.id)
   UNION
-  (SELECT ldsource.id as source_id
-    , ldsource.name as source_name
+  (SELECT ldsource.id as ld_id
+    , ldsource.name as ld_name
     , composes.level as level
     , composes.position as position
-    , activity.id as target_id
-    , activity.name as target_name
+    , activity.id as node_id
+    , activity.name as node_name
     , 'ACTIVITY' as type
   FROM ld ldsource
   INNER JOIN composes
@@ -652,12 +652,12 @@ CREATE OR REPLACE VIEW vw_ld_activity AS
   INNER JOIN activity
     on composes.activity_id = activity.id)
   UNION
-  (SELECT ldsource.id as source_id
-    , ldsource.name as source_name
+  (SELECT ldsource.id as ld_id
+    , ldsource.name as ld_name
     , composes.level as level
     , composes.position as position
-    , activity_group.id as target_id
-    , activity_group.name as target_name
+    , activity_group.id as node_id
+    , activity_group.name as node_name
     , 'ACTIVITY_GROUP' as type
   FROM ld ldsource
   INNER JOIN composes

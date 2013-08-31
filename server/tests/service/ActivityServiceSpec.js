@@ -33,7 +33,7 @@ describe('Activity Service', function() {
                     {"level": 5, "position": 1, "target_id": 2, "target_name": "Group 2 Name", "type": "ACTIVITY_GROUP"},
     				{"level": 6, "position": 1, "target_id": 10, "target_name": "Evaluation Activity 1", "type": "ACTIVITY"}
     			];
-            var activityDaoStub = sandbox.stub(ActivityDao, "getLdActivities", function(id, callback) {
+            var activityDaoStub = sandbox.stub(ActivityDao, "getLdNodes", function(id, callback) {
                 callback(null, activities);
             });
 

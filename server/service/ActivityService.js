@@ -17,7 +17,7 @@ module.exports = {
 
 	// callback(err, result, message)
 	getLDActivityStructure: function(ldid, callback) {
-		ActivityDao.getLdActivities(ldid, function(err, ldLevelResults) {
+		ActivityDao.getLdNodes(ldid, function(err, ldLevelResults) {
 			if (err) {
 				callback(err, null, {message: messages.UNABLE_TO_RETRIEVE_ACTIVITIES});
 				return;
