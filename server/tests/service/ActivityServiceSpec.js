@@ -25,13 +25,13 @@ describe('Activity Service', function() {
 
     		var activities = 
     			[
-    				{"level": 1, "position": 1, "node_id": 5, "target_name": "Support Activity 1", "type": "ACTIVITY"},
-    				{"level": 2, "position": 2, "node_id": 1, "target_name": "N/A", "type": "ACTIVITY_GROUP"},
-                    {"level": 3, "position": 1, "node_id": 9, "target_name": "Support Activity 2", "type": "ACTIVITY"},
-                    {"level": 3, "position": 2, "node_id": 8, "target_name": "Learning Activity 7", "type": "ACTIVITY"},
-                    {"level": 4, "position": 1, "node_id": 2, "target_name": "Learning Design Title Demo 2", "type": "LD"},
-                    {"level": 5, "position": 1, "node_id": 2, "target_name": "Group 2 Name", "type": "ACTIVITY_GROUP"},
-    				{"level": 6, "position": 1, "node_id": 10, "target_name": "Evaluation Activity 1", "type": "ACTIVITY"}
+    				{"level": 1, "position": 1, "node_id": 5, "node_name": "Support Activity 1", "type": "ACTIVITY"},
+    				{"level": 2, "position": 2, "node_id": 1, "node_name": "N/A", "type": "ACTIVITY_GROUP"},
+                    {"level": 3, "position": 1, "node_id": 9, "node_name": "Support Activity 2", "type": "ACTIVITY"},
+                    {"level": 3, "position": 2, "node_id": 8, "node_name": "Learning Activity 7", "type": "ACTIVITY"},
+                    {"level": 4, "position": 1, "node_id": 2, "node_name": "Learning Design Title Demo 2", "type": "LD"},
+                    {"level": 5, "position": 1, "node_id": 2, "node_name": "Group 2 Name", "type": "ACTIVITY_GROUP"},
+    				{"level": 6, "position": 1, "node_id": 10, "node_name": "Evaluation Activity 1", "type": "ACTIVITY"}
     			];
             var activityDaoStub = sandbox.stub(ActivityDao, "getLdNodes", function(id, callback) {
                 callback(null, activities);
