@@ -4,6 +4,7 @@ var sinon = require('sinon');
 var ActivityService = require('../../service/ActivityService');
 var ActivityDao = require('../../dao/ActivityDao');
 var messages = require('../../service/ValidationMessages');
+var _ = require('underscore');
 
 describe('Activity Service', function() {
 
@@ -26,7 +27,7 @@ describe('Activity Service', function() {
     		var activities = 
     			[
     				{"level": 1, "position": 1, "node_id": 5, "node_name": "Support Activity 1", "type": "ACTIVITY"},
-    				{"level": 2, "position": 2, "node_id": 1, "node_name": "N/A", "type": "ACTIVITY_GROUP"},
+    				{"level": 2, "position": 2, "node_id": 1, "node_name": null, "type": "ACTIVITY_GROUP"},
                     {"level": 3, "position": 1, "node_id": 9, "node_name": "Support Activity 2", "type": "ACTIVITY"},
                     {"level": 3, "position": 2, "node_id": 8, "node_name": "Learning Activity 7", "type": "ACTIVITY"},
                     {"level": 4, "position": 1, "node_id": 2, "node_name": "Learning Design Title Demo 2", "type": "LD"},
@@ -53,7 +54,15 @@ describe('Activity Service', function() {
             var activityCallback = function(err, result, message) {
             	expect(err).to.be.null;
             	expect(message).to.be.null;
-            	console.log(JSON.stringify(result));
+                expect(_.keys(result)).to.have.length(6);
+
+                expect(result[1]).to.have.length(1);
+                expect(result[1][0].node_name).to.equal('Support Activity 1');
+                expect(result[1][0].type).to.equal('ACTIVITY');
+
+                expect(result[2]).to.have.length(1);
+                expect(result[2][0].node_name).to.be.null;
+                expect(result[2][0].type).to.equal('ACTIVITY_GROUP');
 
                 assert.isTrue(activityDaoStub.withArgs(ldid).calledOnce);
             	assert.isTrue(activityGroupDaoStub.withArgs([1,2]).calledOnce);
