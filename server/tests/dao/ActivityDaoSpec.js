@@ -36,6 +36,16 @@ describe('Activity DAO', function() {
 			});
 		});
 
+		it('Get Activity Groups Max Positions returns results', function(done) {
+			var groupids = [1, 7];
+			ActivityDao.getActivityGroupsMaxPosition(groupids, function(err, results) {
+				expect(results).to.have.length(2);
+				expect(results[0].max_position).to.equal(2);
+				expect(results[1].max_position).to.equal(4);
+				done();
+			});
+		});
+
 	});
 
 });
