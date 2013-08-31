@@ -63,6 +63,13 @@ describe('Activity Service', function() {
                 expect(result[2]).to.have.length(1);
                 expect(result[2][0].node_name).to.be.null;
                 expect(result[2][0].type).to.equal('ACTIVITY_GROUP');
+                expect(_.keys(result[2][0].children)).to.have.length(2);
+
+                expect(result[3]).to.have.length(2);
+                expect(result[3][0].node_name).to.equal('Support Activity 2');
+                expect(result[3][0].type).to.equal('ACTIVITY');
+                expect(result[3][1].node_name).to.equal('Learning Activity 7');
+                expect(result[3][1].type).to.equal('ACTIVITY');
 
                 assert.isTrue(activityDaoStub.withArgs(ldid).calledOnce);
             	assert.isTrue(activityGroupDaoStub.withArgs([1,2]).calledOnce);
