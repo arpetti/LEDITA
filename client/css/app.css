@@ -365,6 +365,18 @@ line-height: 18px;
     border: 2px solid #FFFFFF;
 }
 
+.ldBox {
+    background-color: #990000;
+    border-radius: 6px;
+    color: #FFF;
+    min-height: 40px;
+    width: 22%;
+    margin: 10px 1%;
+    display: inline-block;
+    border: 2px solid #FFFFFF;
+}
+
+
 .levelBox {
     text-align: center;
     padding-top: 20px;
