@@ -27,8 +27,7 @@ module.exports = {
 				return;
 			}
 			
-			// var byLevel = _.groupBy(ldLevelResults, function(result){ return result.level; });
-			var activityGroupIds = _.pluck(_.where(ldLevelResults, {type: "ACTIVITY_GROUP"}), 'target_id');
+			var activityGroupIds = _.pluck(_.where(ldLevelResults, {type: "ACTIVITY_GROUP"}), 'node_id');
 			
 			ActivityDao.getActivityGroups(activityGroupIds, function(err, activityGroupResults) {
 				if (err) {
@@ -44,7 +43,7 @@ module.exports = {
 
 				var enrichLdLevels = _.map(ldLevelResults, function(element) {
 					if (element.type === 'ACTIVITY_GROUP') {
-						element.children = testMultiGroup[element.target_id];
+						element.children = testMultiGroup[element.node_id];
 						return element;
 					} else {
 						return element;
