@@ -8,7 +8,7 @@ angular.module('ledita-app')
         },
 
         getActivities: function(ldid, success, error) {
-        	var activityUrl = "/mockdata/ldactivity" + ldid + ".json";
+        	var activityUrl = "/learningdesignstructure/" + ldid;
         	$http.get(activityUrl).success(success).error(error);
         }
         

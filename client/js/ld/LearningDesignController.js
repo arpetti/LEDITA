@@ -16,7 +16,8 @@ angular.module('ledita-app')
         $scope.error = "Failed to fetch learning design activities.";
     });
 
-    //TODO Determine when is groupBox2 needed?
+    //TODO Replace this function with experiment version below
+    //TODO Add Angular Karma unit test!
   	$scope.getBoxClass = function (node) {
   		if (node.children) {
   			if (node.children.length >= 4)

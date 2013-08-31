@@ -118,28 +118,32 @@
 
         <div id="tabContent">
             <!-- BEGIN DYNAMIC ACTIVITY CONTENT -->
-            <div ng-repeat="level in levels" class="levelBox">
-                <div ng-repeat="node in level.nodes" ng-class="getBoxClass(node)">
+            <div ng-repeat="(level, nodes) in levels" class="levelBox">
+                <div ng-repeat="node in nodes" ng-class="getBoxClassExperiment(node)">
 
                     <!-- If it's a group:  -->
-                    <div ng-show="node.children" class="groupName">{{ node.name }}</div>
+                    <div ng-show="node.children" class="groupName">{{ node.node_name }}</div>
                     <div class="clearfix"></div>
-                    <div ng-repeat="child in node.children" class="actBox">
-                        <a ng-href="#" class="whiteText" ng-click="open()"><h6 class="actName">{{ child.name }}</h6>
 
-                            <div class="actLabel">
-                                <span class="timeLabel"><i class="icon-time icon-white"></i> 15 min </span>
-                                <span class="orgLabel"><i class="icon-th-large icon-white"></i> ALL</span>
-                            </div>
-                        </a>
+                    <!-- Children are also in levels: Create unstyled div for each level -->
+                    <div ng-repeat="(childLevel, subChildren) in node.children">
+                        <div ng-repeat="child in subChildren" class="actBox">
+                            <a ng-href="#" class="whiteText" ng-click="open()"><h6 class="actName">{{ child.activity_name }}</h6>
+
+                                <!-- FIXME Convert static data to dynamic -->
+                                <div class="actLabel">
+                                    <span class="timeLabel"><i class="icon-time icon-white"></i> 15 min </span>
+                                    <span class="orgLabel"><i class="icon-th-large icon-white"></i> ALL</span>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                     <!-- End Children -->
 
-
                     <!-- If it's NOT a group:  -->
                     <div ng-show="!node.children" class="actName"><a ng-href="#" class="whiteText" ng-click="open()">
-                        <h6>{{ node.name }}</h6>
-
+                        <h6>{{ node.node_name }}</h6>
+                        <!-- FIXME Convert static data to dynamic -->
                         <div class="actLabel">
                             <span class="timeLabel"><i class="icon-time icon-white"></i> 15 min </span>
                             <span class="orgLabel"><i class="icon-th-large icon-white"></i> ALL</span>
