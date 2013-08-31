@@ -17,17 +17,17 @@ module.exports = {
 
 	// callback(err, result, message)
 	getLDActivityStructure: function(ldid, callback) {
-		ActivityDao.getLdNodes(ldid, function(err, ldLevelResults) {
+		ActivityDao.getLdNodes(ldid, function(err, ldNodeResults) {
 			if (err) {
 				callback(err, null, {message: messages.UNABLE_TO_RETRIEVE_ACTIVITIES});
 				return;
 			}
-			if (ldLevelResults.length === 0) {
+			if (ldNodeResults.length === 0) {
 				callback(null, null, {message: messages.NO_ACTIVITIES_FOUND});
 				return;
 			}
 			
-			var activityGroupIds = _.pluck(_.where(ldLevelResults, {type: "ACTIVITY_GROUP"}), 'node_id');
+			var activityGroupIds = _.pluck(_.where(ldNodeResults, {type: "ACTIVITY_GROUP"}), 'node_id');
 			
 			ActivityDao.getActivityGroups(activityGroupIds, function(err, activityGroupResults) {
 				if (err) {
@@ -39,19 +39,19 @@ module.exports = {
 					return;
 				}
 				
-				var testMultiGroup = _.groupByMulti(activityGroupResults, ['activity_group_id', 'level']);
+				var groupsByIdThenLevel = _.groupByMulti(activityGroupResults, ['activity_group_id', 'level']);
 
-				var enrichLdLevels = _.map(ldLevelResults, function(element) {
+				var enrichLdNodes = _.map(ldNodeResults, function(element) {
 					if (element.type === 'ACTIVITY_GROUP') {
-						element.children = testMultiGroup[element.node_id];
+						element.children = groupsByIdThenLevel[element.node_id];
 						return element;
 					} else {
 						return element;
 					}
 				});
 
-				var groupEnrichedLdLevels = _.groupBy(enrichLdLevels, function(result){ return result.level; });
-				callback(null, groupEnrichedLdLevels, null);
+				var ldNodesByLevel = _.groupBy(enrichLdNodes, function(result){ return result.level; });
+				callback(null, ldNodesByLevel, null);
 			});
 		});
 	}
