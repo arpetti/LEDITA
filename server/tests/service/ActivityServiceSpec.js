@@ -20,11 +20,100 @@ describe('Activity Service', function() {
 
     describe('getLDActivityStructure', function() {
 
+        it('Returns message if no LD nodes found', function(done) {
+
+            var ldid = 999;
+            var ldNodes = [];
+            var activityDaoStub = sandbox.stub(ActivityDao, "getLdNodes", function(id, callback) {
+                callback(null, ldNodes);
+            });
+            var activityGroupDaoStub = sandbox.stub(ActivityDao, "getActivityGroups");
+
+            var activityCallback = function(err, result, message) {
+                expect(err).to.be.null;
+                expect(result).to.be.null;
+                expect(message).to.equal(messages.NO_LD_NODES_FOUND);
+
+                assert.isTrue(activityDaoStub.withArgs(ldid).calledOnce);
+                assert.equal(activityGroupDaoStub.callCount, 0, "no activity groups fetched when LD has no nodes");
+                done();
+            };
+            ActivityService.getLDActivityStructure(ldid, activityCallback);
+        });
+
+        it('Returns message if no activity groups could be found', function(done) {
+
+            var ldid = 30;
+            var ldNodes = 
+                [
+                    {"level": 1, "position": 1, "node_id": 10, "node_name": "My Activity 1", "type": "ACTIVITY"},
+                    {"level": 2, "position": 1, "node_id": 11, "node_name": "My Activity 2", "type": "ACTIVITY_GROUP"}
+                ];
+            var activityDaoStub = sandbox.stub(ActivityDao, "getLdNodes", function(id, callback) {
+                callback(null, ldNodes);
+            });
+            var activityGroups = [];
+            var activityGroupDaoStub = sandbox.stub(ActivityDao, "getActivityGroups", function(groupids, callback) {
+                callback(null, activityGroups);
+            });
+
+            var activityCallback = function(err, result, message) {
+                expect(err).to.be.null;
+                expect(result).to.be.null;
+                expect(message).to.equal(messages.NO_ACTIVITIES_FOUND);
+
+                assert.isTrue(activityDaoStub.withArgs(ldid).calledOnce);
+                assert.isTrue(activityGroupDaoStub.withArgs([11]).calledOnce);
+                done();
+            };
+            ActivityService.getLDActivityStructure(ldid, activityCallback);
+
+        });
+
+        it('Returns just nodes by level if LD has no activity groups', function(done) {
+
+            var ldid = 20;
+            var ldNodes = 
+                [
+                    {"level": 1, "position": 1, "node_id": 10, "node_name": "My Activity 1", "type": "ACTIVITY"},
+                    {"level": 2, "position": 1, "node_id": 11, "node_name": "My Activity 2", "type": "ACTIVITY"},
+                    {"level": 3, "position": 1, "node_id": 12, "node_name": "My Activity 3", "type": "ACTIVITY"}
+                ];
+            var activityDaoStub = sandbox.stub(ActivityDao, "getLdNodes", function(id, callback) {
+                callback(null, ldNodes);
+            });
+            var activityGroupDaoStub = sandbox.stub(ActivityDao, "getActivityGroups");
+
+            var activityCallback = function(err, result, message) {
+                expect(err).to.be.null;
+                expect(_.keys(result)).to.have.length(3); // i.e. 3 levels
+                expect(message).to.be.null;
+
+                expect(result[1]).to.have.length(1);
+                expect(result[1][0].node_name).to.equal('My Activity 1');
+                expect(result[1][0].type).to.equal('ACTIVITY');
+
+                expect(result[2]).to.have.length(1);
+                expect(result[2][0].node_name).to.equal('My Activity 2');
+                expect(result[2][0].type).to.equal('ACTIVITY');
+
+                expect(result[3]).to.have.length(1);
+                expect(result[3][0].node_name).to.equal('My Activity 3');
+                expect(result[3][0].type).to.equal('ACTIVITY');
+
+                assert.isTrue(activityDaoStub.withArgs(ldid).calledOnce);
+                assert.equal(activityGroupDaoStub.callCount, 0, "no activity groups fetched when LD has no activity groups");
+                done();
+            };
+
+            ActivityService.getLDActivityStructure(ldid, activityCallback);
+
+        });
+
     	it('Returns results grouped by level', function(done) {
 
     		var ldid = 1;
-
-    		var activities = 
+    		var ldNodes = 
     			[
     				{"level": 1, "position": 1, "node_id": 5, "node_name": "Support Activity 1", "type": "ACTIVITY"},
     				{"level": 2, "position": 2, "node_id": 1, "node_name": null, "type": "ACTIVITY_GROUP"},
@@ -35,7 +124,7 @@ describe('Activity Service', function() {
     				{"level": 6, "position": 1, "node_id": 10, "node_name": "Evaluation Activity 1", "type": "ACTIVITY"}
     			];
             var activityDaoStub = sandbox.stub(ActivityDao, "getLdNodes", function(id, callback) {
-                callback(null, activities);
+                callback(null, ldNodes);
             });
 
             var activityGroups = 
@@ -49,12 +138,12 @@ describe('Activity Service', function() {
                 ];
             var activityGroupDaoStub = sandbox.stub(ActivityDao, "getActivityGroups", function(groupids, callback) {
                 callback(null, activityGroups);
-            })
+            });
 
             var activityCallback = function(err, result, message) {
             	expect(err).to.be.null;
             	expect(message).to.be.null;
-                expect(_.keys(result)).to.have.length(6);
+                expect(_.keys(result)).to.have.length(6); // i.e. 6 levels
 
                 expect(result[1]).to.have.length(1);
                 expect(result[1][0].node_name).to.equal('Support Activity 1');

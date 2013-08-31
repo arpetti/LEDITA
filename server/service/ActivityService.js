@@ -19,23 +19,27 @@ module.exports = {
 	getLDActivityStructure: function(ldid, callback) {
 		ActivityDao.getLdNodes(ldid, function(err, ldNodeResults) {
 			if (err) {
-				callback(err, null, {message: messages.UNABLE_TO_RETRIEVE_ACTIVITIES});
+				callback(err, null, messages.UNABLE_TO_RETRIEVE_LD_NODES);
 				return;
 			}
 			if (ldNodeResults.length === 0) {
-				callback(null, null, {message: messages.NO_ACTIVITIES_FOUND});
+				callback(null, null, messages.NO_LD_NODES_FOUND);
 				return;
 			}
 			
 			var activityGroupIds = _.pluck(_.where(ldNodeResults, {type: "ACTIVITY_GROUP"}), 'node_id');
+			if (activityGroupIds.length === 0) {
+				callback(null, _.groupBy(ldNodeResults, function(result){ return result.level; }), null);
+				return;
+			}
 			
 			ActivityDao.getActivityGroups(activityGroupIds, function(err, activityGroupResults) {
 				if (err) {
-					callback(err, null, {message: messages.UNABLE_TO_RETRIEVE_ACTIVITIES});
+					callback(err, null, messages.UNABLE_TO_RETRIEVE_ACTIVITIES);
 					return;
 				}
 				if (activityGroupResults.length === 0) {
-					callback(null, null, {message: messages.NO_ACTIVITIES_FOUND});
+					callback(null, null, messages.NO_ACTIVITIES_FOUND);
 					return;
 				}
 				

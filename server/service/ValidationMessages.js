@@ -23,5 +23,7 @@ module.exports.LD_NOT_FOUND = "Unable to find learning design."
 module.exports.LD_DETAIL_NOT_FOUND = "Learning Design details could not be found"
 
 // Activities
-module.exports.UNABLE_TO_RETRIEVE_ACTIVITIES = 'Unable to retrieve activities at this time, please try again later.';
-module.exports.NO_ACTIVITIES_FOUND = 'This learning design has no activities.';
+module.exports.UNABLE_TO_RETRIEVE_LD_NODES = "Unable to retrieve learning design nodes at this time, please try again later.";
+module.exports.NO_LD_NODES_FOUND = "This learning design has no nodes";
+module.exports.UNABLE_TO_RETRIEVE_ACTIVITIES = "Unable to retrieve activities at this time, please try again later.";
+module.exports.NO_ACTIVITIES_FOUND = "This learning design has no activities.";
