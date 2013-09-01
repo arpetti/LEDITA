@@ -16,18 +16,8 @@ angular.module('ledita-app')
         $scope.error = "Failed to fetch learning design activities.";
     });
 
-    //TODO Add Angular Karma unit test!
     $scope.getBoxClass = function(node) {
-      if (node.type === 'ACTIVITY') {
-        return 'actBox';
-      }
-      if (node.type === 'LD') {
-        return 'ldBox';
-      }
-      if (node.type === 'ACTIVITY_GROUP') {
-        return 'groupBox3'; //FIXME different style based on MAXIMUM number of children IN A LEVEL
-      }
-
+      return LDService.getBoxClass(node);
     };
 
    $scope.isBtnActive = function (data) {

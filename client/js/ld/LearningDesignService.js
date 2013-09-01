@@ -10,6 +10,21 @@ angular.module('ledita-app')
         getActivities: function(ldid, success, error) {
         	var activityUrl = "/learningdesignstructure/" + ldid;
         	$http.get(activityUrl).success(success).error(error);
+        },
+
+        //TODO Add Angular Karma unit test!
+        getBoxClass: function(node) {
+            if (node.type === 'ACTIVITY') {
+                return 'actBox';
+            }
+            if (node.type === 'LD') {
+                return 'ldBox';
+            }
+            if (node.type === 'ACTIVITY_GROUP') {
+                if (node.max_position >= 1 && node.max_position <= 4) {
+                    return 'groupBox' + node.max_position;
+                }
+            } 
         }
         
     };

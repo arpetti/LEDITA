@@ -48,7 +48,9 @@ module.exports = {
 
 				var enrichLdNodes = _.map(ldNodeResults, function(element) {
 					if (element.type === 'ACTIVITY_GROUP') {
-						element.max_position = groupsById[element.node_id][0].max_position;
+						if (groupsById[element.node_id]) {  // check for empty group
+							element.max_position = groupsById[element.node_id][0].max_position;
+						}
 						element.children = groupsByIdThenLevel[element.node_id];
 						return element;
 					} else {
