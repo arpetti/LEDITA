@@ -13,6 +13,7 @@ before_script:
 
 script:
   - NODE_ENV=ci npm test
+  - NODE_ENV=ci npm run-script client-test
   # The below script is commented out because angular unit tests are not implemented yet
   #- karma start config/karma.conf.js --no-auto-watch --single-run --reporters=dots --browsers=Firefox
   - karma start test/client/config/karma-e2e.conf.js --reporters=progress --browsers=PhantomJS
