@@ -129,12 +129,18 @@ describe('Activity Service', function() {
 
             var activityGroups = 
                 [
-                    {"activity_group_id": 1, "activity_group_name": null, "level": 1, "position": 1, "activity_id": 1, "activity_name": "Learning Activity 1"},
-                    {"activity_group_id": 1, "activity_group_name": null, "level": 1, "position": 2, "activity_id": 2, "activity_name": "Learning Activity 2"},
-                    {"activity_group_id": 1, "activity_group_name": null, "level": 2, "position": 2, "activity_id": 2, "activity_name": "Learning Activity 3"},
-                    {"activity_group_id": 1, "activity_group_name": null, "level": 2, "position": 2, "activity_id": 4, "activity_name": "Learning Activity 4"},
-                    {"activity_group_id": 2, "activity_group_name": "Group 2 Name", "level": 2, "position": 1, "activity_id": 5, "activity_name": "Learning Activity 5"},
-                    {"activity_group_id": 2, "activity_group_name": "Group 2 Name", "level": 2, "position": 2, "activity_id": 7, "activity_name": "Learning Activity 6"},
+                    {"activity_group_id": 1, "activity_group_name": null, "level": 1, "position": 1, 
+                        "activity_id": 1, "activity_name": "Learning Activity 1", "max_position": 4},
+                    {"activity_group_id": 1, "activity_group_name": null, "level": 1, "position": 2, 
+                        "activity_id": 2, "activity_name": "Learning Activity 2", "max_position": 4},
+                    {"activity_group_id": 1, "activity_group_name": null, "level": 2, "position": 2, 
+                        "activity_id": 2, "activity_name": "Learning Activity 3", "max_position": 4},
+                    {"activity_group_id": 1, "activity_group_name": null, "level": 2, "position": 2, 
+                        "activity_id": 4, "activity_name": "Learning Activity 4", "max_position": 4},
+                    {"activity_group_id": 2, "activity_group_name": "Group 2 Name", "level": 2, "position": 1, 
+                        "activity_id": 5, "activity_name": "Learning Activity 5", "max_position": 2},
+                    {"activity_group_id": 2, "activity_group_name": "Group 2 Name", "level": 2, "position": 2, 
+                        "activity_id": 7, "activity_name": "Learning Activity 6", "max_position": 2},
                 ];
             var activityGroupDaoStub = sandbox.stub(ActivityDao, "getActivityGroups", function(groupids, callback) {
                 callback(null, activityGroups);
@@ -152,6 +158,7 @@ describe('Activity Service', function() {
                 expect(result[2]).to.have.length(1);
                 expect(result[2][0].node_name).to.be.null;
                 expect(result[2][0].type).to.equal('ACTIVITY_GROUP');
+                expect(result[2][0].max_position).to.equal(4);
                 expect(_.keys(result[2][0].children)).to.have.length(2);
 
                 expect(result[3]).to.have.length(2);

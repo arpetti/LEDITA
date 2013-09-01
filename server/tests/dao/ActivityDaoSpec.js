@@ -1,5 +1,6 @@
 var expect = require('chai').expect
-    , ActivityDao = require('../../dao/ActivityDao');
+var ActivityDao = require('../../dao/ActivityDao');
+var _ = require('underscore');
 
 describe('Activity DAO', function() {   
 
@@ -36,12 +37,16 @@ describe('Activity DAO', function() {
 			});
 		});
 
-		it('Get Activity Groups Max Positions returns results', function(done) {
-			var groupids = [1, 7];
-			ActivityDao.getActivityGroupsMaxPosition(groupids, function(err, results) {
-				expect(results).to.have.length(2);
-				expect(results[0].max_position).to.equal(2);
-				expect(results[1].max_position).to.equal(4);
+		it('Activity Group information also contains max position', function(done) {
+			var groupids = [5];
+			var group5ExpectedMaxPosition = 3;
+			
+			ActivityDao.getActivityGroups(groupids, function(err, results) {
+				expect(results).to.have.length(5);
+				var allMaxPosAreSame = _.every(results, function(value) {
+					return value.max_position === group5ExpectedMaxPosition
+				});
+				expect(allMaxPosAreSame).to.be.true;
 				done();
 			});
 		});

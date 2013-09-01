@@ -43,10 +43,12 @@ module.exports = {
 					return;
 				}
 				
+				var groupsById = _.groupBy(activityGroupResults, function(element){return element.activity_group_id});
 				var groupsByIdThenLevel = _.groupByMulti(activityGroupResults, ['activity_group_id', 'level']);
 
 				var enrichLdNodes = _.map(ldNodeResults, function(element) {
 					if (element.type === 'ACTIVITY_GROUP') {
+						element.max_position = groupsById[element.node_id][0].max_position;
 						element.children = groupsByIdThenLevel[element.node_id];
 						return element;
 					} else {
