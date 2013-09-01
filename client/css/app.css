@@ -70,6 +70,54 @@ a:hover {
     text-align: center;
 }
 
+
+/*  error page
+===================== */
+.boardTop, .boardBottom {
+    width: 100%;
+    height: 10px;
+    clear: both;
+    background: url("../img/wood.png");
+}
+
+.boardBottom {
+    box-shadow:  0 3px 5px rgba(0, 0, 0, 0.2);
+
+}
+.boardLeft {
+    width: 2%;
+    height: 250px;
+    background: url("../img/wood.png");
+    float: left;
+}
+
+.boardRight {
+    width: 2%;
+    height: 250px;
+    background: url("../img/wood.png");
+    float: right;
+}
+.boardBody {
+    background: url("../img/boardBody.png") no-repeat;
+              background-size: 100% 100%;
+    float: left;
+    width: 96%;
+    margin: 0 auto;
+    text-align: center;
+    color: #ffffff;
+    padding: 20px 0;
+    height: 210px;
+}
+
+
+.boardBody h1 {
+             padding: 30px 30px 0 30px;
+}
+
+
+.boardBody h3 {
+    padding: 0 30px 0 30px;
+}
 /* main layout
 ===================== */
 
