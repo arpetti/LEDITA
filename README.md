@@ -135,7 +135,11 @@ This runs unit and DAO tests. If you have any DAO tests failing locally, reset y
 
 ### <a name="rununit"/>Run Client Unit Tests    
 
-Not implemented yet.
+    ```
+    npm run-script client-test
+    ```
+
+This uses karma to run the Angular unit tests.
 
 ### <a name="rune2e"/>Run Client End To End Tests
 
