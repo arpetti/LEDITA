@@ -123,7 +123,9 @@ Project Website: http://www.professoreitaliano.com
 
 ## Running Tests
 
-Before any pushes are made, please ensure all tests pass locally. Tests will also be run automatically on Travis after pushing. The instructions below explain how to run server and client tests locally.
+Before any pushes are made, please ensure all tests pass locally. Tests will also be run automatically on Travis for every ```git push```. If you're on Mac or Linux, the easiest way to run all tests is from project root, run ```./run-all-tests.sh```
+
+However, if you're on Windows, or want to run different types of tests individually, the instructions below explain how to to do so.
  
 ### Run Server Tests
 
