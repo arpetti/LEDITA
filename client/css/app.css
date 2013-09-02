@@ -11,6 +11,62 @@ ACE500 = green
 
 /* resets and overrides
 ===================== */
+.newActBox {
+    width: 70px;
+    position: absolute;
+    left: 26.5%;
+    top: 150px;
+}
+
+.newActBox a {
+    font-weight: normal;
+}
+
+.newActButton1:hover, .newActButton2:hover, .newActButton3:hover {
+    background-color: #990000;
+    color: #ffffff;
+}
+
+.newActButton1 {
+    width: 44px;
+    height: 44px;
+    border-radius: 60px;
+    background: #496f56 scroll 0 0;
+    margin: 10px 0;
+    line-height: 18px;
+    padding: 10px;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+}
+
+.newActButton2 {
+    width: 44px;
+    height: 44px;
+    border-radius: 60px;
+    background: #0099CC scroll 0 0;
+    margin: 10px 0;
+    line-height: 18px;
+    padding: 10px;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+
+}
+
+.newActButton3 {
+    width: 44px;
+    height: 44px;
+    border-radius: 60px;
+    background: #cccccc scroll 0 0;
+    margin: 10px 0;
+    line-height: 18px;
+    padding: 10px;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
+    color: #666;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -70,7 +126,6 @@ a:hover {
     text-align: center;
 }
 
-
 /*  error page
 ===================== */
 .boardTop, .boardBottom {
@@ -81,9 +136,10 @@ a:hover {
 }
 
 .boardBottom {
-    box-shadow:  0 3px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 
 }
+
 .boardLeft {
     width: 2%;
     height: 250px;
@@ -97,9 +153,10 @@ a:hover {
     background: url("../img/wood.png");
     float: right;
 }
+
 .boardBody {
     background: url("../img/boardBody.png") no-repeat;
-              background-size: 100% 100%;
+    background-size: 100% 100%;
     float: left;
     width: 96%;
     margin: 0 auto;
@@ -109,15 +166,14 @@ a:hover {
     height: 210px;
 }
 
-
 .boardBody h1 {
-             padding: 30px 30px 0 30px;
+    padding: 30px 30px 0 30px;
 }
-
 
 .boardBody h3 {
     padding: 0 30px 0 30px;
 }
+
 /* main layout
 ===================== */
 
@@ -340,7 +396,7 @@ input.sidebarInput {
 }
 
 #model:hover {
-background-color: #990000;
+    background-color: #990000;
 }
 
 .btnModelImg {
@@ -365,13 +421,13 @@ background-color: #990000;
 #footer {
     margin: 0;
     padding: 0;
-text-align: center;
+    text-align: center;
 }
 
 #copyInfo {
- padding: 20px 0 0 5%;
+    padding: 20px 0 0 5%;
     font-size: 12px;
-line-height: 18px;
+    line-height: 18px;
 }
 
 .scrollup {
@@ -403,27 +459,36 @@ line-height: 18px;
 }
 
 .actBox {
-    background-color: #00A000;
     border-radius: 6px;
     color: #FFF;
     min-height: 40px;
-    width: 22%;
+    width: 21%;
     margin: 10px 1%;
     display: inline-block;
-    border: 2px solid #FFFFFF;
+    border: 6px solid #ebc786;
+    background: url("../img/boardBody.png");
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
 }
 
 .ldBox {
-    background-color: #990000;
+    background-color: #0099CC;
     border-radius: 6px;
     color: #FFF;
     min-height: 40px;
-    width: 22%;
+    width: 21%;
     margin: 10px 1%;
     display: inline-block;
-    border: 2px solid #FFFFFF;
+    border: 6px solid #FFFFFF;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
 }
 
+.ldBox .actName h6 {
+    color: #990000;
+    background: #FFFFFF;
+    border: 1px dashed #0099CC;
+    line-height: 14px;
+    padding: 2px 0;
+}
 
 .levelBox {
     text-align: center;
@@ -453,6 +518,12 @@ line-height: 18px;
     clear: left;
     padding: 2px 5px;
     line-height: 1.3em;
+}
+
+.groupBox {
+    background-color: #990000;
+    width: 500px;
+    height: 200px;
 }
 
 .groupBox1, .groupBox2, .groupBox3, .groupBox4 {
@@ -486,19 +557,19 @@ line-height: 18px;
     margin: -10px 10px 0 20px;
 }
 
-.groupBox1  .actBox {
-    width: 90%;
+.groupBox1  .actBox, .groupBox1 .ldBox {
+    width: 85%;
     background-color: #990000;
 
 }
 
-.groupBox2 .actBox {
-    width: 45%;
+.groupBox2 .actBox, .groupBox2 .ldBox {
+    width: 42%;
     background-color: #00A000;
 }
 
-.groupBox3 .actBox {
-    width: 30%;
+.groupBox3 .actBox, .groupBox3 .ldBox {
+    width: 27%;
     background-color: #00A000;
 }
 
@@ -512,7 +583,7 @@ line-height: 18px;
 
 .timeLabel {
     float: left;
-    padding: 5px ;
+    padding: 5px;
 }
 
 .orgLabel {
@@ -525,20 +596,51 @@ a.whiteText:hover {
     color: #FFFFFF;
     text-decoration: underline;
 }
-.likeButton {
+
+.likeButton2 {
     background-color: #ddd;
     border-radius: 35px;
     text-align: center;
     display: inline-block;
     height: 40px;
     width: 40px;
-   margin: 20px auto;
+    margin: 20px auto;
     padding: 10px;
     border: 3px solid #999;
 
 }
 
+.likeButton {
+    background-color: #ddd;
+    border-radius: 32px;
+    text-align: center;
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    margin: -7px 10px 5px;
+    padding: 10px;
+    border: 3px solid #999;
+    float: right;
+    line-height: 10px;
+
+}
+
 .likedButton {
+    background-color: #0099CC;
+    border-radius: 32px;
+    text-align: center;
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    margin: -7px 10px 5px;
+    padding: 10px;
+    border: 3px solid #FFFFFF;
+    float: right;
+    line-height: 10px;
+
+}
+
+.likedButton2 {
     background-color: #990000;
     border-radius: 35px;
     text-align: center;
@@ -549,35 +651,37 @@ a.whiteText:hover {
     padding: 10px;
     border: 3px solid #FFFFFF;
 
-
 }
 
-.likeButton a{
+a .likeButton {
     font-weight: normal;
     color: #666666;
 }
 
-.likedButton a{
+a .likedButton {
     font-weight: normal;
     color: #FFFFFF;
 }
 
-
-.likeButton:hover  {
+.likeButton:hover {
     background-color: #0099CC;
     border-color: #FFFFFF;
 }
-.likeButton:hover a {
+
+a .likeButton:hover {
     color: #ffffff;
 }
+
 .likeButton:hover i {
     background-color: #ffffff;
     border-radius: 10px;
 
 }
 
-.likedButton:hover  {
-    background-color: #dddddd}
+.likedButton:hover {
+    background-color: #dddddd
+}
+
 /* activity text
 ===================== */
 .nodeText {
@@ -625,6 +729,7 @@ a.whiteText:hover {
     font-size: 22px;
     padding-top: 0;
 }
+
 .tabText {
     padding: 0;
     font-weight: bold;
@@ -643,6 +748,7 @@ ul.listNode li {
     font-size: 12px;
     font-weight: bold;
 }
+
 .modal-header {
     color: #FFFFFF;
     background-color: #0099CC;
@@ -654,14 +760,15 @@ ul.listNode li {
     height: 30px;
 }
 
-
 .modal-header h4 {
-float: left;
+    float: left;
     margin: 5px 0 0 40px;
 }
+
 .modal-footer {
     padding: 5px;
 }
+
 /* navbar
 ===================== */
 .navbar-inverse .navbar-inner {
@@ -694,9 +801,9 @@ float: left;
 }
 
 .btn-menu:hover {
-    color: #999;
+    color: #990000;
     background-color: #FFFFFF;
-    text-shadow: 0 -1px 1px #FFFFFF, 0 1px 1px #CCCCCC;
+    text-shadow: 0 -1px 1px #ccc;
     box-shadow: 0 -1px 2px rgba(255, 255, 255, 0.65), 0 2px 2px #CCCCCC;
 
 }
@@ -724,13 +831,13 @@ float: left;
 }
 
 .nav-closed:hover .nav-username {
-    color: #0099CC;
-    text-shadow: 0 -1px 1px #FFFFFF, 0 1px 1px #CCCCCC;
+    color: #cccccc;
 
+    text-shadow: 0 1px 1px #FFF, 0 -1px 1px #fff;
 }
 
 .nav-closed:hover .user-pic {
-    border-color: #999;
+    border-color: #ccc;
 }
 
 .nav-closed:hover .caret {
@@ -791,11 +898,13 @@ float: left;
     text-shadow: 0 1px 1px rgba(155, 155, 155, 0.65);
     border-radius: 22px;
     width: 22px;
-    height:22px;
+    height: 22px;
+    line-height: 14px;
+    font-size: 12px;
     padding: 0;
     margin: 5px;
+    border: 4px double #0099CC;
 }
-
 
 #pwRec a {
     text-align: right;
@@ -823,14 +932,14 @@ li#loggedInUserName.nav-username {
     padding-right: 3px;
 }
 
-
 .navbar .nav.pull-right {
     margin-top: -10px;
     padding-top: 0;
 }
 
 .dropdown-menu {
-    border: 3px solid #FFFFFF;
+    border: 3px solid #fff;
+    margin: 5px;
 }
 
 .dropdown-menu > li > a:hover {
@@ -944,7 +1053,6 @@ input[type="checkbox"] {
 
 }
 
-
 .errorTip {
     font: bold 11px helvetica, arial, sans-serif;
     color: #FFFFFF;
@@ -952,7 +1060,6 @@ input[type="checkbox"] {
     background-color: #990000;
     padding: 3px;
 }
-
 
 /* misc
 ===================== */
@@ -1047,7 +1154,7 @@ input[type="checkbox"] {
 
 }
 
-.authorName a{
+.authorName a {
     float: right;
     text-align: center;
     margin: 0 5px 2px 0;
@@ -1070,7 +1177,7 @@ input[type="checkbox"] {
     background-color: #FFFFFF;
 }
 
-.likes a{
+.likes a {
     float: left;
     text-align: center;
     margin: 0 5px 2px 0;
@@ -1084,7 +1191,7 @@ input[type="checkbox"] {
     color: #666666;
 }
 
-.liked a{
+.liked a {
     float: left;
     text-align: center;
     margin: 0 5px 2px 0;
@@ -1096,10 +1203,10 @@ input[type="checkbox"] {
     line-height: 20px;
     color: #FFFFFF;
     width: 25%;
-    border:  2px solid #FFFFFF;
+    border: 2px solid #FFFFFF;
 }
 
-.likes:hover, .authorName:hover  {
+.likes:hover, .authorName:hover {
     box-shadow: 0 -1px 1px #CCCCCC, 0 1px 1px #F5F4ED;
 
 }
@@ -1116,7 +1223,7 @@ input[type="checkbox"] {
     text-overflow: ellipsis;
     width: 95%;
     background-color: #FFFFFF;
-    margin: 0 auto ;
+    margin: 0 auto;
     border: 1px dashed #0099CC;
     padding: 10px 5px;
 }
@@ -1170,6 +1277,7 @@ input[type="checkbox"] {
         width: 130px;
         margin: 0 0 0 8px;
     }
+
 }
 
 @media (max-width: 979px) {
@@ -1325,6 +1433,10 @@ input[type="checkbox"] {
         margin: 10px;
     }
 
+    .ldBox, .actBox {
+        width: 20%;
+    }
+
 }
 
 @media (max-width: 885px) and (min-width: 767px) {
@@ -1377,6 +1489,7 @@ input[type="checkbox"] {
     #sidebar {
         margin-bottom: 20px;
     }
+
 }
 
 @media (max-width: 620px) {
@@ -1457,6 +1570,19 @@ input[type="checkbox"] {
         font-size: 10px;
     }
 
+    .ldBox, .actBox {
+        width: 19%;
+    }
+
+    .groupBox3 .actBox, .groupBox3 .ldBox {
+        width: 24%;
+        background-color: #00A000;
+    }
+
+    .groupBox2 .actBox, .groupBox2 .ldBox {
+        width: 34%;
+        background-color: #00A000;
+    }
 }
 
 @media (max-width: 290px) {
@@ -1475,6 +1601,7 @@ input[type="checkbox"] {
         margin: 3px;
     }
 }
+
 
 
 
