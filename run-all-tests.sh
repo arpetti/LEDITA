@@ -26,11 +26,11 @@ if [[ -n "$nodepid" ]]; then
 fi
 
 echo "Running server side unit, dao, and integration tests..."
-npm test
+NODE_ENV=dev npm test
 serverTestStatus=$?
 
 echo "Running client side unit tests..."
-npm run-script client-test
+NODE_ENV=dev npm run-script client-test
 clientUnitTestStatus=$?
 
 echo "Recreating database in preparation for end to end tests..."
