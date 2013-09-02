@@ -33,13 +33,15 @@ echo "Running client side unit tests..."
 npm run-script client-test
 clientUnitTestStatus=$?
 
+echo "Recreating database in preparation for end to end tests..."
+database/local/create-db.sh
+
 echo "Starting node web server..."
 NODE_ENV=dev node server.js > /dev/null &
 sleep 2
 
-# TODO Investigate if possible to define e2e tests in package.json similar to client-test
 echo "Running client side end to end tests..."
-test/client/scripts/local-e2e-test.sh
+npm run-script client-e2e-test
 clientE2ETestStatus=$?
 
 echo "Stopping node web server..."
