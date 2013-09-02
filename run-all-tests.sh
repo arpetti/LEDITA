@@ -35,22 +35,36 @@ echo "Running client side unit tests..."
 npm run-script client-test
 clientUnitTestStatus=$?
 
-echo "Server test status is $serverTestStatus, Client test status is $clientUnitTestStatus"
-
-# FIXME How to check if server already started?
-# Start server
-#NODE_ENV=dev node server.js > /dev/null &
-#sleep 2
+echo "Starting node web server..."
+NODE_ENV=dev node server.js > /dev/null &
+sleep 2
 
 # TODO Investigate if possible to define e2e tests in package.json similar to client-test
-# Run client side Angular-Karma end-to-end tests
-#test/client/scripts/local-e2e-test.sh
+echo "Running client side end to end tests..."
+test/client/scripts/local-e2e-test.sh
+clientE2ETestStatus=$?
 
-# TODO Kill Server, but NODE, not RUBY
-# http://stackoverflow.com/questions/6437602/shell-script-to-get-the-process-id-on-linux
-#output=`ps -aux|grep r[u]by`
-#set -- $output
-#pid = $1
+echo "Stopping node web server..."
+nodepid=`ps -ax | pgrep node`
+if [[ -n "$nodepid" ]]; then
+	kill $nodepid
+	sleep 2
+fi
+
+echo "Server test status is $serverTestStatus"
+echo "Client unit test status is $clientUnitTestStatus"
+echo "Client e2e test status is: $clientE2ETestStatus"
+
+if [[ $serverTestStatus != 0 ]] || [[ $clientUnitTestStatus != 0 ]] || [[ $clientE2ETestStatus != 0 ]]; then
+	echo "ERROR: There were test failures"
+	exit 1
+else
+	echo "SUCCESS: All tests passed"
+fi
+exit 0
+
+
+#FUTURE if node webserver doesn't die, kill again with -9
 #kill $pid
 #sleep 2
 #kill -9 $pid >/dev/null 2>&1
