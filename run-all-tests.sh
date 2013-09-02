@@ -13,14 +13,12 @@
 ######################################################################################
 
 mysqlpid=`ps -ax | pgrep mysql`
-set -- $mysqlpid
 if [[ -z "$mysqlpid" ]]; then
 	echo "Please start mysql then run this script again, goodbye."
 	exit 1
 fi
 
 nodepid=`ps -ax | pgrep node`
-set -- $nodepid
 if [[ -n "$nodepid" ]]; then
 	echo "Node web server already running at pid: $nodepid, killing..."
 	kill $nodepid
