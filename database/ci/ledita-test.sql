@@ -671,21 +671,38 @@ CREATE OR REPLACE VIEW vw_activity_group_max_pos AS
   FROM participates 
   GROUP BY activity_group_id;  
 
-CREATE OR REPLACE VIEW vw_activity_group AS
-  SELECT activity_group.id as activity_group_id
-    , activity_group.name as activity_group_name
+CREATE OR REPLACE VIEW vw_group AS
+  (SELECT activity_group.id as group_id
+    , activity_group.name as group_name
     , participates.level as level
     , participates.position as position
-    , activity.id as activity_id
-    , activity.name as activity_name
+    , activity.id as group_child_id
+    , activity.name as group_child_name
     , pos.max_position as max_position
+    , 'ACTIVITY' as group_child_type
   FROM activity_group
   INNER JOIN vw_activity_group_max_pos pos
     ON activity_group.id = pos.activity_group_id
   INNER JOIN participates
     ON activity_group.id = participates.activity_group_id
   INNER JOIN activity
-    ON participates.activity_id = activity.id;
+    ON participates.activity_id = activity.id)
+  UNION
+  (SELECT activity_group.id as group_id
+    , activity_group.name as group_name
+    , participates.level as level
+    , participates.position as position
+    , ld.id as group_child_id
+    , ld.name as group_child_name
+    , pos.max_position as max_position
+    , 'LD' as group_child_type
+  FROM activity_group
+  INNER JOIN vw_activity_group_max_pos pos
+    ON activity_group.id = pos.activity_group_id
+  INNER JOIN participates
+    ON activity_group.id = participates.activity_group_id
+  INNER JOIN ld
+    ON participates.ld_is_part_id = ld.id);
 
 USE `ledita-test` ;
 

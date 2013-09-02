@@ -4,8 +4,10 @@ var mysql = require('mysql')
 var GET_LD_NODES = 'select ld_id, ld_name, level, position, node_id, node_name, type ' +
   'from vw_ld_node where ld_id = ? order by level, position';
 
-var GET_ACTIVITY_GROUPS = 'select activity_group_id, activity_group_name, level, position ' +
-  'activity_id, activity_name, max_position from vw_activity_group where activity_group_id in (?)';
+var GET_GROUPS = 'select group_id, group_name, level, position, ' +
+  'group_child_id, group_child_name, max_position, group_child_type ' + 
+  'from vw_group where group_id in (?) ' +
+  'order by group_id, level, position';
 
 module.exports = {
 
@@ -19,8 +21,8 @@ module.exports = {
     });
   },
 
-  getActivityGroups: function(groupids, callback) {
-    dao.findAll(GET_ACTIVITY_GROUPS, [groupids], function(err, rows) {
+  getGroups: function(groupids, callback) {
+    dao.findAll(GET_GROUPS, [groupids], function(err, rows) {
       if (err) {
         callback(err);
         return;

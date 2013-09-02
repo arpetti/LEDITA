@@ -128,7 +128,7 @@
                     <!-- Children are also in levels: Create unstyled div for each level -->
                     <div ng-repeat="(childLevel, subChildren) in node.children">
                         <div ng-repeat="child in subChildren" class="actBox">
-                            <a ng-href="#" class="whiteText" ng-click="open()"><h6 class="actName">{{ child.activity_name }}</h6>
+                            <a ng-href="#" class="whiteText" ng-click="open()"><h6 class="actName">{{ child.group_child_name }}</h6>
 
                                 <!-- FIXME Convert static data to dynamic -->
                                 <div class="actLabel">
@@ -176,7 +176,7 @@
 
                                 <div class="clearfix"></div>
                                 <div ng-repeat="child in node.children">
-                                    <h5 class="nodeNameTextDetails">{{ child.name }}</h5>
+                                    <h5 class="nodeNameTextDetails">{{ child.group_child_name }}</h5>
 
                                     <p class="tabText"><i class="icon-home"></i> Modality: <span class="nodeBodyText">{ { activity.modality } }</span>
                                     </p>
@@ -313,7 +313,7 @@
                         <!-- Children in groups are organized by level, create unstyled div for each level -->
                         <div ng-repeat="(childLevel, subChildren) in node.children">
                             <div ng-repeat="child in subChildren">
-                                <h5 class="nodeNameText">{{ child.activity_name }}</h5>
+                                <h5 class="nodeNameText">{{ child.group_child_name }}</h5>
 
                                 <p class="tabText"><i class="icon-home"></i> Modality: <span class="nodeBodyText">{ { activity.modality } }</span>
                                 </p>
@@ -435,7 +435,7 @@
                         <!-- Children are also in levels: Create unstyled div for each level -->
                         <div ng-repeat="(childLevel, subChildren) in node.children">
                             <div ng-repeat="child in subChildren">
-                                <h5 class="nodeNameText">{{ child.activity_name }}</h5>
+                                <h5 class="nodeNameText">{{ child.group_child_name }}</h5>
 
                                 <p class="tabText"><i class="icon-home"></i> Modality: <span class="nodeBodyText">{ { activity.modality } }</span>
                                 </p>

@@ -12,7 +12,6 @@ angular.module('ledita-app')
         	$http.get(activityUrl).success(success).error(error);
         },
 
-        //TODO Add Angular Karma unit test!
         getBoxClass: function(node) {
             if (node.type === 'ACTIVITY') {
                 return 'actBox';

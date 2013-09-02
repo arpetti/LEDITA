@@ -27,7 +27,7 @@ describe('Activity Service', function() {
             var activityDaoStub = sandbox.stub(ActivityDao, "getLdNodes", function(id, callback) {
                 callback(null, ldNodes);
             });
-            var activityGroupDaoStub = sandbox.stub(ActivityDao, "getActivityGroups");
+            var activityGroupDaoStub = sandbox.stub(ActivityDao, "getGroups");
 
             var activityCallback = function(err, result, message) {
                 expect(err).to.be.null;
@@ -35,13 +35,13 @@ describe('Activity Service', function() {
                 expect(message).to.equal(messages.NO_LD_NODES_FOUND);
 
                 assert.isTrue(activityDaoStub.withArgs(ldid).calledOnce);
-                assert.equal(activityGroupDaoStub.callCount, 0, "no activity groups fetched when LD has no nodes");
+                assert.equal(activityGroupDaoStub.callCount, 0, "no groups fetched when LD has no nodes");
                 done();
             };
             ActivityService.getLDActivityStructure(ldid, activityCallback);
         });
 
-        it('Returns message if no activity groups could be found', function(done) {
+        it('Returns message if no groups could be found', function(done) {
 
             var ldid = 30;
             var ldNodes = 
@@ -53,7 +53,7 @@ describe('Activity Service', function() {
                 callback(null, ldNodes);
             });
             var activityGroups = [];
-            var activityGroupDaoStub = sandbox.stub(ActivityDao, "getActivityGroups", function(groupids, callback) {
+            var activityGroupDaoStub = sandbox.stub(ActivityDao, "getGroups", function(groupids, callback) {
                 callback(null, activityGroups);
             });
 
@@ -70,7 +70,7 @@ describe('Activity Service', function() {
 
         });
 
-        it('Returns just nodes by level if LD has no activity groups', function(done) {
+        it('Returns just nodes by level if LD has no groups', function(done) {
 
             var ldid = 20;
             var ldNodes = 
@@ -82,7 +82,7 @@ describe('Activity Service', function() {
             var activityDaoStub = sandbox.stub(ActivityDao, "getLdNodes", function(id, callback) {
                 callback(null, ldNodes);
             });
-            var activityGroupDaoStub = sandbox.stub(ActivityDao, "getActivityGroups");
+            var activityGroupDaoStub = sandbox.stub(ActivityDao, "getGroups");
 
             var activityCallback = function(err, result, message) {
                 expect(err).to.be.null;
@@ -127,23 +127,23 @@ describe('Activity Service', function() {
                 callback(null, ldNodes);
             });
 
-            var activityGroups = 
+            var groups = 
                 [
-                    {"activity_group_id": 1, "activity_group_name": null, "level": 1, "position": 1, 
-                        "activity_id": 1, "activity_name": "Learning Activity 1", "max_position": 4},
-                    {"activity_group_id": 1, "activity_group_name": null, "level": 1, "position": 2, 
-                        "activity_id": 2, "activity_name": "Learning Activity 2", "max_position": 4},
-                    {"activity_group_id": 1, "activity_group_name": null, "level": 2, "position": 2, 
-                        "activity_id": 2, "activity_name": "Learning Activity 3", "max_position": 4},
-                    {"activity_group_id": 1, "activity_group_name": null, "level": 2, "position": 2, 
-                        "activity_id": 4, "activity_name": "Learning Activity 4", "max_position": 4},
-                    {"activity_group_id": 2, "activity_group_name": "Group 2 Name", "level": 2, "position": 1, 
-                        "activity_id": 5, "activity_name": "Learning Activity 5", "max_position": 2},
-                    {"activity_group_id": 2, "activity_group_name": "Group 2 Name", "level": 2, "position": 2, 
-                        "activity_id": 7, "activity_name": "Learning Activity 6", "max_position": 2},
+                    {"group_id": 1, "group_name": null, "level": 1, "position": 1, 
+                        "group_child_id": 1, "group_child_name": "Learning Activity 1", "max_position": 4},
+                    {"group_id": 1, "group_name": null, "level": 1, "position": 2, 
+                        "group_child_id": 2, "group_child_name": "Learning Activity 2", "max_position": 4},
+                    {"group_id": 1, "group_name": null, "level": 2, "position": 4, 
+                        "group_child_id": 2, "group_child_name": "Learning Activity 3", "max_position": 4},
+                    {"group_id": 1, "group_name": null, "level": 2, "position": 2, 
+                        "group_child_id": 4, "group_child_name": "Learning Activity 4", "max_position": 4},
+                    {"group_id": 2, "group_name": "Group 2 Name", "level": 2, "position": 1, 
+                        "group_child_id": 5, "group_child_name": "Learning Activity 5", "max_position": 2},
+                    {"group_id": 2, "group_name": "Group 2 Name", "level": 2, "position": 2, 
+                        "activity_id": 7, "group_child_name": "Learning Activity 6", "max_position": 2},
                 ];
-            var activityGroupDaoStub = sandbox.stub(ActivityDao, "getActivityGroups", function(groupids, callback) {
-                callback(null, activityGroups);
+            var activityGroupDaoStub = sandbox.stub(ActivityDao, "getGroups", function(groupids, callback) {
+                callback(null, groups);
             });
 
             var activityCallback = function(err, result, message) {

@@ -33,7 +33,7 @@ module.exports = {
 				return;
 			}
 			
-			ActivityDao.getActivityGroups(activityGroupIds, function(err, activityGroupResults) {
+			ActivityDao.getGroups(activityGroupIds, function(err, activityGroupResults) {
 				if (err) {
 					callback(err, null, messages.UNABLE_TO_RETRIEVE_ACTIVITIES);
 					return;
@@ -43,8 +43,8 @@ module.exports = {
 					return;
 				}
 				
-				var groupsById = _.groupBy(activityGroupResults, function(element){return element.activity_group_id});
-				var groupsByIdThenLevel = _.groupByMulti(activityGroupResults, ['activity_group_id', 'level']);
+				var groupsById = _.groupBy(activityGroupResults, function(element){return element.group_id});
+				var groupsByIdThenLevel = _.groupByMulti(activityGroupResults, ['group_id', 'level']);
 
 				var enrichLdNodes = _.map(ldNodeResults, function(element) {
 					if (element.type === 'ACTIVITY_GROUP') {
