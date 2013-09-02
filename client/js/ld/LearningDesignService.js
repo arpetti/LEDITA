@@ -24,6 +24,8 @@ angular.module('ledita-app')
                     return 'groupBox' + node.max_position;
                 }
             } 
+            console.log('WARNING: Could not determine box class for node.');
+            return '';
         }
         
     };
