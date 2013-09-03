@@ -11,62 +11,6 @@ ACE500 = green
 
 /* resets and overrides
 ===================== */
-.newActBox {
-    width: 70px;
-    position: absolute;
-    left: 26.5%;
-    top: 150px;
-}
-
-.newActBox a {
-    font-weight: normal;
-}
-
-.newActButton1:hover, .newActButton2:hover, .newActButton3:hover {
-    background-color: #990000;
-    color: #ffffff;
-}
-
-.newActButton1 {
-    width: 44px;
-    height: 44px;
-    border-radius: 60px;
-    background: #496f56 scroll 0 0;
-    margin: 10px 0;
-    line-height: 18px;
-    padding: 10px;
-    border: 2px solid #FFFFFF;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
-    color: #ffffff;
-}
-
-.newActButton2 {
-    width: 44px;
-    height: 44px;
-    border-radius: 60px;
-    background: #0099CC scroll 0 0;
-    margin: 10px 0;
-    line-height: 18px;
-    padding: 10px;
-    border: 2px solid #FFFFFF;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
-    color: #ffffff;
-
-}
-
-.newActButton3 {
-    width: 44px;
-    height: 44px;
-    border-radius: 60px;
-    background: #cccccc scroll 0 0;
-    margin: 10px 0;
-    line-height: 18px;
-    padding: 10px;
-    border: 2px solid #FFFFFF;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
-    color: #666;
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -440,6 +384,66 @@ input.sidebarInput {
     text-indent: -9999px;
     width: 40px;
 }
+
+/* new nodes bar
+===================== */
+.newActBox {
+    width: 70px;
+    position: absolute;
+    left: 26.5%;
+    top: 150px;
+}
+
+.newActBox a {
+    font-weight: normal;
+}
+
+.newActButton1:hover, .newActButton2:hover, .newActButton3:hover {
+    background-color: #990000;
+    color: #ffffff;
+}
+
+.newActButton1 {
+    width: 44px;
+    height: 44px;
+    border-radius: 60px;
+    background: #496f56 scroll 0 0;
+    margin: 10px 0;
+    line-height: 18px;
+    padding: 10px;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+}
+
+.newActButton2 {
+    width: 44px;
+    height: 44px;
+    border-radius: 60px;
+    background: #0099CC scroll 0 0;
+    margin: 10px 0;
+    line-height: 18px;
+    padding: 10px;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+
+}
+
+.newActButton3 {
+    width: 44px;
+    height: 44px;
+    border-radius: 60px;
+    background: #cccccc scroll 0 0;
+    margin: 10px 0;
+    line-height: 18px;
+    padding: 10px;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
+    color: #666;
+}
+
+
 
 /* activities diagram
 ===================== */
