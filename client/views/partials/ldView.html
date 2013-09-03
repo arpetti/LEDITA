@@ -131,7 +131,7 @@
 
                     <!-- Children are also in levels: Create unstyled div for each level -->
                     <div ng-repeat="(childLevel, subChildren) in node.children">
-                        <div ng-repeat="child in subChildren" class="actBox">
+                        <div ng-repeat="child in subChildren" ng-class="getGroupBoxClass(child)">
                             <a ng-href="#" class="whiteText" ng-click="open()"><h6 class="actName">{{ child.group_child_name }}</h6>
 
                                 <!-- FIXME Convert static data to dynamic -->
