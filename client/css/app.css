@@ -11,62 +11,6 @@ ACE500 = green
 
 /* resets and overrides
 ===================== */
-.newActBox {
-    width: 70px;
-    position: absolute;
-    left: 26.5%;
-    top: 150px;
-}
-
-.newActBox a {
-    font-weight: normal;
-}
-
-.newActButton1:hover, .newActButton2:hover, .newActButton3:hover {
-    background-color: #990000;
-    color: #ffffff;
-}
-
-.newActButton1 {
-    width: 44px;
-    height: 44px;
-    border-radius: 60px;
-    background: #496f56 scroll 0 0;
-    margin: 10px 0;
-    line-height: 18px;
-    padding: 10px;
-    border: 2px solid #FFFFFF;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
-    color: #ffffff;
-}
-
-.newActButton2 {
-    width: 44px;
-    height: 44px;
-    border-radius: 60px;
-    background: #0099CC scroll 0 0;
-    margin: 10px 0;
-    line-height: 18px;
-    padding: 10px;
-    border: 2px solid #FFFFFF;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
-    color: #ffffff;
-
-}
-
-.newActButton3 {
-    width: 44px;
-    height: 44px;
-    border-radius: 60px;
-    background: #cccccc scroll 0 0;
-    margin: 10px 0;
-    line-height: 18px;
-    padding: 10px;
-    border: 2px solid #FFFFFF;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
-    color: #666;
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -441,6 +385,66 @@ input.sidebarInput {
     width: 40px;
 }
 
+/* new nodes bar
+===================== */
+.newActBox {
+    width: 70px;
+    position: absolute;
+    left: 26.5%;
+    top: 150px;
+}
+
+.newActBox a {
+    font-weight: normal;
+}
+
+.newActButton1:hover, .newActButton2:hover, .newActButton3:hover {
+    background-color: #990000;
+    color: #ffffff;
+}
+
+.newActButton1 {
+    width: 44px;
+    height: 44px;
+    border-radius: 60px;
+    background: #496f56 scroll 0 0;
+    margin: 10px 0;
+    line-height: 18px;
+    padding: 10px;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+}
+
+.newActButton2 {
+    width: 44px;
+    height: 44px;
+    border-radius: 60px;
+    background: #0099CC scroll 0 0;
+    margin: 10px 0;
+    line-height: 18px;
+    padding: 10px;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+
+}
+
+.newActButton3 {
+    width: 44px;
+    height: 44px;
+    border-radius: 60px;
+    background: #cccccc scroll 0 0;
+    margin: 10px 0;
+    line-height: 18px;
+    padding: 10px;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
+    color: #666;
+}
+
+
+
 /* activities diagram
 ===================== */
 .titleRight {
@@ -482,12 +486,14 @@ input.sidebarInput {
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
 }
 
-.ldBox .actName h6 {
+.ldBox .actName h6, .ldBox h6.actName {
     color: #990000;
     background: #FFFFFF;
     border: 1px dashed #0099CC;
     line-height: 14px;
     padding: 2px 0;
+    width: 96%;
+    margin: 5px auto;
 }
 
 .levelBox {
@@ -559,19 +565,16 @@ input.sidebarInput {
 
 .groupBox1  .actBox, .groupBox1 .ldBox {
     width: 85%;
-    background-color: #990000;
 
 }
 
 .groupBox2 .actBox, .groupBox2 .ldBox {
     width: 42%;
-    background-color: #00A000;
 }
 
 .groupBox3 .actBox, .groupBox3 .ldBox {
     width: 27%;
-    background-color: #00A000;
-}
+    }
 
 .actLabel {
     font-size: 11px;
@@ -1576,12 +1579,10 @@ input[type="checkbox"] {
 
     .groupBox3 .actBox, .groupBox3 .ldBox {
         width: 24%;
-        background-color: #00A000;
     }
 
     .groupBox2 .actBox, .groupBox2 .ldBox {
         width: 34%;
-        background-color: #00A000;
     }
 }
 

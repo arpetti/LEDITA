@@ -26,7 +26,19 @@ angular.module('ledita-app')
             } 
             console.log('WARNING: Could not determine box class for node.');
             return '';
+        },
+
+        getGroupBoxClass: function(node) {
+            if (node.group_child_type === 'ACTIVITY') {
+                return 'actBox';
+            }
+            if (node.group_child_type === 'LD') {
+                return 'ldBox';
+            }
+            console.log('WARNING: Could not determine box class for node.');
+            return '';
         }
+
         
     };
 });

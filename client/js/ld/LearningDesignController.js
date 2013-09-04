@@ -20,7 +20,11 @@ angular.module('ledita-app')
       return LDService.getBoxClass(node);
     };
 
-   $scope.isBtnActive = function (data) {
+    $scope.getGroupBoxClass = function(node) {
+        return LDService.getGroupBoxClass(node);
+    };
+
+    $scope.isBtnActive = function (data) {
        if (data == true)
        return "btnActive";
    }                      ;
