@@ -7,16 +7,37 @@ CREATE SCHEMA IF NOT EXISTS `ledita-web-app` DEFAULT CHARACTER SET utf8 ;
 USE `ledita-web-app` ;
 
 -- -----------------------------------------------------
+-- Table `ledita-web-app`.`students_type`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ledita-web-app`.`students_type` ;
+
+CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`students_type` (
+  `type` CHAR(1) NOT NULL ,
+  `description` VARCHAR(100) NOT NULL ,
+  PRIMARY KEY (`type`) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+INSERT INTO `ledita-web-app`.`students_type` (`type`, `description`)
+VALUES  ('1', 'ALL'),
+        ('2', 'INDIVIDUAL'),
+        ('3', 'PAIR'),
+        ('4', 'GROUP');
+
+-- -----------------------------------------------------
 -- Table `ledita-web-app`.`students`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `ledita-web-app`.`students` ;
 
 CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`students` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
-  `type` CHAR(1) NOT NULL COMMENT 'TYPE:\n1=ALL\n2=INDIVIDUAL\n3=PAIR\n4=GROUP' ,
+  `type` CHAR(1) NOT NULL ,
   `group_number` INT(10) UNSIGNED NULL DEFAULT NULL ,
   `people_per_group` INT(10) UNSIGNED NULL DEFAULT NULL ,
-  PRIMARY KEY (`id`) )
+  PRIMARY KEY (`id`) ,
+  CONSTRAINT `fk_students_type`
+    FOREIGN KEY (`type` )
+    REFERENCES `ledita-web-app`.`students_type` (`type` ))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -704,6 +725,27 @@ CREATE OR REPLACE VIEW vw_group AS
     ON activity_group.id = participates.activity_group_id
   INNER JOIN ld
     ON participates.ld_is_part_id = ld.id);
+
+CREATE OR REPLACE VIEW vw_activity_org AS
+  SELECT activity.id as activity_id
+    , activity.name as activity_name
+    , students.group_number as students_group_number
+    , students.people_per_group as students_people_per_group
+    , students_type.description as students_type
+    , IF(students_type.description='GROUP', 
+        CONCAT(
+            IF(students.group_number IS NOT NULL, CAST(students.group_number AS CHAR), ''),
+            'G',
+            IF(students.people_per_group IS NOT NULL, 
+              CONCAT(' x ', CAST(students.people_per_group AS CHAR)), 
+              '')
+        ), 
+        students_type.description) as org_label
+  FROM activity
+  INNER JOIN students
+    ON activity.students_id = students.id
+  INNER JOIN students_type
+    ON students.type = students_type.type;
 
 USE `ledita-web-app` ;
 
