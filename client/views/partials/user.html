@@ -1,0 +1,71 @@
+<div class="container top-margin">
+    <div class="row-fluid">
+
+        <div class="span3  centered top-margin ">
+            <!-- FIXME: GET REAL PICTURE FROM DB -->
+            <img src="../img/user.png" class="user-pic-big">
+
+        </div>
+        <!-- FIXME: GET REAL USER DATA FROM DB -->
+        <div class="span9 top-margin userData">
+            <h1>Firstname Lastname</h1>
+            <h4>Workplace</h4>
+            <h4>City</h4>
+            <h4>Country</h4>
+        </div>
+        <div class="clearfix"></div>
+        <div class="top-margin zero">
+            <div class="btnContent btnActive btnTitle">
+                <!-- FIXME: GET REAL USER DATA FROM DB -->
+                <h3>Firstname's Designs</h3>
+            </div>
+            <div id="contentBody">
+                <div class="ldTable">
+                    <div class="headerTable">
+                        <div class="colTable col1">
+                            <p>&nbsp;</p>
+                        </div>
+                        <div class="colTable col2">
+                            <p>Design Name</p>
+                        </div>
+                        <div class="colTable col3">
+                            <p>Level</p>
+                        </div>
+                        <div class="colTable col4">
+                            <p>Duration</p>
+                        </div>
+                        <div class="colTable col5">
+                            <p>Created </p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="rowTable">
+                        <!-- FIXME: LIKE SYSTEM WITH CLASSES LIKECOL OR LIKEDCOL -->
+                        <div class="colTable col1">
+                            <a ng-href="#" class="likeCol"><p>Like <i class="icon-thumbs-up"></i></p></a>
+                        </div>
+                        <!-- FIXME: INSERT A NG-REPEAT WITH REAL LD DATA FROM DB WHERE USER IS LD AUTHOR -->
+                        <div class="rowLink">
+                            <a ng-href="#">
+                                <div class="colTable col2">
+                                    <p>{ { learningDesign.name } }</p>
+                                </div>
+                                <div class="colTable col3">
+                                    <p>A2</p>
+                                </div>
+                                <div class="colTable col4">
+                                    <p>Lesson</p>
+                                </div>
+                                <div class="colTable col5">
+                                    <p>25 aug 2013 </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="space"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

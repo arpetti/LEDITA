@@ -443,8 +443,6 @@ input.sidebarInput {
     color: #666;
 }
 
-
-
 /* activities diagram
 ===================== */
 .titleRight {
@@ -465,7 +463,7 @@ input.sidebarInput {
 .actBox {
     border-radius: 6px;
     color: #FFF;
-    min-height: 40px;
+    min-height: 44px;
     width: 21%;
     margin: 10px 1%;
     display: inline-block;
@@ -494,6 +492,11 @@ input.sidebarInput {
     padding: 2px 0;
     width: 96%;
     margin: 5px auto;
+}
+
+.ldBox .actName h6:hover, .ldBox h6.actName:hover {
+    text-decoration: underline;
+    color: #990000;
 }
 
 .levelBox {
@@ -526,18 +529,13 @@ input.sidebarInput {
     line-height: 1.3em;
 }
 
-.groupBox {
-    background-color: #990000;
-    width: 500px;
-    height: 200px;
-}
-
 .groupBox1, .groupBox2, .groupBox3, .groupBox4 {
     background-color: #dddddd;
     margin: 10px 0.5%;
     border-radius: 6px;
     padding: 0;
     display: inline-block;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
 
 }
 
@@ -574,7 +572,7 @@ input.sidebarInput {
 
 .groupBox3 .actBox, .groupBox3 .ldBox {
     width: 27%;
-    }
+}
 
 .actLabel {
     font-size: 11px;
@@ -772,6 +770,145 @@ ul.listNode li {
     padding: 5px;
 }
 
+/* ldTable
+===================== */
+.ldTable {
+    background-color: #dddddd;
+    margin: 10px;
+    border-radius: 6px;
+}
+
+.rowTable {
+    padding: 5px;
+    border-bottom: 1px dashed #999;
+    text-align: center;
+}
+
+.rowTable p {
+    margin: 7px 5px;
+    padding: 0;
+}
+
+.headerTable {
+    padding: 5px;
+    border-bottom: 1px solid #999;
+    text-align: center;
+    background-color: #666;
+    border-radius: 6px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.headerTable p {
+    margin: 0;
+    padding: 0;
+}
+
+.rowLink a, .rowLink p {
+    color: #666666;
+    font-weight: normal;
+    line-height: 14px;
+
+}
+
+.rowLink a:hover .col2, .rowLink a:hover .col3, .rowLink a:hover .col4, .rowLink a:hover .col5 {
+    color: #0099CC;
+    font-weight: normal;
+    background-color: #ffffff;
+    border-radius: 6px;
+    border-color: #dddddd;
+}
+
+.rowLink a:hover .col2 p, .rowLink a:hover .col3 p, .rowLink a:hover .col4 p, .rowLink a:hover .col5 p {
+    color: #0099CC;
+    font-weight: normal;
+}
+
+.space {
+    height: 10px;
+}
+
+.zero {
+    margin: 0 auto;
+    padding: 0;
+}
+
+.colTable {
+    float: left;
+    padding: 0 1%;
+    border-right: 1px dashed #999999;
+    text-align: center;
+}
+
+.likeCol p {
+    background-color: #FFFFFF;
+    border-radius: 6px;
+    color: #666666;
+    font-weight: normal;
+    padding: 5px;
+    margin: 2px 0;
+}
+
+.likeCol p:hover {
+    border: 2px solid #fff;
+    margin: 0;
+    background-color: #0099CC;
+    color: #ffffff;
+}
+
+.likeCol p:hover i {
+    background-color: #fff;
+    border-radius: 4px;
+}
+
+.likedCol p {
+    background-color: #0099CC;
+    border-radius: 6px;
+    color: #fff;
+    font-weight: normal;
+    padding: 5px;
+    border: 2px solid #fff;
+    margin: 0;
+}
+
+.likedCol p:hover {
+    background-color: #ddd;
+    color: #666;
+    margin: 0;
+}
+
+.likedCol p i {
+    background-color: #fff;
+    border-radius: 4px;
+}
+
+.likedCol p:hover i {
+    background-color: #ddd;
+}
+
+.col1 {
+    width: 8%;
+}
+
+.col2 {
+    width: 50%;
+    text-align: left;
+}
+
+.col3 {
+    width: 5%;
+}
+
+.col4 {
+    width: 15%;
+}
+
+.col5 {
+    width: 11%;
+}
+
 /* navbar
 ===================== */
 .navbar-inverse .navbar-inner {
@@ -831,6 +968,36 @@ ul.listNode li {
     color: #FFFFFF;
     text-shadow: 0 -1px 1px #999999;
     display: inline;
+}
+
+img.user-pic {
+    width: 50px;
+    height: 50px;
+}
+
+img.user-pic-big {
+    width: 128px;
+    height: 128px;
+    border: 5px solid #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btnTitle {
+    min-width: 30%;
+    position: relative;
+    z-index: 1;
+    margin-bottom: -1px;
+    padding: 0px 25px;
+}
+
+.btnTitle h3 {
+    line-height: 22px;
+    display: inline-block;
+}
+
+.blu {
+    background-color: #0000FF;
 }
 
 .nav-closed:hover .nav-username {
@@ -1062,6 +1229,13 @@ input[type="checkbox"] {
     border: 1px solid #FFFFFF;
     background-color: #990000;
     padding: 3px;
+}
+
+/* grid style
+===================== */
+.gridStyle {
+    border: 1px solid rgb(212, 212, 212);
+    min-height: 150px;
 }
 
 /* misc
@@ -1454,9 +1628,22 @@ input[type="checkbox"] {
         margin: 10px 2px;
     }
 
+    .btnTitle {
+        min-width: 35%;
+    }
+
 }
 
 @media (max-width: 767px) {
+    .userData {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .btnTitle {
+        min-width: 43%;
+    }
+
     .form-horizontal {
         width: 90%;
         margin: 0 auto;
@@ -1496,9 +1683,18 @@ input[type="checkbox"] {
 }
 
 @media (max-width: 620px) {
+
+    .btnTitle {
+        min-width: 56%;
+    }
+
     .ld-border {
         width: 42%;
         margin-right: 0;
+    }
+
+    .col2 {
+        width: 48%;
     }
 
     ul.nav-top-pad.nav {
@@ -1525,6 +1721,39 @@ input[type="checkbox"] {
 }
 
 @media (max-width: 480px) {
+
+    .btnTitle h3 {
+        font-size: 20px;
+    }
+
+    .col1 {
+        width: 20%;
+        border: none;
+    }
+
+    .col2, .col3, .col4, .col5 {
+        float: none;
+        width: 100%;
+        border: none;
+        padding: 2px;
+        text-align: left;
+    }
+
+    .headerTable {
+        text-indent: -9999px;
+        height: 5px;
+
+    }
+
+    .headerTable .colTable {
+        display: none;
+    }
+
+    .rowLink {
+        float: right;
+        width: 78%;
+    }
+
     .control-group {
         margin: 0;
     }
