@@ -728,13 +728,16 @@ CREATE OR REPLACE VIEW vw_group AS
     , activity.name as group_child_name
     , pos.max_position as max_position
     , 'ACTIVITY' as group_child_type
+    , vw_activity_org.org_label as org_label
   FROM activity_group
   INNER JOIN vw_activity_group_max_pos pos
     ON activity_group.id = pos.activity_group_id
   INNER JOIN participates
     ON activity_group.id = participates.activity_group_id
   INNER JOIN activity
-    ON participates.activity_id = activity.id)
+    ON participates.activity_id = activity.id
+  INNER JOIN vw_activity_org
+    ON activity.id = vw_activity_org.activity_id)
   UNION
   (SELECT activity_group.id as group_id
     , activity_group.name as group_name
@@ -744,6 +747,7 @@ CREATE OR REPLACE VIEW vw_group AS
     , ld.name as group_child_name
     , pos.max_position as max_position
     , 'LD' as group_child_type
+    , null as org_label
   FROM activity_group
   INNER JOIN vw_activity_group_max_pos pos
     ON activity_group.id = pos.activity_group_id

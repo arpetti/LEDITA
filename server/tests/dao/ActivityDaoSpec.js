@@ -39,16 +39,19 @@ describe('Activity DAO', function() {
 			});
 		});
 
-		it('Group information contains max position', function(done) {
+		it('Group information contains max position and org label', function(done) {
 			var groupids = [5];
 			var group5ExpectedMaxPosition = 3;
 			
 			ActivityDao.getGroups(groupids, function(err, results) {
 				expect(results).to.have.length(6);
+				expect(results[0].org_label).to.equal('PAIR');
+
 				var allMaxPosAreSame = _.every(results, function(value) {
 					return value.max_position === group5ExpectedMaxPosition
 				});
 				expect(allMaxPosAreSame).to.be.true;
+				
 				done();
 			});
 		});
