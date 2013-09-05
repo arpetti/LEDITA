@@ -16,12 +16,20 @@ describe('Activity DAO', function() {
     			expect(results[0].node_name).to.equal('Support Activity 3');
     			expect(results[0].type).to.equal('ACTIVITY');
     			expect(results[0].org_label).to.equal('PAIR')
+    			expect(results[0].dur_min).to.equal(0);
+    			expect(results[0].dur_hh).to.equal(0);
+    			expect(results[0].dur_dd).to.equal(15);
+    			expect(results[0].dur_mon).to.equal(1);
 	            
     			expect(results[1].level).to.equal(2);
     			expect(results[1].position).to.equal(1);
     			expect(results[1].node_name).to.equal('Group 4 Name');
     			expect(results[1].type).to.equal('ACTIVITY_GROUP');
     			expect(results[1].org_label).to.be.null;
+    			expect(results[1].dur_min).to.be.null;
+    			expect(results[1].dur_hh).to.be.null;
+    			expect(results[1].dur_dd).to.be.null;
+    			expect(results[1].dur_mon).to.be.null;
 
 	            done();
         	});
@@ -39,13 +47,17 @@ describe('Activity DAO', function() {
 			});
 		});
 
-		it('Group information contains max position and org label', function(done) {
+		it('Group information contains max position, org label and duration', function(done) {
 			var groupids = [5];
 			var group5ExpectedMaxPosition = 3;
 			
 			ActivityDao.getGroups(groupids, function(err, results) {
 				expect(results).to.have.length(6);
 				expect(results[0].org_label).to.equal('PAIR');
+				expect(results[0].dur_min).to.equal(15);
+				expect(results[0].dur_hh).to.equal(0);
+				expect(results[0].dur_dd).to.equal(0);
+				expect(results[0].dur_mon).to.equal(0);
 
 				var allMaxPosAreSame = _.every(results, function(value) {
 					return value.max_position === group5ExpectedMaxPosition

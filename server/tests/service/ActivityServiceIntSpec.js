@@ -31,6 +31,10 @@ describe('Activity Service Integration', function() {
                   expect(result[2][0].type).to.equal('ACTIVITY') // Level 2 first node is ACTIVITY
                   expect(result[2][0].node_name).to.equal('Support Activity 2');
                   expect(result[2][0].org_label).to.equal('INDIVIDUAL');
+                  expect(result[2][0].dur_min).to.equal(0);
+                  expect(result[2][0].dur_hh).to.equal(0);
+                  expect(result[2][0].dur_dd).to.equal(15);
+                  expect(result[2][0].dur_mon).to.equal(1);
 
       		done();
 		});

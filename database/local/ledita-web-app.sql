@@ -677,6 +677,10 @@ CREATE OR REPLACE VIEW vw_ld_node AS
     , ldtarget.name as node_name
     , 'LD' as type
     , null as org_label
+    , null as dur_min
+    , null as dur_hh
+    , null as dur_dd
+    , null as dur_mon
   FROM ld ldsource
   INNER JOIN composes
     ON ldsource.id = composes.ld_id
@@ -691,6 +695,10 @@ CREATE OR REPLACE VIEW vw_ld_node AS
     , activity.name as node_name
     , 'ACTIVITY' as type
     , vw_activity_org.org_label as org_label
+    , activity.dur_min as dur_min
+    , activity.dur_hh as dur_hh
+    , activity.dur_dd as dur_dd
+    , activity.dur_mon as dur_mon
   FROM ld ldsource
   INNER JOIN composes
     ON ldsource.id = composes.ld_id
@@ -707,6 +715,10 @@ CREATE OR REPLACE VIEW vw_ld_node AS
     , activity_group.name as node_name
     , 'ACTIVITY_GROUP' as type
     , null as org_label
+    , null as dur_min
+    , null as dur_hh
+    , null as dur_dd
+    , null as dur_mon
   FROM ld ldsource
   INNER JOIN composes
     ON ldsource.id = composes.ld_id
@@ -729,6 +741,10 @@ CREATE OR REPLACE VIEW vw_group AS
     , pos.max_position as max_position
     , 'ACTIVITY' as group_child_type
     , vw_activity_org.org_label as org_label
+    , activity.dur_min as dur_min
+    , activity.dur_hh as dur_hh
+    , activity.dur_dd as dur_dd
+    , activity.dur_mon as dur_mon
   FROM activity_group
   INNER JOIN vw_activity_group_max_pos pos
     ON activity_group.id = pos.activity_group_id
@@ -748,6 +764,10 @@ CREATE OR REPLACE VIEW vw_group AS
     , pos.max_position as max_position
     , 'LD' as group_child_type
     , null as org_label
+    , null as dur_min
+    , null as dur_hh
+    , null as dur_dd
+    , null as dur_mon
   FROM activity_group
   INNER JOIN vw_activity_group_max_pos pos
     ON activity_group.id = pos.activity_group_id
