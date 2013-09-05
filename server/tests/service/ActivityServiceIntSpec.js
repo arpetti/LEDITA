@@ -20,7 +20,8 @@ describe('Activity Service Integration', function() {
                   expect(result[1][0].node_name).to.be.null; // Level 1 first node activity group has no name
                   expect(_.keys(result[1][0].children)).to.have.length(2); // Level 1 first node activity group has 2 levels of children
                   expect(result[1][0].children[1]).to.have.length(1); // First level of children has 1 activity
-                  expect(result[1][0].children[1][0].group_child_name).to.equal('Learning Activity 5');	
+                  expect(result[1][0].children[1][0].group_child_name).to.equal('Learning Activity 5');
+                  expect(result[1][0].children[1][0].org_label).to.equal('INDIVIDUAL');	
                   expect(result[1][0].children[2]).to.have.length(1); // Second level of children has 1 activity
                   expect(result[1][0].children[2][0].group_child_name).to.equal('Learning Activity 6');	
 
