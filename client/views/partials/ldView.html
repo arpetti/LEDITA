@@ -135,9 +135,13 @@
                             <a ng-href="#" class="whiteText" ng-click="open()"><h6 class="actName">{{ child.group_child_name }}</h6>
 
                                 <!-- FIXME Convert static data to dynamic -->
-                                <div class="actLabel">
+                                <div class="actLabel" ng-show="child.group_child_type!='LD'">
                                     <span class="timeLabel"><i class="icon-time icon-white"></i> 15 min </span>
                                     <span class="orgLabel"><i class="icon-th-large icon-white"></i> {{ child.org_label}}</span>
+                                </div>
+                                <div class="actLabel" ng-show="child.group_child_type=='LD'">
+                                    <span class="timeLabel"> A1 </span>
+                                    <span class="orgLabel"> Lesson</span>
                                 </div>
                             </a>
                         </div>
@@ -148,9 +152,13 @@
                     <div ng-show="!node.children" class="actName"><a ng-href="#" class="whiteText" ng-click="open()">
                         <h6>{{ node.node_name }}</h6>
                         <!-- FIXME Convert static data to dynamic -->
-                        <div class="actLabel">
+                        <div class="actLabel" ng-show="node.type!='LD'">
                             <span class="timeLabel"><i class="icon-time icon-white"></i> 15 min </span>
                             <span class="orgLabel"><i class="icon-th-large icon-white"></i> {{ node.org_label }}</span>
+                        </div>
+                        <div class="actLabel" ng-show="node.type=='LD'">
+                            <span class="timeLabel">A1 </span>
+                            <span class="orgLabel">Semester</span>
                         </div>
                     </a>
                     </div>
