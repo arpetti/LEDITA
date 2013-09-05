@@ -136,7 +136,7 @@
 
                                 <!-- FIXME Convert static data to dynamic -->
                                 <div class="actLabel" ng-show="child.group_child_type!='LD'">
-                                    <span class="timeLabel"><i class="icon-time icon-white"></i> 15 min </span>
+                                    <span class="timeLabel"><i class="icon-time icon-white"></i> {{ child | durationDisplay}} </span>
                                     <span class="orgLabel"><i class="icon-th-large icon-white"></i> {{ child.org_label}}</span>
                                 </div>
                                 <div class="actLabel" ng-show="child.group_child_type=='LD'">
