@@ -647,6 +647,27 @@ CREATE OR REPLACE VIEW vw_ld_prerequisite AS
   INNER JOIN ld ldtarget
     on needs.ld_requisite_id = ldtarget.id);
 
+CREATE OR REPLACE VIEW vw_activity_org AS
+  SELECT activity.id as activity_id
+    , activity.name as activity_name
+    , students.group_number as students_group_number
+    , students.people_per_group as students_people_per_group
+    , students_type.description as students_type
+    , IF(students_type.description='GROUP', 
+        CONCAT(
+            IF(students.group_number IS NOT NULL, CAST(students.group_number AS CHAR), ''),
+            'G',
+            IF(students.people_per_group IS NOT NULL, 
+              CONCAT(' x ', CAST(students.people_per_group AS CHAR)), 
+              '')
+        ), 
+        students_type.description) as org_label
+  FROM activity
+  INNER JOIN students
+    ON activity.students_id = students.id
+  INNER JOIN students_type
+    ON students.type = students_type.type;  
+
 CREATE OR REPLACE VIEW vw_ld_node AS
   (SELECT ldsource.id as ld_id
     , ldsource.name as ld_name
@@ -655,6 +676,7 @@ CREATE OR REPLACE VIEW vw_ld_node AS
     , ldtarget.id as node_id
     , ldtarget.name as node_name
     , 'LD' as type
+    , null as org_label
   FROM ld ldsource
   INNER JOIN composes
     ON ldsource.id = composes.ld_id
@@ -668,11 +690,14 @@ CREATE OR REPLACE VIEW vw_ld_node AS
     , activity.id as node_id
     , activity.name as node_name
     , 'ACTIVITY' as type
+    , vw_activity_org.org_label as org_label
   FROM ld ldsource
   INNER JOIN composes
     ON ldsource.id = composes.ld_id
   INNER JOIN activity
-    on composes.activity_id = activity.id)
+    on composes.activity_id = activity.id
+  INNER JOIN vw_activity_org
+    on activity.id = vw_activity_org.activity_id)
   UNION
   (SELECT ldsource.id as ld_id
     , ldsource.name as ld_name
@@ -681,6 +706,7 @@ CREATE OR REPLACE VIEW vw_ld_node AS
     , activity_group.id as node_id
     , activity_group.name as node_name
     , 'ACTIVITY_GROUP' as type
+    , null as org_label
   FROM ld ldsource
   INNER JOIN composes
     ON ldsource.id = composes.ld_id
@@ -726,26 +752,6 @@ CREATE OR REPLACE VIEW vw_group AS
   INNER JOIN ld
     ON participates.ld_is_part_id = ld.id);
 
-CREATE OR REPLACE VIEW vw_activity_org AS
-  SELECT activity.id as activity_id
-    , activity.name as activity_name
-    , students.group_number as students_group_number
-    , students.people_per_group as students_people_per_group
-    , students_type.description as students_type
-    , IF(students_type.description='GROUP', 
-        CONCAT(
-            IF(students.group_number IS NOT NULL, CAST(students.group_number AS CHAR), ''),
-            'G',
-            IF(students.people_per_group IS NOT NULL, 
-              CONCAT(' x ', CAST(students.people_per_group AS CHAR)), 
-              '')
-        ), 
-        students_type.description) as org_label
-  FROM activity
-  INNER JOIN students
-    ON activity.students_id = students.id
-  INNER JOIN students_type
-    ON students.type = students_type.type;
 
 USE `ledita-web-app` ;
 

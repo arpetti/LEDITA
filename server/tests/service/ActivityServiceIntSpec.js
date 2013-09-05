@@ -26,6 +26,11 @@ describe('Activity Service Integration', function() {
 
                   expect(result[1][1].type).to.equal('ACTIVITY_GROUP'); // Level 1 second node is activity group
                   expect(result[1][1].node_name).to.equal('Group 3 Name'); // Level 1 second node activity group name
+
+                  expect(result[2][0].type).to.equal('ACTIVITY') // Level 2 first node is ACTIVITY
+                  expect(result[2][0].node_name).to.equal('Support Activity 2');
+                  expect(result[2][0].org_label).to.equal('INDIVIDUAL');
+
       		done();
 		});
 	});
