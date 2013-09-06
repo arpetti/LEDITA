@@ -197,7 +197,7 @@
                                     <h5 class="nodeNameTextDetails">{{ child.group_child_name }}</h5>
 
                                     <p class="tabText"><i class="icon-home"></i> Modality: <span
-                                            class="nodeBodyText">{ { activity.modality } }</span>
+                                            class="nodeBodyText">{{ child.modality }}</span>
                                     </p>
 
                                     <p class="tabText"><i class="icon-time"></i> Duration: <span
@@ -254,7 +254,7 @@
                         <!-- If it's NOT a group:  -->
                         <div ng-show="!node.children"><h5 class="nodeNameTextDetails">{{ node.name }}</h5>
 
-                            <p class="tabText"><i class="icon-home"></i> Modality: <span class="nodeBodyText">{ { activity.modality } }</span>
+                            <p class="tabText"><i class="icon-home"></i> Modality: <span class="nodeBodyText">{{ node.modality }}</span>
                             </p>
 
                             <p class="tabText"><i class="icon-time"></i> Duration: <span class="nodeBodyText">{{ node | durationDisplay }}</span>
@@ -340,7 +340,7 @@
                             <div ng-repeat="child in subChildren">
                                 <h5 class="nodeNameText">{{ child.group_child_name }}</h5>
                                  <span ng-show="child.group_child_type!='LD'">
-                                <p class="tabText"><i class="icon-home"></i> Modality: <span class="nodeBodyText">{ { activity.modality } }</span>
+                                <p class="tabText"><i class="icon-home"></i> Modality: <span class="nodeBodyText">{{ child.modality }}</span>
                                 </p>
 
                                 <p class="tabText"><i class="icon-time"></i> Duration: <span class="nodeBodyText">{{ child | durationDisplay }}</span>
@@ -413,7 +413,7 @@
                     <!-- If it's NOT a group:  -->
                     <div ng-show="!node.children"><h5 class="nodeNameText">{{ node.node_name }}</h5>
                         <span ng-show="node.type!='LD'">
-                        <p class="tabText"><i class="icon-home"></i> Modality: <span class="nodeBodyText">{ { activity.modality } }</span>
+                        <p class="tabText"><i class="icon-home"></i> Modality: <span class="nodeBodyText">{{ node.modality }}</span>
                         </p>
 
                         <p class="tabText"><i class="icon-time"></i> Duration: <span class="nodeBodyText">{{ node | durationDisplay }}</span>
@@ -515,7 +515,7 @@
                                 <h5 class="nodeNameText">{{ child.group_child_name }}</h5>
                                   <span ng-show="child.group_child_type!='LD'">
 
-                                <p class="tabText"><i class="icon-home"></i> Modality: <span class="nodeBodyText">{ { activity.modality } }</span>
+                                <p class="tabText"><i class="icon-home"></i> Modality: <span class="nodeBodyText">{{ child.modality }}</span>
                                 </p>
 
                                 <p class="tabText"><i class="icon-time"></i> Duration: <span class="nodeBodyText">{{ child | durationDisplay }}</span>
@@ -587,7 +587,7 @@
                     <div ng-show="!node.children"><h5 class="nodeNameText">{{ node.node_name }}</h5>
                             <span ng-show="node.type!='LD'">
 
-                        <p class="tabText"><i class="icon-home"></i> Modality: <span class="nodeBodyText">{ { activity.modality } }</span>
+                        <p class="tabText"><i class="icon-home"></i> Modality: <span class="nodeBodyText">{{ node.modality }}</span>
                         </p>
 
                         <p class="tabText"><i class="icon-time"></i> Duration: <span class="nodeBodyText">{{ node | durationDisplay }}</span>
