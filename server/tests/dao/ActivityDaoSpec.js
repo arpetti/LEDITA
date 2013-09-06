@@ -115,8 +115,8 @@ describe('Activity DAO', function() {
 				
 				// results are in 2 sections: technology, and resource
 				expect(_.keys(results)).to.have.length(2); 
-				expect(_.keys(results)[0]).to.equal('technology');
-				expect(_.keys(results)[1]).to.equal('resource');
+				expect(_.has(results, 'technology'));
+				expect(_.has(results, 'resource'));
 
 				// verify technology section
 				var tech = results.technology;
@@ -154,8 +154,8 @@ describe('Activity DAO', function() {
 
 				// results are in 2 sections: technology, and resource
 				expect(_.keys(results)).to.have.length(2); 
-				expect(_.keys(results)[0]).to.equal('technology');
-				expect(_.keys(results)[1]).to.equal('resource');
+				expect(_.has(results, 'technology'));
+				expect(_.has(results, 'resource'));
 
 				// verify technology section
 				var tech = results.technology;
