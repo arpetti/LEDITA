@@ -1,87 +1,87 @@
 <div class="container top-margin">
 <div class="row-fluid">
 <div class="span3">
-<div id="sidebar">
-    <div>
-        <a ng-href="#">
-            <!-- TODO: IF liked -> class likedButton, ELSE class likeButton -->
+    <div id="sidebar">
+        <div>
+            <a ng-href="#">
+                <!-- TODO: IF liked -> class likedButton, ELSE class likeButton -->
 
-            <div class="likeButton">
-                <!-- TODO: Like button. If the LD is already liked, add class 'icon-white'.-->
-                Like <i class="icon-thumbs-up "></i>
-            </div>
-        </a>
+                <div class="likeButton">
+                    <!-- TODO: Like button. If the LD is already liked, add class 'icon-white'.-->
+                    Like <i class="icon-thumbs-up "></i>
+                </div>
+            </a>
+        </div>
+
+        <h4 id="sidebarHeader">General Info</h4>
+
+        <div>
+            <h5 class="zeroMargin date"><i class="icon-pencil"></i> Author:</h5>
+            <a href="#" class="zeroMargin">{{ learningDesign.user_name}} {{ learningDesign.user_last_name}}</a>
+        </div>
+        <div class="marginTopSidebar">
+            <h5 class="zeroMargin date "><i class="icon-calendar"></i> Created in:</h5>
+            <span class="zeroMargin">{{learningDesign.ld_creation_date | date:'yyyy-MM-dd'}}</span>
+        </div>
+        <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-map-marker"></i> Topics:</h5>
+            <ul ng-repeat="subject in learningDesign.subjects" class="zeroMargin subjects">
+                <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{subject.subject_name}}</a></li>
+            </ul>
+        </div>
+        <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-tasks"></i> Objectives:</h5>
+            <ul ng-repeat="objective in learningDesign.objectives" class="zeroMargin objectives">
+                <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{objective.objective_descr}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-backward"></i> Pre-Requisites:</h5>
+            <ul ng-repeat="prereq in learningDesign.prerequisites" class="zeroMargin prerequisites">
+                <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{prereq.prereq_name}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="clear marginTopSidebar">
+            <h5 class="zeroMargin"><i class="icon-user"></i> Students' Description:</h5>
+            <span>{{ learningDesign.ld_students_profile }}</span>
+        </div>
+
+        <!-- TODO: 2nd phase - Tag system -->
+        <!--
+
+     <div class="clear marginTop"><h5 class=" zeroMargin">Tags:</h5>
+
+         <ul class="zeroMargin">
+             <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
+             <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
+             <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
+         </ul>
+
+     </div>
+
+     -->
+
+        <!-- TODO: 1st phase - Service for name of father and children LDs -->
+
+        <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-retweet"></i> Related Designs:</h5>
+            <ul class="zeroMargin">
+                <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
+                <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
+                <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
+                <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
+                <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
+                <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+        <div id="model">
+            <a href="#">
+                <img src="../../img/model.png" class="btnModelImg">
+                <h5 class="btnModel">USE THIS DESIGN AS A MODEL</h5>
+            </a>
+        </div>
+        <!--Sidebar content-->
+
     </div>
-
-    <h4 id="sidebarHeader">General Info</h4>
-
-    <div>
-        <h5 class="zeroMargin date"><i class="icon-pencil"></i> Author:</h5>
-        <a href="#" class="zeroMargin">{{ learningDesign.user_name}} {{ learningDesign.user_last_name}}</a>
-    </div>
-    <div class="marginTopSidebar">
-        <h5 class="zeroMargin date "><i class="icon-calendar"></i> Created in:</h5>
-        <span class="zeroMargin">{{learningDesign.ld_creation_date | date:'yyyy-MM-dd'}}</span>
-    </div>
-    <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-map-marker"></i> Topics:</h5>
-        <ul ng-repeat="subject in learningDesign.subjects" class="zeroMargin subjects">
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{subject.subject_name}}</a></li>
-        </ul>
-    </div>
-    <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-tasks"></i> Objectives:</h5>
-        <ul ng-repeat="objective in learningDesign.objectives" class="zeroMargin objectives">
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{objective.objective_descr}}</a>
-            </li>
-        </ul>
-    </div>
-    <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-backward"></i> Pre-Requisites:</h5>
-        <ul ng-repeat="prereq in learningDesign.prerequisites" class="zeroMargin prerequisites">
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{prereq.prereq_name}}</a>
-            </li>
-        </ul>
-    </div>
-    <div class="clear marginTopSidebar">
-        <h5 class="zeroMargin"><i class="icon-user"></i> Students' Description:</h5>
-        <span>{{ learningDesign.ld_students_profile }}</span>
-    </div>
-
-    <!-- TODO: 2nd phase - Tag system -->
-    <!--
-
- <div class="clear marginTop"><h5 class=" zeroMargin">Tags:</h5>
-
-     <ul class="zeroMargin">
-         <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
-         <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
-         <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
-     </ul>
-
- </div>
-
- -->
-
-    <!-- TODO: 1st phase - Service for name of father and children LDs -->
-
-    <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-retweet"></i> Related Designs:</h5>
-        <ul class="zeroMargin">
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
-            <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
-        </ul>
-    </div>
-    <div class="clearfix"></div>
-    <div id="model">
-        <a href="#">
-            <img src="../../img/model.png" class="btnModelImg">
-            <h5 class="btnModel">USE THIS DESIGN AS A MODEL</h5>
-        </a>
-    </div>
-    <!--Sidebar content-->
-
-</div>
 </div>
 
 
@@ -132,7 +132,8 @@
                     <!-- Children are also in levels: Create unstyled div for each level -->
                     <div ng-repeat="(childLevel, subChildren) in node.children">
                         <div ng-repeat="child in subChildren" ng-class="getGroupBoxClass(child)">
-                            <a ng-href="#" class="whiteText" ng-click="open()"><h6 class="actName">{{ child.group_child_name }}</h6>
+                            <a ng-href="#" class="whiteText" ng-click="open()"><h6 class="actName">{{
+                                child.group_child_name }}</h6>
 
                                 <!-- FIXME Convert static data to dynamic -->
                                 <div class="actLabel" ng-show="child.group_child_type!='LD'">
@@ -151,11 +152,13 @@
                     <!-- If it's NOT a group:  -->
                     <div ng-show="!node.children" class="actName"><a ng-href="#" class="whiteText" ng-click="open()">
                         <h6>{{ node.node_name }}</h6>
-                        <!-- FIXME Convert static data to dynamic -->
+
                         <div class="actLabel" ng-show="node.type!='LD'">
-                            <span class="timeLabel"><i class="icon-time icon-white"></i> 15 min </span>
+                            <span class="timeLabel"><i
+                                    class="icon-time icon-white"></i> {{ node | durationDisplay }} </span>
                             <span class="orgLabel"><i class="icon-th-large icon-white"></i> {{ node.org_label }}</span>
                         </div>
+                        <!-- FIXME Convert static data to dynamic -->
                         <div class="actLabel" ng-show="node.type=='LD'">
                             <span class="timeLabel">A1 </span>
                             <span class="orgLabel">Semester</span>
@@ -170,7 +173,7 @@
 
             <div modal="shouldBeOpen" close="close()" options="opts">
                 <div class="modal-header">
-                    <h4 >Activity Details</h4>
+                    <h4>Activity Details</h4>
                     <button class="btn modalButton float-right" ng-click="close()">x</button>
                     <div class="clearfix"></div>
                 </div>
@@ -192,10 +195,12 @@
                                     <div ng-repeat="child in subChildren">
                                         <h5 class="nodeNameTextDetails">{{ child.group_child_name }}</h5>
 
-                                        <p class="tabText"><i class="icon-home"></i> Modality: <span class="nodeBodyText">{ { activity.modality } }</span>
+                                        <p class="tabText"><i class="icon-home"></i> Modality: <span
+                                                class="nodeBodyText">{ { activity.modality } }</span>
                                         </p>
 
-                                        <p class="tabText"><i class="icon-time"></i> Duration: <span class="nodeBodyText">{ { activity.dur_mon, activity.dur_dd, activity.dur_hh, activity.dur_min } }</span>
+                                        <p class="tabText"><i class="icon-time"></i> Duration: <span
+                                                class="nodeBodyText"> {{ child | durationDisplay }}</span>
                                         </p>
 
                                         <p class="tabText"><i class="icon-th-large"></i> Students' organization: <span
@@ -207,7 +212,8 @@
                                         <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
                                         <ul class="listNode">
                                             <li><i class="icon-chevron-right"></i> Name: <span class="nodeBodyText">{ { resource.name } }</span>
-                                                | Type:<span class="nodeBodyText"> { { resource.type } }</span> | Copyright: <span
+                                                | Type:<span class="nodeBodyText"> { { resource.type } }</span> |
+                                                Copyright: <span
                                                         class="nodeBodyText">{ { resource.copy } }</span> |
                                                 Description: <span
                                                         class="nodeBodyText">{ { resource.descr } }</span> | Link: <span
@@ -220,16 +226,19 @@
                                                         Size: <span
                                                                 class="nodeBodyText">{ { file.size } }</span> |
                                                         Extension: <span
-                                                                class="nodeBodyText">{ { file.mime } }</span> | Link: <span
-                                                                class="nodeBodyText"><a ng-href="{ { file.uri } }">Link</a></span>
+                                                                class="nodeBodyText">{ { file.mime } }</span> |
+                                                        Link: <span
+                                                                class="nodeBodyText"><a
+                                                                ng-href="{ { file.uri } }">Link</a></span>
                                                     </li>
                                                 </ul>
                                             </ul>
 
                                         </ul>
                                         </p>
-                                        <p class="tabText"><i class="icon-info-sign"></i> Activity Description:<br> <span
-                                                class="nodeBodyText">{ { activity.pract_descr } }</span></p>
+                                        <p class="tabText"><i class="icon-info-sign"></i> Activity
+                                            Description:<br> <span
+                                                    class="nodeBodyText">{ { activity.pract_descr } }</span></p>
 
                                         <p class="tabText"><i class="icon-question-sign"></i> Pedagogical
                                             Suggestions:<br> <span
@@ -247,7 +256,7 @@
                                 <p class="tabText"><i class="icon-home"></i> Modality: <span class="nodeBodyText">{ { activity.modality } }</span>
                                 </p>
 
-                                <p class="tabText"><i class="icon-time"></i> Duration: <span class="nodeBodyText">{ { activity.dur_mon, activity.dur_dd, activity.dur_hh, activity.dur_min } }</span>
+                                <p class="tabText"><i class="icon-time"></i> Duration: <span class="nodeBodyText">{{ node | durationDisplay }}</span>
                                 </p>
 
                                 <p class="tabText"><i class="icon-th-large"></i> Students' organization: <span
@@ -333,7 +342,7 @@
                                 <p class="tabText"><i class="icon-home"></i> Modality: <span class="nodeBodyText">{ { activity.modality } }</span>
                                 </p>
 
-                                <p class="tabText"><i class="icon-time"></i> Duration: <span class="nodeBodyText">{ { activity.dur_mon, activity.dur_dd, activity.dur_hh, activity.dur_min } }</span>
+                                <p class="tabText"><i class="icon-time"></i> Duration: <span class="nodeBodyText">{{ child | durationDisplay }}</span>
                                 </p>
 
                                 <p class="tabText"><i class="icon-th-large"></i> Students' organization: <span
@@ -345,17 +354,20 @@
                                 <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
                                 <ul class="listNode">
                                     <li><i class="icon-chevron-right"></i> Name: <span class="nodeBodyText">{ { resource.name } }</span>
-                                        | Type:<span class="nodeBodyText"> { { resource.type } }</span> | Copyright: <span
+                                        | Type:<span class="nodeBodyText"> { { resource.type } }</span> |
+                                        Copyright: <span
                                                 class="nodeBodyText">{ { resource.copy } }</span> | Description: <span
                                                 class="nodeBodyText">{ { resource.descr } }</span> | Link: <span
-                                                class="nodeBodyText"><a ng-href="{ { resource.link } }">Link</a></span></li>
+                                                class="nodeBodyText"><a ng-href="{ { resource.link } }">Link</a></span>
+                                    </li>
                                     <ul>
                                         <li><i class="icon-file"></i> Attached Files:</li>
                                         <ul>
                                             <li>Name: <span class="nodeBodyText">{ { file.name } }</span> | Size: <span
                                                     class="nodeBodyText">{ { file.size } }</span> | Extension: <span
                                                     class="nodeBodyText">{ { file.mime } }</span> | Link: <span
-                                                    class="nodeBodyText"><a ng-href="{ { file.uri } }">Link</a></span></li>
+                                                    class="nodeBodyText"><a ng-href="{ { file.uri } }">Link</a></span>
+                                            </li>
                                         </ul>
                                     </ul>
 
@@ -379,7 +391,7 @@
                         <p class="tabText"><i class="icon-home"></i> Modality: <span class="nodeBodyText">{ { activity.modality } }</span>
                         </p>
 
-                        <p class="tabText"><i class="icon-time"></i> Duration: <span class="nodeBodyText">{ { activity.dur_mon, activity.dur_dd, activity.dur_hh, activity.dur_min } }</span>
+                        <p class="tabText"><i class="icon-time"></i> Duration: <span class="nodeBodyText">{{ node | durationDisplay }}</span>
                         </p>
 
                         <p class="tabText"><i class="icon-th-large"></i> Students' organization: <span
@@ -455,7 +467,7 @@
                                 <p class="tabText"><i class="icon-home"></i> Modality: <span class="nodeBodyText">{ { activity.modality } }</span>
                                 </p>
 
-                                <p class="tabText"><i class="icon-time"></i> Duration: <span class="nodeBodyText">{ { activity.dur_mon, activity.dur_dd, activity.dur_hh, activity.dur_min } }</span>
+                                <p class="tabText"><i class="icon-time"></i> Duration: <span class="nodeBodyText">{{ child | durationDisplay }}</span>
                                 </p>
 
                                 <p class="tabText"><i class="icon-th-large"></i> Students' organization: <span
@@ -467,17 +479,20 @@
                                 <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
                                 <ul class="listNode">
                                     <li><i class="icon-chevron-right"></i> Name: <span class="nodeBodyText">{ { resource.name } }</span>
-                                        | Type:<span class="nodeBodyText"> { { resource.type } }</span> | Copyright: <span
+                                        | Type:<span class="nodeBodyText"> { { resource.type } }</span> |
+                                        Copyright: <span
                                                 class="nodeBodyText">{ { resource.copy } }</span> | Description: <span
                                                 class="nodeBodyText">{ { resource.descr } }</span> | Link: <span
-                                                class="nodeBodyText"><a ng-href="{ { resource.link } }">Link</a></span></li>
+                                                class="nodeBodyText"><a ng-href="{ { resource.link } }">Link</a></span>
+                                    </li>
                                     <ul>
                                         <li><i class="icon-file"></i> Attached Files:</li>
                                         <ul>
                                             <li>Name: <span class="nodeBodyText">{ { file.name } }</span> | Size: <span
                                                     class="nodeBodyText">{ { file.size } }</span> | Extension: <span
                                                     class="nodeBodyText">{ { file.mime } }</span> | Link: <span
-                                                    class="nodeBodyText"><a ng-href="{ { file.uri } }">Link</a></span></li>
+                                                    class="nodeBodyText"><a ng-href="{ { file.uri } }">Link</a></span>
+                                            </li>
                                         </ul>
                                     </ul>
 
@@ -487,7 +502,8 @@
                                         class="nodeBodyText">{ { activity.pract_descr } }</span></p>
 
                             </div>
-                        </div><!-- End unstyled div for children levels -->
+                        </div>
+                        <!-- End unstyled div for children levels -->
                     </div>
                     <!-- End Children -->
 
@@ -498,7 +514,7 @@
                         <p class="tabText"><i class="icon-home"></i> Modality: <span class="nodeBodyText">{ { activity.modality } }</span>
                         </p>
 
-                        <p class="tabText"><i class="icon-time"></i> Duration: <span class="nodeBodyText">{ { activity.dur_mon, activity.dur_dd, activity.dur_hh, activity.dur_min } }</span>
+                        <p class="tabText"><i class="icon-time"></i> Duration: <span class="nodeBodyText">{{ node | durationDisplay }}</span>
                         </p>
 
                         <p class="tabText"><i class="icon-th-large"></i> Students' organization: <span
