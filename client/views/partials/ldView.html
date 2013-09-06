@@ -135,15 +135,15 @@
                         <a ng-href="#" class="whiteText" ng-click="open()"><h6 class="actName">{{
                             child.group_child_name }}</h6>
 
-                            <!-- FIXME Convert static data to dynamic -->
                             <div class="actLabel" ng-show="child.group_child_type!='LD'">
                                 <span class="timeLabel"><i class="icon-time icon-white"></i> {{ child | durationDisplay}} </span>
                                 <span class="orgLabel"><i
                                         class="icon-th-large icon-white"></i> {{ child.org_label}}</span>
                             </div>
+                            <!-- FIXME Convert static data to dynamic -->
                             <div class="actLabel" ng-show="child.group_child_type=='LD'">
-                                <span class="timeLabel"> A1 </span>
-                                <span class="orgLabel"> Lesson</span>
+                                <span class="timeLabel"><i class="icon-time icon-white"></i> Lesson </span>
+                                <span class="orgLabel"><i class="icon-flag icon-white"></i> A1</span>
                             </div>
                         </a>
                     </div>
@@ -161,8 +161,8 @@
                     </div>
                     <!-- FIXME Convert static data to dynamic -->
                     <div class="actLabel" ng-show="node.type=='LD'">
-                        <span class="timeLabel">A1 </span>
-                        <span class="orgLabel">Semester</span>
+                        <span class="timeLabel"><i class="icon-time icon-white"></i> Semester </span>
+                        <span class="orgLabel"><i class="icon-flag icon-white"></i> A1</span>
                     </div>
                 </a>
                 </div>
@@ -380,6 +380,30 @@
                                 <p class="tabText"><i class="icon-question-sign"></i> Pedagogical Suggestions:<br> <span
                                         class="nodeBodyText">{ { activity.edu_descr } }</span></p>
                                     </span>
+                                <!-- IF CHILD NODE IS AN LD FIXME: convert static data to dynamic -->
+                                <span ng-show="child.group_child_type=='LD'">
+                                           <p class="tabText"><i class="icon-time"></i> Duration: <span
+                                                   class="nodeBodyText"> Lesson</span></p>
+                                           <p class="tabText"><i class="icon-flag"></i> Language Level: <span
+                                                   class="nodeBodyText"> A1</span></p>
+                                           <p class="tabText"><i class="icon-calendar"></i> Created in: <span
+                                                   class="nodeBodyText"> CREATION DATE </span></p>
+                                           <p class="tabText"><i class="icon-map-marker"></i> Topics: <span
+                                                   class="nodeBodyText" ng-repeat=""> NG REPEAT FOR TOPICS</span></p>
+                                           <p class="tabText"><i class="icon-tasks"></i> Objectives: <span
+                                                   class="nodeBodyText" ng-repeat=""> NG REPEAT FOR OBJECTIVES</span>
+                                           </p>
+                                           <p class="tabText"><i class="icon-backward"></i> Pre-Requisites: <span
+                                                   class="nodeBodyText" ng-repeat=""> NG REPEAT FOR REQUISITES</span>
+                                           </p>
+                                           <p class="tabText"><i class="icon-user"></i> Students' Description: <span
+                                                   class="nodeBodyText"> STUDENT DESCRIPTION TEXT</span></p>
+                                           <p class="tabText"><i class="icon-pencil"></i> Author: <span
+                                                   class="nodeBodyText"> <a ng-href="#">AUTHOR NAME</a></span></p>
+                                           <p class="tabText"><i class="icon-share"></i><span class="nodeBodyText"> <a
+                                                   ng-href="#">Link</a></span></p>
+
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -426,6 +450,30 @@
                         <p class="tabText"><i class="icon-question-sign"></i> Pedagogical Suggestions:<br> <span
                                 class="nodeBodyText">{ { activity.edu_descr } }</span></p>
                             </span>
+                        <!-- IF CHILD NODE IS AN LD FIXME: convert static data to dynamic -->
+                                <span ng-show="node.type=='LD'">
+                                           <p class="tabText"><i class="icon-time"></i> Duration: <span
+                                                   class="nodeBodyText"> Lesson</span></p>
+                                           <p class="tabText"><i class="icon-flag"></i> Language Level: <span
+                                                   class="nodeBodyText"> A1</span></p>
+                                           <p class="tabText"><i class="icon-calendar"></i> Created in: <span
+                                                   class="nodeBodyText"> CREATION DATE </span></p>
+                                           <p class="tabText"><i class="icon-map-marker"></i> Topics: <span
+                                                   class="nodeBodyText" ng-repeat=""> NG REPEAT FOR TOPICS</span></p>
+                                           <p class="tabText"><i class="icon-tasks"></i> Objectives: <span
+                                                   class="nodeBodyText" ng-repeat=""> NG REPEAT FOR OBJECTIVES</span>
+                                           </p>
+                                           <p class="tabText"><i class="icon-backward"></i> Pre-Requisites: <span
+                                                   class="nodeBodyText" ng-repeat=""> NG REPEAT FOR REQUISITES</span>
+                                           </p>
+                                           <p class="tabText"><i class="icon-user"></i> Students' Description: <span
+                                                   class="nodeBodyText"> STUDENT DESCRIPTION TEXT</span></p>
+                                           <p class="tabText"><i class="icon-pencil"></i> Author: <span
+                                                   class="nodeBodyText"> <a ng-href="#">AUTHOR NAME</a></span></p>
+                                           <p class="tabText"><i class="icon-share"></i><span class="nodeBodyText"> <a
+                                                   ng-href="#">Link</a></span></p>
+
+                                </span>
                     </div>
                 </div>
                 <!-- End Activity or Group Box -->
@@ -504,6 +552,30 @@
                                       <p class="tabText"><i class="icon-info-sign"></i> Activity Description:<br> <span
                                               class="nodeBodyText">{ { activity.pract_descr } }</span></p>
                                  </span>
+                                <!-- IF CHILD NODE IS AN LD FIXME: convert static data to dynamic -->
+                                <span ng-show="child.group_child_type=='LD'">
+                                           <p class="tabText"><i class="icon-time"></i> Duration: <span
+                                                   class="nodeBodyText"> Lesson</span></p>
+                                           <p class="tabText"><i class="icon-flag"></i> Language Level: <span
+                                                   class="nodeBodyText"> A1</span></p>
+                                           <p class="tabText"><i class="icon-calendar"></i> Created in: <span
+                                                   class="nodeBodyText"> CREATION DATE </span></p>
+                                           <p class="tabText"><i class="icon-map-marker"></i> Topics: <span
+                                                   class="nodeBodyText" ng-repeat=""> NG REPEAT FOR TOPICS</span></p>
+                                           <p class="tabText"><i class="icon-tasks"></i> Objectives: <span
+                                                   class="nodeBodyText" ng-repeat=""> NG REPEAT FOR OBJECTIVES</span>
+                                           </p>
+                                           <p class="tabText"><i class="icon-backward"></i> Pre-Requisites: <span
+                                                   class="nodeBodyText" ng-repeat=""> NG REPEAT FOR REQUISITES</span>
+                                           </p>
+                                           <p class="tabText"><i class="icon-user"></i> Students' Description: <span
+                                                   class="nodeBodyText"> STUDENT DESCRIPTION TEXT</span></p>
+                                           <p class="tabText"><i class="icon-pencil"></i> Author: <span
+                                                   class="nodeBodyText"> <a ng-href="#">AUTHOR NAME</a></span></p>
+                                           <p class="tabText"><i class="icon-share"></i><span class="nodeBodyText"> <a
+                                                   ng-href="#">Link</a></span></p>
+
+                                </span>
                             </div>
                         </div>
                         <!-- End unstyled div for children levels -->
@@ -548,6 +620,30 @@
                                 </p>
                                 <p class="tabText"><i class="icon-info-sign"></i>Activity Description:<br> <span
                                         class="nodeBodyText">{ { activity.pract_descr } }</span></p>
+                                </span>
+                        <!-- IF CHILD NODE IS AN LD FIXME: convert static data to dynamic -->
+                                <span ng-show="node.type=='LD'">
+                                           <p class="tabText"><i class="icon-time"></i> Duration: <span
+                                                   class="nodeBodyText"> Lesson</span></p>
+                                           <p class="tabText"><i class="icon-flag"></i> Language Level: <span
+                                                   class="nodeBodyText"> A1</span></p>
+                                           <p class="tabText"><i class="icon-calendar"></i> Created in: <span
+                                                   class="nodeBodyText"> CREATION DATE </span></p>
+                                           <p class="tabText"><i class="icon-map-marker"></i> Topics: <span
+                                                   class="nodeBodyText" ng-repeat=""> NG REPEAT FOR TOPICS</span></p>
+                                           <p class="tabText"><i class="icon-tasks"></i> Objectives: <span
+                                                   class="nodeBodyText" ng-repeat=""> NG REPEAT FOR OBJECTIVES</span>
+                                           </p>
+                                           <p class="tabText"><i class="icon-backward"></i> Pre-Requisites: <span
+                                                   class="nodeBodyText" ng-repeat=""> NG REPEAT FOR REQUISITES</span>
+                                           </p>
+                                           <p class="tabText"><i class="icon-user"></i> Students' Description: <span
+                                                   class="nodeBodyText"> STUDENT DESCRIPTION TEXT</span></p>
+                                           <p class="tabText"><i class="icon-pencil"></i> Author: <span
+                                                   class="nodeBodyText"> <a ng-href="#">AUTHOR NAME</a></span></p>
+                                           <p class="tabText"><i class="icon-share"></i><span class="nodeBodyText"> <a
+                                                   ng-href="#">Link</a></span></p>
+
                                 </span>
                     </div>
                 </div>
