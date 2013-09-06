@@ -680,6 +680,8 @@ CREATE OR REPLACE VIEW vw_ld_node AS
     , null as dur_hh
     , null as dur_dd
     , null as dur_mon
+    , null as pract_descr
+    , null as edu_descr
   FROM ld ldsource
   INNER JOIN composes
     ON ldsource.id = composes.ld_id
@@ -698,6 +700,8 @@ CREATE OR REPLACE VIEW vw_ld_node AS
     , activity.dur_hh as dur_hh
     , activity.dur_dd as dur_dd
     , activity.dur_mon as dur_mon
+    , activity.pract_descr as pract_descr
+    , activity.edu_descr as edu_descr
   FROM ld ldsource
   INNER JOIN composes
     ON ldsource.id = composes.ld_id
@@ -718,11 +722,13 @@ CREATE OR REPLACE VIEW vw_ld_node AS
     , null as dur_hh
     , null as dur_dd
     , null as dur_mon
+    , null as pract_descr
+    , null as edu_descr
   FROM ld ldsource
   INNER JOIN composes
     ON ldsource.id = composes.ld_id
   INNER JOIN activity_group
-    on composes.activity_group_id = activity_group.id);   
+    on composes.activity_group_id = activity_group.id);  
 
 CREATE OR REPLACE VIEW vw_activity_group_max_pos AS
   SELECT activity_group_id as activity_group_id
@@ -744,6 +750,8 @@ CREATE OR REPLACE VIEW vw_group AS
     , activity.dur_hh as dur_hh
     , activity.dur_dd as dur_dd
     , activity.dur_mon as dur_mon
+    , activity.pract_descr as pract_descr
+    , activity.edu_descr as edu_descr
   FROM activity_group
   INNER JOIN vw_activity_group_max_pos pos
     ON activity_group.id = pos.activity_group_id
@@ -767,6 +775,8 @@ CREATE OR REPLACE VIEW vw_group AS
     , null as dur_hh
     , null as dur_dd
     , null as dur_mon
+    , null as pract_descr
+    , null as edu_descr
   FROM activity_group
   INNER JOIN vw_activity_group_max_pos pos
     ON activity_group.id = pos.activity_group_id

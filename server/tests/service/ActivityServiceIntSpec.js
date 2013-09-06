@@ -35,6 +35,8 @@ describe('Activity Service Integration', function() {
                   expect(result[2][0].dur_hh).to.equal(0);
                   expect(result[2][0].dur_dd).to.equal(15);
                   expect(result[2][0].dur_mon).to.equal(1);
+                  expect(result[2][0].pract_descr).to.equal('Practical description: what to do for the execution of this activity');
+                  expect(result[2][0].edu_descr).to.equal('Pedagogical Description: how to obtain better results and improve learning during the activity');
 
       		done();
 		});

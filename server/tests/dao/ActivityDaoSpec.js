@@ -20,7 +20,9 @@ describe('Activity DAO', function() {
     			expect(results[0].dur_hh).to.equal(0);
     			expect(results[0].dur_dd).to.equal(15);
     			expect(results[0].dur_mon).to.equal(1);
-	            
+    			expect(results[0].pract_descr).to.equal('Practical description: what to do for the execution of this activity');
+    			expect(results[0].edu_descr).to.equal('Pedagogical Description: how to obtain better results and improve learning during the activity');
+
     			expect(results[1].level).to.equal(2);
     			expect(results[1].position).to.equal(1);
     			expect(results[1].node_name).to.equal('Group 4 Name');
@@ -30,6 +32,8 @@ describe('Activity DAO', function() {
     			expect(results[1].dur_hh).to.be.null;
     			expect(results[1].dur_dd).to.be.null;
     			expect(results[1].dur_mon).to.be.null;
+    			expect(results[1].pract_descr).to.be.null;
+    			expect(results[1].edu_descr).to.be.null;
 
 	            done();
         	});

@@ -2,12 +2,12 @@ var mysql = require('mysql')
   , dao = require('./Dao');
 
 var GET_LD_NODES = 'select ld_id, ld_name, level, position, node_id, node_name, type, org_label, ' +
-  'dur_min, dur_hh, dur_dd, dur_mon ' + 
+  'dur_min, dur_hh, dur_dd, dur_mon, pract_descr, edu_descr ' + 
   'from vw_ld_node where ld_id = ? order by level, position';
 
 var GET_GROUPS = 'select group_id, group_name, level, position, ' +
   'group_child_id, group_child_name, max_position, group_child_type, org_label, ' + 
-  'dur_min, dur_hh, dur_dd, dur_mon ' + 
+  'dur_min, dur_hh, dur_dd, dur_mon, pract_descr, edu_descr ' + 
   'from vw_group where group_id in (?) ' +
   'order by group_id, level, position';
 
