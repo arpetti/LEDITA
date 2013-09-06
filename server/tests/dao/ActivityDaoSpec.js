@@ -106,4 +106,73 @@ describe('Activity DAO', function() {
 
 	});
 
+	describe('Get Activity Details', function() {
+
+		it('Gets technologies and resources', function(done) {
+			var activityids = [2, 3];
+			ActivityDao.getActivityDetails(activityids, function(err, results) {
+				expect(err).to.be.null;
+				
+				// results are in 2 sections: technology, and resource
+				expect(_.keys(results)).to.have.length(2); 
+				expect(_.keys(results)[0]).to.equal('technology');
+				expect(_.keys(results)[1]).to.equal('resource');
+
+				// verify technology section
+				var tech = results.technology;
+				expect(tech).to.have.length(3);
+				
+				expect(tech[0].activity_id).to.equal(2);
+				expect(tech[0].activity_name).to.equal('Learning Activity 2');
+				expect(tech[0].technology_name).to.equal('PC');
+
+				expect(tech[1].activity_id).to.equal(2);
+				expect(tech[1].activity_name).to.equal('Learning Activity 2');
+				expect(tech[1].technology_name).to.equal('Smartphone');
+				
+				expect(tech[2].activity_id).to.equal(3);
+				expect(tech[2].activity_name).to.equal('Learning Activity 3');
+				expect(tech[2].technology_name).to.equal('Whiteboard');
+
+				// verify resource section
+				var resource = results.resource;
+				expect(resource).to.have.length(1);
+
+				expect(resource[0].activity_id).to.equal(2);
+				expect(resource[0].resource_name).to.equal('Didactical resource name 2');
+				expect(resource[0].file_id).to.equal(1);
+				expect(resource[0].file_mime).to.equal('application/pdf');				
+				
+				done();
+			});
+		});
+
+		it('Gets a resource with no associated file', function(done) {
+			var activityids = [34];
+			ActivityDao.getActivityDetails(activityids, function(err, results) {
+				expect(err).to.be.null;
+
+				// results are in 2 sections: technology, and resource
+				expect(_.keys(results)).to.have.length(2); 
+				expect(_.keys(results)[0]).to.equal('technology');
+				expect(_.keys(results)[1]).to.equal('resource');
+
+				// verify technology section
+				var tech = results.technology;
+				expect(tech).to.have.length(0);
+
+				// verify resource section
+				var resource = results.resource;
+				expect(resource).to.have.length(1);
+
+				expect(resource[0].activity_id).to.equal(34);
+				expect(resource[0].resource_name).to.equal('Didactical resource name 12');
+				expect(resource[0].file_id).to.be.null;
+
+				done();
+			});
+		});
+
+	});
+
 });
