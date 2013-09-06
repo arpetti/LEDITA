@@ -239,11 +239,11 @@
                                     </p>
                                     <p class="tabText"><i class="icon-info-sign"></i> Activity
                                         Description:<br> <span
-                                                class="nodeBodyText">{ { activity.pract_descr } }</span></p>
+                                                class="nodeBodyText">{{ child.pract_descr }}</span></p>
 
                                     <p class="tabText"><i class="icon-question-sign"></i> Pedagogical
                                         Suggestions:<br> <span
-                                                class="nodeBodyText">{ { activity.edu_descr } }</span></p>
+                                                class="nodeBodyText">{{ child.edu_descr }}</span></p>
 
                                 </div>
                             </div>
@@ -289,10 +289,10 @@
                             </ul>
                             </p>
                             <p class="tabText"><i class="icon-info-sign"></i> Activity Description:<br> <span
-                                    class="nodeBodyText">{ { activity.pract_descr } }</span></p>
+                                    class="nodeBodyText">{{ node.pract_descr }}</span></p>
 
                             <p class="tabText"><i class="icon-question-sign"></i> Pedagogical Suggestions:<br> <span
-                                    class="nodeBodyText">{ { activity.edu_descr } }</span></p>
+                                    class="nodeBodyText">{{ node.edu_descr }}</span></p>
                         </div>
                     </div>
                     <!-- End Activity or Group Box -->
@@ -375,10 +375,10 @@
                                 </ul>
                                      </p>
                                      <p class="tabText"><i class="icon-info-sign"></i> Activity Description:<br> <span
-                                             class="nodeBodyText">{ { activity.pract_descr } }</span></p>
+                                             class="nodeBodyText">{{ child.pract_descr }}</span></p>
 
                                 <p class="tabText"><i class="icon-question-sign"></i> Pedagogical Suggestions:<br> <span
-                                        class="nodeBodyText">{ { activity.edu_descr } }</span></p>
+                                        class="nodeBodyText">{{ child.edu_descr }}</span></p>
                                     </span>
                                 <!-- IF CHILD NODE IS AN LD FIXME: convert static data to dynamic -->
                                 <span ng-show="child.group_child_type=='LD'">
@@ -445,10 +445,10 @@
                         </ul>
                             </p>
                             <p class="tabText"><i class="icon-info-sign"></i> Activity Description:<br> <span
-                                    class="nodeBodyText">{ { activity.pract_descr } }</span></p>
+                                    class="nodeBodyText">{{ node.pract_descr }}</span></p>
 
                         <p class="tabText"><i class="icon-question-sign"></i> Pedagogical Suggestions:<br> <span
-                                class="nodeBodyText">{ { activity.edu_descr } }</span></p>
+                                class="nodeBodyText">{{ node.edu_descr }}</span></p>
                             </span>
                         <!-- IF CHILD NODE IS AN LD FIXME: convert static data to dynamic -->
                                 <span ng-show="node.type=='LD'">
@@ -550,7 +550,7 @@
                                 </ul>
                                       </p>
                                       <p class="tabText"><i class="icon-info-sign"></i> Activity Description:<br> <span
-                                              class="nodeBodyText">{ { activity.pract_descr } }</span></p>
+                                              class="nodeBodyText">{{ child.pract_descr }}</span></p>
                                  </span>
                                 <!-- IF CHILD NODE IS AN LD FIXME: convert static data to dynamic -->
                                 <span ng-show="child.group_child_type=='LD'">
@@ -619,7 +619,7 @@
                         </ul>
                                 </p>
                                 <p class="tabText"><i class="icon-info-sign"></i>Activity Description:<br> <span
-                                        class="nodeBodyText">{ { activity.pract_descr } }</span></p>
+                                        class="nodeBodyText">{{ node.pract_descr }}</span></p>
                                 </span>
                         <!-- IF CHILD NODE IS AN LD FIXME: convert static data to dynamic -->
                                 <span ng-show="node.type=='LD'">
