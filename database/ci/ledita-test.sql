@@ -43,6 +43,24 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
+-- Table `ledita-test`.`modality_type`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ledita-test`.`modality_type` ;
+
+CREATE  TABLE IF NOT EXISTS `ledita-test`.`modality_type` (
+  `type` CHAR(1) NOT NULL ,
+  `description` VARCHAR(100) NOT NULL ,
+  PRIMARY KEY (`type`) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+INSERT INTO `ledita-test`.`modality_type` (`type`, `description`)
+VALUES  ('1', 'Face to face'),
+        ('2', 'Online'),
+        ('3', 'Blended');
+
+
+-- -----------------------------------------------------
 -- Table `ledita-test`.`activity`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `ledita-test`.`activity` ;
@@ -53,19 +71,22 @@ CREATE  TABLE IF NOT EXISTS `ledita-test`.`activity` (
   `name` VARCHAR(255) NOT NULL ,
   `type` CHAR(1) NOT NULL COMMENT 'VALUES:\n1 = LEARNING;\n2 = SUPPORT;\n3 = EVALUATION \n' ,
   `dur_min` INT(2) NOT NULL DEFAULT 0 ,
-  `dur_hh` INT(2) NULL DEFAULT NULL COMMENT 'VALUES:\n1= MIN\n2 = HOURS\n3 = DAY\n4 = MONTHS\n5 = YEARS' ,
-  `dur_dd` INT(2) NULL DEFAULT NULL COMMENT 'VALUES:\n1= MIN\n2 = HOURS\n3 = DAY\n4 = MONTHS\n5 = YEARS' ,
-  `dur_mon` INT(2) NULL DEFAULT NULL COMMENT 'VALUES:\n1= MIN\n2 = HOURS\n3 = DAY\n4 = MONTHS\n5 = YEARS' ,
+  `dur_hh` INT(2) NULL DEFAULT NULL ,
+  `dur_dd` INT(2) NULL DEFAULT NULL ,
+  `dur_mon` INT(2) NULL DEFAULT NULL ,
   `pract_descr` VARCHAR(2000) NULL DEFAULT NULL ,
   `edu_descr` VARCHAR(2000) NULL DEFAULT NULL ,
-  `modality` CHAR(1) NOT NULL COMMENT 'Modality:\n1=Face to face\n2=Online\n3=Blanded' ,
+  `modality` CHAR(1) NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_activity_students1_idx` (`students_id` ASC) ,
   CONSTRAINT `fk_activity_students1`
     FOREIGN KEY (`students_id` )
     REFERENCES `ledita-test`.`students` (`id` )
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION ,
+  CONSTRAINT `fk_modality`
+    FOREIGN KEY (`modality` )
+    REFERENCES `ledita-test`.`modality_type` (`type` ))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -682,6 +703,7 @@ CREATE OR REPLACE VIEW vw_ld_node AS
     , null as dur_mon
     , null as pract_descr
     , null as edu_descr
+    , null as modality
   FROM ld ldsource
   INNER JOIN composes
     ON ldsource.id = composes.ld_id
@@ -702,13 +724,16 @@ CREATE OR REPLACE VIEW vw_ld_node AS
     , activity.dur_mon as dur_mon
     , activity.pract_descr as pract_descr
     , activity.edu_descr as edu_descr
+    , modality_type.description as modality
   FROM ld ldsource
   INNER JOIN composes
     ON ldsource.id = composes.ld_id
   INNER JOIN activity
     on composes.activity_id = activity.id
   INNER JOIN vw_activity_org
-    on activity.id = vw_activity_org.activity_id)
+    on activity.id = vw_activity_org.activity_id
+  INNER JOIN modality_type
+    on activity.modality = modality_type.type)
   UNION
   (SELECT ldsource.id as ld_id
     , ldsource.name as ld_name
@@ -724,11 +749,12 @@ CREATE OR REPLACE VIEW vw_ld_node AS
     , null as dur_mon
     , null as pract_descr
     , null as edu_descr
+    , null as modality
   FROM ld ldsource
   INNER JOIN composes
     ON ldsource.id = composes.ld_id
   INNER JOIN activity_group
-    on composes.activity_group_id = activity_group.id);  
+    on composes.activity_group_id = activity_group.id); 
 
 CREATE OR REPLACE VIEW vw_activity_group_max_pos AS
   SELECT activity_group_id as activity_group_id
@@ -752,6 +778,7 @@ CREATE OR REPLACE VIEW vw_group AS
     , activity.dur_mon as dur_mon
     , activity.pract_descr as pract_descr
     , activity.edu_descr as edu_descr
+    , modality_type.description as modality
   FROM activity_group
   INNER JOIN vw_activity_group_max_pos pos
     ON activity_group.id = pos.activity_group_id
@@ -760,7 +787,9 @@ CREATE OR REPLACE VIEW vw_group AS
   INNER JOIN activity
     ON participates.activity_id = activity.id
   INNER JOIN vw_activity_org
-    ON activity.id = vw_activity_org.activity_id)
+    ON activity.id = vw_activity_org.activity_id
+  INNER JOIN modality_type
+    on activity.modality = modality_type.type)
   UNION
   (SELECT activity_group.id as group_id
     , activity_group.name as group_name
@@ -777,6 +806,7 @@ CREATE OR REPLACE VIEW vw_group AS
     , null as dur_mon
     , null as pract_descr
     , null as edu_descr
+    , null as modality
   FROM activity_group
   INNER JOIN vw_activity_group_max_pos pos
     ON activity_group.id = pos.activity_group_id

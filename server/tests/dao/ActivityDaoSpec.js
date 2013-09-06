@@ -22,6 +22,7 @@ describe('Activity DAO', function() {
     			expect(results[0].dur_mon).to.equal(1);
     			expect(results[0].pract_descr).to.equal('Practical description: what to do for the execution of this activity');
     			expect(results[0].edu_descr).to.equal('Pedagogical Description: how to obtain better results and improve learning during the activity');
+    			expect(results[0].modality).to.equal('Online');
 
     			expect(results[1].level).to.equal(2);
     			expect(results[1].position).to.equal(1);
@@ -34,6 +35,7 @@ describe('Activity DAO', function() {
     			expect(results[1].dur_mon).to.be.null;
     			expect(results[1].pract_descr).to.be.null;
     			expect(results[1].edu_descr).to.be.null;
+    			expect(results[1].modality).to.be.null;
 
 	            done();
         	});
