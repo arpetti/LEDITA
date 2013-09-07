@@ -5,7 +5,7 @@ module.exports = {
 
 	getLDNodes: function(req, res) {
 		var ldid = req.params.id;
-		ActivityService.getLDActivityStructure(ldid, function(err, result, message) {
+		ActivityService.getEnrichedLDActivityStructure(ldid, function(err, result, message) {
 			if(err) {
                 return res.send(500, message);
             }

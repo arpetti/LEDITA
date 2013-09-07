@@ -26,7 +26,7 @@ describe('Activity controller', function() {
     		req.params = {id: learningDesignId};
 
     		var nodeResult = {"1": [], "2": []};
-    		var serviceStub = sandbox.stub(ActivityService, "getLDActivityStructure", function(ldid, callback) {
+    		var serviceStub = sandbox.stub(ActivityService, "getEnrichedLDActivityStructure", function(ldid, callback) {
                 callback(null, nodeResult, null);
             });
 
@@ -48,7 +48,7 @@ describe('Activity controller', function() {
 
     		var error = new Error("something went wrong");
     		var ldMessage = "Unable to retrieve ld nodes";
-    		var serviceStub = sandbox.stub(ActivityService, "getLDActivityStructure", function(ldid, callback) {
+    		var serviceStub = sandbox.stub(ActivityService, "getEnrichedLDActivityStructure", function(ldid, callback) {
                 callback(error, null, ldMessage);
             });
 
@@ -69,7 +69,7 @@ describe('Activity controller', function() {
     		req.params = {id: learningDesignId};
 
     		var ldMessage = "This LD has no nodes";
-    		var serviceStub = sandbox.stub(ActivityService, "getLDActivityStructure", function(ldid, callback) {
+    		var serviceStub = sandbox.stub(ActivityService, "getEnrichedLDActivityStructure", function(ldid, callback) {
                 callback(null, null, ldMessage);
             });
 

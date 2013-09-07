@@ -207,8 +207,8 @@
                                     <p class="tabText"><i class="icon-th-large"></i> Students' organization: <span
                                             class="nodeBodyText">{{ child.org_label }}</span></p>
 
-                                    <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies: <span
-                                            class="nodeBodyText">{ { technology.name } }</span></p>
+                                    <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies: 
+                                        <span ng-repeat="tech in node.technologies" class="nodeBodyText">{{ tech.technology_name }}</span></p>
 
                                     <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
                                     <ul class="listNode">
@@ -263,8 +263,8 @@
                             <p class="tabText"><i class="icon-th-large"></i> Students' organization: <span
                                     class="nodeBodyText">{{ node.org_label }}</span></p>
 
-                            <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies: <span
-                                    class="nodeBodyText">{ { technology.name } }</span></p>
+                            <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies: 
+                                <span ng-repeat="tech in node.technologies" class="nodeBodyText">{{ tech.technology_name }}</span></p>
 
                             <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
                             <ul class="listNode">
@@ -349,8 +349,8 @@
                                 <p class="tabText"><i class="icon-th-large"></i> Students' organization: <span
                                         class="nodeBodyText">{{ child.org_label }}</span></p>
 
-                                <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies: <span
-                                        class="nodeBodyText">{ { technology.name } }</span></p>
+                                <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies: 
+                                    <span ng-repeat="tech in child.technologies" class="nodeBodyText">{{ tech.technology_name }}</span></p>
 
                                 <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
                                 <ul class="listNode">
@@ -422,8 +422,8 @@
                         <p class="tabText"><i class="icon-th-large"></i> Students' organization: <span
                                 class="nodeBodyText">{{ node.org_label }}</span></p>
 
-                        <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies: <span
-                                class="nodeBodyText">{ { technology.name } }</span></p>
+                        <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies: 
+                            <span ng-repeat="tech in node.technologies" class="nodeBodyText">{{ tech.technology_name }}</span></p>
 
                         <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
                         <ul class="listNode">
@@ -524,8 +524,8 @@
                                 <p class="tabText"><i class="icon-th-large"></i> Students' organization: <span
                                         class="nodeBodyText">{{ child.org_label }}</span></p>
 
-                                <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies: <span
-                                        class="nodeBodyText">{ { technology.name } }</span></p>
+                                <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies: 
+                                    <span ng-repeat="tech in child.technologies" class="nodeBodyText">{{ tech.technology_name }}</span></p>
 
                                 <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
                                 <ul class="listNode">
@@ -596,8 +596,8 @@
                         <p class="tabText"><i class="icon-th-large"></i> Students' organization: <span
                                 class="nodeBodyText">{{ node.org_label }}</span></p>
 
-                        <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies: <span
-                                class="nodeBodyText">{ { technology.name } }</span></p>
+                        <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies: 
+                            <span ng-repeat="tech in node.technologies" class="nodeBodyText">{{ tech.technology_name }}</span></p>
 
                         <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
                         <ul class="listNode">
