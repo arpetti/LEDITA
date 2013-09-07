@@ -388,10 +388,8 @@ input.sidebarInput {
 /* new nodes bar
 ===================== */
 .newActBox {
-    width: 70px;
-    position: absolute;
-    left: 26.5%;
-    top: 150px;
+    width: 90%;
+    margin: 0 auto;
 }
 
 .newActBox a {
@@ -404,43 +402,151 @@ input.sidebarInput {
 }
 
 .newActButton1 {
-    width: 44px;
-    height: 44px;
+    width: 55px;
+    height: 55px;
     border-radius: 60px;
     background: #496f56 scroll 0 0;
-    margin: 10px 0;
-    line-height: 18px;
+    margin: 10px 3%;
+    line-height: 22px;
     padding: 10px;
     border: 2px solid #FFFFFF;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
     color: #ffffff;
+    display: inline-block;
 }
 
 .newActButton2 {
-    width: 44px;
-    height: 44px;
+    width: 55px;
+    height: 55px;
     border-radius: 60px;
     background: #0099CC scroll 0 0;
-    margin: 10px 0;
-    line-height: 18px;
+    margin: 10px 3%;
+    line-height: 22px;
     padding: 10px;
     border: 2px solid #FFFFFF;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
     color: #ffffff;
+    display: inline-block;
 
 }
 
 .newActButton3 {
-    width: 44px;
-    height: 44px;
+    width: 55px;
+    height: 55px;
     border-radius: 60px;
     background: #cccccc scroll 0 0;
-    margin: 10px 0;
-    line-height: 18px;
+    margin: 10px 3%;
+    line-height: 22px;
     padding: 10px;
     border: 2px solid #FFFFFF;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
     color: #666;
+    display: inline-block;
+}
+
+/* edit elements
+===================== */
+.onoffswitch {
+    position: relative;
+    width: 120px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.onoffswitch-checkbox {
+    display: none;
+}
+
+.onoffswitch-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid #FFFFFF;
+    border-radius: 20px;
+}
+
+.onoffswitch-inner {
+    width: 200%;
+    margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s;
+    -webkit-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s;
+    transition: margin 0.3s ease-in 0s;
+}
+
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    float: left;
+    width: 50%;
+    height: 22px;
+    padding: 0;
+    line-height: 22px;
+    font-size: 14px;
+    color: white;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.onoffswitch-inner:before {
+    content: "Public";
+    padding-left: 10px;
+    background-color: #0099CC;
+    color: #FFFFFF;
+}
+
+.onoffswitch-inner:after {
+    content: "Private";
+    padding-right: 10px;
+    background-color: #DDDDDD;
+    color: #666666;
+    text-align: right;
+}
+
+.onoffswitch-switch {
+    width: 14px;
+    margin: 4px;
+    background: #FFFFFF;
+    border: 2px solid #FFFFFF;
+    border-radius: 20px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 94px;
+    -moz-transition: all 0.3s ease-in 0s;
+    -webkit-transition: all 0.3s ease-in 0s;
+    -o-transition: all 0.3s ease-in 0s;
+    transition: all 0.3s ease-in 0s;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px;
+}
+
+.edit {
+    float: left;
+}
+
+.edit, .delete {
+    margin: 2px;
+    background-color: #4f4f4f;
+    border-radius: 24px;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    border: 2px solid #ffffff;
+}
+
+.edit:hover, .delete:hover {
+    background-color: #990000;
+}
+
+.delete {
+    float: right;
 }
 
 /* activities diagram
@@ -685,6 +791,11 @@ a .likeButton:hover {
 
 /* activity text
 ===================== */
+.border {
+    border: 1px dashed #dddddd;
+    margin: 0 5px;
+    border-radius: 4px ;
+}
 .nodeText {
     text-align: left;
     padding: 10px 25px;
@@ -1678,6 +1789,7 @@ input[type="checkbox"] {
 
     #sidebar {
         margin-bottom: 20px;
+
     }
 
 }

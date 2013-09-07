@@ -121,6 +121,7 @@
     </div>
 
     <div id="tabContent">
+
         <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Global View) -->
         <div ng-repeat="(level, nodes) in levels" class="levelBox">
             <div ng-repeat="node in nodes" ng-class="getBoxClass(node)">
@@ -207,7 +208,7 @@
                                     <p class="tabText"><i class="icon-th-large"></i> Students' organization: <span
                                             class="nodeBodyText">{{ child.org_label }}</span></p>
 
-                                    <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies: 
+                                    <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies:
                                         <span ng-repeat="tech in node.technologies" class="nodeBodyText">{{ tech.technology_name }}</span></p>
 
                                     <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
@@ -217,7 +218,7 @@
                                             Copyright: <span
                                                     class="nodeBodyText">{ { resource.copy } }</span> |
                                             Description: <span
-                                                    class="nodeBodyText">{ { resource.descr } }</span> | Link: <span
+                                                    class="nodeBodyText">{ { resource.descr } }</span> | <span
                                                     class="nodeBodyText"><a
                                                     ng-href="{ { resource.link } }">Link</a></span></li>
                                         <ul>
@@ -228,7 +229,7 @@
                                                             class="nodeBodyText">{ { file.size } }</span> |
                                                     Extension: <span
                                                             class="nodeBodyText">{ { file.mime } }</span> |
-                                                    Link: <span
+                                                    <span
                                                             class="nodeBodyText"><a
                                                             ng-href="{ { file.uri } }">Link</a></span>
                                                 </li>
@@ -349,8 +350,9 @@
                                 <p class="tabText"><i class="icon-th-large"></i> Students' organization: <span
                                         class="nodeBodyText">{{ child.org_label }}</span></p>
 
-                                <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies: 
-                                    <span ng-repeat="tech in child.technologies" class="nodeBodyText">{{ tech.technology_name }}</span></p>
+                                <p class="tabText" ng-show="child.technologies"><i class="icon-facetime-video"></i> Used Technologies:
+                                    <span ng-repeat="tech in child.technologies" class="nodeBodyText border">{{ tech.technology_name }}</span>
+                                </p>
 
                                 <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
                                 <ul class="listNode">
@@ -358,7 +360,7 @@
                                         | Type:<span class="nodeBodyText"> { { resource.type } }</span> |
                                         Copyright: <span
                                                 class="nodeBodyText">{ { resource.copy } }</span> | Description: <span
-                                                class="nodeBodyText">{ { resource.descr } }</span> | Link: <span
+                                                class="nodeBodyText">{ { resource.descr } }</span> | <span
                                                 class="nodeBodyText"><a ng-href="{ { resource.link } }">Link</a></span>
                                     </li>
                                     <ul>
@@ -366,7 +368,7 @@
                                         <ul>
                                             <li>Name: <span class="nodeBodyText">{ { file.name } }</span> | Size: <span
                                                     class="nodeBodyText">{ { file.size } }</span> | Extension: <span
-                                                    class="nodeBodyText">{ { file.mime } }</span> | Link: <span
+                                                    class="nodeBodyText">{ { file.mime } }</span> | <span
                                                     class="nodeBodyText"><a ng-href="{ { file.uri } }">Link</a></span>
                                             </li>
                                         </ul>
@@ -422,8 +424,8 @@
                         <p class="tabText"><i class="icon-th-large"></i> Students' organization: <span
                                 class="nodeBodyText">{{ node.org_label }}</span></p>
 
-                        <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies: 
-                            <span ng-repeat="tech in node.technologies" class="nodeBodyText">{{ tech.technology_name }}</span></p>
+                        <p class="tabText" ng-show="node.technologies"><i class="icon-facetime-video"></i> Used Technologies:
+                            <span ng-repeat="tech in node.technologies" class="nodeBodyText border">{{ tech.technology_name }}</span></p>
 
                         <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
                         <ul class="listNode">
@@ -524,8 +526,8 @@
                                 <p class="tabText"><i class="icon-th-large"></i> Students' organization: <span
                                         class="nodeBodyText">{{ child.org_label }}</span></p>
 
-                                <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies: 
-                                    <span ng-repeat="tech in child.technologies" class="nodeBodyText">{{ tech.technology_name }}</span></p>
+                                <p class="tabText" ng-show="child.technologies"><i class="icon-facetime-video"></i> Used Technologies:
+                                    <span ng-repeat="tech in child.technologies" class="nodeBodyText border">{{ tech.technology_name }}</span></p>
 
                                 <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
                                 <ul class="listNode">
@@ -533,7 +535,7 @@
                                         | Type:<span class="nodeBodyText"> { { resource.type } }</span> |
                                         Copyright: <span
                                                 class="nodeBodyText">{ { resource.copy } }</span> | Description: <span
-                                                class="nodeBodyText">{ { resource.descr } }</span> | Link: <span
+                                                class="nodeBodyText">{ { resource.descr } }</span> | <span
                                                 class="nodeBodyText"><a ng-href="{ { resource.link } }">Link</a></span>
                                     </li>
                                     <ul>
@@ -541,7 +543,7 @@
                                         <ul>
                                             <li>Name: <span class="nodeBodyText">{ { file.name } }</span> | Size: <span
                                                     class="nodeBodyText">{ { file.size } }</span> | Extension: <span
-                                                    class="nodeBodyText">{ { file.mime } }</span> | Link: <span
+                                                    class="nodeBodyText">{ { file.mime } }</span> | <span
                                                     class="nodeBodyText"><a ng-href="{ { file.uri } }">Link</a></span>
                                             </li>
                                         </ul>
@@ -596,8 +598,8 @@
                         <p class="tabText"><i class="icon-th-large"></i> Students' organization: <span
                                 class="nodeBodyText">{{ node.org_label }}</span></p>
 
-                        <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies: 
-                            <span ng-repeat="tech in node.technologies" class="nodeBodyText">{{ tech.technology_name }}</span></p>
+                        <p class="tabText" ng-show="node.technologies"><i class="icon-facetime-video"></i> Used Technologies:
+                            <span ng-repeat="tech in node.technologies" class="nodeBodyText border">{{ tech.technology_name }}</span></p>
 
                         <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
                         <ul class="listNode">
