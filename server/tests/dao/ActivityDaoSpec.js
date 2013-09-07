@@ -140,8 +140,6 @@ describe('Activity DAO', function() {
 
 				expect(resource[0].activity_id).to.equal(2);
 				expect(resource[0].resource_name).to.equal('Didactical resource name 2');
-				expect(resource[0].file_id).to.equal(1);
-				expect(resource[0].file_mime).to.equal('application/pdf');				
 				
 				done();
 			});
@@ -167,7 +165,6 @@ describe('Activity DAO', function() {
 
 				expect(resource[0].activity_id).to.equal(34);
 				expect(resource[0].resource_name).to.equal('Didactical resource name 12');
-				expect(resource[0].file_id).to.be.null;
 
 				done();
 			});

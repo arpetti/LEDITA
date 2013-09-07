@@ -63,16 +63,33 @@ describe('Activity Service Integration', function() {
 
       describe('Enriched Activity Service', function() {
 
-            it('Adds technologies to ACTIVITY nodes', function(done) {
+            it('Adds technologies and resources to ACTIVITY nodes', function(done) {
                   var ldid = 1;
                   ActivityService.getEnrichedLDActivityStructure(ldid, function(err, result, message) {
                         expect(err).to.be.null;
                         expect(message).to.be.null;
                         
                         expect(_.keys(result)).to.have.length(6); // 6 levels
-                        expect(result[1][0].type).to.equal('ACTIVITY'); // Level 1 first node is activity
+
+                        // Level 1 first node is activity
+                        expect(result[1][0].type).to.equal('ACTIVITY'); 
+
+                        // Verify technologies
                         expect(result[1][0].technologies).to.have.length(1);
                         expect(result[1][0].technologies[0].technology_name).to.equal('Internet');
+
+                        // Verify resources
+                        expect(result[1][0].resources).to.have.length(1);
+                        expect(result[1][0].resources[0].resource_name).to.equal('Didactical resource name 3');
+
+                        // Level 2 first node is activity group
+                        expect(result[2][0].type).to.equal('ACTIVITY_GROUP');
+                        var level2Children = result[2][0].children;
+                        var level2ChildrenActivities = level2Children[1]; // children are organized into level 1
+                        expect(level2ChildrenActivities).to.have.length(2);
+                        expect(level2ChildrenActivities[0].technologies[0].technology_name).to.equal('Tablet');
+                        expect(level2ChildrenActivities[0].resources[0].resource_name).to.equal('Didactical resource name 1');
+
 
                         done();
                   });

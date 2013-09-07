@@ -688,7 +688,6 @@ CREATE OR REPLACE VIEW vw_activity_org AS
   INNER JOIN students_type
     ON students.type = students_type.type;  
 
--- Inner join is intentional: Only want activities that have at least one technology
 CREATE OR REPLACE VIEW vw_activity_technology AS
   SELECT activity.id as activity_id
     , activity.name as activity_name
@@ -700,8 +699,6 @@ CREATE OR REPLACE VIEW vw_activity_technology AS
   INNER JOIN technology
     ON supports.technology_id = technology.id;   
 
--- Inner join is intentional: Only want activities that have at least one resource
--- But outer join to FILE because resource may or may not have files  
 CREATE OR REPLACE VIEW vw_activity_resource AS
   (SELECT activity.id as activity_id
     , activity.name as activity_name
@@ -711,16 +708,9 @@ CREATE OR REPLACE VIEW vw_activity_resource AS
     , resource.descr as resource_descr
     , resource.copy as resource_copy
     , resource.link as resource_link
-    , file.id as file_id
-    , file.name as file_name
-    , file.size as file_size
-    , file.mime as file_mime
-    , file.uri as file_uri
-  FROM activity
+    FROM activity
   INNER JOIN resource
-    ON activity.id = resource.activity_id
-  LEFT OUTER JOIN file
-    ON resource.id = file.resource_id);
+    ON activity.id = resource.activity_id);
 
 CREATE OR REPLACE VIEW vw_ld_node AS
   (SELECT ldsource.id as ld_id

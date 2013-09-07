@@ -23,7 +23,7 @@ var extractActivityIds = function(ldnodes) {
 	return _.union(topLevelActivityIds, childLevelActivityIds);
 };
 
-var addTechToActGroup = function(actGroupNode, techByActivityId) {
+var addTechToActGroup = function(actGroupNode, refData) {
 	var groupChildren = actGroupNode.children;
 	var levels = _.keys(groupChildren);
 	for (var i = 0; i < levels.length; i++) {
@@ -31,7 +31,21 @@ var addTechToActGroup = function(actGroupNode, techByActivityId) {
 		for (var k=0; k<nodes.length; k++) {
 			var node = nodes[k];
 			if (node.group_child_type == 'ACTIVITY') {
-				node.technologies = techByActivityId[node.group_child_id];
+				node.technologies = refData[node.group_child_id];
+			}
+		}
+	}
+};
+
+var addResourceToActGroup = function(actGroupNode, refData) {
+	var groupChildren = actGroupNode.children;
+	var levels = _.keys(groupChildren);
+	for (var i = 0; i < levels.length; i++) {
+		var nodes = groupChildren[levels[i]];
+		for (var k=0; k<nodes.length; k++) {
+			var node = nodes[k];
+			if (node.group_child_type == 'ACTIVITY') {
+				node.resources = refData[node.group_child_id];
 			}
 		}
 	}
@@ -99,6 +113,7 @@ module.exports = {
 			ActivityDao.getActivityDetails(activityIds, function(err, activityDetails) {
 				if (!err) {
 					var techByActivityId = _.groupBy(activityDetails.technology, function(element) {return element.activity_id});
+					var resourceByActivityId = _.groupBy(activityDetails.resource, function(element) {return element.activity_id});
 					var levels = _.keys(ldnodes);
 					for (var i = 0; i < levels.length; i++) {
   						var nodes = ldnodes[levels[i]];
@@ -106,16 +121,14 @@ module.exports = {
   							var node = nodes[k];
   							if (node.type == 'ACTIVITY') {
   								node.technologies = techByActivityId[node.node_id];
+  								node.resources = resourceByActivityId[node.node_id];
   							}
   							if (node.type == 'ACTIVITY_GROUP') {
   								addTechToActGroup(node, techByActivityId);
+  								addResourceToActGroup(node, resourceByActivityId);
   							}
   						}
 					}
-					
-					// TODO Come back to this mess later...
-					var resourceByActivityId = _.groupByMulti(activityDetails.resource, ['activity_id', 'resource_id', 'file_id']);
-					
 					callback(null, ldnodes, null);
 				}
 			});
