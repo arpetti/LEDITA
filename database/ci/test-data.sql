@@ -467,7 +467,7 @@ VALUES
 ('7','15','Name of the file number 7','6757','','image/gif'),
 ('8','18','Name of the file number 8','434567','','application/pdf'),
 ('9','19','Name of the file number 9','5455','','video/mpeg'),
-('10','20','Name of the file number 10','355','','text/
+('10','20','Name of the file number 10','355','','text/plain');
 
 
 INSERT INTO `qcer` (`id`, `name`)
