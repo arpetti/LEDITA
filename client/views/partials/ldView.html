@@ -143,7 +143,7 @@
                             </div>
                             <!-- FIXME Convert static data to dynamic -->
                             <div class="actLabel" ng-show="child.group_child_type=='LD'">
-                                <span class="timeLabel"><i class="icon-time icon-white"></i> Lesson </span>
+                                <span class="timeLabel"><i class="icon-time icon-white"></i>{{ child.scope}}</span>
                                 <span class="orgLabel"><i class="icon-flag icon-white"></i> A1</span>
                             </div>
                         </a>
@@ -162,7 +162,7 @@
                     </div>
                     <!-- FIXME Convert static data to dynamic -->
                     <div class="actLabel" ng-show="node.type=='LD'">
-                        <span class="timeLabel"><i class="icon-time icon-white"></i> Semester </span>
+                        <span class="timeLabel"><i class="icon-time icon-white"></i>{{ node.scope }}</span>
                         <span class="orgLabel"><i class="icon-flag icon-white"></i> A1</span>
                     </div>
                 </a>
