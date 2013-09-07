@@ -355,13 +355,13 @@
                                 </p>
 
                                 <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
-                                <ul class="listNode">
-                                    <li><i class="icon-chevron-right"></i> Name: <span class="nodeBodyText">{ { resource.name } }</span>
-                                        | Type:<span class="nodeBodyText"> { { resource.type } }</span> |
+                                <ul ng-repeat="resource in child.resources" class="listNode">
+                                    <li><i class="icon-chevron-right"></i> Name: <span class="nodeBodyText">{{ resource.resource_name }}</span>
+                                        | Type:<span class="nodeBodyText">{{ resource.type }}</span> |
                                         Copyright: <span
-                                                class="nodeBodyText">{ { resource.copy } }</span> | Description: <span
-                                                class="nodeBodyText">{ { resource.descr } }</span> | <span
-                                                class="nodeBodyText"><a ng-href="{ { resource.link } }">Link</a></span>
+                                                class="nodeBodyText">{{ resource.resource_copy }}</span> | Description: <span
+                                                class="nodeBodyText">{{ resource.resource_descr }}</span> | <span
+                                                class="nodeBodyText"><a ng-href="{{ resource.resource_link }}">Link</a></span>
                                     </li>
                                     <ul>
                                         <li><i class="icon-file"></i> Attached Files:</li>
@@ -428,12 +428,12 @@
                             <span ng-repeat="tech in node.technologies" class="nodeBodyText border">{{ tech.technology_name }}</span></p>
 
                         <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
-                        <ul class="listNode">
-                            <li><i class="icon-chevron-right"></i> Name: <span class="nodeBodyText">{ { resource.name } }</span>
+                        <ul ng-repeat="resource in node.resources" class="listNode">
+                            <li><i class="icon-chevron-right"></i> Name: <span class="nodeBodyText">{{ resource.resource_name }}</span>
                                 | Type:<span class="nodeBodyText"> { { resource.type } }</span> | Copyright: <span
-                                        class="nodeBodyText">{ { resource.copy } }</span> | Description: <span
-                                        class="nodeBodyText">{ { resource.descr } }</span> | <span class="nodeBodyText"><a
-                                        ng-href="{ { resource.link } }">Link</a></span></li>
+                                        class="nodeBodyText">{{ resource.resource_copy }}</span> | Description: <span
+                                        class="nodeBodyText">{{ resource.resource_descr }}</span> | <span class="nodeBodyText"><a
+                                        ng-href="{{ resource.resource_link }}">Link</a></span></li>
                             <ul>
                                 <li><i class="icon-file"></i> Attached Files:</li>
                                 <ul>
@@ -530,13 +530,13 @@
                                     <span ng-repeat="tech in child.technologies" class="nodeBodyText border">{{ tech.technology_name }}</span></p>
 
                                 <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
-                                <ul class="listNode">
-                                    <li><i class="icon-chevron-right"></i> Name: <span class="nodeBodyText">{ { resource.name } }</span>
+                                <ul ng-repeat="resource in child.resources" class="listNode">
+                                    <li><i class="icon-chevron-right"></i> Name: <span class="nodeBodyText">{{ resource.resource_name }}</span>
                                         | Type:<span class="nodeBodyText"> { { resource.type } }</span> |
                                         Copyright: <span
-                                                class="nodeBodyText">{ { resource.copy } }</span> | Description: <span
-                                                class="nodeBodyText">{ { resource.descr } }</span> | <span
-                                                class="nodeBodyText"><a ng-href="{ { resource.link } }">Link</a></span>
+                                                class="nodeBodyText">{{ resource.resource_copy }}</span> | Description: <span
+                                                class="nodeBodyText">{{ resource.resource_descr }}</span> | <span
+                                                class="nodeBodyText"><a ng-href="{{ resource.resource_link }}">Link</a></span>
                                     </li>
                                     <ul>
                                         <li><i class="icon-file"></i> Attached Files:</li>
@@ -602,12 +602,12 @@
                             <span ng-repeat="tech in node.technologies" class="nodeBodyText border">{{ tech.technology_name }}</span></p>
 
                         <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
-                        <ul class="listNode">
-                            <li><i class="icon-chevron-right"></i> Name: <span class="nodeBodyText">{ { resource.name } }</span>
+                        <ul ng-repeat="resource in node.resources" class="listNode">
+                            <li><i class="icon-chevron-right"></i> Name: <span class="nodeBodyText">{{ resource.resource_name }}</span>
                                 | Type:<span class="nodeBodyText"> { { resource.type } }</span> | Copyright: <span
-                                        class="nodeBodyText">{ { resource.copy } }</span> | Description: <span
-                                        class="nodeBodyText">{ { resource.descr } }</span> | <span class="nodeBodyText"><a
-                                        ng-href="{ { resource.link } }">Link</a></span></li>
+                                        class="nodeBodyText">{{ resource.resource_copy }}</span> | Description: <span
+                                        class="nodeBodyText">{{ resource.resource_descr }}</span> | <span class="nodeBodyText"><a
+                                        ng-href="{{ resource.resource_link }}">Link</a></span></li>
                             <ul>
                                 <li><i class="icon-file"></i> Attached Files:</li>
                                 <ul>
