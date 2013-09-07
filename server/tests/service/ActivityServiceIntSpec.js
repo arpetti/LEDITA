@@ -61,4 +61,23 @@ describe('Activity Service Integration', function() {
             });
       });
 
+      describe('Enriched Activity Service', function() {
+
+            it('Adds technologies to ACTIVITY nodes', function(done) {
+                  var ldid = 1;
+                  ActivityService.getEnrichedLDActivityStructure(ldid, function(err, result, message) {
+                        expect(err).to.be.null;
+                        expect(message).to.be.null;
+                        
+                        expect(_.keys(result)).to.have.length(6); // 6 levels
+                        expect(result[1][0].type).to.equal('ACTIVITY'); // Level 1 first node is activity
+                        expect(result[1][0].technologies).to.have.length(1);
+                        expect(result[1][0].technologies[0].technology_name).to.equal('Internet');
+
+                        done();
+                  });
+            });
+
+      });
+
 });

@@ -13,6 +13,30 @@ _.groupByMulti = function (obj, values, context) {
     return byFirst;
 };
 
+var extractActivityIds = function(ldnodes) {
+	var topLevelActivityIds = _.pluck(_.where(_.flatten(_.values(ldnodes)), {type: 'ACTIVITY'}), 'node_id');
+	var activityGroups = _.pluck(_.where(_.flatten(_.values(ldnodes)), {type: 'ACTIVITY_GROUP'}), 'children');
+	var activityGroupValues =  _.map(activityGroups, function(element) {return _.flatten(_.values(element));} );
+	var flatActGroups = _.flatten(activityGroupValues);
+	var childLevelActivityIds = _.pluck(_.where(flatActGroups, {group_child_type: 'ACTIVITY'}), 'group_child_id');
+
+	return _.union(topLevelActivityIds, childLevelActivityIds);
+};
+
+var addTechToActGroup = function(actGroupNode, techByActivityId) {
+	var groupChildren = actGroupNode.children;
+	var levels = _.keys(groupChildren);
+	for (var i = 0; i < levels.length; i++) {
+		var nodes = groupChildren[levels[i]];
+		for (var k=0; k<nodes.length; k++) {
+			var node = nodes[k];
+			if (node.group_child_type == 'ACTIVITY') {
+				node.technologies = techByActivityId[node.group_child_id];
+			}
+		}
+	}
+};
+
 module.exports = {
 
 	// callback(err, result, message)
@@ -60,6 +84,40 @@ module.exports = {
 
 				var ldNodesByLevel = _.groupBy(enrichLdNodes, function(result){ return result.level; });
 				callback(null, ldNodesByLevel, null);
+			});
+		});
+	},
+
+	// callback(err, result, message)
+	getEnrichedLDActivityStructure: function(ldid, callback) {
+		module.exports.getLDActivityStructure(ldid, function(err, ldnodes, message) {
+			if (err || message) {
+				callback(err, null, message);
+				return;
+			}
+			var activityIds = extractActivityIds(ldnodes);
+			ActivityDao.getActivityDetails(activityIds, function(err, activityDetails) {
+				if (!err) {
+					var techByActivityId = _.groupBy(activityDetails.technology, function(element) {return element.activity_id});
+					var levels = _.keys(ldnodes);
+					for (var i = 0; i < levels.length; i++) {
+  						var nodes = ldnodes[levels[i]];
+  						for (var k=0; k<nodes.length; k++) {
+  							var node = nodes[k];
+  							if (node.type == 'ACTIVITY') {
+  								node.technologies = techByActivityId[node.node_id];
+  							}
+  							if (node.type == 'ACTIVITY_GROUP') {
+  								addTechToActGroup(node, techByActivityId);
+  							}
+  						}
+					}
+					
+					// TODO Come back to this mess later...
+					var resourceByActivityId = _.groupByMulti(activityDetails.resource, ['activity_id', 'resource_id', 'file_id']);
+					
+					callback(null, ldnodes, null);
+				}
 			});
 		});
 	}
