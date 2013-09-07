@@ -1,11 +1,19 @@
 'use strict';
 
+/*
+* Angular Directive References:
+*   http://www.codeproject.com/Articles/607873/Extending-HTML-with-AngularJS-Directives
+*   http://jsfiddle.net/Wijmo/LyJ2T/
+*/
 
 angular.module('ledita-app')
 .directive('activitydetail', [function() {
     return {
         restrict: 'E',
-        scope: { node: '=' },
+        scope: { 
+            showped: "@", 
+            node: '=' 
+        },
         template:
             "<span> " +
             "<p class='tabText'> " +
@@ -35,13 +43,12 @@ angular.module('ledita-app')
             "<p class='tabText'><i class='icon-info-sign'></i> Activity Description:<br> " +
             "    <span class='nodeBodyText'>{{ node.pract_descr }}</span> " +
             "</p> " +
-            "<p class='tabText'><i class='icon-question-sign'></i> Pedagogical Suggestions:<br> " +
+            "<p ng-show='showped' class='tabText'><i class='icon-question-sign'></i> Pedagogical Suggestions:<br> " +
             "    <span class='nodeBodyText'>{{ node.edu_descr }}</span></p> " +
             "</span>",
-        replace: true,        // replace original markup with template
-        transclude: false,    // do not copy original HTML content
-        link: function($scope, element, attrs) {
-            // TODO: Pedagogical Suggestions should only be displayed for Teacher View
+        replace: true,        
+        transclude: false,    
+        link: function(scope, element, attrs) {
         }
     };
 }]);
