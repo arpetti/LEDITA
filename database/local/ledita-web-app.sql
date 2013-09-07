@@ -720,6 +720,7 @@ CREATE OR REPLACE VIEW vw_ld_node AS
     , composes.position as position
     , ldtarget.id as node_id
     , ldtarget.name as node_name
+    , ldtarget.scope as scope
     , 'LD' as type
     , null as org_label
     , null as dur_min
@@ -741,6 +742,7 @@ CREATE OR REPLACE VIEW vw_ld_node AS
     , composes.position as position
     , activity.id as node_id
     , activity.name as node_name
+    , null as scope
     , 'ACTIVITY' as type
     , vw_activity_org.org_label as org_label
     , activity.dur_min as dur_min
@@ -766,6 +768,7 @@ CREATE OR REPLACE VIEW vw_ld_node AS
     , composes.position as position
     , activity_group.id as node_id
     , activity_group.name as node_name
+    , null as scope
     , 'ACTIVITY_GROUP' as type
     , null as org_label
     , null as dur_min
@@ -794,6 +797,7 @@ CREATE OR REPLACE VIEW vw_group AS
     , participates.position as position
     , activity.id as group_child_id
     , activity.name as group_child_name
+    , null as scope
     , pos.max_position as max_position
     , 'ACTIVITY' as group_child_type
     , vw_activity_org.org_label as org_label
@@ -822,6 +826,7 @@ CREATE OR REPLACE VIEW vw_group AS
     , participates.position as position
     , ld.id as group_child_id
     , ld.name as group_child_name
+    , ld.scope as scope
     , pos.max_position as max_position
     , 'LD' as group_child_type
     , null as org_label
