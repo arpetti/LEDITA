@@ -80,7 +80,7 @@ describe('LD Directives', function() {
         $rootScope.$digest();
         
         expect(element.html()).not.toBe(null);
-        expect(element.html()).toMatch('p ng-show="showped" class="tabText" style="display: none;"');
+        expect(element.html()).toMatch('p ng-show="showped" class="tabText" style="display: none;');
     });
 
     it('Shows Pedagogical Description', function() {
