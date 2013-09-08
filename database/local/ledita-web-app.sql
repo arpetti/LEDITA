@@ -713,6 +713,15 @@ CREATE OR REPLACE VIEW vw_activity_resource AS
   INNER JOIN resource
     ON activity.id = resource.activity_id);
 
+CREATE OR REPLACE VIEW vw_ld_qcer AS
+  (SELECT ld.id as ld_id
+    , qcer.name as qcer_name
+  FROM ld
+  INNER JOIN classificates
+    on ld.id = classificates.ld_id
+  INNER JOIN qcer
+    on classificates.qcer_id = qcer.id);   
+
 CREATE OR REPLACE VIEW vw_ld_node AS
   (SELECT ldsource.id as ld_id
     , ldsource.name as ld_name

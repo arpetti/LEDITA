@@ -123,15 +123,17 @@ describe('Activity DAO', function() {
 
 	describe('Get Activity Details', function() {
 
-		it('Gets technologies and resources', function(done) {
+		it('Gets technologies, resources, qcer', function(done) {
 			var activityids = [2, 3];
-			ActivityDao.getActivityDetails(activityids, function(err, results) {
+			var ldids = [3, 5];
+			ActivityDao.getActivityDetails(activityids, ldids, function(err, results) {
 				expect(err).to.be.null;
 				
-				// results are in 2 sections: technology, and resource
-				expect(_.keys(results)).to.have.length(2); 
+				// results are in 3 sections: technology, resource, qcer
+				expect(_.keys(results)).to.have.length(3); 
 				expect(_.has(results, 'technology'));
 				expect(_.has(results, 'resource'));
+				expect(_.has(results, 'qcer'));
 
 				// verify technology section
 				var tech = results.technology;
@@ -156,7 +158,36 @@ describe('Activity DAO', function() {
 				expect(resource[0].activity_id).to.equal(2);
 				expect(resource[0].resource_name).to.equal('Didactical resource name 2');
 				expect(resource[0].resource_type).to.equal('document');
+
+				// verify qcer section
+				var qcer = results.qcer;
+				expect(qcer).to.have.length(7);
+				expect(qcer[0].ld_id).to.equal(3);
+				expect(qcer[0].qcer_name).to.equal('C1');
+				expect(qcer[1].ld_id).to.equal(5);
+				expect(qcer[1].qcer_name).to.equal('A1');
+				expect(qcer[2].ld_id).to.equal(5);
+				expect(qcer[2].qcer_name).to.equal('A2');
 				
+				done();
+			});
+		});
+
+		it('Returns empty lists if no details found', function(done) {
+			var activityids = [32, 35];
+			var ldids = [7];
+
+			ActivityDao.getActivityDetails(activityids, ldids, function(err, results) {
+
+				expect(_.keys(results)).to.have.length(3); 
+				expect(_.has(results, 'technology'));
+				expect(_.has(results, 'resource'));
+				expect(_.has(results, 'qcer'));
+
+				expect(results.technology).to.have.length(0);
+				expect(results.resource).to.have.length(0);
+				expect(results.qcer).to.to.have.length(0);
+
 				done();
 			});
 		});

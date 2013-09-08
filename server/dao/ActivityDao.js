@@ -20,6 +20,9 @@ var GET_RESOURCES = 'select activity_id, activity_name, ' +
   'resource_id, resource_name, resource_type, resource_descr, resource_copy, resource_link ' +
   'from vw_activity_resource where activity_id in (?)';
 
+// Strictly speaking this is LD data, but its convenient to get it at the same time as activity details
+var GET_LD_QCERS = 'select ld_id, qcer_name from vw_ld_qcer where ld_id in (?) order by ld_id, qcer_name';
+
 module.exports = {
 
   getLdNodes: function(ldid, callback) {
@@ -42,7 +45,7 @@ module.exports = {
     });
   },
 
-  getActivityDetails: function(activityids, callback) {
+  getActivityDetails: function(activityids, ldids, callback) {
     async.parallel({
       technology: function(callback) {
         dao.findAll(GET_TECHNOLOGIES, [activityids], function(err, rows) {
@@ -59,7 +62,15 @@ module.exports = {
           else
             callback(null, rows);
         });
-      }
+      },
+      qcer: function(callback) {
+        dao.findAll(GET_LD_QCERS, [ldids], function(err, rows) {
+            if (err) 
+              callback(err);
+            else
+              callback(null, rows);
+          });
+        }
     },
     function(err, results) {
       if (err) 
