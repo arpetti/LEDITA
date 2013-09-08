@@ -13,23 +13,12 @@ _.groupByMulti = function (obj, values, context) {
     return byFirst;
 };
 
-// TODO Consolidate shared code between extract***Ids methods
-var extractActivityIds = function(ldnodes) {
-	var topLevelActivityIds = _.pluck(_.where(_.flatten(_.values(ldnodes)), {type: 'ACTIVITY'}), 'node_id');
-	var activityGroups = _.pluck(_.where(_.flatten(_.values(ldnodes)), {type: 'ACTIVITY_GROUP'}), 'children');
+var extractIds = function(nodes, targetType) {
+	var topLevelIds = _.pluck(_.where(_.flatten(_.values(nodes)), {type: targetType}), 'node_id');
+	var activityGroups = _.pluck(_.where(_.flatten(_.values(nodes)), {type: 'ACTIVITY_GROUP'}), 'children');
 	var activityGroupValues =  _.map(activityGroups, function(element) {return _.flatten(_.values(element));} );
 	var flatActGroups = _.flatten(activityGroupValues);
-	var childLevelActivityIds = _.pluck(_.where(flatActGroups, {group_child_type: 'ACTIVITY'}), 'group_child_id');
-
-	return _.union(topLevelActivityIds, childLevelActivityIds);
-};
-
-var extractLdIds = function(ldnodes) {
-	var topLevelIds = _.pluck(_.where(_.flatten(_.values(ldnodes)), {type: 'LD'}), 'node_id');
-	var activityGroups = _.pluck(_.where(_.flatten(_.values(ldnodes)), {type: 'ACTIVITY_GROUP'}), 'children');
-	var activityGroupValues =  _.map(activityGroups, function(element) {return _.flatten(_.values(element));} );
-	var flatActGroups = _.flatten(activityGroupValues);
-	var childLevelIds = _.pluck(_.where(flatActGroups, {group_child_type: 'LD'}), 'group_child_id');
+	var childLevelIds = _.pluck(_.where(flatActGroups, {group_child_type: targetType}), 'group_child_id');
 
 	return _.union(topLevelIds, childLevelIds);
 }
@@ -135,8 +124,8 @@ module.exports = {
 				callback(err, null, message);
 				return;
 			}
-			var activityIds = extractActivityIds(ldnodes);
-			var ldIds = extractLdIds(ldnodes); 
+			var activityIds = extractIds(ldnodes, 'ACTIVITY');
+			var ldIds = extractIds(ldnodes, 'LD'); 
 			ActivityDao.getActivityDetails(activityIds, ldIds, function(err, activityDetails) {
 				if (!err) {
 					var techByActivityId = _.groupBy(activityDetails.technology, function(element) {return element.activity_id});
