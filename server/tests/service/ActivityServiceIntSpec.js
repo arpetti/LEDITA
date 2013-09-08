@@ -63,9 +63,10 @@ describe('Activity Service Integration', function() {
 
       describe('Enriched Activity Service', function() {
 
-            it('Adds technologies and resources to ACTIVITY nodes', function(done) {
+            it('Adds technologies, resources, qcer to nodes', function(done) {
                   var ldid = 1;
                   ActivityService.getEnrichedLDActivityStructure(ldid, function(err, result, message) {
+                        console.log(JSON.stringify(result));
                         expect(err).to.be.null;
                         expect(message).to.be.null;
                         
@@ -92,6 +93,21 @@ describe('Activity Service Integration', function() {
                         expect(level2ChildrenActivities[0].resources[0].resource_name).to.equal('Didactical resource name 1');
                         expect(level2ChildrenActivities[0].resources[0].resource_type).to.equal('website');
 
+                        // Level 4 node is LD
+                        expect(result[4][0].type).to.equal('LD');
+                        expect(result[4][0].node_name).to.equal('Learning Design Title Demo 2');
+                        // Activity specific data should be null for LD
+                        expect(result[4][0].org_label).to.be.null;
+                        expect(result[4][0].dur_min).to.be.null;
+                        expect(result[4][0].dur_hh).to.be.null;
+                        expect(result[4][0].dur_dd).to.be.null;
+                        expect(result[4][0].dur_mon).to.be.null;
+                        expect(result[4][0].pract_descr).to.be.null;
+                        expect(result[4][0].edu_descr).to.be.null;
+                        // Verify LD has qcers
+                        var qcers = result[4][0].qcers;
+                        expect(qcers).to.have.length(1);
+                        expect(qcers[0].qcer_name).to.equal('B1');
 
                         done();
                   });

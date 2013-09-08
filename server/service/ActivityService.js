@@ -13,6 +13,7 @@ _.groupByMulti = function (obj, values, context) {
     return byFirst;
 };
 
+// TODO Consolidate shared code between extract***Ids methods
 var extractActivityIds = function(ldnodes) {
 	var topLevelActivityIds = _.pluck(_.where(_.flatten(_.values(ldnodes)), {type: 'ACTIVITY'}), 'node_id');
 	var activityGroups = _.pluck(_.where(_.flatten(_.values(ldnodes)), {type: 'ACTIVITY_GROUP'}), 'children');
@@ -23,6 +24,17 @@ var extractActivityIds = function(ldnodes) {
 	return _.union(topLevelActivityIds, childLevelActivityIds);
 };
 
+var extractLdIds = function(ldnodes) {
+	var topLevelIds = _.pluck(_.where(_.flatten(_.values(ldnodes)), {type: 'LD'}), 'node_id');
+	var activityGroups = _.pluck(_.where(_.flatten(_.values(ldnodes)), {type: 'ACTIVITY_GROUP'}), 'children');
+	var activityGroupValues =  _.map(activityGroups, function(element) {return _.flatten(_.values(element));} );
+	var flatActGroups = _.flatten(activityGroupValues);
+	var childLevelIds = _.pluck(_.where(flatActGroups, {group_child_type: 'LD'}), 'group_child_id');
+
+	return _.union(topLevelIds, childLevelIds);
+}
+
+// TODO Consolidate shared bcode between add***ToActGroup methods
 var addTechToActGroup = function(actGroupNode, refData) {
 	var groupChildren = actGroupNode.children;
 	var levels = _.keys(groupChildren);
@@ -46,6 +58,20 @@ var addResourceToActGroup = function(actGroupNode, refData) {
 			var node = nodes[k];
 			if (node.group_child_type == 'ACTIVITY') {
 				node.resources = refData[node.group_child_id];
+			}
+		}
+	}
+};
+
+var addQcerToActGroup = function(actGroupNode, refData) {
+	var groupChildren = actGroupNode.children;
+	var levels = _.keys(groupChildren);
+	for (var i = 0; i < levels.length; i++) {
+		var nodes = groupChildren[levels[i]];
+		for (var k=0; k<nodes.length; k++) {
+			var node = nodes[k];
+			if (node.group_child_type == 'LD') {
+				node.qcers = refData[node.group_child_id];
 			}
 		}
 	}
@@ -110,24 +136,20 @@ module.exports = {
 				return;
 			}
 			var activityIds = extractActivityIds(ldnodes);
-			// TODO Implement extractLdIds
-			// var ldIds = extractLdIds(ldnodes); 
-			ActivityDao.getActivityDetails(activityIds, null, function(err, activityDetails) {
+			var ldIds = extractLdIds(ldnodes); 
+			ActivityDao.getActivityDetails(activityIds, ldIds, function(err, activityDetails) {
 				if (!err) {
 					var techByActivityId = _.groupBy(activityDetails.technology, function(element) {return element.activity_id});
 					var resourceByActivityId = _.groupBy(activityDetails.resource, function(element) {return element.activity_id});
-					//TODO var qcerByLdId = _.groupBy(activityDetails.qcer, function(element) {return element.ld_id});
+					var qcerByLdId = _.groupBy(activityDetails.qcer, function(element) {return element.ld_id});
 					var levels = _.keys(ldnodes);
 					for (var i = 0; i < levels.length; i++) {
   						var nodes = ldnodes[levels[i]];
   						for (var k=0; k<nodes.length; k++) {
   							var node = nodes[k];
-  							/*
-  							// TODO
   							if (node.type == 'LD') {
 								node.qcers = qcerByLdId[node.node_id];
   							}
-  							*/
   							if (node.type == 'ACTIVITY') {
   								node.technologies = techByActivityId[node.node_id];
   								node.resources = resourceByActivityId[node.node_id];
@@ -135,7 +157,7 @@ module.exports = {
   							if (node.type == 'ACTIVITY_GROUP') {
   								addTechToActGroup(node, techByActivityId);
   								addResourceToActGroup(node, resourceByActivityId);
-  								//TODO addQcerToActGroup(node, qcerByLdId);
+  								addQcerToActGroup(node, qcerByLdId);
   							}
   						}
 					}
