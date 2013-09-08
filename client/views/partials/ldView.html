@@ -159,7 +159,6 @@
                                     class="icon-time icon-white"></i> {{ node | durationDisplay }} </span>
                         <span class="orgLabel"><i class="icon-th-large icon-white"></i> {{ node.org_label }}</span>
                     </div>
-                    <!-- FIXME Convert static data to dynamic -->
                     <div class="actLabel" ng-show="node.type=='LD'">
                         <span class="timeLabel"><i class="icon-time icon-white"></i>{{ node.scope }}</span>
                         <span ng-repeat="qcer in node.qcers" class="orgLabel"><i class="icon-flag icon-white"></i> {{ qcer.qcer_name }}</span>
@@ -342,12 +341,11 @@
                                  <span ng-show="child.group_child_type!='LD'">
                                     <activitydetail showped="true" node="child"></activitydetail>
                                  </span>
-                                <!-- IF CHILD NODE IS AN LD FIXME: convert static data to dynamic -->
                                 <span ng-show="child.group_child_type=='LD'">
-                                           <p class="tabText"><i class="icon-time"></i> Duration: <span
-                                                   class="nodeBodyText"> Lesson</span></p>
+                                           <p class="tabText"><i class="icon-time"></i> Scope: <span
+                                                   class="nodeBodyText">{{ child.scope }}</span></p>
                                            <p class="tabText"><i class="icon-flag"></i> Language Level: <span
-                                                   class="nodeBodyText"> A1</span></p>
+                                                   ng-repeat="qcer in child.qcers" class="nodeBodyText">{{ qcer.qcer_name }}</span></p>
                                            <p class="tabText"><i class="icon-share"></i><span class="nodeBodyText"> <a
                                                    ng-href="#">Link</a></span></p>
 
@@ -363,12 +361,11 @@
                         <span ng-show="node.type!='LD'">
                             <activitydetail showped="true" node="node"></activitydetail>
                         </span>
-                        <!-- IF CHILD NODE IS AN LD FIXME: convert static data to dynamic -->
                                 <span ng-show="node.type=='LD'">
-                                           <p class="tabText"><i class="icon-time"></i> Duration: <span
-                                                   class="nodeBodyText"> Lesson</span></p>
+                                           <p class="tabText"><i class="icon-time"></i> Scope: <span
+                                                   class="nodeBodyText">{{ node.scope }}</span></p>
                                            <p class="tabText"><i class="icon-flag"></i> Language Level: <span
-                                                   class="nodeBodyText"> A1</span></p>
+                                                   ng-repeat="qcer in node.qcers" class="nodeBodyText">{{ qcer.qcer_name}}</span></p>
                                            <p class="tabText"><i class="icon-share"></i><span class="nodeBodyText"> <a
                                                    ng-href="#">Link</a></span></p>
 
