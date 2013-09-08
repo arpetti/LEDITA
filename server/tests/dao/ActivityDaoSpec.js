@@ -155,32 +155,8 @@ describe('Activity DAO', function() {
 
 				expect(resource[0].activity_id).to.equal(2);
 				expect(resource[0].resource_name).to.equal('Didactical resource name 2');
+				expect(resource[0].resource_type).to.equal('document');
 				
-				done();
-			});
-		});
-
-		it('Gets a resource with no associated file', function(done) {
-			var activityids = [34];
-			ActivityDao.getActivityDetails(activityids, function(err, results) {
-				expect(err).to.be.null;
-
-				// results are in 2 sections: technology, and resource
-				expect(_.keys(results)).to.have.length(2); 
-				expect(_.has(results, 'technology'));
-				expect(_.has(results, 'resource'));
-
-				// verify technology section
-				var tech = results.technology;
-				expect(tech).to.have.length(0);
-
-				// verify resource section
-				var resource = results.resource;
-				expect(resource).to.have.length(1);
-
-				expect(resource[0].activity_id).to.equal(34);
-				expect(resource[0].resource_name).to.equal('Didactical resource name 12');
-
 				done();
 			});
 		});

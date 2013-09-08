@@ -17,7 +17,7 @@ var GET_TECHNOLOGIES = 'select activity_id, activity_name, technology_id, techno
   'order by activity_id, technology_name';
 
 var GET_RESOURCES = 'select activity_id, activity_name, ' +
-  'resource_id, resource_name, resource_descr, resource_copy, resource_link ' +
+  'resource_id, resource_name, resource_type, resource_descr, resource_copy, resource_link ' +
   'from vw_activity_resource where activity_id in (?)';
 
 module.exports = {

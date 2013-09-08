@@ -81,6 +81,7 @@ describe('Activity Service Integration', function() {
                         // Verify resources
                         expect(result[1][0].resources).to.have.length(1);
                         expect(result[1][0].resources[0].resource_name).to.equal('Didactical resource name 3');
+                        expect(result[1][0].resources[0].resource_type).to.equal('video');
 
                         // Level 2 first node is activity group
                         expect(result[2][0].type).to.equal('ACTIVITY_GROUP');
@@ -89,6 +90,7 @@ describe('Activity Service Integration', function() {
                         expect(level2ChildrenActivities).to.have.length(2);
                         expect(level2ChildrenActivities[0].technologies[0].technology_name).to.equal('Tablet');
                         expect(level2ChildrenActivities[0].resources[0].resource_name).to.equal('Didactical resource name 1');
+                        expect(level2ChildrenActivities[0].resources[0].resource_type).to.equal('website');
 
 
                         done();
