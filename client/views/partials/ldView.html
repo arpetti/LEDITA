@@ -141,10 +141,9 @@
                                 <span class="orgLabel"><i
                                         class="icon-th-large icon-white"></i> {{ child.org_label}}</span>
                             </div>
-                            <!-- FIXME Convert static data to dynamic -->
                             <div class="actLabel" ng-show="child.group_child_type=='LD'">
                                 <span class="timeLabel"><i class="icon-time icon-white"></i>{{ child.scope}}</span>
-                                <span class="orgLabel"><i class="icon-flag icon-white"></i> A1</span>
+                                <span ng-repeat="qcer in child.qcers" class="orgLabel"><i class="icon-flag icon-white"></i>{{ qcer.qcer_name }}</span>
                             </div>
                         </a>
                     </div>
@@ -163,7 +162,7 @@
                     <!-- FIXME Convert static data to dynamic -->
                     <div class="actLabel" ng-show="node.type=='LD'">
                         <span class="timeLabel"><i class="icon-time icon-white"></i>{{ node.scope }}</span>
-                        <span class="orgLabel"><i class="icon-flag icon-white"></i> A1</span>
+                        <span ng-repeat="qcer in node.qcers" class="orgLabel"><i class="icon-flag icon-white"></i> {{ qcer.qcer_name }}</span>
                     </div>
                 </a>
                 </div>
