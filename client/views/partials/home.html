@@ -3,7 +3,7 @@
     <!-- LD BOX START -->
     <div ng-repeat="learningDesign in learningDesigns | orderBy:'ld_last_edit_date':true" class="ld-border ld-item">
         <div class="ld-top">
-
+            <!-- FIXME: convert static data to dynamic -->
             <div class="qcer">A2</div>
             <div class="float-right">
                 {{ learningDesign.ld_scope }}

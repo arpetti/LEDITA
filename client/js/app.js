@@ -18,6 +18,13 @@ angular.module('ledita-app', ['ngCookies', 'infinite-scroll', 'ui.bootstrap', 'a
                 controller: 'LdViewCtrl',
                 access: access.user
             });
+//        FIXME: ROUTE FOR LD EDIT PAGE
+        $routeProvider.when('/ldEdit/:ldid',
+            {
+                templateUrl: '/partials/ldEditView',
+                controller: 'LdViewCtrl',
+                access: access.user
+            });
 //        FIXME: ROUTE FOR USER PROFILE PAGE
         $routeProvider.when('/user/:userid',
             {
