@@ -52,3 +52,30 @@ angular.module('ledita-app')
         }
     };
 }]);
+
+angular.module('ledita-app')
+.directive('lddetail', [function() {
+    return {
+        restrict: 'E',
+        scope: { 
+            node: '=' 
+        },
+        template:
+            "<span> " +
+            "<p class='tabText'> " +
+            "    <i class='icon-time'></i> " +
+            "     Scope: <span class='nodeBodyText'>{{ node.scope }}</span> " +
+            "</p> " +
+            "<p class='tabText'><i class='icon-flag'></i> " +
+            "    Language Level: <span ng-repeat='qcer in node.qcers' class='nodeBodyText'>{{ qcer.qcer_name }}</span> " +
+            "</p> " +
+            "<p class='tabText'><i class='icon-share'></i> " +
+            "    <span class='nodeBodyText'> <a ng-href='#'>Link</a></span> " +
+            "</p> " +
+            "</span>",
+        replace: true,        
+        transclude: false,    
+        link: function(scope, element, attrs) {
+        }
+    };
+}]);

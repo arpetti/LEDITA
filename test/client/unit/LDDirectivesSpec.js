@@ -95,4 +95,34 @@ describe('LD Directives', function() {
         expect(element.html()).not.toMatch('span ng-show="showped" style="display: none;"');
         expect(element.html()).toMatch('<span class="nodeBodyText ng-binding">' + node.edu_descr + '</span>');
     });
+
+    it('Displays Learning Design Details', function() {
+      var ldnode = 
+            {
+              "ld_id": 1,
+              "scope": "Semester",
+              "type": "LD",
+              "qcers": [
+                {
+                  "ld_id": 1,
+                  "qcer_name": "A1"
+                },
+                {
+                  "ld_id": 1,
+                  "qcer_name": "A2"
+                }
+              ]
+            };
+        $rootScope.node = ldnode;
+        var element = $compile("<lddetail node='node'></lddetail>")($rootScope);
+        $rootScope.$digest();
+        console.log(element.html());
+        expect(element.html()).not.toBe(null);
+        expect(element.html()).toMatch(
+          'Scope: <span class="nodeBodyText ng-binding">' + ldnode.scope + '</span>');
+        expect(element.html()).toMatch(
+          'span ng-repeat="qcer in node.qcers" class="nodeBodyText ng-scope ng-binding">' + ldnode.qcers[0].qcer_name + '</span>');
+        expect(element.html()).toMatch(
+          'span ng-repeat="qcer in node.qcers" class="nodeBodyText ng-scope ng-binding">' + ldnode.qcers[1].qcer_name + '</span>');
+    });
 });

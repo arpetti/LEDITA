@@ -342,13 +342,7 @@
                                     <activitydetail showped="true" node="child"></activitydetail>
                                  </span>
                                 <span ng-show="child.group_child_type=='LD'">
-                                           <p class="tabText"><i class="icon-time"></i> Scope: <span
-                                                   class="nodeBodyText">{{ child.scope }}</span></p>
-                                           <p class="tabText"><i class="icon-flag"></i> Language Level: <span
-                                                   ng-repeat="qcer in child.qcers" class="nodeBodyText">{{ qcer.qcer_name }}</span></p>
-                                           <p class="tabText"><i class="icon-share"></i><span class="nodeBodyText"> <a
-                                                   ng-href="#">Link</a></span></p>
-
+                                    <lddetail node='child'></lddetail>
                                 </span>
                             </div>
                         </div>
@@ -362,13 +356,7 @@
                             <activitydetail showped="true" node="node"></activitydetail>
                         </span>
                                 <span ng-show="node.type=='LD'">
-                                           <p class="tabText"><i class="icon-time"></i> Scope: <span
-                                                   class="nodeBodyText">{{ node.scope }}</span></p>
-                                           <p class="tabText"><i class="icon-flag"></i> Language Level: <span
-                                                   ng-repeat="qcer in node.qcers" class="nodeBodyText">{{ qcer.qcer_name}}</span></p>
-                                           <p class="tabText"><i class="icon-share"></i><span class="nodeBodyText"> <a
-                                                   ng-href="#">Link</a></span></p>
-
+                                    <lddetail node='node'></lddetail>
                                 </span>
                     </div>
                 </div>
@@ -412,38 +400,23 @@
                                   <span ng-show="child.group_child_type!='LD'">
                                     <activitydetail node="child"></activitydetail>
                                   </span>
-                                <!-- IF CHILD NODE IS AN LD FIXME: convert static data to dynamic -->
-                                <span ng-show="child.group_child_type=='LD'">
-                                           <p class="tabText"><i class="icon-time"></i> Duration: <span
-                                                   class="nodeBodyText"> Lesson</span></p>
-                                           <p class="tabText"><i class="icon-flag"></i> Language Level: <span
-                                                   class="nodeBodyText"> A1</span></p>
-                                           <p class="tabText"><i class="icon-share"></i><span class="nodeBodyText"> <a
-                                                   ng-href="#">Link</a></span></p>
-
-                                </span>
+                                  <span ng-show="child.group_child_type=='LD'">
+                                    <lddetail node='child'></lddetail>
+                                  </span>
                             </div>
                         </div>
                         <!-- End unstyled div for children levels -->
                     </div>
                     <!-- End Children -->
 
-
                     <!-- If it's NOT a group:  -->
                     <div ng-show="!node.children"><h5 class="nodeNameText">{{ node.node_name }}</h5>
-                            <span ng-show="node.type!='LD'">
-                                <activitydetail node="node"></activitydetail>
-                            </span>
-                        <!-- IF CHILD NODE IS AN LD FIXME: convert static data to dynamic -->
-                                <span ng-show="node.type=='LD'">
-                                           <p class="tabText"><i class="icon-time"></i> Duration: <span
-                                                   class="nodeBodyText"> Lesson</span></p>
-                                           <p class="tabText"><i class="icon-flag"></i> Language Level: <span
-                                                   class="nodeBodyText"> A1</span></p>
-                                           <p class="tabText"><i class="icon-share"></i><span class="nodeBodyText"> <a
-                                                   ng-href="#">Link</a></span></p>
-
-                                </span>
+                        <span ng-show="node.type!='LD'">
+                            <activitydetail node="node"></activitydetail>
+                        </span>
+                        <span ng-show="node.type=='LD'">
+                            <lddetail node='node'></lddetail>
+                        </span>
                     </div>
                 </div>
                 <!-- End Activity or Group Box -->
