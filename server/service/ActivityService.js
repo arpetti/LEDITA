@@ -21,46 +21,17 @@ var extractIds = function(nodes, targetType) {
 	var childLevelIds = _.pluck(_.where(flatActGroups, {group_child_type: targetType}), 'group_child_id');
 
 	return _.union(topLevelIds, childLevelIds);
-}
-
-// TODO Consolidate shared bcode between add***ToActGroup methods
-var addTechToActGroup = function(actGroupNode, refData) {
-	var groupChildren = actGroupNode.children;
-	var levels = _.keys(groupChildren);
-	for (var i = 0; i < levels.length; i++) {
-		var nodes = groupChildren[levels[i]];
-		for (var k=0; k<nodes.length; k++) {
-			var node = nodes[k];
-			if (node.group_child_type == 'ACTIVITY') {
-				node.technologies = refData[node.group_child_id];
-			}
-		}
-	}
 };
 
-var addResourceToActGroup = function(actGroupNode, refData) {
+var addRefDataToActGroup = function(actGroupNode, refData, targetType, targetProperty) {
 	var groupChildren = actGroupNode.children;
 	var levels = _.keys(groupChildren);
 	for (var i = 0; i < levels.length; i++) {
 		var nodes = groupChildren[levels[i]];
 		for (var k=0; k<nodes.length; k++) {
 			var node = nodes[k];
-			if (node.group_child_type == 'ACTIVITY') {
-				node.resources = refData[node.group_child_id];
-			}
-		}
-	}
-};
-
-var addQcerToActGroup = function(actGroupNode, refData) {
-	var groupChildren = actGroupNode.children;
-	var levels = _.keys(groupChildren);
-	for (var i = 0; i < levels.length; i++) {
-		var nodes = groupChildren[levels[i]];
-		for (var k=0; k<nodes.length; k++) {
-			var node = nodes[k];
-			if (node.group_child_type == 'LD') {
-				node.qcers = refData[node.group_child_id];
+			if (node.group_child_type == targetType) {
+				node[targetProperty] = refData[node.group_child_id];
 			}
 		}
 	}
@@ -144,9 +115,9 @@ module.exports = {
   								node.resources = resourceByActivityId[node.node_id];
   							}
   							if (node.type == 'ACTIVITY_GROUP') {
-  								addTechToActGroup(node, techByActivityId);
-  								addResourceToActGroup(node, resourceByActivityId);
-  								addQcerToActGroup(node, qcerByLdId);
+  								addRefDataToActGroup(node, techByActivityId, 'ACTIVITY', 'technologies');
+  								addRefDataToActGroup(node, resourceByActivityId, 'ACTIVITY', 'resources');
+  								addRefDataToActGroup(node, qcerByLdId, 'LD', 'qcers');
   							}
   						}
 					}
