@@ -43,6 +43,7 @@ describe('LD Directives', function() {
                   "activity_name": "Support Activity 1",
                   "resource_id": 3,
                   "resource_name": "Didactical resource name 3",
+                  "resource_type": "video",
                   "resource_descr": "Description of the didactical resource number 3",
                   "resource_copy": null,
                   "resource_link": "http://#"
@@ -70,6 +71,8 @@ describe('LD Directives', function() {
                 node.technologies[0].technology_name + '</span>');
         expect(element.html()).toMatch(
             '<span class="nodeBodyText ng-binding">' + node.resources[0].resource_name + '</span>');
+        expect(element.html()).toMatch(
+          'Type:<span class="nodeBodyText ng-binding">' + node.resources[0].resource_type + '</span>');
         expect(element.html()).toMatch(
             '<span class="nodeBodyText ng-binding">' + node.pract_descr + '</span>');
     });

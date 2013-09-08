@@ -32,7 +32,7 @@ angular.module('ledita-app')
             "    <ul ng-repeat='resource in node.resources' class='listNode'> " +
             "        <li><i class='icon-chevron-right'></i> " +
             "            Name: <span class='nodeBodyText'>{{ resource.resource_name }}</span> " +
-            "            | Type:<span class='nodeBodyText'>{{ resource.type }}</span> | " +
+            "            | Type:<span class='nodeBodyText'>{{ resource.resource_type }}</span> | " +
             "            Copyright: <span " +
             "                class='nodeBodyText'>{{ resource.resource_copy }}</span> | Description: <span " +
             "                class='nodeBodyText'>{{ resource.resource_descr }}</span> | <span " +
