@@ -83,7 +83,7 @@ describe('LD Directives', function() {
         $rootScope.$digest();
         
         expect(element.html()).not.toBe(null);
-        expect(element.html()).toMatch('p ng-show="showped" class="tabText" style="display: none;');
+        expect(element.html()).toMatch('span ng-show="showped" style="display: none;');
     });
 
     it('Shows Pedagogical Description', function() {
@@ -92,7 +92,7 @@ describe('LD Directives', function() {
         $rootScope.$digest();
 
         expect(element.html()).not.toBe(null);
-        expect(element.html()).not.toMatch('p ng-show="showped" class="tabText" style="display: none;"');
-        expect(element.html()).toMatch('p ng-show="showped" class="tabText"');
+        expect(element.html()).not.toMatch('span ng-show="showped" style="display: none;"');
+        expect(element.html()).toMatch('<span class="nodeBodyText ng-binding">' + node.edu_descr + '</span>');
     });
 });

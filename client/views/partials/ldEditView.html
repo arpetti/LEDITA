@@ -1,68 +1,683 @@
 <div class="container top-margin">
-    <div class="row-fluid">
-        <div id="sidebar" class="span3">
-            <h4 class="red centered">General Info</h4>
-            <!--
-              <div id="ldName">
-                  <a href="#"><span class="float-right icon-white icon-star-empty"></span> </a>
-                  <h4>Learning Design Title Demo 25</h4>
-              </div>
-              <div id="langLev">
-                  <span class="langLev langLevSel">A1</span>
-                  <span class="langLev">A2</span>
-                  <span class="langLev">B1</span>
-                  <span class="langLev">B2</span>
-                  <span class="langLev">C1</span>
-                  <span class="langLev">C2</span>
-              </div>
-            -->
-            <div>
-                <h5 class="float-left zeroMargin ">Author:</h5>
-                <a href="#" class="float-right">firstname lastname</a>
-            </div>
-            <div class="clear"><h5 class="float-left zeroMargin">Subject:</h5>
+<div class="row-fluid">
+<div class="span3">
+    <div id="sidebar">
+        <div>
+            <a ng-href="#">
+                <!-- TODO: IF liked -> class likedButton, ELSE class likeButton -->
 
-                <form ng-submit="addSubject()">
-                    <input type="text" class="sidebarInput" ng-model="subject" placeholder="add new subject">
-                    <input class="btn-sidebar" type="submit" value="+">
-                </form>
-
-            </div>
-            <div class="clear"><h5 class="float-left zeroMargin">Objectives:</h5>
-
-                <form ng-submit="addObjectives()">
-                    <input type="text" class="sidebarInput" ng-model="objectives" placeholder="add new subject">
-                    <input class="btn-sidebar" type="submit" value="+">
-                </form>
-            </div>
-            <div class="clear"><h5 class="float-left zeroMargin">Pre-Requisites:</h5>
-
-                <form ng-submit="addRequisites()">
-                    <input type="text" class="sidebarInput" ng-model="requisites" placeholder="add new subject">
-                    <input class="btn-sidebar" type="submit" value="+">
-                </form>
-            </div>
-            <div class="clear">
-                <h5 class="zeroMargin">Students' Description:</h5>
-                <textarea class="textarea">write here...</textarea>
-            </div>
-            <div class="clear"><h5 class="float-left zeroMargin">Tags:</h5>
-
-                <form ng-submit="addTags()">
-                    <input type="text" class="sidebarInput" ng-model="tags" placeholder="add new tag">
-                    <input class="btn-sidebar" type="submit" value="+">
-                </form>
-                <ul>
-                    <li ng-repeat="tag in tags">{{ tag }}</li>
-                </ul>
-            </div>
-            <div class="clear"><h5 class="float-left zeroMargin">Related Designs:</h5>
-            </div>
-
-            <!--Sidebar content-->
+                <div class="likeButton">
+                    <!-- TODO: Like button. If the LD is already liked, add class 'icon-white'.-->
+                    Like <i class="icon-thumbs-up "></i>
+                </div>
+            </a>
         </div>
-        <div id="content" class="span9">
-            <!--Body content-->
+
+        <h4 id="sidebarHeader">General Info</h4>
+
+        <div>
+            <h5 class="zeroMargin date"><i class="icon-pencil"></i> Author:</h5>
+            <a href="#" class="zeroMargin">{{ learningDesign.user_name}} {{ learningDesign.user_last_name}}</a>
+        </div>
+        <div class="marginTopSidebar">
+            <h5 class="zeroMargin date "><i class="icon-calendar"></i> Created in:</h5>
+            <span class="zeroMargin">{{learningDesign.ld_creation_date | date:'yyyy-MM-dd'}}</span>
+        </div>
+        <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-map-marker"></i> Topics:</h5>
+            <ul ng-repeat="subject in learningDesign.subjects" class="zeroMargin subjects">
+                <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{subject.subject_name}}</a></li>
+            </ul>
+        </div>
+        <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-tasks"></i> Objectives:</h5>
+            <ul ng-repeat="objective in learningDesign.objectives" class="zeroMargin objectives">
+                <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{objective.objective_descr}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-backward"></i> Pre-Requisites:</h5>
+            <ul ng-repeat="prereq in learningDesign.prerequisites" class="zeroMargin prerequisites">
+                <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{prereq.prereq_name}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="clear marginTopSidebar">
+            <h5 class="zeroMargin"><i class="icon-user"></i> Students' Description:</h5>
+            <span>{{ learningDesign.ld_students_profile }}</span>
+        </div>
+
+        <!-- TODO: 2nd phase - Tag system -->
+        <!--
+
+     <div class="clear marginTop"><h5 class=" zeroMargin">Tags:</h5>
+
+         <ul class="zeroMargin">
+             <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
+             <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 2</a></li>
+             <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
+         </ul>
+
+     </div>
+
+     -->
+
+        <!-- TODO: 1st phase - Service for name of father and children LDs -->
+
+
+        <div class="clearfix"></div>
+        <div class="clear marginTopSidebar">
+            <h5 class="zeroMargin"><i class="icon-bullhorn"></i> Publication:</h5>
+
+            <div class="onoffswitch">
+                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+                <label class="onoffswitch-label" for="myonoffswitch">
+                    <div class="onoffswitch-inner"></div>
+                    <div class="onoffswitch-switch"></div>
+                </label>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+
+        <!--Sidebar content-->
+
+    </div>
+</div>
+
+
+<div id="content" class="span9">
+
+
+<tabset type="pills">
+<div id="contentButtons">
+    <tab-heading>
+        <button class="btnContent" ng-class="isBtnActive(data.static1)" ng-click="data.static1 = true"><img
+                src="../../img/board.png" class="btnImage"> Global View
+        </button>
+    </tab-heading>
+    <tab-heading>
+        <button class="btnContent" ng-class="isBtnActive(data.static2)" ng-click="data.static2 = true"><img
+                src="../../img/teacher.png"
+                class="btnImage"> Teacher View
+        </button>
+    </tab-heading>
+    <button class="btnContent" ng-class="isBtnActive(data.static3)" ng-click="data.static3 = true"><img
+            src="../../img/student.png"
+            class="btnImage"> Student View
+    </button>
+</div>
+
+<tab active="data.static1">
+<div id="contentBody">
+    <div id="contentHeader">
+
+        <div class="titleLeft">
+            <h4 class="inline">{{learningDesign.ld_name }}</h4>
+        </div>
+        <div class="titleRight">
+            <h4><span class="round">A1</span> {{ learningDesign.ld_scope }}</h4>
+        </div>
+
+    </div>
+
+    <div id="tabContent">
+        <div class="newActBox">
+            <a href="#">
+                <span class="newActButton1"><i class="icon-plus icon-white"></i> Activity</span>
+                <span class="newActButton2"><i class="icon-plus icon-white"></i> Design</span>
+                <span class="newActButton3"><i class="icon-plus icon-white"></i> Group</span>
+    </a>
+        </div>
+        <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Global View) -->
+        <div ng-repeat="(level, nodes) in levels" class="levelBox">
+            <div ng-repeat="node in nodes" ng-class="getBoxClass(node)">
+
+                <!-- If it's a group:  -->
+                <div ng-show="node.children" class="groupName">{{ node.node_name }}</div>
+                <div class="clearfix"></div>
+
+                <!-- Children are also in levels: Create unstyled div for each level -->
+                <div ng-repeat="(childLevel, subChildren) in node.children">
+                    <div ng-repeat="child in subChildren" ng-class="getGroupBoxClass(child)">
+                        <div class="tools">
+                            <a class="edit" ng-href="#"><i class="icon-edit icon-white"></i> </a>
+                            <a class="delete" ng-href="#"><i class="icon-remove icon-white"></i> </a>
+                            <span class="clearfix"></span>
+                        </div>
+                        <a ng-href="#" class="whiteText" ng-click="open()"><h6 class="actName">{{
+                            child.group_child_name }}</h6>
+
+                            <div class="actLabel" ng-show="child.group_child_type!='LD'">
+                                <span class="timeLabel"><i class="icon-time icon-white"></i> {{ child | durationDisplay}} </span>
+                                <span class="orgLabel"><i
+                                        class="icon-th-large icon-white"></i> {{ child.org_label}}</span>
+                            </div>
+                            <!-- FIXME Convert static data to dynamic -->
+                            <div class="actLabel" ng-show="child.group_child_type=='LD'">
+                                <span class="timeLabel"><i class="icon-time icon-white"></i> Lesson </span>
+                                <span class="orgLabel"><i class="icon-flag icon-white"></i> A1</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- End Children -->
+
+                <!-- If it's NOT a group:  -->
+                <div ng-show="!node.children" class="actName"><a ng-href="#" class="whiteText" ng-click="open()">
+                    <div class="tools">
+                        <a class="edit" ng-href="#"><i class="icon-edit icon-white"></i> </a>
+                        <a class="delete" ng-href="#"><i class="icon-remove icon-white"></i> </a>
+                        <span class="clearfix"></span>
+                    </div>
+                    <h6>{{ node.node_name }}</h6>
+
+                    <div class="actLabel" ng-show="node.type!='LD'">
+                            <span class="timeLabel"><i
+                                    class="icon-time icon-white"></i> {{ node | durationDisplay }} </span>
+                        <span class="orgLabel"><i class="icon-th-large icon-white"></i> {{ node.org_label }}</span>
+                    </div>
+                    <!-- FIXME Convert static data to dynamic -->
+                    <div class="actLabel" ng-show="node.type=='LD'">
+                        <span class="timeLabel"><i class="icon-time icon-white"></i> Semester </span>
+                        <span class="orgLabel"><i class="icon-flag icon-white"></i> A1</span>
+                    </div>
+                </a>
+                </div>
+            </div>
+            <!-- End Activity or Group Box -->
+        </div>
+        <!-- End Level Box -->
+        <!-- END DYNAMIC ACTIVITY CONTENT (Global View) -->
+
+        <div modal="shouldBeOpen" close="close()" options="opts">
+            <div class="modal-header">
+                <h4>Activity Details</h4>
+                <button class="btn modalButton float-right" ng-click="close()">x</button>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-body">
+
+                <!--TODO: Filter node details depending on the click in a specific node-->
+                <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Modal) -->
+                <div ng-repeat="(level, nodes) in levels">
+                    <div ng-repeat="node in nodes | filter:node.node_name = 'Hardware Component Identification'"
+                         class="nodeTextDetails">
+
+                        <!-- If it's a group:  -->
+                        <div ng-show="node.children" class="groupBoxText">
+                            <h4 class="groupNameText"> {{ node.node_name }} </h4>
+
+                            <div class="clearfix"></div>
+                            <!-- Children are also in levels: Create unstyled div for each level -->
+                            <div ng-repeat="(childLevel, subChildren) in node.children">
+                                <div ng-repeat="child in subChildren">
+                                    <h5 class="nodeNameTextDetails">{{ child.group_child_name }}</h5>
+
+                                    <p class="tabText"><i class="icon-home"></i> Modality: <span
+                                            class="nodeBodyText">{ { activity.modality } }</span>
+                                    </p>
+
+                                    <p class="tabText"><i class="icon-time"></i> Duration: <span
+                                            class="nodeBodyText"> {{ child | durationDisplay }}</span>
+                                    </p>
+
+                                    <p class="tabText"><i class="icon-th-large"></i> Students' organization: <span
+                                            class="nodeBodyText">{{ child.org_label }}</span></p>
+
+                                    <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies: <span
+                                            class="nodeBodyText">{ { technology.name } }</span></p>
+
+                                    <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
+                                    <ul class="listNode">
+                                        <li><i class="icon-chevron-right"></i> Name: <span class="nodeBodyText">{ { resource.name } }</span>
+                                            | Type:<span class="nodeBodyText"> { { resource.type } }</span> |
+                                            Copyright: <span
+                                                    class="nodeBodyText">{ { resource.copy } }</span> |
+                                            Description: <span
+                                                    class="nodeBodyText">{ { resource.descr } }</span> | Link: <span
+                                                    class="nodeBodyText"><a
+                                                    ng-href="{ { resource.link } }">Link</a></span></li>
+                                        <ul>
+                                            <li><i class="icon-file"></i> Attached Files:</li>
+                                            <ul>
+                                                <li>Name: <span class="nodeBodyText">{ { file.name } }</span> |
+                                                    Size: <span
+                                                            class="nodeBodyText">{ { file.size } }</span> |
+                                                    Extension: <span
+                                                            class="nodeBodyText">{ { file.mime } }</span> |
+                                                    Link: <span
+                                                            class="nodeBodyText"><a
+                                                            ng-href="{ { file.uri } }">Link</a></span>
+                                                </li>
+                                            </ul>
+                                        </ul>
+
+                                    </ul>
+                                    </p>
+                                    <p class="tabText"><i class="icon-info-sign"></i> Activity
+                                        Description:<br> <span
+                                                class="nodeBodyText">{{ child.pract_descr }}</span></p>
+
+                                    <p class="tabText"><i class="icon-question-sign"></i> Pedagogical
+                                        Suggestions:<br> <span
+                                                class="nodeBodyText">{{ child.edu_descr }}</span></p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Children -->
+
+
+                        <!-- If it's NOT a group:  -->
+                        <div ng-show="!node.children"><h5 class="nodeNameTextDetails">{{ node.name }}</h5>
+
+                            <p class="tabText"><i class="icon-home"></i> Modality: <span class="nodeBodyText">{ { activity.modality } }</span>
+                            </p>
+
+                            <p class="tabText"><i class="icon-time"></i> Duration: <span class="nodeBodyText">{{ node | durationDisplay }}</span>
+                            </p>
+
+                            <p class="tabText"><i class="icon-th-large"></i> Students' organization: <span
+                                    class="nodeBodyText">{{ node.org_label }}</span></p>
+
+                            <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies: <span
+                                    class="nodeBodyText">{ { technology.name } }</span></p>
+
+                            <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
+                            <ul class="listNode">
+                                <li><i class="icon-chevron-right"></i> Name: <span class="nodeBodyText">{ { resource.name } }</span>
+                                    | Type:<span class="nodeBodyText"> { { resource.type } }</span> |
+                                    Copyright: <span
+                                            class="nodeBodyText">{ { resource.copy } }</span> | Description: <span
+                                            class="nodeBodyText">{ { resource.descr } }</span> | <span
+                                            class="nodeBodyText"><a
+                                            ng-href="{ { resource.link } }">Link</a></span></li>
+                                <ul>
+                                    <li><i class="icon-file"></i> Attached Files:</li>
+                                    <ul>
+                                        <li>Name: <span class="nodeBodyText">{ { file.name } }</span> | Size: <span
+                                                class="nodeBodyText">{ { file.size } }</span> | Extension: <span
+                                                class="nodeBodyText">{ { file.mime } }</span> | <span
+                                                class="nodeBodyText"><a ng-href="{ { file.uri } }">Link</a></span>
+                                        </li>
+                                    </ul>
+                                </ul>
+
+                            </ul>
+                            </p>
+                            <p class="tabText"><i class="icon-info-sign"></i> Activity Description:<br> <span
+                                    class="nodeBodyText">{{ node.pract_descr }}</span></p>
+
+                            <p class="tabText"><i class="icon-question-sign"></i> Pedagogical Suggestions:<br> <span
+                                    class="nodeBodyText">{{ node.edu_descr }}</span></p>
+                        </div>
+                    </div>
+                    <!-- End Activity or Group Box -->
+                </div>
+                <!-- End Level Box -->
+                <!-- END DYNAMIC ACTIVITY CONTENT (Modal)-->
+
+
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+    </div>
+</div>
+</tab>
+<tab active="data.static2">
+    <div id="contentBody">
+        <div id="contentHeader">
+
+
+            <div class="float-left">
+                <h4 class="inline"><a href="#"><img ng-src="../img/emptyStar.png" class="star"></a>{{
+                    learningDesign.ld_name }}</h4>
+            </div>
+            <div class="float-right">
+                <h4><span class="round">A1</span> {{ learningDesign.ld_scope }}</h4>
+            </div>
+        </div>
+
+        <div id="tabContent">
+
+            <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Teacher View) -->
+            <div ng-repeat="(level, nodes) in levels">
+                <div ng-repeat="node in nodes" class="nodeText">
+
+                    <!-- If it's a group:  -->
+                    <div ng-show="node.children" class="groupBoxText">
+                        <h4 class="groupNameText"> {{ node.node_name }} </h4>
+
+                        <div class="clearfix"></div>
+                        <!-- Children in groups are organized by level, create unstyled div for each level -->
+                        <div ng-repeat="(childLevel, subChildren) in node.children">
+                            <div ng-repeat="child in subChildren">
+                                <h5 class="nodeNameText">{{ child.group_child_name }}</h5>
+                                 <span ng-show="child.group_child_type!='LD'">
+                                <p class="tabText"><i class="icon-home"></i> Modality: <span class="nodeBodyText">{ { activity.modality } }</span>
+                                </p>
+
+                                <p class="tabText"><i class="icon-time"></i> Duration: <span class="nodeBodyText">{{ child | durationDisplay }}</span>
+                                </p>
+
+                                <p class="tabText"><i class="icon-th-large"></i> Students' organization: <span
+                                        class="nodeBodyText">{{ child.org_label }}</span></p>
+
+                                <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies: <span
+                                        class="nodeBodyText">{ { technology.name } }</span></p>
+
+                                <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
+                                <ul class="listNode">
+                                    <li><i class="icon-chevron-right"></i> Name: <span class="nodeBodyText">{ { resource.name } }</span>
+                                        | Type:<span class="nodeBodyText"> { { resource.type } }</span> |
+                                        Copyright: <span
+                                                class="nodeBodyText">{ { resource.copy } }</span> | Description: <span
+                                                class="nodeBodyText">{ { resource.descr } }</span> | Link: <span
+                                                class="nodeBodyText"><a ng-href="{ { resource.link } }">Link</a></span>
+                                    </li>
+                                    <ul>
+                                        <li><i class="icon-file"></i> Attached Files:</li>
+                                        <ul>
+                                            <li>Name: <span class="nodeBodyText">{ { file.name } }</span> | Size: <span
+                                                    class="nodeBodyText">{ { file.size } }</span> | Extension: <span
+                                                    class="nodeBodyText">{ { file.mime } }</span> | Link: <span
+                                                    class="nodeBodyText"><a ng-href="{ { file.uri } }">Link</a></span>
+                                            </li>
+                                        </ul>
+                                    </ul>
+
+                                </ul>
+                                     </p>
+                                     <p class="tabText"><i class="icon-info-sign"></i> Activity Description:<br> <span
+                                             class="nodeBodyText">{{ child.pract_descr }}</span></p>
+
+                                <p class="tabText"><i class="icon-question-sign"></i> Pedagogical Suggestions:<br> <span
+                                        class="nodeBodyText">{{ child.edu_descr }}</span></p>
+                                    </span>
+                                <!-- IF CHILD NODE IS AN LD FIXME: convert static data to dynamic -->
+                                <span ng-show="child.group_child_type=='LD'">
+                                           <p class="tabText"><i class="icon-time"></i> Duration: <span
+                                                   class="nodeBodyText"> Lesson</span></p>
+                                           <p class="tabText"><i class="icon-flag"></i> Language Level: <span
+                                                   class="nodeBodyText"> A1</span></p>
+                                           <p class="tabText"><i class="icon-calendar"></i> Created in: <span
+                                                   class="nodeBodyText"> CREATION DATE </span></p>
+                                           <p class="tabText"><i class="icon-map-marker"></i> Topics: <span
+                                                   class="nodeBodyText" > NG REPEAT FOR TOPICS</span></p>
+                                           <p class="tabText"><i class="icon-tasks"></i> Objectives: <span
+                                                   class="nodeBodyText" > NG REPEAT FOR OBJECTIVES</span>
+                                           </p>
+                                           <p class="tabText"><i class="icon-backward"></i> Pre-Requisites: <span
+                                                   class="nodeBodyText" > NG REPEAT FOR REQUISITES</span>
+                                           </p>
+                                           <p class="tabText"><i class="icon-user"></i> Students' Description: <span
+                                                   class="nodeBodyText"> STUDENT DESCRIPTION TEXT</span></p>
+                                           <p class="tabText"><i class="icon-pencil"></i> Author: <span
+                                                   class="nodeBodyText"> <a ng-href="#">AUTHOR NAME</a></span></p>
+                                           <p class="tabText"><i class="icon-share"></i><span class="nodeBodyText"> <a
+                                                   ng-href="#">Link</a></span></p>
+
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Children -->
+
+
+                    <!-- If it's NOT a group:  -->
+                    <div ng-show="!node.children"><h5 class="nodeNameText">{{ node.node_name }}</h5>
+                        <span ng-show="node.type!='LD'">
+                        <p class="tabText"><i class="icon-home"></i> Modality: <span class="nodeBodyText">{ { activity.modality } }</span>
+                        </p>
+
+                        <p class="tabText"><i class="icon-time"></i> Duration: <span class="nodeBodyText">{{ node | durationDisplay }}</span>
+                        </p>
+
+                        <p class="tabText"><i class="icon-th-large"></i> Students' organization: <span
+                                class="nodeBodyText">{{ node.org_label }}</span></p>
+
+                        <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies: <span
+                                class="nodeBodyText">{ { technology.name } }</span></p>
+
+                        <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
+                        <ul class="listNode">
+                            <li><i class="icon-chevron-right"></i> Name: <span class="nodeBodyText">{ { resource.name } }</span>
+                                | Type:<span class="nodeBodyText"> { { resource.type } }</span> | Copyright: <span
+                                        class="nodeBodyText">{ { resource.copy } }</span> | Description: <span
+                                        class="nodeBodyText">{ { resource.descr } }</span> | <span class="nodeBodyText"><a
+                                        ng-href="{ { resource.link } }">Link</a></span></li>
+                            <ul>
+                                <li><i class="icon-file"></i> Attached Files:</li>
+                                <ul>
+                                    <li>Name: <span class="nodeBodyText">{ { file.name } }</span> | Size: <span
+                                            class="nodeBodyText">{ { file.size } }</span> | Extension: <span
+                                            class="nodeBodyText">{ { file.mime } }</span> | <span
+                                            class="nodeBodyText"><a ng-href="{ { file.uri } }">Link</a></span></li>
+                                </ul>
+                            </ul>
+
+                        </ul>
+                            </p>
+                            <p class="tabText"><i class="icon-info-sign"></i> Activity Description:<br> <span
+                                    class="nodeBodyText">{{ node.pract_descr }}</span></p>
+
+                        <p class="tabText"><i class="icon-question-sign"></i> Pedagogical Suggestions:<br> <span
+                                class="nodeBodyText">{{ node.edu_descr }}</span></p>
+                            </span>
+                        <!-- IF CHILD NODE IS AN LD FIXME: convert static data to dynamic -->
+                                <span ng-show="node.type=='LD'">
+                                           <p class="tabText"><i class="icon-time"></i> Duration: <span
+                                                   class="nodeBodyText"> Lesson</span></p>
+                                           <p class="tabText"><i class="icon-flag"></i> Language Level: <span
+                                                   class="nodeBodyText"> A1</span></p>
+                                           <p class="tabText"><i class="icon-calendar"></i> Created in: <span
+                                                   class="nodeBodyText"> CREATION DATE </span></p>
+                                           <p class="tabText"><i class="icon-map-marker"></i> Topics: <span
+                                                   class="nodeBodyText" > NG REPEAT FOR TOPICS</span></p>
+                                           <p class="tabText"><i class="icon-tasks"></i> Objectives: <span
+                                                   class="nodeBodyText" > NG REPEAT FOR OBJECTIVES</span>
+                                           </p>
+                                           <p class="tabText"><i class="icon-backward"></i> Pre-Requisites: <span
+                                                   class="nodeBodyText" > NG REPEAT FOR REQUISITES</span>
+                                           </p>
+                                           <p class="tabText"><i class="icon-user"></i> Students' Description: <span
+                                                   class="nodeBodyText"> STUDENT DESCRIPTION TEXT</span></p>
+                                           <p class="tabText"><i class="icon-pencil"></i> Author: <span
+                                                   class="nodeBodyText"> <a ng-href="#">AUTHOR NAME</a></span></p>
+                                           <p class="tabText"><i class="icon-share"></i><span class="nodeBodyText"> <a
+                                                   ng-href="#">Link</a></span></p>
+
+                                </span>
+                    </div>
+                </div>
+                <!-- End Activity or Group Box -->
+            </div>
+            <!-- End Level Box -->
+            <!-- END DYNAMIC ACTIVITY CONTENT (Teacher View) -->
+            <div class="clearfix"></div>
         </div>
     </div>
+
+</tab>
+<tab active="data.static3">
+    <div id="contentBody">
+        <div id="contentHeader">
+
+
+            <div class="float-left">
+                <h4 class="inline"><a href="#"><img ng-src="../img/emptyStar.png" class="star"></a>{{
+                    learningDesign.ld_name }}</h4>
+            </div>
+            <div class="float-right">
+                <h4><span class="round">A1</span> {{ learningDesign.ld_scope }}</h4>
+            </div>
+        </div>
+        <div id="tabContent">
+            <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Student View) -->
+            <div ng-repeat="(level, nodes) in levels">
+                <div ng-repeat="node in nodes" class="nodeText">
+
+                    <!-- If it's a group:  -->
+                    <div ng-show="node.children" class="groupBoxText">
+                        <h4 class="groupNameText"> {{ node.node_name }} </h4>
+
+                        <div class="clearfix"></div>
+
+                        <!-- Children are also in levels: Create unstyled div for each level -->
+                        <div ng-repeat="(childLevel, subChildren) in node.children">
+                            <div ng-repeat="child in subChildren">
+                                <h5 class="nodeNameText">{{ child.group_child_name }}</h5>
+                                  <span ng-show="child.group_child_type!='LD'">
+
+                                <p class="tabText"><i class="icon-home"></i> Modality: <span class="nodeBodyText">{ { activity.modality } }</span>
+                                </p>
+
+                                <p class="tabText"><i class="icon-time"></i> Duration: <span class="nodeBodyText">{{ child | durationDisplay }}</span>
+                                </p>
+
+                                <p class="tabText"><i class="icon-th-large"></i> Students' organization: <span
+                                        class="nodeBodyText">{{ child.org_label }}</span></p>
+
+                                <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies: <span
+                                        class="nodeBodyText">{ { technology.name } }</span></p>
+
+                                <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
+                                <ul class="listNode">
+                                    <li><i class="icon-chevron-right"></i> Name: <span class="nodeBodyText">{ { resource.name } }</span>
+                                        | Type:<span class="nodeBodyText"> { { resource.type } }</span> |
+                                        Copyright: <span
+                                                class="nodeBodyText">{ { resource.copy } }</span> | Description: <span
+                                                class="nodeBodyText">{ { resource.descr } }</span> | Link: <span
+                                                class="nodeBodyText"><a ng-href="{ { resource.link } }">Link</a></span>
+                                    </li>
+                                    <ul>
+                                        <li><i class="icon-file"></i> Attached Files:</li>
+                                        <ul>
+                                            <li>Name: <span class="nodeBodyText">{ { file.name } }</span> | Size: <span
+                                                    class="nodeBodyText">{ { file.size } }</span> | Extension: <span
+                                                    class="nodeBodyText">{ { file.mime } }</span> | Link: <span
+                                                    class="nodeBodyText"><a ng-href="{ { file.uri } }">Link</a></span>
+                                            </li>
+                                        </ul>
+                                    </ul>
+
+                                </ul>
+                                      </p>
+                                      <p class="tabText"><i class="icon-info-sign"></i> Activity Description:<br> <span
+                                              class="nodeBodyText">{{ child.pract_descr }}</span></p>
+                                 </span>
+                                <!-- IF CHILD NODE IS AN LD FIXME: convert static data to dynamic -->
+                                <span ng-show="child.group_child_type=='LD'">
+                                           <p class="tabText"><i class="icon-time"></i> Duration: <span
+                                                   class="nodeBodyText"> Lesson</span></p>
+                                           <p class="tabText"><i class="icon-flag"></i> Language Level: <span
+                                                   class="nodeBodyText"> A1</span></p>
+                                           <p class="tabText"><i class="icon-calendar"></i> Created in: <span
+                                                   class="nodeBodyText"> CREATION DATE </span></p>
+                                           <p class="tabText"><i class="icon-map-marker"></i> Topics: <span
+                                                   class="nodeBodyText" > NG REPEAT FOR TOPICS</span></p>
+                                           <p class="tabText"><i class="icon-tasks"></i> Objectives: <span
+                                                   class="nodeBodyText" > NG REPEAT FOR OBJECTIVES</span>
+                                           </p>
+                                           <p class="tabText"><i class="icon-backward"></i> Pre-Requisites: <span
+                                                   class="nodeBodyText" > NG REPEAT FOR REQUISITES</span>
+                                           </p>
+                                           <p class="tabText"><i class="icon-user"></i> Students' Description: <span
+                                                   class="nodeBodyText"> STUDENT DESCRIPTION TEXT</span></p>
+                                           <p class="tabText"><i class="icon-pencil"></i> Author: <span
+                                                   class="nodeBodyText"> <a ng-href="#">AUTHOR NAME</a></span></p>
+                                           <p class="tabText"><i class="icon-share"></i><span class="nodeBodyText"> <a
+                                                   ng-href="#">Link</a></span></p>
+
+                                </span>
+                            </div>
+                        </div>
+                        <!-- End unstyled div for children levels -->
+                    </div>
+                    <!-- End Children -->
+
+
+                    <!-- If it's NOT a group:  -->
+                    <div ng-show="!node.children"><h5 class="nodeNameText">{{ node.node_name }}</h5>
+                            <span ng-show="node.type!='LD'">
+
+                        <p class="tabText"><i class="icon-home"></i> Modality: <span class="nodeBodyText">{ { activity.modality } }</span>
+                        </p>
+
+                        <p class="tabText"><i class="icon-time"></i> Duration: <span class="nodeBodyText">{{ node | durationDisplay }}</span>
+                        </p>
+
+                        <p class="tabText"><i class="icon-th-large"></i> Students' organization: <span
+                                class="nodeBodyText">{{ node.org_label }}</span></p>
+
+                        <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies: <span
+                                class="nodeBodyText">{ { technology.name } }</span></p>
+
+                        <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
+                        <ul class="listNode">
+                            <li><i class="icon-chevron-right"></i> Name: <span class="nodeBodyText">{ { resource.name } }</span>
+                                | Type:<span class="nodeBodyText"> { { resource.type } }</span> | Copyright: <span
+                                        class="nodeBodyText">{ { resource.copy } }</span> | Description: <span
+                                        class="nodeBodyText">{ { resource.descr } }</span> | <span class="nodeBodyText"><a
+                                        ng-href="{ { resource.link } }">Link</a></span></li>
+                            <ul>
+                                <li><i class="icon-file"></i> Attached Files:</li>
+                                <ul>
+                                    <li>Name: <span class="nodeBodyText">{ { file.name } }</span> | Size: <span
+                                            class="nodeBodyText">{ { file.size } }</span> | Extension: <span
+                                            class="nodeBodyText">{ { file.mime } }</span> | <span
+                                            class="nodeBodyText"><a ng-href="{ { file.uri } }">Link</a></span></li>
+                                </ul>
+                            </ul>
+
+                        </ul>
+                                </p>
+                                <p class="tabText"><i class="icon-info-sign"></i>Activity Description:<br> <span
+                                        class="nodeBodyText">{{ node.pract_descr }}</span></p>
+                                </span>
+                        <!-- IF CHILD NODE IS AN LD FIXME: convert static data to dynamic -->
+                                <span ng-show="node.type=='LD'">
+                                           <p class="tabText"><i class="icon-time"></i> Duration: <span
+                                                   class="nodeBodyText"> Lesson</span></p>
+                                           <p class="tabText"><i class="icon-flag"></i> Language Level: <span
+                                                   class="nodeBodyText"> A1</span></p>
+                                           <p class="tabText"><i class="icon-calendar"></i> Created in: <span
+                                                   class="nodeBodyText"> CREATION DATE </span></p>
+                                           <p class="tabText"><i class="icon-map-marker"></i> Topics: <span
+                                                   class="nodeBodyText" > NG REPEAT FOR TOPICS</span></p>
+                                           <p class="tabText"><i class="icon-tasks"></i> Objectives: <span
+                                                   class="nodeBodyText" > NG REPEAT FOR OBJECTIVES</span>
+                                           </p>
+                                           <p class="tabText"><i class="icon-backward"></i> Pre-Requisites: <span
+                                                   class="nodeBodyText" > NG REPEAT FOR REQUISITES</span>
+                                           </p>
+                                           <p class="tabText"><i class="icon-user"></i> Students' Description: <span
+                                                   class="nodeBodyText"> STUDENT DESCRIPTION TEXT</span></p>
+                                           <p class="tabText"><i class="icon-pencil"></i> Author: <span
+                                                   class="nodeBodyText"> <a ng-href="#">AUTHOR NAME</a></span></p>
+                                           <p class="tabText"><i class="icon-share"></i><span class="nodeBodyText"> <a
+                                                   ng-href="#">Link</a></span></p>
+
+                                </span>
+                    </div>
+                </div>
+                <!-- End Activity or Group Box -->
+            </div>
+            <!-- End Level Box -->
+            <!-- END DYNAMIC ACTIVITY CONTENT (Student View) -->
+
+            <div class="clearfix"></div>
+        </div>
+
+</tab>
+
+</tabset>
+
+</div>
+</div>
+<!--Body content-->
+</div>
+</div>
 </div>
