@@ -105,8 +105,7 @@
                 <h4 class="inline">{{learningDesign.ld_name }}</h4>
             </div>
             <div class="titleRight">
-                <!-- FIXME: convert to dynamic data for LD qcer -->
-                <h4><span class="round">A1</span> {{ learningDesign.ld_scope }}</h4>
+                <h4><span ng-repeat="qcer in learningDesign.qcers" class="round">{{ qcer.qcer_name }}</span> {{ learningDesign.ld_scope }}</h4>
             </div>
         </div>
         <div id="tabContent">
