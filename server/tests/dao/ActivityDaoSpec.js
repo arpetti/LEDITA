@@ -127,6 +127,7 @@ describe('Activity DAO', function() {
 			var activityids = [2, 3];
 			var ldids = [3, 5];
 			ActivityDao.getActivityDetails(activityids, ldids, function(err, results) {
+				console.log(JSON.stringify(results));
 				expect(err).to.be.null;
 				
 				// results are in 3 sections: technology, resource, qcer
@@ -190,6 +191,24 @@ describe('Activity DAO', function() {
 
 				done();
 			});
+		});
+
+		it('Returns empty lists if not provided any input', function(done) {
+			var activityids = [];
+			var ldids = [];
+
+			ActivityDao.getActivityDetails(activityids, ldids, function(err, results) {
+
+				expect(_.keys(results)).to.have.length(3); 
+				expect(_.has(results, 'technology'));
+				expect(_.has(results, 'resource'));
+				expect(_.has(results, 'qcer'));
+
+				expect(results.technology).to.have.length(0);
+				expect(results.resource).to.have.length(0);
+				expect(results.qcer).to.to.have.length(0);
+				done();
+			})
 		});
 
 	});

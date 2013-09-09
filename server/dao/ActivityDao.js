@@ -48,29 +48,41 @@ module.exports = {
   getActivityDetails: function(activityids, ldids, callback) {
     async.parallel({
       technology: function(callback) {
-        dao.findAll(GET_TECHNOLOGIES, [activityids], function(err, rows) {
-          if (err) 
-            callback(err);
-          else
-            callback(null, rows);
-        });
-      },
-      resource: function(callback) {
-        dao.findAll(GET_RESOURCES, [activityids], function(err, rows) {
-          if (err) 
-            callback(err);
-          else
-            callback(null, rows);
-        });
-      },
-      qcer: function(callback) {
-        dao.findAll(GET_LD_QCERS, [ldids], function(err, rows) {
+        if (activityids && activityids.length == 0) {
+          callback(null, []);
+        } else {
+          dao.findAll(GET_TECHNOLOGIES, [activityids], function(err, rows) {
             if (err) 
               callback(err);
             else
               callback(null, rows);
           });
         }
+      },
+      resource: function(callback) {
+        if (activityids && activityids.length == 0) {
+          callback(null, []);
+        } else {
+          dao.findAll(GET_RESOURCES, [activityids], function(err, rows) {
+            if (err) 
+              callback(err);
+            else
+              callback(null, rows);
+          });
+        }
+      },
+      qcer: function(callback) {
+        if (ldids && ldids.length == 0) {
+          callback(null, []);
+        } else {
+          dao.findAll(GET_LD_QCERS, [ldids], function(err, rows) {
+            if (err) 
+              callback(err);
+            else
+              callback(null, rows);
+          });
+        }
+      }
     },
     function(err, results) {
       if (err) 

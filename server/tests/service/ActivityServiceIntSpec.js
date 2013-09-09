@@ -66,7 +66,6 @@ describe('Activity Service Integration', function() {
             it('Adds technologies, resources, qcer to nodes', function(done) {
                   var ldid = 1;
                   ActivityService.getEnrichedLDActivityStructure(ldid, function(err, result, message) {
-                        console.log(JSON.stringify(result));
                         expect(err).to.be.null;
                         expect(message).to.be.null;
                         

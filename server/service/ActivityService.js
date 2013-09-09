@@ -98,7 +98,9 @@ module.exports = {
 			var activityIds = extractIds(ldnodes, 'ACTIVITY');
 			var ldIds = extractIds(ldnodes, 'LD'); 
 			ActivityDao.getActivityDetails(activityIds, ldIds, function(err, activityDetails) {
-				if (!err) {
+				if (err) {
+					callback(err, null, messages.UNABLE_TO_RETRIEVE_ACTIVITIES);
+				} else {
 					var techByActivityId = _.groupBy(activityDetails.technology, function(element) {return element.activity_id});
 					var resourceByActivityId = _.groupBy(activityDetails.resource, function(element) {return element.activity_id});
 					var qcerByLdId = _.groupBy(activityDetails.qcer, function(element) {return element.ld_id});
