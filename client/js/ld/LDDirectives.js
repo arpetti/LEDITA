@@ -66,7 +66,7 @@ angular.module('ledita-app')
             "    <i class='icon-time'></i> " +
             "     Scope: <span class='nodeBodyText'>{{ node.scope }}</span> " +
             "</p> " +
-            "<p class='tabText'><i class='icon-flag'></i> " +
+            "<p class='tabText' ng-show='node.qcers'><i class='icon-flag' ></i> " +
             "    Language Level: <span ng-repeat='qcer in node.qcers' class='nodeBodyText'>{{ qcer.qcer_name }}</span> " +
             "</p> " +
             "<p class='tabText'><i class='icon-share'></i> " +
