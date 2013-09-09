@@ -41,6 +41,7 @@ describe('Learning Design', function() {
         expect(binding('learningDesign.ld_name')).toBe('Learning Design Title Demo 1');
         expect(binding('learningDesign.ld_students_profile')).toBe('20 studenti adolescenti di livello B1');
         expect(binding('learningDesign.ld_scope')).toBe('Lesson');
+        expect(repeater('.qceritem').column('qcer.qcer_name')).toEqual(["A1", "A2"]);
 
         // Verify subjects
         expect(repeater('.subjects li').count()).toBe(2);
@@ -83,6 +84,7 @@ describe('Learning Design', function() {
         expect(binding('learningDesign.ld_name')).toBe('Learning Design Title Demo 2');
         expect(binding('learningDesign.ld_students_profile')).toBe('20 studenti adolescenti di livello B1');
         expect(binding('learningDesign.ld_scope')).toBe('Module');
+        expect(repeater('.qceritem').column('qcer.qcer_name')).toEqual(["B1"]);
 
         // Verify subjects
         expect(repeater('.subjects li').count()).toBe(2);
