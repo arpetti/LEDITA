@@ -10,14 +10,16 @@ var LdDao = require('../dao/LdDao')
 */
 module.exports = {
 
-    LD_NUMBER_OF_DATA_ELEMENTS: 4,
+    LD_NUMBER_OF_DATA_ELEMENTS: 5,
 
     getLearningDesignPromise: function(ldid) {
         var promiseDaoGetLd = nodefn.call(LdDao.getLearningDesign, ldid);
         var promiseDaoGetLdSubjects = nodefn.call(LdDao.getLearningDesignSubjects, ldid);
         var promiseDaoGetLdObjectives = nodefn.call(LdDao.getLearningDesignObjectives, ldid);
         var promiseDaoGetLdPrerequisites = nodefn.call(LdDao.getPrerequisites, ldid);
+        var promiseDaoGetLdQcers = nodefn.call(LdDao.getQcers, ldid);
 
-        return when.join(promiseDaoGetLd, promiseDaoGetLdSubjects, promiseDaoGetLdObjectives, promiseDaoGetLdPrerequisites);
+        return when.join(promiseDaoGetLd, promiseDaoGetLdSubjects, 
+            promiseDaoGetLdObjectives, promiseDaoGetLdPrerequisites, promiseDaoGetLdQcers);
     }
 };

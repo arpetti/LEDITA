@@ -30,6 +30,7 @@ module.exports = {
             learningDesignDetail.subjects = results[1];
             learningDesignDetail.objectives = results[2];
             learningDesignDetail.prerequisites = results[3];
+            learningDesignDetail.qcers = results[4];
             res.json(200, learningDesignDetail);
         }, function(err) {
             return res.send(500, err.message); 

@@ -51,6 +51,7 @@ describe('Learning Design Controller', function() {
                     [],
                     [],
                     [],
+                    [],
                     []
                 ];
             var serviceStub = sandbox.stub(LearningDesignService, 'getLearningDesignPromise').
@@ -76,6 +77,7 @@ describe('Learning Design Controller', function() {
                     [{"subject_name":"Topic 1"},{"subject_name":"Topic 5"}],
                     [{"objective_descr":"Objective 1"},{"objective_descr":"Objective 6"}],
                     [{"prereq_name":"prereq1", "prereq_type": "OBJECTIVE"}],
+                    [{"qcer_name":"C1"}],
                     [{"something": "does not belong here"}]
                 ];
             var serviceStub = sandbox.stub(LearningDesignService, 'getLearningDesignPromise').
@@ -98,7 +100,8 @@ describe('Learning Design Controller', function() {
             var serviceResponse = [
                     [{"ld_id":1,"ld_name":"Learning Design Title Demo 1"}],
                     [{"subject_name":"Topic 1"},{"subject_name":"Topic 5"}],
-                    [{"objective_descr":"Objective 1"},{"objective_descr":"Objective 6"}]
+                    [{"objective_descr":"Objective 1"},{"objective_descr":"Objective 6"}],
+                    [{"qcer_name": "A2"}]
                 ]
             var serviceStub = sandbox.stub(LearningDesignService, 'getLearningDesignPromise').
                 returns(when(serviceResponse));
@@ -111,6 +114,7 @@ describe('Learning Design Controller', function() {
                 expect(result.subjects[1].subject_name).to.equal('Topic 5');
                 expect(result.objectives[0].objective_descr).to.equal('Objective 1');
                 expect(result.objectives[1].objective_descr).to.equal('Objective 6');
+                expect(result.qcers[0].qcer_name).to.equal('A2');
 
             	assert.isTrue(serviceStub.withArgs(learningDesignId).calledOnce);
             }
