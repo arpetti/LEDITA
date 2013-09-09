@@ -169,7 +169,7 @@
 
                     <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Modal) -->
                     <div ng-repeat="(level, nodes) in levels">
-                        <div ng-repeat="node in nodes |   filter:node.node_name = nameSelected"
+                        <div ng-repeat="node in nodes |   filter:node.node_name = nameSelected "
                              class="nodeTextDetails">
                             <!-- If it's a group:  -->
                             <div ng-show="node.children" class="groupBoxText">
@@ -178,7 +178,7 @@
                                 <div class="clearfix"></div>
                                 <!-- Children in groups are organized by level, create unstyled div for each level -->
                                 <div ng-repeat="(childLevel, subChildren) in node.children">
-                                    <div ng-repeat="child in subChildren">
+                                    <div ng-repeat="child in subChildren | filter:child.child_node_name = nameSelected">
                                         <h5 class="nodeNameText">{{ child.group_child_name }}</h5>
                                  <span ng-show="child.group_child_type!='LD'">
                                     <activitydetail showped="true" node="child"></activitydetail>
