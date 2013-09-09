@@ -70,7 +70,7 @@ angular.module('ledita-app')
             "    Language Level: <span ng-repeat='qcer in node.qcers' class='nodeBodyText'>{{ qcer.qcer_name }}</span> " +
             "</p> " +
             "<p class='tabText'><i class='icon-share'></i> " +
-            "    <span class='nodeBodyText'> <a ng-href='#'>Link</a></span> " +
+            "    <span class='nodeBodyText'> <a ng-href='/ld/{{ node.node_id }}{{ node.group_child_id }}'>Link</a></span> " +
             "</p> " +
             "</span>",
         replace: true,        
