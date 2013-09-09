@@ -178,4 +178,59 @@ describe('Activity Service', function() {
 
     });
 
+    describe('Get Enriched Structure', function() {
+
+        it('Gets complete structure', function(done) {
+            var ldid = 1;
+            
+            var ldNodes = 
+                [
+                    {"level": 1, "position": 1, "node_id": 11, "type": "LD", "node_name": "LD 11"},
+                    {"level": 2, "position": 1, "node_id": 12, "type": "ACTIVITY_GROUP", "node_name": "AG 12"},
+                    {"level": 3, "position": 1, "node_id": 13, "type": "ACTIVITY", "node_name": "ACT 13"}
+                ];
+            var activityDaoStub = sandbox.stub(ActivityDao, "getLdNodes", function(id, callback) {
+                callback(null, ldNodes);
+            });
+
+            var groups = 
+                [
+                    {"group_id": 12, "group_name": "AG 12", "level": 1, "position": 1, 
+                        "group_child_id": 21, "group_child_type": "ACTIVITY", "group_child_name": "ACT 21", "max_position": 2},
+                    {"group_id": 12, "group_name": "AG 12", "level": 1, "position": 2, 
+                        "group_child_id": 22, "group_child_type": "LD", "group_child_name": "LD 22", "max_position": 2}
+                ];
+            var activityGroupDaoStub = sandbox.stub(ActivityDao, "getGroups", function(groupids, callback) {
+                callback(null, groups);
+            });
+
+            // TODO Fill in some details for ACTIVITY at top level and child level, same for LD
+            var activityDetails = {
+                "technology": [
+                ],
+                "resource": [
+                ],
+                "qcer": [
+                ]
+            };
+            var activityDetailDaoStub = sandbox.stub(ActivityDao, "getActivityDetails", function(activityids, ldids, callback) {
+                callback(null, activityDetails);
+            });
+
+            var activityCallback = function(err, result, message) {
+                expect(err).to.be.null;
+                expect(message).to.be.null;
+                expect(_.keys(result)).to.have.length(3); // i.e. 3 levels
+
+                assert.isTrue(activityDaoStub.withArgs(ldid).calledOnce);
+                assert.isTrue(activityGroupDaoStub.withArgs([12]).calledOnce);
+                assert.isTrue(activityDetailDaoStub.withArgs([13,21], [11, 22]).calledOnce);
+                done();
+            };
+
+            ActivityService.getEnrichedLDActivityStructure(ldid, activityCallback);
+        });
+
+    });
+
 });
