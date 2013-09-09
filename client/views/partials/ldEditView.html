@@ -24,8 +24,13 @@
             <span class="zeroMargin">{{learningDesign.ld_creation_date | date:'yyyy-MM-dd'}}</span>
         </div>
         <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-map-marker"></i> Topics:</h5>
+
+            <form ng-submit="addSubject()" class="sidebarForm">
+                <input type="text" class="sidebarInput" ng-model="subject" placeholder="add new subject">
+                <input class="btn sidebarButton" type="submit" value="+">
+            </form>
             <ul ng-repeat="subject in learningDesign.subjects" class="zeroMargin subjects">
-                <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{subject.subject_name}}</a></li>
+                <li class="sidebarEditItem"><span class="sidebarEditItemLink">{{subject.subject_name}} <a ng-href="#" ><i class="icon-remove-circle"></i> </a></span></li>
             </ul>
         </div>
         <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-tasks"></i> Objectives:</h5>

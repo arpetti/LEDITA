@@ -142,16 +142,7 @@ a:hover {
     padding-top: 15px;
 }
 
-.sidebarInput {
-    width: 75%;
-}
 
-input.sidebarInput {
-    font-size: 12px;
-    line-height: 12px;
-    margin: 0;
-    padding: 0 5px;
-}
 
 .btn-sidebar {
     color: #FFFFFF;
@@ -384,6 +375,74 @@ input.sidebarInput {
     text-indent: -9999px;
     width: 40px;
 }
+/* new LD creation
+ ==================== */
+.sidebarForm {
+ margin: 5px 0;
+}
+
+input.sidebarButton  {
+    background: #0099CC;
+    color: #FFFFFF;
+    font-weight: bold;
+    text-shadow: 0 1px 1px rgba(155, 155, 155, 0.65);
+    border-radius: 14px;
+    width: 14px;
+    height: 14px;
+    line-height: 11px;
+    font-size: 14px;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.sidebarButton:hover {
+    background-color: #990000;
+    color: #ffffff;
+}
+
+.sidebarInput {
+    width: 75%;
+    margin: 0;
+}
+
+input.sidebarInput {
+    font-size: 12px;
+    line-height: 12px;
+    margin: 0;
+    padding: 0 5px;
+}
+.sidebarEditItem {
+    float: left;
+list-style: none;
+}
+
+.sidebarEditItem span {
+    margin: 0 5px 2px 0;
+    background-color: #dddddd;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    padding: 1px 4px;
+    line-height: 24px;
+}
+
+.sidebarEditItemLink {
+    font-weight: normal;
+    color: #666666;
+}
+
+.sidebarEditItemLink:hover {
+    background-color: #0099CC;
+    color: #FFFFFF;
+
+}
+
+.sidebarEditItemLink:hover i {
+    background-image: url("../img/glyphicons-halflings-white.png");
+
+}
+
 
 /* new nodes bar
 ===================== */
@@ -446,6 +505,7 @@ input.sidebarInput {
 
 /* edit elements
 ===================== */
+
 .onoffswitch {
     position: relative;
     width: 120px;
