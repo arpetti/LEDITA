@@ -598,6 +598,7 @@ input.sidebarInput {
     padding: 2px 0;
     width: 96%;
     margin: 5px auto;
+    cursor: pointer;
 }
 
 .ldBox .actName h6:hover, .ldBox h6.actName:hover {
@@ -633,6 +634,8 @@ input.sidebarInput {
     clear: left;
     padding: 2px 5px;
     line-height: 1.3em;
+    cursor: pointer;
+
 }
 
 .groupBox1, .groupBox2, .groupBox3, .groupBox4 {
@@ -686,17 +689,21 @@ input.sidebarInput {
     font-family: 'arial', sans-serif;
     text-align: center;
     border-bottom: 1px dashed #FFFFFF;
+    cursor: pointer;
+
 }
 
 .timeLabel {
     float: left;
     padding: 5px;
+    cursor: pointer;
+
 }
 
 .orgLabel {
     float: right;
     padding: 5px;
-
+    cursor: pointer;
 }
 
 a.whiteText:hover {

@@ -165,117 +165,43 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="modal-body">
+
+
                     <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Modal) -->
                     <div ng-repeat="(level, nodes) in levels">
-                        <!--TODO: Filter node details depending on the click in a specific node-->
-                        <div ng-repeat="node in nodes | filter:node.node_name = 'Hardware Component Identification'"
+                        <!-- FIXME: convert static filter to dynamic -->
+                        <div ng-repeat="node in nodes |   filter:node.node_name = 'Support Activity 1'"
                              class="nodeTextDetails">
                             <!-- If it's a group:  -->
                             <div ng-show="node.children" class="groupBoxText">
                                 <h4 class="groupNameText"> {{ node.node_name }} </h4>
 
                                 <div class="clearfix"></div>
-                                <!-- Children are also in levels: Create unstyled div for each level -->
+                                <!-- Children in groups are organized by level, create unstyled div for each level -->
                                 <div ng-repeat="(childLevel, subChildren) in node.children">
                                     <div ng-repeat="child in subChildren">
-                                        <h5 class="nodeNameTextDetails">{{ child.group_child_name }}</h5>
-
-                                        <p class="tabText"><i class="icon-home"></i> Modality: <span
-                                                class="nodeBodyText">{{ child.modality }}</span>
-                                        </p>
-
-                                        <p class="tabText"><i class="icon-time"></i> Duration: <span
-                                                class="nodeBodyText"> {{ child | durationDisplay }}</span>
-                                        </p>
-
-                                        <p class="tabText"><i class="icon-th-large"></i> Students' organization: <span
-                                                class="nodeBodyText">{{ child.org_label }}</span></p>
-
-                                        <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies:
-                                            <span ng-repeat="tech in node.technologies" class="nodeBodyText">{{ tech.technology_name }}</span>
-                                        </p>
-
-                                        <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
-                                        <ul class="listNode">
-                                            <li><i class="icon-chevron-right"></i> Name: <span class="nodeBodyText">{ { resource.name } }</span>
-                                                | Type:<span class="nodeBodyText"> { { resource.type } }</span> |
-                                                Copyright: <span
-                                                        class="nodeBodyText">{ { resource.copy } }</span> |
-                                                Description: <span
-                                                        class="nodeBodyText">{ { resource.descr } }</span> | <span
-                                                        class="nodeBodyText"><a
-                                                        ng-href="{ { resource.link } }">Link</a></span></li>
-                                            <ul>
-                                                <li><i class="icon-file"></i> Attached Files:</li>
-                                                <ul>
-                                                    <li>Name: <span class="nodeBodyText">{ { file.name } }</span> |
-                                                        Size: <span
-                                                                class="nodeBodyText">{ { file.size } }</span> |
-                                                        Extension: <span
-                                                                class="nodeBodyText">{ { file.mime } }</span> |
-                                                    <span
-                                                            class="nodeBodyText"><a
-                                                            ng-href="{ { file.uri } }">Link</a></span>
-                                                    </li>
-                                                </ul>
-                                            </ul>
-                                        </ul>
-                                        </p>
-                                        <p class="tabText"><i class="icon-info-sign"></i> Activity
-                                            Description:<br> <span
-                                                    class="nodeBodyText">{{ child.pract_descr }}</span></p>
-
-                                        <p class="tabText"><i class="icon-question-sign"></i> Pedagogical
-                                            Suggestions:<br> <span
-                                                    class="nodeBodyText">{{ child.edu_descr }}</span></p>
+                                        <h5 class="nodeNameText">{{ child.group_child_name }}</h5>
+                                 <span ng-show="child.group_child_type!='LD'">
+                                    <activitydetail showped="true" node="child"></activitydetail>
+                                 </span>
+                                <span ng-show="child.group_child_type=='LD'">
+                                    <lddetail node='child'></lddetail>
+                                </span>
                                     </div>
                                 </div>
                             </div>
                             <!-- End Children -->
                             <!-- If it's NOT a group:  -->
-                            <div ng-show="!node.children"><h5 class="nodeNameTextDetails">{{ node.name }}</h5>
-
-                                <p class="tabText"><i class="icon-home"></i> Modality: <span class="nodeBodyText">{{ node.modality }}</span>
-                                </p>
-
-                                <p class="tabText"><i class="icon-time"></i> Duration: <span class="nodeBodyText">{{ node | durationDisplay }}</span>
-                                </p>
-
-                                <p class="tabText"><i class="icon-th-large"></i> Students' organization: <span
-                                        class="nodeBodyText">{{ node.org_label }}</span></p>
-
-                                <p class="tabText"><i class="icon-facetime-video"></i> Used Technologies:
-                                    <span ng-repeat="tech in node.technologies" class="nodeBodyText">{{ tech.technology_name }}</span>
-                                </p>
-
-                                <p class="tabText"><i class="icon-briefcase"></i> Didactical Resources:
-                                <ul class="listNode">
-                                    <li><i class="icon-chevron-right"></i> Name: <span class="nodeBodyText">{ { resource.name } }</span>
-                                        | Type:<span class="nodeBodyText"> { { resource.type } }</span> |
-                                        Copyright: <span
-                                                class="nodeBodyText">{ { resource.copy } }</span> | Description: <span
-                                                class="nodeBodyText">{ { resource.descr } }</span> | <span
-                                                class="nodeBodyText"><a
-                                                ng-href="{ { resource.link } }">Link</a></span></li>
-                                    <ul>
-                                        <li><i class="icon-file"></i> Attached Files:</li>
-                                        <ul>
-                                            <li>Name: <span class="nodeBodyText">{ { file.name } }</span> | Size: <span
-                                                    class="nodeBodyText">{ { file.size } }</span> | Extension: <span
-                                                    class="nodeBodyText">{ { file.mime } }</span> | <span
-                                                    class="nodeBodyText"><a ng-href="{ { file.uri } }">Link</a></span>
-                                            </li>
-                                        </ul>
-                                    </ul>
-                                </ul>
-                                </p>
-                                <p class="tabText"><i class="icon-info-sign"></i> Activity Description:<br> <span
-                                        class="nodeBodyText">{{ node.pract_descr }}</span></p>
-
-                                <p class="tabText"><i class="icon-question-sign"></i> Pedagogical Suggestions:<br> <span
-                                        class="nodeBodyText">{{ node.edu_descr }}</span></p>
+                            <div ng-show="!node.children"><h5 class="nodeNameText">{{ node.node_name }}</h5>
+                        <span ng-show="node.type!='LD'">
+                            <activitydetail showped="true" node="node"></activitydetail>
+                        </span>
+                                <span ng-show="node.type=='LD'">
+                                    <lddetail node='node'></lddetail>
+                                </span>
                             </div>
                         </div>
+
                         <!-- End Activity or Group Box -->
                     </div>
                     <!-- End Level Box -->
