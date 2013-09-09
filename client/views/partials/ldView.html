@@ -183,7 +183,7 @@
                                  <span ng-show="child.group_child_type!='LD'">
                                     <activitydetail showped="true" node="child"></activitydetail>
                                  </span>
-                                <span ng-show="child.group_child_type=='LD'">
+                                <span ng-show="child.group_child_type=='LD'" ng-click="close()">
                                     <lddetail node='child'></lddetail>
                                 </span>
                                     </div>
@@ -195,7 +195,7 @@
                         <span ng-show="node.type!='LD'">
                             <activitydetail showped="true" node="node"></activitydetail>
                         </span>
-                                <span ng-show="node.type=='LD'">
+                                <span ng-show="node.type=='LD'" ng-click="close()">
                                     <lddetail node='node'></lddetail>
                                 </span>
                             </div>
