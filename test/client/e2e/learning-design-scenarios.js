@@ -84,6 +84,23 @@ describe('Learning Design', function() {
         expect(binding('learningDesign.ld_students_profile')).toBe('20 studenti adolescenti di livello B1');
         expect(binding('learningDesign.ld_scope')).toBe('Module');
 
+        // Verify subjects
+        expect(repeater('.subjects li').count()).toBe(2);
+        expect(repeater('.subjects li').column('subject.subject_name')).toEqual(["Topic 2", "Topic 4"]);
+
+        // Verify objectives
+        expect(repeater('.objectives li').count()).toBe(2);
+        expect(repeater('.objectives li').column('objective.objective_descr')).toEqual(["Objective 2", "Objective 6"]);
+
+        // Verify prerequisites
+        expect(repeater('.prerequisites li').count()).toBe(1);
+        expect(repeater('.prerequisites li').column('prereq.prereq_name')).toEqual(["Learning Design Title Demo 1"]);
+
+        // Verify Global View
+        expect(repeater('.levelBox').count()).toBe(4);
+        expect(repeater('.groupBox1').count()).toBe(2);
+        expect(repeater('.actBox').count()).toBe(10);
+
         // Logout
         element('#userActionsMenu').click();
         element('#logoutLink').click();
