@@ -143,4 +143,28 @@ describe('Learning Design DAO', function() {
 
     });
 
+    describe('Qcers', function() {
+
+        it('Gets learning design qcers returns results', function(done) {
+            var learningDesignId = 1;
+            LdDao.getQcers(learningDesignId, function(err, results) {
+                expect(err).to.be.null;
+                expect(results).to.have.length(2);
+                expect(results[0].qcer_name).to.equal('A1');
+                expect(results[1].qcer_name).to.equal('A2');
+                done();
+            });
+        });
+
+        it('Gets learning design qcers returns empty list when LD has no qcers', function(done) {
+            var learningDesignId = 7;
+            LdDao.getQcers(learningDesignId, function(err, results) {
+                expect(err).to.be.null;
+                expect(results).to.have.length(0);
+                done();
+            });
+        });
+
+    });
+
 });	
