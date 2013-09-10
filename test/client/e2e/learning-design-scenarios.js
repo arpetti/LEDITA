@@ -113,6 +113,22 @@ describe('Learning Design', function() {
             "Practical description: what to do for the execution of this activity"];
         expect(repeater(".studentLevel").row(1)).toEqual(expectedLd1StudentViewLevel2);
 
+        // Verify Global View after other Views
+        element("#globalTab").click();
+        expect(repeater('.levelBox').count()).toBe(6);
+        expect(repeater('.groupBox2').count()).toBe(2);
+        expect(repeater('.actBox').count()).toBe(10);
+
+        element("#node .actBox").click('Support Activity 1');
+        expect(binding('node.node_name')).toBe('Support Activity 1');
+        expect(binding('node.modality')).toBe('Online');
+        expect(binding('node | durationDisplay')).toBe('1 mo. 15 d.');
+        expect(binding('node.org_label')).toBe('ALL');
+ expect(binding('tech.technology_name')).toBe('Internet');
+ expect(binding('resource.resource_name')).toBe('Didactical resource name 3');
+        expect(binding('node.pract_descr')).toBe('Practical description: what to do for the execution of this activity');
+        expect(binding('node.edu_descr')).toBe('Pedagogical Description: how to obtain better results and improve learning during the activity');
+
         // Logout
         element('#userActionsMenu').click();
         element('#logoutLink').click();
@@ -195,6 +211,23 @@ describe('Learning Design', function() {
             "Didactical resource name 6","image","Description of the didactical resource number 6",
             "Practical description: what to do for the execution of this activity"];
         expect(repeater(".studentLevel").row(0)).toEqual(expectedLd2StudentViewLevel1);
+
+        // Verify Global View after other Views
+        element("#globalTab").click();
+        expect(repeater('.levelBox').count()).toBe(4);
+        expect(repeater('.groupBox2').count()).toBe(2);
+        expect(repeater('.actBox').count()).toBe(10);
+
+        element("#node .actBox").click('Learning Activity 11');
+        expect(binding('node.node_name')).toBe('Learning Activity 11');
+        expect(binding('node.modality')).toBe('Online');
+        expect(binding('node | durationDisplay')).toBe('30 min.');
+        expect(binding('node.org_label')).toBe('INDIVIDUAL');
+        expect(binding('tech.technology_name')).toBe('');
+        expect(binding('resource.resource_name')).toBe('');
+        expect(binding('node.pract_descr')).toBe('Practical description: what to do for the execution of this activity');
+        expect(binding('node.edu_descr')).toBe('Pedagogical Description: how to obtain better results and improve learning during the activity');
+
 
         // Logout
         element('#userActionsMenu').click();
