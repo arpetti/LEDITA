@@ -93,7 +93,7 @@
                 class="btnImage"> Teacher View
         </button>
     </tab-heading>
-    <button class="btnContent" ng-class="isBtnActive(data.static3)" ng-click="data.static3 = true"><img
+    <button id="studentTab" class="btnContent" ng-class="isBtnActive(data.static3)" ng-click="data.static3 = true"><img
             src="../../img/student.png"
             class="btnImage"> Student View
     </button>
@@ -277,7 +277,7 @@
         </div>
         <div id="tabContent">
             <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Student View) -->
-            <div ng-repeat="(level, nodes) in levels">
+            <div ng-repeat="(level, nodes) in levels" class="studentLevel">
                 <div ng-repeat="node in nodes" class="nodeText">
                     <!-- If it's a group:  -->
                     <div ng-show="node.children" class="groupBoxText">
