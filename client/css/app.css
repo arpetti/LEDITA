@@ -279,9 +279,8 @@ a:hover {
     border: 1px solid #CCCCCC;
     background-color: #FFFFFF;
     width: 99%;
-    -moz-border-radius: 6px;
+    -moz-border-radius: 0 6px 0 0;
     border-radius: 0 6px 0 0;
-    -moz-border-top-left-radius: 0;
     -webkit-border-radius: 0 6px 0 0;
     border-bottom: none;
     margin: 0;

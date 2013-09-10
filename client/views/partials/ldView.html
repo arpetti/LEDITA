@@ -182,7 +182,7 @@
 
 
                     <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Modal) -->
-                    <div ng-repeat="(level, nodes) in levels" class="modalLevel" >
+                    <div ng-repeat="(level, nodes) in levels" id="modalActivityData" >
                         <div ng-repeat="node in nodes |   filter:node.node_name = nameSelected "
                              class="nodeTextDetails">
                             <!-- If it's a group:  -->
