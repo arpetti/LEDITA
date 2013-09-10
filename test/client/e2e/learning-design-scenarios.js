@@ -120,6 +120,8 @@ describe('Learning Design', function() {
         expect(repeater('.actBox').count()).toBe(10);
         sleep(2);
 
+
+        /*FIXME: this part take the first node and not the one of the selector*/
         element("#node .actBox").click('Support Activity 2');
         expect(binding('node.node_name')).toBe('Support Activity 1');
         expect(binding('node.modality')).toBe('Online');
