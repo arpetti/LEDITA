@@ -133,7 +133,7 @@
                     <!-- Children are also in levels: Create unstyled div for each level -->
                     <div ng-repeat="(childLevel, subChildren) in node.children">
                         <div ng-repeat="child in subChildren" ng-class="getGroupBoxClass(child)">
-                            <a class="whiteText" ng-click="open(child.group_child_name)"><h6 class="actName">{{
+                            <a class="whiteText childModalLink" ng-click="open(child.group_child_name)"><h6 class="actName">{{
                                 child.group_child_name }}</h6>
 
                                 <div class="actLabel" ng-show="child.group_child_type!='LD'">
@@ -175,14 +175,14 @@
             <div id="modalView" modal="shouldBeOpen" close="close()" options="opts">
                 <div class="modal-header">
                     <h4>Activity Details</h4>
-                    <button class="btn modalButton float-right" ng-click="close()">x</button>
+                    <button id="activityModalClose" class="btn modalButton float-right" ng-click="close()">x</button>
                     <div class="clearfix"></div>
                 </div>
                 <div class="modal-body">
 
 
                     <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Modal) -->
-                    <div ng-repeat="(level, nodes) in levels" id="modalActivityData" >
+                    <div ng-repeat="(level, nodes) in levels" class="modalActivityData" >
                         <div ng-repeat="node in nodes |   filter:node.node_name = nameSelected "
                              class="nodeTextDetails">
                             <!-- If it's a group:  -->

@@ -120,24 +120,48 @@ describe('Learning Design', function() {
         expect(repeater('.actBox').count()).toBe(10);
         sleep(2);
 
+        // Logout
+        element('#userActionsMenu').click();
+        element('#logoutLink').click();
+    });
 
-        /*FIXME: this part take the first node and not the one of the selector*/
-        element("#node .actBox").click('Support Activity 2');
-        expect(binding('node.node_name')).toBe('Support Activity 1');
-        expect(binding('node.modality')).toBe('Online');
-        expect(binding('node | durationDisplay')).toBe('1 mo. 15 d.');
-        expect(binding('node.org_label')).toBe('ALL');
- expect(binding('tech.technology_name')).toBe('Internet');
- expect(binding('resource.resource_name')).toBe('Didactical resource name 3');
-        expect(binding('node.pract_descr')).toBe('Practical description: what to do for the execution of this activity');
-        expect(binding('node.edu_descr')).toBe('Pedagogical Description: how to obtain better results and improve learning during the activity');
+    it('Shows activity details in modal window', function() {
+        var existingUserName = testUsers.getUserName;
+        var existingUserPassword = testUsers.getUserPassword;
+
+        browser().navigateTo('/login');
+        input('username').enter(existingUserName);
+        input('password').enter(existingUserPassword);
+        element('#loginButton').click();
+        sleep(2);
+
+        // Click on first result 
+        element('#ldlist .ld-item:nth-child(1) .ld-center a').click();
+        sleep(2);
+
+        // Verify detail view
+        expect(browser().location().url()).toBe('/ld/1');
+
+        // Click on a child link
+        element(".childModalLink").click();
+
+        // Verify modal window content 
+        var expectedSupportActivity2ModalDetail = [
+            "Group 2 Name","Learning Activity 6","Face to face","3 h. 30 min.","ALL",
+            "PC","Smartphone","Didactical resource name 4","audio",
+            "Description of the didactical resource number 4",
+            "Practical description: what to do for the execution of this activity",
+            "Pedagogical Description: how to obtain better results and improve learning during the activity"
+            ];
+        expect(repeater(".modalActivityData").row(4)).toEqual(expectedSupportActivity2ModalDetail);
+        element("#activityModalClose").click();
 
         // Logout
         element('#userActionsMenu').click();
         element('#logoutLink').click();
     });
 
-    it('Renders Learning Design detail for LD having no child LDs', function() {
+    it('Displays Learning Design detail for LD having no child LDs', function() {
         var existingUserName = testUsers.getUserName;
         var existingUserPassword = testUsers.getUserPassword;
 
@@ -220,7 +244,6 @@ describe('Learning Design', function() {
         expect(repeater('.levelBox').count()).toBe(4);
         expect(repeater('.groupBox1').count()).toBe(2);
         expect(repeater('.actBox').count()).toBe(10);
-
 
         // Logout
         element('#userActionsMenu').click();
