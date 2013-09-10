@@ -98,17 +98,32 @@
             class="btnImage"> Student View
     </button>
 </div>
-<tab active="data.static1">
-    <div id="contentBody">
-        <div id="contentHeader">
-            <div class="titleLeft">
-                <h4 class="inline">{{learningDesign.ld_name }}</h4>
-            </div>
-            <div class="titleRight">
-                <h4><span ng-repeat="qcer in learningDesign.qcers" class="round qceritem">{{ qcer.qcer_name }}</span> {{ learningDesign.ld_scope }}</h4>
-            </div>
+
+
+
+
+
+<div id="contentBody">
+    <div id="contentHeader">
+        <div class="titleLeft">
+            <h4>{{learningDesign.ld_name }}</h4>
         </div>
-        <div id="tabContent">
+        <div class="titleRight">
+            <h4><span ng-repeat="qcer in learningDesign.qcers" class="round qceritem">{{ qcer.qcer_name }}</span> {{ learningDesign.ld_scope }}</h4>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<tab active="data.static1">
+        <div class="tabContent">
             <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Global View) -->
             <div ng-repeat="(level, nodes) in levels" class="levelBox">
                 <div ng-repeat="node in nodes" ng-class="getBoxClass(node)">
@@ -210,20 +225,11 @@
             </div>
             <div class="clearfix"></div>
         </div>
-    </div>
+
 </tab>
 <tab active="data.static2">
-    <div id="contentBody">
-        <div id="contentHeader">
-            <div class="float-left">
-                <h4 class="inline">{{ learningDesign.ld_name }}</h4>
-            </div>
-            <div class="float-right">
-                <!-- FIXME: convert qcer to dynamic -->
-                <h4><span class="round">A1</span> {{ learningDesign.ld_scope }}</h4>
-            </div>
-        </div>
-        <div id="tabContent">
+
+        <div class="tabContent">
             <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Teacher View) -->
             <div ng-repeat="(level, nodes) in levels" class="teacherLevel">
                 <div ng-repeat="node in nodes" class="nodeText">
@@ -262,20 +268,11 @@
             <!-- END DYNAMIC ACTIVITY CONTENT (Teacher View) -->
             <div class="clearfix"></div>
         </div>
-    </div>
+
 </tab>
 <tab active="data.static3">
-    <div id="contentBody">
-        <div id="contentHeader">
-            <div class="float-left">
-                <h4 class="inline">{{ learningDesign.ld_name }}</h4>
-            </div>
-            <div class="float-right">
-                <!-- FIXME: convert qcer to dynamic -->
-                <h4><span class="round">A1</span> {{ learningDesign.ld_scope }}</h4>
-            </div>
-        </div>
-        <div id="tabContent">
+
+        <div class="tabContent">
             <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Student View) -->
             <div ng-repeat="(level, nodes) in levels" class="studentLevel">
                 <div ng-repeat="node in nodes" class="nodeText">
@@ -315,7 +312,7 @@
             <!-- END DYNAMIC ACTIVITY CONTENT (Student View) -->
             <div class="clearfix"></div>
         </div>
-    </div>
+
 </tab>
 </tabset>
 </div>

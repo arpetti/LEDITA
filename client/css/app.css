@@ -142,8 +142,6 @@ a:hover {
     padding-top: 15px;
 }
 
-
-
 .btn-sidebar {
     color: #FFFFFF;
     font-weight: bold;
@@ -195,7 +193,7 @@ a:hover {
 #contentButtons {
     width: 100%;
     text-align: justify;
-    margin: 0 0 -20px;
+    margin: 0;
 }
 
 .btnContent {
@@ -282,12 +280,12 @@ a:hover {
     background-color: #FFFFFF;
     width: 99%;
     -moz-border-radius: 6px;
-    border-radius: 0 6px 6px 6px;
+    border-radius: 0 6px 0 0;
     -moz-border-top-left-radius: 0;
-    -webkit-border-radius: 0 6px 6px 6px;
+    -webkit-border-radius: 0 6px 0 0;
+    border-bottom: none;
     margin: 0;
     padding: 0;
-    min-height: 400px;
 }
 
 #contentHeader {
@@ -301,6 +299,7 @@ a:hover {
 
 #contentHeader h4 {
     margin: 0;
+    width: 100%;
 
 }
 
@@ -375,13 +374,14 @@ a:hover {
     text-indent: -9999px;
     width: 40px;
 }
+
 /* new LD creation
  ==================== */
 .sidebarForm {
- margin: 5px 0;
+    margin: 5px 0;
 }
 
-input.sidebarButton  {
+input.sidebarButton {
     background: #0099CC;
     color: #FFFFFF;
     font-weight: bold;
@@ -412,9 +412,10 @@ input.sidebarInput {
     margin: 0;
     padding: 0 5px;
 }
+
 .sidebarEditItem {
     float: left;
-list-style: none;
+    list-style: none;
 }
 
 .sidebarEditItem span {
@@ -442,7 +443,6 @@ list-style: none;
     background-image: url("../img/glyphicons-halflings-white.png");
 
 }
-
 
 /* new nodes bar
 ===================== */
@@ -584,7 +584,7 @@ list-style: none;
 }
 
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
-    right: 0px;
+    right: 0;
 }
 
 .edit {
@@ -619,11 +619,22 @@ list-style: none;
     float: left;
 }
 
-#tabContent {
-    margin: 0;
-    padding: 0;
+.nav {
+    margin-bottom: -5px;
+}
+
+.tabContent {
+    margin: -25px 0 0 0;
     text-align: center;
-    clear: both;
+
+    border: 1px solid #CCCCCC;
+    background-color: #FFFFFF;
+    width: 99%;
+    -moz-border-radius: 0 0 6px 6px;
+    border-radius: 0 0 6px 6px;
+    -webkit-border-radius: 0 0 6px 6px;
+    border-top: none;
+    padding: 25px 0 0 0;
 }
 
 .actBox {
@@ -861,8 +872,9 @@ a .likeButton:hover {
 .border {
     border: 1px dashed #dddddd;
     margin: 0 5px;
-    border-radius: 4px ;
+    border-radius: 4px;
 }
+
 .nodeText {
     text-align: left;
     padding: 10px 25px;
@@ -875,7 +887,7 @@ a .likeButton:hover {
 .nodeTextDetails {
     border: none;
     margin: 0;
-    padding-top: 0px;
+    padding-top: 0;
 }
 
 .groupBoxText {
@@ -972,9 +984,7 @@ ul.listNode li {
     border-bottom: 1px solid #999;
     text-align: center;
     background-color: #666;
-    border-radius: 6px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+    border-radius: 6px 6px 0 0;
     color: #ffffff;
     font-weight: bold;
 }
@@ -1166,7 +1176,7 @@ img.user-pic-big {
     position: relative;
     z-index: 1;
     margin-bottom: -1px;
-    padding: 0px 25px;
+    padding: 0 25px;
 }
 
 .btnTitle h3 {

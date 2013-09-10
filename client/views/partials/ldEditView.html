@@ -111,20 +111,30 @@
     </button>
 </div>
 
-<tab active="data.static1">
+
+
+
+
 <div id="contentBody">
     <div id="contentHeader">
-
         <div class="titleLeft">
-            <h4 class="inline">{{learningDesign.ld_name }}</h4>
+            <h4>{{learningDesign.ld_name }}</h4>
         </div>
         <div class="titleRight">
-            <h4><span class="round">A1</span> {{ learningDesign.ld_scope }}</h4>
+            <h4><span ng-repeat="qcer in learningDesign.qcers" class="round qceritem">{{ qcer.qcer_name }}</span> {{ learningDesign.ld_scope }}</h4>
         </div>
-
+        <div class="clearfix"></div>
     </div>
+</div>
 
-    <div id="tabContent">
+
+
+
+
+<tab active="data.static1">
+
+
+    <div class="tabContent">
         <div class="newActBox">
             <a href="#">
                 <span class="newActButton1"><i class="icon-plus icon-white"></i> Activity</span>
@@ -329,23 +339,10 @@
 
         <div class="clearfix"></div>
     </div>
-</div>
 </tab>
 <tab active="data.static2">
-    <div id="contentBody">
-        <div id="contentHeader">
 
-
-            <div class="float-left">
-                <h4 class="inline"><a href="#"><img ng-src="../img/emptyStar.png" class="star"></a>{{
-                    learningDesign.ld_name }}</h4>
-            </div>
-            <div class="float-right">
-                <h4><span class="round">A1</span> {{ learningDesign.ld_scope }}</h4>
-            </div>
-        </div>
-
-        <div id="tabContent">
+        <div class="tabContent">
 
             <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Teacher View) -->
             <div ng-repeat="(level, nodes) in levels">
@@ -503,23 +500,10 @@
             <!-- END DYNAMIC ACTIVITY CONTENT (Teacher View) -->
             <div class="clearfix"></div>
         </div>
-    </div>
 
 </tab>
 <tab active="data.static3">
-    <div id="contentBody">
-        <div id="contentHeader">
-
-
-            <div class="float-left">
-                <h4 class="inline"><a href="#"><img ng-src="../img/emptyStar.png" class="star"></a>{{
-                    learningDesign.ld_name }}</h4>
-            </div>
-            <div class="float-right">
-                <h4><span class="round">A1</span> {{ learningDesign.ld_scope }}</h4>
-            </div>
-        </div>
-        <div id="tabContent">
+        <div class="tabContent">
             <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Student View) -->
             <div ng-repeat="(level, nodes) in levels">
                 <div ng-repeat="node in nodes" class="nodeText">
