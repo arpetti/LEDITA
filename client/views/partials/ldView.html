@@ -83,7 +83,7 @@
 <tabset type="pills">
 <div id="contentButtons">
     <tab-heading>
-        <button class="btnContent" ng-class="isBtnActive(data.static1)" ng-click="data.static1 = true"><img
+        <button id="globalTab" class="btnContent" ng-class="isBtnActive(data.static1)" ng-click="data.static1 = true"><img
                 src="../../img/board.png" class="btnImage"> Global View
         </button>
     </tab-heading>
@@ -126,7 +126,7 @@
         <div class="tabContent">
             <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Global View) -->
             <div ng-repeat="(level, nodes) in levels" class="levelBox">
-                <div ng-repeat="node in nodes" ng-class="getBoxClass(node)">
+                <div ng-repeat="node in nodes" ng-class="getBoxClass(node)" id="node">
                     <!-- If it's a group:  -->
                     <div ng-show="node.children" class="groupName">{{ node.node_name }}</div>
                     <div class="clearfix"></div>
@@ -172,7 +172,7 @@
             </div>
             <!-- End Level Box -->
             <!-- END DYNAMIC ACTIVITY CONTENT (Global View) -->
-            <div modal="shouldBeOpen" close="close()" options="opts">
+            <div id="modalView" modal="shouldBeOpen" close="close()" options="opts">
                 <div class="modal-header">
                     <h4>Activity Details</h4>
                     <button class="btn modalButton float-right" ng-click="close()">x</button>
@@ -182,7 +182,7 @@
 
 
                     <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Modal) -->
-                    <div ng-repeat="(level, nodes) in levels">
+                    <div ng-repeat="(level, nodes) in levels" class="modalLevel" >
                         <div ng-repeat="node in nodes |   filter:node.node_name = nameSelected "
                              class="nodeTextDetails">
                             <!-- If it's a group:  -->

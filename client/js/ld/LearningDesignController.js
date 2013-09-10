@@ -31,6 +31,7 @@ angular.module('ledita-app')
 
     $scope.open = function (nodeName) {
         $scope.shouldBeOpen = true;
+        var nameSelected;
         $scope.nameSelected = nodeName;
         return nameSelected;
     };
