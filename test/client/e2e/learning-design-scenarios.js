@@ -156,6 +156,46 @@ describe('Learning Design', function() {
         expect(repeater('.groupBox1').count()).toBe(2);
         expect(repeater('.actBox').count()).toBe(10);
 
+        // Verify Teacher View
+        element("#teacherTab").click();
+        var expectedLd2TeacherViewLevel1 = [
+            "","Learning Activity 8","Face to face","15 min.","INDIVIDUAL",
+            "Practical description: what to do for the execution of this activity",
+            "Pedagogical Description: how to obtain better results and improve learning during the activity",
+
+            "Learning Activity 9","Face to face","2 h.","INDIVIDUAL","PC","Smartphone","Tablet",
+            "Didactical resource name 5","website","www.copy.com","Description of the didactical resource number 5",
+            "Practical description: what to do for the execution of this activity",
+            "Pedagogical Description: how to obtain better results and improve learning during the activity",
+
+            "Group 3 Name","Learning Activity 10","Online","30 min.","INDIVIDUAL",
+            "Practical description: what to do for the execution of this activity",
+            "Pedagogical Description: how to obtain better results and improve learning during the activity",
+
+            "Learning Activity 11","Face to face","2 d.","INDIVIDUAL",
+            "Didactical resource name 6","image","Description of the didactical resource number 6",
+            "Practical description: what to do for the execution of this activity",
+            "Pedagogical Description: how to obtain better results and improve learning during the activity"];
+        expect(repeater(".teacherLevel").row(0)).toEqual(expectedLd2TeacherViewLevel1);
+
+        // Verify Student View
+        element("#studentTab").click();
+        var expectedLd2StudentViewLevel1 = [
+            "","Learning Activity 8","Face to face","15 min.","INDIVIDUAL",
+            "Practical description: what to do for the execution of this activity",
+
+            "Learning Activity 9","Face to face","2 h.","INDIVIDUAL","PC","Smartphone","Tablet",
+            "Didactical resource name 5","website","www.copy.com","Description of the didactical resource number 5",
+            "Practical description: what to do for the execution of this activity",
+
+            "Group 3 Name","Learning Activity 10","Online","30 min.","INDIVIDUAL",
+            "Practical description: what to do for the execution of this activity",
+
+            "Learning Activity 11","Face to face","2 d.","INDIVIDUAL",
+            "Didactical resource name 6","image","Description of the didactical resource number 6",
+            "Practical description: what to do for the execution of this activity"];
+        expect(repeater(".studentLevel").row(0)).toEqual(expectedLd2StudentViewLevel1);
+
         // Logout
         element('#userActionsMenu').click();
         element('#logoutLink').click();
