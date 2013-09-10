@@ -88,7 +88,7 @@
         </button>
     </tab-heading>
     <tab-heading>
-        <button class="btnContent" ng-class="isBtnActive(data.static2)" ng-click="data.static2 = true"><img
+        <button id="teacherTab" class="btnContent" ng-class="isBtnActive(data.static2)" ng-click="data.static2 = true"><img
                 src="../../img/teacher.png"
                 class="btnImage"> Teacher View
         </button>
@@ -225,7 +225,7 @@
         </div>
         <div id="tabContent">
             <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Teacher View) -->
-            <div ng-repeat="(level, nodes) in levels">
+            <div ng-repeat="(level, nodes) in levels" class="teacherLevel">
                 <div ng-repeat="node in nodes" class="nodeText">
                     <!-- If it's a group:  -->
                     <div ng-show="node.children" class="groupBoxText">
