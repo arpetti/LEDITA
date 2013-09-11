@@ -4,27 +4,15 @@ var LdDao =      require('../dao/LdDao.js')
 
 module.exports = {
     
-    // TODO Replace with call to LDService.getAllLearningDesigns...
     index: function(req, res) {
-        LdDao.getLearningDesigns(function(err, learningDesigns){
+        LDService.getAllLearningDesigns(function(err, result, message){
             if(err) {
-                return res.send(500, err.message); 
+                return res.send(500, message); 
             } else { 
-                res.json(200, learningDesigns);
+                res.json(200, result);
             }
         });
     },
-
-    // work in progress...
-    // index: function(req, res) {
-    //     LDService.getAllLearningDesigns(function(err, result, message){
-    //         if(err) {
-    //             return res.send(500, message); 
-    //         } else { 
-    //             res.json(200, result);
-    //         }
-    //     });
-    // },
 
     findById: function(req, res) {
         var ldid = req.params.id;

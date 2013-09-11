@@ -129,16 +129,17 @@ describe('Learning Design Controller', function() {
 
     	it('Returns a 500 when unexpected error occurs getting learning designs from dao', function(done) {
 
-    		var daoError = new Error("something went wrong");
-    		var daoStub = sandbox.stub(LearningDesignDao, "getLearningDesigns", function(callback) {
-                callback(daoError);
+    		var serviceError = new Error("something went wrong");
+            var serviceMessage = "Unable to retrieve lds";
+    		var serviceStub = sandbox.stub(LearningDesignService, "getAllLearningDesigns", function(callback) {
+                callback(serviceError, null, serviceMessage);
             });
 
             res.send = function(httpStatus, errMessage) {
                 expect(httpStatus).to.equal(500);
-                expect(errMessage).to.equal(daoError.message);
+                expect(errMessage).to.equal(serviceMessage);
                 
-                assert.isTrue(daoStub.calledOnce);
+                assert.isTrue(serviceStub.calledOnce);
                 done();
             };
 
@@ -148,7 +149,7 @@ describe('Learning Design Controller', function() {
     	it('Returns a 200 when learning designs are retrieved successfully', function(done) {
 
     		var ldResults = [{ld_id: 1, ld_name: "Demo 1"}, {ld_id: 2, ld_name: "Demo 2"}];
-    		var daoStub = sandbox.stub(LearningDesignDao, "getLearningDesigns", function(callback) {
+    		var serviceStub = sandbox.stub(LearningDesignService, "getAllLearningDesigns", function(callback) {
                 callback(null, ldResults);
             });
 
@@ -157,7 +158,7 @@ describe('Learning Design Controller', function() {
                 expect(results.length).to.equal(ldResults.length);
                 expect(results).to.equal(ldResults);
                 
-                assert.isTrue(daoStub.calledOnce);
+                assert.isTrue(serviceStub.calledOnce);
                 done();
             };
 
