@@ -8,6 +8,7 @@ var GET_SUBJECTS = 'select subject_name from vw_ld_subject where ld_id = ?';
 var GET_OBJECTIVES = 'select objective_descr from vw_ld_objective where ld_id = ?';
 var GET_PREREQUISITES = 'select prereq_name, prereq_type from vw_ld_prerequisite where ld_id = ?';
 var GET_LD_QCERS = 'select qcer_name from vw_ld_qcer where ld_id in (?) order by qcer_name';
+var GET_LD_QCERS_WITH_LD_ID = 'select ld_id, qcer_name from vw_ld_qcer where ld_id in (?)';
 
 module.exports = {
 
@@ -63,6 +64,16 @@ module.exports = {
 
   getQcers: function(ldid, callback) {
     dao.findAll(GET_LD_QCERS, [ldid], function(err, rows) {
+      if (err) {
+        callback(err);
+        return;
+      }
+      callback(null, rows);
+    });
+  },
+
+  getQcersWithLdId: function(ldid, callback) {
+    dao.findAll(GET_LD_QCERS_WITH_LD_ID, [ldid], function(err, rows) {
       if (err) {
         callback(err);
         return;

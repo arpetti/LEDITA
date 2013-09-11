@@ -1,10 +1,27 @@
 // This is an integration test because the dependencies are not mocked out
 // Reference for mocha-promise testing: http://architects.dzone.com/articles/functional-testing-nodejs
 var expect = require('chai').expect
-    , LDService = require('../../service/LDService')
-    , messages = require('../../service/ValidationMessages');
+var LDService = require('../../service/LDService');
+var messages = require('../../service/ValidationMessages');
+var _ = require('underscore');
 
 describe('LD Service Integration', function() {
+
+      it('Gets all learning designs with qcers', function(done) {
+            LDService.getAllLearningDesigns(function(err, result, message) {
+                  expect(err).to.be.null;
+                  expect(message).to.be.null;
+                  expect(result).to.have.length(30);
+
+                  var ldDemo1 = _.findWhere(result, {ld_id: 1});
+                  expect(ldDemo1.ld_name).to.equal('Learning Design Title Demo 1');
+                  expect(ldDemo1.qcers).to.have.length(2);
+                  expect(ldDemo1.qcers[0].qcer_name).to.equal('A1');
+                  expect(ldDemo1.qcers[1].qcer_name).to.equal('A2');
+
+                  done();
+            });
+      });
 
 	it('Gets a learning design with subjects, objectives, prerequisites, qcers', function(done) {
 		var learningDesignId = 1;

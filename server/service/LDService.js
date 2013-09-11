@@ -1,13 +1,10 @@
-var LdDao = require('../dao/LdDao')
-    , when   = require('when')
-    , nodefn = require('when/node/function')
-	, messages = require('./ValidationMessages');
+var LdDao = require('../dao/LdDao');
+var when   = require('when');
+var nodefn = require('when/node/function');
+var messages = require('./ValidationMessages');
+var async = require('async');
+var _ = require('underscore');
 
-/*
-    Using cujos/when module to convert async dao calls to promises,
-    to avoid the dreaded "christmas tree" code - deep nested async calls.
-    https://github.com/cujojs/when/blob/master/docs/api.md#node-style-asynchronous-functions
-*/
 module.exports = {
 
     LD_NUMBER_OF_DATA_ELEMENTS: 5,
@@ -21,5 +18,44 @@ module.exports = {
 
         return when.join(promiseDaoGetLd, promiseDaoGetLdSubjects, 
             promiseDaoGetLdObjectives, promiseDaoGetLdPrerequisites, promiseDaoGetLdQcers);
+    },
+
+    // callback(err, result, message)
+    getAllLearningDesigns: function(callback) {
+        async.waterfall([
+            function(callback) {
+                LdDao.getLearningDesigns(function(err, results) {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        callback(null, _.pluck(results, 'ld_id'), results);
+                    }
+                })
+            },
+            function(ldids, lds, callback)  {
+                if (ldids && ldids.length == 0) {
+                    callback(null, lds);
+                } else {
+                    LdDao.getQcersWithLdId(ldids, function(err, results) {
+                        if (err) {
+                            callback(err);
+                        } else {
+                            var qcersByLdid = _.groupBy(results, function(element){return element.ld_id});
+                            var enrichLds = _.map(lds, function(element) {
+                                element.qcers = qcersByLdid[element.ld_id];
+                                return element;
+                            });
+                            callback(null, enrichLds);
+                        }
+                    });
+                }
+            }
+        ], function (err, result) {
+           if (err) {
+                callback(err, null, messages.UNABLE_TO_RETRIEVE_LDS);
+           } else {
+                callback(null, result, null);
+           }
+        });
     }
 };

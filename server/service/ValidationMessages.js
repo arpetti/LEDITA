@@ -19,6 +19,7 @@ module.exports.INVALID_USERNAME_PASSWORD = 'Invalid username or password.';
 module.exports.LOGIN_SUCCESS = "Login successful."
 
 // Learning Design
+module.exports.UNABLE_TO_RETRIEVE_LDS = 'Unable to retrieve learning designs at this time, please try again later.';
 module.exports.LD_NOT_FOUND = "Unable to find learning design."
 module.exports.LD_DETAIL_NOT_FOUND = "Learning Design details could not be found"
 

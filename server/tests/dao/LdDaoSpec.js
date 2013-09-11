@@ -165,6 +165,19 @@ describe('Learning Design DAO', function() {
             });
         });
 
+        it('Gets qcers with learning design ids', function(done) {
+            var ldids = [17, 18];
+            LdDao.getQcersWithLdId(ldids, function(err, results) {
+                expect(err).to.be.null;
+                expect(results).to.have.length(2);
+                expect(results[0].ld_id).to.equal(17);
+                expect(results[0].qcer_name).to.equal('C1');
+                expect(results[1].ld_id).to.equal(18);
+                expect(results[1].qcer_name).to.equal('A1');
+                done();
+            });
+        });
+
     });
 
 });	

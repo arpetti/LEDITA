@@ -4,6 +4,7 @@ var LdDao =      require('../dao/LdDao.js')
 
 module.exports = {
     
+    // TODO Replace with call to LDService.getAllLearningDesigns...
     index: function(req, res) {
         LdDao.getLearningDesigns(function(err, learningDesigns){
             if(err) {
