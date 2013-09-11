@@ -20,7 +20,7 @@ describe('LD Service', function() {
 
     describe('Get All Learning Designs', function() {
 
-    	it.only('Calls back with error if LdDao.getLearningDesigns returns error', function(done) {
+    	it('Calls back with error if LdDao.getLearningDesigns returns error', function(done) {
 
     		var daoGetLdError = new Error("something went wrong");
             var daoGetLdStub = sandbox.stub(LdDao, "getLearningDesigns", function(callback) {

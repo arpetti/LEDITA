@@ -15,6 +15,17 @@ module.exports = {
         });
     },
 
+    // work in progress...
+    // index: function(req, res) {
+    //     LDService.getAllLearningDesigns(function(err, result, message){
+    //         if(err) {
+    //             return res.send(500, message); 
+    //         } else { 
+    //             res.json(200, result);
+    //         }
+    //     });
+    // },
+
     findById: function(req, res) {
         var ldid = req.params.id;
         var learningDesignDetail = {};
