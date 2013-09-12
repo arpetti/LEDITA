@@ -1520,6 +1520,10 @@ input[type="checkbox"] {
 
 }
 
+.qcer-spacer {
+    margin-right: 5px;
+}
+
 .scope {
     float: right;
     width: 35%;

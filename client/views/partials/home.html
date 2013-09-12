@@ -3,8 +3,9 @@
     <div ng-repeat="learningDesign in learningDesigns | orderBy:'ld_last_edit_date':true" class="ld-border ld-item"
          ng-show="learningDesign.ld_publication==1">
         <div class="ld-top">
-            <!-- FIXME: convert qcer static data to dynamic -->
-            <div class="qcer">A1, A2, B1, B2, C1, C2</div>
+            <div class="qcer">
+                <span class="qcer-spacer" ng-repeat="qcer in learningDesign.qcers">{{ qcer.qcer_name }}</span>
+            </div>
             <div class="scope">
                 {{ learningDesign.ld_scope }}
             </div>
