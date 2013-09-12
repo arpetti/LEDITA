@@ -14,7 +14,30 @@ angular.module('ledita-app')
         }, function() {
             $rootScope.error = "Failed to logout";
         });
-    };
+    }
+
+
+/* Function for LD creation Modal
+* ===================================  */
+
+         $scope.createLD = function () {
+            $scope.beOpen = true;
+        };
+
+        $scope.closeLD = function () {
+            $scope.closeMsg = 'I was closed at: ' + new Date();
+            $scope.beOpen = false;
+        };
+
+        $scope.opts = {
+            backdropFade: true,
+            dialogFade:true,
+            backdropClick: false
+
+        };
+
+//        End function LD creation Modal
+
 }]);
 
 angular.module('ledita-app')
