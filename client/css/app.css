@@ -135,7 +135,7 @@ a:hover {
     border: 1px dashed #FFFFFF;
     text-align: center;
     padding: 5px;
-    margin: 0 0 10px 0;
+    margin: 0 0 15px 0;
 }
 
 .marginTopSidebar {
@@ -374,31 +374,132 @@ a:hover {
     width: 40px;
 }
 
+/* Modal Create LD
+ ==================== */
+.createLdForm {
+}
+.formLevel {
+    margin: 0 auto 20px;
+width: 98%;
+    clear: both;
+}
+.formLabel {
+    margin: 0;
+    font-weight: bold;
+    padding:0;
+    float: left;
+    text-align: right;
+    width: 25%;
+}
+.formInput {
+width: 70%;
+    float: right;
+}
+input.formInput {
+    font-size: 12px;
+    line-height: 12px;
+    margin: 0;
+    padding: 0 1%;
+}
+
+.formCheck {
+   width: 72%;
+    float: right;
+    text-align: left;
+    font-size: 12px;
+    line-height: 12px;
+    margin: 0 ;
+    padding: 0;
+  }
+.formTag {
+    width: 70%;
+    margin: 10px;
+    float: right;
+}
+
+
+.modalEditItem {
+    float: left;
+    list-style: none;
+    margin: 0 2px 5px 0;
+}
+
+.modalEditItem span {
+    margin: 0 5px 10px 0;
+    background-color: #dddddd;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    padding: 1px 4px;
+    line-height: 24px;
+}
+
+.modalEditItemLink {
+    font-weight: normal;
+    color: #666666;
+}
+
+.modalEditItemLink:hover {
+    background-color: #990000;
+    color: #FFFFFF;
+
+}
+
+.modalEditItemLink:hover i {
+    background-image: url("../img/glyphicons-halflings-white.png");
+
+}
+
+.btnForm {
+    background-color: #0099CC;
+    background-image: none;
+    color: #ffffff;
+}
+
+.btnFormCancel {
+    background-image: none;
+    background-color: #990000;
+    color: #FFFFFF;
+}
+
+.btnForm:hover {
+    background-color: #00A000;
+    color: #ffffff;
+}
+.btnFormCancel:hover {
+    background-color: #FF2800;
+    color: #ffffff;
+}
+
 /* new LD creation
  ==================== */
 .sidebarForm {
     margin: 5px 0;
 }
 
-input.sidebarButton {
-    background: #0099CC;
-    color: #FFFFFF;
-    font-weight: bold;
-    text-shadow: 0 1px 1px rgba(155, 155, 155, 0.65);
+button.sidebarButton  {
+background: #0099CC;
     border-radius: 14px;
-    width: 14px;
-    height: 14px;
-    line-height: 11px;
-    font-size: 14px;
-    padding: 0;
+    height: 16px;
+    width: 16px;
+    line-height: 16px;
     margin: 0;
-    text-align: center;
+    padding: 0;
+}
+button.sidebarButton i {
+    margin: 0;
+    padding: 0;
 }
 
 .sidebarButton:hover {
     background-color: #990000;
     color: #ffffff;
 }
+.sidebarTextarea {
+    font: 12px 'Raleway', sans-serif;
+    width: 90%;
+    resize: none;
+ }
 
 .sidebarInput {
     width: 75%;
@@ -433,7 +534,7 @@ input.sidebarInput {
 }
 
 .sidebarEditItemLink:hover {
-    background-color: #0099CC;
+    background-color: #990000;
     color: #FFFFFF;
 
 }
@@ -591,12 +692,12 @@ input.sidebarInput {
 }
 
 .edit, .delete {
-    margin: 2px;
+    margin: -15px 5px 0;
     background-color: #4f4f4f;
     border-radius: 24px;
-    width: 22px;
-    height: 22px;
-    line-height: 22px;
+    width: 18px;
+    height: 18px;
+    line-height: 20px;
     border: 2px solid #ffffff;
 }
 
@@ -1658,6 +1759,9 @@ input[type="checkbox"] {
         width: 130px;
         margin: 0 0 0 8px;
     }
+    label {
+        font-size: 12px;
+    }
 
 }
 
@@ -1818,6 +1922,10 @@ input[type="checkbox"] {
         width: 20%;
     }
 
+    .likeButton, .likedButton {
+        margin: 2px 10px 5px;
+    }
+
 }
 
 @media (max-width: 885px) and (min-width: 767px) {
@@ -1839,6 +1947,11 @@ input[type="checkbox"] {
 }
 
 @media (max-width: 767px) {
+
+    .likeButton, .likedButton {
+        margin: -7px 10px 5px;
+    }
+
     .userData {
         text-align: center;
         margin-bottom: 20px;
@@ -1923,11 +2036,28 @@ input[type="checkbox"] {
         font-size: 12px;
         line-height: 12px;
     }
+    .formLabel {
+        float: none;
+        width: 100%;
+        text-align: left;
+    }
+
+    .formInput, .formCheck {
+        text-align: left;
+        float: none;
+        width: 100%;
+    }
 
 }
 
 @media (max-width: 480px) {
-
+    .formCheckLabel {
+        float: none;
+    }
+    .formCheck {
+        margin: 0;
+        padding: 0;
+    }
     .btnTitle h3 {
         font-size: 20px;
     }
