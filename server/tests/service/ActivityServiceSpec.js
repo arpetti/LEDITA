@@ -180,7 +180,7 @@ describe('Activity Service', function() {
 
     describe('Get Enriched Structure', function() {
 
-        it.only('Gets complete structure', function(done) {
+        it('Gets complete structure', function(done) {
             var ldid = 1;
             
             var ldNodes = 

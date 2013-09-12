@@ -127,7 +127,6 @@ describe('Activity DAO', function() {
 			var activityids = [2, 3];
 			var ldids = [3, 5];
 			ActivityDao.getActivityDetails(activityids, ldids, function(err, results) {
-				console.log(JSON.stringify(results));
 				expect(err).to.be.null;
 				
 				// results are in 3 sections: technology, resource, qcer
