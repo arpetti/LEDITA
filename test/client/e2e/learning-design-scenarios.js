@@ -4,7 +4,7 @@
 
 describe('Learning Design', function() {
 
-    it('Logged in user can see all learning designs', function() {
+    it('Logged in user can see all learning designs on home page', function() {
         var existingUserName = testUsers.getUserName;
         var existingUserPassword = testUsers.getUserPassword;
 
@@ -14,8 +14,17 @@ describe('Learning Design', function() {
         element('#loginButton').click();
         sleep(2);
 
-        // Verify results
-        expect(repeater('#ldlist .ld-item').count()).toBeGreaterThan(5);
+        // Verify total results
+        expect(repeater('.ld-border').count()).toEqual(30);
+
+        // Verify first LD
+        var expectedLd1Data = ["A1","A2","Lesson","Learning Design Title Demo 1","Mario","Rossi"];
+        expect(repeater('.ld-border').row(0)).toEqual(expectedLd1Data);
+
+        // Verify another LD
+        var expectedLd5Data = ["A1","A2","B1","B2","C1","C2","Semester",
+            "Learning Design Title Demo 5","Sara","Neri"];
+        expect(repeater('.ld-border').row(4)).toEqual(expectedLd5Data);
 
         // Logout
         element('#userActionsMenu').click();
