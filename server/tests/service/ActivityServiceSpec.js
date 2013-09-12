@@ -180,7 +180,7 @@ describe('Activity Service', function() {
 
     describe('Get Enriched Structure', function() {
 
-        it('Gets complete structure', function(done) {
+        it.only('Gets complete structure', function(done) {
             var ldid = 1;
             
             var ldNodes = 
@@ -204,13 +204,38 @@ describe('Activity Service', function() {
                 callback(null, groups);
             });
 
-            // TODO Fill in some details for ACTIVITY at top level and child level, same for LD
             var activityDetails = {
                 "technology": [
+                    {
+                      "activity_id": 13,
+                      "activity_name": "ACT 13",
+                      "technology_id": 1,
+                      "technology_name": "Tablet"
+                    },
+                    {
+                      "activity_id": 21,
+                      "activity_name": "ACT 21",
+                      "technology_id": 2,
+                      "technology_name": "PC"
+                    }
                 ],
                 "resource": [
+                    {
+                      "activity_id": 13,
+                      "activity_name": "ACT 13",
+                      "resource_id": 2,
+                      "resource_name": "Didactical resource name 2",
+                      "resource_type": "document",
+                      "resource_descr": "Description of the didactical resource number 2",
+                      "resource_copy": "Carlo Neri",
+                      "resource_link": null
+                    }
                 ],
                 "qcer": [
+                    {
+                      "ld_id": 22,
+                      "qcer_name": "B1"
+                    }
                 ]
             };
             var activityDetailDaoStub = sandbox.stub(ActivityDao, "getActivityDetails", function(activityids, ldids, callback) {
@@ -221,6 +246,8 @@ describe('Activity Service', function() {
                 expect(err).to.be.null;
                 expect(message).to.be.null;
                 expect(_.keys(result)).to.have.length(3); // i.e. 3 levels
+
+                // TODO Assert tech, resource, qcer attached to expected nodes
 
                 assert.isTrue(activityDaoStub.withArgs(ldid).calledOnce);
                 assert.isTrue(activityGroupDaoStub.withArgs([12]).calledOnce);
