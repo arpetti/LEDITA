@@ -34,3 +34,20 @@ angular.module('ledita-app')
     };
 
 }]);
+
+angular.module('ledita-app')
+.controller('LdCreateCtrl',
+['$scope', function($scope) {
+
+    //TODO Replace with call to service
+    $scope.qceropts = [
+    	{"qcer_id": 1, "qcer_name": "A1"},
+    	{"qcer_id": 2, "qcer_name": "A2"},
+    	{"qcer_id": 3, "qcer_name": "B1"},
+    	{"qcer_id": 4, "qcer_name": "B2"},
+    	{"qcer_id": 5, "qcer_name": "C1"},
+    	{"qcer_id": 6, "qcer_name": "C2"},
+    ];
+    $scope.selectedQcers = {};
+
+}]);

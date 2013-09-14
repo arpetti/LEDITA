@@ -100,7 +100,7 @@
 
 				        <div class="clearfix"></div>
 				    </div>
-				    <div class="modal-body">
+				    <div ng-controller="LdCreateCtrl" class="modal-body">
 				        <form novalidate="" class="createLdForm">
 				            <div class="formLevel">
 				                <label class="formLabel"><i class="icon-ok"></i> Design Name*:</label>
@@ -111,12 +111,9 @@
 				                <label class="formLabel formLabel"><i class="icon-flag"></i> Language Level:</label>
 
 				                <div class="formCheck">
-				                    <input type="checkbox" ng-model="ld.qcer.a1"> A1
-				                    <input type="checkbox" ng-model="ld.qcer.a2"> A2
-				                    <input type="checkbox" ng-model="ld.qcer.b1"> B1
-				                    <input type="checkbox" ng-model="ld.qcer.b2"> B2
-				                    <input type="checkbox" ng-model="ld.qcer.c1"> C1
-				                    <input type="checkbox" ng-model="ld.qcer.c2"> C2
+				                	<span ng-repeat="qceropt in qceropts">
+				                    	<input type="checkbox" ng-model="selectedQcers[qceropt.qcer_name]"> {{ qceropt.qcer_name }}
+				                	</span>
 				                </div>
 				                <span class="clearfix"></span>
 				            </div>
@@ -183,7 +180,7 @@
 
 				        </form>
 
-				    </div>
+				    </div><!-- End Modal Body -->
 				    <div class="modal-footer">
 				        <button class="btn btnFormCancel" ng-click="closeLD()">Cancel</button>
 				        <button class="btn btnForm " ng-click="ok()">Create</button>
