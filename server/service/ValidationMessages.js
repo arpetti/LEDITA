@@ -28,3 +28,7 @@ module.exports.UNABLE_TO_RETRIEVE_LD_NODES = "Unable to retrieve learning design
 module.exports.NO_LD_NODES_FOUND = "This learning design has no nodes";
 module.exports.UNABLE_TO_RETRIEVE_ACTIVITIES = "Unable to retrieve activities at this time, please try again later.";
 module.exports.NO_ACTIVITIES_FOUND = "This learning design has no activities.";
+
+// Reference Data
+module.exports.UNABLE_TO_RETRIEVE_QCERS = "Unable to retrieve qcers at this time, please try again later.";
+module.exports.QCERS_NOT_FOUND = "No qcers could be found, please contact system administrator.";
