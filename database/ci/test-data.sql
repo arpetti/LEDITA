@@ -470,15 +470,6 @@ VALUES
 ('10','20','Name of the file number 10','355','','text/plain');
 
 
-INSERT INTO `qcer` (`id`, `name`)
-VALUES
-('1','A1'),
-('2','A2'),
-('3','B1'),
-('4','B2'),
-('5','C1'),
-('6','C2');
-
 INSERT INTO `classificates` (`ld_id`, `qcer_id`)
 VALUES
 ('1','1'),

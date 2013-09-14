@@ -231,9 +231,19 @@ DROP TABLE IF EXISTS `ledita-web-app`.`qcer` ;
 CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`qcer` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(50) NOT NULL ,
-  PRIMARY KEY (`id`) )
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `UNIQ_QCER` (`name` ASC) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+INSERT INTO `qcer` (`id`, `name`)
+VALUES
+('1','A1'),
+('2','A2'),
+('3','B1'),
+('4','B2'),
+('5','C1'),
+('6','C2');
 
 
 -- -----------------------------------------------------

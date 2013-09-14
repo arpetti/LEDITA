@@ -37,4 +37,14 @@ describe('DAO', function() {
         });
     });
 
+    it('Insert that violates unique constraint is rejected', function(done) {
+    	var queryString = 'insert into qcer set ?';
+    	var jsonData = {"name": "A1"};
+    	Dao.insertRecord(queryString, jsonData, function(err, insertedId) {
+    		expect(insertedId).to.be.undefined;
+    		expect(err).not.to.be.null;
+    		done();
+    	});
+    });
+
 });	
