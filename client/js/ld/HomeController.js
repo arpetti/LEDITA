@@ -14,3 +14,23 @@ angular.module('ledita-app')
     });
 
 }]);
+
+angular.module('ledita-app')
+.controller('NavActionCtrl',
+['$scope', function($scope) {
+    $scope.createLD = function () {
+        $scope.beOpen = true;
+    };
+
+    $scope.closeLD = function () {
+        $scope.closeMsg = 'I was closed at: ' + new Date();
+        $scope.beOpen = false;
+    };
+
+    $scope.opts = {
+        backdropFade: true,
+        dialogFade:true,
+        backdropClick: false
+    };
+
+}]);

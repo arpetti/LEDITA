@@ -57,7 +57,7 @@
             </button>
             <a class="brand" href="/"><img src="../img/logo.png" alt="Ledita Logo"/></a>
 
-            <div class="nav-collapse collapse">
+            <div ng-controller="NavActionCtrl" class="nav-collapse collapse">
                 <ul class="nav-top-pad nav">
                     <li>
                         <button type="button" class="btn btn-small btn-menu">Explore LDs</button>
@@ -91,8 +91,106 @@
                         </li>
                     </ul>
                 </div>
-            </div>
 
+                <!-- Start LD creation Modal -->
+				<div modal="beOpen" close="closeLD()" options="opts">
+
+				    <div class="modal-header">
+				        <h4>Create a New Design</h4>
+
+				        <div class="clearfix"></div>
+				    </div>
+				    <div class="modal-body">
+				        <form novalidate="" class="createLdForm">
+				            <div class="formLevel">
+				                <label class="formLabel"><i class="icon-ok"></i> Design Name*:</label>
+				                <input class="formInput" type="text" ng-model="ld.name" required="">
+				                <span class="clearfix"></span>
+				            </div>
+				            <div class="formLevel">
+				                <label class="formLabel formLabel"><i class="icon-flag"></i> Language Level:</label>
+
+				                <div class="formCheck">
+				                    <input type="checkbox" ng-model="ld.qcer.a1"> A1
+				                    <input type="checkbox" ng-model="ld.qcer.a2"> A2
+				                    <input type="checkbox" ng-model="ld.qcer.b1"> B1
+				                    <input type="checkbox" ng-model="ld.qcer.b2"> B2
+				                    <input type="checkbox" ng-model="ld.qcer.c1"> C1
+				                    <input type="checkbox" ng-model="ld.qcer.c2"> C2
+				                </div>
+				                <span class="clearfix"></span>
+				            </div>
+				            <div class="formLevel">
+				                <label class="formLabel"><i class="icon-time"></i> Design Scope*:</label>
+				                <input class="formInput" type="text" ng-model="ld.scope" placeholder="typeahead..." required="">
+				                <span class="clearfix"></span>
+
+				                <div class="formTag">
+				                    <ul class="zeroMargin scopes" ng-show="ld.scope">
+				                        <li class="modalEditItem"><span class="modalEditItemLink">{{ld.scope}} <a ng-href="#"><i
+				                                class="icon-remove-circle"></i> </a></span>
+				                        </li>
+				                    </ul>
+				                </div>
+				            </div>
+
+				            <div class="formLevel">
+				                <label class="formLabel"><i class="icon-map-marker"></i> Topics*:</label>
+				                <input class="formInput" type="text" ng-model="ld.subjects" placeholder="typeahead..." required="">
+				                <span class="clearfix"></span>
+
+				                <div class="formTag">
+				                    <ul ng-repeat="subject in ld.subjects" class="zeroMargin subjects">
+				                        <li class="modalEditItem"><span class="modalEditItemLink">{{subject}} <a ng-href="#"><i
+				                                class="icon-remove-circle"></i> </a></span>
+				                        </li>
+				                    </ul>
+				                </div>
+				            </div>
+				            <div class="formLevel">
+				                <label class="formLabel"><i class="icon-tasks"></i> Objectives*:</label>
+				                <input class="formInput" type="text" ng-model="ld.aims" placeholder="typeahead..." required="">
+				                <span class="clearfix"></span>
+
+				                <div class="formTag">
+				                    <ul ng-repeat="aim in ld.aims" class="zeroMargin objectives">
+				                        <li class="modalEditItem"><span class="modalEditItemLink">{{aim}} <a ng-href="#"><i
+				                                class="icon-remove-circle"></i> </a></span>
+				                        </li>
+				                    </ul>
+				                </div>
+				            </div>
+				            <div class="formLevel">
+				                <label class="formLabel"><i class="icon-backward"></i> Pre-Requisites:</label>
+				                <input class="formInput" type="text" ng-model="ld.needs" placeholder="typeahead..." required="">
+				                <span class="clearfix"></span>
+
+				                <div class="formTag">
+				                    <ul ng-repeat="need in ld.needs" class="zeroMargin prerequisites">
+				                        <li class="modalEditItem"><span class="modalEditItemLink">{{need}} <a ng-href="#"><i
+				                                class="icon-remove-circle"></i> </a></span>
+				                        </li>
+				                    </ul>
+
+				                </div>
+				            </div>
+
+				            <div class="formLevel">
+				                <label class="formLabel"><i class="icon-user"></i> Students' Description:</label>
+				                <textarea class="formInput" ng-model="ld.students" rows="4"></textarea>
+				                <span class="clearfix"></span>
+				            </div>
+
+				        </form>
+
+				    </div>
+				    <div class="modal-footer">
+				        <button class="btn btnFormCancel" ng-click="closeLD()">Cancel</button>
+				        <button class="btn btnForm " ng-click="ok()">Create</button>
+				    </div>
+				</div>
+				<!-- End LD creation Modal -->
+            </div>
             <!--/.nav-collapse -->
         </div>
     </div>
@@ -100,106 +198,7 @@
 </div>
 <!-- End Nav Bar User View -->
 
-<!-- Start LD creation Modal -->
 
-<div modal="beOpen" close="closeLD()" options="opts">
-
-    <div class="modal-header">
-        <h4>Create a New Design</h4>
-
-        <div class="clearfix"></div>
-    </div>
-    <div class="modal-body">
-        <form novalidate="" class="createLdForm">
-            <div class="formLevel">
-                <label class="formLabel"><i class="icon-ok"></i> Design Name*:</label>
-                <input class="formInput" type="text" ng-model="ld.name" required="">
-                <span class="clearfix"></span>
-            </div>
-            <div class="formLevel">
-                <label class="formLabel formLabel"><i class="icon-flag"></i> Language Level:</label>
-
-                <div class="formCheck">
-                    <input type="checkbox" ng-model="ld.qcer.a1"> A1
-                    <input type="checkbox" ng-model="ld.qcer.a2"> A2
-                    <input type="checkbox" ng-model="ld.qcer.b1"> B1
-                    <input type="checkbox" ng-model="ld.qcer.b2"> B2
-                    <input type="checkbox" ng-model="ld.qcer.c1"> C1
-                    <input type="checkbox" ng-model="ld.qcer.c2"> C2
-                </div>
-                <span class="clearfix"></span>
-            </div>
-            <div class="formLevel">
-                <label class="formLabel"><i class="icon-time"></i> Design Scope*:</label>
-                <input class="formInput" type="text" ng-model="ld.scope" placeholder="typeahead..." required="">
-                <span class="clearfix"></span>
-
-                <div class="formTag">
-                    <ul class="zeroMargin scopes" ng-show="ld.scope">
-                        <li class="modalEditItem"><span class="modalEditItemLink">{{ld.scope}} <a ng-href="#"><i
-                                class="icon-remove-circle"></i> </a></span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="formLevel">
-                <label class="formLabel"><i class="icon-map-marker"></i> Topics*:</label>
-                <input class="formInput" type="text" ng-model="ld.subjects" placeholder="typeahead..." required="">
-                <span class="clearfix"></span>
-
-                <div class="formTag">
-                    <ul ng-repeat="subject in ld.subjects" class="zeroMargin subjects">
-                        <li class="modalEditItem"><span class="modalEditItemLink">{{subject}} <a ng-href="#"><i
-                                class="icon-remove-circle"></i> </a></span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="formLevel">
-                <label class="formLabel"><i class="icon-tasks"></i> Objectives*:</label>
-                <input class="formInput" type="text" ng-model="ld.aims" placeholder="typeahead..." required="">
-                <span class="clearfix"></span>
-
-                <div class="formTag">
-                    <ul ng-repeat="aim in ld.aims" class="zeroMargin objectives">
-                        <li class="modalEditItem"><span class="modalEditItemLink">{{aim}} <a ng-href="#"><i
-                                class="icon-remove-circle"></i> </a></span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="formLevel">
-                <label class="formLabel"><i class="icon-backward"></i> Pre-Requisites:</label>
-                <input class="formInput" type="text" ng-model="ld.needs" placeholder="typeahead..." required="">
-                <span class="clearfix"></span>
-
-                <div class="formTag">
-                    <ul ng-repeat="need in ld.needs" class="zeroMargin prerequisites">
-                        <li class="modalEditItem"><span class="modalEditItemLink">{{need}} <a ng-href="#"><i
-                                class="icon-remove-circle"></i> </a></span>
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-
-            <div class="formLevel">
-                <label class="formLabel"><i class="icon-user"></i> Students' Description:</label>
-                <textarea class="formInput" ng-model="ld.students" rows="4"></textarea>
-                <span class="clearfix"></span>
-            </div>
-
-        </form>
-
-    </div>
-    <div class="modal-footer">
-        <button class="btn btnFormCancel" ng-click="closeLD()">Cancel</button>
-        <button class="btn btnForm " ng-click="ok()">Create</button>
-    </div>
-</div>
-
-<!-- End LD creation Modal -->
 
 
 <div ng-view class="container">
