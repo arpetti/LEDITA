@@ -777,16 +777,18 @@ input.sidebarInput {
     color: #990000;
 }
 
-.levelBox {
+.levelBox, .levelBoxChild {
     text-align: center;
     padding-top: 20px;
     background: url("../img/arw.png") no-repeat top;
 }
 
-.levelBox.last {
-    padding-bottom: 20px;
+div.clearfix+div.levelBox, div.levelBox:first-child,
+div.clearfix+div.levelBoxChild, div.levelBoxChild:first-child  {
     background: none;
+    padding-top: 0;
 }
+
 
 .actId {
     float: left;

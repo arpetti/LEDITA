@@ -134,7 +134,7 @@
                     <div ng-show="node.children" class="groupName">{{ node.node_name }}</div>
                     <div class="clearfix"></div>
                     <!-- Children are also in levels: Create unstyled div for each level -->
-                    <div ng-repeat="(childLevel, subChildren) in node.children">
+                    <div ng-repeat="(childLevel, subChildren) in node.children" class="levelBoxChild">
                         <div ng-repeat="child in subChildren" ng-class="getGroupBoxClass(child)">
                             <a class="whiteText childModalLink" ng-click="open(child.group_child_name)"><h6 class="actName">{{
                                 child.group_child_name }}</h6>
