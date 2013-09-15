@@ -75,6 +75,7 @@ describe('User DAO', function() {
         };
         UserDao.addUser(userData, function(err, result) {
             expect(err).not.to.be.null;
+            expect(err.message).to.contain('UNIQ_EMAIL');
             expect(result).to.be.undefined;
             done();
         });

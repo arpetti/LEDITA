@@ -192,7 +192,8 @@ DROP TABLE IF EXISTS `ledita-web-app`.`objective` ;
 CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`objective` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `descr` VARCHAR(200) NULL DEFAULT NULL ,
-  PRIMARY KEY (`id`) )
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `UNIQ_OBJECTIVE` (`descr` ASC) )
 ENGINE = InnoDB
 AUTO_INCREMENT = 7
 DEFAULT CHARACTER SET = utf8;
@@ -357,7 +358,8 @@ DROP TABLE IF EXISTS `ledita-web-app`.`subject` ;
 CREATE  TABLE IF NOT EXISTS `ledita-web-app`.`subject` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(100) NULL DEFAULT NULL ,
-  PRIMARY KEY (`id`) )
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `UNIQ_SUBJECT` (`name` ASC) )
 ENGINE = InnoDB
 AUTO_INCREMENT = 6
 DEFAULT CHARACTER SET = utf8;
