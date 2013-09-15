@@ -18,13 +18,13 @@ module.exports = {
 		});
 	},
 
-	// callback(err, result)
+	// callback(err, result, message)
     getSubjectsMatching: function(callback) {
     	RefDao.getSubjectsMatching(function(err, results) {
     		if (err) {
-    			callback(err);
+    			callback(err, null, messages.UNABLE_TO_RETRIEVE_SUBJECTS);
     		} else {
-    			callback(null, results);
+    			callback(null, results, null);
     		}
     	});
     }
