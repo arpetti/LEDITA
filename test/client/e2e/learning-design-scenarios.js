@@ -18,12 +18,11 @@ describe('Learning Design', function() {
         expect(repeater('.ld-border').count()).toEqual(30);
 
         // Verify first LD
-        var expectedLd1Data = ["A1","A2","Lesson","Learning Design Title Demo 1","Mario","Rossi"];
+        var expectedLd1Data = ["Learning Design Title Demo 1","A1","A2","Lesson","Mario","Rossi"];
         expect(repeater('.ld-border').row(0)).toEqual(expectedLd1Data);
 
         // Verify another LD
-        var expectedLd5Data = ["A1","A2","B1","B2","C1","C2","Semester",
-            "Learning Design Title Demo 5","Sara","Neri"];
+        var expectedLd5Data = ["Learning Design Title Demo 5","A1","A2","B1","B2","C1","C2","Semester","Sara","Neri"];
         expect(repeater('.ld-border').row(4)).toEqual(expectedLd5Data);
 
         // Logout
@@ -42,7 +41,7 @@ describe('Learning Design', function() {
         sleep(2);
 
         // Click on first result 
-        element('#ldlist .ld-item:nth-child(1) .ld-center a').click();
+        element('#ldlist .ld-item:nth-child(1) a .ld-center').click();
         sleep(2);
 
         // Verify detail view
@@ -145,7 +144,7 @@ describe('Learning Design', function() {
         sleep(2);
 
         // Click on first result 
-        element('#ldlist .ld-item:nth-child(1) .ld-center a').click();
+        element('#ldlist .ld-item:nth-child(1) a .ld-center').click();
         sleep(2);
 
         // Verify detail view
@@ -181,7 +180,7 @@ describe('Learning Design', function() {
         sleep(2);
 
         // Click on second result 
-        element('#ldlist .ld-item:nth-child(2) .ld-center a').click();
+        element('#ldlist .ld-item:nth-child(2) a .ld-center').click();
         sleep(2);
 
         // Verify detail view
