@@ -250,14 +250,14 @@ VALUES
 INSERT INTO `activity` (`id`, `students_id`, `name`, `type`, `dur_min`, `dur_hh`, `dur_dd`, `dur_mon`, `pract_descr`, `edu_descr`, `modality`)
 VALUES
 ('1','1','Learning Activity 1','1','15','0','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
-('2','1','Learning Activity 2','1','0','2','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('2','1','Learning Activity 2','1','0','0','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
 ('3','1','Learning Activity 3','1','30','0','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','2'),
 ('4','1','Learning Activity 4','1','0','0','2','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
 ('5','1','Support Activity 1','2','0','0','15','1','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','2'),
 ('6','1','Learning Activity 5','1','30','0','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
 ('7','1','Learning Activity 6','1','30','3','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
 ('8','1','Learning Activity 7','1','0','0','5','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
-('9','1','Support Activity 2','2','0','0','0','1','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','2'),
+('9','1','Support Activity 2','2','0','0','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','2'),
 ('10','1','Evaluation Activity 1','3','0','2','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
 ('11','2','Learning Activity 8','1','15','0','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
 ('12','2','Learning Activity 9','1','0','2','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),

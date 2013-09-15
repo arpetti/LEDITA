@@ -20,7 +20,7 @@ angular.module('ledita-app')
             "    <i class='icon-home'></i> Modality: <span class='nodeBodyText'>{{ node.modality }}</span> " +
             "</p> " +
             "<p class='tabText'> " +
-            "    <i class='icon-time'></i> Duration: <span class='nodeBodyText'>{{ node | durationDisplay }}</span> " +
+            "    <i class='icon-time'></i> Duration: <span class='nodeBodyText'>{{ node | durationDisplay }} <span ng-show='!(node | durationDisplay)'> Free</span></span> " +
             "</p> " +
             "<p class='tabText'><i class='icon-th-large'></i> Students' organization: " +
             "    <span class='nodeBodyText'>{{ node.org_label }}</span> " +
