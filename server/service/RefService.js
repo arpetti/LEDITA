@@ -16,6 +16,17 @@ module.exports = {
 			} 
 			callback(null, results, null);
 		});
-	}
+	},
+
+	// callback(err, result)
+    getSubjectsMatching: function(callback) {
+    	RefDao.getSubjectsMatching(function(err, results) {
+    		if (err) {
+    			callback(err);
+    		} else {
+    			callback(null, results);
+    		}
+    	});
+    }
 
 };

@@ -60,45 +60,4 @@ describe('LD Create DAO', function() {
 		}); 
 	});
 
-	describe('Typeahead Data', function() {
-
-		it('Finds subjects matched by beginning of string', function(done) {
-			var partial = ['To'];
-			LdCreateDao.getSubjectsMatching(partial, function(err, results) {
-				expect(err).to.be.null;
-				expect(results).to.have.length(5);
-				done();
-			});
-		});
-
-		it('Finds subjects matched by middle of string', function(done) {
-			var partial = ['opi'];
-			LdCreateDao.getSubjectsMatching(partial, function(err, results) {
-				expect(err).to.be.null;
-				expect(results).to.have.length(5);
-				done();
-			});
-		});
-
-		it('Subject matching is case insensitive', function(done) {
-			var partial = ['to'];
-			LdCreateDao.getSubjectsMatching(partial, function(err, results) {
-				expect(err).to.be.null;
-				expect(results).to.have.length(5);
-				done();
-			});
-		});
-
-		it('Subject matching returns empty list if nothing matched', function(done) {
-			var partial = ['xyz'];
-			LdCreateDao.getSubjectsMatching(partial, function(err, results) {
-				expect(err).to.be.null;
-				expect(results).not.to.be.null;
-				expect(results).to.have.length(0);
-				done();
-			});
-		});
-
-	});
-
 });
