@@ -140,7 +140,7 @@
                                 child.group_child_name }}</h6>
 
                                 <div class="actLabel" ng-show="child.group_child_type!='LD'">
-                                    <span class="timeLabel"><i class="icon-time icon-white"></i> {{ child | durationDisplay}} </span>
+                                    <span class="timeLabel"><i class="icon-time icon-white"></i> {{ child | durationDisplay}} <span ng-show="!(child | durationDisplay)"> Free</span></span>
                                 <span class="orgLabel"><i
                                         class="icon-th-large icon-white"></i> {{ child.org_label}}</span>
                                 </div>
@@ -160,7 +160,7 @@
 
                         <div class="actLabel" ng-show="node.type!='LD'">
                             <span class="timeLabel"><i
-                                    class="icon-time icon-white"></i> {{ node | durationDisplay }} </span>
+                                    class="icon-time icon-white"></i> {{ node | durationDisplay }} <span ng-show="!(node | durationDisplay)"> Free</span> </span>
                             <span class="orgLabel"><i class="icon-th-large icon-white"></i> {{ node.org_label }}</span>
                         </div>
                         <div class="actLabel" ng-show="node.type=='LD'">

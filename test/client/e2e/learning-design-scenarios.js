@@ -83,7 +83,7 @@ describe('Learning Design', function() {
             "Practical description: what to do for the execution of this activity",
             "Pedagogical Description: how to obtain better results and improve learning during the activity",
             
-            "Learning Activity 2","Face to face", "2 h.", "ALL", "PC", "Smartphone",
+            "Learning Activity 2","Face to face", "", "ALL", "PC", "Smartphone",
             "Didactical resource name 2", "document", "Carlo Neri", "Description of the didactical resource number 2",
             "Practical description: what to do for the execution of this activity",
             "Pedagogical Description: how to obtain better results and improve learning during the activity",
@@ -110,7 +110,7 @@ describe('Learning Design', function() {
             "Didactical resource name 1", "website", "Description of the didactical resource number 1",
             "Practical description: what to do for the execution of this activity",
             
-            "Learning Activity 2","Face to face", "2 h.", "ALL", "PC", "Smartphone",
+            "Learning Activity 2","Face to face", "", "ALL", "PC", "Smartphone",
             "Didactical resource name 2", "document", "Carlo Neri", "Description of the didactical resource number 2",
             "Practical description: what to do for the execution of this activity",
 
