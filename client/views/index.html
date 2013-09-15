@@ -97,7 +97,7 @@
 
 				    <div class="modal-header">
 				        <h4>Create a New Design</h4>
-
+				        <button id="createLdClose" class="btn modalButton float-right" ng-click="closeLD()">x</button>
 				        <div class="clearfix"></div>
 				    </div>
 				    <div ng-controller="LdCreateCtrl" class="modal-body">
@@ -112,7 +112,7 @@
 
 				                <div class="formCheck">
 				                	<span ng-repeat="qceropt in qceropts">
-				                    	<input type="checkbox" ng-model="selectedQcers[qceropt.qcer_name]"> {{ qceropt.qcer_name }}
+				                    	<input type="checkbox" ng-model="selectedQcers[qceropt.id]"> {{ qceropt.name }}
 				                	</span>
 				                </div>
 				                <span class="clearfix"></span>
