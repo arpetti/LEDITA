@@ -1589,17 +1589,18 @@ input[type="checkbox"] {
     min-width: 200px;
     float: left;
     color: #FFFFFF;
-    height: 155px;
+    height: 165px;
 }
 
-.ld-top {
-    height: 25px;
-    margin: 5px auto 5px auto;
-    padding: 0 5px;
-}
+
 
 .ld-center {
-    height: 80px;
+    margin: 10px auto 5px auto;
+    height: 120px;
+    width: 95%;
+    background-color: #FFFFFF;
+    border: 1px dashed #0099CC;
+    padding: 0;
 }
 
 .ld-bottom {
@@ -1611,51 +1612,34 @@ input[type="checkbox"] {
     font-weight: normal;
 }
 
-.qcer {
-    float: left;
-    width: 65%;
-    height: 22px;
-    color: #FFF;
-    font-size: 12px;
-    font-weight: bold;
-
+.qcer, .scope {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #666;
+    font-weight: normal;
 }
 
 .qcer-spacer {
     margin-right: 5px;
 }
 
-.scope {
-    float: right;
-    width: 35%;
-    height: 22px;
-    text-align: right;
-    color: #FFF;
-    font-size: 12px;
-    font-weight: bold;
-
-}
-
 .authorName a {
     float: right;
     text-align: center;
-    margin: 0 5px 2px 0;
-    background-color: #dddddd;
-    border-radius: 4px;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    padding: 1px 4px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 24px;
-    height: 24px;
-    width: 60%;
+    margin: 0 0 2px 0;
     display: inline-block;
-    color: #666666;
-
+    color: #fff;
+    font-weight: normal;
+    padding:0 2px;
+    border-radius: 4px;
+border: 1px solid #0099CC;
 }
-
-.authorName a:hover, .likes a:hover {
+.authorName a:hover {
+    border: 1px dashed #ffffff;
+    padding:0 2px;
+    border-radius: 4px;
+}
+ .likes a:hover {
     background-color: #FFFFFF;
 }
 
@@ -1703,18 +1687,13 @@ input[type="checkbox"] {
     line-height: 26px;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 95%;
-    background-color: #FFFFFF;
-    margin: 0 auto;
-    border: 1px dashed #0099CC;
-    padding: 10px 5px;
 }
 
-.ld-name-text a {
+.ld-name-text  {
     color: #990000;
 }
 
-.ld-name-text a:hover {
+.ld-name-text:hover {
     text-decoration: none;
     text-shadow: 0 -1px 1px #CCC, 0 1px 1px #999;
 
@@ -1755,6 +1734,9 @@ input[type="checkbox"] {
         width: 90%;
     }
 
+    .scope, .qcer {
+        width: 90%;
+    }
     .btn-menu {
         width: 130px;
         margin: 0 0 0 8px;
