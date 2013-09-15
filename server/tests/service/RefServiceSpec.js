@@ -72,4 +72,71 @@ describe('Reference Data Service', function() {
         RefService.getQcers(refServiceCallback);
     });
 
+    describe('SUBJECT', function() {
+
+    	beforeEach(function() {
+
+	    });
+
+	    afterEach(function() {
+	        sandbox.restore();
+	    });
+
+	    it('Returns subject results', function(done) {
+
+	    	var subjects = [{"name":"Topic 1"},{"name":"Topic 2"}];
+	    	var refDaoStub = sandbox.stub(RefDao, "getSubjectsMatching", function(callback) {
+	            callback(null, subjects);
+	        });
+
+	        var refServiceCallback = function(err, results) {
+	        	expect(err).to.be.null;
+	        	expect(results).not.to.be.null;
+	        	expect(results).to.have.length(subjects.length);
+	        	expect(results[0].name).to.equal(subjects[0].name);
+	        	expect(results[1].name).to.equal(subjects[1].name);
+
+	     		assert.isTrue(refDaoStub.calledOnce);
+	        	done();
+	        }
+	        RefService.getSubjectsMatching(refServiceCallback);
+		});
+
+		it('Empty result is not considered an error', function(done) {
+
+			var subjects = [];
+	    	var refDaoStub = sandbox.stub(RefDao, "getSubjectsMatching", function(callback) {
+	            callback(null, subjects);
+	        });
+
+	        var refServiceCallback = function(err, results) {
+	        	expect(err).to.be.null;
+	        	expect(results).not.to.be.null;
+	        	expect(results).to.have.length(0);
+
+	     		assert.isTrue(refDaoStub.calledOnce);
+	        	done();
+	        }
+	        RefService.getSubjectsMatching(refServiceCallback);
+		});
+
+		it('Returns error if error occurs calling dao', function(done) {
+
+	    	var daoError = new Error('something went wrong');
+	    	var refDaoStub = sandbox.stub(RefDao, "getSubjectsMatching", function(callback) {
+	            callback(daoError);
+	        });
+	        var refServiceCallback = function(err, results) {
+	        	expect(err).not.to.be.null;
+	        	expect(err).to.equal(daoError);
+	        	expect(results).to.be.undefined;
+
+	     		assert.isTrue(refDaoStub.calledOnce);
+	        	done();
+	        }
+	        RefService.getSubjectsMatching(refServiceCallback);
+	    });
+
+    });
+
 });
