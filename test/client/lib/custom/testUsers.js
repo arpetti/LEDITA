@@ -5,11 +5,19 @@
 		{
 			username:   "sara@email.it",
 			password:   "passw0rD",
+		},
+		{
+			username:   "mario@email.it",
+			password:   "passw0rD",
 		}
 	];
 
 	exports.getUserName = getUserName(users[0]);
 	exports.getUserPassword = getUserPassword(users[0]);
+
+	exports.getMarioUserName = getUserName(users[1]);
+	exports.getMarioUserPassword = getUserPassword(users[1]);
+	
 	exports.buildLongEmailAddress = buildLongEmailAddress();
 
 	function getUserName(user) {

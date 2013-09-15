@@ -66,7 +66,7 @@
                         <button type="button" class="btn btn-small btn-menu">Find Users</button>
                     </li>
                     <li>
-                        <button type="button" class="btn btn-small btn-menu" href ng-click="createLD()">Create a New
+                        <button id="createLd" type="button" class="btn btn-small btn-menu" href ng-click="createLD()">Create a New
                             LD
                         </button>
 
@@ -111,7 +111,7 @@
 				                <label class="formLabel formLabel"><i class="icon-flag"></i> Language Level:</label>
 
 				                <div class="formCheck">
-				                	<span ng-repeat="qceropt in qceropts">
+				                	<span ng-repeat="qceropt in qceropts" class="qcerOptData" >
 				                    	<input type="checkbox" ng-model="selectedQcers[qceropt.id]"> {{ qceropt.name }}
 				                	</span>
 				                </div>
@@ -182,7 +182,7 @@
 
 				    </div><!-- End Modal Body -->
 				    <div class="modal-footer">
-				        <button class="btn btnFormCancel" ng-click="closeLD()">Cancel</button>
+				        <button id="cancelCreateLd" class="btn btnFormCancel" ng-click="closeLD()">Cancel</button>
 				        <button class="btn btnForm " ng-click="ok()">Create</button>
 				    </div>
 				</div>
