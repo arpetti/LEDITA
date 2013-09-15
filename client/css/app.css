@@ -766,9 +766,9 @@ input.sidebarInput {
     background: #FFFFFF;
     border: 1px dashed #0099CC;
     line-height: 14px;
-    padding: 2px 0;
+    padding: 2px 0 5px 0;
     width: 96%;
-    margin: 5px auto;
+    margin: 5px auto -2px auto;
     cursor: pointer;
 }
 
@@ -861,22 +861,23 @@ div.clearfix+div.levelBoxChild, div.levelBoxChild:first-child  {
     font-weight: bold;
     font-family: 'arial', sans-serif;
     text-align: center;
-    border-bottom: 1px dashed #FFFFFF;
+    border-top: 1px dashed #FFFFFF;
     cursor: pointer;
+    padding: 5px 0;
+    width: 95%;
+    margin: 0 auto;
 
 }
 
 .timeLabel {
-    float: left;
-    padding: 5px;
     cursor: pointer;
+    display: block;
 
 }
 
 .orgLabel {
-    float: right;
-    padding: 5px;
     cursor: pointer;
+    display: block;
 }
 
 a.whiteText:hover {
