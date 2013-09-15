@@ -2,17 +2,18 @@
 <div class="row-fluid">
 <div class="span3">
     <div id="sidebar">
+        <!--
         <div>
             <a ng-href="#">
-                <!-- TODO: IF liked -> class likedButton, ELSE class likeButton -->
+                <!-- TODO: IF liked -> class likedButton, ELSE class likeButton
 
                 <div class="likeButton">
-                    <!-- TODO: Like button. If the LD is already liked, add class 'icon-white'.-->
+                    <!-- TODO: Like button. If the LD is already liked, add class 'icon-white'.
                     Like <i class="icon-thumbs-up "></i>
                 </div>
             </a>
         </div>
-
+        -->
         <h4 id="sidebarHeader">General Info</h4>
 
         <div>
@@ -162,53 +163,57 @@
                 <div class="clearfix"></div>
 
                 <!-- Children are also in levels: Create unstyled div for each level -->
-                <div ng-repeat="(childLevel, subChildren) in node.children">
+
+
+                <div ng-repeat="(childLevel, subChildren) in node.children" class="levelBoxChild">
                     <div ng-repeat="child in subChildren" ng-class="getGroupBoxClass(child)">
                         <div class="tools">
                             <a class="edit" ng-href="#"><i class="icon-edit icon-white"></i> </a>
                             <a class="delete" ng-href="#"><i class="icon-remove icon-white"></i> </a>
                             <span class="clearfix"></span>
-                        </div>
-                        <a ng-href="#" class="whiteText" ng-click="open()"><h6 class="actName">{{
+                        </div> <a class="whiteText childModalLink" ng-click="open(child.group_child_name)"><h6 class="actName">{{
                             child.group_child_name }}</h6>
 
                             <div class="actLabel" ng-show="child.group_child_type!='LD'">
-                                <span class="timeLabel"><i class="icon-time icon-white"></i> {{ child | durationDisplay}} </span>
+                                <span class="timeLabel"><i class="icon-time icon-white"></i> {{ child | durationDisplay}} <span ng-show="!(child | durationDisplay)"> Free</span></span>
                                 <span class="orgLabel"><i
                                         class="icon-th-large icon-white"></i> {{ child.org_label}}</span>
                             </div>
-                            <!-- FIXME Convert static data to dynamic -->
                             <div class="actLabel" ng-show="child.group_child_type=='LD'">
-                                <span class="timeLabel"><i class="icon-time icon-white"></i> Lesson </span>
-                                <span class="orgLabel"><i class="icon-flag icon-white"></i> A1</span>
+                                <span class="timeLabel"><i class="icon-time icon-white"></i> {{ child.scope}}</span>
+                                    <span class="orgLabel"><i class="icon-flag icon-white"
+                                                              ng-show="child.qcers"></i> <span
+                                            ng-repeat="qcer in child.qcers">{{ qcer.qcer_name }} </span></span>
                             </div>
                         </a>
                     </div>
                 </div>
+
                 <!-- End Children -->
 
                 <!-- If it's NOT a group:  -->
-                <div ng-show="!node.children" class="actName"><a ng-href="#" class="whiteText" ng-click="open()">
-                    <div class="tools">
-                        <a class="edit" ng-href="#"><i class="icon-edit icon-white"></i> </a>
-                        <a class="delete" ng-href="#"><i class="icon-remove icon-white"></i> </a>
-                        <span class="clearfix"></span>
-                    </div>
-                    <h6>{{ node.node_name }}</h6>
 
-                    <div class="actLabel" ng-show="node.type!='LD'">
+                    <div ng-show="!node.children" class="actName"><a class="whiteText" ng-click="open(node.node_name)">
+                        <div class="tools">
+                            <a class="edit" ng-href="#"><i class="icon-edit icon-white"></i> </a>
+                            <a class="delete" ng-href="#"><i class="icon-remove icon-white"></i> </a>
+                            <span class="clearfix"></span>
+                        </div>
+                        <h6>{{ node.node_name }}</h6>
+
+                        <div class="actLabel" ng-show="node.type!='LD'">
                             <span class="timeLabel"><i
-                                    class="icon-time icon-white"></i> {{ node | durationDisplay }} </span>
-                        <span class="orgLabel"><i class="icon-th-large icon-white"></i> {{ node.org_label }}</span>
+                                    class="icon-time icon-white"></i> {{ node | durationDisplay }} <span ng-show="!(node | durationDisplay)"> Free</span> </span>
+                            <span class="orgLabel"><i class="icon-th-large icon-white"></i> {{ node.org_label }}</span>
+                        </div>
+                        <div class="actLabel" ng-show="node.type=='LD'">
+                            <span class="timeLabel"><i class="icon-time icon-white"></i> {{ node.scope }}</span>
+                            <span class="orgLabel"><i class="icon-flag icon-white" ng-show="node.qcers"></i> <span
+                                    ng-repeat="qcer in node.qcers"> {{ qcer.qcer_name }} </span></span>
+                        </div>
+                    </a>
                     </div>
-                    <!-- FIXME Convert static data to dynamic -->
-                    <div class="actLabel" ng-show="node.type=='LD'">
-                        <span class="timeLabel"><i class="icon-time icon-white"></i> Semester </span>
-                        <span class="orgLabel"><i class="icon-flag icon-white"></i> A1</span>
-                    </div>
-                </a>
                 </div>
-            </div>
             <!-- End Activity or Group Box -->
         </div>
         <!-- End Level Box -->
