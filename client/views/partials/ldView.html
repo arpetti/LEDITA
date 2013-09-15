@@ -2,17 +2,19 @@
 <div class="row-fluid">
 <div class="span3">
     <div id="sidebar">
-        <div>
-            <!-- FIXME: add link for like function -->
+        <!--
+         <div>
+            FIXME: add link for like function
             <a ng-href="#">
-                <!-- TODO: IF liked -> class likedButton, ELSE class likeButton -->
+                <!-- TODO: IF liked -> class likedButton, ELSE class likeButton
                 <div class="likeButton">
-                    <!-- TODO: Like button. If the LD is already liked, add class 'icon-white'.-->
+                    <!-- TODO: Like button. If the LD is already liked, add class 'icon-white'.
                     Like <i class="icon-thumbs-up "></i>
                 </div>
             </a>
         </div>
-        <h4 id="sidebarHeader">General Info</h4>
+        -->
+    <h4 id="sidebarHeader">General Info</h4>
 
         <div>
             <h5 class="zeroMargin date"><i class="icon-pencil"></i> Author:</h5>
@@ -57,7 +59,7 @@
             </ul>
         </div>
         -->
-        <!-- TODO: 1st phase - Service for name of father and children LDs -->
+        <!-- TODO: 1st phase - Service for name of father and children LDs
         <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-retweet"></i> Related Designs:</h5>
             <ul class="zeroMargin">
                 <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item n. 1</a></li>
@@ -68,6 +70,7 @@
                 <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">item number 3</a></li>
             </ul>
         </div>
+        -->
         <div class="clearfix"></div>
         <div id="model">
             <!-- FIXME: add a dynamic link to use the LD as a model -->
@@ -131,7 +134,7 @@
                     <div ng-show="node.children" class="groupName">{{ node.node_name }}</div>
                     <div class="clearfix"></div>
                     <!-- Children are also in levels: Create unstyled div for each level -->
-                    <div ng-repeat="(childLevel, subChildren) in node.children">
+                    <div ng-repeat="(childLevel, subChildren) in node.children" class="levelBoxChild">
                         <div ng-repeat="child in subChildren" ng-class="getGroupBoxClass(child)">
                             <a class="whiteText childModalLink" ng-click="open(child.group_child_name)"><h6 class="actName">{{
                                 child.group_child_name }}</h6>
