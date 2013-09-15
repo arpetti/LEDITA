@@ -1,10 +1,9 @@
-var ActivityService = require('../service/ActivityService');
+var RefService = require('../service/RefService');
 
 module.exports = {
 
-	getLDNodes: function(req, res) {
-		var ldid = req.params.id;
-		ActivityService.getEnrichedLDActivityStructure(ldid, function(err, result, message) {
+	getQcers: function(req, res) {
+		RefService.getQcers(function(err, result, message) {
 			if(err) {
                 return res.send(500, message);
             }

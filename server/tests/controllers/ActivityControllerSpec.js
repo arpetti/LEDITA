@@ -4,7 +4,7 @@ var expect = require('chai').expect
     , ActivityService = require('../../service/ActivityService')
     , ActivityCtrl = require('../../controllers/ActivityController');
 
-describe('Activity controller', function() {
+describe('Activity Controller', function() {
 
     var req = { }
         , res = {}

@@ -3,7 +3,8 @@ var _ =           require('underscore')
     , passport =  require('passport')
     , AuthCtrl =  require('./controllers/auth')
     , LearningDesignCtrl = require('./controllers/learningDesign')
-    , ActivityCtrl       = require('./controllers/ActivityController')
+    , ActivityController       = require('./controllers/ActivityController')
+    , RefController       = require('./controllers/RefController')
     , User =      require('./models/User.js')
     , userRoles = require('../client/js/auth/AuthRoutingConfig').userRoles
     , accessLevels = require('../client/js/auth/AuthRoutingConfig').accessLevels;
@@ -59,7 +60,15 @@ var routes = [
     {
         path: '/learningdesignstructure/:id',
         httpMethod: 'GET',
-        middleware: [ensureAuthenticated, ensureAuthorized, ActivityCtrl.getLDNodes],
+        middleware: [ensureAuthenticated, ensureAuthorized, ActivityController.getLDNodes],
+        accessLevel: accessLevels.user
+    },
+
+    // Reference Data
+    {
+    	path: '/reference/qcer',
+    	httpMethod: 'GET',
+    	middleware: [ensureAuthenticated, ensureAuthorized, RefController.getQcers],
         accessLevel: accessLevels.user
     },
 

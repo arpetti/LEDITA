@@ -18,4 +18,9 @@ describe('REST resources require authorization', function() {
     expect(element('pre').text()).toBe('Unauthorized');
   });
 
+  it('GET qcers', function() {
+    browser().navigateTo('/reference/qcer');
+    expect(element('pre').text()).toBe('Unauthorized');
+  });
+
 }); 
