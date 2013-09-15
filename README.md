@@ -29,6 +29,13 @@ Project Website: http://www.professoreitaliano.com
 
 * If you don't already have it, install [Node.js](http://nodejs.org/)
 
+* Install grunt
+	````
+	npm install -g grunt-cli
+	```
+
+	For Mac, use ```sudo```
+
 * Install [node-gyp](https://github.com/TooTallNate/node-gyp), this is a required dependency for [bcrypt](https://github.com/ncb000gt/node.bcrypt.js/) which is used by this project for password hashing.
 
     ```
