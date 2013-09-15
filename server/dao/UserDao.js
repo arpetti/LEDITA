@@ -39,12 +39,12 @@ module.exports = {
   },
 
   deleteUser: function(userJsonData, callback) {
-    dao.insertRecord(DELETE_USER, userJsonData, function(err, result) {
+    dao.deleteRecord(DELETE_USER, userJsonData, function(err, result) {
       if (err) {
         callback(err);
         return;
       }
-      callback(null, result);
+      callback(null, null);
     });
   }
 
