@@ -7,7 +7,7 @@ var DELETE_USER = 'DELETE FROM ld WHERE ?';
 module.exports = {
 
 	createLd: function(ldData, callback) {
-		dao.insertRecord(CREATE_LD, ldData, function(err, ldid) {
+		dao.insertRecordWithCreationDate(CREATE_LD, ldData, function(err, ldid) {
 			if(err) {
 				callback(err);
 			} else {

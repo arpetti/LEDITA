@@ -57,6 +57,11 @@ module.exports = {
     });
   },
 
+  insertRecordWithCreationDate: function(queryString, jsonData, callback) {
+  	jsonData.creation_date = new Date();
+  	module.exports.insertRecord(queryString, jsonData, callback);
+  },
+
   deleteRecord: function(queryString, jsonData, callback) {
     pool.getConnection(function(err, connection) {
       if (err) {
