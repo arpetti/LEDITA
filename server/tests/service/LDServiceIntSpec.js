@@ -14,7 +14,7 @@ describe('LD Service Integration', function() {
                   expect(result).to.have.length(30);
 
                   var ldDemo1 = _.findWhere(result, {ld_id: 1});
-                  expect(ldDemo1.ld_name).to.equal('Learning Design Title Demo 1');
+                  expect(ldDemo1.ld_name).to.equal('Learningà Designè Titleì Demoò 1ù é');
                   expect(ldDemo1.qcers).to.have.length(2);
                   expect(ldDemo1.qcers[0].qcer_name).to.equal('A1');
                   expect(ldDemo1.qcers[1].qcer_name).to.equal('A2');
@@ -32,7 +32,7 @@ describe('LD Service Integration', function() {
       		expect(learningDesign).to.have.length(1);
       		learningDesignObj = learningDesign[0];
       		expect(learningDesignObj.ld_id).to.equal(1);
-                  expect(learningDesignObj.ld_name).to.equal('Learning Design Title Demo 1');
+                  expect(learningDesignObj.ld_name).to.equal('Learningà Designè Titleì Demoò 1ù é');
                   expect(learningDesignObj.ld_scope).to.equal('Lesson');
                   expect(learningDesignObj.ld_students_profile).to.equal('20 studenti adolescenti di livello B1');
                   expect(learningDesignObj.user_name).to.equal('Mario');

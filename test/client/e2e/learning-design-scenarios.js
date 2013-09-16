@@ -18,7 +18,7 @@ describe('Learning Design', function() {
         expect(repeater('.ld-border').count()).toEqual(30);
 
         // Verify first LD
-        var expectedLd1Data = ["Learning Design Title Demo 1","A1","A2","Lesson","Mario","Rossi"];
+        var expectedLd1Data = ["Learningà Designè Titleì Demoò 1ù é","A1","A2","Lesson","Mario","Rossi"];
         expect(repeater('.ld-border').row(0)).toEqual(expectedLd1Data);
 
         // Verify another LD
@@ -46,7 +46,7 @@ describe('Learning Design', function() {
 
         // Verify detail view
         expect(browser().location().url()).toBe('/ld/1');
-        expect(binding('learningDesign.ld_name')).toBe('Learning Design Title Demo 1');
+        expect(binding('learningDesign.ld_name')).toBe('Learningà Designè Titleì Demoò 1ù é');
         expect(binding('learningDesign.ld_students_profile')).toBe('20 studenti adolescenti di livello B1');
         expect(binding('learningDesign.ld_scope')).toBe('Lesson');
         expect(repeater('.qceritem').column('qcer.qcer_name')).toEqual(["A1", "A2"]);
@@ -200,7 +200,7 @@ describe('Learning Design', function() {
 
         // Verify prerequisites
         expect(repeater('.prerequisites li').count()).toBe(1);
-        expect(repeater('.prerequisites li').column('prereq.prereq_name')).toEqual(["Learning Design Title Demo 1"]);
+        expect(repeater('.prerequisites li').column('prereq.prereq_name')).toEqual(["Learningà Designè Titleì Demoò 1ù é"]);
 
         // Verify Global View
         expect(repeater('.levelBox').count()).toBe(4);

@@ -15,7 +15,7 @@ VALUES ('1', '1', 'Mario', 'Rossi', 'M', 'mario@email.it', '$2a$10$/MWGZW7cmwNdl
 ('5', '5', 'Silvia', 'Rosa', 'F', 'silvia@email.it', '$2a$10$/MWGZW7cmwNdle.jiFJb9OiWqVZjxbgJxYNpEraHkwzZ2muBHL7Gm', 'Scuola E', 'Pechino', 'Cina');
 
 INSERT INTO `ld`(`id`, `user_id`, `ld_model_id`, `name`, `scope`, `publication`, `students_profile`, `creation_date`, `last_edit_date`)
-VALUES ('1','1', NULL,'Learning Design Title Demo 1','Lesson','1','20 studenti adolescenti di livello B1','2012-08-16 22:21:26', '2013-08-16 22:21:26'),
+VALUES ('1','1', NULL,'Learningà Designè Titleì Demoò 1ù é','Lesson','1','20 studenti adolescenti di livello B1','2012-08-16 22:21:26', '2013-08-16 22:21:26'),
               ('2','1', '1','Learning Design Title Demo 2','Module','0','20 studenti adolescenti di livello B1','2012-08-15 22:21:26', '2013-08-14 22:21:26'),
               ('3','2', NULL,'Learning Design Title Demo 3','Semester','1','20 studenti adolescenti di livello B1','2012-08-14 22:21:26', '2013-08-13 22:21:26'),
               ('4','3', NULL,'Learning Design Title Demo 4','Lesson','1','20 studenti adolescenti di livello B1','2012-08-13 22:21:26', '2013-08-12 22:21:26'),

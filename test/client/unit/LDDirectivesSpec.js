@@ -14,7 +14,7 @@ describe('LD Directives', function () {
         node =
         {
             "ld_id": 1,
-            "ld_name": "Learning Design Title Demo 1",
+            "ld_name": "Learningà Designè Titleì Demoò 1ù é",
             "level": 1,
             "position": 1,
             "node_id": 5,

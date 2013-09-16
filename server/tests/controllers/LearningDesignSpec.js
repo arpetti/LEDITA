@@ -73,7 +73,7 @@ describe('Learning Design Controller', function() {
             req.params = {id: learningDesignId};
 
             var serviceResponse = [
-                    [{"ld_id":1,"ld_name":"Learning Design Title Demo 1"}],
+                    [{"ld_id":1,"ld_name":"Learningà Designè Titleì Demoò 1ù é"}],
                     [{"subject_name":"Topic 1"},{"subject_name":"Topic 5"}],
                     [{"objective_descr":"Objective 1"},{"objective_descr":"Objective 6"}],
                     [{"prereq_name":"prereq1", "prereq_type": "OBJECTIVE"}],
@@ -98,7 +98,7 @@ describe('Learning Design Controller', function() {
     		req.params = {id: learningDesignId};
 
             var serviceResponse = [
-                    [{"ld_id":1,"ld_name":"Learning Design Title Demo 1"}],
+                    [{"ld_id":1,"ld_name":"Learningà Designè Titleì Demoò 1ù é"}],
                     [{"subject_name":"Topic 1"},{"subject_name":"Topic 5"}],
                     [{"objective_descr":"Objective 1"},{"objective_descr":"Objective 6"}],
                     [{"qcer_name": "A2"}]
@@ -109,7 +109,7 @@ describe('Learning Design Controller', function() {
             res.json = function(httpStatus, result) {
             	expect(httpStatus).to.equal(200);
             	expect(result.ld_id).to.equal(1);
-            	expect(result.ld_name).to.equal('Learning Design Title Demo 1');
+            	expect(result.ld_name).to.equal('Learningà Designè Titleì Demoò 1ù é');
                 expect(result.subjects[0].subject_name).to.equal('Topic 1');
                 expect(result.subjects[1].subject_name).to.equal('Topic 5');
                 expect(result.objectives[0].objective_descr).to.equal('Objective 1');
