@@ -2,9 +2,9 @@
 module.exports.FIRST_NAME_REQUIRED = 'First name is required.';
 module.exports.FIRST_NAME_LENGTH = 'First name must be 2-20 characters long.';
 module.exports.FIRST_NAME_ALLOWED_CHARS = 'First name can contain only letters.';
-module.exports.SURNAME_REQUIRED = 'Suname is required.';
+module.exports.SURNAME_REQUIRED = 'Surname is required.';
 module.exports.SURNAME_LENGTH = 'Surname must be 2-20 characters long.';
-module.exports.SURNAME_ALLOWED_CHARS = 'Suname can contain only letters.';
+module.exports.SURNAME_ALLOWED_CHARS = 'Surname can contain only letters.';
 module.exports.EMAIL_REQUIRED = 'Email address is required.';
 module.exports.EMAIL_LENGTH = 'Email must be less than 255 characters long.';
 module.exports.EMAIL_FORMAT = 'Please input a valid email address.';
@@ -25,7 +25,7 @@ module.exports.LD_DETAIL_NOT_FOUND = "Learning Design details could not be found
 
 // Activities
 module.exports.UNABLE_TO_RETRIEVE_LD_NODES = "Unable to retrieve learning design nodes at this time, please try again later.";
-module.exports.NO_LD_NODES_FOUND = "This learning design has no nodes";
+module.exports.NO_LD_NODES_FOUND = "This design has no contents";
 module.exports.UNABLE_TO_RETRIEVE_ACTIVITIES = "Unable to retrieve activities at this time, please try again later.";
 module.exports.NO_ACTIVITIES_FOUND = "This learning design has no activities.";
 

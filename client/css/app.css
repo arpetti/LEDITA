@@ -720,6 +720,11 @@ input.sidebarInput {
 
 /* activities diagram
 ===================== */
+#activityErrors {
+    width: 50%;
+    margin: 20px auto;
+}
+
 .titleRight {
     float: right;
 }

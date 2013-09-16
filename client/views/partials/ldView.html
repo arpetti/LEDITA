@@ -127,6 +127,7 @@
 
 <tab active="data.static1">
         <div class="tabContent">
+
             <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Global View) -->
             <div ng-repeat="(level, nodes) in levels" class="levelBox">
                 <div ng-repeat="node in nodes" ng-class="getBoxClass(node)" id="node">
@@ -173,6 +174,10 @@
                 </div>
                 <!-- End Activity or Group Box -->
             </div>
+            <div id="activityErrors" ng-show="alertMsg" class="alert alert-warning">
+                {{ alertMsg }}
+            </div>
+
             <!-- End Level Box -->
             <!-- END DYNAMIC ACTIVITY CONTENT (Global View) -->
             <div id="modalView" modal="shouldBeOpen" close="close()" options="opts">
@@ -267,6 +272,10 @@
                 </div>
                 <!-- End Activity or Group Box -->
             </div>
+            <div id="activityErrors" ng-show="alertMsg" class="alert alert-warning">
+                {{ alertMsg }}
+            </div>
+
             <!-- End Level Box -->
             <!-- END DYNAMIC ACTIVITY CONTENT (Teacher View) -->
             <div class="clearfix"></div>
@@ -311,6 +320,10 @@
                 </div>
                 <!-- End Activity or Group Box -->
             </div>
+            <div id="activityErrors" ng-show="alertMsg" class="alert alert-warning">
+                {{ alertMsg }}
+            </div>
+
             <!-- End Level Box -->
             <!-- END DYNAMIC ACTIVITY CONTENT (Student View) -->
             <div class="clearfix"></div>

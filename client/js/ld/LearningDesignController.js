@@ -14,6 +14,7 @@ angular.module('ledita-app')
         $scope.levels = res;
     }, function(err) {
         $scope.error = "Failed to fetch learning design activities.";
+        $scope.alertMsg = err;
     });
 
     $scope.getBoxClass = function(node) {
