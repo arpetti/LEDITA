@@ -125,10 +125,10 @@ describe('Learning Design DAO', function() {
             var learningDesignId = 5;
             LdDao.getPrerequisites(learningDesignId, function(err, results){
                 expect(results).to.have.length(2);
-                expect(results[0].prereq_name).to.equal('Objective 4');
-                expect(results[0].prereq_type).to.equal('OBJECTIVE');
-                expect(results[1].prereq_name).to.equal('Learning Design Title Demo 3');
-                expect(results[1].prereq_type).to.equal('LD');
+                expect(results[1].prereq_name).to.equal('Objective 4');
+                expect(results[1].prereq_type).to.equal('OBJECTIVE');
+                expect(results[0].prereq_name).to.equal('Learning Design Title Demo 3');
+                expect(results[0].prereq_type).to.equal('LD');
                 done();
             });
         });

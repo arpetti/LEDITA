@@ -5,14 +5,16 @@ VALUES ('1', 'mario.png', '287', 'http://localhost/ledita/img/usr/mario.png', 'p
         ('2', 'lucia.png', '347', 'http://localhost/ledita/img/usr/lucia.png', 'png'),
 ('3', 'antonio.png', '287', 'http://localhost/ledita/img/usr/antonio.png', 'jpg'),
 ('4', 'sara.png', '287', 'http://localhost/ledita/img/usr/sara.png', 'gif'),
-('5', 'silvia.png', '287', 'http://localhost/ledita/img/usr/silvia.png', 'png');
+('5', 'silvia.png', '287', 'http://localhost/ledita/img/usr/silvia.png', 'png'),
+('6', 'alessandro.png', '287', 'http://localhost/ledita/img/usr/alessandro.png', 'png');
 
 INSERT INTO `ledita-test`.`user` (`id`, `image_id`, `name`, `last_name`, `gender`, `email`, `hash`, `workplace`, `city`, `country`)
 VALUES ('1', '1', 'Mario', 'Rossi', 'M', 'mario@email.it', '$2a$10$/MWGZW7cmwNdle.jiFJb9OiWqVZjxbgJxYNpEraHkwzZ2muBHL7Gm', 'Scuola A', 'Roma', 'Italia'),
 ('2', '2', 'Lucia', 'Bianchi', 'F', 'lucia@email.it', '$2a$10$/MWGZW7cmwNdle.jiFJb9OiWqVZjxbgJxYNpEraHkwzZ2muBHL7Gm', 'Scuola B', 'Parigi', 'Francia'),
 ('3', '3', 'Antonio', 'Verdi', 'M', 'antonio@email.it', '$2a$10$/MWGZW7cmwNdle.jiFJb9OiWqVZjxbgJxYNpEraHkwzZ2muBHL7Gm', 'Scuola C', 'Berlino', 'Germania'),
 ('4', '4', 'Sara', 'Neri', 'F', 'sara@email.it', '$2a$10$/MWGZW7cmwNdle.jiFJb9OiWqVZjxbgJxYNpEraHkwzZ2muBHL7Gm', 'Scuola D', 'Los Angeles', 'Stati Uniti'),
-('5', '5', 'Silvia', 'Rosa', 'F', 'silvia@email.it', '$2a$10$/MWGZW7cmwNdle.jiFJb9OiWqVZjxbgJxYNpEraHkwzZ2muBHL7Gm', 'Scuola E', 'Pechino', 'Cina');
+('5', '5', 'Silvia', 'Rosa', 'F', 'silvia@email.it', '$2a$10$/MWGZW7cmwNdle.jiFJb9OiWqVZjxbgJxYNpEraHkwzZ2muBHL7Gm', 'Scuola E', 'Pechino', 'Cina'),
+('6', '6', 'Alessandro', 'Arpetti', 'M', 'arpetti@gmail.com', '$2a$10$/MWGZW7cmwNdle.jiFJb9OiWqVZjxbgJxYNpEraHkwzZ2muBHL7Gm', 'ProfessoreItaliano', 'Campinas', 'Brasile');
 
 INSERT INTO `ld`(`id`, `user_id`, `ld_model_id`, `name`, `scope`, `publication`, `students_profile`, `creation_date`, `last_edit_date`)
 VALUES ('1','1', NULL,'Learningà Designè Titleì Demoò 1ù é','Lesson','1','20 studenti adolescenti di livello B1','2012-08-16 22:21:26', '2013-08-16 22:21:26'),
@@ -44,14 +46,15 @@ VALUES ('1','1', NULL,'Learningà Designè Titleì Demoò 1ù é','Lesson','1','
               ('27','2', NULL,'Learning Design Title Demo 27','Semester','1','20 studenti adolescenti di livello B1','2012-01-06 22:21:26', '2013-01-11 22:21:26'),
               ('28','3', NULL,'Learning Design Title Demo 28','Lesson','1','20 studenti adolescenti di livello B1','2012-01-05 22:21:26', '2013-01-10 22:21:26'),
               ('29','4', NULL,'Learning Design Title Demo 29','Semester','1','20 studenti adolescenti di livello B1','2012-01-04 22:21:26', '2013-01-09 22:21:26'),
-              ('30','4', NULL,'Learning Design Title Demo 30','Module','0','20 studenti adolescenti di livello B1','2012-01-02 22:21:26', '2013-01-07 22:21:26');
+               ('31','6', NULL,'Parole Dolci','Lezione','1','8 studenti adulti, tutti brasiliani, corso di 4 ore a settimana','2011-09-16 22:21:26', '2011-09-16 22:21:26');
 
 INSERT INTO `subject` (`id`, `name`)
 VALUES ('1', 'Topic 1'),
 ('2', 'Topic 2'),
 ('3', 'Topic 3'),
 ('4', 'Topic 4'),
-('5', 'Topic 5');
+('5', 'Topic 5'),
+('6', 'Sentimenti ');
 
 
 INSERT INTO `concerns` (`subject_id`, `ld_id`)
@@ -85,8 +88,6 @@ VALUES
  ('2','27'),
  ('3','28'),
  ('4','29'),
- ('5','30'),
- ('1','30'),
  ('2','29'),
  ('4','27'),
  ('5','26'),
@@ -109,7 +110,8 @@ VALUES
  ('1','5'),
  ('2','4'),
  ('4','2'),
- ('5','1');
+ ('5','1'),
+ ('6','31');
 
 
 INSERT INTO `objective` (`id`, `descr`)
@@ -118,7 +120,14 @@ VALUES ('1', 'Objective 1'),
 ('3', 'Objective 3'),
 ('4', 'Objective 4'),
 ('5', 'Objective 5'),
-('6', 'Objective 6');
+('6', 'Objective 6'),
+('7', 'Espressione dei sentimenti'),
+('8', 'Frasi idiomatiche sui sentimenti'),
+('9', 'La sfera degli affetti in Italia'),
+('10', 'Lessico relativo ai sentimenti'),
+('11', 'Registro formale e informale con i sentimenti'),
+('12', 'A1'),
+('13', 'Lessico relativo al cibo');
 
 INSERT INTO `aims` (`ld_id`, `objective_id`)
 VALUES
@@ -151,7 +160,6 @@ VALUES
 ('27','3'),
 ('28','4'),
 ('29','5'),
-('30','6'),
 ('1','6'),
 ('2','6'),
 ('3','6'),
@@ -181,7 +189,11 @@ VALUES
 ('27','1'),
 ('28','1'),
 ('29','1'),
-('30','1');
+('31','7'),
+('31','8'),
+('31','9'),
+('31','10'),
+('31','11');
 
 INSERT INTO `needs` (`id`, `ld_id`, `ld_requisite_id`,`objective_id`)
 VALUES
@@ -195,7 +207,9 @@ VALUES
 ('8', '6', NULL , '1' ),
 ('9', '7', NULL , '5' ),
 ('10', '8', '2' , NULL ),
-('11', '8', NULL , '6' );
+('11', '8', NULL , '6' ),
+('12', '31', NULL , '12' ),
+('13', '31', NULL , '13' );
 
 
 INSERT INTO `likes` (`user_id`, `ld_id`)
@@ -228,8 +242,7 @@ VALUES
 ('1','26'),
 ('2','27'),
 ('3','28'),
-('4','29'),
-('5','30');
+('4','29');
 
 
 
@@ -298,7 +311,23 @@ VALUES
 ('47','5','Learning Activity 44','1','30','3','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
 ('48','5','Learning Activity 45','1','0','0','5','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
 ('49','5','Support Activity 46','2','0','0','0','1','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','2'),
-('50','5','Evaluation Activity 47','3','0','2','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1');
+('50','5','Evaluation Activity 47','3','0','2','0','0','Practical description: what to do for the execution of this activity','Pedagogical Description: how to obtain better results and improve learning during the activity','1'),
+('51','1','Brainstorming','1','2','0','0','0','Quali sono le parole che conoscete per indicare dolci?','Fare un brainstorming con gli studenti chiedendogli tutte le parole di cibi dolci che conoscono. Scrivere le parole alla lavagna.','1'),
+('52','3','Striscia senza dialoghi','1','8','0','0','0','Scrivere i dialoghi per la striscia usando almeno 3 parole tra quelle scritte alla lavagna.','Mostrare la striscia senza il testo e, in coppia, chiedere agli studenti di inventare i dialoghi usando almeno 3 parole tra quelle scritte alla lavagna.','1'),
+('53','1','Lettura strisce degli studenti','1','5','0','0','0','Quali dialoghi avete creato? Leggiamo insieme.','Presentare i dialoghi creati dagli studenti in plenum, cercando di portare l\'attenzione sulle parole dolci usate.','1'),
+('54','3','Battuta e apelto','1','5','0','0','0','Leggete il testo della striscia e provate a descrivere cosa significano le parole "battuta" e "apelto".','Distribuire agli studenti, divisi in coppie diverse dalle precedenti, la striscia con il testo originale e chiedergli di tentare di descrivere il significato di “battuta” e “apelto”.','1'),
+('55','1','Verifica comprensione','1','5','0','0','0','Vediamo insieme, cosa significano secondo voi "battuta" e "apelto".','Controllo in plenum e verifica della comprensione.','1'),
+('56','2','Esercizio su lessico sentimenti','1','7','0','0','0','Fare l\'esercizio di pagina 20 n. 1a.','Individualmente, distribuire le fotocopie del libro e fare l\'esercizio a pag. 20 n. 1a per introdurre i verbi e le parole usate per esprimere i sentimenti.','1'),
+('57','1','Correzione esercizio','1','3','0','0','0','Correzione con la classe dell\'esercizio svolto.','Controllo in plenum.','1'),
+('58','3','Esercizio su espressioni idiomatiche','1','7','0','0','0','Fare in coppia l\'esercizio di pagina 20 n. 1b.','In coppia, fare l\'esercizio a pag. 20 n. 1b per la comprensione di espressioni idiomatiche sui sentimenti.','1'),
+('59','1','Correzione esercizio','1','3','0','0','0','Correzione con la classe dell\'esercizio svolto.','Controllo in plenum.','1'),
+('60','1','Esercizio su sentimenti contrari','1','10','0','0','0','Fare l\'esercizio di pagina 23 n. 4.','In plenum, fare l\'esercizio a pag. 23 n. 4 delle fotocopie per dividere i verbi con significato positivo da quelli con significato negativo. Es. Amare – odiare.','1'),
+('61','2','Produzione frasi','1','10','0','0','0','Scrivere tre frasi con le parole studiate in questa lezione e specificare in che situazioni possono essere usate.','Individualmente, scrivere 3 frasi usando i verbi e le parole studiate, mostrando specificamente in che situazioni sono usate.','1'),
+('62','1','Commento frasi degli studenti','1','5','0','0','0','Con la classe, leggere e commentare le frasi scritte.','Controllo in plenum.','1'),
+('63','7','Domande sull\'uso del lessico sui sentimenti','1','20','0','0','0','In gruppi di 4, rispondere alla seguenti domande: esistono differenze nell\'uso delle parole e dei verbi che esprimono sentimenti tra l\'italiano e il portoghese? Secondo voi, quali parole è meglio evitare? Quali parole si possono usare con: la famiglia, il partner, gli amici o con le altre persone? Quali parole si possono usare in situazioni formali?','Passeggiare tra i gruppi cercando di stimolare la produzione spontanea degli studenti.','1'),
+('64','1','Discussione sulle risposte','1','10','0','0','0','Commentare con la classe le varie risposte proposte dagli studenti.','Controllo in plenum e discussione. Se gli studenti non riescono ad evidenziare gli aspetti importanti, aiutarli ad esplicitarli.','1'),
+('65','3','Creazione di una striscia','3','15','0','0','0','Creare la descrizione testuale di una striscia, descrivendo specificamente il luogo di ambientazione e i personaggi presenti e usando almeno 3 frasi che esprimono i sentimenti e 1 frase idiomatica tra quelle studiate precedentemente.','Aiutare gli studenti con evenutali difficoltà nella creazione, cercando di farli concentrare sull\'uso delle parole e delle frasi sui sentimenti.','1'),
+('66','1','Correzione frasi','1','5','0','0','0','Presentare la striscia alla classe.','Concentrare la correzione sugli aspetti importanti della lezione e verificare gli obiettivi progettati.','1');
 
 INSERT INTO `activity_group` (`id`, `name`)
 VALUES
@@ -311,7 +340,13 @@ VALUES
 ('7','Group 5 Name'),
 ('8',NULL),
 ('9','Group 6 Name'),
-('10','Group 7 Name');
+('10','Group 7 Name'),
+('11','Motivazione'),
+('12','Globalità'),
+('13','Analisi'),
+('14','Riflessione linguistica'),
+('15','Riflessione socioculturale'),
+('16','Verifica finale');
 
 INSERT INTO `participates` (`id`, `activity_group_id`, `activity_id`, `ld_is_part_id`, `level`, `position`)
 VALUES
@@ -347,7 +382,23 @@ VALUES
 ('30','9',NULL,'5','1','1'),
 ('31','10','42',NULL,'1','1'),
 ('32','10','43',NULL,'1','2'),
-('33','10',NULL,'9','1','3');
+('33','10',NULL,'9','1','3'),
+('34','11','51',NULL,'1','1'),
+('35','11','52',NULL,'2','1'),
+('36','11','53',NULL,'3','1'),
+('37','12','54',NULL,'1','1'),
+('38','12','55',NULL,'2','1'),
+('39','13','56',NULL,'1','1'),
+('40','13','57',NULL,'2','1'),
+('41','13','58',NULL,'3','1'),
+('42','13','59',NULL,'4','1'),
+('43','14','60',NULL,'1','1'),
+('44','14','61',NULL,'2','1'),
+('45','14','62',NULL,'3','1'),
+('46','15','63',NULL,'1','1'),
+('47','15','64',NULL,'2','1'),
+('48','16','65',NULL,'1','1'),
+('49','16','66',NULL,'2','1');
 
 INSERT INTO `composes` (`id`, `ld_id`, `activity_id`, `ld_part_id`, `activity_group_id`, `level`, `position`)
 VALUES
@@ -386,8 +437,13 @@ VALUES
 ('33','5',NULL,NULL,'10','5','2'),
 ('34','5','49',NULL,NULL,'6','1'),
 ('35','5','50',NULL,NULL,'6','3'),
-('36','5',NULL,'2',NULL,'6','2');
-
+('36','5',NULL,'2',NULL,'6','2'),
+('37','31',NULL,NULL,'11','1','1'),
+('38','31',NULL,NULL,'12','2','1'),
+('39','31',NULL,NULL,'13','3','1'),
+('40','31',NULL,NULL,'14','4','1'),
+('41','31',NULL,NULL,'15','5','1'),
+('42','31',NULL,NULL,'16','6','1');
 
 
 INSERT INTO `technology` (`id`, `name`)
@@ -453,7 +509,12 @@ VALUES
 ('17','45','Didactical resource name 17','document','Description of the didactical resource number 17',NULL,'© www.ioi.com'),
 ('18','48','Didactical resource name 18','video','Description of the didactical resource number 18','http://#',NULL),
 ('19','49','Didactical resource name 19','website','Description of the didactical resource number 19','http://#',NULL),
-('20','50','Didactical resource name 20','document','Description of the didactical resource number 20',NULL,NULL);
+('20','50','Didactical resource name 20','document','Description of the didactical resource number 20',NULL,NULL),
+('21','52','Striscia senza dialoghi','image','Striscia con i dialoghi cancellati.',NULL,NULL),
+('22','54','Striscia con dialoghi','image','Striscia con i dialoghi.',NULL,NULL),
+('23','56','Le parole italiane','document','Fotocopie dal libro “Le parole italiane” di Alma Edizioni (Unità 3 – Personalità e sentimenti, p. 20).',NULL,NULL),
+('24','58','Le parole italiane','document','Fotocopie dal libro “Le parole italiane” di Alma Edizioni (Unità 3 – Personalità e sentimenti, p. 20).',NULL,NULL),
+('25','60','Le parole italiane','document','Fotocopie dal libro “Le parole italiane” di Alma Edizioni (Unità 3 – Personalità e sentimenti, p. 23).',NULL,NULL);
 
 
 INSERT INTO `file` (`id`, `resource_id`, `name`, `size`, `uri`, `mime` )
@@ -467,7 +528,12 @@ VALUES
 ('7','15','Name of the file number 7','6757','','image/gif'),
 ('8','18','Name of the file number 8','434567','','application/pdf'),
 ('9','19','Name of the file number 9','5455','','video/mpeg'),
-('10','20','Name of the file number 10','355','','text/plain');
+('10','20','Name of the file number 10','355','','text/plain'),
+('11','21','Striscia senza dialoghi','355','/img/avatar_sample.png','image/png'),
+('12','22','Striscia con dialoghi','355','/img/avatar_sample.png','image/png'),
+('13','23','Fotocopie libro','355','','application/pdf'),
+('14','24','Fotocopie libro','355','','application/pdf'),
+('15','25','Fotocopie libro','355','','application/pdf');
 
 
 INSERT INTO `classificates` (`ld_id`, `qcer_id`)
@@ -504,4 +570,5 @@ VALUES
 ('27','4'),
 ('28','3'),
 ('29','5'),
-('30','1');
+('31','2'),
+('31','3');
