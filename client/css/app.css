@@ -396,8 +396,8 @@ width: 70%;
     float: right;
 }
 input.formInput {
-    font-size: 12px;
-    line-height: 12px;
+    font-size: 14px;
+    line-height: 14px;
     margin: 0;
     padding: 0 1%;
 }
@@ -406,11 +406,17 @@ input.formInput {
    width: 72%;
     float: right;
     text-align: left;
-    font-size: 12px;
-    line-height: 12px;
+    font-size: 14px;
+    line-height: 14px;
     margin: 0 ;
     padding: 0;
   }
+
+.formCheck input[type="checkbox"] {
+margin-left: 4%;
+
+}
+
 .formTag {
     width: 70%;
     margin: 10px;
@@ -463,7 +469,7 @@ input.formInput {
 }
 
 .btnForm:hover {
-    background-color: #00A000;
+    background-color: #39BBE6;
     color: #ffffff;
 }
 .btnFormCancel:hover {
