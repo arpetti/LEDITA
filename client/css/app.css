@@ -477,6 +477,14 @@ margin-left: 4%;
     color: #ffffff;
 }
 
+.errorTipModal {
+    color: #FFFFFF;
+    font-size: 12px;
+    background-color: #990000;
+    padding: 3px;
+    border-radius: 4px;
+    margin:0 0 0 28% ;
+}
 /* new LD creation
  ==================== */
 .sidebarForm {

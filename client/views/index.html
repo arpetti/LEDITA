@@ -100,11 +100,14 @@
 				        <div class="clearfix"></div>
 				    </div>
 				    <div ng-controller="LdCreateCtrl" class="modal-body">
-				        <form novalidate="" class="createLdForm">
+				        <form novalidate="" class="createLdForm" name="LdCreateForm">
 				            <div class="formLevel">
-				                <label class="formLabel"><i class="icon-ok"></i> Design Name*:</label>
-				                <input class="formInput" type="text" ng-model="ld.name" required="">
-				                <span class="clearfix"></span>
+                                <label class="formLabel"><i class="icon-ok"></i> Design Name*:</label>
+				                <input class="formInput" type="text" name="ldName" ng-model="name" required ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
+                                <span class="errorTipModal" ng-show="LdCreateForm.ldName.$dirty && LdCreateForm.ldName.$error.required">Required!</span>
+                                <span class="errorTipModal" ng-show="LdCreateForm.ldName.$error.pattern">The design name cannot contain this symbol.</span>
+                                <span class="errorTipModal" ng-show="LdCreateForm.ldName.$error.maxlength">The design name cannot be longer than 50 characters.</span>
+                                <span class="clearfix"></span>
 				            </div>
 				            <div class="formLevel">
 				                <label class="formLabel formLabel"><i class="icon-flag"></i> Language Level:</label>
