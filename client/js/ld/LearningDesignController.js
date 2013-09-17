@@ -30,11 +30,12 @@ angular.module('ledita-app')
        return "btnActive";
    }                      ;
 
-    $scope.open = function (nodeName) {
+    $scope.open = function (node) {
         $scope.shouldBeOpen = true;
-        var nameSelected;
-        $scope.nameSelected = nodeName;
-        return nameSelected;
+        var selectedNode;
+        $scope.selectedNode = node;
+        $scope.selectedNode.displayName = node.node_name || node.group_child_name;
+        return selectedNode;
     };
 
     $scope.close = function () {

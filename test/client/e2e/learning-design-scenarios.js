@@ -154,15 +154,8 @@ describe('Learning Design', function() {
         element(".childModalLink").click();
 
         // Verify modal window content 
-        var expectedSupportActivity2ModalDetail = [
-            "Group 2 Name","Learning Activity 6","Face to face","3 h. 30 min.","ALL",
-            "PC","Smartphone","Didactical resource name 4","audio",
-            "Description of the didactical resource number 4",
-            "Practical description: what to do for the execution of this activity",
-            "Pedagogical Description: how to obtain better results and improve learning during the activity"
-            ];
-        expect(repeater(".modalActivityData").row(4)).toEqual(expectedSupportActivity2ModalDetail);
-        element("#activityModalClose").click();
+      <!-- TODO: test for modal -->
+
 
         // Logout
         element('#userActionsMenu').click();
