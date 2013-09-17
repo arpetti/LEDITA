@@ -16,7 +16,8 @@ module.exports = {
 	},
 
 	getSubjectsMatching: function(req, res) {
-		RefService.getSubjectsMatching(function(err, results, message) {
+		var partial = req.params.partial;
+		RefService.getSubjectsMatching(partial, function(err, results, message) {
 			if (err) {
 				return res.send(500, message);
 			} else {

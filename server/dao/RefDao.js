@@ -2,7 +2,7 @@ var mysql = require('mysql')
 var dao = require('./Dao');
 
 var GET_QCERS = 'select id, name from qcer order by name';
-var GET_SUBJECTS_MATCHING = "select name from subject where name like ?";
+var GET_SUBJECTS_MATCHING = "select name from subject where name like ? order by name";
 
 var addWildCard = function(partial) {
 	return '%' + partial + '%';

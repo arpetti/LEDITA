@@ -88,8 +88,11 @@ describe('Reference Data Controller', function() {
 
 	    it('Returns a 200 with Subject results from Reference Service', function(done) {
 
+	    	var partial = 'To';
+    		req.params = {partial: partial};
+
 	    	var subjects = [{"name":"Topic 1"},{"name":"Topic 2"}];
-    		var serviceStub = sandbox.stub(RefService, "getSubjectsMatching", function(callback) {
+    		var serviceStub = sandbox.stub(RefService, "getSubjectsMatching", function(partial, callback) {
                 callback(null, subjects, null);
             });
 
@@ -97,7 +100,7 @@ describe('Reference Data Controller', function() {
                 expect(httpStatus).to.equal(200);
                 expect(result).to.equal(subjects);
                 
-                assert.isTrue(serviceStub.calledOnce);
+                assert.isTrue(serviceStub.withArgs(partial).calledOnce);
                 done();
             };
 
@@ -106,9 +109,12 @@ describe('Reference Data Controller', function() {
 
 	    it('Returns a 500 with message if Reference Service calls back with error', function(done) {
 
+	    	var partial = 'To';
+    		req.params = {partial: partial};
+
     		var error = new Error("something went wrong");
     		var refMessage = "Unable to retrieve subjects";
-    		var serviceStub = sandbox.stub(RefService, "getSubjectsMatching", function(callback) {
+    		var serviceStub = sandbox.stub(RefService, "getSubjectsMatching", function(partial, callback) {
                 callback(error, null, refMessage);
             });
 
@@ -116,7 +122,7 @@ describe('Reference Data Controller', function() {
                 expect(httpStatus).to.equal(500);
                 expect(message).to.equal(refMessage);
                 
-                assert.isTrue(serviceStub.calledOnce);
+                assert.isTrue(serviceStub.withArgs(partial).calledOnce);
                 done();
             };
 

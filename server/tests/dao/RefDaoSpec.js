@@ -62,5 +62,4 @@ describe('Reference Data Dao', function() {
 
 	});
 
-
 });

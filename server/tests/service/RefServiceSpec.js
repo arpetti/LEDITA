@@ -85,8 +85,9 @@ describe('Reference Data Service', function() {
 
 	    it('Returns subject results', function(done) {
 
+	    	var partial = 'To';
 	    	var subjects = [{"name":"Topic 1"},{"name":"Topic 2"}];
-	    	var refDaoStub = sandbox.stub(RefDao, "getSubjectsMatching", function(callback) {
+	    	var refDaoStub = sandbox.stub(RefDao, "getSubjectsMatching", function(partial, callback) {
 	            callback(null, subjects);
 	        });
 
@@ -98,16 +99,17 @@ describe('Reference Data Service', function() {
 	        	expect(results[0].name).to.equal(subjects[0].name);
 	        	expect(results[1].name).to.equal(subjects[1].name);
 
-	     		assert.isTrue(refDaoStub.calledOnce);
+	     		assert.isTrue(refDaoStub.withArgs(partial).calledOnce);
 	        	done();
 	        }
-	        RefService.getSubjectsMatching(refServiceCallback);
+	        RefService.getSubjectsMatching(partial, refServiceCallback);
 		});
 
 		it('Empty result is not considered an error', function(done) {
 
+			var partial = 'Zz';
 			var subjects = [];
-	    	var refDaoStub = sandbox.stub(RefDao, "getSubjectsMatching", function(callback) {
+	    	var refDaoStub = sandbox.stub(RefDao, "getSubjectsMatching", function(partial, callback) {
 	            callback(null, subjects);
 	        });
 
@@ -117,16 +119,17 @@ describe('Reference Data Service', function() {
 	        	expect(results).not.to.be.null;
 	        	expect(results).to.have.length(0);
 
-	     		assert.isTrue(refDaoStub.calledOnce);
+	     		assert.isTrue(refDaoStub.withArgs(partial).calledOnce);
 	        	done();
 	        }
-	        RefService.getSubjectsMatching(refServiceCallback);
+	        RefService.getSubjectsMatching(partial, refServiceCallback);
 		});
 
 		it('Returns error if error occurs calling dao', function(done) {
 
+			var partial = 'something';
 	    	var daoError = new Error('something went wrong');
-	    	var refDaoStub = sandbox.stub(RefDao, "getSubjectsMatching", function(callback) {
+	    	var refDaoStub = sandbox.stub(RefDao, "getSubjectsMatching", function(partial, callback) {
 	            callback(daoError);
 	        });
 	        var refServiceCallback = function(err, results, message) {
@@ -135,10 +138,10 @@ describe('Reference Data Service', function() {
 	        	expect(message).to.equal(messages.UNABLE_TO_RETRIEVE_SUBJECTS)
 	        	expect(results).to.be.null;
 
-	     		assert.isTrue(refDaoStub.calledOnce);
+	     		assert.isTrue(refDaoStub.withArgs(partial).calledOnce);
 	        	done();
 	        }
-	        RefService.getSubjectsMatching(refServiceCallback);
+	        RefService.getSubjectsMatching(partial, refServiceCallback);
 	    });
 
     });

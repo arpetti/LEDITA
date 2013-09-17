@@ -19,8 +19,8 @@ module.exports = {
 	},
 
 	// callback(err, result, message)
-    getSubjectsMatching: function(callback) {
-    	RefDao.getSubjectsMatching(function(err, results) {
+    getSubjectsMatching: function(partial, callback) {
+    	RefDao.getSubjectsMatching(partial, function(err, results) {
     		if (err) {
     			callback(err, null, messages.UNABLE_TO_RETRIEVE_SUBJECTS);
     		} else {

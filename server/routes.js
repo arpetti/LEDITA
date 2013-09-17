@@ -72,6 +72,13 @@ var routes = [
         accessLevel: accessLevels.user
     },
 
+    {
+    	path: '/reference/subjects/:partial',
+    	httpMethod: 'GET',
+    	middleware: [ensureAuthenticated, ensureAuthorized, RefController.getSubjectsMatching],
+        accessLevel: accessLevels.user
+    },
+
     // All other get requests should be handled by AngularJS's client-side routing system
     {
         path: '/*',
