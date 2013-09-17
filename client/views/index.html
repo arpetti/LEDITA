@@ -135,7 +135,7 @@
 
 				            <div class="formLevel">
 				                <label class="formLabel"><i class="icon-map-marker"></i> Topics*:</label>
-				                <input class="formInput" type="text" ng-model="ld.subjects" placeholder="typeahead..." required="">
+				                <input class="formInput" type="text" ng-model="ld.subjects" typeahead="suggestion for suggestion in getSubjects($viewValue)" placeholder="Topics..." required="">
 				                <span class="clearfix"></span>
 
 				                <div class="formTag">

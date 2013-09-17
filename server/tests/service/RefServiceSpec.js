@@ -96,8 +96,8 @@ describe('Reference Data Service', function() {
 	        	expect(message).to.be.null;
 	        	expect(results).not.to.be.null;
 	        	expect(results).to.have.length(subjects.length);
-	        	expect(results[0].name).to.equal(subjects[0].name);
-	        	expect(results[1].name).to.equal(subjects[1].name);
+	        	expect(results[0]).to.equal(subjects[0].name);
+	        	expect(results[1]).to.equal(subjects[1].name);
 
 	     		assert.isTrue(refDaoStub.withArgs(partial).calledOnce);
 	        	done();

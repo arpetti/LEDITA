@@ -1,5 +1,6 @@
 var RefDao = require('../dao/RefDao');
 var messages = require('./ValidationMessages');
+var _ = require('underscore');
 
 module.exports = {
 
@@ -24,7 +25,7 @@ module.exports = {
     		if (err) {
     			callback(err, null, messages.UNABLE_TO_RETRIEVE_SUBJECTS);
     		} else {
-    			callback(null, results, null);
+    			callback(null, _.pluck(results, "name") , null);
     		}
     	});
     }

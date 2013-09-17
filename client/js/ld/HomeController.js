@@ -37,7 +37,7 @@ angular.module('ledita-app')
 
 angular.module('ledita-app')
 .controller('LdCreateCtrl',
-['$scope', 'Home', function($scope, Home) {
+['$scope', '$http', 'Home', 'limitToFilter', function($scope, $http, Home, limitToFilter) {
 
 	Home.getQcers(function(res) {
         $scope.qceropts = res;
@@ -46,5 +46,12 @@ angular.module('ledita-app')
     });
     
     $scope.selectedQcers = {};
+
+    $scope.getSubjects = function(subject) {
+    	var subjectMatchUrl = '/reference/subjects/' + subject;
+		return $http.get(subjectMatchUrl).then(function(response) {
+			return limitToFilter(response.data, 15);
+		});
+  	};
 
 }]);
