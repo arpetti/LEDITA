@@ -42,7 +42,7 @@ angular.module('ledita-app')
 	Home.getQcers(function(res) {
         $scope.qceropts = res;
     }, function(err) {
-        $scope.qcerError = err.message; //TODO test if this is populated
+        $scope.qcerError = err;
     });
     
     $scope.selectedQcers = {};

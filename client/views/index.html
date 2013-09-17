@@ -113,6 +113,7 @@
 				                <label class="formLabel formLabel"><i class="icon-flag"></i> Language Level:</label>
 
 				                <div class="formCheck">
+				                	<span ng-show="qcerError">{{ qcerError }}</span>
 				                	<span ng-repeat="qceropt in qceropts" class="qcerOptData" >
 				                    	<input type="checkbox" ng-model="selectedQcers[qceropt.id]"> {{ qceropt.name }}
 				                	</span>
