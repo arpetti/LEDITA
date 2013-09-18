@@ -163,7 +163,7 @@ CREATE  TABLE IF NOT EXISTS `ledita-test`.`ld` (
   `name` VARCHAR(50) NOT NULL ,
   `scope` VARCHAR(50) NOT NULL ,
   `publication` TINYINT(1) NOT NULL DEFAULT '0' ,
-  `students_profile` VARCHAR(2000) NULL DEFAULT NULL ,
+  `students_profile` VARCHAR(500) NULL DEFAULT NULL ,
   `creation_date` DATETIME NOT NULL ,
   `last_edit_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
   PRIMARY KEY (`id`) ,
@@ -191,7 +191,7 @@ DROP TABLE IF EXISTS `ledita-test`.`objective` ;
 
 CREATE  TABLE IF NOT EXISTS `ledita-test`.`objective` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
-  `descr` VARCHAR(200) NULL DEFAULT NULL ,
+  `descr` VARCHAR(255) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) ,
   UNIQUE INDEX `UNIQ_OBJECTIVE` (`descr` ASC) )
 ENGINE = InnoDB
@@ -357,7 +357,7 @@ DROP TABLE IF EXISTS `ledita-test`.`subject` ;
 
 CREATE  TABLE IF NOT EXISTS `ledita-test`.`subject` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(100) NULL DEFAULT NULL ,
+  `name` VARCHAR(255) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) ,
   UNIQUE INDEX `UNIQ_SUBJECT` (`name` ASC) )
 ENGINE = InnoDB

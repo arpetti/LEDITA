@@ -377,9 +377,11 @@ a:hover {
 /* Modal Create LD
  ==================== */
 .createLdForm {
+    margin: 0;
+    padding: 0;
 }
 .formLevel {
-    margin: 0 auto 20px;
+    margin: 0 auto 5px;
 width: 98%;
     clear: both;
 }
@@ -468,6 +470,13 @@ margin-left: 4%;
     color: #FFFFFF;
 }
 
+.btnForm[disabled]:hover {
+    background-color: #e6e6e6;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    color: #666666;
+}
+
 .btnForm:hover {
     background-color: #39BBE6;
     color: #ffffff;
@@ -477,13 +486,18 @@ margin-left: 4%;
     color: #ffffff;
 }
 
+.errorBox {
+    height: 20px;
+    margin: -10px 0 5px 0;
+}
+
 .errorTipModal {
     color: #FFFFFF;
     font-size: 12px;
     background-color: #990000;
     padding: 3px;
     border-radius: 4px;
-    margin:0 0 0 28% ;
+    margin: 0 0 2px 28% ;
 }
 /* new LD creation
  ==================== */
@@ -1084,6 +1098,7 @@ ul.listNode li {
 
 .modal-footer {
     padding: 5px;
+    margin: 0;
 }
 
 /* ldTable
