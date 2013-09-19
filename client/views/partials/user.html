@@ -3,12 +3,12 @@
 
         <div class="span3  centered top-margin ">
             <!-- FIXME: GET REAL PICTURE FROM DB -->
-            <img src="../img/user.png" class="user-pic-big">
+            <img ng-src="../img/pics/user{{ user.image_id }}.png" class="user-pic-big">
 
         </div>
         <!-- FIXME: GET REAL USER DATA FROM DB -->
         <div class="span9 top-margin userData">
-            <h1>{{ user.user_name }} {{ user.last_name }} </h1>
+            <h1>{{ user.user_name }} {{ user.last_name }} <span class="smallText">{ {{ user.gender }} }</span></h1>
             <h4>{{ user.workplace }}</h4>
             <h4>{{ user.city }}</h4>
             <h4>{{ user.country }}</h4>
@@ -36,14 +36,14 @@
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="rowTable" ng-repeat="profile in userProfiles | filter:(profile.user_id = user.user_id)" >
+                    <div class="rowTable" ng-repeat="profile in userProfiles " >
                         <div class="rowLink">
                             <a ng-href="/ld/{{ profile.ld_id }}">
                                 <div class="colTable col1">
                                     <p>{{ profile.ld_name }}</p>
                                 </div>
                                 <div class="colTable col2">
-                                    <p ng-repeat="qcer in profile.qcers" class="qcerList">{{ qcer.qcer_name }}</p>         <span>&nbsp;</span>
+                                    <p ng-repeat="qcer in profile.qcers" class="qcerList">{{ qcer.qcer_name }}</p> <span>&nbsp;</span>
 
                                 </div>
                                 <div class="colTable col3">

@@ -1,10 +1,11 @@
 angular.module('ledita-app')
-    .controller('UserCtrl',
-        ['$scope', '$routeParams', 'UserService', function($scope, $routeParams, UserService) {
+    .controller('UserProfileCtrl',
+        ['$scope', '$routeParams', 'UserProfileService', function($scope, $routeParams, UserProfileService) {
 
             $scope.userid = $routeParams.userid;
 
-            UserService.getUserProfiles(function(res) {
+
+            UserProfileService.getUserProfiles(function(res) {
                 $scope.userProfiles = res;
                 $scope.loading = false;
             }, function(err) {
@@ -12,8 +13,7 @@ angular.module('ledita-app')
                 $scope.loading = false;
             });
 
-
-            UserService.getUserById($scope.userid, function(res) {
+            UserProfileService.getUserProfile($scope.userid, function(res) {
                 $scope.user = res;
                 $scope.loading = false;
             }, function(err) {
@@ -22,8 +22,7 @@ angular.module('ledita-app')
             });
 
 
-
-
-
-
         }]);
+
+
+

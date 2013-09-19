@@ -7,7 +7,7 @@ var _ = require('underscore');
 
 module.exports = {
 
-    USER_NUMBER_OF_DATA_ELEMENTS: 2,
+    LD_NUMBER_OF_DATA_ELEMENTS: 2,
 
     getUserProfilePromise: function(userid, ldid) {
         var promiseDaoGetUserProfile = nodefn.call(UserProfileDao.getUserProfile, userid);
@@ -37,18 +37,18 @@ module.exports = {
                             callback(err);
                         } else {
                             var qcersByLdid = _.groupBy(results, function(element){return element.ld_id});
-                            var enrichUsers = _.map(lds, function(element) {
+                            var enrichLds = _.map(lds, function(element) {
                                 element.qcers = qcersByLdid[element.ld_id];
                                 return element;
                             });
-                            callback(null, enrichUsers);
+                            callback(null, enrichLds);
                         }
                     });
                 }
             }
         ], function (err, result) {
             if (err) {
-                callback(err, null, messages.UNABLE_TO_RETRIEVE_USERS);
+                callback(err, null, messages.UNABLE_TO_RETRIEVE_USER);
             } else {
                 callback(null, result, null);
             }

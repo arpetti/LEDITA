@@ -19,8 +19,8 @@ module.exports = {
         var UserProfileDetail = {};
 
         return UserProfileService.getUserProfilePromise(userid).then(function(results) {
-            if (results.length !== UserProfileService.USER_NUMBER_OF_DATA_ELEMENTS) {
-                return res.send(400, messages.USER_DETAIL_NOT_FOUND);
+            if (results.length !== UserProfileService.LD_NUMBER_OF_DATA_ELEMENTS) {
+                return res.send(400, messages.LD_DETAIL_NOT_FOUND);
             }
             var userProfile = results[0];
             if (userProfile.length === 0) {

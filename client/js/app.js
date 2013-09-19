@@ -29,7 +29,7 @@ angular.module('ledita-app', ['ngCookies', 'infinite-scroll', 'ui.bootstrap', 'a
         $routeProvider.when('/user/:userid',
             {
                 templateUrl: '/partials/user',
-                controller: 'UserCtrl',
+                controller: 'UserProfileCtrl',
                 access: access.user
             });
         $routeProvider.when('/login',
