@@ -1268,25 +1268,23 @@ ul.listNode li {
 }
 
 .col1 {
-    width: 8%;
+    width: 55%;
 }
 
 .col2 {
-    width: 50%;
+    width: 15%;
     text-align: left;
 }
 
 .col3 {
-    width: 5%;
+    width: 10%;
 }
 
 .col4 {
-    width: 15%;
+    width: 10%;
 }
 
-.col5 {
-    width: 11%;
-}
+
 
 /* navbar
 ===================== */
@@ -1660,6 +1658,15 @@ input[type="checkbox"] {
 .padding-right {
     padding-right: 10px;
 }
+
+/* User Profile
+===================== */
+.qcerList {
+    float: left;
+}
+
+
+
 
 /* LDs view
 ===================== */

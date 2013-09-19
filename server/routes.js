@@ -3,6 +3,7 @@ var _ =           require('underscore')
     , passport =  require('passport')
     , AuthCtrl =  require('./controllers/auth')
     , LearningDesignCtrl = require('./controllers/learningDesign')
+    , UserProfileCtrl = require('./controllers/UserProfileController')
     , ActivityController       = require('./controllers/ActivityController')
     , RefController       = require('./controllers/RefController')
     , User =      require('./models/User.js')
@@ -53,6 +54,20 @@ var routes = [
         path: '/learningdesigns/:id',
         httpMethod: 'GET',
         middleware: [ensureAuthenticated, ensureAuthorized, LearningDesignCtrl.findById],
+        accessLevel: accessLevels.user
+    },
+
+    // User Profile
+    {
+        path: '/userprofiles',
+        httpMethod: 'GET',
+        middleware: [ensureAuthenticated, ensureAuthorized, UserProfileCtrl.index],
+        accessLevel: accessLevels.user
+    },
+    {
+        path: '/userprofiles/:id',
+        httpMethod: 'GET',
+        middleware: [ensureAuthenticated, ensureAuthorized, UserProfileCtrl.findById],
         accessLevel: accessLevels.user
     },
 

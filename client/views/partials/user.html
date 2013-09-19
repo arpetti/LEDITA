@@ -8,56 +8,49 @@
         </div>
         <!-- FIXME: GET REAL USER DATA FROM DB -->
         <div class="span9 top-margin userData">
-            <h1>Firstname Lastname</h1>
-            <h4>Workplace</h4>
-            <h4>City</h4>
-            <h4>Country</h4>
+            <h1>{{ user.user_name }} {{ user.last_name }} </h1>
+            <h4>{{ user.workplace }}</h4>
+            <h4>{{ user.city }}</h4>
+            <h4>{{ user.country }}</h4>
         </div>
         <div class="clearfix"></div>
         <div class="top-margin zero">
             <div class="btnContent btnActive btnTitle">
                 <!-- FIXME: GET REAL USER DATA FROM DB -->
-                <h3>Firstname's Designs</h3>
+                <h3>{{ user.user_name }}'s Designs</h3>
             </div>
             <div id="contentBody">
                 <div class="ldTable">
                     <div class="headerTable">
                         <div class="colTable col1">
-                            <p>&nbsp;</p>
-                        </div>
-                        <div class="colTable col2">
                             <p>Design Name</p>
                         </div>
-                        <div class="colTable col3">
+                        <div class="colTable col2">
                             <p>Level</p>
                         </div>
-                        <div class="colTable col4">
+                        <div class="colTable col3">
                             <p>Duration</p>
                         </div>
-                        <div class="colTable col5">
+                        <div class="colTable col4">
                             <p>Created </p>
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="rowTable">
-                        <!-- FIXME: LIKE SYSTEM WITH CLASSES LIKECOL OR LIKEDCOL -->
-                        <div class="colTable col1">
-                            <a ng-href="#" class="likeCol"><p>Like <i class="icon-thumbs-up"></i></p></a>
-                        </div>
-                        <!-- FIXME: INSERT A NG-REPEAT WITH REAL LD DATA FROM DB WHERE USER IS LD AUTHOR -->
+                    <div class="rowTable" ng-repeat="profile in userProfiles | filter:(profile.user_id = user.user_id)" >
                         <div class="rowLink">
-                            <a ng-href="#">
+                            <a ng-href="/ld/{{ profile.ld_id }}">
+                                <div class="colTable col1">
+                                    <p>{{ profile.ld_name }}</p>
+                                </div>
                                 <div class="colTable col2">
-                                    <p>{ { learningDesign.name } }</p>
+                                    <p ng-repeat="qcer in profile.qcers" class="qcerList">{{ qcer.qcer_name }}</p>         <span>&nbsp;</span>
+
                                 </div>
                                 <div class="colTable col3">
-                                    <p>A2</p>
+                                    <p>{{ profile.scope }}</p>
                                 </div>
                                 <div class="colTable col4">
-                                    <p>Lesson</p>
-                                </div>
-                                <div class="colTable col5">
-                                    <p>25 aug 2013 </p>
+                                    <p>{{ profile.creation_date | date:'yyyy MMM d' }} </p>
                                 </div>
                             </a>
                         </div>
@@ -67,5 +60,6 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>

@@ -865,6 +865,25 @@ CREATE OR REPLACE VIEW vw_group AS
   INNER JOIN ld
     ON participates.ld_is_part_id = ld.id);
 
+CREATE OR REPLACE VIEW vw_user_profile AS
+(SELECT
+user.id as user_id,
+user.image_id,
+user.name as user_name,
+user.last_name,
+user.gender,
+user.email,
+user.workplace,
+user.city,
+user.country,
+ld.name as ld_name,
+ld.scope,
+ld.publication,
+ld.creation_date
+FROM user
+RIGHT JOIN ld
+ON user.id = ld.user_id);
+
 
 USE `ledita-test` ;
 

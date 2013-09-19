@@ -11,17 +11,17 @@ module.exports.EMAIL_FORMAT = 'Please input a valid email address.';
 module.exports.PASSWORD_REQUIRED = 'Password is required.';
 module.exports.PASSWORD_LENGTH = 'Password must be 8-40 characters long.';
 module.exports.TERMS = 'You must agree the terms and conditions and privacy policy.';
-module.exports.USERNAME_EXISTS = 'Username already exists'
+module.exports.USERNAME_EXISTS = 'Username already exists';
 
 // Login
 module.exports.UNABLE_TO_RETRIEVE_USER = 'Unable to retrieve user details at this time, please try again later.';
 module.exports.INVALID_USERNAME_PASSWORD = 'Invalid username or password.';
-module.exports.LOGIN_SUCCESS = "Login successful."
+module.exports.LOGIN_SUCCESS = "Login successful.";
 
 // Learning Design
 module.exports.UNABLE_TO_RETRIEVE_LDS = 'Unable to retrieve learning designs at this time, please try again later.';
-module.exports.LD_NOT_FOUND = "Unable to find learning design."
-module.exports.LD_DETAIL_NOT_FOUND = "Learning Design details could not be found"
+module.exports.LD_NOT_FOUND = "Unable to find learning design.";
+module.exports.LD_DETAIL_NOT_FOUND = "Learning Design details could not be found";
 
 // Activities
 module.exports.UNABLE_TO_RETRIEVE_LD_NODES = "Unable to retrieve learning design nodes at this time, please try again later.";
@@ -33,3 +33,7 @@ module.exports.NO_ACTIVITIES_FOUND = "This learning design has no activities.";
 module.exports.UNABLE_TO_RETRIEVE_QCERS = "Unable to retrieve qcers at this time, please try again later.";
 module.exports.QCERS_NOT_FOUND = "No qcers could be found, please contact system administrator.";
 module.UNABLE_TO_RETRIEVE_SUBJECTS = "Unable to retrieve subjects at this time, please try again later.";
+
+// User Profile
+module.exports.USER_DETAIL_NOT_FOUND = "User's profile details could not be found";
+module.exports.USER_NOT_FOUND = "Unable to find user.";
