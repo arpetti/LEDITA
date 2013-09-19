@@ -59,12 +59,8 @@ angular.module('ledita-app')
   		$scope.selectedTopics.push(topic);
   	};
 
-  	var clearTopic = function() {
-  		$scope.ldTopic = "";
-  	};
-
   	var clearCurrentTopic = function() {
-  		$scope.ldTopic = "";
+  		$scope.ldTopic = " ";
   	};
 
   	$scope.addTopicFromSuggestion = function() {
