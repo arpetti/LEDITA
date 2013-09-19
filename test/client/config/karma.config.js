@@ -12,6 +12,7 @@ module.exports = function(config) {
             '../../client/js/lib/angular/angular-cookies.js',
             '../../client/js/lib/ng-infinite-scroll.min.js',
             '../../client/js/lib/ui-bootstrap-tpls-0.4.0.min.js',
+            '../../client/js/lib/ui-utils.min.js',
             '../../client/js/app.js',
             '../../client/js/auth/*.js',
             '../../client/js/ld/*.js',

@@ -156,22 +156,25 @@
 
                             <div class="formLevel">
                                 <div class="errorBox">
-                                    <span class="errorTipModal"
-                                          ng-show="LdCreateForm.ldTopic.$dirty && LdCreateForm.ldTopic.$error.required">Required!</span>
+                                    <!-- <span class="errorTipModal"
+                                          ng-show="LdCreateForm.ldTopic.$dirty && LdCreateForm.ldTopic.$error.required">Required!</span> -->
                                     <span class="errorTipModal" ng-show="LdCreateForm.ldTopic.$error.pattern">A topic cannot contain this symbol.</span>
                                     <span class="errorTipModal" ng-show="LdCreateForm.ldTopic.$error.maxlength">A topic cannot be longer than 255 characters.</span><span
                                         class="clearfix"></span>
                                 </div>
                                 <label class="formLabel"><i class="icon-map-marker"></i> Topics*:</label>
-                                <input class="formInput" type="text" ng-model="ld.subjects" name="ldTopic"
+                                <input class="formInput" type="text" ng-model="ldTopic" name="ldTopic"
                                        typeahead="suggestion for suggestion in getSubjects($viewValue)"
+                                       typeahead-on-select="addTopicFromSuggestion()"
+                                       ui-keypress="{13:'addTopicFromUserInput($event)'}"
+                                       ng-change="clearTopic()"
                                        placeholder="Topics..." required ng-maxlength="255"
                                        ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
                                 <span class="clearfix"></span>
 
                                 <div class="formTag">
-                                    <ul ng-repeat="subject in ld.subjects" class="zeroMargin subjects">
-                                        <li class="modalEditItem"><span class="modalEditItemLink">{{subject}} <a
+                                    <ul ng-repeat="topic in selectedTopics" class="zeroMargin subjects">
+                                        <li class="modalEditItem"><span class="modalEditItemLink">{{topic}} <a
                                                 ng-href="#"><i
                                                 class="icon-remove-circle"></i> </a></span>
                                         </li>
@@ -290,9 +293,9 @@
 <script src="/js/lib/bootstrap.js"></script>
 <script src="/js/lib/ui-bootstrap-tpls-0.4.0.min.js"></script>
 
-
 <!-- Util -->
 <script src="/js/lib/ng-infinite-scroll.min.js"></script>
+<script src="/js/lib/ui-utils.min.js"></script>
 
 
 <script>

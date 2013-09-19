@@ -46,6 +46,7 @@ angular.module('ledita-app')
     });
     
     $scope.selectedQcers = {};
+    $scope.selectedTopics = [];
 
     $scope.getSubjects = function(subject) {
     	var subjectMatchUrl = '/reference/subjects/' + subject;
@@ -53,5 +54,28 @@ angular.module('ledita-app')
 			return limitToFilter(response.data, 15);
 		});
   	};
+
+  	var addTopic = function(topic) {
+  		$scope.selectedTopics.push(topic);
+  	};
+
+  	var clearTopic = function() {
+  		$scope.ldTopic = "";
+  	};
+
+  	var clearCurrentTopic = function() {
+  		$scope.ldTopic = "";
+  	};
+
+  	$scope.addTopicFromSuggestion = function() {
+  		addTopic($scope.ldTopic);
+  		clearCurrentTopic();
+  	};
+
+  	$scope.addTopicFromUserInput = function($event) {
+        $event.preventDefault();
+        addTopic($scope.ldTopic);
+        clearCurrentTopic();
+    };
 
 }]);
