@@ -19,7 +19,7 @@
         <div>
             <h5 class="zeroMargin date"><i class="icon-pencil"></i> Author:</h5>
             <!-- FIXME: add dynamic link to author profile page -->
-            <a href="#" class="zeroMargin">{{ learningDesign.user_name}} {{ learningDesign.user_last_name}}</a>
+            <a ng-href="/user/{{ learningDesign.user_id }}" class="zeroMargin">{{ learningDesign.user_name}} {{ learningDesign.user_last_name}}</a>
         </div>
         <div class="marginTopSidebar">
             <h5 class="zeroMargin date "><i class="icon-calendar"></i> Created in:</h5>
