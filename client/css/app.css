@@ -1677,7 +1677,7 @@ background-color: #ffffff;
 .rowUserLink a, .rowUserLink p {
     color: #666666;
     font-weight: normal;
-    line-height: 14px;
+    line-height: 28px;
     text-align: center;
 
 }
@@ -1775,14 +1775,14 @@ background-color: #ffffff;
     min-width: 200px;
     float: left;
     color: #FFFFFF;
-    height: 190px;
+    height: 180px;
 }
 
 
 
 .ld-center {
     margin: 10px auto 5px auto;
-    height: 150px;
+    height: 135px;
     width: 95%;
     background-color: #FFFFFF;
     border: 1px dashed #0099CC;
@@ -1796,6 +1796,11 @@ background-color: #ffffff;
 
 .ld-bottom a {
     font-weight: normal;
+}
+
+.qcer {
+    margin-top: 0px;
+    padding-top: 0;
 }
 
 .qcer, .scope {
@@ -1868,12 +1873,34 @@ border: 1px solid #0099CC;
     text-decoration: none;
 }
 
+
 .ld-name-text {
     font-size: 22px;
     line-height: 26px;
     overflow: hidden;
     text-overflow: ellipsis;
-    height: 80px;
+    height: 78px;
+    margin: 5px;
+
+    /* Internet Explorer 10 */
+    display:-ms-flexbox;
+    -ms-flex-pack:center;
+    -ms-flex-align:center;
+
+    /* Firefox */
+    display:-moz-box;
+    -moz-box-pack:center;
+    -moz-box-align:center;
+
+    /* Safari, Opera, and Chrome */
+    display:-webkit-box;
+    -webkit-box-pack:center;
+    -webkit-box-align:center;
+
+    /* W3C */
+    display:box;
+    box-pack:center;
+    box-align:center;
 }
 
 .ld-name-text  {
@@ -1911,6 +1938,11 @@ border: 1px solid #0099CC;
 
     .ld-border {
         width: 20%;
+    height: 195px;
+    }
+
+    .ld-center {
+        height: 150px;
     }
 
     .ld-name-text {
@@ -1918,6 +1950,7 @@ border: 1px solid #0099CC;
         line-height: 24px;
         overflow: hidden;
         text-overflow: ellipsis;
+        height: 94px;
     }
 
     .scope, .qcer {
@@ -2183,6 +2216,9 @@ border: 1px solid #0099CC;
         margin-right: 0;
     }
 
+    .qcer {
+        margin-top: 0;
+    }
     .col2 {
         width: 48%;
     }

@@ -5,9 +5,8 @@
 
         <a ng-href="ld/{{ learningDesign.ld_id }}">
             <div class="ld-center text-center">
-                <h4 class="ld-name-text">
+                    <h4 class="ld-name-text">
                     {{ learningDesign.ld_name }}</h4>
-
                 <div class="qcer">
                     <i class="icon-flag" ng-show="learningDesign.qcers"></i>
                     <span class="qcer-spacer" ng-repeat="qcer in learningDesign.qcers">{{ qcer.qcer_name }}</span>
