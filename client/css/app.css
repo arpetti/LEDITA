@@ -1195,6 +1195,21 @@ ul.listNode li {
     margin: 0;
     padding: 0;
 }
+.headerUserTable {
+    padding: 5px;
+    border-bottom: 1px solid #999;
+    background-color: #666;
+    border-radius: 6px 6px 0 0;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.headerUserTable p {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 .rowLink a, .rowLink p {
     color: #666666;
@@ -1660,16 +1675,14 @@ background-color: #ffffff;
 .colUser2 {
     width: 15%;
 }
+
 .colUser3 {
-    width: 3%;
-}
-.colUser4 {
     width: 20%;
 }
-.colUser5 {
+.colUser4 {
     width: 13%;
 }
-.colUser6 {
+.colUser5 {
     width: 13%;
     border-right: none;
 }
@@ -1682,7 +1695,7 @@ background-color: #ffffff;
 
 }
 
-.rowUserLink a:hover .colUser1, .rowUserLink a:hover .colUser2, .rowUserLink a:hover .colUser3, .rowUserLink a:hover .colUser4, .rowUserLink a:hover .colUser5, .rowUserLink a:hover .colUser6 {
+.rowUserLink a:hover .colUser1, .rowUserLink a:hover .colUser2, .rowUserLink a:hover .colUser3, .rowUserLink a:hover .colUser4, .rowUserLink a:hover .colUser5  {
     color: #0099CC;
     font-weight: normal;
     background-color: #ffffff;
@@ -1690,7 +1703,7 @@ background-color: #ffffff;
     border-color: #dddddd;
 }
 
-.rowUserLink a:hover .colUser1 p, .rowUserLink a:hover .colUser2 p, .rowUserLink a:hover .colUser3 p, .rowUserLink a:hover .colUser4 p, .rowUserLink a:hover .colUser5 p, .rowUserLink a:hover .colUser6  p{
+.rowUserLink a:hover .colUser1 p, .rowUserLink a:hover .colUser2 p, .rowUserLink a:hover .colUser3 p, .rowUserLink a:hover .colUser4 p, .rowUserLink a:hover .colUser5 p {
     color: #0099CC;
     font-weight: normal;
 }
@@ -2322,6 +2335,21 @@ border: 1px solid #0099CC;
         text-overflow: ellipsis;
     }
 
+    .headerUserTable {
+        height: 24px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .colUser1 {
+        width: 13%;
+    }
+    .colUser2 {
+        width: 13%;
+    }
+    .colUser3 {
+        width: 18%;
+    }
+
 }
 
 @media (max-width: 480px) {
@@ -2400,6 +2428,10 @@ border: 1px solid #0099CC;
 
     .groupBox2 .actBox, .groupBox2 .ldBox {
         width: 34%;
+    }
+
+    .userTable {
+     font-size: 12px;
     }
 }
 

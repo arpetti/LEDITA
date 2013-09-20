@@ -36,7 +36,6 @@ describe('User Service Integration', function() {
             expect(user.id).not.to.be.null;
             expect(user.name).to.equal('Sara');
             expect(user.last_name).to.equal('Neri');
-            expect(user.gender).to.equal('F');
             expect(user.email).to.equal(goodUsername);
             expect(user.username).to.equal(goodUsername);
             expect(user.hash).to.be.null;

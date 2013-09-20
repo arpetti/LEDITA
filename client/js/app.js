@@ -37,6 +37,12 @@ angular.module('ledita-app', ['ngCookies', 'infinite-scroll', 'ui.bootstrap', 'u
                 controller: 'UserProfileCtrl',
                 access: access.user
             });
+        $routeProvider.when('/lds',
+            {
+                templateUrl: '/partials/exploreLDs',
+                controller: 'UserProfileCtrl',
+                access: access.user
+            });
         $routeProvider.when('/login',
             {
                 templateUrl: '/partials/login',

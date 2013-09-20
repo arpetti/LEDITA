@@ -1,9 +1,9 @@
 var mysql = require('mysql')
     , dao = require('./Dao');
 
-var GET_USER_PROFILES = 'SELECT user_id, image_id, user_name, last_name, gender, workplace, city, country, vw_user_profile.ld_id, ld_name, scope, creation_date from vw_user_profile where publication = 1 ';
+var GET_USER_PROFILES = 'SELECT user_id, image_id, user_name, last_name, workplace, city, country, vw_user_profile.ld_id, ld_name, scope, creation_date from vw_user_profile where publication = 1 ';
 var GET_USER_PROFILE = GET_USER_PROFILES + ' AND user_id = ?';
-var GET_UNIQUE_USERS = 'SELECT DISTINCT user_id, image_id, user_name, last_name, gender, workplace, city, country from vw_user_profile';
+var GET_UNIQUE_USERS = 'SELECT DISTINCT user_id, image_id, user_name, last_name, workplace, city, country from vw_user_profile';
 
 var GET_LD_QCERS = 'select qcer_name from vw_ld_qcer where ld_id in (?) order by qcer_name';
 var GET_LD_QCERS_WITH_LD_ID = 'select ld_id, qcer_name from vw_ld_qcer where ld_id in (?)';
