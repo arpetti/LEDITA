@@ -44,9 +44,11 @@ angular.module('ledita-app')
     }, function(err) {
         $scope.qcerError = err;
     });
-    
+
     $scope.selectedQcers = {};
     $scope.selectedTopics = [];
+    $scope.selectedObjectives = [];
+    $scope.selectedRequisites = [];
 
     $scope.getSubjects = function(subject) {
     	var subjectMatchUrl = '/reference/subjects/' + subject;
@@ -72,6 +74,19 @@ angular.module('ledita-app')
         $event.preventDefault();
         addTopic($scope.ldTopic);
         clearCurrentTopic();
+    };
+
+    $scope.submitLD = function() {
+    	console.log('submitLD is called');
+    	var ld = {
+    		name: $scope.ldName,
+    		qcers: $scope.selectedQcers,
+    		scope: $scope.ldScope,
+    		topics: $scope.selectedTopics,
+    		objectives: $scope.selectedObjectives,
+    		requisites: $scope.selectedRequisites
+    	};
+    	console.log('LD to be POSTed: ' + JSON.stringify(ld));
     };
 
 }]);

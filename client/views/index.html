@@ -101,8 +101,8 @@
 
                         <div class="clearfix"></div>
                     </div>
-                    <form novalidate class="createLdForm" name="LdCreateForm" ng-submit="ok()">
-                        <div ng-controller="LdCreateCtrl" class="modal-body">
+                    <div ng-controller="LdCreateCtrl" class="modal-body">
+                    	<form novalidate class="createLdForm" name="LdCreateForm" ng-submit="submitLD()">
 
                             <div class="formLevel">
                                 <div class="errorBox">
@@ -112,7 +112,7 @@
                                     <span class="errorTipModal" ng-show="LdCreateForm.ldName.$error.maxlength">The design name cannot be longer than 50 characters.</span>
                                 </div>
                                 <label class="formLabel"><i class="icon-ok"></i> Design Name*:</label>
-                                <input class="formInput" type="text" name="ldName" ng-model="name" required
+                                <input class="formInput" type="text" name="ldName" ng-model="ldName" required
                                        ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                                 <span class="clearfix"></span>
                             </div>
@@ -140,7 +140,7 @@
                                         class="clearfix"></span>
                                 </div>
                                 <label class="formLabel"><i class="icon-time"></i> Design Scope*:</label>
-                                <input class="formInput" type="text" name="ldScope" ng-model="ld.scope"
+                                <input class="formInput" type="text" name="ldScope" ng-model="ldScope"
                                        placeholder="typeahead..." required ng-maxlength="50"
                                        ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
 
@@ -190,63 +190,65 @@
                                         class="clearfix"></span>
                                 </div>
                             <label class="formLabel"><i class="icon-tasks"></i> Objectives*:</label>
-                            <input class="formInput" type="text" name="ldObjective" ng-model="ld.aims"
+                            <input class="formInput" type="text" name="ldObjective" ng-model="ldObjective"
                                    placeholder="typeahead..." required ng-maxlength="255"
                                    ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
                             <span class="clearfix"></span>
 
-                            <div class="formTag">
+                            <!-- FIXME Enable when auto complete and enter key press is implemented -->
+                            <!-- <div class="formTag">
                                 <ul ng-repeat="aim in ld.aims" class="zeroMargin objectives">
                                     <li class="modalEditItem"><span class="modalEditItemLink">{{aim}} <a ng-href="#"><i
                                             class="icon-remove-circle"></i> </a></span>
                                     </li>
                                 </ul>
-                            </div>
-                    </div>
+                            </div> -->
+                    		</div>
 
-                    <div class="formLevel">
-                        <div class="errorBox">
-                            <span class="errorTipModal" ng-show="LdCreateForm.ldRequisite.$error.pattern">A pre-requisite cannot contain this symbol.</span>
-                            <span class="errorTipModal" ng-show="LdCreateForm.ldRequisite.$error.maxlength">A pre-requisite cannot be longer than 255 characters.</span>
+		                    <div class="formLevel">
+		                        <div class="errorBox">
+		                            <span class="errorTipModal" ng-show="LdCreateForm.ldRequisite.$error.pattern">A pre-requisite cannot contain this symbol.</span>
+		                            <span class="errorTipModal" ng-show="LdCreateForm.ldRequisite.$error.maxlength">A pre-requisite cannot be longer than 255 characters.</span>
 
-                        </div>
-                        <label class="formLabel"><i class="icon-backward"></i> Pre-Requisites:</label>
-                        <input class="formInput" type="text" name="ldRequisite" ng-model="ld.needs"
-                               placeholder="typeahead..."  ng-maxlength="255"
-                               ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
-                        <span class="clearfix"></span>
+		                        </div>
+		                        <label class="formLabel"><i class="icon-backward"></i> Pre-Requisites:</label>
+		                        <input class="formInput" type="text" name="ldRequisite" ng-model="ldRequisite"
+		                               placeholder="typeahead..."  ng-maxlength="255"
+		                               ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
+		                        <span class="clearfix"></span>
 
-                        <div class="formTag">
-                            <ul ng-repeat="need in ld.needs" class="zeroMargin prerequisites">
-                                <li class="modalEditItem"><span class="modalEditItemLink">{{need}} <a ng-href="#"><i
-                                        class="icon-remove-circle"></i> </a></span>
-                                </li>
-                            </ul>
+		                        <!-- FIXME Enable when auto complete and enter key press is implemented -->
+		                        <!-- <div class="formTag">
+		                            <ul ng-repeat="need in ld.needs" class="zeroMargin prerequisites">
+		                                <li class="modalEditItem"><span class="modalEditItemLink">{{need}} <a ng-href="#"><i
+		                                        class="icon-remove-circle"></i> </a></span>
+		                                </li>
+		                            </ul>
 
-                        </div>
-                    </div>
+		                        </div> -->
+		                    </div>
 
-                    <div class="formLevel">
-                        <div class="errorBox">
-                            <span class="errorTipModal" ng-show="LdCreateForm.ldStudentsDescr.$error.pattern">Students' description cannot contain this symbol.</span>
-                            <span class="errorTipModal" ng-show="LdCreateForm.ldStudentsDescr.$error.maxlength">Students' description cannot be longer than 500 characters.</span>
+		                    <div class="formLevel">
+		                        <div class="errorBox">
+		                            <span class="errorTipModal" ng-show="LdCreateForm.ldStudentsDescr.$error.pattern">Students' description cannot contain this symbol.</span>
+		                            <span class="errorTipModal" ng-show="LdCreateForm.ldStudentsDescr.$error.maxlength">Students' description cannot be longer than 500 characters.</span>
 
-                        </div>
-                        <label class="formLabel"><i class="icon-user"></i> Students' Description:</label>
-                        <textarea class="formInput" name="ldStudentsDescr" ng-model="ld.students" rows="4" ng-maxlength="500"  ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/"></textarea>
-                        <span class="clearfix"></span>
-                    </div>
+		                        </div>
+		                        <label class="formLabel"><i class="icon-user"></i> Students' Description:</label>
+		                        <textarea class="formInput" name="ldStudentsDescr" ng-model="ldStudentsDescr" rows="4" ng-maxlength="500"  ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/"></textarea>
+		                        <span class="clearfix"></span>
+		                    </div>
 
 
-                </div>
-                <!-- End Modal Body -->
-                <div class="modal-footer">
-                    <button id="cancelCreateLd" class="btn btnFormCancel" ng-click="closeLD()">Cancel</button>
-                    <button id="confirmCreateLD" type="submit" class="btn btnForm " ng-disabled="LdCreateForm.$invalid" >Create</button>
-                </div>
-                    </form>
-                </div>
-            <!-- End LD creation Modal -->
+                
+                
+			                <div class="modal-footer">
+			                    <button id="cancelCreateLd" class="btn btnFormCancel" ng-click="closeLD()">Cancel</button>
+			                    <button id="confirmCreateLD" type="submit" class="btn btnForm " ng-disabled="LdCreateForm.$invalid">Create</button>
+			                </div>
+                    	</form>
+                    </div><!-- End Modal Body -->
+                </div><!-- End LD creation Modal -->
         </div>
         <!--/.nav-collapse -->
     </div>
