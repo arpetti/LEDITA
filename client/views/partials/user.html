@@ -22,20 +22,20 @@
                 <div class="ldTable">
                     <div class="headerTable">
                         <div class="colTable col1">
-                            <p>Design Name</p>
+                            <p><a href="" ng-click="predicate = 'ld_name'; reverse=!reverse" class="whiteText">Design Name <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
                         </div>
                         <div class="colTable col2">
-                            <p>QCER Level</p>
+                            <p><a href="" ng-click="predicate = 'qcers[0].qcer_name'; reverse=!reverse" class="whiteText">QCER Level <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
                         </div>
                         <div class="colTable col3">
-                            <p>Scope</p>
+                            <p><a href="" ng-click="predicate = 'scope'; reverse=!reverse" class="whiteText">Scope <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
                         </div>
                         <div class="colTable col4">
-                            <p>Created </p>
+                            <p><a href="" ng-click="predicate = 'creation_date'; reverse=!reverse" class="whiteText">Created <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="rowTable" ng-repeat="profile in userProfiles " >
+                    <div class="rowTable" ng-repeat="profile in userProfiles | orderBy:predicate:reverse " >
                         <div class="rowLink">
                             <a ng-href="/ld/{{ profile.ld_id }}">
                                 <div class="colTable col1">
