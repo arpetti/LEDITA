@@ -5,6 +5,10 @@
             <div class="span3">
                 <div id="searchBox">
                     <h4 id="searchBoxHeader">Find Users</h4>
+                    <div class="searchBoxDiv">
+                        <i class="icon-filter"></i> <input type="search" class="searchBoxInput" ng-model="search" placeholder="filter users..." />
+
+                    </div>
 
                 </div>
 
@@ -36,7 +40,7 @@
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="rowTable" ng-repeat="profile in uniqueUsers">
+                    <div class="rowTable" ng-repeat="profile in uniqueUsers | filter:search">
                         <div class="rowUserLink">
                             <a ng-href="/user/{{ profile.user_id }}">
 
@@ -64,6 +68,7 @@
                                 </div>
                                </a>
                         </div>
+
                         <div class="clearfix"></div>
                     </div>
                 </div>

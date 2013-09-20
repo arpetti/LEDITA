@@ -1694,6 +1694,23 @@ background-color: #ffffff;
     color: #0099CC;
     font-weight: normal;
 }
+
+.searchBoxDiv {
+    padding: 10px;
+    margin: 0 auto;
+}
+
+.searchBoxInput {
+    width: 75%;
+    margin: 0;
+}
+
+input.searchBoxInput {
+    font-size: 12px;
+    line-height: 12px;
+    margin: 0;
+    padding: 0 5px;
+}
 /* misc
 ===================== */
 .top-margin {
