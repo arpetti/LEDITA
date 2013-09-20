@@ -70,6 +70,10 @@ a:hover {
     text-align: center;
 }
 
+.right {
+    text-align: right;
+}
+
 /*  error page
 ===================== */
 .boardTop, .boardBottom {
@@ -1151,6 +1155,7 @@ ul.listNode li {
     margin: 0;
 }
 
+
 /* ldTable
 ===================== */
 .ldTable {
@@ -1162,18 +1167,24 @@ ul.listNode li {
 .rowTable {
     padding: 5px;
     border-bottom: 1px dashed #999;
-    text-align: center;
+    text-align: left;
+}
+
+.rowTable:last-child {
+    border-bottom: none;
 }
 
 .rowTable p {
     margin: 10px 5px;
     padding: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
 }
 
 .headerTable {
     padding: 5px;
     border-bottom: 1px solid #999;
-    text-align: center;
     background-color: #666;
     border-radius: 6px 6px 0 0;
     color: #ffffff;
@@ -1192,7 +1203,7 @@ ul.listNode li {
 
 }
 
-.rowLink a:hover .col2, .rowLink a:hover .col3, .rowLink a:hover .col4, .rowLink a:hover .col5 {
+.rowLink a:hover .col2, .rowLink a:hover .col3, .rowLink a:hover .col4, .rowLink a:hover .col1 {
     color: #0099CC;
     font-weight: normal;
     background-color: #ffffff;
@@ -1200,7 +1211,7 @@ ul.listNode li {
     border-color: #dddddd;
 }
 
-.rowLink a:hover .col2 p, .rowLink a:hover .col3 p, .rowLink a:hover .col4 p, .rowLink a:hover .col5 p {
+.rowLink a:hover .col2 p, .rowLink a:hover .col3 p, .rowLink a:hover .col4 p, .rowLink a:hover .col1 p {
     color: #0099CC;
     font-weight: normal;
 }
@@ -1218,7 +1229,6 @@ ul.listNode li {
     float: left;
     padding: 0 1%;
     border-right: 1px dashed #999999;
-    text-align: center;
 }
 
 .likeCol p {
@@ -1273,7 +1283,6 @@ ul.listNode li {
 
 .col2 {
     width: 15%;
-    text-align: left;
 }
 
 .col3 {
@@ -1281,7 +1290,8 @@ ul.listNode li {
 }
 
 .col4 {
-    width: 10%;
+    width: 11%;
+    border-right: none;
 }
 
 
@@ -1670,7 +1680,16 @@ input[type="checkbox"] {
     float: left;
 }
 
-
+#contentBodyUser {
+    border: 1px solid #CCCCCC;
+    background-color: #FFFFFF;
+    width: 99%;
+    -moz-border-radius: 0 6px 6px 6px;
+    border-radius: 0 6px 6px 6px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    margin: 0;
+    padding: 0;
+}
 
 
 /* LDs view
@@ -1920,7 +1939,9 @@ border: 1px solid #0099CC;
     .top-margin {
         margin-top: 0;
     }
-
+    .userData {
+        margin-bottom: 20px;
+    }
     .control-group {
         margin: 0 0 0 -150px;
     }
@@ -2040,6 +2061,7 @@ border: 1px solid #0099CC;
     .userData {
         text-align: center;
         margin-bottom: 20px;
+
     }
 
     .btnTitle {
@@ -2163,6 +2185,19 @@ border: 1px solid #0099CC;
         margin: 5px 0 0 0;
     }
 
+    .col1 {
+        width: 45%;
+    }
+    .col2 {
+        width: 15%;
+    }
+    .col3 {
+        width: 15%;
+    }
+    .col4 {
+        width: 15%;
+    }
+
 }
 
 @media (max-width: 480px) {
@@ -2177,18 +2212,7 @@ border: 1px solid #0099CC;
         font-size: 20px;
     }
 
-    .col1 {
-        width: 20%;
-        border: none;
-    }
 
-    .col2, .col3, .col4, .col5 {
-        float: none;
-        width: 100%;
-        border: none;
-        padding: 2px;
-        text-align: left;
-    }
 
     .headerTable {
         text-indent: -9999px;
@@ -2201,8 +2225,6 @@ border: 1px solid #0099CC;
     }
 
     .rowLink {
-        float: right;
-        width: 78%;
     }
 
     .control-group {
@@ -2271,6 +2293,13 @@ border: 1px solid #0099CC;
     .btnModelImg {
         width: 32px;
         margin: 3px;
+    }
+}
+
+@media (max-height: 500px) {
+
+    .modal-body {
+        height: 300px;
     }
 }
 

@@ -8,10 +8,10 @@
         </div>
         <!-- FIXME: GET REAL USER DATA FROM DB -->
         <div class="span9 top-margin userData">
-            <h1>{{ user.user_name }} {{ user.last_name }} <span class="smallText">{ {{ user.gender }} }</span></h1>
+            <h1>{{ user.user_name }} {{ user.last_name }}</h1>
+            <h4 class="smallText">{ {{ user.gender }} }</h4>
             <h4>{{ user.workplace }}</h4>
-            <h4>{{ user.city }}</h4>
-            <h4>{{ user.country }}</h4>
+            <h4>{{ user.city }}, {{ user.country }}</h4>
         </div>
         <div class="clearfix"></div>
         <div class="top-margin zero">
@@ -19,17 +19,17 @@
                 <!-- FIXME: GET REAL USER DATA FROM DB -->
                 <h3>{{ user.user_name }}'s Designs</h3>
             </div>
-            <div id="contentBody">
+            <div id="contentBodyUser">
                 <div class="ldTable">
                     <div class="headerTable">
                         <div class="colTable col1">
                             <p>Design Name</p>
                         </div>
                         <div class="colTable col2">
-                            <p>Level</p>
+                            <p>QCER Level</p>
                         </div>
                         <div class="colTable col3">
-                            <p>Duration</p>
+                            <p>Scope</p>
                         </div>
                         <div class="colTable col4">
                             <p>Created </p>
@@ -43,7 +43,7 @@
                                     <p>{{ profile.ld_name }}</p>
                                 </div>
                                 <div class="colTable col2">
-                                    <p ng-repeat="qcer in profile.qcers" class="qcerList">{{ qcer.qcer_name }}</p> <span>&nbsp;</span>
+                                    <p ng-repeat="qcer in profile.qcers" class="qcerList">{{ qcer.qcer_name }}</p> <p ng-show="!profile.qcers">Not defined</p>
 
                                 </div>
                                 <div class="colTable col3">
@@ -56,8 +56,8 @@
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="space"></div>
                 </div>
+                <div class="clearfix"></div>
             </div>
         </div>
 
