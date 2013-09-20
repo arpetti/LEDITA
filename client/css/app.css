@@ -1711,14 +1711,14 @@ input[type="checkbox"] {
     min-width: 200px;
     float: left;
     color: #FFFFFF;
-    height: 165px;
+    height: 190px;
 }
 
 
 
 .ld-center {
     margin: 10px auto 5px auto;
-    height: 120px;
+    height: 150px;
     width: 95%;
     background-color: #FFFFFF;
     border: 1px dashed #0099CC;
@@ -1809,6 +1809,7 @@ border: 1px solid #0099CC;
     line-height: 26px;
     overflow: hidden;
     text-overflow: ellipsis;
+    height: 80px;
 }
 
 .ld-name-text  {
@@ -1853,7 +1854,6 @@ border: 1px solid #0099CC;
         line-height: 24px;
         overflow: hidden;
         text-overflow: ellipsis;
-        width: 90%;
     }
 
     .scope, .qcer {
@@ -2196,6 +2196,13 @@ border: 1px solid #0099CC;
     }
     .col4 {
         width: 15%;
+    }
+
+    .ld-name-text {
+        font-size: 20px;
+        line-height: 24px;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
 }
