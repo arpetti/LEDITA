@@ -137,15 +137,14 @@
     <div id="contentHeader">
         <div class="titleEdit">
             <!-- FIXME: dynamic data -->
-
             <input placeholder="{{learningDesign.ld_name }}" class="titleLDInput" >
 
             <!-- FIXME: dynamic data with with ng-repeater as in index.html modal -->
-            <div class="titleQcer"> <span ng-repeat="qcer in learningDesign.qcers" class="qcerCheck ">
+            <div class="titleQcer"><i class="icon-signal icon-white"></i><span ng-repeat="qcer in learningDesign.qcers" class="qcerCheck ">
                 	<input type="checkbox" ng-model="selectedQcers[qceropt.id]"> {{ qcer.qcer_name }}</span></div>
 
             <!-- FIXME: dynamic data with typeahead -->
-            <div class="titleScope"><input class="scopeLDInput" placeholder="{{learningDesign.ld_scope }}"></div>
+            <div class="titleScope"><i class="icon-bell icon-white"></i> <input class="scopeLDInput" placeholder="{{learningDesign.ld_scope }}"></div>
         </div>
     </div>
 </div>
@@ -190,8 +189,8 @@
                                         class="icon-th-large icon-white"></i> {{ child.org_label}}</span>
                             </div>
                             <div class="actLabel" ng-show="child.group_child_type=='LD'">
-                                <span class="timeLabel"><i class="icon-time icon-white"></i> {{ child.scope}}</span>
-                                    <span class="orgLabel"><i class="icon-flag icon-white"
+                                <span class="timeLabel"><i class="icon-bell icon-white"></i> {{ child.scope}}</span>
+                                    <span class="orgLabel"><i class="icon-signal icon-white"
                                                               ng-show="child.qcers"></i> <span
                                             ng-repeat="qcer in child.qcers">{{ qcer.qcer_name }} </span></span>
                             </div>
@@ -214,8 +213,8 @@
                         <span class="orgLabel"><i class="icon-th-large icon-white"></i> {{ node.org_label }}</span>
                     </div>
                     <div class="actLabel" ng-show="node.type=='LD'">
-                        <span class="timeLabel"><i class="icon-time icon-white"></i> {{ node.scope }}</span>
-                            <span class="orgLabel"><i class="icon-flag icon-white" ng-show="node.qcers"></i> <span
+                        <span class="timeLabel"><i class="icon-bell icon-white"></i> {{ node.scope }}</span>
+                            <span class="orgLabel"><i class="icon-signal icon-white" ng-show="node.qcers"></i> <span
                                     ng-repeat="qcer in node.qcers"> {{ qcer.qcer_name }} </span></span>
                     </div>
                 </a>
