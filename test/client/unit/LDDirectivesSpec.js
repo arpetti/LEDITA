@@ -116,7 +116,6 @@ describe('LD Directives', function () {
         $rootScope.node = ldnode;
         var element = $compile("<lddetail node='node'></lddetail>")($rootScope);
         $rootScope.$digest();
-        console.log(element.html());
         expect(element.html()).not.toBe(null);
         expect(element.html()).toMatch(
             'Scope: <span class="nodeBodyText ng-binding">' + ldnode.scope + '</span>');
