@@ -6,6 +6,10 @@ angular.module('ledita-app')
                 $http.get('/userprofiles').success(success).error(error);
             },
 
+            getUniqueUsers: function(success, error) {
+                $http.get('/uniqueusers').success(success).error(error);
+            },
+
             getUserProfile: function(userId, success, error) {
                 var userUrl = '/userprofiles/' + userId;
                 $http.get(userUrl).success(success).error(error);

@@ -70,6 +70,12 @@ var routes = [
         middleware: [ensureAuthenticated, ensureAuthorized, UserProfileCtrl.findById],
         accessLevel: accessLevels.user
     },
+    {
+        path: '/uniqueusers',
+        httpMethod: 'GET',
+        middleware: [ensureAuthenticated, ensureAuthorized, UserProfileCtrl.getUniqueUsers],
+        accessLevel: accessLevels.user
+    },
 
     // Activity
     {

@@ -1630,6 +1630,46 @@ input[type="checkbox"] {
     min-height: 150px;
 }
 
+
+/* Find users Page
+===================== */
+#searchBox {
+background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+
+#searchBoxHeader {
+    text-align: center;
+}
+
+.userTable {
+    background-color: #dddddd;
+    margin: 10px;
+    border-radius: 6px;
+    text-align: center;
+}
+.colUser1 {
+    width: 18%;
+}
+.colUser2 {
+    width: 18%;
+}
+.colUser3 {
+    width: 5%;
+}
+.colUser4 {
+    width: 15%;
+}
+.colUser5 {
+    width: 15%;
+}
+.colUser6 {
+    width: 15%;
+    border-right: none;
+}
+
 /* misc
 ===================== */
 .top-margin {

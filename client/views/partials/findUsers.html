@@ -1,0 +1,66 @@
+<div class="container top-margin">
+    <div class="row-fluid">
+
+        <div class="top-margin zero">
+            <div class="span3">
+                <div id="searchBox">
+                    <h4 id="searchBoxHeader">Find Users</h4>
+
+                </div>
+
+            </div>
+            <div class="span9">
+                <div class="userTable">
+                    <div class="headerTable">
+                        <div class="colTable colUser1">
+                            <p>First Name</p>
+                        </div>
+                        <div class="colTable colUser2">
+                            <p>Last Name</p>
+                        </div>
+                        <div class="colTable colUser3">
+                            <p>Sex</p>
+                        </div>
+                        <div class="colTable colUser4">
+                            <p>Workplace</p>
+                        </div>
+                        <div class="colTable colUser5">
+                            <p>City</p>
+                        </div>
+                        <div class="colTable colUser6">
+                            <p>Country</p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="rowTable" ng-repeat="profile in uniqueUsers">
+                        <div class="rowLink">
+                            <a ng-href="/user/{{ profile.user_id }}">
+                                <div class="colTable colUser1">
+                                    <p>{{ profile.user_name }}</p>
+                                </div>
+                                <div class="colTable colUser2">
+                                    <p>{{ profile.last_name }}</p>
+                                </div>
+                               <div class="colTable colUser3">
+                                    <p>{{ profile.gender }}</p>
+                                </div>
+                               <div class="colTable colUser4">
+                                    <p>{{ profile.workplace }}</p>
+                                </div>
+                               <div class="colTable colUser5">
+                                    <p>{{ profile.city }}</p>
+                                </div>
+                               <div class="colTable colUser6">
+                                    <p>{{ profile.country }}</p>
+                                </div>
+                               </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
