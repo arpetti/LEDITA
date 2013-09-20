@@ -12,6 +12,10 @@
             <div class="span9">
                 <div class="userTable">
                     <div class="headerTable">
+
+                        <div class="colTable colUser0">
+                            <p>&nbsp;</p>
+                        </div>
                         <div class="colTable colUser1">
                             <p>First Name</p>
                         </div>
@@ -33,8 +37,13 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="rowTable" ng-repeat="profile in uniqueUsers">
-                        <div class="rowLink">
+                        <div class="rowUserLink">
                             <a ng-href="/user/{{ profile.user_id }}">
+
+
+                                <div class="colTable colUser0">
+                                    <img ng-src="../img/pics/user{{ profile.user_id }}.png" class="user-pic">
+                                </div>
                                 <div class="colTable colUser1">
                                     <p>{{ profile.user_name }}</p>
                                 </div>

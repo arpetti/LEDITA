@@ -1650,26 +1650,50 @@ background-color: #ffffff;
     border-radius: 6px;
     text-align: center;
 }
+
+.colUser0 {
+    width: 48px;
+}
 .colUser1 {
-    width: 18%;
+    width: 15%;
 }
 .colUser2 {
-    width: 18%;
+    width: 15%;
 }
 .colUser3 {
-    width: 5%;
+    width: 3%;
 }
 .colUser4 {
-    width: 15%;
+    width: 20%;
 }
 .colUser5 {
-    width: 15%;
+    width: 13%;
 }
 .colUser6 {
-    width: 15%;
+    width: 13%;
     border-right: none;
 }
 
+.rowUserLink a, .rowUserLink p {
+    color: #666666;
+    font-weight: normal;
+    line-height: 14px;
+    text-align: center;
+
+}
+
+.rowUserLink a:hover .colUser1, .rowUserLink a:hover .colUser2, .rowUserLink a:hover .colUser3, .rowUserLink a:hover .colUser4, .rowUserLink a:hover .colUser5, .rowUserLink a:hover .colUser6 {
+    color: #0099CC;
+    font-weight: normal;
+    background-color: #ffffff;
+    border-radius: 6px;
+    border-color: #dddddd;
+}
+
+.rowUserLink a:hover .colUser1 p, .rowUserLink a:hover .colUser2 p, .rowUserLink a:hover .colUser3 p, .rowUserLink a:hover .colUser4 p, .rowUserLink a:hover .colUser5 p, .rowUserLink a:hover .colUser6  p{
+    color: #0099CC;
+    font-weight: normal;
+}
 /* misc
 ===================== */
 .top-margin {
