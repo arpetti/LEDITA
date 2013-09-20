@@ -2,74 +2,69 @@
     <div class="row-fluid">
 
         <div class="top-margin zero">
-            <div class="span3">
-                <div id="searchBox">
-                    <h4 id="searchBoxHeader">Find Users</h4>
-                    <div class="searchBoxDiv">
-                        <i class="icon-filter"></i> <input type="search" class="searchBoxInput" ng-model="search" placeholder="filter users..." />
-
-                    </div>
+            <div class="btnContent btnActive btnTitle">
+                <h4 id="searchBoxHeader">Find Users</h4>
+                <div class="searchBoxDiv">
+                    <i class="icon-filter"></i> <input type="search" class="searchBoxInput" ng-model="search" placeholder="filter users..." />
 
                 </div>
-
-            </div>
-            <div class="span9">
-                <div class="userTable">
-                    <div class="headerUserTable">
-
-                        <div class="colTable colUser0">
-                            <p>&nbsp;</p>
-                        </div>
-                        <div class="colTable colUser1">
-                            <p>First Name</p>
-                        </div>
-                        <div class="colTable colUser2">
-                            <p>Last Name</p>
-                        </div>
-
-                        <div class="colTable colUser3">
-                            <p>Workplace</p>
-                        </div>
-                        <div class="colTable colUser4">
-                            <p>City</p>
-                        </div>
-                        <div class="colTable colUser5">
-                            <p>Country</p>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="rowTable" ng-repeat="profile in uniqueUsers | filter:search">
-                        <div class="rowUserLink">
-                            <a ng-href="/user/{{ profile.user_id }}">
-
-
-                                <div class="colTable colUser0">
-                                    <img ng-src="../img/pics/user{{ profile.user_id }}.png" class="user-pic">
-                                </div>
-                                <div class="colTable colUser1">
-                                    <p>{{ profile.user_name }}</p>
-                                </div>
-                                <div class="colTable colUser2">
-                                    <p>{{ profile.last_name }}</p>
-                                </div>
-
-                               <div class="colTable colUser3">
-                                    <p>{{ profile.workplace }}</p>
-                                </div>
-                               <div class="colTable colUser4">
-                                    <p>{{ profile.city }}</p>
-                                </div>
-                               <div class="colTable colUser5">
-                                    <p>{{ profile.country }}</p>
-                                </div>
-                               </a>
-                        </div>
-
-                        <div class="clearfix"></div>
-                    </div>
                 </div>
-                <div class="clearfix"></div>
-            </div>
+
+                <div id="contentBodyUser">
+                    <div class="ldTable">
+                        <div class="headerUserTable">
+                            <div class="colTable colUser0">
+                                <p>&nbsp;</p>
+                            </div>
+                            <div class="colTable colUser1">
+                                <p><a href="" ng-click="predicate = 'user_name'; reverse=!reverse" class="whiteText">First Name <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
+                            </div>
+                            <div class="colTable colUser2">
+                                <p><a href="" ng-click="predicate = 'last_name'; reverse=!reverse" class="whiteText">Last Name <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
+                            </div>
+                            <div class="colTable colUser3">
+                                <p><a href="" ng-click="predicate = 'workplace'; reverse=!reverse" class="whiteText">Workplace <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
+                            </div>
+                            <div class="colTable colUser4">
+                                <p><a href="" ng-click="predicate = 'city'; reverse=!reverse" class="whiteText">City <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
+                            </div>
+                            <div class="colTable colUser5">
+                                <p><a href="" ng-click="predicate = 'country'; reverse=!reverse" class="whiteText">Country <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="rowTable" ng-repeat="profile in uniqueUsers | filter:search | orderBy:predicate:reverse" >
+                            <div class="rowUserLink">
+                                <a ng-href="/user/{{ profile.user_id }}">
+                                    <div class="colTable colUser0">
+                                        <img ng-src="../img/pics/user{{ profile.user_id }}.png" class="user-pic">
+                                    </div>
+                                    <div class="colTable colUser1">
+                                        <p>{{ profile.user_name }}</p>
+                                    </div>
+                                    <div class="colTable colUser2">
+                                        <p>{{ profile.last_name }}</p>
+
+                                    </div>
+                                    <div class="colTable colUser3">
+                                        <p>{{ profile.workplace }}</p>
+                                    </div>
+                                    <div class="colTable colUser4">
+                                        <p>{{ profile.city }}</p>
+                                    </div>
+                                    <div class="colTable colUser5">
+                                        <p>{{ profile.country }}</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+
+
         </div>
 
     </div>

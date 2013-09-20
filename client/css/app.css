@@ -1202,6 +1202,7 @@ ul.listNode li {
     border-radius: 6px 6px 0 0;
     color: #ffffff;
     font-weight: bold;
+    text-align: center;
 }
 
 .headerUserTable p {
@@ -1648,15 +1649,17 @@ input[type="checkbox"] {
 
 /* Find users Page
 ===================== */
-#searchBox {
-background-color: #ffffff;
-    border: 1px solid #cccccc;
-    border-radius: 6px;
-    margin-top: 10px;
-}
 
 #searchBoxHeader {
     text-align: center;
+margin: 10px;
+    padding: 10px 0 0 0;
+}
+
+.searchBoxDiv {
+    text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
 .userTable {
@@ -1685,6 +1688,23 @@ background-color: #ffffff;
 .colUser5 {
     width: 13%;
     border-right: none;
+
+}.colLD1 {
+    width: 35%;
+}
+.colLD2 {
+    width: 17%;
+}
+
+.colLD3 {
+    width: 10%;
+}
+.colLD4 {
+    width: 15%;
+}
+.colLD5 {
+    width: 12%;
+    border-right: none;
 }
 
 .rowUserLink a, .rowUserLink p {
@@ -1704,6 +1724,19 @@ background-color: #ffffff;
 }
 
 .rowUserLink a:hover .colUser1 p, .rowUserLink a:hover .colUser2 p, .rowUserLink a:hover .colUser3 p, .rowUserLink a:hover .colUser4 p, .rowUserLink a:hover .colUser5 p {
+    color: #0099CC;
+    font-weight: normal;
+
+}
+.rowUserLink a:hover .colLD1, .rowUserLink a:hover .colLD2, .rowUserLink a:hover .colLD3, .rowUserLink a:hover .colLD4, .rowUserLink a:hover .colLD5  {
+    color: #0099CC;
+    font-weight: normal;
+    background-color: #ffffff;
+    border-radius: 6px;
+    border-color: #dddddd;
+}
+
+.rowUserLink a:hover .colLD1 p, .rowUserLink a:hover .colLD2 p, .rowUserLink a:hover .colLD3 p, .rowUserLink a:hover .colLD4 p, .rowUserLink a:hover .colLD5 p {
     color: #0099CC;
     font-weight: normal;
 }
@@ -2347,6 +2380,22 @@ border: 1px solid #0099CC;
         width: 13%;
     }
     .colUser3 {
+        width: 18%;
+    }
+
+    .colLD1 {
+        width: 20%;
+    }
+    .colLD2 {
+        width: 13%;
+    }
+    .colLD3 {
+        width: 18%;
+    }
+.colLD4 {
+        width: 18%;
+    }
+.colLD5 {
         width: 18%;
     }
 

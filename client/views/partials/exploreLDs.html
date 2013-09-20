@@ -1,74 +1,58 @@
 <div class="container top-margin">
     <div class="row-fluid">
 
+
         <div class="top-margin zero">
-            <div class="span3">
-                <div id="searchBox">
-                    <h4 id="searchBoxHeader">Find Users</h4>
+            <div class="btnContent btnActive btnTitle">
+                    <h4 id="searchBoxHeader">Explore Learning Designs</h4>
                     <div class="searchBoxDiv">
-                        <i class="icon-filter"></i> <input type="search" class="searchBoxInput" ng-model="search" placeholder="filter users..." />
+                        <i class="icon-filter"></i> <input type="search" class="searchBoxInput" ng-model="search" placeholder="filter designs..." />
 
                     </div>
 
-                </div>
 
             </div>
-            <div class="span9">
-                <div class="userTable">
-                    <div class="headerTable">
-
-                        <div class="colTable colUser0">
-                            <p>&nbsp;</p>
+            <div id="contentBodyUser">
+                <div class="ldTable">
+                    <div class="headerUserTable">
+                        <div class="colTable colLD1">
+                            <p><a href="" ng-click="predicate = 'ld_name'; reverse=!reverse" class="whiteText">Design Name <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
                         </div>
-                        <div class="colTable colUser1">
-                            <p>First Name</p>
+                        <div class="colTable colLD2">
+                            <p><a href="" ng-click="predicate = 'qcers[0].qcer_name'; reverse=!reverse" class="whiteText"> QCER Levels <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
                         </div>
-                        <div class="colTable colUser2">
-                            <p>Last Name</p>
+                        <div class="colTable colLD3">
+                            <p><a href="" ng-click="predicate = 'ld_scope'; reverse=!reverse" class="whiteText">Scope <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
                         </div>
-                        <div class="colTable colUser3">
-                            <p>Sex</p>
+                        <div class="colTable colLD4">
+                            <p><a href="" ng-click="predicate = 'user_name'; reverse=!reverse" class="whiteText">Author <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
                         </div>
-                        <div class="colTable colUser4">
-                            <p>Workplace</p>
-                        </div>
-                        <div class="colTable colUser5">
-                            <p>City</p>
-                        </div>
-                        <div class="colTable colUser6">
-                            <p>Country</p>
+                        <div class="colTable colLD5">
+                            <p><a href="" ng-click="predicate = 'ld_creation_date'; reverse=!reverse" class="whiteText">Created <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="rowTable" ng-repeat="profile in uniqueUsers | filter:search">
+                    <div class="rowTable" ng-repeat="learningDesign in learningDesigns | filter:search | orderBy:predicate:reverse"  ng-show="learningDesign.ld_publication==1">
                         <div class="rowUserLink">
-                            <a ng-href="/user/{{ profile.user_id }}">
+                            <a ng-href="/ld/{{ learningDesign.ld_id }}">
+                                <div class="colTable colLD1">
+                                    <p>{{ learningDesign.ld_name }}</p>
+                                </div>
+                                <div class="colTable colLD2">
+                                    <p ng-repeat="qcer in learningDesign.qcers" class="qcerList">{{ qcer.qcer_name }}</p> <p ng-show="!learningDesign.qcers">Not defined</p>
 
-
-                                <div class="colTable colUser0">
-                                    <img ng-src="../img/pics/user{{ profile.user_id }}.png" class="user-pic">
                                 </div>
-                                <div class="colTable colUser1">
-                                    <p>{{ profile.user_name }}</p>
+                                <div class="colTable colLD3">
+                                    <p>{{ learningDesign.ld_scope }}</p>
                                 </div>
-                                <div class="colTable colUser2">
-                                    <p>{{ profile.last_name }}</p>
+                                <div class="colTable colLD4">
+                                    <p>{{ learningDesign.user_name }} {{ learningDesign.user_last_name }} </p>
                                 </div>
-                                <div class="colTable colUser3">
-                                    <p>{{ profile.gender }}</p>
-                                </div>
-                                <div class="colTable colUser4">
-                                    <p>{{ profile.workplace }}</p>
-                                </div>
-                                <div class="colTable colUser5">
-                                    <p>{{ profile.city }}</p>
-                                </div>
-                                <div class="colTable colUser6">
-                                    <p>{{ profile.country }}</p>
+                                <div class="colTable colLD5">
+                                    <p>{{ learningDesign.ld_creation_date | date:'yyyy MMM d' }} </p>
                                 </div>
                             </a>
                         </div>
-
                         <div class="clearfix"></div>
                     </div>
                 </div>
