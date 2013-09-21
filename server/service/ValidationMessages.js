@@ -22,6 +22,7 @@ module.exports.LOGIN_SUCCESS = "Login successful.";
 module.exports.UNABLE_TO_RETRIEVE_LDS = 'Unable to retrieve learning designs at this time, please try again later.';
 module.exports.LD_NOT_FOUND = "Unable to find learning design.";
 module.exports.LD_DETAIL_NOT_FOUND = "Learning Design details could not be found";
+module.exports.UNABLE_TO_CREATE_LD = "Unable to create learning design at this time, please try again later.";
 
 // Activities
 module.exports.UNABLE_TO_RETRIEVE_LD_NODES = "Unable to retrieve learning design nodes at this time, please try again later.";

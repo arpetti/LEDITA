@@ -77,14 +77,14 @@ angular.module('ledita-app')
     };
 
     $scope.submitLD = function() {
-    	console.log('submitLD is called');
     	var ld = {
     		name: $scope.ldName,
     		qcers: $scope.selectedQcers,
     		scope: $scope.ldScope,
     		topics: $scope.selectedTopics,
     		objectives: $scope.selectedObjectives,
-    		requisites: $scope.selectedRequisites
+    		requisites: $scope.selectedRequisites,
+    		studentsDescription: $scope.ldStudentsDescr
     	};
     	console.log('LD to be POSTed: ' + JSON.stringify(ld));
     };
