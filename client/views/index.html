@@ -5,6 +5,7 @@
     <title>LEDITA: Learning Design for Italian Language</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
     <meta name="author" content="">
     <link href='https://fonts.googleapis.com/css?family=Cabin+Sketch:700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
@@ -84,8 +85,9 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/user/{{ user.id }}"><i class="icon-cog"></i> My Profile</a></li>
-                            <li><a href="#"><i class="icon-pencil"></i> My Designs</a></li>
+                            <!-- FIXME: add dynamic links -->
+                            <li><a href="/user/"><i class="icon-cog"></i> My Profile</a></li>
+                            <li><a href="/lds/"><i class="icon-pencil"></i> My Designs</a></li>
                             <li class="divider"></li>
                             <li><a id="logoutLink" ng-click="logout()" href=""><i class="icon-off"></i> Logout</a></li>
                         </ul>
