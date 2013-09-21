@@ -25,6 +25,10 @@ var getSelectedQcers = function(ldData) {
 	return _.map(selectedQcers, function(element) {return parseInt(element,10); });
 }
 
+var buildClassificates = function(ldid, qcerIds) {
+	return _.map(qcerIds, function(qcerId){ return [qcerId, ldid]; });
+};
+
 module.exports = {
 
 	// callback(err, ldid, message)
@@ -45,7 +49,8 @@ module.exports = {
             },
             function(ldid, callback)  {
             	var qcerIds = getSelectedQcers(ldData);
-            	console.log('Future task will attach these qcers to ld:' + JSON.stringify(qcerIds));
+            	var qcersToAttach = buildClassificates(ldid, qcerIds);
+            	console.log('Future task will attach these qcers to ld:' + JSON.stringify(qcersToAttach));
             	callback(null, ldid); 
             },
             function(ldid, callback)  {

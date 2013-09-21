@@ -17,11 +17,12 @@ describe('LD Create Service', function() {
         sandbox.restore();
     });
 
+    // TODO: Test when have no qcers or selected = false
 	it('Creates all the data successfully when input is valid', function(done) {
 		var userId = 29;
 		var ldData = {
     		name: "Test LD Create",
-    		qcers: {"3": true, "6":true},
+    		qcers: {"3": true, "6": true},
     		scope: "Test LD Scope",
     		topics: ["Topic 1","New Topic 23"],
     		objectives: [],

@@ -62,6 +62,25 @@ module.exports = {
   	module.exports.insertRecord(queryString, jsonData, callback);
   },
 
+  bulkInsert: function(queryString, values, callback) {
+  	pool.getConnection(function(err, connection) {
+      if (err) {
+        logWrapper.log().error('db connection error', err);
+        callback(err);
+        return;
+      }
+      connection.query(queryString, [values], function(err, result) {
+        if (err) {
+          logWrapper.log().error('db bulk insert error', err);
+          callback(err);
+          return;
+        }
+        connection.end();
+        callback(null, result);
+      });
+    });
+  },
+
   deleteRecord: function(queryString, jsonData, callback) {
     pool.getConnection(function(err, connection) {
       if (err) {
