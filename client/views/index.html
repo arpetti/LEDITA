@@ -94,16 +94,16 @@
                 </div>
 
                 <!-- Start LD creation Modal -->
-                <div modal="beOpen" close="closeLD()" options="opts">
+                <div modal="beOpen" close="closeLD()" options="opts" id="modal">
 
                     <div class="modal-header">
                         <h4>Create a New Design</h4>
 
                         <div class="clearfix"></div>
                     </div>
-                    <div ng-controller="LdCreateCtrl" class="modal-body">
+                    <div ng-controller="LdCreateCtrl" >
                     	<form novalidate class="createLdForm" name="LdCreateForm" ng-submit="submitLD()">
-
+                         <div class="modal-body">
                             <div class="formLevel">
                                 <div class="errorBox">
                                     <span class="errorTipModal"
@@ -241,7 +241,7 @@
 
 
                 
-                
+                            </div>
 			                <div class="modal-footer">
 			                    <button id="cancelCreateLd" class="btn btnFormCancel" ng-click="closeLD()">Cancel</button>
 			                    <button id="confirmCreateLD" type="submit" class="btn btnForm " ng-disabled="LdCreateForm.$invalid">Create</button>
