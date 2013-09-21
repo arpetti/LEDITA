@@ -17,7 +17,6 @@ describe('LD Create Service', function() {
         sandbox.restore();
     });
 
-    // TODO: Test when have no qcers or selected = false
 	it('Creates all the data successfully when input is valid', function(done) {
 		var userId = 29;
 		var ldData = {
@@ -25,7 +24,7 @@ describe('LD Create Service', function() {
     		qcers: {"3": true, "6": true},
     		scope: "Test LD Scope",
     		topics: ["Topic 1","New Topic 23"],
-    		objectives: [],
+    		objectives: ["Objective 1", "New Objective 98"],
     		requisites: [],
     		studentsDescription: "Test Students Description"
     	};
@@ -34,6 +33,58 @@ describe('LD Create Service', function() {
         var ldCreateDaoStub = sandbox.stub(LdCreateDao, "createLd", function(ldObj, callback) {
             callback(null, addedLdId);
         });
+
+        var results = {"affectedRows": 2};
+        var ldCreateDaoClassificatesStub = sandbox.stub(LdCreateDao, "insertClassificates", function(classificates, callback) {
+        	callback(null, results);
+        });
+
+        var ldMatcher = sinon.match({
+        	user_id: userId,
+            name: ldData.name,
+            scope: ldData.scope,
+            students_profile: ldData.studentsDescription
+        });
+
+        var classificatesMatcher = sinon.match(function (value) {
+    		return value.length === 2 && 
+    			value[0][0] === 3 &&
+    			value[0][1] === addedLdId &&
+    			value[1][0] === 6 &&
+    			value[1][1] === addedLdId;
+		});
+
+        var ldCreateCallback = function(err, ldid, message) {
+        	expect(err).to.be.null;
+        	expect(message).to.be.null;
+        	expect(ldid).to.equal(addedLdId);
+
+        	assert.isTrue(ldCreateDaoStub.withArgs(ldMatcher).calledOnce);
+        	assert.isTrue(ldCreateDaoClassificatesStub.withArgs(classificatesMatcher).calledOnce);
+        	done();
+        };
+
+        LdCreateService.createLd(userId, ldData, ldCreateCallback);
+	});
+
+	it('Does not insert classificates if empty', function(done) {
+		var userId = 29;
+		var ldData = {
+    		name: "Test LD Create",
+    		qcers: {},
+    		scope: "Test LD Scope",
+    		topics: ["Topic 1","New Topic 23"],
+    		objectives: ["Objective 1", "New Objective 98"],
+    		requisites: [],
+    		studentsDescription: "Test Students Description"
+    	};
+
+    	var addedLdId = 65;
+        var ldCreateDaoStub = sandbox.stub(LdCreateDao, "createLd", function(ldObj, callback) {
+            callback(null, addedLdId);
+        });
+
+        var ldCreateDaoClassificatesStub = sandbox.stub(LdCreateDao, "insertClassificates");
 
         var ldMatcher = sinon.match({
         	user_id: userId,
@@ -48,6 +99,46 @@ describe('LD Create Service', function() {
         	expect(ldid).to.equal(addedLdId);
 
         	assert.isTrue(ldCreateDaoStub.withArgs(ldMatcher).calledOnce);
+        	assert.equal(ldCreateDaoClassificatesStub.callCount, 0, "does not insert classificates when empty");
+        	done();
+        };
+
+        LdCreateService.createLd(userId, ldData, ldCreateCallback);
+	});
+
+	it('Halts all inserts if LD insert returns error from dao', function(done) {
+		var userId = 29;
+		var ldData = {
+    		name: "Test LD Create",
+    		qcers: {"3": true, "6": true},
+    		scope: "Test LD Scope",
+    		topics: ["Topic 1","New Topic 23"],
+    		objectives: ["Objective 1", "New Objective 98"],
+    		requisites: [],
+    		studentsDescription: "Test Students Description"
+    	};
+
+    	var daoError = new Error('something went wrong');
+        var ldCreateDaoStub = sandbox.stub(LdCreateDao, "createLd", function(ldObj, callback) {
+            callback(daoError);
+        });
+
+        var ldCreateDaoClassificatesStub = sandbox.stub(LdCreateDao, "insertClassificates");
+
+        var ldMatcher = sinon.match({
+        	user_id: userId,
+            name: ldData.name,
+            scope: ldData.scope,
+            students_profile: ldData.studentsDescription
+        });
+
+        var ldCreateCallback = function(err, ldid, message) {
+        	expect(err).to.equal(daoError);
+        	expect(ldid).to.be.null
+        	expect(message).to.equal(messages.UNABLE_TO_CREATE_LD);
+
+        	assert.isTrue(ldCreateDaoStub.withArgs(ldMatcher).calledOnce);
+        	assert.equal(ldCreateDaoClassificatesStub.callCount, 0, "does not insert classificates when error occurs inserting LD");
         	done();
         };
 

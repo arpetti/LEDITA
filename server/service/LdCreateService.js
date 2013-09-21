@@ -48,10 +48,18 @@ module.exports = {
                 })
             },
             function(ldid, callback)  {
-            	var qcerIds = getSelectedQcers(ldData);
-            	var qcersToAttach = buildClassificates(ldid, qcerIds);
-            	console.log('Future task will attach these qcers to ld:' + JSON.stringify(qcersToAttach));
-            	callback(null, ldid); 
+            	var qcersToAttach = buildClassificates(ldid, getSelectedQcers(ldData));
+            	if (qcersToAttach.length > 0) {
+	            	LdCreateDao.insertClassificates(qcersToAttach, function(err, results) {
+	            		if (err) {
+	            			callback(err);
+	            		} else {
+	            			callback(null, ldid);
+	            		}
+	            	})
+            	} else {
+            		callback(null, ldid);
+            	}
             },
             function(ldid, callback)  {
             	console.log('Future task to insert or attach topics for ldid: ' + ldid);

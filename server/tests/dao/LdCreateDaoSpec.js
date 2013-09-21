@@ -5,6 +5,7 @@ chai.use(require('chai-datetime'));
 var LdCreateDao = require('../../dao/LdCreateDao');
 var LdDao = require('../../dao/LdDao');
 var Dao = require('../../dao/Dao');
+var _ = require('underscore');
 
 describe('LD Create DAO', function() {
 
@@ -87,11 +88,25 @@ describe('LD Create DAO', function() {
 				expect(err).to.be.null;
 				expect(results).not.to.be.null;
 				expect(results.affectedRows).to.equal(classificates.length);
+				Dao.findAll('SELECT qcer_id, ld_id FROM classificates WHERE ld_id = ?', [existingLdWithNoClassificates], function(err, results) {
+					expect(err).to.be.null;
+					expect(results).to.to.have.length(classificates.length);					
+					expect(_.contains(_.pluck(results, "qcer_id"), qcer1)).to.be.true;
+					expect(_.contains(_.pluck(results, "qcer_id"), qcer2)).to.be.true;
+					done();
+				});
+			});
+		});
+
+		it('Returns error if classificates is empty', function(done) {
+			var classificates = [];
+			LdCreateDao.insertClassificates(classificates, function(err, results) {
+				expect(err).not.to.be.null;
+				expect(results).to.be.undefined;
 				done();
 			});
 		});
 
 	});
-
 
 });
