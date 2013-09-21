@@ -17,7 +17,7 @@ describe('LD Create Service', function() {
         sandbox.restore();
     });
 
-	it.only('Creates all the data successfully when input is valid', function(done) {
+	it('Creates all the data successfully when input is valid', function(done) {
 		var userId = 29;
 		var ldData = {
     		name: "Test LD Create",

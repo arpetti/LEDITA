@@ -1,6 +1,7 @@
 var LdCreateDao = require('../dao/LdCreateDao');
 var async = require('async');
 var messages = require('./ValidationMessages');
+var _ = require('underscore');
 
 var createLdForInsert = function(userId, ldData) {
 	var ldObj = {
@@ -11,6 +12,12 @@ var createLdForInsert = function(userId, ldData) {
 	};
 	return ldObj;
 };
+
+var getSelectedQcers = function(ldData) {
+	var potentialQcers = ldData.qcers;
+	var potentialQcerList = _.pairs(potentialQcers);
+	console.log(JSON.stringify(potentialQcerList));
+}
 
 module.exports = {
 
