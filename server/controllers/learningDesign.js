@@ -1,6 +1,7 @@
-var LdDao =      require('../dao/LdDao.js')
-    , LDService = require('../service/LDService')
-    , messages = require('../service/ValidationMessages');
+var LdDao =      require('../dao/LdDao.js');
+var LDService = require('../service/LDService');
+var LdCreateService = require('../service/LdCreateService');
+var messages = require('../service/ValidationMessages');
 
 module.exports = {
     
@@ -35,5 +36,17 @@ module.exports = {
         }, function(err) {
             return res.send(500, err.message); 
         });
+    },
+
+    createLd: function(req, res) {
+    	var ldData = req.body;
+    	LdCreateService.createLd(req.user.id, ldData, function(err, ldid, message) {
+    		if(err) {
+                return res.send(500, message); 
+            } else { 
+            	var result = {ldid: ldid};
+                res.json(200, result);
+            }
+    	});
     }
 };

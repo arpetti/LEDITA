@@ -8,6 +8,13 @@ angular.module('ledita-app')
 
         getQcers: function(success, error) {
             $http.get('/reference/qcer').success(success).error(error);
+        },
+
+        createLd: function(ldData, success, error) {
+            $http.post('/learningdesign', ldData).success(function(res) {
+                success(res);
+            }).error(error);
         }
+
     };
 });

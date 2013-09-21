@@ -56,6 +56,12 @@ var routes = [
         middleware: [ensureAuthenticated, ensureAuthorized, LearningDesignCtrl.findById],
         accessLevel: accessLevels.user
     },
+    {
+        path: '/learningdesign',
+        httpMethod: 'POST',
+        middleware: [ensureAuthenticated, ensureAuthorized, LearningDesignCtrl.createLd],
+        accessLevel: accessLevels.user
+    },
 
     // User Profile
     {

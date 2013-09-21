@@ -37,7 +37,7 @@ angular.module('ledita-app')
 
 angular.module('ledita-app')
 .controller('LdCreateCtrl',
-['$scope', '$http', 'Home', 'limitToFilter', function($scope, $http, Home, limitToFilter) {
+['$scope', '$http', 'Home', 'limitToFilter', '$location', function($scope, $http, Home, limitToFilter, $location) {
 
 	Home.getQcers(function(res) {
         $scope.qceropts = res;
@@ -77,7 +77,7 @@ angular.module('ledita-app')
     };
 
     $scope.submitLD = function() {
-    	var ld = {
+    	Home.createLd({
     		name: $scope.ldName,
     		qcers: $scope.selectedQcers,
     		scope: $scope.ldScope,
@@ -85,8 +85,14 @@ angular.module('ledita-app')
     		objectives: $scope.selectedObjectives,
     		requisites: $scope.selectedRequisites,
     		studentsDescription: $scope.ldStudentsDescr
-    	};
-    	console.log('LD to be POSTed: ' + JSON.stringify(ld));
+    	},
+        function(res) {
+        	// FIXME: How to call closeLd from NavCtrl? Maybe broadcast/event? 
+            $location.path('/');	//TODO Redirect user to ld edit page when available
+        },
+        function(err) {
+            $scope.ldCreateError = err;
+        });
     };
 
 }]);
