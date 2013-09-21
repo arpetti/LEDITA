@@ -15,8 +15,14 @@ var createLdForInsert = function(userId, ldData) {
 
 var getSelectedQcers = function(ldData) {
 	var potentialQcers = ldData.qcers;
-	var potentialQcerList = _.pairs(potentialQcers);
-	console.log(JSON.stringify(potentialQcerList));
+	var selectedQcers = [];
+	for (var key in potentialQcers) {
+		var value = potentialQcers[key];
+		if(value === true) {
+			selectedQcers.push(key);
+		}
+	};
+	return _.map(selectedQcers, function(element) {return parseInt(element,10); });
 }
 
 module.exports = {
@@ -24,7 +30,7 @@ module.exports = {
 	// callback(err, ldid, message)
 	createLd: function(userId, ldData, callback) {
 
-		// TODO Input validation
+		// TODO Input validation, make sure qcer ids are numbers
 
 		async.waterfall([
             function(callback) {
@@ -38,7 +44,8 @@ module.exports = {
                 })
             },
             function(ldid, callback)  {
-            	console.log('Future task to attach qcers for ldid: ' + ldid);
+            	var qcerIds = getSelectedQcers(ldData);
+            	console.log('Future task will attach these qcers to ld:' + JSON.stringify(qcerIds));
             	callback(null, ldid); 
             },
             function(ldid, callback)  {
