@@ -2,7 +2,7 @@ var chai = require('chai');
 var expect = require('chai').expect
 chai.use(require('chai-datetime'));
 
-var LDCreateService = require('../../service/LDCreateService');
+var LDCreateService = require('../../service/LdCreateService');
 var messages = require('../../service/ValidationMessages');
 var Dao = require('../../dao/Dao')
 
