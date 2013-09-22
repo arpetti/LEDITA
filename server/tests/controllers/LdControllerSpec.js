@@ -4,7 +4,7 @@ var expect = require('chai').expect
     , when   = require('when')
     , LdController = require('../../controllers/LdController')
     , LearningDesignDao = require('../../dao/LdDao')
-    , LearningDesignService = require('../../service/LDService')
+    , LdGetService = require('../../service/LdGetService')
     , messages = require('../../service/ValidationMessages');
 
 describe('Learning Design Controller', function() {
@@ -29,7 +29,7 @@ describe('Learning Design Controller', function() {
     		req.params = {id: learningDesignId};
 
             var serviceError = new Error("something went wrong");
-            var serviceStub = sandbox.stub(LearningDesignService, 'getLearningDesignPromise').
+            var serviceStub = sandbox.stub(LdGetService, 'getLearningDesignPromise').
                 returns(when.reject(serviceError));
 
             res.send = function(httpStatus, errMessage) {
@@ -54,7 +54,7 @@ describe('Learning Design Controller', function() {
                     [],
                     []
                 ];
-            var serviceStub = sandbox.stub(LearningDesignService, 'getLearningDesignPromise').
+            var serviceStub = sandbox.stub(LdGetService, 'getLearningDesignPromise').
                 returns(when(serviceResponse));
 
             res.send = function(httpStatus, errMessage) {
@@ -80,7 +80,7 @@ describe('Learning Design Controller', function() {
                     [{"qcer_name":"C1"}],
                     [{"something": "does not belong here"}]
                 ];
-            var serviceStub = sandbox.stub(LearningDesignService, 'getLearningDesignPromise').
+            var serviceStub = sandbox.stub(LdGetService, 'getLearningDesignPromise').
                 returns(when(serviceResponse));
 
             res.send = function(httpStatus, errMessage) {
@@ -103,7 +103,7 @@ describe('Learning Design Controller', function() {
                     [{"objective_descr":"Objective 1"},{"objective_descr":"Objective 6"}],
                     [{"qcer_name": "A2"}]
                 ]
-            var serviceStub = sandbox.stub(LearningDesignService, 'getLearningDesignPromise').
+            var serviceStub = sandbox.stub(LdGetService, 'getLearningDesignPromise').
                 returns(when(serviceResponse));
 
             res.json = function(httpStatus, result) {
@@ -131,7 +131,7 @@ describe('Learning Design Controller', function() {
 
     		var serviceError = new Error("something went wrong");
             var serviceMessage = "Unable to retrieve lds";
-    		var serviceStub = sandbox.stub(LearningDesignService, "getAllLearningDesigns", function(callback) {
+    		var serviceStub = sandbox.stub(LdGetService, "getAllLearningDesigns", function(callback) {
                 callback(serviceError, null, serviceMessage);
             });
 
@@ -149,7 +149,7 @@ describe('Learning Design Controller', function() {
     	it('Returns a 200 when learning designs are retrieved successfully', function(done) {
 
     		var ldResults = [{ld_id: 1, ld_name: "Demo 1"}, {ld_id: 2, ld_name: "Demo 2"}];
-    		var serviceStub = sandbox.stub(LearningDesignService, "getAllLearningDesigns", function(callback) {
+    		var serviceStub = sandbox.stub(LdGetService, "getAllLearningDesigns", function(callback) {
                 callback(null, ldResults);
             });
 

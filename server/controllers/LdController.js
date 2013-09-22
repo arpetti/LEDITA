@@ -1,12 +1,12 @@
 var LdDao =      require('../dao/LdDao.js');
-var LDService = require('../service/LDService');
+var LdGetService = require('../service/LdGetService');
 var LdCreateService = require('../service/LdCreateService');
 var messages = require('../service/ValidationMessages');
 
 module.exports = {
     
     index: function(req, res) {
-        LDService.getAllLearningDesigns(function(err, result, message){
+        LdGetService.getAllLearningDesigns(function(err, result, message){
             if(err) {
                 return res.send(500, message); 
             } else { 
@@ -19,8 +19,8 @@ module.exports = {
         var ldid = req.params.id;
         var learningDesignDetail = {};
         
-        return LDService.getLearningDesignPromise(ldid).then(function(results) {
-            if (results.length !== LDService.LD_NUMBER_OF_DATA_ELEMENTS) {
+        return LdGetService.getLearningDesignPromise(ldid).then(function(results) {
+            if (results.length !== LdGetService.LD_NUMBER_OF_DATA_ELEMENTS) {
                 return res.send(400, messages.LD_DETAIL_NOT_FOUND);
             }
             var learningDesign = results[0];

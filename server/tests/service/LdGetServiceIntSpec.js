@@ -1,14 +1,14 @@
 // This is an integration test because the dependencies are not mocked out
 // Reference for mocha-promise testing: http://architects.dzone.com/articles/functional-testing-nodejs
 var expect = require('chai').expect
-var LDService = require('../../service/LDService');
+var LdGetService = require('../../service/LdGetService');
 var messages = require('../../service/ValidationMessages');
 var _ = require('underscore');
 
 describe('LD Service Integration', function() {
 
       it('Gets all learning designs with qcers', function(done) {
-            LDService.getAllLearningDesigns(function(err, result, message) {
+            LdGetService.getAllLearningDesigns(function(err, result, message) {
                   expect(err).to.be.null;
                   expect(message).to.be.null;
                   expect(result).to.have.length(30);
@@ -25,8 +25,8 @@ describe('LD Service Integration', function() {
 
 	it('Gets a learning design with subjects, objectives, prerequisites, qcers', function(done) {
 		var learningDesignId = 1;
-		LDService.getLearningDesignPromise(learningDesignId).then(function(result) {
-      		expect(result).to.have.length(LDService.LD_NUMBER_OF_DATA_ELEMENTS);
+		LdGetService.getLearningDesignPromise(learningDesignId).then(function(result) {
+      		expect(result).to.have.length(LdGetService.LD_NUMBER_OF_DATA_ELEMENTS);
       		
       		var learningDesign = result[0];
       		expect(learningDesign).to.have.length(1);
@@ -62,8 +62,8 @@ describe('LD Service Integration', function() {
 
 	it('Returns empty results when learning design not found', function(done) {
 		var learningDesignId = 999;
-		LDService.getLearningDesignPromise(learningDesignId).then(function(result) {
-			expect(result).to.have.length(LDService.LD_NUMBER_OF_DATA_ELEMENTS);
+		LdGetService.getLearningDesignPromise(learningDesignId).then(function(result) {
+			expect(result).to.have.length(LdGetService.LD_NUMBER_OF_DATA_ELEMENTS);
 			expect(result[0]).to.have.length(0);
 			expect(result[1]).to.have.length(0);
 			expect(result[2]).to.have.length(0);

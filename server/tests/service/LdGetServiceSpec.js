@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 var assert = require('chai').assert;
 var sinon = require('sinon');
-var LDService = require('../../service/LDService');
+var LdGetService = require('../../service/LdGetService');
 var LdDao = require('../../dao/LdDao');
 var messages = require('../../service/ValidationMessages');
 var _ = require('underscore');
@@ -39,7 +39,7 @@ describe('LD Service', function() {
             	done();
             };
 
-            LDService.getAllLearningDesigns(getAllCallback);
+            LdGetService.getAllLearningDesigns(getAllCallback);
 
     	});
     });
