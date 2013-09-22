@@ -5,6 +5,7 @@ var CREATE_LD = 'INSERT INTO ld SET ?';
 var DELETE_USER = 'DELETE FROM ld WHERE ?';
 
 var BULK_INSERT_CLASSIFICATES = "INSERT INTO classificates (qcer_id, ld_id) VALUES ?";
+var BULK_INSERT_CONCERNS = "INSERT INTO concerns (subject_id, ld_id) VALUES ?";
 
 module.exports = {
 
@@ -30,6 +31,16 @@ module.exports = {
 
 	insertClassificates: function(classificates, callback) {
 		dao.bulkInsert(BULK_INSERT_CLASSIFICATES, classificates, function(err, result) {
+			if (err) {
+	        	callback(err);
+	      	} else {
+		    	callback(null, result);
+	      	}
+		});
+	},
+
+	insertConcerns: function(concerns, callback) {
+		dao.bulkInsert(BULK_INSERT_CONCERNS, concerns, function(err, result) {
 			if (err) {
 	        	callback(err);
 	      	} else {

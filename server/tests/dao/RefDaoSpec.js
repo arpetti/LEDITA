@@ -76,7 +76,6 @@ describe('Reference Data Dao', function() {
 			var notExistSubject3 = 'my new subject';
 			var subjectNames = [existSubject1, existSubject2, notExistSubject3];
 			RefDao.findSubjectsByName(subjectNames, function(err, results) {
-				console.log(JSON.stringify(results));
 				expect(err).to.be.null;
 				expect(results).to.have.length(2);
 				expect(_.contains(_.pluck(results, "name"), existSubject1)).to.be.true;

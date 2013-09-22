@@ -1,4 +1,5 @@
 var LdCreateDao = require('../dao/LdCreateDao');
+var TopicService = require('./TopicService');
 var async = require('async');
 var messages = require('./ValidationMessages');
 var _ = require('underscore');
@@ -64,6 +65,9 @@ module.exports = {
             function(ldid, callback)  {
             	console.log('Future task to insert or attach topics for ldid: ' + ldid);
             	callback(null, ldid); 
+            	// TopicService.insertTopics(ldid, ldData.selectedTopics, function() {
+            	// 	callback(null, ldid); 
+            	// });
             },
             function(ldid, callback)  {
             	console.log('Future task to insert or attach objectives for ldid: ' + ldid);
