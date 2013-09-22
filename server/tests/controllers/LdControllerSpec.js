@@ -2,7 +2,7 @@ var expect = require('chai').expect
     , assert = require('chai').assert
     , sinon = require('sinon')
     , when   = require('when')
-    , LearningDesignCtrl = require('../../controllers/learningDesign')
+    , LdController = require('../../controllers/LdController')
     , LearningDesignDao = require('../../dao/LdDao')
     , LearningDesignService = require('../../service/LDService')
     , messages = require('../../service/ValidationMessages');
@@ -39,7 +39,7 @@ describe('Learning Design Controller', function() {
                 done();
             };
 
-            LearningDesignCtrl.findById(req, res);
+            LdController.findById(req, res);
     	});
 
     	it('Returns a 404 when learning design not found', function(done) {
@@ -63,7 +63,7 @@ describe('Learning Design Controller', function() {
                 assert.isTrue(serviceStub.withArgs(learningDesignId).calledOnce);
             };
 
-            LearningDesignCtrl.findById(req, res).then(function(results) {
+            LdController.findById(req, res).then(function(results) {
                 }).then(done, done);
 
     	});
@@ -89,7 +89,7 @@ describe('Learning Design Controller', function() {
                 assert.isTrue(serviceStub.withArgs(learningDesignId).calledOnce);
             }
 
-            LearningDesignCtrl.findById(req, res).then(function(results) {
+            LdController.findById(req, res).then(function(results) {
                 }).then(done, done);
         });
 
@@ -119,7 +119,7 @@ describe('Learning Design Controller', function() {
             	assert.isTrue(serviceStub.withArgs(learningDesignId).calledOnce);
             }
 
-            LearningDesignCtrl.findById(req, res).then(function(results) {
+            LdController.findById(req, res).then(function(results) {
                 }).then(done, done);
     	});
 
@@ -143,7 +143,7 @@ describe('Learning Design Controller', function() {
                 done();
             };
 
-            LearningDesignCtrl.index(req, res);
+            LdController.index(req, res);
     	});
 
     	it('Returns a 200 when learning designs are retrieved successfully', function(done) {
@@ -162,7 +162,7 @@ describe('Learning Design Controller', function() {
                 done();
             };
 
-            LearningDesignCtrl.index(req, res);
+            LdController.index(req, res);
     	});
     });
 
