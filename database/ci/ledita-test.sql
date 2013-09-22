@@ -445,7 +445,7 @@ CREATE  TABLE IF NOT EXISTS `ledita-test`.`resource` (
   `activity_id` INT(11) NOT NULL ,
   `name` VARCHAR(50) NOT NULL ,
   `type` VARCHAR(50) NOT NULL ,
-  `descr` VARCHAR(1000) NULL DEFAULT NULL ,
+  `descr` VARCHAR(500) NULL DEFAULT NULL ,
   `link` VARCHAR(255) NULL DEFAULT NULL ,
   `copy` VARCHAR(255) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) ,

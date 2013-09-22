@@ -383,6 +383,7 @@ a:hover {
 .createLdForm {
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 .formLevel {
     margin: 0 auto 5px;
@@ -580,11 +581,7 @@ input.sidebarInput {
 ===================== */
 .newActBox {
     width: 90%;
-    margin: 0 auto;
-}
-
-.newActBox a {
-    font-weight: normal;
+    margin: 10px auto;
 }
 
 .newActButton1:hover, .newActButton2:hover, .newActButton3:hover {
@@ -593,27 +590,28 @@ input.sidebarInput {
 }
 
 .newActButton1 {
-    width: 55px;
-    height: 55px;
-    border-radius: 60px;
+    width: 75px;
+    height: 75px;
+    border-radius: 40px;
     background: #496f56 scroll 0 0;
-    margin: 10px 3%;
+    margin: 0 3% 10px ;
     line-height: 22px;
-    padding: 10px;
+    padding: 0 0 10px 0;
     border: 2px solid #FFFFFF;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
     color: #ffffff;
     display: inline-block;
+font-weight: normal;
 }
 
 .newActButton2 {
-    width: 55px;
-    height: 55px;
-    border-radius: 60px;
+    width: 75px;
+    height: 75px;
+    border-radius: 40px;
     background: #0099CC scroll 0 0;
-    margin: 10px 3%;
+    margin: 0 3% 10px ;
     line-height: 22px;
-    padding: 10px;
+    padding: 0 0 10px 0;
     border: 2px solid #FFFFFF;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
     color: #ffffff;
@@ -622,13 +620,13 @@ input.sidebarInput {
 }
 
 .newActButton3 {
-    width: 55px;
-    height: 55px;
-    border-radius: 60px;
+    width: 75px;
+    height: 75px;
+    border-radius: 40px;
     background: #cccccc scroll 0 0;
-    margin: 10px 3%;
+    margin: 0 3% 10px ;
     line-height: 22px;
-    padding: 10px;
+    padding: 0 0 10px 0;
     border: 2px solid #FFFFFF;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
     color: #666;
@@ -767,9 +765,73 @@ input.scopeLDInput {
 
 .delete {
     float: right;
+}
+.durationBox {
+    margin: 0;
+    padding: 0;
+    width: 24%;
+    display: inline-block;
+}
+.orgGroupBox {
+    margin: 10px auto 0;
+    padding: 0;
+    width: 48%;
+    display: inline-block;
+    font-size: 13px ;
+}
+input.formInputDuration {
+    font-size: 14px;
+    line-height: 14px;
+    margin: 0 auto;
+    padding: 0 1%;
+}
 
+
+.formInputDuration {
+    width: 50%;
+}
+
+.org {
+    width: 22%;
+}
+
+input.formInputDuration[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    cursor:pointer;
+    display:block;
+    text-align:center;
+    position:relative;
+    width: 10px;
+}
+
+input.formInputDuration[type=number]::-webkit-inner-spin-button:hover {
+    color: #236DCD;
+}
+
+input.formInputDuration[type=number]::-webkit-inner-spin-button:before,
+input.formInputDuration[type=number]::-webkit-inner-spin-button:after {
+    content: "^";
+    position:absolute;
+    font-family:monospace;
+    font-size: 22px;
+    right: 2px;
 
 }
+
+input.formInputDuration[type=number]::-webkit-inner-spin-button:before {
+    top:4px;
+}
+
+input.formInputDuration[type=number]::-webkit-inner-spin-button:after {
+    bottom:4px;
+    -webkit-transform: rotate(180deg);
+}
+
+.checkModality {
+    margin-right: 15px;
+}
+
+
 
 /* activities diagram
 ===================== */
@@ -2504,12 +2566,31 @@ border: 1px solid #0099CC;
     }
 }
 
-@media (max-height: 500px) {
-
+@media (min-height: 786px) {
     .modal-body {
-        height: 300px;
+   max-height: 470px;
+        overflow: auto;
     }
+
 }
+
+@media (min-height: 450px) and (max-height: 786px) {
+    .modal-body {
+   max-height: 270px;
+        overflow: auto;
+    }
+
+}
+
+@media (min-height: 320px) and (max-height: 450px) {
+    .modal-body {
+   max-height: 170px;
+        overflow: auto;
+    }
+
+}
+
+
 
 
 

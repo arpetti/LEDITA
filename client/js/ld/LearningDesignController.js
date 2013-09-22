@@ -48,4 +48,52 @@ angular.module('ledita-app')
         dialogFade:true
     };
 
+    $scope.createActivity = function (node) {
+        $scope.addActivity = true;
+        };
+
+    $scope.closeAddActivity = function () {
+        $scope.closeMsg = 'I was closed at: ' + new Date();
+        $scope.addActivity = false;
+    };
+    $scope.optsAddActivity = {
+        backdropFade: true,
+        dialogFade:true,
+        backdropClick:false
+    };
+
+    $scope.createResource = function (node) {
+        $scope.addResource = true;
+
+
+
+    };
+
+    $scope.closeAddResource = function () {
+        $scope.closeMsg = 'I was closed at: ' + new Date();
+        $scope.addResource = false;
+        $scope.addActivity = true;
+    };
+
+    $scope.optsAddResource = {
+        backdropFade: true,
+        dialogFade:true,
+        backdropClick:false
+
+    };
 }]);
+
+angular.module('ledita-app')
+    .controller('ActCreateCtrl',
+        ['$scope', '$http', 'Home', 'limitToFilter', '$location', function($scope, $http, Home, limitToFilter, $location) {
+
+
+
+        }]);
+angular.module('ledita-app')
+    .controller('AddResourceCtrl',
+        ['$scope', '$http', 'Home', 'limitToFilter', '$location', function($scope, $http, Home, limitToFilter, $location) {
+
+
+
+        }]);

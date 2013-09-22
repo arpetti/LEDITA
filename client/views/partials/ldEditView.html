@@ -17,7 +17,7 @@
         <h4 id="sidebarHeader">General Info</h4>
 
         <div>
-            <h5 class="zeroMargin date"><i class="icon-pencil"></i> Author:</h5>
+            <h5 class="zeroMargin "><i class="icon-pencil"></i> Author:</h5>
             <a href="#" class="zeroMargin">{{ learningDesign.user_name}} {{ learningDesign.user_last_name}}</a>
         </div>
         <div class="marginTopSidebar">
@@ -30,37 +30,43 @@
 
             <form ng-submit="addSubject()" class="sidebarForm">
                 <input type="text" class="sidebarInput" ng-model="subject" placeholder="add new topic">
-                <button class="btn sidebarButton" type="submit" ><i class="icon-plus-sign icon-white"></i> </button>
+                <button class="btn sidebarButton" type="submit"><i class="icon-plus-sign icon-white"></i></button>
             </form>
             <ul ng-repeat="subject in learningDesign.subjects" class="zeroMargin subjects">
-                <li class="sidebarEditItem"><span class="sidebarEditItemLink">{{subject.subject_name}} <a ng-href="#" ><i class="icon-remove-circle"></i> </a></span></li>
+                <li class="sidebarEditItem"><span class="sidebarEditItemLink">{{subject.subject_name}} <a ng-href="#"><i
+                        class="icon-remove-circle"></i> </a></span></li>
             </ul>
         </div>
         <!-- FIXME: dynamic data with typeahead -->
         <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-tasks"></i> Objectives:</h5>
+
             <form ng-submit="addAims()" class="sidebarForm">
                 <input type="text" class="sidebarInput" ng-model="aims" placeholder="add new objective">
-                <button class="btn sidebarButton" type="submit" ><i class="icon-plus-sign icon-white"></i> </button>
+                <button class="btn sidebarButton" type="submit"><i class="icon-plus-sign icon-white"></i></button>
             </form>
             <ul ng-repeat="objective in learningDesign.objectives" class="zeroMargin objectives">
-                <li class="sidebarEditItem"><span class="sidebarEditItemLink">{{objective.objective_descr}} <a ng-href="#" ><i class="icon-remove-circle"></i> </a></span>
+                <li class="sidebarEditItem"><span class="sidebarEditItemLink">{{objective.objective_descr}} <a
+                        ng-href="#"><i class="icon-remove-circle"></i> </a></span>
                 </li>
             </ul>
         </div>
         <!-- FIXME: dynamic data with typeahead -->
         <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-backward"></i> Pre-Requisites:</h5>
+
             <form ng-submit="addNeeds()" class="sidebarForm">
                 <input type="text" class="sidebarInput" ng-model="needs" placeholder="add new pre-requisites">
-                <button class="btn sidebarButton" type="submit" ><i class="icon-plus-sign icon-white"></i> </button>
+                <button class="btn sidebarButton" type="submit"><i class="icon-plus-sign icon-white"></i></button>
             </form>
             <ul ng-repeat="prereq in learningDesign.prerequisites" class="zeroMargin prerequisites">
-                <li class="sidebarEditItem"><span  class="sidebarEditItemLink">{{prereq.prereq_name}} <a ng-href="#" ><i class="icon-remove-circle"></i> </a></span>
+                <li class="sidebarEditItem"><span class="sidebarEditItemLink">{{prereq.prereq_name}} <a ng-href="#"><i
+                        class="icon-remove-circle"></i> </a></span>
                 </li>
             </ul>
         </div>
         <!-- FIXME: dynamic data -->
         <div class="clear marginTopSidebar">
             <h5 class="zeroMargin"><i class="icon-user"></i> Students' Description:</h5>
+
             <form class="sidebarForm">
                 <textarea class="sidebarTextarea" rows="4">{{ learningDesign.ld_students_profile }}</textarea>
 
@@ -130,158 +136,436 @@
 </div>
 
 
-
-
-
 <div id="contentBody">
     <div id="contentHeader">
         <div class="titleEdit">
             <!-- FIXME: dynamic data -->
-            <input placeholder="{{learningDesign.ld_name }}" class="titleLDInput" >
+            <input placeholder="{{learningDesign.ld_name }}" class="titleLDInput">
 
             <!-- FIXME: dynamic data with with ng-repeater as in index.html modal -->
-            <div class="titleQcer"><i class="icon-signal icon-white"></i><span ng-repeat="qcer in learningDesign.qcers" class="qcerCheck ">
+            <div class="titleQcer"><i class="icon-signal icon-white"></i><span ng-repeat="qcer in learningDesign.qcers"
+                                                                               class="qcerCheck ">
                 	<input type="checkbox" ng-model="selectedQcers[qceropt.id]"> {{ qcer.qcer_name }}</span></div>
 
             <!-- FIXME: dynamic data with typeahead -->
-            <div class="titleScope"><i class="icon-bell icon-white"></i> <input class="scopeLDInput" placeholder="{{learningDesign.ld_scope }}"></div>
+            <div class="titleScope"><i class="icon-bell icon-white"></i> <input class="scopeLDInput"
+                                                                                placeholder="{{learningDesign.ld_scope }}">
+            </div>
         </div>
     </div>
 </div>
 
 
-
-
-
 <tab active="data.static1">
 
 
-    <div class="tabContent">
-        <div class="newActBox">
-            <a href="#">
-                <span class="newActButton1"><i class="icon-plus icon-white"></i> Activity</span>
-                <span class="newActButton2"><i class="icon-plus icon-white"></i> Design</span>
-                <span class="newActButton3"><i class="icon-plus icon-white"></i> Group</span>
-    </a>
-        </div>
+<div class="tabContent">
+<div class="newActBox">
+    <button id="createActivity" type="button" class="newActButton1" href ng-click="createActivity()">
+        <i class="icon-plus icon-white"></i><br>Activity
+    </button>
+    <button id="addLD" type="button" class="newActButton2" href ng-click="addLD()">
+        <i class="icon-plus icon-white"></i><br>Design
+    </button>
+    <button id="createGroup" type="button" class="newActButton3" href ng-click="createGroup()">
+        <i class="icon-plus icon-white"></i><br>Group
+    </button>
 
-        <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Global View) -->
-        <div ng-repeat="(level, nodes) in levels" class="levelBox">
-            <div ng-repeat="node in nodes" ng-class="getBoxClass(node)" id="node">
-                <!-- If it's a group:  -->
-                <div ng-show="node.children" class="groupName">{{ node.node_name }}</div>
-                <div class="clearfix"></div>
-                <!-- Children are also in levels: Create unstyled div for each level -->
-                <div ng-repeat="(childLevel, subChildren) in node.children" class="levelBoxChild">
-                    <div ng-repeat="child in subChildren" ng-class="getGroupBoxClass(child)">
-                        <div class="tools">
-                            <a class="edit" ng-href="#"><i class="icon-edit icon-white"></i> </a>
-                            <a class="delete" ng-href="#"><i class="icon-remove icon-white"></i> </a>
-                            <span class="clearfix"></span>
-                        </div>
-                        <a class="whiteText childModalLink" ng-click="open(child)"><h6 class="actName">{{
-                            child.group_child_name }}</h6>
+</div>
 
-                            <div class="actLabel" ng-show="child.group_child_type!='LD'">
+<!-- BEGIN DYNAMIC ACTIVITY CONTENT (Global View) -->
+<div ng-repeat="(level, nodes) in levels" class="levelBox">
+    <div ng-repeat="node in nodes" ng-class="getBoxClass(node)" id="node">
+        <!-- If it's a group:  -->
+        <div ng-show="node.children" class="groupName">{{ node.node_name }}</div>
+        <div class="clearfix"></div>
+        <!-- Children are also in levels: Create unstyled div for each level -->
+        <div ng-repeat="(childLevel, subChildren) in node.children" class="levelBoxChild">
+            <div ng-repeat="child in subChildren" ng-class="getGroupBoxClass(child)">
+                <div class="tools">
+                    <a class="edit" ng-href="#"><i class="icon-edit icon-white"></i> </a>
+                    <a class="delete" ng-href="#"><i class="icon-remove icon-white"></i> </a>
+                    <span class="clearfix"></span>
+                </div>
+                <a class="whiteText childModalLink" ng-click="open(child)"><h6 class="actName">{{
+                    child.group_child_name }}</h6>
+
+                    <div class="actLabel" ng-show="child.group_child_type!='LD'">
                                 <span class="timeLabel"><i class="icon-time icon-white"></i> {{ child | durationDisplay}} <span
                                         ng-show="!(child | durationDisplay)"> Free</span></span>
                                 <span class="orgLabel"><i
                                         class="icon-th-large icon-white"></i> {{ child.org_label}}</span>
-                            </div>
-                            <div class="actLabel" ng-show="child.group_child_type=='LD'">
-                                <span class="timeLabel"><i class="icon-bell icon-white"></i> {{ child.scope}}</span>
+                    </div>
+                    <div class="actLabel" ng-show="child.group_child_type=='LD'">
+                        <span class="timeLabel"><i class="icon-bell icon-white"></i> {{ child.scope}}</span>
                                     <span class="orgLabel"><i class="icon-signal icon-white"
                                                               ng-show="child.qcers"></i> <span
                                             ng-repeat="qcer in child.qcers">{{ qcer.qcer_name }} </span></span>
-                            </div>
-                        </a>
                     </div>
-                </div>
-                <!-- End Children -->
-                <!-- If it's NOT a group:  -->
-                <div ng-show="!node.children" class="actName"><div class="tools">
-                    <a class="edit" ng-href="#"><i class="icon-edit icon-white"></i> </a>
-                    <a class="delete" ng-href="#"><i class="icon-remove icon-white"></i> </a>
-                    <span class="clearfix"></span>
-                </div><a class="whiteText" ng-click="open(node)">
-                    <h6>{{ node.node_name }}</h6>
+                </a>
+            </div>
+        </div>
+        <!-- End Children -->
+        <!-- If it's NOT a group:  -->
+        <div ng-show="!node.children" class="actName">
+            <div class="tools">
+                <a class="edit" ng-href="#"><i class="icon-edit icon-white"></i> </a>
+                <a class="delete" ng-href="#"><i class="icon-remove icon-white"></i> </a>
+                <span class="clearfix"></span>
+            </div>
+            <a class="whiteText" ng-click="open(node)">
+                <h6>{{ node.node_name }}</h6>
 
-                    <div class="actLabel" ng-show="node.type!='LD'">
+                <div class="actLabel" ng-show="node.type!='LD'">
                             <span class="timeLabel"><i
                                     class="icon-time icon-white"></i> {{ node | durationDisplay }} <span
                                     ng-show="!(node | durationDisplay)"> Free</span> </span>
-                        <span class="orgLabel"><i class="icon-th-large icon-white"></i> {{ node.org_label }}</span>
-                    </div>
-                    <div class="actLabel" ng-show="node.type=='LD'">
-                        <span class="timeLabel"><i class="icon-bell icon-white"></i> {{ node.scope }}</span>
+                    <span class="orgLabel"><i class="icon-th-large icon-white"></i> {{ node.org_label }}</span>
+                </div>
+                <div class="actLabel" ng-show="node.type=='LD'">
+                    <span class="timeLabel"><i class="icon-bell icon-white"></i> {{ node.scope }}</span>
                             <span class="orgLabel"><i class="icon-signal icon-white" ng-show="node.qcers"></i> <span
                                     ng-repeat="qcer in node.qcers"> {{ qcer.qcer_name }} </span></span>
-                    </div>
-                </a>
                 </div>
-            </div>
-            <!-- End Activity or Group Box -->
+            </a>
         </div>
-        <div id="activityErrors" ng-show="alertMsg" class="alert alert-warning">
-            {{ alertMsg }}
-        </div>
+    </div>
+    <!-- End Activity or Group Box -->
+</div>
+<div id="activityErrors" ng-show="alertMsg" class="alert alert-warning">
+    {{ alertMsg }}
+</div>
 
-        <!-- End Level Box -->
-        <!-- END DYNAMIC ACTIVITY CONTENT (Global View) -->
+<!-- End Level Box -->
+<!-- END DYNAMIC ACTIVITY CONTENT (Global View) -->
 
 
-        <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Modal View) -->
-        <div id="modalView" modal="shouldBeOpen" close="close()" options="opts">
-            <div class="modal-header">
-                <h4>Activity Details</h4>
-                <button id="activityModalClose" class="btn modalButton float-right" ng-click="close()">x</button>
-                <div class="clearfix"></div>
-            </div>
+<!-- BEGIN DYNAMIC ACTIVITY CONTENT (Modal View) -->
+<div id="modalView" modal="shouldBeOpen" close="close()" options="opts">
+    <div class="modal-header">
+        <h4>Activity Details</h4>
+        <button id="activityModalClose" class="btn modalButton float-right" ng-click="close()">x</button>
+        <div class="clearfix"></div>
+    </div>
 
-            <div class="modal-body">
+    <div class="modal-body">
 
-                <!-- If it's a group:  -->
+        <!-- If it's a group:  -->
 
-                <div ng-show="selectedNode.group_child_id" class="groupBoxText">
-                    <h4 class="groupNameText"> {{ selectedNode.group_name }} </h4>
+        <div ng-show="selectedNode.group_child_id" class="groupBoxText">
+            <h4 class="groupNameText"> {{ selectedNode.group_name }} </h4>
 
-                    <div class="clearfix"></div>
-                    <!-- Children in groups are organized by level, create unstyled div for each level -->
-                    <div>
-                        <div>
-                            <h5 class="nodeNameText">{{ selectedNode.displayName }}</h5>
+            <div class="clearfix"></div>
+            <!-- Children in groups are organized by level, create unstyled div for each level -->
+            <div>
+                <div>
+                    <h5 class="nodeNameText">{{ selectedNode.displayName }}</h5>
                                  <span ng-show="selectedNode.group_child_type!='LD'">
                                     <activitydetail showped="true" node="selectedNode"></activitydetail>
                                  </span>
                                 <span ng-show="selectedNode.group_child_type=='LD'">
                                     <lddetail node='selectedNode'></lddetail>
                                 </span>
-                        </div>
-                    </div>
                 </div>
-                <!-- End Children -->
-                <!-- If it's NOT a group:  -->
-                <div ng-show="!selectedNode.group_child_id"><h5 class="nodeNameText">{{ selectedNode.displayName }}</h5>
+            </div>
+        </div>
+        <!-- End Children -->
+        <!-- If it's NOT a group:  -->
+        <div ng-show="!selectedNode.group_child_id"><h5 class="nodeNameText">{{ selectedNode.displayName }}</h5>
                         <span ng-show="selectedNode.type!='LD'">
                             <activitydetail showped="true" node="selectedNode"></activitydetail>
                         </span>
                                 <span ng-show="selectedNode.type=='LD'">
                                     <lddetail node='selectedNode'></lddetail>
                                 </span>
-                </div>
-                <!-- End Activity or Group Box -->
-                <div id="activityErrors" ng-show="alertMsg" class="alert alert-warning">
-                    {{ alertMsg }}
-                </div>
-                <!-- End Level Box -->
-            </div>
-            <div class="modal-footer">
-            </div>
         </div>
-        <!-- END DYNAMIC ACTIVITY CONTENT (Modal)-->
+        <!-- End Activity or Group Box -->
+        <div id="activityErrors" ng-show="alertMsg" class="alert alert-warning">
+            {{ alertMsg }}
+        </div>
+        <!-- End Level Box -->
+    </div>
+    <div class="modal-footer">
+    </div>
+</div>
+<!-- END DYNAMIC ACTIVITY CONTENT (Modal)-->
+
+<!-- BEGIN ADD RESOURCE (Modal View) -->
+<div id="modalAddResource" modal="addResource" close="closeAddResource()" options="optsAddResource"
+     class="modal-activity">
+    <div class="modal-header">
+        <h4>Add a New Resource</h4>
 
         <div class="clearfix"></div>
     </div>
+    <div ng-controller="AddResourceCtrl">
+        <form novalidate class="createLdForm" name="AddResourceForm" ng-submit="AddResource()">
+            <div class="modal-body">
+                <div class="formLevel">
+                    <div class="errorBox">
+                                    <span class="errorTipModal"
+                                          ng-show="AddResourceForm.resourceName.$dirty && AddResourceForm.resourceName.$error.required">Required!</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.resourceName.$error.pattern">The resource name cannot contain this symbol.</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.resourceName.$error.maxlength">The resource name cannot be longer than 50 characters.</span>
+                    </div>
+                    <label class="formLabel"><i class="icon-ok"></i> Resource Name*:</label>
+                    <input class="formInput" type="text" name="resourceName" ng-model="resourceName" required
+                           ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
+                    <span class="clearfix"></span>
+                </div>
+                <div class="formLevel">
+                    <div class="errorBox">
+                                    <span class="errorTipModal"
+                                          ng-show="AddResourceForm.type.$dirty && AddResourceForm.type.$error.required">Required!</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.type.$error.pattern">The type name cannot contain this symbol.</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.type.$error.maxlength">The type name cannot be longer than 50 characters.</span>
+                    </div>
+                    <label class="formLabel"><i class="icon-ok"></i> Type*:</label>
+                    <input class="formInput" type="text" ng-model="type" name="type"
+                           typeahead="suggestion for suggestion in getSubjects($viewValue)"
+                           typeahead-on-select="addTopicFromSuggestion()"
+                           ui-keypress="{13:'addTopicFromUserInput($event)'}"
+                           placeholder="Type..." ng-maxlength="50"
+                           ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
+
+                    <div class="formTag">
+                            <span class="modalEditItem" ng-show="type"><span class="modalEditItemLink">{{type}} <a
+                                    ng-href="#"><i
+                                    class="icon-remove-circle"></i> </a></span>
+                            </span>
+                    </div>
+                </div>
+                <div class="formLevel">
+                    <div class="errorBox">
+                        <span class="errorTipModal" ng-show="AddResourceForm.copy.$error.pattern">The copyright cannot contain this symbol.</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.copy.$error.maxlength">The copyright cannot be longer than 255 characters.</span>
+                    </div>
+                    <label class="formLabel"><i class="icon-ok"></i> Copyright:</label>
+                    <input class="formInput" type="text" name="copy" ng-model="copy"
+                           ng-maxlength="255" ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
+                    <span class="clearfix"></span>
+                </div>
+                <div class="formLevel">
+                    <div class="errorBox">
+                        <span class="errorTipModal" ng-show="AddResourceForm.descr.$error.pattern">Type description cannot contain this symbol.</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.descr.$error.maxlength">Type description cannot be longer than 500 characters.</span>
+
+                    </div>
+                    <label class="formLabel"><i class="icon-ok"></i> Description:</label>
+                    <textarea class="formInput" name="descr" ng-model="descr" rows="10"
+                              ng-maxlength="500" ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/"></textarea>
+                    <span class="clearfix"></span>
+                </div>
+                <div class="formLevel">
+                    <div class="errorBox">
+                        <span class="errorTipModal" ng-show="AddResourceForm.url.$dirty && AddResourceForm.url.$error.url">Insert a valid url starting with http://</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.url.$error.maxlength">The resource name cannot be longer than 255 characters.</span>
+                    </div>
+                    <label class="formLabel"><i class="icon-ok"></i> Link:</label>
+                    <input class="formInput" type="url" placeholder="don't forget http://" name="url" ng-model="url"
+                           ng-maxlength="255">
+                    <span class="clearfix"></span>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button id="cancelAddResource" class="btn btnFormCancel" ng-click="closeAddResource()">Cancel</button>
+                <button id="confirmAddResource" type="submit" class="btn btnForm "
+                        ng-disabled="AddResourceForm.$invalid">
+                    Add this resource
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- END ADD RESOURCE (Modal)-->
+
+
+<!-- BEGIN ADD ACTIVITY CONTENT (Modal View) -->
+<div id="modalAddActivity" modal="addActivity" close="closeAddActivity()" options="optsAddActivity"
+     class="modal-activity">
+    <div class="modal-header">
+        <h4>Add a New Activity</h4>
+
+        <div class="clearfix"></div>
+    </div>
+    <div ng-controller="ActCreateCtrl">
+        <form novalidate class="createLdForm" name="ActCreateForm" ng-submit="submitLD()">
+            <div class="modal-body">
+                <div class="formLevel">
+                    <div class="errorBox">
+                                    <span class="errorTipModal"
+                                          ng-show="ActCreateForm.actName.$dirty && ActCreateForm.actName.$error.required">Required!</span>
+                        <span class="errorTipModal" ng-show="ActCreateForm.actName.$error.pattern">The activity name cannot contain this symbol.</span>
+                        <span class="errorTipModal" ng-show="ActCreateForm.actName.$error.maxlength">The activity name cannot be longer than 255 characters.</span>
+                    </div>
+                    <label class="formLabel"><i class="icon-ok"></i> Activity Name*:</label>
+                    <input class="formInput" type="text" name="actName" ng-model="actName" required
+                           ng-maxlength="255" ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
+                    <span class="clearfix"></span>
+                </div>
+                <div class="formLevel">
+                    <div class="errorBox">
+                    </div>
+                    <label class="formLabel"><i class="icon-home"></i> Modality*:</label>
+
+                    <div class="formInput">
+                        <span class="checkModality"><input type="radio" name="f2f" ng-model="modality" value="1"
+                                                           required> Face to face    </span>
+                        <span class="checkModality"><input type="radio" name="distance" ng-model="modality" value="2"
+                                                           required> Distance </span>
+                        <span class="checkModality"><input type="radio" name="blended" ng-model="modality" value="3"
+                                                           required> Blended </span>
+                    </div>
+                    <span class="clearfix"></span>
+
+                </div>
+
+                <div class="formLevel">
+                    <div class="errorBox">
+                    </div>
+                    <label class="formLabel formLabel"><i class="icon-time"></i> Duration:</label>
+
+                    <div class="formInput">
+                        <span class="durationBox">
+                                <input class="formInputDuration" type="number" name="dur_mon" ng-model="dur_mon"
+                                       required
+                                       min="0" max="60" maxlength="2" placeholder="0"> mon.
+                        </span>
+                        <span class="durationBox">
+                                <input class="formInputDuration" type="number" name="dur_d" ng-model="dur_d"
+                                       required
+                                       min="0" max="30" maxlength="2" placeholder="0"> d.
+                        </span>
+                        <span class="durationBox">
+                                <input class="formInputDuration" type="number" name="dur_h" ng-model="dur_h"
+                                       required
+                                       min="0" max="23" maxlength="2" placeholder="0"> h.
+                        </span>
+                        <span class="durationBox">
+                                <input class="formInputDuration" type="number" name="dur_min" ng-model="dur_min"
+                                       required
+                                       min="0" max="59" maxlength="2" placeholder="0"> min.
+                        </span>
+                    </div>
+                    <span class="clearfix"></span>
+                </div>
+
+                <div class="formLevel">
+                    <div class="errorBox">
+                                    <span class="errorTipModal"
+                                          ng-show="LdCreateForm.ldScope.$dirty && LdCreateForm.ldScope.$error.required">Required!</span>
+                        <span class="errorTipModal" ng-show="LdCreateForm.ldScope.$error.pattern">The design scope cannot contain this symbol.</span>
+                        <span class="errorTipModal" ng-show="LdCreateForm.ldScope.$error.maxlength">The design scope cannot be longer than 50 characters.</span><span
+                            class="clearfix"></span>
+                    </div>
+                    <label class="formLabel"><i class="icon-th-large"></i> Organization*:</label>
+
+                    <div class="formInput">
+                        <span class="checkModality"><input type="radio" name="org_all" ng-model="org" value="1"
+                                                           required> All    </span>
+                        <span class="checkModality"><input type="radio" name="org_ind" ng-model="org" value="2"
+                                                           required> Individual </span>
+                        <span class="checkModality"><input type="radio" name="org_pair" ng-model="org" value="3"
+                                                           required> Pairs </span>
+                        <span class="checkModality"><input type="radio" name="org_group" ng-model="org" value="4"
+                                                           required> Groups </span>
+                    </div>
+                    <span class="clearfix"></span>
+
+                    <div class="formInput" ng-show="org=='4'">
+                  <span class="orgGroupBox">
+                                <input class="formInputDuration org" type="number" name="group_number"
+                                       ng-model="group_number"
+                                       required
+                                       min="0" max="99" maxlength="2" placeholder="0"> No. of groups
+                        </span>
+                        <span class="orgGroupBox">
+                                <input class="formInputDuration org" type="number" name="people_per_group"
+                                       ng-model="people_per_group"
+                                       required
+                                       min="0" max="99" maxlength="2" placeholder="0"> People per group
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+                <div class="formLevel">
+                    <div class="errorBox">
+                        <span class="errorTipModal" ng-show="ActCreateForm.technologies.$error.pattern">A technology cannot contain this symbol.</span>
+                        <span class="errorTipModal" ng-show="ActCreateForm.technologies.$error.maxlength">A technology cannot be longer than 50 characters.</span><span
+                            class="clearfix"></span>
+                    </div>
+                    <label class="formLabel"><i class="icon-facetime-video"></i> Technologies:</label>
+                    <!-- FIXME: typeahead for technologies -->
+                    <input class="formInput" type="text" ng-model="technologies" name="technologies"
+                           typeahead="suggestion for suggestion in getSubjects($viewValue)"
+                           typeahead-on-select="addTopicFromSuggestion()"
+                           ui-keypress="{13:'addTopicFromUserInput($event)'}"
+                           placeholder="Technologies..." ng-maxlength="50"
+                           ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
+
+                    <div class="formTag">
+                        <ul ng-repeat="technology in technologies" class="zeroMargin subjects">
+                            <li class="modalEditItem"><span class="modalEditItemLink">{{technology}} <a
+                                    ng-href="#"><i
+                                    class="icon-remove-circle"></i> </a></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="formLevel">
+
+                    <label class="formLabel"><i class="icon-briefcase"></i> Resources:</label>
+                    <span class="formInput">
+                    <button class="btn-mini btn" ng-click="createResource()"><i class="icon-plus"></i> Add a resource
+                    </button>
+                        </span>
+                    <span class="clearfix"></span>
+
+                </div>
+
+                <div class="formLevel">
+                    <div class="errorBox">
+                        <span class="errorTipModal" ng-show="ActCreateForm.pract_descr.$error.pattern">Activity description cannot contain this symbol.</span>
+                        <span class="errorTipModal" ng-show="ActCreateForm.pract_descr.$error.maxlength">Activity description cannot be longer than 2000 characters.</span>
+
+                    </div>
+                    <label class="formLabel"><i class="icon-user"></i> Practical Description:</label>
+                    <textarea class="formInput" name="pract_descr" ng-model="pract_descr" rows="5"
+                              ng-maxlength="200" ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/"></textarea>
+                    <span class="clearfix"></span>
+                </div>
+                <div class="formLevel">
+                    <div class="errorBox">
+                        <span class="errorTipModal" ng-show="ActCreateForm.edu_descr.$error.pattern">Pedagogical suggestions cannot contain this symbol.</span>
+                        <span class="errorTipModal" ng-show="ActCreateForm.edu_descr.$error.maxlength">Pedagogical suggestions cannot be longer than 2000 characters.</span>
+
+                    </div>
+                    <label class="formLabel"><i class="icon-user"></i> Pedagogical Suggestions:</label>
+                    <textarea class="formInput" name="edu_descr" ng-model="edu_descr" rows="5"
+                              ng-maxlength="200" ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/"></textarea>
+                    <span class="clearfix"></span>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button id="cancelCreateLd" class="btn btnFormCancel" ng-click="closeAddActivity()">Cancel</button>
+                <button id="confirmCreateLD" type="submit" class="btn btnForm " ng-disabled="LdCreateForm.$invalid">
+                    Create
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- END ADD ACTIVITY CONTENT (Modal)-->
+
+<div class="clearfix"></div>
+
+</div>
 </tab>
 <tab active="data.static2">
 
