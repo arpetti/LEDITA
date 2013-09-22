@@ -3,7 +3,7 @@ var _ =           require('underscore')
     , passport =  require('passport')
     , AuthController =  require('./controllers/AuthController')
     , LdController = require('./controllers/LdController')
-    , UserProfileCtrl = require('./controllers/UserProfileController')
+    , UserProfileController = require('./controllers/UserProfileController')
     , ActivityController       = require('./controllers/ActivityController')
     , RefController       = require('./controllers/RefController')
     , User =      require('./models/User.js')
@@ -67,19 +67,19 @@ var routes = [
     {
         path: '/userprofiles',
         httpMethod: 'GET',
-        middleware: [ensureAuthenticated, ensureAuthorized, UserProfileCtrl.index],
+        middleware: [ensureAuthenticated, ensureAuthorized, UserProfileController.index],
         accessLevel: accessLevels.user
     },
     {
         path: '/userprofiles/:id',
         httpMethod: 'GET',
-        middleware: [ensureAuthenticated, ensureAuthorized, UserProfileCtrl.findById],
+        middleware: [ensureAuthenticated, ensureAuthorized, UserProfileController.findById],
         accessLevel: accessLevels.user
     },
     {
         path: '/uniqueusers',
         httpMethod: 'GET',
-        middleware: [ensureAuthenticated, ensureAuthorized, UserProfileCtrl.getUniqueUsers],
+        middleware: [ensureAuthenticated, ensureAuthorized, UserProfileController.getUniqueUsers],
         accessLevel: accessLevels.user
     },
 
