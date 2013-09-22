@@ -164,7 +164,7 @@
     <button id="createActivity" type="button" class="newActButton1" href ng-click="createActivity()">
         <i class="icon-plus icon-white"></i><br>Activity
     </button>
-    <button id="addLD" type="button" class="newActButton2" href ng-click="addLD()">
+    <button id="addLD" type="button" class="newActButton2" href ng-click="addingLD()">
         <i class="icon-plus icon-white"></i><br>Design
     </button>
     <button id="createGroup" type="button" class="newActButton3" href ng-click="createGroup()">
@@ -562,6 +562,61 @@
     </div>
 </div>
 <!-- END ADD ACTIVITY CONTENT (Modal)-->
+
+
+<!-- BEGIN ADD LD (Modal View) -->
+<div id="modalAddLD" modal="addLD" close="closeAddLD()" options="optsAddLD"
+     class="modal-activity">
+    <div class="modal-header">
+        <h4>Add a Design</h4>
+
+        <div class="clearfix"></div>
+    </div>
+    <div ng-controller="AddLDCtrl">
+        <form novalidate class="createLdForm" name="AddLDForm" ng-submit="AddLD()">
+            <div class="modal-body">
+
+                        <div class="searchBoxDiv">
+                            <i class="icon-filter"></i> <input type="search" class="searchBoxInput" ng-model="search" placeholder="filter designs..." />
+
+                        </div>
+
+
+                        <div class="ldPartTable">
+                            <div class="rowLDTable" ng-repeat="learningDesign in learningDesigns | filter:search "  ng-show="learningDesign.ld_publication==1">
+
+                                        <div class=" colLDPart0">
+                                            <input type="radio" ng-model="ld" value="{{ ld_id }}">
+
+                                        </div>
+                                        <div class=" colLDPart1">
+                                            <p><i class="icon-ok"></i> {{ learningDesign.ld_name }}</p>
+                                            <p><i class="icon-signal float-left"> </i> <span ng-repeat="qcer in learningDesign.qcers" class="qcerLDList"> {{ qcer.qcer_name }}</span> </p><p ng-show="!learningDesign.qcers">Not defined</p>
+
+                                            <p><i class="icon-bell"></i> {{ learningDesign.ld_scope }}</p>
+                                            <p><i class="icon-pencil"></i> {{ learningDesign.user_name }} {{ learningDesign.user_last_name }} </p>
+                                            <p><i class="icon-calendar"></i> {{ learningDesign.ld_creation_date | date:'yyyy MMM d' }} </p>
+                                        </div>
+
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button id="cancelAddLD" class="btn btnFormCancel" ng-click="closeAddLD()">Cancel</button>
+                <button id="confirmAddLD" type="submit" class="btn btnForm "
+                        ng-disabled="AddLDForm.$invalid">
+                    Add this LD
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- END ADD LD (Modal)-->
 
 <div class="clearfix"></div>
 

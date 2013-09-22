@@ -62,11 +62,22 @@ angular.module('ledita-app')
         backdropClick:false
     };
 
+    $scope.addingLD = function (node) {
+        $scope.addLD = true;
+        };
+
+    $scope.closeAddLD = function () {
+        $scope.closeMsg = 'I was closed at: ' + new Date();
+        $scope.addLD = false;
+    };
+    $scope.optsAddLD = {
+        backdropFade: true,
+        dialogFade:true,
+        backdropClick:false
+    };
+
     $scope.createResource = function (node) {
         $scope.addResource = true;
-
-
-
     };
 
     $scope.closeAddResource = function () {
@@ -81,6 +92,15 @@ angular.module('ledita-app')
         backdropClick:false
 
     };
+
+    LDService.getLearningDesigns(function(res) {
+        $scope.learningDesigns = res;
+        $scope.loading = false;
+    }, function(err) {
+        $scope.error = "Failed to fetch learning designs.";
+        $scope.loading = false;
+    });
+
 }]);
 
 angular.module('ledita-app')
@@ -92,6 +112,14 @@ angular.module('ledita-app')
         }]);
 angular.module('ledita-app')
     .controller('AddResourceCtrl',
+        ['$scope', '$http', 'Home', 'limitToFilter', '$location', function($scope, $http, Home, limitToFilter, $location) {
+
+
+
+        }]);
+
+angular.module('ledita-app')
+    .controller('AddLDCtrl',
         ['$scope', '$http', 'Home', 'limitToFilter', '$location', function($scope, $http, Home, limitToFilter, $location) {
 
 
