@@ -61,6 +61,19 @@ angular.module('ledita-app')
         dialogFade:true,
         backdropClick:false
     };
+ $scope.createGroup = function (node) {
+        $scope.addGroup = true;
+        };
+
+    $scope.closeAddGroup = function () {
+        $scope.closeMsg = 'I was closed at: ' + new Date();
+        $scope.addGroup = false;
+    };
+    $scope.optsAddGroup = {
+        backdropFade: true,
+        dialogFade:true,
+        backdropClick:false
+    };
 
     $scope.addingLD = function (node) {
         $scope.addLD = true;
