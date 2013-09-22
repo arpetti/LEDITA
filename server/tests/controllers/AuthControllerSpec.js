@@ -1,7 +1,7 @@
 var expect = require('chai').expect
     , assert = require('chai').assert
     , sinon = require('sinon')
-    , AuthCtrl = require('../../controllers/auth')
+    , AuthController = require('../../controllers/AuthController')
     , User = require('../../models/User')
     , UserValidator = require('../../service/UserValidator')
     , HashHelper = require('../../util/HashHelper')
@@ -75,7 +75,7 @@ describe('Auth controller', function() {
                 done();
             };
 
-            AuthCtrl.registerNewUser(req, res, next);
+            AuthController.registerNewUser(req, res, next);
 
         });
 
@@ -98,7 +98,7 @@ describe('Auth controller', function() {
                 done();
             };
 
-            AuthCtrl.registerNewUser(req, res, next);
+            AuthController.registerNewUser(req, res, next);
         });
 
         it('returns a 403 when user already exists', function(done) {
@@ -125,7 +125,7 @@ describe('Auth controller', function() {
                 done();
             };
 
-            AuthCtrl.registerNewUser(req, res, next);
+            AuthController.registerNewUser(req, res, next);
         });
 
         it('returns a 500 when checking for existing user encounters unexpected error', function(done) {
@@ -150,7 +150,7 @@ describe('Auth controller', function() {
                 done();
             };
 
-            AuthCtrl.registerNewUser(req, res, next);
+            AuthController.registerNewUser(req, res, next);
         });
 
         it('returns a 500 when password hash generation encounters unexpected error', function(done) {
@@ -178,7 +178,7 @@ describe('Auth controller', function() {
                 done();
             };
 
-            AuthCtrl.registerNewUser(req, res, next);
+            AuthController.registerNewUser(req, res, next);
         });
 
         it('returns a 500 when adding a new user encounters unexpected error', function(done) {
@@ -209,7 +209,7 @@ describe('Auth controller', function() {
                 done();
             };
 
-            AuthCtrl.registerNewUser(req, res, next);
+            AuthController.registerNewUser(req, res, next);
         });
 
         it('calls next() with an error argument if req.logIn() returns error', function(done) {
@@ -250,7 +250,7 @@ describe('Auth controller', function() {
                 done();
             };
 
-            AuthCtrl.registerNewUser(req, res, next);
+            AuthController.registerNewUser(req, res, next);
 
         });
 

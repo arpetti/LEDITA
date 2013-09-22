@@ -1,7 +1,7 @@
 var _ =           require('underscore')
     , path =      require('path')
     , passport =  require('passport')
-    , AuthCtrl =  require('./controllers/auth')
+    , AuthController =  require('./controllers/AuthController')
     , LearningDesignCtrl = require('./controllers/learningDesign')
     , UserProfileCtrl = require('./controllers/UserProfileController')
     , ActivityController       = require('./controllers/ActivityController')
@@ -27,19 +27,19 @@ var routes = [
     {
         path: '/registernewuser',
         httpMethod: 'POST',
-        middleware: [AuthCtrl.registerNewUser],
+        middleware: [AuthController.registerNewUser],
         accessLevel: accessLevels.public
     },
     {
         path: '/login',
         httpMethod: 'POST',
-        middleware: [AuthCtrl.login],
+        middleware: [AuthController.login],
         accessLevel: accessLevels.public
     },
     {
         path: '/logout',
         httpMethod: 'POST',
-        middleware: [AuthCtrl.logout],
+        middleware: [AuthController.logout],
         accessLevel: accessLevels.public
     },
 
