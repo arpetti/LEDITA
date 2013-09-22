@@ -35,6 +35,8 @@ angular.module('ledita-app')
 
 }]);
 
+// TODO Implement Remove topic, objective etc. 
+// 	x href from UI should click to remove function here that splices the array
 angular.module('ledita-app')
 .controller('LdCreateCtrl',
 ['$scope', '$http', 'Home', 'limitToFilter', '$location', function($scope, $http, Home, limitToFilter, $location) {
@@ -74,6 +76,32 @@ angular.module('ledita-app')
         $event.preventDefault();
         addTopic($scope.ldTopic);
         clearCurrentTopic();
+    };
+
+    $scope.getObjectives = function(objective) {
+    	var objectiveMatchUrl = '/reference/objectives/' + objective;
+		return $http.get(objectiveMatchUrl).then(function(response) {
+			return limitToFilter(response.data, 15);
+		});
+  	};
+
+  	var addObjective = function(objective) {
+  		$scope.selectedObjectives.push(objective);
+  	};
+
+  	var clearCurrentObjective = function() {
+  		$scope.ldObjective = " ";
+  	};
+
+  	$scope.addObjectiveFromSuggestion = function() {
+  		addObjective($scope.ldObjective);
+  		clearCurrentObjective();
+  	};
+
+  	$scope.addObjectiveFromUserInput = function($event) {
+        $event.preventDefault();
+        addObjective($scope.ldObjective);
+        clearCurrentObjective();
     };
 
     $scope.submitLD = function() {
