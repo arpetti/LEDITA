@@ -54,7 +54,7 @@ VALUES ('1', 'Topic 1'),
 ('3', 'Topic 3'),
 ('4', 'Topic 4'),
 ('5', 'Topic 5'),
-('6', 'Sentimenti ');
+('6', 'Sentimenti');
 
 
 INSERT INTO `concerns` (`subject_id`, `ld_id`)

@@ -1,5 +1,6 @@
 var expect = require('chai').expect
 var RefDao = require('../../dao/RefDao');
+var _ = require('underscore');
 
 describe('Reference Data Dao', function() {
 
@@ -65,6 +66,22 @@ describe('Reference Data Dao', function() {
 				expect(err).to.be.null;
 				expect(results).not.to.be.null;
 				expect(results).to.have.length(0);
+				done();
+			});
+		});
+
+		it('Finds subjects by name', function(done) {
+			var existSubject1 = 'Topic 3';
+			var existSubject2 = 'Sentimenti';
+			var notExistSubject3 = 'my new subject';
+			var subjectNames = [existSubject1, existSubject2, notExistSubject3];
+			RefDao.findSubjectsByName(subjectNames, function(err, results) {
+				console.log(JSON.stringify(results));
+				expect(err).to.be.null;
+				expect(results).to.have.length(2);
+				expect(_.contains(_.pluck(results, "name"), existSubject1)).to.be.true;
+				expect(_.contains(_.pluck(results, "name"), existSubject2)).to.be.true;
+				expect(_.contains(_.pluck(results, "name"), notExistSubject3)).to.be.false;
 				done();
 			});
 		});
