@@ -135,13 +135,85 @@ describe('Reference Data Service', function() {
 	        var refServiceCallback = function(err, results, message) {
 	        	expect(err).not.to.be.null;
 	        	expect(err).to.equal(daoError);
-	        	expect(message).to.equal(messages.UNABLE_TO_RETRIEVE_SUBJECTS)
+	        	expect(message).to.equal(messages.UNABLE_TO_RETRIEVE_SUBJECTS);
 	        	expect(results).to.be.null;
 
 	     		assert.isTrue(refDaoStub.withArgs(partial).calledOnce);
 	        	done();
 	        }
 	        RefService.getSubjectsMatching(partial, refServiceCallback);
+	    });
+
+    });
+
+	describe('OBJECTIVE', function() {
+
+    	beforeEach(function() {
+	    });
+
+	    afterEach(function() {
+	        sandbox.restore();
+	    });
+
+	    it('Returns objective results', function(done) {
+
+	    	var partial = 'To';
+	    	var objectives = [{"descr": "Objective 1"},{"descr":"Objective 2"}];
+	    	var refDaoStub = sandbox.stub(RefDao, "getObjectivesMatching", function(partial, callback) {
+	            callback(null, objectives);
+	        });
+
+	        var refServiceCallback = function(err, results, message) {
+	        	expect(err).to.be.null;
+	        	expect(message).to.be.null;
+	        	expect(results).not.to.be.null;
+	        	expect(results).to.have.length(objectives.length);
+	        	expect(results[0]).to.equal(objectives[0].descr);
+	        	expect(results[1]).to.equal(objectives[1].descr);
+
+	     		assert.isTrue(refDaoStub.withArgs(partial).calledOnce);
+	        	done();
+	        }
+	        RefService.getObjectivesMatching(partial, refServiceCallback);
+		});
+
+		it('Empty result is not considered an error', function(done) {
+
+			var partial = 'Zz';
+			var objectives = [];
+	    	var refDaoStub = sandbox.stub(RefDao, "getObjectivesMatching", function(partial, callback) {
+	            callback(null, objectives);
+	        });
+
+	        var refServiceCallback = function(err, results, message) {
+	        	expect(err).to.be.null;
+	        	expect(message).to.be.null;
+	        	expect(results).not.to.be.null;
+	        	expect(results).to.have.length(0);
+
+	     		assert.isTrue(refDaoStub.withArgs(partial).calledOnce);
+	        	done();
+	        }
+	        RefService.getObjectivesMatching(partial, refServiceCallback);
+		});
+
+		it('Returns error if error occurs calling dao', function(done) {
+
+			var partial = 'something';
+	    	var daoError = new Error('something went wrong');
+	    	var refDaoStub = sandbox.stub(RefDao, "getObjectivesMatching", function(partial, callback) {
+	            callback(daoError);
+	        });
+	        var refServiceCallback = function(err, results, message) {
+	        	expect(err).not.to.be.null;
+	        	expect(err).to.equal(daoError);
+	        	expect(message).to.equal(messages.UNABLE_TO_RETRIEVE_OBJECTIVES);
+	        	expect(results).to.be.null;
+
+	     		assert.isTrue(refDaoStub.withArgs(partial).calledOnce);
+	        	done();
+	        }
+	        RefService.getObjectivesMatching(partial, refServiceCallback);
 	    });
 
     });

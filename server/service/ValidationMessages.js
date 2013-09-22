@@ -34,6 +34,7 @@ module.exports.NO_ACTIVITIES_FOUND = "This learning design has no activities.";
 module.exports.UNABLE_TO_RETRIEVE_QCERS = "Unable to retrieve qcers at this time, please try again later.";
 module.exports.QCERS_NOT_FOUND = "No qcers could be found, please contact system administrator.";
 module.UNABLE_TO_RETRIEVE_SUBJECTS = "Unable to retrieve subjects at this time, please try again later.";
+module.UNABLE_TO_RETRIEVE_OBJECTIVES = "Unable to retrieve objectives at this time, please try again later.";
 
 // User Profile
 module.exports.USER_DETAIL_NOT_FOUND = "User's profile details could not be found";

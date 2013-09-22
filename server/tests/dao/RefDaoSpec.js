@@ -23,11 +23,20 @@ describe('Reference Data Dao', function() {
 
 	describe('SUBJECT', function() {
 
+		var verifySubjects = function(results) {
+			expect(results).to.have.length(5);
+			expect(results[0].name).to.equal('Topic 1');
+			expect(results[1].name).to.equal('Topic 2');
+			expect(results[2].name).to.equal('Topic 3');
+			expect(results[3].name).to.equal('Topic 4');
+			expect(results[4].name).to.equal('Topic 5');
+		}
+
 		it('Finds subjects matched by beginning of string', function(done) {
 			var partial = ['To'];
 			RefDao.getSubjectsMatching(partial, function(err, results) {
 				expect(err).to.be.null;
-				expect(results).to.have.length(5);
+				verifySubjects(results);
 				done();
 			});
 		});
@@ -36,7 +45,7 @@ describe('Reference Data Dao', function() {
 			var partial = ['opi'];
 			RefDao.getSubjectsMatching(partial, function(err, results) {
 				expect(err).to.be.null;
-				expect(results).to.have.length(5);
+				verifySubjects(results);
 				done();
 			});
 		});
@@ -53,6 +62,56 @@ describe('Reference Data Dao', function() {
 		it('Subject matching returns empty list if nothing matched', function(done) {
 			var partial = ['xyz'];
 			RefDao.getSubjectsMatching(partial, function(err, results) {
+				expect(err).to.be.null;
+				expect(results).not.to.be.null;
+				expect(results).to.have.length(0);
+				done();
+			});
+		});
+
+	});
+
+	describe('OBJECTIVE', function() {
+
+		it('Finds objectives matched by beginning of string', function(done) {
+			var partial = ['Les'];
+			RefDao.getObjectivesMatching(partial, function(err, results) {
+				expect(err).to.be.null;
+				expect(results).to.have.length(2);
+				expect(results[0].descr).to.equal('Lessico relativo ai sentimenti');
+				expect(results[1].descr).to.equal('Lessico relativo al cibo');
+				done();
+			});
+		});
+
+		it('Finds objectives matched by middle of string', function(done) {
+			var partial = ['jecti'];
+			RefDao.getObjectivesMatching(partial, function(err, results) {
+				expect(err).to.be.null;
+				expect(results).to.have.length(6);
+				expect(results[0].descr).to.equal('Objective 1');
+				expect(results[1].descr).to.equal('Objective 2');
+				expect(results[2].descr).to.equal('Objective 3');
+				expect(results[3].descr).to.equal('Objective 4');
+				expect(results[4].descr).to.equal('Objective 5');
+				expect(results[5].descr).to.equal('Objective 6');
+				done();
+			});
+		});
+
+		it('Objective matching is case insensitive', function(done) {
+			var partial = ['frasi'];
+			RefDao.getObjectivesMatching(partial, function(err, results) {
+				expect(err).to.be.null;
+				expect(results).to.have.length(1);
+				expect(results[0].descr).to.equal('Frasi idiomatiche sui sentimenti');
+				done();
+			});
+		});
+
+		it('Objective matching returns empty list if nothing matched', function(done) {
+			var partial = ['xyz'];
+			RefDao.getObjectivesMatching(partial, function(err, results) {
 				expect(err).to.be.null;
 				expect(results).not.to.be.null;
 				expect(results).to.have.length(0);

@@ -28,6 +28,17 @@ module.exports = {
     			callback(null, _.pluck(results, "name") , null);
     		}
     	});
+    },
+
+    // callback(err, result, message)
+    getObjectivesMatching: function(partial, callback) {
+    	RefDao.getObjectivesMatching(partial, function(err, results) {
+    		if (err) {
+    			callback(err, null, messages.UNABLE_TO_RETRIEVE_OBJECTIVES);
+    		} else {
+    			callback(null, _.pluck(results, "descr") , null);
+    		}
+    	});
     }
 
 };

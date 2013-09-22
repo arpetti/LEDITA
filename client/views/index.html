@@ -193,18 +193,20 @@
                                 </div>
                             <label class="formLabel"><i class="icon-tasks"></i> Objectives*:</label>
                             <input class="formInput" type="text" name="ldObjective" ng-model="ldObjective"
-                                   placeholder="typeahead..." required ng-maxlength="255"
+                                   typeahead="suggestion for suggestion in getObjectives($viewValue)"
+                                   typeahead-on-select="addObjectiveFromSuggestion()"
+                                   ui-keypress="{13:'addObjectiveFromUserInput($event)'}"
+                                   placeholder="Objectives..." required ng-maxlength="255"
                                    ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
                             <span class="clearfix"></span>
 
-                            <!-- FIXME Enable when auto complete and enter key press is implemented -->
-                            <!-- <div class="formTag">
-                                <ul ng-repeat="aim in ld.aims" class="zeroMargin objectives">
-                                    <li class="modalEditItem"><span class="modalEditItemLink">{{aim}} <a ng-href="#"><i
+                            <div class="formTag">
+                                <ul ng-repeat="objective in selectedObjectives" class="zeroMargin objectives">
+                                    <li class="modalEditItem"><span class="modalEditItemLink">{{objective}} <a ng-href="#"><i
                                             class="icon-remove-circle"></i> </a></span>
                                     </li>
                                 </ul>
-                            </div> -->
+                            </div>
                     		</div>
 
 		                    <div class="formLevel">
