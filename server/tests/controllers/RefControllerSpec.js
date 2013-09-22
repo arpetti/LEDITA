@@ -130,4 +130,57 @@ describe('Reference Data Controller', function() {
     	});
 	});
 
+	describe('getObjectivessMatching', function() {
+
+		beforeEach(function() {
+	    });
+
+	    afterEach(function() {
+	        sandbox.restore();
+	    });
+
+	    it('Returns a 200 with Objective results from Reference Service', function(done) {
+
+	    	var partial = 'Obj';
+    		req.params = {partial: partial};
+
+	    	var objectives = [{"descr": "Objective 1"},{"descr": "Objective 2"}];
+    		var serviceStub = sandbox.stub(RefService, "getObjectivesMatching", function(partial, callback) {
+                callback(null, objectives, null);
+            });
+
+            res.json = function(httpStatus, result) {
+                expect(httpStatus).to.equal(200);
+                expect(result).to.equal(objectives);
+                
+                assert.isTrue(serviceStub.withArgs(partial).calledOnce);
+                done();
+            };
+
+            RefController.getObjectivesMatching(req, res);
+	    });
+
+	    it('Returns a 500 with message if Reference Service calls back with error', function(done) {
+
+	    	var partial = 'Obj';
+    		req.params = {partial: partial};
+
+    		var error = new Error("something went wrong");
+    		var refMessage = "Unable to retrieve objectives";
+    		var serviceStub = sandbox.stub(RefService, "getObjectivesMatching", function(partial, callback) {
+                callback(error, null, refMessage);
+            });
+
+            res.send = function(httpStatus, message) {
+                expect(httpStatus).to.equal(500);
+                expect(message).to.equal(refMessage);
+                
+                assert.isTrue(serviceStub.withArgs(partial).calledOnce);
+                done();
+            };
+
+            RefController.getObjectivesMatching(req, res);
+    	});
+	});
+
 });    
