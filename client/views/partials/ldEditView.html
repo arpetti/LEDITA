@@ -17,7 +17,7 @@
         <h4 id="sidebarHeader">General Info</h4>
 
         <div>
-            <h5 class="zeroMargin "><i class="icon-pencil"></i> Author:</h5>
+            <h5 class="zeroMargin date"><i class="icon-pencil"></i> Author:</h5>
             <a href="#" class="zeroMargin">{{ learningDesign.user_name}} {{ learningDesign.user_last_name}}</a>
         </div>
         <div class="marginTopSidebar">
@@ -617,6 +617,42 @@
     </div>
 </div>
 <!-- END ADD LD (Modal)-->
+
+
+<!-- BEGIN CREATE GROUP (Modal)-->
+<div id="modalCreateGroup" modal="addGroup" close="closeAddGroup()" options="optsAddGroup"
+     class="modal-activity">
+    <div class="modal-header">
+        <h4>Create a Group</h4>
+        <div class="clearfix"></div>
+    </div>
+    <div class="modal-body">
+
+        <div class="newActBox centered">
+            <button id="createActivity" type="button" class="newActButton1" href ng-click="createActivity()">
+                <i class="icon-plus icon-white"></i><br>Activity
+            </button>
+            <button id="addLD" type="button" class="newActButton2" href ng-click="addingLD()">
+                <i class="icon-plus icon-white"></i><br>Design
+            </button>
+
+
+        </div>
+        <div id="activityErrors" ng-show="alertMsg" class="alert alert-warning">
+            {{ alertMsg }}
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button id="cancelCreateGroup" class="btn btnFormCancel" ng-click="closeAddGroup()">Cancel</button>
+        <button id="confirmCreateGroup" type="submit" class="btn btnForm "
+                ng-disabled="AddGroupForm.$invalid">
+            Add this group
+        </button>
+
+    </div>
+
+</div>
+<!-- END CREATE GROUP (Modal)-->
 
 <div class="clearfix"></div>
 
