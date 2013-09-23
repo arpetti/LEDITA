@@ -35,7 +35,7 @@ module.exports = {
 	// callback(err, ldid, message)
 	createLd: function(userId, ldData, callback) {
 
-		// TODO Input validation, make sure qcer ids are numbers
+		// TODO Input validation, make sure qcer ids are numbers, at least one topic
 
 		async.waterfall([
             function(callback) {

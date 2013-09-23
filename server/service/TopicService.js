@@ -1,4 +1,5 @@
 var RefDao = require('../dao/RefDao');
+var LdCreateDao = require('../dao/LdCreateDao');
 var async = require('async');
 var messages = require('./ValidationMessages');
 var _ = require('underscore');
@@ -24,8 +25,13 @@ module.exports = {
 		    	});
 		    },
 		    function(concerns, existingTopics, callback) {
-		    	console.log('Future task will bulk insert concerns: ' + JSON.stringify(concerns));
-		        callback(null, existingTopics);
+		    	if (concerns.length > 0) {
+		    		LdCreateDao.insertConcerns(concerns, function(err, results) {
+		    			callback(null, existingTopics);
+		    		});
+		    	} else {
+			        callback(null, existingTopics);
+		    	}
 		    },
 		    function(existingTopics, callback){
 		        console.log('Future task will insert entries in topicNames that are not existingTopics');

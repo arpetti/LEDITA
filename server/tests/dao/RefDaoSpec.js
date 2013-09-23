@@ -85,6 +85,16 @@ describe('Reference Data Dao', function() {
 			});
 		});
 
+		it('Find subjects by name returns error when given empty input', function(done) {
+			var subjectNames = [];
+			RefDao.findSubjectsByName(subjectNames, function(err, results) {
+				expect(err).not.to.be.null;
+				expect(results).to.be.undefined;
+				done();
+			});
+
+		});
+
 	});
 
 	describe('OBJECTIVE', function() {
