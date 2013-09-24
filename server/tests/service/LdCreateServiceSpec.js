@@ -1,9 +1,10 @@
-var expect = require('chai').expect
-    , assert = require('chai').assert
-    , sinon = require('sinon')
-    , LdCreateService = require('../../service/LdCreateService')
-    , LdCreateDao = require('../../dao/LdCreateDao')
-    , messages = require('../../service/ValidationMessages');
+var expect = require('chai').expect;
+var assert = require('chai').assert;
+var sinon = require('sinon');
+var LdCreateService = require('../../service/LdCreateService');
+var TopicService = require('../../service/TopicService');
+var LdCreateDao = require('../../dao/LdCreateDao');
+var messages = require('../../service/ValidationMessages');
 
 describe('LD Create Service', function() {
 
@@ -39,6 +40,10 @@ describe('LD Create Service', function() {
         	callback(null, results);
         });
 
+        var topicServiceStub = sandbox.stub(TopicService, "insertTopics", function(ldid, topicNames, callback) {
+        	callback(null, addedLdId);
+        });
+
         var ldMatcher = sinon.match({
         	user_id: userId,
             name: ldData.name,
@@ -46,7 +51,7 @@ describe('LD Create Service', function() {
             students_profile: ldData.studentsDescription
         });
 
-        var classificatesMatcher = sinon.match(function (value) {
+        var classificatesMatcher = sinon.match(function(value) {
     		return value.length === 2 && 
     			value[0][0] === 3 &&
     			value[0][1] === addedLdId &&
@@ -61,6 +66,7 @@ describe('LD Create Service', function() {
 
         	assert.isTrue(ldCreateDaoStub.withArgs(ldMatcher).calledOnce);
         	assert.isTrue(ldCreateDaoClassificatesStub.withArgs(classificatesMatcher).calledOnce);
+        	assert.isTrue(topicServiceStub.withArgs(addedLdId, ldData.topics).calledOnce);
         	done();
         };
 
@@ -86,6 +92,10 @@ describe('LD Create Service', function() {
 
         var ldCreateDaoClassificatesStub = sandbox.stub(LdCreateDao, "insertClassificates");
 
+        var topicServiceStub = sandbox.stub(TopicService, "insertTopics", function(ldid, topicNames, callback) {
+        	callback(null, addedLdId);
+        });
+
         var ldMatcher = sinon.match({
         	user_id: userId,
             name: ldData.name,
@@ -100,6 +110,7 @@ describe('LD Create Service', function() {
 
         	assert.isTrue(ldCreateDaoStub.withArgs(ldMatcher).calledOnce);
         	assert.equal(ldCreateDaoClassificatesStub.callCount, 0, "does not insert classificates when empty");
+        	assert.isTrue(topicServiceStub.withArgs(addedLdId, ldData.topics).calledOnce);
         	done();
         };
 

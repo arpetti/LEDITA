@@ -63,11 +63,9 @@ module.exports = {
             	}
             },
             function(ldid, callback)  {
-            	console.log('Future task to insert or attach topics for ldid: ' + ldid);
-            	callback(null, ldid); 
-            	// TopicService.insertTopics(ldid, ldData.selectedTopics, function() {
-            	// 	callback(null, ldid); 
-            	// });
+            	TopicService.insertTopics(ldid, ldData.topics, function() {
+            		callback(null, ldid); 
+            	});
             },
             function(ldid, callback)  {
             	console.log('Future task to insert or attach objectives for ldid: ' + ldid);
