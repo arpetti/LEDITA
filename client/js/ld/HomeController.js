@@ -115,8 +115,8 @@ angular.module('ledita-app')
     		studentsDescription: $scope.ldStudentsDescr
     	},
         function(res) {
-        	// FIXME: How to call closeLd from NavCtrl? Maybe broadcast/event? 
-            $location.path('/');	//TODO Redirect user to ld edit page when available
+            $location.path('/ldedit/' + res.ldid);
+            //TODO Broadcast event to close modal from different controller
         },
         function(err) {
             $scope.ldCreateError = err;
