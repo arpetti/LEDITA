@@ -113,7 +113,7 @@
                                     <span class="errorTipModal" ng-show="LdCreateForm.ldName.$error.pattern">The design name cannot contain this symbol.</span>
                                     <span class="errorTipModal" ng-show="LdCreateForm.ldName.$error.maxlength">The design name cannot be longer than 50 characters.</span>
                                 </div>
-                                <label class="formLabel"><i class="icon-ok"></i> Design Name*:</label>
+                                <label class="formLabel"><i class="icon-book"></i> Design Name*:</label>
                                 <input class="formInput" type="text" name="ldName" ng-model="ldName" required
                                        ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                                 <span class="clearfix"></span>
@@ -121,13 +121,17 @@
 
                             <div class="formLevel">
                                 <div class="errorBox">
+                                        <span class="errorTipModal"
+                                              ng-show="LdCreateForm.qcer.$dirty && LdCreateForm.qcer.$error.required">Required!</span>
+
                                 </div>
-                                <label class="formLabel formLabel"><i class="icon-signal"></i> QCER Level:</label>
+                                <label class="formLabel formLabel"><i class="icon-tasks"></i> QCER Level*:</label>
 
                                 <div class="formCheck">
                                     <span ng-show="qcerError">{{ qcerError }}</span>
-				                	<span ng-repeat="qceropt in qceropts" class="qcerOptData">
-				                    	<input type="checkbox" ng-model="selectedQcers[qceropt.id]"> {{ qceropt.name }}
+                                    <!-- FIXME: hide required error when only one input is selected -->
+				                	<span ng-repeat="qceropt in qceropts" class="qcerOptData" >
+				                    	<input type="checkbox" ng-model="selectedQcers[qceropt.id]" name="qcer" required="" > {{ qceropt.name }}
 				                	</span>
                                 </div>
                                 <span class="clearfix"></span>
@@ -191,7 +195,7 @@
                                     <span class="errorTipModal" ng-show="LdCreateForm.ldObjective.$error.maxlength">An objective cannot be longer than 255 characters.</span><span
                                         class="clearfix"></span>
                                 </div>
-                            <label class="formLabel"><i class="icon-tasks"></i> Objectives*:</label>
+                            <label class="formLabel"><i class="icon-screenshot"></i> Objectives*:</label>
                             <input class="formInput" type="text" name="ldObjective" ng-model="ldObjective"
                                    typeahead="suggestion for suggestion in getObjectives($viewValue)"
                                    typeahead-on-select="addObjectiveFromSuggestion()"
@@ -234,12 +238,15 @@
 
 		                    <div class="formLevel">
 		                        <div class="errorBox">
-		                            <span class="errorTipModal" ng-show="LdCreateForm.ldStudentsDescr.$error.pattern">Students' description cannot contain this symbol.</span>
+		                               <span class="errorTipModal"
+                                             ng-show="LdCreateForm.ldStudentsDescr.$dirty && LdCreateForm.ldStudentsDescr.$error.required">Required!</span>
+
+                                    <span class="errorTipModal" ng-show="LdCreateForm.ldStudentsDescr.$error.pattern">Students' description cannot contain this symbol.</span>
 		                            <span class="errorTipModal" ng-show="LdCreateForm.ldStudentsDescr.$error.maxlength">Students' description cannot be longer than 500 characters.</span>
 
 		                        </div>
-		                        <label class="formLabel"><i class="icon-user"></i> Students' Description:</label>
-		                        <textarea class="formInput" name="ldStudentsDescr" ng-model="ldStudentsDescr" rows="4" ng-maxlength="500"  ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/"></textarea>
+		                        <label class="formLabel"><i class="icon-user"></i> Students' Description*:</label>
+		                        <textarea class="formInput" name="ldStudentsDescr" ng-model="ldStudentsDescr" required="" rows="4" ng-maxlength="500"  ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/"></textarea>
 		                        <span class="clearfix"></span>
 		                    </div>
 
