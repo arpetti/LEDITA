@@ -18,7 +18,8 @@
 
         <div>
             <h5 class="zeroMargin date"><i class="icon-pencil"></i> Author:</h5>
-            <span class="zeroMargin"> <a href="#" >{{ learningDesign.user_name}} {{ learningDesign.user_last_name}}</a></span>
+            <span class="zeroMargin"> <a href="#">{{ learningDesign.user_name}} {{
+                learningDesign.user_last_name}}</a></span>
         </div>
         <div class="marginTopSidebar">
             <h5 class="zeroMargin date "><i class="icon-calendar"></i> Created in:</h5>
@@ -135,46 +136,55 @@
 
 <div id="contentBody">
     <div id="contentHeader">
-            <div class="titleLeft">
-                <form name="LdName" novalidate="" class="singleForm">
-                    <div class="editBox">
+        <div >
+            <form name="LdName" novalidate="" class="singleForm">
+                <div>
+
+                    <label class="editLabel"><i class="icon-book icon-white"></i> Design name: </label>
+                    <input class="editInputName" type="text"
+                                                                placeholder="{{ learningDesign.ld_name }}" name="ldName"
+                                                                ng-model="ldName" required
+                                                                ng-maxlength="50"
+                                                                ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
+
                     <div class="errorBoxTab">
                                     <span class="errorTipTab"
                                           ng-show="(learningDesign.ld_name == '') || (LdName.ldName.$dirty && LdName.ldName.$error.required)">Required!</span>
                         <span class="errorTipTab" ng-show="LdName.ldName.$error.pattern">The design name cannot contain this symbol.</span>
                         <span class="errorTipTab" ng-show="LdName.ldName.$error.maxlength">The design name cannot be longer than 50 characters.</span>
-                    </div>
-                <i class="icon-book icon-white"></i> <input class="editInputName" type="text" placeholder="{{ learningDesign.ld_name }}" name="ldName" ng-model="ldName" required
-                                                            ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
-                    </div></form>
-            </div>
-            <div class="titleRight">
-                <div class="titleQcer"  ><i class="icon-tasks icon-white"></i>
+                    </div></div>
+            </form>
+        </div>
+        <div >
+            <div class="titleQcer">
+                <label class="editLabel"><i class="icon-tasks icon-white"></i> QCER Levels:</label>
 
-                                    	<input type="checkbox" ng-model="selectedQcers[qceropt.id]"> A1
-                                    	<input type="checkbox" ng-model="selectedQcers[qceropt.id]"> A2
-                                    	<input type="checkbox" ng-model="selectedQcers[qceropt.id]"> B1
-                                    	<input type="checkbox" ng-model="selectedQcers[qceropt.id]"> B2
-                                    	<input type="checkbox" ng-model="selectedQcers[qceropt.id]"> C1
-                                    	<input type="checkbox" ng-model="selectedQcers[qceropt.id]"> C2
-				 </div>
-                <div class="titleScope">
-                    <form name="ScopeForm" novalidate="" class="singleForm">
-                        <div class="editBox"><div class="errorBoxTab">
+                <input type="checkbox" ng-model="selectedQcers"> A1
+                <input type="checkbox" ng-model="selectedQcers[qceropt.id]"> A2
+                <input type="checkbox" ng-model="selectedQcers[qceropt.id]"> B1
+                <input type="checkbox" ng-model="selectedQcers[qceropt.id]"> B2
+                <input type="checkbox" ng-model="selectedQcers[qceropt.id]"> C1
+                <input type="checkbox" ng-model="selectedQcers[qceropt.id]"> C2
+            </div>
+            <div class="titleScope">
+                <form name="ScopeForm" novalidate="" class="singleForm">
+                    <div >
+                        <label class="editLabel"><i class="icon-bell icon-white"></i> Scope:</label>
+                        <input class="editInputScocpe" type="text" name="ldScope" ng-model="ldScope"
+                               placeholder=" {{ learningDesign.ld_scope }}" required ng-maxlength="50"
+                               ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
+                        <div class="errorBoxTab">
                                     <span class="errorTipTab"
                                           ng-show="(learningDesign.ld_scope == '') || (ScopeForm.ldScope.$dirty && ScopeForm.ldScope.$error.required)">Required!</span>
-                            <span class="errorTipTab" ng-show="ScopeForm.ldScope.$error.pattern">The design name cannot contain this symbol.</span>
-                            <span class="errorTipTab" ng-show="ScopeForm.ldScope.$error.maxlength">The design name cannot be longer than 50 characters.</span>
+                            <span class="errorTipTab" ng-show="ScopeForm.ldScope.$error.pattern">The scope cannot contain this symbol.</span>
+                            <span class="errorTipTab" ng-show="ScopeForm.ldScope.$error.maxlength">The scope cannot be longer than 50 characters.</span>
                         </div>
-                    <i class="icon-bell icon-white"></i>
-                    <input class="editInputScocpe" type="text" name="ldScope" ng-model="ldScope"
-                           placeholder=" {{ learningDesign.ld_scope }}" required ng-maxlength="50"
-                           ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
-                        </div></form>
-                </div>
+                    </div>
+                </form>
             </div>
-            <div class="clearfix"></div>
-     </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
 </div>
 
 
@@ -380,7 +390,8 @@
                 </div>
                 <div class="formLevel">
                     <div class="errorBox">
-                        <span class="errorTipModal" ng-show="AddResourceForm.url.$dirty && AddResourceForm.url.$error.url">Insert a valid url starting with http://</span>
+                        <span class="errorTipModal"
+                              ng-show="AddResourceForm.url.$dirty && AddResourceForm.url.$error.url">Insert a valid url starting with http://</span>
                         <span class="errorTipModal" ng-show="AddResourceForm.url.$error.maxlength">The resource name cannot be longer than 255 characters.</span>
                     </div>
                     <label class="formLabel"><i class="icon-ok"></i> Link:</label>
@@ -598,33 +609,43 @@
         <form novalidate class="createLdForm" name="AddLDForm" ng-submit="AddLD()">
             <div class="modal-body">
 
-                        <div class="searchBoxDiv">
-                            <i class="icon-filter"></i> <input type="search" class="searchBoxInput" ng-model="search" placeholder="filter designs..." />
+                <div class="searchBoxDiv">
+                    <i class="icon-filter"></i> <input type="search" class="searchBoxInput" ng-model="search"
+                                                       placeholder="filter designs..."/>
+
+                </div>
+
+
+                <div class="ldPartTable">
+                    <div class="rowLDTable" ng-repeat="learningDesign in learningDesigns | filter:search "
+                         ng-show="learningDesign.ld_publication==1">
+
+                        <div class=" colLDPart0">
+                            <input type="radio" ng-model="ld" value="{{ ld_id }}">
 
                         </div>
+                        <div class=" colLDPart1">
+                            <p><i class="icon-book"></i> {{ learningDesign.ld_name }}</p>
 
+                            <p><i class="icon-tasks float-left"> </i> <span ng-repeat="qcer in learningDesign.qcers"
+                                                                            class="qcerLDList"> {{ qcer.qcer_name }}</span>
+                            </p>
 
-                        <div class="ldPartTable">
-                            <div class="rowLDTable" ng-repeat="learningDesign in learningDesigns | filter:search "  ng-show="learningDesign.ld_publication==1">
+                            <p ng-show="!learningDesign.qcers">Not defined</p>
 
-                                        <div class=" colLDPart0">
-                                            <input type="radio" ng-model="ld" value="{{ ld_id }}">
+                            <p><i class="icon-bell"></i> {{ learningDesign.ld_scope }}</p>
 
-                                        </div>
-                                        <div class=" colLDPart1">
-                                            <p><i class="icon-book"></i> {{ learningDesign.ld_name }}</p>
-                                            <p><i class="icon-tasks float-left"> </i> <span ng-repeat="qcer in learningDesign.qcers" class="qcerLDList"> {{ qcer.qcer_name }}</span> </p><p ng-show="!learningDesign.qcers">Not defined</p>
+                            <p><i class="icon-pencil"></i> {{ learningDesign.user_name }} {{
+                                learningDesign.user_last_name }} </p>
 
-                                            <p><i class="icon-bell"></i> {{ learningDesign.ld_scope }}</p>
-                                            <p><i class="icon-pencil"></i> {{ learningDesign.user_name }} {{ learningDesign.user_last_name }} </p>
-                                            <p><i class="icon-calendar"></i> {{ learningDesign.ld_creation_date | date:'yyyy MMM d' }} </p>
-                                        </div>
-
-                                <div class="clearfix"></div>
-                            </div>
+                            <p><i class="icon-calendar"></i> {{ learningDesign.ld_creation_date | date:'yyyy MMM d' }}
+                            </p>
                         </div>
+
                         <div class="clearfix"></div>
-
+                    </div>
+                </div>
+                <div class="clearfix"></div>
 
 
             </div>
@@ -646,6 +667,7 @@
      class="modal-activity">
     <div class="modal-header">
         <h4>Create a Group</h4>
+
         <div class="clearfix"></div>
     </div>
     <div class="modal-body">
