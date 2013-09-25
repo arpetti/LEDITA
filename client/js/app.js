@@ -14,13 +14,13 @@ angular.module('ledita-app', ['ngCookies', 'infinite-scroll', 'ui.bootstrap', 'u
             });
         $routeProvider.when('/ld/:ldid',
             {
-                templateUrl: '/partials/ldView',
+                templateUrl: '/partials/ldview',
                 controller: 'LdViewCtrl',
                 access: access.user
             });
         $routeProvider.when('/ldedit/:ldid',
             {
-                templateUrl: '/partials/ldEditView',
+                templateUrl: '/partials/ldedit',
                 controller: 'LdViewCtrl',
                 access: access.user
             });
@@ -32,13 +32,13 @@ angular.module('ledita-app', ['ngCookies', 'infinite-scroll', 'ui.bootstrap', 'u
             });
         $routeProvider.when('/users',
             {
-                templateUrl: '/partials/findUsers',
+                templateUrl: '/partials/users',
                 controller: 'UserProfileCtrl',
                 access: access.user
             });
         $routeProvider.when('/lds',
             {
-                templateUrl: '/partials/exploreLDs',
+                templateUrl: '/partials/lds',
                 controller: 'HomeCtrl',
                 access: access.user
             });
