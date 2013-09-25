@@ -18,7 +18,7 @@
 
         <div>
             <h5 class="zeroMargin date"><i class="icon-pencil"></i> Author:</h5>
-            <a href="#" class="zeroMargin">{{ learningDesign.user_name}} {{ learningDesign.user_last_name}}</a>
+            <span class="zeroMargin"> <a href="#" >{{ learningDesign.user_name}} {{ learningDesign.user_last_name}}</a></span>
         </div>
         <div class="marginTopSidebar">
             <h5 class="zeroMargin date "><i class="icon-calendar"></i> Created in:</h5>
@@ -38,7 +38,7 @@
             </ul>
         </div>
         <!-- FIXME: dynamic data with typeahead -->
-        <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-tasks"></i> Objectives:</h5>
+        <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-screenshot"></i> Objectives:</h5>
 
             <form ng-submit="addAims()" class="sidebarForm">
                 <input type="text" class="sidebarInput" ng-model="aims" placeholder="add new objective">
@@ -125,34 +125,56 @@
     </tab-heading>
     <tab-heading>
         <button class="btnContent" ng-class="isBtnActive(data.static2)" ng-click="data.static2 = true"><img
-                src="../../img/teacher.png"
-                class="btnImage"> Teacher View
+                src="../../img/text.png"
+                class="btnImage"> Textual View
         </button>
     </tab-heading>
-    <button class="btnContent" ng-class="isBtnActive(data.static3)" ng-click="data.static3 = true"><img
-            src="../../img/student.png"
-            class="btnImage"> Student View
-    </button>
+
 </div>
 
 
 <div id="contentBody">
     <div id="contentHeader">
-        <div class="titleEdit">
-            <!-- FIXME: dynamic data -->
-            <input placeholder="{{learningDesign.ld_name }}" class="titleLDInput">
-
-            <!-- FIXME: dynamic data with with ng-repeater as in index.html modal -->
-            <div class="titleQcer"><i class="icon-signal icon-white"></i><span ng-repeat="qcer in learningDesign.qcers"
-                                                                               class="qcerCheck ">
-                	<input type="checkbox" ng-model="selectedQcers[qceropt.id]"> {{ qcer.qcer_name }}</span></div>
-
-            <!-- FIXME: dynamic data with typeahead -->
-            <div class="titleScope"><i class="icon-bell icon-white"></i> <input class="scopeLDInput"
-                                                                                placeholder="{{learningDesign.ld_scope }}">
+            <div class="titleLeft">
+                <form name="LdName" novalidate="" class="singleForm">
+                    <div class="editBox">
+                    <div class="errorBoxTab">
+                                    <span class="errorTipTab"
+                                          ng-show="(learningDesign.ld_name == 'add a design name') || (learningDesign.ld_name == '') || (LdName.ldName.$dirty && LdName.ldName.$error.required)">Required!</span>
+                        <span class="errorTipTab" ng-show="LdName.ldName.$error.pattern">The design name cannot contain this symbol.</span>
+                        <span class="errorTipTab" ng-show="LdName.ldName.$error.maxlength">The design name cannot be longer than 50 characters.</span>
+                    </div>
+                <i class="icon-book icon-white"></i> <input class="editInputName" type="text" placeholder="{{ learningDesign.ld_name }}" name="ldName" ng-model="ldName" required
+                                                            ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
+                    </div></form>
             </div>
-        </div>
-    </div>
+            <div class="titleRight">
+                <div class="titleQcer"  ><i class="icon-tasks icon-white"></i>
+
+                                    	<input type="checkbox" ng-model="selectedQcers"> A1
+                                    	<input type="checkbox" ng-model="selectedQcers[qceropt.id]"> A2
+                                    	<input type="checkbox" ng-model="selectedQcers[qceropt.id]"> B1
+                                    	<input type="checkbox" ng-model="selectedQcers[qceropt.id]"> B2
+                                    	<input type="checkbox" ng-model="selectedQcers[qceropt.id]"> C1
+                                    	<input type="checkbox" ng-model="selectedQcers[qceropt.id]"> C2
+				 </div>
+                <div class="titleScope">
+                    <form name="ScopeForm" novalidate="" class="singleForm">
+                        <div class="editBox"><div class="errorBoxTab">
+                                    <span class="errorTipTab"
+                                          ng-show="ScopeForm.ldScope.$error.required">Required!</span>
+                            <span class="errorTipTab" ng-show="ScopeForm.ldScope.$error.pattern">The design name cannot contain this symbol.</span>
+                            <span class="errorTipTab" ng-show="ScopeForm.ldScope.$error.maxlength">The design name cannot be longer than 50 characters.</span>
+                        </div>
+                    <i class="icon-bell icon-white"></i>
+                    <input class="editInputScocpe" type="text" name="ldScope" ng-model="ldScope"
+                           placeholder=" {{ learningDesign.ld_scope }}" required ng-maxlength="50"
+                           ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
+                        </div></form>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+     </div>
 </div>
 
 

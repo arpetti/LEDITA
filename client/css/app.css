@@ -635,6 +635,39 @@ font-weight: normal;
 
 /* edit elements
 ===================== */
+.errorBoxTab {
+    height: 20px;
+    margin: -10px 0 -1px 0;
+    padding: 0;
+    z-index: -1;
+    width: 100%;text-align: right;
+}
+
+.errorTipTab {
+    color: #FFFFFF;
+    font-size: 12px;
+    background-color: #990000;
+    padding: 3px;
+    border-radius: 4px;
+    margin: 0 10px 2px 0;
+    font-weight: normal;
+}
+.editBox {
+    text-align: right;
+}
+.editInputName {
+    width: 92%;
+    margin: 0;
+}
+.editInputScope {
+    margin: 0;
+
+}
+
+.singleForm {
+    margin: 0;
+}
+
 .titleLDInput {
 }
 input.titleLDInput {
@@ -858,7 +891,9 @@ input.formInputDuration[type=number]::-webkit-inner-spin-button:after {
 
 .titleScope {
     font-weight: bold;
-    margin: 5px 0 0 0;
+    margin: 10px 0 0 0;
+    float: none;
+    text-align: right;
 }
 
 .titleLeft {
