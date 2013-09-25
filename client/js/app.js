@@ -14,7 +14,7 @@ angular.module('ledita-app', ['ngCookies', 'infinite-scroll', 'ui.bootstrap', 'u
             });
         $routeProvider.when('/ld/:ldid',
             {
-                templateUrl: '/partials/ldview',
+                templateUrl: '/partials/ld',
                 controller: 'LdViewCtrl',
                 access: access.user
             });
