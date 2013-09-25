@@ -51,7 +51,30 @@ describe('Topic Service', function() {
         };
 
         TopicService.insertTopics(ldid, topicNames, serviceCallback);
-
     });
+
+	it('Inserts new topics and concerns for non existing topics', function(done) {
+		var ldid = 679;
+		var topicName1 = 'new topic 1';
+		var topicName2 = 'new topic 2';
+		var topicNames = [topicName1, topicName2];
+
+		var topicDaoResults = [];
+		var refDaoStub = sandbox.stub(RefDao, "findSubjectsByName", function(topicNames, callback) {
+            callback(null, topicDaoResults);
+        });
+
+        var ldCreateDaoConcernsStub = sandbox.stub(LdCreateDao, "insertConcerns");
+
+        var serviceCallback = function() {
+        	assert.isTrue(refDaoStub.withArgs(topicNames).calledOnce);
+        	assert.equal(ldCreateDaoConcernsStub.callCount, 0);
+        	done();
+        };
+
+        TopicService.insertTopics(ldid, topicNames, serviceCallback);
+	});
+
+	//TODO Test for mix of existing and new topics
 
 });

@@ -85,6 +85,15 @@ describe('Reference Data Dao', function() {
 			});
 		});
 
+		it('Find subjects by name returns empty list when none found', function(done) {
+			var subjectNames = ['Goats', 'Donkeys'];
+			RefDao.findSubjectsByName(subjectNames, function(err, results) {
+				expect(err).to.be.null;
+				expect(results).to.have.length(0);
+				done();
+			});
+		});
+
 		it('Find subjects by name returns error when given empty input', function(done) {
 			var subjectNames = [];
 			RefDao.findSubjectsByName(subjectNames, function(err, results) {

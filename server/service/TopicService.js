@@ -9,6 +9,11 @@ var generateConcerns = function(existingTopics, ldid) {
 	return _.map(topicIds, function(topicId){ return [topicId, ldid]; });
 };
 
+var extractNewTopics = function(topicNames, existingTopics) {
+	var existingTopicNames = _.pluck(existingTopics, 'name');
+	return _.difference(topicNames, existingTopicNames);
+};
+
 module.exports = {
 
 	// callback()
@@ -34,7 +39,8 @@ module.exports = {
 		    	}
 		    },
 		    function(existingTopics, callback){
-		        console.log('Future task will insert entries in topicNames that are not existingTopics');
+		        var newTopicsToInsert = extractNewTopics(topicNames, existingTopics);
+		        console.log('Future task to insert these topics, then concerns: ' + JSON.stringify(newTopicsToInsert));
 		        callback(null, 'done');
 		    }
 		], function (err, result) {
