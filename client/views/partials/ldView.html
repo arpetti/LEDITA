@@ -27,20 +27,20 @@
         </div>
         <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-map-marker"></i> Topics:</h5>
             <ul ng-repeat="subject in learningDesign.subjects" class="zeroMargin subjects">
-                <!-- FIXME: add dynamic link to explore LDs page with subject.subject_name as filter -->
+                <!-- FIXME: add dynamic link to  LDs page with subject.subject_name as filter -->
                 <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{subject.subject_name}}</a></li>
             </ul>
         </div>
         <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-tasks"></i> Objectives:</h5>
             <ul ng-repeat="objective in learningDesign.objectives" class="zeroMargin objectives">
-                <!-- FIXME: add dynamic link to explore LDs page with objective.objective_descr as filter -->
+                <!-- FIXME: add dynamic link to  LDs page with objective.objective_descr as filter -->
                 <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{objective.objective_descr}}</a>
                 </li>
             </ul>
         </div>
         <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-backward"></i> Pre-Requisites:</h5>
             <ul ng-repeat="prereq in learningDesign.prerequisites" class="zeroMargin prerequisites">
-                <!-- FIXME: add dynamic link to explore LDs page with prereq.prereq_name as filter -->
+                <!-- FIXME: add dynamic link to  LDs page with prereq.prereq_name as filter -->
                 <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{prereq.prereq_name}}</a>
                 </li>
             </ul>
