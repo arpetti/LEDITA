@@ -68,16 +68,16 @@ describe('Learning Design', function() {
         expect(repeater('.groupBox2').count()).toBe(2);
         expect(repeater('.actBox').count()).toBe(10);
 
-        // Verify Teacher View
-        element("#teacherTab").click();
-        var expectedLd1TeacherViewLevel1 = [
+        // Verify Textual View
+        element("#textualTab").click();
+        var expectedLd1TextualViewLevel1 = [
             "Support Activity 1","Online", "1 mo. 15 d.", "ALL", "Internet",
             "Didactical resource name 3", "video", "Description of the didactical resource number 3",
             "Practical description: what to do for the execution of this activity",
             "Pedagogical Description: how to obtain better results and improve learning during the activity"];
-        expect(repeater(".teacherLevel").row(0)).toEqual(expectedLd1TeacherViewLevel1);
+        expect(repeater(".teacherLevel").row(0)).toEqual(expectedLd1TextualViewLevel1);
         
-        var expectedLd1TeacherViewLevel2 = [
+        var expectedLd1TextualViewLevel2 = [
             "", "Learning Activity 1", "Face to face", "15 min.", "ALL", "Tablet",
             "Didactical resource name 1", "website", "Description of the didactical resource number 1",
             "Practical description: what to do for the execution of this activity",
@@ -95,31 +95,8 @@ describe('Learning Design', function() {
             "Learning Activity 4","Face to face","2 d.","ALL",
             "Practical description: what to do for the execution of this activity",
             "Pedagogical Description: how to obtain better results and improve learning during the activity"];
-        expect(repeater(".teacherLevel").row(1)).toEqual(expectedLd1TeacherViewLevel2);
+        expect(repeater(".teacherLevel").row(1)).toEqual(expectedLd1TextualViewLevel2);
 
-        // Verify Student View
-        element("#studentTab").click();
-        var expectedLd1StudentViewLevel1 = [
-            "Support Activity 1","Online", "1 mo. 15 d.", "ALL", "Internet",
-            "Didactical resource name 3", "video", "Description of the didactical resource number 3",
-            "Practical description: what to do for the execution of this activity"];
-        expect(repeater(".studentLevel").row(0)).toEqual(expectedLd1StudentViewLevel1);
-
-        var expectedLd1StudentViewLevel2 = [
-            "", "Learning Activity 1", "Face to face", "15 min.", "ALL", "Tablet",
-            "Didactical resource name 1", "website", "Description of the didactical resource number 1",
-            "Practical description: what to do for the execution of this activity",
-            
-            "Learning Activity 2","Face to face", "", "ALL", "PC", "Smartphone",
-            "Didactical resource name 2", "document", "Carlo Neri", "Description of the didactical resource number 2",
-            "Practical description: what to do for the execution of this activity",
-
-            "Learning Activity 3","Online","30 min.","ALL","Whiteboard",
-            "Practical description: what to do for the execution of this activity",
-
-            "Learning Activity 4","Face to face","2 d.","ALL",
-            "Practical description: what to do for the execution of this activity"];
-        expect(repeater(".studentLevel").row(1)).toEqual(expectedLd1StudentViewLevel2);
 
         // Verify Global View after other Views
         element("#globalTab").click();
@@ -200,9 +177,9 @@ describe('Learning Design', function() {
         expect(repeater('.groupBox1').count()).toBe(2);
         expect(repeater('.actBox').count()).toBe(10);
 
-        // Verify Teacher View
-        element("#teacherTab").click();
-        var expectedLd2TeacherViewLevel1 = [
+        // Verify Textual View
+        element("#textualTab").click();
+        var expectedLd2TextualViewLevel1 = [
             "","Learning Activity 8","Face to face","15 min.","INDIVIDUAL",
             "Practical description: what to do for the execution of this activity",
             "Pedagogical Description: how to obtain better results and improve learning during the activity",
@@ -220,25 +197,8 @@ describe('Learning Design', function() {
             "Didactical resource name 6","image","Description of the didactical resource number 6",
             "Practical description: what to do for the execution of this activity",
             "Pedagogical Description: how to obtain better results and improve learning during the activity"];
-        expect(repeater(".teacherLevel").row(0)).toEqual(expectedLd2TeacherViewLevel1);
+        expect(repeater(".teacherLevel").row(0)).toEqual(expectedLd2TextualViewLevel1);
 
-        // Verify Student View
-        element("#studentTab").click();
-        var expectedLd2StudentViewLevel1 = [
-            "","Learning Activity 8","Face to face","15 min.","INDIVIDUAL",
-            "Practical description: what to do for the execution of this activity",
-
-            "Learning Activity 9","Face to face","2 h.","INDIVIDUAL","PC","Smartphone","Tablet",
-            "Didactical resource name 5","website","www.copy.com","Description of the didactical resource number 5",
-            "Practical description: what to do for the execution of this activity",
-
-            "Group 3 Name","Learning Activity 10","Online","30 min.","INDIVIDUAL",
-            "Practical description: what to do for the execution of this activity",
-
-            "Learning Activity 11","Face to face","2 d.","INDIVIDUAL",
-            "Didactical resource name 6","image","Description of the didactical resource number 6",
-            "Practical description: what to do for the execution of this activity"];
-        expect(repeater(".studentLevel").row(0)).toEqual(expectedLd2StudentViewLevel1);
 
         // Verify Global View after other Views
         element("#globalTab").click();

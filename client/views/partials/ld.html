@@ -92,16 +92,13 @@
         </button>
     </tab-heading>
     <tab-heading>
-        <button id="teacherTab" class="btnContent" ng-class="isBtnActive(data.static2)" ng-click="data.static2 = true">
+        <button id="textualTab" class="btnContent" ng-class="isBtnActive(data.static2)" ng-click="data.static2 = true">
             <img
-                    src="../../img/teacher.png"
-                    class="btnImage"> Teacher View
+                    src="../../img/text.png"
+                    class="btnImage"> Textual View
         </button>
     </tab-heading>
-    <button id="studentTab" class="btnContent" ng-class="isBtnActive(data.static3)" ng-click="data.static3 = true"><img
-            src="../../img/student.png"
-            class="btnImage"> Student View
-    </button>
+
 </div>
 
 
@@ -275,54 +272,6 @@
 
         <!-- End Level Box -->
         <!-- END DYNAMIC ACTIVITY CONTENT (Teacher View) -->
-        <div class="clearfix"></div>
-    </div>
-
-</tab>
-<tab active="data.static3">
-
-    <div class="tabContent">
-        <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Student View) -->
-        <div ng-repeat="(level, nodes) in levels" class="studentLevel">
-            <div ng-repeat="node in nodes" class="nodeText">
-                <!-- If it's a group:  -->
-                <div ng-show="node.children" class="groupBoxText">
-                    <h4 class="groupNameText"> {{ node.node_name }} </h4>
-
-                    <div class="clearfix"></div>
-                    <!-- Children are also in levels: Create unstyled div for each level -->
-                    <div ng-repeat="(childLevel, subChildren) in node.children">
-                        <div ng-repeat="child in subChildren">
-                            <h5 class="nodeNameText">{{ child.group_child_name }}</h5>
-                                  <span ng-show="child.group_child_type!='LD'">
-                                    <activitydetail node="child"></activitydetail>
-                                  </span>
-                                  <span ng-show="child.group_child_type=='LD'">
-                                    <lddetail node='child'></lddetail>
-                                  </span>
-                        </div>
-                    </div>
-                    <!-- End unstyled div for children levels -->
-                </div>
-                <!-- End Children -->
-                <!-- If it's NOT a group:  -->
-                <div ng-show="!node.children"><h5 class="nodeNameText">{{ node.node_name }}</h5>
-                        <span ng-show="node.type!='LD'">
-                            <activitydetail node="node"></activitydetail>
-                        </span>
-                        <span ng-show="node.type=='LD'">
-                            <lddetail node='node'></lddetail>
-                        </span>
-                </div>
-            </div>
-            <!-- End Activity or Group Box -->
-        </div>
-        <div id="activityErrors" ng-show="alertMsg" class="alert alert-warning">
-            {{ alertMsg }}
-        </div>
-
-        <!-- End Level Box -->
-        <!-- END DYNAMIC ACTIVITY CONTENT (Student View) -->
         <div class="clearfix"></div>
     </div>
 
