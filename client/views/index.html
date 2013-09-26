@@ -129,9 +129,9 @@
 
                                 <div class="formCheck">
                                     <span ng-show="qcerError">{{ qcerError }}</span>
-                                    <!-- FIXME: hide required error when only one input is selected -->
+                                    <!-- FIXME: validate at least one required -->
 				                	<span ng-repeat="qceropt in qceropts" class="qcerOptData" >
-				                    	<input type="checkbox" ng-model="selectedQcers[qceropt.id]" name="qcer" required="" > {{ qceropt.name }}
+				                    	<input type="checkbox" ng-model="selectedQcers[qceropt.id]" name="qcer"> {{ qceropt.name }}
 				                	</span>
                                 </div>
                                 <span class="clearfix"></span>
