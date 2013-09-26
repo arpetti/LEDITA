@@ -98,9 +98,49 @@ describe('LD Create DAO', function() {
 			});
 		});
 
-		it('Returns error if classificates is empty', function(done) {
+		it('Bulk inserts returns error if classificates is empty', function(done) {
 			var classificates = [];
 			LdCreateDao.insertClassificates(classificates, function(err, results) {
+				expect(err).not.to.be.null;
+				expect(results).to.be.undefined;
+				done();
+			});
+		});
+
+	});
+
+	describe('Subjects', function() {
+		
+		var subject1 = 'bulk insert subject test 1';
+		var subject2 = 'bulk insert subject test 2';
+
+		afterEach(function(done) {
+			Dao.deleteRecord('DELETE FROM subject where name in (?, ?)', [subject1, subject2], function(err, result) {
+				done();
+			});
+		});
+
+		it('Bulk inserts subjects', function(done) {
+			var subjects = [[subject1], [subject2]];
+			LdCreateDao.insertSubjects(subjects, function(err, results) {
+				expect(err).to.be.null;
+				expect(results).not.to.be.null;
+				expect(results.affectedRows).to.equal(subjects.length);
+				Dao.findAll('SELECT id, name FROM subject where name in (?, ?)', [subject1, subject2], function(err, results) {
+					expect(err).to.be.null;
+					expect(results).to.to.have.length(subjects.length);					
+					expect(_.contains(_.pluck(results, "name"), subject1)).to.be.true;
+					expect(_.contains(_.pluck(results, "name"), subject2)).to.be.true;
+					expect(results[0].id).not.to.be.null;
+					expect(results[1].id).not.to.be.null;
+					done();
+				});
+			});
+		});
+
+		it('Bulk insert subjects returns error if classificates is empty', function(done) {
+			var subjects = [];
+			LdCreateDao.insertSubjects(subjects, function(err, results) {
 				expect(err).not.to.be.null;
 				expect(results).to.be.undefined;
 				done();
