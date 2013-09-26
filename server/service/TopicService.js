@@ -11,7 +11,8 @@ var generateConcerns = function(existingTopics, ldid) {
 
 var extractNewTopics = function(topicNames, existingTopics) {
 	var existingTopicNames = _.pluck(existingTopics, 'name');
-	return _.difference(topicNames, existingTopicNames);
+	var newTopicNames = _.difference(topicNames, existingTopicNames);
+	return _.map(newTopicNames, function(name){ return [name]; });
 };
 
 module.exports = {
@@ -40,8 +41,13 @@ module.exports = {
 		    },
 		    function(existingTopics, callback){
 		        var newTopicsToInsert = extractNewTopics(topicNames, existingTopics);
-		        console.log('Future task to insert these topics, then concerns: ' + JSON.stringify(newTopicsToInsert));
-		        callback(null, 'done');
+		        if (newTopicsToInsert.length > 0) {
+			        LdCreateDao.insertSubjects(newTopicsToInsert, function(err, results) {
+			        	callback(null, newTopicsToInsert);
+			        });
+		        } else {
+		        	callback(null, newTopicsToInsert);
+		        }
 		    }
 		], function (err, result) {
 		   callback(); // don't cb with err because shouldn't halt rest of callers' flow   
