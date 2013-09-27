@@ -36,8 +36,6 @@ describe('Topic Service', function() {
         	callback(null, results);
         });
 
-        // var ldCreateDaoSubjectsStub = sandbox.stub(LdCreateDao, "insertSubjects");
-
         var concernsMatcher = sinon.match(function (value) {
     		return value.length === 2 && 
     			value[0][0] === topicId1 &&
@@ -49,7 +47,6 @@ describe('Topic Service', function() {
         var serviceCallback = function() {
         	assert.isTrue(refDaoStub.withArgs(topicNames).calledOnce);
         	assert.isTrue(bulkInsertConcernsStub.withArgs(concernsMatcher).calledOnce);
-        	// assert.equal(ldCreateDaoSubjectsStub.callCount, 0);
         	done();
         };
 

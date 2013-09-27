@@ -38,6 +38,7 @@ module.exports = {
 		// TODO Input validation, make sure qcer ids are numbers, at least one topic
 
 		async.waterfall([
+			// Step 1: Create LD
             function(callback) {
             	var ldObj = createLdForInsert(userId, ldData);
                 LdCreateDao.createLd(ldObj, function(err, ldid) {
@@ -48,6 +49,7 @@ module.exports = {
                     }
                 })
             },
+            // Step 2: Associate Qcer's to the LD
             function(ldid, callback)  {
             	var qcersToAttach = buildClassificates(ldid, getSelectedQcers(ldData));
             	if (qcersToAttach.length > 0) {
@@ -62,6 +64,7 @@ module.exports = {
             		callback(null, ldid);
             	}
             },
+            // Step 3: Associate Topics to the LD (creating if necessary)
             function(ldid, callback)  {
             	TopicService.insertTopics(ldid, ldData.topics, function() {
             		callback(null, ldid); 

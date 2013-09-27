@@ -6,7 +6,6 @@ var DELETE_USER = 'DELETE FROM ld WHERE ?';
 
 var BULK_INSERT_CLASSIFICATES = "INSERT INTO classificates (qcer_id, ld_id) VALUES ?";
 var BULK_INSERT_CONCERNS = "INSERT INTO concerns (subject_id, ld_id) VALUES ?";
-var BULK_INSERT_SUBJECTS = "INSERT INTO subject (name) VALUES ?";
 
 var INSERT_SUBJECT = "INSERT INTO subject SET ?";
 var INSERT_CONCERN = "INSERT INTO concerns SET ?";
@@ -65,16 +64,6 @@ module.exports = {
 
 	insertConcerns: function(concerns, callback) {
 		dao.bulkInsert(BULK_INSERT_CONCERNS, concerns, function(err, result) {
-			if (err) {
-	        	callback(err);
-	      	} else {
-		    	callback(null, result);
-	      	}
-		});
-	},
-
-	insertSubjects: function(subjects, callback) {
-		dao.bulkInsert(BULK_INSERT_SUBJECTS, subjects, function(err, result) {
 			if (err) {
 	        	callback(err);
 	      	} else {
