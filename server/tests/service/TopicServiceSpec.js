@@ -72,7 +72,7 @@ describe('Topic Service', function() {
         var bulkInsertConcernsStub = sandbox.stub(LdCreateDao, "insertConcerns");
         
         var insertSubjectStub = sandbox.stub(LdCreateDao, "insertSubject", function(topicData, callback) {
-        	if(topicData.name === topicName1) {
+        	if (topicData.name === topicName1) {
         		callback(null, newTopicId1);
         	} else {
         		callback(null, newTopicId2);
@@ -145,6 +145,83 @@ describe('Topic Service', function() {
         TopicService.insertTopics(ldid, topicNames, serviceCallback);
 	});
 
-	// TODO Test what happens if error occurs somewhere in async.each?
+	it('If error occurs inserting subject, corresponding concern is not inserted', function(done) {
+		var ldid = 84;
+		var topicName1 = 'new topic 1';
+		var topicName2 = 'new topic 2';
+		var topicName3 = 'new topic 3';
+		var topicNames = [topicName1, topicName2, topicName3];
+		var newTopicId1 = 11;
+		var newTopicId2 = 12;
+		var newTopicId3 = 13;
+
+		var topicDaoResults = [];
+		var refDaoStub = sandbox.stub(RefDao, "findSubjectsByName", function(topicNames, callback) {
+            callback(null, topicDaoResults);
+        });
+
+        var bulkInsertConcernsStub = sandbox.stub(LdCreateDao, "insertConcerns");
+        
+        var insertSubjectStub = sandbox.stub(LdCreateDao, "insertSubject", function(topicData, callback) {
+        	if (topicData.name === topicName1) {
+        		callback(null, newTopicId1);
+        		return;
+        	};
+        	if (topicData.name === topicName2) {
+        		callback(new Error('something went wrong'));
+        		return;
+        	}
+        	if (topicData.name === topicName3) {
+        		callback(null, newTopicId3);
+        		return;
+        	};
+        });
+        
+        var singleInsertConcernStub = sandbox.stub(LdCreateDao, "insertConcern");
+
+        var serviceCallback = function() {
+        	assert.isTrue(refDaoStub.withArgs(topicNames).calledOnce);
+        	assert.equal(bulkInsertConcernsStub.callCount, 0);
+        	
+        	assert.isTrue(insertSubjectStub.withArgs(sinon.match({ name: topicName1 })).calledOnce);
+        	assert.isTrue(insertSubjectStub.withArgs(sinon.match({ name: topicName2 })).calledOnce);
+        	assert.isTrue(insertSubjectStub.withArgs(sinon.match({ name: topicName3 })).calledOnce);
+        	
+        	assert.isTrue(singleInsertConcernStub.withArgs(
+        		sinon.match({ subject_id: newTopicId1, ld_id: ldid})).calledOnce);
+        	assert.equal(singleInsertConcernStub.withArgs(
+        		sinon.match({ subject_id: newTopicId2, ld_id: ldid })).callCount, 0);
+        	assert.isTrue(singleInsertConcernStub.withArgs(
+        		sinon.match({ subject_id: newTopicId3, ld_id: ldid})).calledOnce);
+        	
+        	done();
+        };
+
+        TopicService.insertTopics(ldid, topicNames, serviceCallback);
+	});
+
+	it('If error occurs finding existing subjects, entire flow is halted', function(done) {
+		var ldid = 99;
+		var existTopic = 'Topic 1';
+		var newTopic = 'Topic 75';
+		var topicNames = [existTopic, newTopic];
+
+		var refDaoStub = sandbox.stub(RefDao, "findSubjectsByName", function(topicNames, callback) {
+            callback(new Error('something went wrong finding subjects by name'));
+        });
+        var bulkInsertConcernsStub = sandbox.stub(LdCreateDao, "insertConcerns");
+        var insertSubjectStub = sandbox.stub(LdCreateDao, "insertSubject");
+        var singleInsertConcernStub = sandbox.stub(LdCreateDao, "insertConcern");
+
+        var serviceCallback = function() {
+        	assert.isTrue(refDaoStub.withArgs(topicNames).calledOnce);
+        	assert.equal(bulkInsertConcernsStub.callCount, 0);
+        	assert.equal(insertSubjectStub.callCount, 0);
+        	assert.equal(singleInsertConcernStub.callCount, 0);
+        	done();
+        };
+
+        TopicService.insertTopics(ldid, topicNames, serviceCallback);
+	});
 
 });

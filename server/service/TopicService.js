@@ -12,8 +12,6 @@ var generateConcerns = function(existingTopics, ldid) {
 var extractNewTopics = function(topicNames, existingTopics) {
 	var existingTopicNames = _.pluck(existingTopics, 'name');
 	return _.difference(topicNames, existingTopicNames);
-	//var newTopicNames = _.difference(topicNames, existingTopicNames);
-	//return _.map(newTopicNames, function(name){ return [name]; });
 };
 
 module.exports = {
@@ -25,14 +23,14 @@ module.exports = {
 		    function(callback){
 		    	RefDao.findSubjectsByName(topicNames, function(err, existingTopics) {
 		    		if (err) {
-		    			callback(err)
+		    			callback(err); // If existing cannot be determined, halt entire flow
 		    		} else {
 		    			var concerns = generateConcerns(existingTopics, ldid);
 		    			callback(null, concerns, existingTopics);
 		    		}
 		    	});
 		    },
-		    // Step 2: Insert concerns for those topics that already exist
+		    // Step 2: Bulk insert concerns for those topics that already exist
 		    function(concerns, existingTopics, callback) {
 		    	if (concerns.length > 0) {
 		    		LdCreateDao.insertConcerns(concerns, function(err, results) {
@@ -42,7 +40,7 @@ module.exports = {
 			        callback(null, existingTopics);
 		    	}
 		    },
-		    // Step 3: For each new topic - insert it, get its id, and insert concern
+		    // Step 3: For each new topic - insert it, get its id, and insert related concern
 		    function(existingTopics, callback) {
 		    	var newTopicsToInsert = extractNewTopics(topicNames, existingTopics);
 		    	if (newTopicsToInsert.length > 0) {
