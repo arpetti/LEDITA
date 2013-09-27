@@ -6,6 +6,7 @@ var LDCreateService = require('../../service/LdCreateService');
 var messages = require('../../service/ValidationMessages');
 var Dao = require('../../dao/Dao')
 var async = require('async');
+var _ = require('underscore');
 
 // This is an integration test because the dependencies are not mocked out
 describe('LD Create Service Integration', function() {
@@ -13,13 +14,12 @@ describe('LD Create Service Integration', function() {
 	var ldName = "LD Created From Integration Test";
 	var existingTopicName = "Topic 1";
 	var newTopicName = "New Topic From Integration Test";
+	
 	var cleanupData = {name: ldName};
-	var cleanupConcernsData = [ldName, existingTopicName];
 	
 	var cleanupClassificates = 'DELETE FROM classificates WHERE ld_id = (select id from ld where ?)';
 	var cleanupLd = 'DELETE FROM ld where ?';
-	var cleanupConcerns = 'DELETE FROM concerns WHERE ld_id = (select id from ld where id = ?) ' +
-		'and subject_id = (select id from subject where name = ?)';
+	var cleanupConcerns = 'DELETE FROM concerns WHERE ld_id = (select id from ld where ?)';
 	var cleanupSubjects = 'DELETE FROM subject where name = ?';
 
 	var verifyLdQuery = 'select id, user_id, ld_model_id, name, scope, publication, students_profile, creation_date, last_edit_date from ld where id = ?';
@@ -30,7 +30,7 @@ describe('LD Create Service Integration', function() {
 	afterEach(function(done) {
 		async.series([
 		    function(callback){
-		        Dao.deleteRecord(cleanupConcerns, cleanupConcernsData, function(err, results) {
+		        Dao.deleteRecord(cleanupConcerns, cleanupData, function(err, results) {
 			        callback(null, null);
 		        })
 		    },
@@ -77,6 +77,7 @@ describe('LD Create Service Integration', function() {
     		expect(ldid).not.to.be.null;
     		expect(ldid).to.be.above(numExistingLds);
     		
+    		// Verify newly created LD
     		Dao.findAll(verifyLdQuery, [ldid], function(err, results) {
     			expect(results).to.have.length(1);
     			expect(results[0].id).to.equal(ldid);
@@ -89,6 +90,7 @@ describe('LD Create Service Integration', function() {
     			expect(results[0].creation_date).to.equalDate(today);
 				expect(results[0].last_edit_date).to.equalDate(today);
 
+				// Verify LD to Qcer relationships
 				Dao.findAll(verifyLdQcerQuery, [ldid], function(err, results) {
 					expect(results).to.have.length(2);
 					expect(results[0].ld_id).to.equal(ldid);
@@ -96,11 +98,14 @@ describe('LD Create Service Integration', function() {
 					expect(results[1].ld_id).to.equal(ldid);
 					expect(results[1].qcer_name).to.equal(qcer6Name);
 					
+					// Verify LD to Topic relationships
 					Dao.findAll(verifyLdTopicQuery, [ldid], function(err, results) {
-						expect(results).to.have.length(1);
-						expect(results[0].ld_name).to.equal(ldData.name);
-						expect(results[0].subject_name).to.equal(existingTopicName);
+						expect(results).to.have.length(2);
+						expect(_.contains(_.pluck(results, "ld_name"), ldData.name)).to.be.true;
+						expect(_.contains(_.pluck(results, "subject_name"), existingTopicName)).to.be.true;
+						expect(_.contains(_.pluck(results, "subject_name"), newTopicName)).to.be.true;
 
+						// Verify newly created Topic
 						Dao.findAll(verifySubjectQuery, [newTopicName], function(err, results) {
 							expect(results).to.have.length(1);
 							expect(results[0].id).not.to.be.null;

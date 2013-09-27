@@ -113,9 +113,11 @@ describe('LD Create DAO', function() {
 		
 		var subject1 = 'bulk insert subject test 1';
 		var subject2 = 'bulk insert subject test 2';
+		var subject3 = 'single insert subject test 3';
+		var cleanupSubjects = [subject1, subject2, subject3];
 
 		afterEach(function(done) {
-			Dao.deleteRecord('DELETE FROM subject where name in (?, ?)', [subject1, subject2], function(err, result) {
+			Dao.deleteRecord('DELETE FROM subject where name in (?, ?, ?)', cleanupSubjects, function(err, result) {
 				done();
 			});
 		});
@@ -143,6 +145,26 @@ describe('LD Create DAO', function() {
 			LdCreateDao.insertSubjects(subjects, function(err, results) {
 				expect(err).not.to.be.null;
 				expect(results).to.be.undefined;
+				done();
+			});
+		});
+
+		it('Inserts a single subject', function(done) {
+			var subjectData = {"name": subject3};
+			LdCreateDao.insertSubject(subjectData, function(err, subjectId) {
+				expect(err).to.be.null;
+				expect(subjectId).to.be.above(0);
+				done();
+			});
+		});
+
+		it('Multiple subjects with same name are not allowed', function(done) {
+			var existingSubject = 'Topic 4'; // known from demo data
+			var subjectData = {"name": existingSubject};
+			LdCreateDao.insertSubject(subjectData, function(err, subjectId) {
+				expect(err).not.to.be.null;
+				expect(err.message).to.contain('UNIQ_SUBJECT');
+				expect(subjectId).to.be.undefined;
 				done();
 			});
 		});
