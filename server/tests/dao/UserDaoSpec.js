@@ -71,7 +71,6 @@ describe('User DAO', function() {
             last_name: 'Bunny',
             email: emailExists,
             hash: 'hashedPasswordGobbledyGook&='
-
         };
         UserDao.addUser(userData, function(err, result) {
             expect(err).not.to.be.null;

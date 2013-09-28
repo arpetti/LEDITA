@@ -142,4 +142,155 @@ describe('LD Create DAO', function() {
 
 	});
 
+	describe('Concerns', function() {
+
+		// known from demo data that LD 7 is not already associated to these subjects
+		var ldid = 7;
+		var subjectId1 = 1;
+		var subjectId3 = 3;
+
+		var verifyLdConcerns = 'SELECT subject_id FROM concerns where ld_id = ?';
+
+		var cleanupData = [ldid, subjectId1, subjectId3];
+		var cleanupConcerns = 'DELETE FROM concerns where ld_id = ' + ldid +  
+			' and subject_id in (' + subjectId1 + ', ' + subjectId3 + ')';
+
+		afterEach(function(done) {
+			Dao.deleteRecord(cleanupConcerns, [], function(err, results) {
+				done();
+			});
+		});
+
+		it('Bulk inserts multiple concerns at once', function(done) {
+			var concerns = [[subjectId1, ldid], [subjectId3, ldid]];
+			LdCreateDao.insertConcerns(concerns, function(err, results) {
+				expect(err).to.be.null;
+				expect(results).not.to.be.null;
+				expect(results.affectedRows).to.equal(concerns.length);
+				Dao.findAll(verifyLdConcerns, [ldid], function(err, results) {
+					expect(err).to.be.null;
+					expect(results).to.have.length.above(2);
+					expect(_.contains(_.pluck(results, "subject_id"), subjectId1)).to.be.true;
+					expect(_.contains(_.pluck(results, "subject_id"), subjectId3)).to.be.true;
+					done();
+				});
+			});
+		});
+
+		// Why does this make UserDaoSpec afterEach timeout?
+		// it('Bulk inserts returns an error if concerns are empty', function(done) {
+		// 	var concerns = [];
+		// 	LdCreateDao.insertConcerns(concerns, function(err, result) {
+		// 		expect(err).not.to.be.null;
+		// 		expect(result).to.be.undefined;
+		// 		done();
+		// 	});
+		// });
+
+		it('Inserts a single concern', function(done) {
+			var concernData = {subject_id: subjectId1, ld_id: ldid};
+			LdCreateDao.insertConcern(concernData, function(err, id) {
+				expect(err).to.be.null;
+				Dao.findAll(verifyLdConcerns, [ldid], function(err, results) {
+					expect(err).to.be.null;
+					expect(results).to.have.length.above(1);
+					expect(_.contains(_.pluck(results, "subject_id"), subjectId1)).to.be.true;
+					done();
+				});
+			});
+		});
+
+	});
+
+	describe('Objectives', function() {
+
+		var newObjective = 'Basket Weaving';
+		var cleanupObjectives = [newObjective];
+
+		afterEach(function(done) {
+			Dao.deleteRecord('DELETE FROM objective where descr in (?)', cleanupObjectives, function(err, result) {
+				done();
+			});
+		});
+
+		it('Inserts a single objective', function(done) {
+			var objectiveData = {"descr": newObjective};
+			LdCreateDao.insertObjective(objectiveData, function(err, objectiveId) {
+				expect(err).to.be.null;
+				expect(objectiveId).to.be.above(0);
+				done();
+			});
+		});
+
+		it('Multiple objectives with same name are not allowed', function(done) {
+			var existingObjective = 'Objective 5'; // known from demo data
+			var objectiveData = {"descr": existingObjective};
+			LdCreateDao.insertObjective(objectiveData, function(err, objectiveId) {
+				expect(err).not.to.be.null;
+				expect(err.message).to.contain('UNIQ_OBJECTIVE');
+				expect(objectiveId).to.be.undefined;
+				done();
+			});
+		});
+
+	});
+
+	describe('Aims', function() {
+
+		// known from demo data that LD 26 is not already associated to these objectives
+		var ldid = 26;
+		var objective3 = 3;
+		var objective4 = 4;
+
+		var verifyLdAims = 'SELECT objective_id FROM aims where ld_id = ?';
+		var cleanupAims = 'DELETE FROM aims where ld_id = ' + ldid +  
+			' and objective_id in (' + objective3 + ', ' + objective4 + ')';
+
+		afterEach(function(done) {
+			Dao.deleteRecord(cleanupAims, [], function(err, results) {
+				done();
+			});
+		});
+
+		it('Bulk inserts multiple aims at once', function(done) {
+			var aims = [[objective3, ldid], [objective4, ldid]];
+			LdCreateDao.insertAims(aims, function(err, results) {
+				expect(err).to.be.null;
+				expect(results).not.to.be.null;
+				expect(results.affectedRows).to.equal(aims.length);
+				Dao.findAll(verifyLdAims, [ldid], function(err, results) {
+					expect(err).to.be.null;
+					expect(results).to.have.length.above(2);
+					expect(_.contains(_.pluck(results, "objective_id"), objective3)).to.be.true;
+					expect(_.contains(_.pluck(results, "objective_id"), objective4)).to.be.true;
+					done();
+				});
+			});
+		});
+
+		// Why does this make UserDaoSpec afterEach timeout?
+		// it('Bulk inserts returns an error if aims are empty', function(done) {
+		// 	var aims = [];
+		// 	LdCreateDao.insertAims(aims, function(err, result) {
+		// 		expect(err).not.to.be.null;
+		// 		expect(result).to.be.undefined;
+		// 		done();
+		// 	});
+		// });
+
+		it('Inserts a single aim', function(done) {
+			var aimData = {objective_id: objective3, ld_id: ldid};
+			LdCreateDao.insertAim(aimData, function(err, id) {
+				expect(err).to.be.null;
+				Dao.findAll(verifyLdAims, [ldid], function(err, results) {
+					expect(err).to.be.null;
+					expect(results).to.have.length.above(1);
+					expect(_.contains(_.pluck(results, "objective_id"), objective3)).to.be.true;
+					done();
+				});
+			});
+		});
+
+	});
+
 });
