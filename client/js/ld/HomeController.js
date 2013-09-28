@@ -17,7 +17,7 @@ angular.module('ledita-app')
 
 angular.module('ledita-app')
 .controller('NavActionCtrl',
-['$scope', function($scope) {
+['$scope', '$timeout', function($scope, $timeout) {
     $scope.createLD = function () {
         $scope.beOpen = true;
     };
@@ -26,6 +26,12 @@ angular.module('ledita-app')
         $scope.closeMsg = 'I was closed at: ' + new Date();
         $scope.beOpen = false;
     };
+
+    $scope.$on('closeLdCreateModal', function (event) {
+        $timeout(function () {
+            $scope.closeLD();
+        }, 10);
+    });
 
     $scope.opts = {
         backdropFade: true,
@@ -39,7 +45,7 @@ angular.module('ledita-app')
 // 	x href from UI should click to remove function here that splices the array
 angular.module('ledita-app')
 .controller('LdCreateCtrl',
-['$scope', '$http', 'Home', 'limitToFilter', '$location', function($scope, $http, Home, limitToFilter, $location) {
+['$rootScope', '$scope', '$http', 'Home', 'limitToFilter', '$location', function($rootScope, $scope, $http, Home, limitToFilter, $location) {
 
 	Home.getQcers(function(res) {
         $scope.qceropts = res;
@@ -116,7 +122,7 @@ angular.module('ledita-app')
     	},
         function(res) {
             $location.path('/ldedit/' + res.ldid);
-            //TODO Broadcast event to close modal from different controller
+            $rootScope.$broadcast('closeLdCreateModal');
         },
         function(err) {
             $scope.ldCreateError = err;

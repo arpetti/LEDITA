@@ -25,6 +25,9 @@ if [[ -n "$nodepid" ]]; then
 	sleep 2
 fi
 
+echo "Recreating database in preparation for server side tests..."
+database/local/create-db.sh
+
 echo "Running server side unit, dao, and integration tests..."
 NODE_ENV=dev npm test
 serverTestStatus=$?
