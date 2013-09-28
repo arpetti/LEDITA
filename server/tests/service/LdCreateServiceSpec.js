@@ -3,6 +3,7 @@ var assert = require('chai').assert;
 var sinon = require('sinon');
 var LdCreateService = require('../../service/LdCreateService');
 var TopicService = require('../../service/TopicService');
+var ObjectiveService = require('../../service/ObjectiveService');
 var LdCreateDao = require('../../dao/LdCreateDao');
 var messages = require('../../service/ValidationMessages');
 
@@ -44,6 +45,10 @@ describe('LD Create Service', function() {
         	callback(null, addedLdId);
         });
 
+        var objectiveServiceStub = sandbox.stub(ObjectiveService, "insertObjectives", function(ldid, objectiveNames, callback) {
+        	callback(null, addedLdId);
+        });
+
         var ldMatcher = sinon.match({
         	user_id: userId,
             name: ldData.name,
@@ -67,6 +72,7 @@ describe('LD Create Service', function() {
         	assert.isTrue(ldCreateDaoStub.withArgs(ldMatcher).calledOnce);
         	assert.isTrue(ldCreateDaoClassificatesStub.withArgs(classificatesMatcher).calledOnce);
         	assert.isTrue(topicServiceStub.withArgs(addedLdId, ldData.topics).calledOnce);
+        	assert.isTrue(objectiveServiceStub.withArgs(addedLdId, ldData.objectives).calledOnce);
         	done();
         };
 
@@ -96,6 +102,10 @@ describe('LD Create Service', function() {
         	callback(null, addedLdId);
         });
 
+        var objectiveServiceStub = sandbox.stub(ObjectiveService, "insertObjectives", function(ldid, objectiveNames, callback) {
+        	callback(null, addedLdId);
+        });
+
         var ldMatcher = sinon.match({
         	user_id: userId,
             name: ldData.name,
@@ -111,6 +121,7 @@ describe('LD Create Service', function() {
         	assert.isTrue(ldCreateDaoStub.withArgs(ldMatcher).calledOnce);
         	assert.equal(ldCreateDaoClassificatesStub.callCount, 0, "does not insert classificates when empty");
         	assert.isTrue(topicServiceStub.withArgs(addedLdId, ldData.topics).calledOnce);
+        	assert.isTrue(objectiveServiceStub.withArgs(addedLdId, ldData.objectives).calledOnce);
         	done();
         };
 
@@ -135,6 +146,8 @@ describe('LD Create Service', function() {
         });
 
         var ldCreateDaoClassificatesStub = sandbox.stub(LdCreateDao, "insertClassificates");
+        var topicServiceStub = sandbox.stub(TopicService, "insertTopics");
+        var objectiveServiceStub = sandbox.stub(ObjectiveService, "insertObjectives");
 
         var ldMatcher = sinon.match({
         	user_id: userId,
@@ -150,6 +163,8 @@ describe('LD Create Service', function() {
 
         	assert.isTrue(ldCreateDaoStub.withArgs(ldMatcher).calledOnce);
         	assert.equal(ldCreateDaoClassificatesStub.callCount, 0, "does not insert classificates when error occurs inserting LD");
+        	assert.equal(topicServiceStub.callCount, 0);
+        	assert.equal(objectiveServiceStub.callCount, 0);
         	done();
         };
 

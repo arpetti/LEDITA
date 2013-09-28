@@ -14,6 +14,8 @@ describe('LD Create Service Integration', function() {
 	var ldName = "LD Created From Integration Test";
 	var existingTopicName = "Topic 1";
 	var newTopicName = "New Topic From Integration Test";
+	var existingObjective = "Objective 1";
+	var newObjective = "New Objective from Integration Test";
 	
 	var cleanupData = {name: ldName};
 	
@@ -21,14 +23,28 @@ describe('LD Create Service Integration', function() {
 	var cleanupLd = 'DELETE FROM ld where ?';
 	var cleanupConcerns = 'DELETE FROM concerns WHERE ld_id = (select id from ld where ?)';
 	var cleanupSubjects = 'DELETE FROM subject where name = ?';
+	var cleanupAims = 'DELETE FROM aims where ld_id = (select id from ld where ?)';
+	var cleanupObjectives = 'DELETE FROM objective where descr = ?';
 
 	var verifyLdQuery = 'select id, user_id, ld_model_id, name, scope, publication, students_profile, creation_date, last_edit_date from ld where id = ?';
 	var verifyLdQcerQuery = 'select ld_id, qcer_name from vw_ld_qcer where ld_id = ? order by qcer_name';
 	var verifyLdTopicQuery = 'select ld_name, subject_name from vw_ld_subject where ld_id = ? order by subject_name';
 	var verifySubjectQuery = 'select id, name from subject where name = ?';
+	var verifyLdObjectiveQuery = 'select ld_name, objective_descr from vw_ld_objective where ld_id = ?';
+	var verifyObjectiveQuery = 'select id, descr from objective where descr = ?';
 
 	afterEach(function(done) {
 		async.series([
+			function(callback){
+		        Dao.deleteRecord(cleanupAims, cleanupData, function(err, results) {
+			        callback(null, null);
+		        })
+		    },
+			function(callback){
+		        Dao.deleteRecord(cleanupObjectives, [newObjective], function(err, results) {
+			        callback(null, null);
+		        })
+		    },
 		    function(callback){
 		        Dao.deleteRecord(cleanupConcerns, cleanupData, function(err, results) {
 			        callback(null, null);
@@ -65,7 +81,7 @@ describe('LD Create Service Integration', function() {
     		qcers: {"3": true, "6": true},
     		scope: "Scope From Integration Test",
     		topics: [existingTopicName, newTopicName],
-    		objectives: ["Objective 1", "New Objective From Integration Test"],
+    		objectives: [existingObjective, newObjective],
     		requisites: [],
     		studentsDescription: "Students Description From Integration Test"
     	};
@@ -110,7 +126,22 @@ describe('LD Create Service Integration', function() {
 							expect(results).to.have.length(1);
 							expect(results[0].id).not.to.be.null;
 							expect(results[0].name).to.equal(newTopicName);
-	    					done();
+
+							// Verify LD to Objective relationships
+							Dao.findAll(verifyLdObjectiveQuery, [ldid], function(err, results) {
+								expect(results).to.have.length(2);
+								expect(_.contains(_.pluck(results, "ld_name"), ldData.name)).to.be.true;
+								expect(_.contains(_.pluck(results, "objective_descr"), existingObjective)).to.be.true;
+								expect(_.contains(_.pluck(results, "objective_descr"), newObjective)).to.be.true;
+
+								// Verify newly created Objective
+								Dao.findAll(verifyObjectiveQuery, [newObjective], function(err, results) {
+									expect(results).to.have.length(1);
+									expect(results[0].id).not.to.be.null;
+									expect(results[0].descr).to.equal(newObjective);
+	    							done();
+								});
+							})
 						})
 					});
 				});
