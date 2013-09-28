@@ -7,12 +7,14 @@ var DELETE_USER = 'DELETE FROM ld WHERE ?';
 var BULK_INSERT_CLASSIFICATES = "INSERT INTO classificates (qcer_id, ld_id) VALUES ?";
 var BULK_INSERT_CONCERNS = "INSERT INTO concerns (subject_id, ld_id) VALUES ?";
 var BULK_INSERT_AIMS = "INSERT INTO aims (objective_id, ld_id) VALUES ?";
+var BULK_INSERT_NEEDS = "INSERT INTO needs (objective_id, ld_id) VALUES ?";
 
 var INSERT_SUBJECT = "INSERT INTO subject SET ?";
 var INSERT_CONCERN = "INSERT INTO concerns SET ?";
 
 var INSERT_OBJECTIVE = "INSERT INTO objective SET ?";
 var INSERT_AIM = "INSERT INTO aims SET ?";
+var INSERT_NEED = "INSERT INTO needs SET ?";
 
 module.exports = {
 
@@ -66,6 +68,16 @@ module.exports = {
 		});
 	},
 
+	bulkInsertNeeds: function(aims, callback) {
+		dao.bulkInsert(BULK_INSERT_NEEDS, aims, function(err, result) {
+			if (err) {
+	        	callback(err);
+	      	} else {
+		    	callback(null, result);
+	      	}
+		});
+	},
+
 	insertSubject: function(subjectData, callback) {
 		dao.insertRecord(INSERT_SUBJECT, subjectData, function(err, subjectId) {
 			if(err) {
@@ -98,6 +110,16 @@ module.exports = {
 	
 	insertAim: function(aimData, callback) {
 		dao.insertRecord(INSERT_AIM, aimData, function(err, id) {
+			if(err) {
+				callback(err);
+			} else {
+				callback(null, id);
+			}
+		});
+	},
+
+	insertNeed: function(needData, callback) {
+		dao.insertRecord(INSERT_NEED, needData, function(err, id) {
 			if(err) {
 				callback(err);
 			} else {

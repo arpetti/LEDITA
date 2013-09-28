@@ -291,4 +291,61 @@ describe('LD Create DAO', function() {
 
 	});
 
+	describe('NEEDS', function() {
+
+		// Known from demo data that LD 2 is not already associated to these objectives
+		var ldId = 2;
+		var objectiveId7 = 7;
+		var objectiveId8 = 8;
+
+		var verifyLdNeeds = 'SELECT objective_id FROM needs where ld_id = ? and objective_id is not null';
+		var cleanupNeeds = 'DELETE FROM needs where ld_id = ' + ldId +  
+			' and objective_id in (' + objectiveId7 + ', ' + objectiveId8 + ')';
+
+		afterEach(function(done) {
+			Dao.deleteRecord(cleanupNeeds, [], function(err, results) {
+				done();
+			});
+		});
+
+		it('Bulk inserts multiple needs at once', function(done) {
+			var needs = [[objectiveId7, ldId], [objectiveId8, ldId]];
+			LdCreateDao.bulkInsertNeeds(needs, function(err, results) {
+				expect(err).to.be.null;
+				expect(results).not.to.be.null;
+				expect(results.affectedRows).to.equal(needs.length);
+				Dao.findAll(verifyLdNeeds, [ldId], function(err, results) {
+					expect(err).to.be.null;
+					expect(results).to.have.length(2);
+					expect(_.contains(_.pluck(results, "objective_id"), objectiveId7)).to.be.true;
+					expect(_.contains(_.pluck(results, "objective_id"), objectiveId8)).to.be.true;
+					done();
+				});
+			});
+		});
+
+		it('Bulk insert needs returns an error if needs are empty', function(done) {
+			var needs = [];
+			LdCreateDao.bulkInsertNeeds(needs, function(err, result) {
+				expect(err).not.to.be.null;
+				expect(result).to.be.undefined;
+				done();
+			});
+		});
+
+		it('Inserts a single need', function(done) {
+			var needData = {objective_id: objectiveId7, ld_id: ldId};
+			LdCreateDao.insertNeed(needData, function(err, id) {
+				expect(err).to.be.null;
+				Dao.findAll(verifyLdNeeds, [ldId], function(err, results) {
+					expect(err).to.be.null;
+					expect(results).to.have.length(1);
+					expect(_.contains(_.pluck(results, "objective_id"), objectiveId7)).to.be.true;
+					done();
+				});
+			});
+		});
+
+	});
+
 });
