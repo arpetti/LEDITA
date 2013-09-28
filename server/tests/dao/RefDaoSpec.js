@@ -101,7 +101,6 @@ describe('Reference Data Dao', function() {
 				expect(results).to.be.undefined;
 				done();
 			});
-
 		});
 
 	});
@@ -150,6 +149,39 @@ describe('Reference Data Dao', function() {
 				expect(err).to.be.null;
 				expect(results).not.to.be.null;
 				expect(results).to.have.length(0);
+				done();
+			});
+		});
+
+		it('Finds objectives by name', function(done) {
+			var existObjective1 = 'Objective 1';
+			var existObjectivet2 = 'Objective 2';
+			var notExistObjective3 = 'my new objective';
+			var objectiveNames = [existObjective1, existObjectivet2, notExistObjective3];
+			RefDao.findObjectivesByName(objectiveNames, function(err, results) {
+				expect(err).to.be.null;
+				expect(results).to.have.length(2);
+				expect(_.contains(_.pluck(results, "descr"), existObjective1)).to.be.true;
+				expect(_.contains(_.pluck(results, "descr"), existObjectivet2)).to.be.true;
+				expect(_.contains(_.pluck(results, "descr"), notExistObjective3)).to.be.false;
+				done();
+			});
+		});
+
+		it('Find objectives by name returns empty list when none found', function(done) {
+			var objectiveNames = ['Rowing', 'Swimming'];
+			RefDao.findObjectivesByName(objectiveNames, function(err, results) {
+				expect(err).to.be.null;
+				expect(results).to.have.length(0);
+				done();
+			});
+		});
+
+		it('Find objectives by name returns error when given empty input', function(done) {
+			var objectiveNames = [];
+			RefDao.findObjectivesByName(objectiveNames, function(err, results) {
+				expect(err).not.to.be.null;
+				expect(results).to.be.undefined;
 				done();
 			});
 		});

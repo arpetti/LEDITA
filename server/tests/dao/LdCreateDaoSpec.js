@@ -177,15 +177,14 @@ describe('LD Create DAO', function() {
 			});
 		});
 
-		// Why does this make UserDaoSpec afterEach timeout?
-		// it('Bulk inserts returns an error if concerns are empty', function(done) {
-		// 	var concerns = [];
-		// 	LdCreateDao.insertConcerns(concerns, function(err, result) {
-		// 		expect(err).not.to.be.null;
-		// 		expect(result).to.be.undefined;
-		// 		done();
-		// 	});
-		// });
+		it('Bulk inserts returns an error if concerns are empty', function(done) {
+			var concerns = [];
+			LdCreateDao.insertConcerns(concerns, function(err, result) {
+				expect(err).not.to.be.null;
+				expect(result).to.be.undefined;
+				done();
+			});
+		});
 
 		it('Inserts a single concern', function(done) {
 			var concernData = {subject_id: subjectId1, ld_id: ldid};
@@ -268,15 +267,14 @@ describe('LD Create DAO', function() {
 			});
 		});
 
-		// Why does this make UserDaoSpec afterEach timeout?
-		// it('Bulk inserts returns an error if aims are empty', function(done) {
-		// 	var aims = [];
-		// 	LdCreateDao.insertAims(aims, function(err, result) {
-		// 		expect(err).not.to.be.null;
-		// 		expect(result).to.be.undefined;
-		// 		done();
-		// 	});
-		// });
+		it('Bulk inserts returns an error if aims are empty', function(done) {
+			var aims = [];
+			LdCreateDao.insertAims(aims, function(err, result) {
+				expect(err).not.to.be.null;
+				expect(result).to.be.undefined;
+				done();
+			});
+		});
 
 		it('Inserts a single aim', function(done) {
 			var aimData = {objective_id: objective3, ld_id: ldid};

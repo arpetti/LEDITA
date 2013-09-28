@@ -203,7 +203,7 @@ These instructions are a work in progress. Grunt.js should be considered for aut
             "db_schema" : "ledita-web-app",
             "db_user" : "ledita",
             "db_pswd" : "prod-db-pswd",
-            "db_pool_connection_limit" : 10,
+            "db_pool_connection_limit" : 20,
             "hash_work_factor" : 10,
             "_comment_remember_me_ms" : "7 days in ms: 1000 * 60 * 60 * 24 * 7 = 604800000",
             "remember_me_ms" : 604800000,
