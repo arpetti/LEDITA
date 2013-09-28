@@ -193,13 +193,13 @@ These instructions are a work in progress. Grunt.js should be considered for aut
 
 * Create the project root directory ```LEDITA```.
 
-* Copy the ```server``` directory to ```LEDITA```, minus the tests folder to the production server.
+* Copy the ```server``` directory to ```LEDITA```, minus the tests folder.
 
 * Copy the ```client``` directory to ```LEDITA```.
 
 * Create the ```logs``` directory inside ```LEDITA```.
 
-* Copy ```env.json``` from root of git project, and add ```prod``` section, for example:
+* Copy ```env.json``` from root of git project, to ```LEDITA``` and add ```prod``` section, for example:
     ```
     {
         "prod" : {
@@ -226,5 +226,3 @@ These instructions are a work in progress. Grunt.js should be considered for aut
 * Start the server ```NODE_ENV=prod node server.js > /dev/null &```
 
 * TODO: Configure monitoring tool such as forever?
-
-* TODO: Configure logging?
