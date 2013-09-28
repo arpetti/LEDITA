@@ -3,7 +3,8 @@ var LdCreateDao = require('../dao/LdCreateDao');
 var async = require('async');
 var _ = require('underscore');
 
-var generateAims = function(existingObjectives, ldid) {
+// TODO: These two methods duplicated in ObjectiveService - extract common util/ObjectiveHelper
+var generateNeeds = function(existingObjectives, ldid) {
 	var objectiveIds = _.pluck(existingObjectives, 'id');	
 	return _.map(objectiveIds, function(objectiveId){ return [objectiveId, ldid]; });
 };
@@ -15,8 +16,9 @@ var extractNewObjectives = function(objectiveNames, existingObjectives) {
 
 module.exports = {
 
+	// Prerequisites ARE Objectives
 	// callback()
-	insertObjectives: function(ldid, objectiveNames, callback) {
+	insertPrerequisites: function(ldid, objectiveNames, callback) {
 		async.waterfall([
 			// Step 1: Find objectives that already exist in the system
 		    function(callback){
@@ -24,29 +26,29 @@ module.exports = {
 		    		if (err) {
 		    			callback(err); // If existing cannot be determined, halt entire flow
 		    		} else {
-		    			var aims = generateAims(existingObjectives, ldid);
-		    			callback(null, aims, existingObjectives);
+		    			var needs = generateNeeds(existingObjectives, ldid);
+		    			callback(null, needs, existingObjectives);
 		    		}
 		    	});
 		    },
-		    // Step 2: Bulk insert aims for those objectives that already exist
-		    function(aims, existingObjectives, callback) {
-		    	if (aims.length > 0) {
-		    		LdCreateDao.insertAims(aims, function(err, results) {
+		    // Step 2: Bulk insert needs for those objectives that already exist
+		    function(needs, existingObjectives, callback) {
+		    	if (needs.length > 0) {
+		    		LdCreateDao.bulkInsertNeeds(needs, function(err, results) {
 		    			callback(null, existingObjectives);
 		    		});
 		    	} else {
 			        callback(null, existingObjectives);
 		    	}
 		    },
-		    // Step 3: For each new objective - insert it, get its id, and insert related aim
+		    // Step 3: For each new objective - insert it, get its id, and insert related need
 		    function(existingObjectives, callback) {
 		    	var newObjectivesToInsert = extractNewObjectives(objectiveNames, existingObjectives);
 		    	if (newObjectivesToInsert.length > 0) {
 			    	async.each(newObjectivesToInsert, function(objectiveName, callback) {
 			    		LdCreateDao.insertObjective({descr: objectiveName}, function(err, objectiveId) {
 							if (!err) {
-								LdCreateDao.insertAim({objective_id: objectiveId, ld_id: ldid}, function(err, result) {
+								LdCreateDao.insertNeed({objective_id: objectiveId, ld_id: ldid}, function(err, result) {
 									callback();
 								});
 							}
