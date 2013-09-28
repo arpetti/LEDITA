@@ -1,0 +1,1 @@
+This directory and all its contents should be deleted once its confirmed that the server side tests are running successfully from ```%PROJECT_ROOT%/tests/server```.
