@@ -1,7 +1,6 @@
 var RefDao = require('../dao/RefDao');
 var LdCreateDao = require('../dao/LdCreateDao');
 var async = require('async');
-var messages = require('./ValidationMessages');
 var _ = require('underscore');
 
 var generateConcerns = function(existingTopics, ldid) {
