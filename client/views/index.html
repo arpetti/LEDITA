@@ -221,19 +221,21 @@
 		                        </div>
 		                        <label class="formLabel"><i class="icon-backward"></i> Pre-Requisites:</label>
 		                        <input class="formInput" type="text" name="ldRequisite" ng-model="ldRequisite"
-		                               placeholder="typeahead..."  ng-maxlength="255"
+		                        	   typeahead="suggestion for suggestion in getObjectives($viewValue)"
+                                       typeahead-on-select="addPrerequisiteFromSuggestion()"
+                                       ui-keypress="{13:'addPrerequisiteFromUserInput($event)'}"
+		                               placeholder="Prerequisites..."  ng-maxlength="255"
 		                               ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
 		                        <span class="clearfix"></span>
 
-		                        <!-- FIXME Enable when auto complete and enter key press is implemented -->
-		                        <!-- <div class="formTag">
-		                            <ul ng-repeat="need in ld.needs" class="zeroMargin prerequisites">
-		                                <li class="modalEditItem"><span class="modalEditItemLink">{{need}} <a ng-href="#"><i
+		                        <div class="formTag">
+		                            <ul ng-repeat="prerequisite in selectedPrerequisites" class="zeroMargin prerequisites">
+		                                <li class="modalEditItem"><span class="modalEditItemLink">{{prerequisite}} <a ng-href="#"><i
 		                                        class="icon-remove-circle"></i> </a></span>
 		                                </li>
 		                            </ul>
 
-		                        </div> -->
+		                        </div>
 		                    </div>
 
 		                    <div class="formLevel">

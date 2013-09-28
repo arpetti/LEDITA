@@ -56,7 +56,7 @@ angular.module('ledita-app')
     $scope.selectedQcers = {};
     $scope.selectedTopics = [];
     $scope.selectedObjectives = [];
-    $scope.selectedRequisites = [];
+    $scope.selectedPrerequisites = [];
 
     $scope.getSubjects = function(subject) {
     	var subjectMatchUrl = '/reference/subjects/' + subject;
@@ -108,6 +108,25 @@ angular.module('ledita-app')
         $event.preventDefault();
         addObjective($scope.ldObjective);
         clearCurrentObjective();
+    };
+
+    var addPrerequisite = function(prerequisite) {
+  		$scope.selectedPrerequisites.push(prerequisite);
+  	};
+
+  	var clearCurrentPrerequisite = function() {
+  		$scope.ldRequisite = " ";
+  	};
+
+  	$scope.addPrerequisiteFromSuggestion = function() {
+  		addPrerequisite($scope.ldRequisite);
+  		clearCurrentPrerequisite();
+  	};
+
+  	$scope.addPrerequisiteFromUserInput = function($event) {
+        $event.preventDefault();
+        addPrerequisite($scope.ldRequisite);
+        clearCurrentPrerequisite();
     };
 
     $scope.submitLD = function() {
