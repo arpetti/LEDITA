@@ -1,7 +1,26 @@
 var expect = require('chai').expect
-    , Dao = require('../../dao/Dao');
+var Dao = require('../../dao/Dao');
+var configHelper = require('../../util/ConfigHelper');
+var config = configHelper.config();
+var async = require('async');
 
 describe('DAO', function() {    
+
+	it('Connection is released back to the pool upon error', function(done) {
+		var poolSize = config.db_pool_connection_limit;
+		var badQueries = [];
+		for (var i = 0; i < poolSize+5; i++) {
+			badQueries.push('select foo from bar');
+		}
+		async.each(badQueries, function(badQ, callback) {
+			Dao.findAll(badQ, [], function(err, result) {
+				expect(err).not.to.be.null;
+				callback();
+			});
+		}, function(err) {
+			done();
+		});
+	});
 
 	it('Find all users returns results', function(done) {
         var queryString = 'select id, name, last_name, email from user';

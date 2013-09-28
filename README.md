@@ -191,9 +191,13 @@ If you're having a test failure, you can insert a breakpoint to figure out what'
 
 These instructions are a work in progress. Grunt.js should be considered for automating some of these steps where possible.
 
-* Copy the server directory, minus the tests folder to the production server.
+* Create the project root directory ```LEDITA```.
 
-* Copy the client directory to the production server.
+* Copy the ```server``` directory to ```LEDITA```, minus the tests folder to the production server.
+
+* Copy the ```client``` directory to ```LEDITA```.
+
+* Create the ```logs``` directory inside ```LEDITA```.
 
 * Copy ```env.json``` from root of git project, and add ```prod``` section, for example:
     ```
@@ -213,7 +217,7 @@ These instructions are a work in progress. Grunt.js should be considered for aut
         }
     }
     ```
-* Install and initialize the MYSQL database using ```ledita-web-app.sql``` on a production database server (not the same server where the app will run of course). Create a db user as per ```user.sql``` but modify the password to match what's defined in ```env.json```.
+* Install and initialize the MySQL database using ```ledita-web-app.sql``` on a production database server (not the same server where the app will run of course). Create a db user as per ```user.sql``` but modify the password to match what's defined in ```env.json```.
 
 * For SSL, get real ```cert.pem``` and ```key.pem``` files and copy them to ```server/cert```
 

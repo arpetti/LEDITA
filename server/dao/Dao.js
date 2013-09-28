@@ -25,6 +25,7 @@ module.exports = {
       connection.query(queryString, queryParams, function(err, rows) {
         if (err) {
           logWrapper.log().error('db query error', err);
+          connection.end();
           callback(err);
           return;
         }
@@ -48,6 +49,7 @@ module.exports = {
       connection.query(queryString, jsonData, function(err, result) {
         if (err) {
           logWrapper.log().error('db insert error', err);
+          connection.end();
           callback(err);
           return;
         }
@@ -72,6 +74,7 @@ module.exports = {
       connection.query(queryString, [values], function(err, result) {
         if (err) {
           logWrapper.log().error('db bulk insert error', err);
+          connection.end();
           callback(err);
           return;
         }
@@ -91,6 +94,7 @@ module.exports = {
       connection.query(queryString, jsonData, function(err, result) {
         if (err) {
           logWrapper.log().error('db delete error', err);
+          connection.end();
           callback(err);
           return;
         }
