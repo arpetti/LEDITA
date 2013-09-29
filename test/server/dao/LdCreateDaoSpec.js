@@ -124,6 +124,39 @@ describe('LD Create DAO', function() {
 
 	});
 
+	describe('Scope', function() {
+		
+		var newScope = 'New Scope Inserted By Dao Test';
+		var cleanupSubjects = [newScope];
+
+		afterEach(function(done) {
+			Dao.deleteRecord('DELETE FROM scope where name in (?)', cleanupSubjects, function(err, result) {
+				done();
+			});
+		});
+
+		it('Inserts a single scope', function(done) {
+			var scopeData = {"name": newScope};
+			LdCreateDao.insertScope(scopeData, function(err, scopeId) {
+				expect(err).to.be.null;
+				expect(scopeId).to.be.above(0);
+				done();
+			});
+		});
+
+		it('Multiple scopes with same name are not allowed', function(done) {
+			var existingScope = 'Module'; // known from demo data
+			var scopeData = {"name": existingScope};
+			LdCreateDao.insertScope(scopeData, function(err, scopeId) {
+				expect(err).not.to.be.null;
+				expect(err.message).to.contain('UNIQ_SCOPE');
+				expect(scopeId).to.be.undefined;
+				done();
+			});
+		});
+
+	});
+
 	describe('Subjects', function() {
 		
 		var subject3 = 'single insert subject test 3';

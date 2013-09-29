@@ -9,6 +9,7 @@ var BULK_INSERT_CONCERNS = "INSERT INTO concerns (subject_id, ld_id) VALUES ?";
 var BULK_INSERT_AIMS = "INSERT INTO aims (objective_id, ld_id) VALUES ?";
 var BULK_INSERT_NEEDS = "INSERT INTO needs (objective_id, ld_id) VALUES ?";
 
+var INSERT_SCOPE = "INSERT INTO scope SET ?";
 var INSERT_SUBJECT = "INSERT INTO subject SET ?";
 var INSERT_CONCERN = "INSERT INTO concerns SET ?";
 
@@ -75,6 +76,16 @@ module.exports = {
 	      	} else {
 		    	callback(null, result);
 	      	}
+		});
+	},
+
+	insertScope: function(scopeData, callback) {
+		dao.insertRecord(INSERT_SCOPE, scopeData, function(err, subjectId) {
+			if(err) {
+				callback(err);
+			} else {
+				callback(null, subjectId);
+			}
 		});
 	},
 
