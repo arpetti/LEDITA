@@ -22,14 +22,19 @@ module.exports = {
 		async.waterfall([
 			// Step 1: Find objectives that already exist in the system
 		    function(callback){
-		    	RefDao.findObjectivesByName(objectiveNames, function(err, existingObjectives) {
-		    		if (err) {
-		    			callback(err); // If existing cannot be determined, halt entire flow
-		    		} else {
-		    			var needs = generateNeeds(existingObjectives, ldid);
-		    			callback(null, needs, existingObjectives);
-		    		}
-		    	});
+		    	if (objectiveNames.length > 0) {
+			    	RefDao.findObjectivesByName(objectiveNames, function(err, existingObjectives) {
+			    		if (err) {
+			    			callback(err); // If existing cannot be determined, halt entire flow
+			    		} else {
+			    			var needs = generateNeeds(existingObjectives, ldid);
+			    			callback(null, needs, existingObjectives);
+			    		}
+			    	});
+		    	} else {
+		    		// Jump out of the flow because we have nothing to do
+		    		callback(new Error('No prerequisites provided')); 
+		    	};
 		    },
 		    // Step 2: Bulk insert needs for those objectives that already exist
 		    function(needs, existingObjectives, callback) {

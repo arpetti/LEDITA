@@ -136,7 +136,7 @@ angular.module('ledita-app')
     		scope: $scope.ldScope,
     		topics: $scope.selectedTopics,
     		objectives: $scope.selectedObjectives,
-    		requisites: $scope.selectedRequisites,
+    		requisites: $scope.selectedPrerequisites,
     		studentsDescription: $scope.ldStudentsDescr
     	},
         function(res) {

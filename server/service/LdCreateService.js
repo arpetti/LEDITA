@@ -1,6 +1,7 @@
 var LdCreateDao = require('../dao/LdCreateDao');
 var TopicService = require('./TopicService');
 var ObjectiveService = require('./ObjectiveService');
+var PrerequisiteService = require('./PrerequisiteService');
 var async = require('async');
 var messages = require('./ValidationMessages');
 var _ = require('underscore');
@@ -77,9 +78,11 @@ module.exports = {
             		callback(null, ldid); 
             	});
             },
+            // Step 5: Associate Prerequisites (i.e. Objectives) to the LD (creating if necessary)
             function(ldid, callback)  {
-            	console.log('Future task to insert or attach requisites for ldid: ' + ldid);
-            	callback(null, ldid); 
+            	PrerequisiteService.insertPrerequisites(ldid, ldData.requisites, function() {
+            		callback(null, ldid); 
+            	});
             }
         ], function (err, ldid) {
            if (err) {
