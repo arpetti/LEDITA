@@ -1,79 +1,46 @@
-var check = require('validator').check
-	, messages = require('./ValidationMessages')
-	, UserDao = require('../dao/UserDao')
-	, _ = require('underscore');
-
-var validateNullEmpty = function(field, message) {
-	check(field, message).notNull();
-	check(field, message).notEmpty();
-}
-
-var validateAlpha = function(field, message) {
-	check(field, message).isAlpha();
-}
-
-var validateLength = function(field, message, min, max) {
-	check(field, message).len(min, max);
-}
-
-var validateEmail = function(field, message) {
-	check(field, message).isEmail();
-}
-
-var validateTrue = function(field, message) {
-	if (!field) {
-		return message;
-	}
-	return null;
-}
-
-var validateAny = function(validateFunction, validateArgs) {
-	try {
-		validateFunction.apply(null, validateArgs);
-	} catch(err) {
-		return err.message;
-	}
-	return null;
-}
+var validationHelper = require('../util/ValidationHelper');
+var messages = require('./ValidationMessages');
+var UserDao = require('../dao/UserDao')
+var _ = require('underscore');
 
 module.exports = {
 
 	validate: function(user) {
 
-		var errorMessages=[];
+		var errorMessages = [];
 
 		// First name
 		errorMessages.push(
-			validateAny(validateNullEmpty, [user.firstname, messages.FIRST_NAME_REQUIRED]));
+			validationHelper.validateAny(validationHelper.validateNullEmpty, [user.firstname, messages.FIRST_NAME_REQUIRED]));
 		errorMessages.push(
-			validateAny(validateLength, [user.firstname, messages.FIRST_NAME_LENGTH, 2, 20]));
+			validationHelper.validateAny(validationHelper.validateLength, [user.firstname, messages.FIRST_NAME_LENGTH, 2, 20]));
 		errorMessages.push(
-			validateAny(validateAlpha, [user.firstname, messages.FIRST_NAME_ALLOWED_CHARS]));
+			validationHelper.validateAny(validationHelper.validateAlpha, [user.firstname, messages.FIRST_NAME_ALLOWED_CHARS]));
 		
 		// Surname
 		errorMessages.push(
-			validateAny(validateNullEmpty, [user.surname, messages.SURNAME_REQUIRED]));
+			validationHelper.validateAny(validationHelper.validateNullEmpty, [user.surname, messages.SURNAME_REQUIRED]));
 		errorMessages.push(
-			validateAny(validateLength, [user.surname, messages.SURNAME_LENGTH, 2, 20]));
+			validationHelper.validateAny(validationHelper.validateLength, [user.surname, messages.SURNAME_LENGTH, 2, 20]));
 		errorMessages.push(
-			validateAny(validateAlpha, [user.surname, messages.SURNAME_ALLOWED_CHARS]));
+			validationHelper.validateAny(validationHelper.validateAlpha, [user.surname, messages.SURNAME_ALLOWED_CHARS]));
 
 		// Email (a.k.a. Username)
 		errorMessages.push(
-			validateAny(validateNullEmpty, [user.username, messages.EMAIL_REQUIRED]));
+			validationHelper.validateAny(validationHelper.validateNullEmpty, [user.username, messages.EMAIL_REQUIRED]));
 		errorMessages.push(
-			validateAny(validateLength, [user.username, messages.EMAIL_LENGTH, 5, 255]));
+			validationHelper.validateAny(validationHelper.validateLength, [user.username, messages.EMAIL_LENGTH, 5, 255]));
 		errorMessages.push(
-			validateAny(validateEmail, [user.username, messages.EMAIL_FORMAT]));
+			validationHelper.validateAny(validationHelper.validateEmail, [user.username, messages.EMAIL_FORMAT]));
 
 		// Password
 		errorMessages.push(
-			validateAny(validateNullEmpty, [user.password, messages.PASSWORD_REQUIRED]));
+			validationHelper.validateAny(validationHelper.validateNullEmpty, [user.password, messages.PASSWORD_REQUIRED]));
 		errorMessages.push(
-			validateAny(validateLength, [user.password, messages.PASSWORD_LENGTH, 8, 40]));
+			validationHelper.validateAny(validationHelper.validateLength, [user.password, messages.PASSWORD_LENGTH, 8, 40]));
 
 		// Terms
-		errorMessages.push(validateTrue(user.terms, messages.TERMS));
+		errorMessages.push(validationHelper.validateTrue(user.terms, messages.TERMS));
 		
         return _.filter(errorMessages, function(message){ return message !== null; });
 	},
