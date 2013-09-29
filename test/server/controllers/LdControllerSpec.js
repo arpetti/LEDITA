@@ -5,6 +5,7 @@ var expect = require('chai').expect
     , LdController = require('../../../server/controllers/LdController')
     , LearningDesignDao = require('../../../server/dao/LdDao')
     , LdGetService = require('../../../server/service/LdGetService')
+    , LdCreateService = require('../../../server/service/LdCreateService')
     , messages = require('../../../server/service/ValidationMessages');
 
 describe('Learning Design Controller', function() {
@@ -165,5 +166,78 @@ describe('Learning Design Controller', function() {
             LdController.index(req, res);
     	});
     });
+
+	describe.only('Create Learning Design', function() {
+
+		var req = {}
+	        , res = {}
+	        , sandbox = sinon.sandbox.create();
+
+	    beforeEach(function() {
+
+	    });
+
+	    afterEach(function() {
+	        sandbox.restore();
+	    });
+
+		it('Returns a 500 when Create LD Service returns error', function(done) {
+			var user = {id: 12};
+			var ldData = {
+				name: "Test LD Create",
+	    		qcers: {"3": true, "6": true},
+	    		scope: "Test LD Scope",
+	    		topics: ["Topic 1","New Topic 23"],
+	    		objectives: ["Objective 1", "New Objective 98"],
+	    		requisites: ["Objective 3", "New Objective 216"],
+	    		studentsDescription: "Test Students Description"
+			};	
+			req.user = user;
+			req.body = ldData;
+
+			var serviceError = new Error("something went wrong");
+            var serviceMessage = "Unable to create LD";
+    		var serviceStub = sandbox.stub(LdCreateService, "createLd", function(userId, ldData, callback) {
+                callback(serviceError, null, serviceMessage);
+            });
+
+			res.send = function(httpStatus, errMessage) {
+                expect(httpStatus).to.equal(500);
+                expect(errMessage).to.equal(serviceMessage);
+                assert.isTrue(serviceStub.withArgs(user.id, req.body).calledOnce);
+                done();
+            };
+            LdController.createLd(req, res);
+		});
+
+		it('Returns a 200 with newly created LD ID when successful', function(done) {
+			var user = {id: 12};
+			var ldData = {
+				name: "Test LD Create",
+	    		qcers: {"3": true, "6": true},
+	    		scope: "Test LD Scope",
+	    		topics: ["Topic 1","New Topic 23"],
+	    		objectives: ["Objective 1", "New Objective 98"],
+	    		requisites: ["Objective 3", "New Objective 216"],
+	    		studentsDescription: "Test Students Description"
+			};	
+			req.user = user;
+			req.body = ldData;
+
+			var ldId = 201;
+    		var serviceStub = sandbox.stub(LdCreateService, "createLd", function(userId, ldData, callback) {
+                callback(null, ldId, null);
+            });
+
+			res.json = function(httpStatus, result) {
+                expect(httpStatus).to.equal(200);
+                expect(result.ldid).to.equal(ldId);
+                assert.isTrue(serviceStub.withArgs(user.id, req.body).calledOnce);
+                done();
+            };
+            LdController.createLd(req, res);
+		});
+
+	});
 
 });    
