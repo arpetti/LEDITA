@@ -1,4 +1,5 @@
 var LdCreateDao = require('../dao/LdCreateDao');
+var ScopeService = require('./ScopeService');
 var TopicService = require('./TopicService');
 var ObjectiveService = require('./ObjectiveService');
 var PrerequisiteService = require('./PrerequisiteService');
@@ -42,8 +43,13 @@ module.exports = {
 		async.waterfall([
 			// Step 1: Determine Scope Id
 			function(callback) {
-				var scopeId = 1; // TODO: Call ScopeService to insert or find scopeId based on ldData.scope
-				callback(null, scopeId);
+				ScopeService.getScopeId(ldData.scope, function(err, scopeId) {
+					if (err) {
+						callback(err);
+					} else {
+						callback(null, scopeId);
+					}
+				});
 			},
 			// Step 2: Create LD
             function(scopeId, callback) {

@@ -2,6 +2,7 @@ var expect = require('chai').expect;
 var assert = require('chai').assert;
 var sinon = require('sinon');
 var LdCreateService = require('../../../server/service/LdCreateService');
+var ScopeService = require('../../../server/service/ScopeService');
 var TopicService = require('../../../server/service/TopicService');
 var ObjectiveService = require('../../../server/service/ObjectiveService');
 var PrerequisiteService = require('../../../server/service/PrerequisiteService');
@@ -33,7 +34,9 @@ describe('LD Create Service', function() {
     	};
 
     	var scopeId = 1;
-    	//TODO service stub that returns scopeId
+    	var scopeServiceStub = sandbox.stub(ScopeService, "getScopeId", function(scope, callback) {
+    		callback(null, scopeId);
+    	});
 
     	var addedLdId = 65;
         var ldCreateDaoStub = sandbox.stub(LdCreateDao, "createLd", function(ldObj, callback) {
@@ -77,6 +80,7 @@ describe('LD Create Service', function() {
         	expect(message).to.be.null;
         	expect(ldid).to.equal(addedLdId);
 
+        	assert.isTrue(scopeServiceStub.withArgs(ldData.scope).calledOnce);
         	assert.isTrue(ldCreateDaoStub.withArgs(ldMatcher).calledOnce);
         	assert.isTrue(ldCreateDaoClassificatesStub.withArgs(classificatesMatcher).calledOnce);
         	assert.isTrue(topicServiceStub.withArgs(addedLdId, ldData.topics).calledOnce);
@@ -101,7 +105,9 @@ describe('LD Create Service', function() {
     	};
 
     	var scopeId = 1;
-    	//TODO service stub that returns scopeId
+    	var scopeServiceStub = sandbox.stub(ScopeService, "getScopeId", function(scope, callback) {
+    		callback(null, scopeId);
+    	});
 
     	var addedLdId = 65;
         var ldCreateDaoStub = sandbox.stub(LdCreateDao, "createLd", function(ldObj, callback) {
@@ -134,6 +140,7 @@ describe('LD Create Service', function() {
         	expect(message).to.be.null;
         	expect(ldid).to.equal(addedLdId);
 
+			assert.isTrue(scopeServiceStub.withArgs(ldData.scope).calledOnce);
         	assert.isTrue(ldCreateDaoStub.withArgs(ldMatcher).calledOnce);
         	assert.equal(ldCreateDaoClassificatesStub.callCount, 0, "does not insert classificates when empty");
         	assert.isTrue(topicServiceStub.withArgs(addedLdId, ldData.topics).calledOnce);
@@ -158,7 +165,9 @@ describe('LD Create Service', function() {
     	};
 
     	var scopeId = 1;
-    	//TODO service stub that returns scopeId
+    	var scopeServiceStub = sandbox.stub(ScopeService, "getScopeId", function(scope, callback) {
+    		callback(null, scopeId);
+    	});
 
     	var daoError = new Error('something went wrong');
         var ldCreateDaoStub = sandbox.stub(LdCreateDao, "createLd", function(ldObj, callback) {
@@ -182,7 +191,52 @@ describe('LD Create Service', function() {
         	expect(ldid).to.be.null
         	expect(message).to.equal(messages.UNABLE_TO_CREATE_LD);
 
+			assert.isTrue(scopeServiceStub.withArgs(ldData.scope).calledOnce);
         	assert.isTrue(ldCreateDaoStub.withArgs(ldMatcher).calledOnce);
+        	assert.equal(ldCreateDaoClassificatesStub.callCount, 0, "does not insert classificates when error occurs inserting LD");
+        	assert.equal(topicServiceStub.callCount, 0);
+        	assert.equal(objectiveServiceStub.callCount, 0);
+        	assert.equal(prerequisiteServiceStub.callCount, 0);
+        	done();
+        };
+
+        LdCreateService.createLd(userId, ldData, ldCreateCallback);
+	});
+
+	it('Halts all inserts if Scope Service returns an error', function(done) {
+		var userId = 29;
+		var ldData = {
+    		name: "Test LD Create",
+    		qcers: {"3": true, "6": true},
+    		scope: "Test LD Scope",
+    		topics: ["Topic 1","New Topic 23"],
+    		objectives: ["Objective 1", "New Objective 98"],
+    		requisites: [],
+    		studentsDescription: "Test Students Description"
+    	};
+
+    	var scopeServiceError = new Error("something went wrong");
+    	var scopeServiceStub = sandbox.stub(ScopeService, "getScopeId", function(scope, callback) {
+    		callback(scopeServiceError);
+    	});
+
+    	var addedLdId = 65;
+        var ldCreateDaoStub = sandbox.stub(LdCreateDao, "createLd", function(ldObj, callback) {
+            callback(null, addedLdId);
+        });
+
+        var ldCreateDaoClassificatesStub = sandbox.stub(LdCreateDao, "insertClassificates");
+        var topicServiceStub = sandbox.stub(TopicService, "insertTopics");
+        var objectiveServiceStub = sandbox.stub(ObjectiveService, "insertObjectives");
+        var prerequisiteServiceStub = sandbox.stub(PrerequisiteService, "insertPrerequisites");
+
+        var ldCreateCallback = function(err, ldid, message) {
+        	expect(err).to.equal(scopeServiceError);
+        	expect(ldid).to.be.null
+        	expect(message).to.equal(messages.UNABLE_TO_CREATE_LD);
+
+			assert.isTrue(scopeServiceStub.withArgs(ldData.scope).calledOnce);
+        	assert.equal(ldCreateDaoStub.callCount, 0);
         	assert.equal(ldCreateDaoClassificatesStub.callCount, 0, "does not insert classificates when error occurs inserting LD");
         	assert.equal(topicServiceStub.callCount, 0);
         	assert.equal(objectiveServiceStub.callCount, 0);
