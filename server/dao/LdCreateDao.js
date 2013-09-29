@@ -80,11 +80,11 @@ module.exports = {
 	},
 
 	insertScope: function(scopeData, callback) {
-		dao.insertRecord(INSERT_SCOPE, scopeData, function(err, subjectId) {
+		dao.insertRecord(INSERT_SCOPE, scopeData, function(err, scopeId) {
 			if(err) {
 				callback(err);
 			} else {
-				callback(null, subjectId);
+				callback(null, scopeId);
 			}
 		});
 	},
