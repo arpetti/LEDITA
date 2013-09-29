@@ -106,6 +106,8 @@
                     <div ng-controller="LdCreateCtrl" >
                     	<form novalidate class="createLdForm" name="LdCreateForm" ng-submit="submitLD()">
                          <div class="modal-body">
+
+                         	<!-- Name -->
                             <div class="formLevel">
                                 <div class="errorBox">
                                     <span class="errorTipModal"
@@ -119,6 +121,7 @@
                                 <span class="clearfix"></span>
                             </div>
 
+                            <!-- Qcers -->
                             <div class="formLevel">
                                 <div class="errorBox">
                                         <span class="errorTipModal"
@@ -137,6 +140,7 @@
                                 <span class="clearfix"></span>
                             </div>
 
+                            <!-- Scope -->
                             <div class="formLevel">
                                 <div class="errorBox">
                                     <span class="errorTipModal"
@@ -161,6 +165,7 @@
                                 </div>
                             </div>
 
+                            <!-- Topics -->
                             <div class="formLevel">
                                 <div class="errorBox">
                                     <span class="errorTipModal"
@@ -188,6 +193,7 @@
                                 </div>
                             </div>
 
+                            <!-- Objectives -->
                             <div class="formLevel">
                                 <div class="errorBox">
                                     <span class="errorTipModal"
@@ -214,6 +220,7 @@
                             </div>
                     		</div>
 
+                    		<!-- Pre-requisites -->
 		                    <div class="formLevel">
 		                        <div class="errorBox">
 		                            <span class="errorTipModal" ng-show="LdCreateForm.ldRequisite.$error.pattern">A pre-requisite cannot contain this symbol.</span>
@@ -239,6 +246,7 @@
 		                        </div>
 		                    </div>
 
+		                    <!-- Students Description -->
 		                    <div class="formLevel">
 		                        <div class="errorBox">
 		                               <span class="errorTipModal"
