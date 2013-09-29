@@ -19,7 +19,7 @@ describe('Prerequisite Service', function() {
     });
 
     it('Inserts needs for existing Objectives', function(done) {
-    	var ldid = 67;
+    	var ldId = 67;
     	var objectiveName1 = 'Objective 1';
     	var objectiveId1 = 1;
     	var objectiveName2 = 'Objective 2';
@@ -39,9 +39,9 @@ describe('Prerequisite Service', function() {
         var needsMatcher = sinon.match(function (value) {
     		return value.length === 2 && 
     			value[0][0] === objectiveId1 &&
-    			value[0][1] === ldid &&
+    			value[0][1] === ldId &&
     			value[1][0] === objectiveId2 &&
-    			value[1][1] === ldid;
+    			value[1][1] === ldId;
 		});
 
         var serviceCallback = function() {
@@ -50,11 +50,11 @@ describe('Prerequisite Service', function() {
         	done();
         };
 
-        PrerequisiteService.insertPrerequisites(ldid, prerequisiteNames, serviceCallback);
+        PrerequisiteService.insertPrerequisites(ldId, prerequisiteNames, serviceCallback);
     });
 
 	it('Inserts new Objectives and needs for non existing Objectives', function(done) {
-		var ldid = 679;
+		var ldId = 679;
 		var objectiveName1 = 'new Objective 1';
 		var objectiveName2 = 'new Objective 2';
 		var prerequisiteNames = [objectiveName1, objectiveName2];
@@ -84,17 +84,17 @@ describe('Prerequisite Service', function() {
         	assert.isTrue(insertObjectiveStub.withArgs(sinon.match({ descr: objectiveName1 })).calledOnce);
         	assert.isTrue(insertObjectiveStub.withArgs(sinon.match({ descr: objectiveName2 })).calledOnce);
         	assert.isTrue(singleInsertNeedsStub.withArgs(
-        		sinon.match({ objective_id: newObjectiveId1, ld_id: ldid})).calledOnce);
+        		sinon.match({ objective_id: newObjectiveId1, ld_id: ldId})).calledOnce);
         	assert.isTrue(singleInsertNeedsStub.withArgs(
-        		sinon.match({ objective_id: newObjectiveId2, ld_id: ldid})).calledOnce);
+        		sinon.match({ objective_id: newObjectiveId2, ld_id: ldId})).calledOnce);
         	done();
         };
 
-        PrerequisiteService.insertPrerequisites(ldid, prerequisiteNames, serviceCallback);
+        PrerequisiteService.insertPrerequisites(ldId, prerequisiteNames, serviceCallback);
 	});
 
 	it('Handles mix of existing and new Objectives', function(done) {
-		var ldid = 754;
+		var ldId = 754;
 		var existingObjective1 = 'Objective 1';
 		var newObjective2 = 'New Objective 2';
 		var existingObjective3 = 'Objective 3';
@@ -125,9 +125,9 @@ describe('Prerequisite Service', function() {
         var needsMatcher = sinon.match(function (value) {
     		return value.length === 2 && 
     			value[0][0] === existingObjective1Id &&
-    			value[0][1] === ldid &&
+    			value[0][1] === ldId &&
     			value[1][0] === existingObjective3Id &&
-    			value[1][1] === ldid;
+    			value[1][1] === ldId;
 		});
 
         var serviceCallback = function() {
@@ -135,15 +135,15 @@ describe('Prerequisite Service', function() {
         	assert.isTrue(bulkInsertNeedsStub.withArgs(needsMatcher).calledOnce);
         	assert.isTrue(insertObjectiveStub.withArgs(sinon.match({ descr: newObjective2 })).calledOnce);
         	assert.isTrue(singleinsertNeedsStub.withArgs(
-        		sinon.match({ objective_id: newObjective2Id, ld_id: ldid})).calledOnce);
+        		sinon.match({ objective_id: newObjective2Id, ld_id: ldId})).calledOnce);
         	done();
         };
 
-        PrerequisiteService.insertPrerequisites(ldid, prerequisiteNames, serviceCallback);
+        PrerequisiteService.insertPrerequisites(ldId, prerequisiteNames, serviceCallback);
 	});
 
 	it('If error occurs inserting objective, corresponding need is not inserted', function(done) {
-		var ldid = 84;
+		var ldId = 84;
 		var objectiveName1 = 'new Objective 1';
 		var objectiveName2 = 'new Objective 2';
 		var objectiveName3 = 'new Objective 3';
@@ -185,20 +185,20 @@ describe('Prerequisite Service', function() {
         	assert.isTrue(insertObjectiveStub.withArgs(sinon.match({ descr: objectiveName3 })).calledOnce);
         	
         	assert.isTrue(singleinsertNeedsStub.withArgs(
-        		sinon.match({ objective_id: newObjectiveId1, ld_id: ldid})).calledOnce);
+        		sinon.match({ objective_id: newObjectiveId1, ld_id: ldId})).calledOnce);
         	assert.equal(singleinsertNeedsStub.withArgs(
-        		sinon.match({ objective_id: newObjectiveId2, ld_id: ldid })).callCount, 0);
+        		sinon.match({ objective_id: newObjectiveId2, ld_id: ldId })).callCount, 0);
         	assert.isTrue(singleinsertNeedsStub.withArgs(
-        		sinon.match({ objective_id: newObjectiveId3, ld_id: ldid})).calledOnce);
+        		sinon.match({ objective_id: newObjectiveId3, ld_id: ldId})).calledOnce);
         	
         	done();
         };
 
-        PrerequisiteService.insertPrerequisites(ldid, prerequisiteNames, serviceCallback);
+        PrerequisiteService.insertPrerequisites(ldId, prerequisiteNames, serviceCallback);
 	});
 
 	it('If error occurs finding existing objectives, entire flow is halted', function(done) {
-		var ldid = 99;
+		var ldId = 99;
 		var existObjective = 'Objective 1';
 		var newObjective = 'Objective 75';
 		var prerequisiteNames = [existObjective, newObjective];
@@ -218,11 +218,11 @@ describe('Prerequisite Service', function() {
         	done();
         };
 
-        PrerequisiteService.insertPrerequisites(ldid, prerequisiteNames, serviceCallback);
+        PrerequisiteService.insertPrerequisites(ldId, prerequisiteNames, serviceCallback);
 	});
 
 	it('Does nothing if no prerequisites provided', function(done) {
-		var ldid = 98;
+		var ldId = 98;
 		var prerequisiteNames = [];
 
 		var refDaoStub = sandbox.stub(RefDao, "findObjectivesByName");
@@ -238,8 +238,27 @@ describe('Prerequisite Service', function() {
         	done();
         };
 
-        PrerequisiteService.insertPrerequisites(ldid, prerequisiteNames, serviceCallback);
+        PrerequisiteService.insertPrerequisites(ldId, prerequisiteNames, serviceCallback);
+	});
 
+	it('Does nothing if prerequisites are undefined', function(done) {
+		var ldId = 98;
+		var prerequisiteNames = undefined;
+
+		var refDaoStub = sandbox.stub(RefDao, "findObjectivesByName");
+		var bulkInsertNeedsStub = sandbox.stub(LdCreateDao, "bulkInsertNeeds");
+        var insertObjectiveStub = sandbox.stub(LdCreateDao, "insertObjective");
+        var singleinsertNeedsStub = sandbox.stub(LdCreateDao, "insertNeed");
+
+        var serviceCallback = function() {
+        	assert.equal(refDaoStub.callCount, 0);
+        	assert.equal(bulkInsertNeedsStub.callCount, 0);
+        	assert.equal(insertObjectiveStub.callCount, 0);
+        	assert.equal(singleinsertNeedsStub.callCount, 0);
+        	done();
+        };
+
+        PrerequisiteService.insertPrerequisites(ldId, prerequisiteNames, serviceCallback);
 	});
 
 });

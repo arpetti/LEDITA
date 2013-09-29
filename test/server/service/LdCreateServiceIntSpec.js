@@ -16,6 +16,8 @@ describe('LD Create Service Integration', function() {
 	var newTopicName = "New Topic From Integration Test";
 	var existingObjective = "Objective 1";
 	var newObjective = "New Objective from Integration Test";
+	var existingRequisite = "Objective 2";
+	var newRequisite = "New Requisite from Integration Test";
 	
 	var cleanupData = {name: ldName};
 	
@@ -24,17 +26,25 @@ describe('LD Create Service Integration', function() {
 	var cleanupConcerns = 'DELETE FROM concerns WHERE ld_id = (select id from ld where ?)';
 	var cleanupSubjects = 'DELETE FROM subject where name = ?';
 	var cleanupAims = 'DELETE FROM aims where ld_id = (select id from ld where ?)';
+	var cleanupNeeds = 'DELETE FROM needs where ld_id = (select id from ld where ?)';
 	var cleanupObjectives = 'DELETE FROM objective where descr = ?';
+	var cleanupPrerequisites = 'DELETE FROM objective where descr = ?';
 
 	var verifyLdQuery = 'select id, user_id, ld_model_id, name, scope, publication, students_profile, creation_date, last_edit_date from ld where id = ?';
 	var verifyLdQcerQuery = 'select ld_id, qcer_name from vw_ld_qcer where ld_id = ? order by qcer_name';
 	var verifyLdTopicQuery = 'select ld_name, subject_name from vw_ld_subject where ld_id = ? order by subject_name';
 	var verifySubjectQuery = 'select id, name from subject where name = ?';
 	var verifyLdObjectiveQuery = 'select ld_name, objective_descr from vw_ld_objective where ld_id = ?';
+	var verifyLdPrerequisiteQuery = 'select ld_name, prereq_name, prereq_type from vw_ld_prerequisite where ld_id = ?';
 	var verifyObjectiveQuery = 'select id, descr from objective where descr = ?';
 
 	afterEach(function(done) {
 		async.series([
+			function(callback){
+		        Dao.deleteRecord(cleanupNeeds, cleanupData, function(err, results) {
+			        callback(null, null);
+		        })
+		    },
 			function(callback){
 		        Dao.deleteRecord(cleanupAims, cleanupData, function(err, results) {
 			        callback(null, null);
@@ -42,6 +52,11 @@ describe('LD Create Service Integration', function() {
 		    },
 			function(callback){
 		        Dao.deleteRecord(cleanupObjectives, [newObjective], function(err, results) {
+			        callback(null, null);
+		        })
+		    },
+		    function(callback){
+		        Dao.deleteRecord(cleanupPrerequisites, [newRequisite], function(err, results) {
 			        callback(null, null);
 		        })
 		    },
@@ -82,7 +97,7 @@ describe('LD Create Service Integration', function() {
     		scope: "Scope From Integration Test",
     		topics: [existingTopicName, newTopicName],
     		objectives: [existingObjective, newObjective],
-    		requisites: [],
+    		requisites: [existingRequisite, newRequisite],
     		studentsDescription: "Students Description From Integration Test"
     	};
     	var today = new Date();
@@ -139,7 +154,14 @@ describe('LD Create Service Integration', function() {
 									expect(results).to.have.length(1);
 									expect(results[0].id).not.to.be.null;
 									expect(results[0].descr).to.equal(newObjective);
-	    							done();
+
+									// Verify prerequisites
+									Dao.findAll(verifyLdPrerequisiteQuery, [ldid], function(err, results) {
+										expect(results).to.to.have.length(2);
+										expect(_.contains(_.pluck(results, "prereq_name"), existingRequisite)).to.be.true;
+										expect(_.contains(_.pluck(results, "prereq_name"), newRequisite)).to.be.true;
+	    								done();
+									});
 								});
 							})
 						})

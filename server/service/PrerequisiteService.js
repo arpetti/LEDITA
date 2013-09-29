@@ -4,9 +4,9 @@ var async = require('async');
 var _ = require('underscore');
 
 // TODO: These two methods duplicated in ObjectiveService - extract common util/ObjectiveHelper
-var generateNeeds = function(existingObjectives, ldid) {
+var generateNeeds = function(existingObjectives, ldId) {
 	var objectiveIds = _.pluck(existingObjectives, 'id');	
-	return _.map(objectiveIds, function(objectiveId){ return [objectiveId, ldid]; });
+	return _.map(objectiveIds, function(objectiveId){ return [objectiveId, ldId]; });
 };
 
 var extractNewObjectives = function(objectiveNames, existingObjectives) {
@@ -18,16 +18,16 @@ module.exports = {
 
 	// Prerequisites ARE Objectives
 	// callback()
-	insertPrerequisites: function(ldid, objectiveNames, callback) {
+	insertPrerequisites: function(ldId, objectiveNames, callback) {
 		async.waterfall([
 			// Step 1: Find objectives that already exist in the system
 		    function(callback){
-		    	if (objectiveNames.length > 0) {
+		    	if (objectiveNames && objectiveNames.length > 0) {
 			    	RefDao.findObjectivesByName(objectiveNames, function(err, existingObjectives) {
 			    		if (err) {
 			    			callback(err); // If existing cannot be determined, halt entire flow
 			    		} else {
-			    			var needs = generateNeeds(existingObjectives, ldid);
+			    			var needs = generateNeeds(existingObjectives, ldId);
 			    			callback(null, needs, existingObjectives);
 			    		}
 			    	});
@@ -53,7 +53,7 @@ module.exports = {
 			    	async.each(newObjectivesToInsert, function(objectiveName, callback) {
 			    		LdCreateDao.insertObjective({descr: objectiveName}, function(err, objectiveId) {
 							if (!err) {
-								LdCreateDao.insertNeed({objective_id: objectiveId, ld_id: ldid}, function(err, result) {
+								LdCreateDao.insertNeed({objective_id: objectiveId, ld_id: ldId}, function(err, result) {
 									callback();
 								});
 							}

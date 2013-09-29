@@ -19,7 +19,7 @@ describe('Topic Service', function() {
     });
 
     it('Inserts concerns for existing topics', function(done) {
-    	var ldid = 67;
+    	var ldId = 67;
     	var topicName1 = 'Topic 1';
     	var topicId1 = 1;
     	var topicName2 = 'Topic 2';
@@ -39,9 +39,9 @@ describe('Topic Service', function() {
         var concernsMatcher = sinon.match(function (value) {
     		return value.length === 2 && 
     			value[0][0] === topicId1 &&
-    			value[0][1] === ldid &&
+    			value[0][1] === ldId &&
     			value[1][0] === topicId2 &&
-    			value[1][1] === ldid;
+    			value[1][1] === ldId;
 		});
 
         var serviceCallback = function() {
@@ -50,11 +50,11 @@ describe('Topic Service', function() {
         	done();
         };
 
-        TopicService.insertTopics(ldid, topicNames, serviceCallback);
+        TopicService.insertTopics(ldId, topicNames, serviceCallback);
     });
 
 	it('Inserts new topics and concerns for non existing topics', function(done) {
-		var ldid = 679;
+		var ldId = 679;
 		var topicName1 = 'new topic 1';
 		var topicName2 = 'new topic 2';
 		var topicNames = [topicName1, topicName2];
@@ -84,17 +84,17 @@ describe('Topic Service', function() {
         	assert.isTrue(insertSubjectStub.withArgs(sinon.match({ name: topicName1 })).calledOnce);
         	assert.isTrue(insertSubjectStub.withArgs(sinon.match({ name: topicName2 })).calledOnce);
         	assert.isTrue(singleInsertConcernStub.withArgs(
-        		sinon.match({ subject_id: newTopicId1, ld_id: ldid})).calledOnce);
+        		sinon.match({ subject_id: newTopicId1, ld_id: ldId})).calledOnce);
         	assert.isTrue(singleInsertConcernStub.withArgs(
-        		sinon.match({ subject_id: newTopicId2, ld_id: ldid})).calledOnce);
+        		sinon.match({ subject_id: newTopicId2, ld_id: ldId})).calledOnce);
         	done();
         };
 
-        TopicService.insertTopics(ldid, topicNames, serviceCallback);
+        TopicService.insertTopics(ldId, topicNames, serviceCallback);
 	});
 
 	it('Handles mix of existing and new topics', function(done) {
-		var ldid = 754;
+		var ldId = 754;
 		var existingTopic1 = 'Topic 1';
 		var newTopic2 = 'New Topic 2';
 		var existingTopic3 = 'Topic 3';
@@ -125,9 +125,9 @@ describe('Topic Service', function() {
         var concernsMatcher = sinon.match(function (value) {
     		return value.length === 2 && 
     			value[0][0] === existingTopic1Id &&
-    			value[0][1] === ldid &&
+    			value[0][1] === ldId &&
     			value[1][0] === existingTopic3Id &&
-    			value[1][1] === ldid;
+    			value[1][1] === ldId;
 		});
 
         var serviceCallback = function() {
@@ -135,15 +135,15 @@ describe('Topic Service', function() {
         	assert.isTrue(bulkInsertConcernsStub.withArgs(concernsMatcher).calledOnce);
         	assert.isTrue(insertSubjectStub.withArgs(sinon.match({ name: newTopic2 })).calledOnce);
         	assert.isTrue(singleInsertConcernStub.withArgs(
-        		sinon.match({ subject_id: newTopic2Id, ld_id: ldid})).calledOnce);
+        		sinon.match({ subject_id: newTopic2Id, ld_id: ldId})).calledOnce);
         	done();
         };
 
-        TopicService.insertTopics(ldid, topicNames, serviceCallback);
+        TopicService.insertTopics(ldId, topicNames, serviceCallback);
 	});
 
 	it('If error occurs inserting subject, corresponding concern is not inserted', function(done) {
-		var ldid = 84;
+		var ldId = 84;
 		var topicName1 = 'new topic 1';
 		var topicName2 = 'new topic 2';
 		var topicName3 = 'new topic 3';
@@ -185,20 +185,20 @@ describe('Topic Service', function() {
         	assert.isTrue(insertSubjectStub.withArgs(sinon.match({ name: topicName3 })).calledOnce);
         	
         	assert.isTrue(singleInsertConcernStub.withArgs(
-        		sinon.match({ subject_id: newTopicId1, ld_id: ldid})).calledOnce);
+        		sinon.match({ subject_id: newTopicId1, ld_id: ldId})).calledOnce);
         	assert.equal(singleInsertConcernStub.withArgs(
-        		sinon.match({ subject_id: newTopicId2, ld_id: ldid })).callCount, 0);
+        		sinon.match({ subject_id: newTopicId2, ld_id: ldId })).callCount, 0);
         	assert.isTrue(singleInsertConcernStub.withArgs(
-        		sinon.match({ subject_id: newTopicId3, ld_id: ldid})).calledOnce);
+        		sinon.match({ subject_id: newTopicId3, ld_id: ldId})).calledOnce);
         	
         	done();
         };
 
-        TopicService.insertTopics(ldid, topicNames, serviceCallback);
+        TopicService.insertTopics(ldId, topicNames, serviceCallback);
 	});
 
 	it('If error occurs finding existing subjects, entire flow is halted', function(done) {
-		var ldid = 99;
+		var ldId = 99;
 		var existTopic = 'Topic 1';
 		var newTopic = 'Topic 75';
 		var topicNames = [existTopic, newTopic];
@@ -218,7 +218,47 @@ describe('Topic Service', function() {
         	done();
         };
 
-        TopicService.insertTopics(ldid, topicNames, serviceCallback);
+        TopicService.insertTopics(ldId, topicNames, serviceCallback);
+	});
+
+	it('Does nothing if no topics are provided', function(done) {
+		var ldId = 100;
+		var topicNames = [];
+
+		var refDaoStub = sandbox.stub(RefDao, "findSubjectsByName");
+		var bulkInsertConcernsStub = sandbox.stub(LdCreateDao, "insertConcerns");
+        var insertSubjectStub = sandbox.stub(LdCreateDao, "insertSubject");
+        var singleInsertConcernStub = sandbox.stub(LdCreateDao, "insertConcern");
+
+        var serviceCallback = function() {
+        	assert.equal(refDaoStub.callCount, 0);
+        	assert.equal(bulkInsertConcernsStub.callCount, 0);
+        	assert.equal(insertSubjectStub.callCount, 0);
+        	assert.equal(singleInsertConcernStub.callCount, 0);
+        	done();
+        };
+
+        TopicService.insertTopics(ldId, topicNames, serviceCallback);
+	});
+
+	it('Does nothing if topics are undefined', function(done) {
+		var ldId = 100;
+		var topicNames = undefined;
+
+		var refDaoStub = sandbox.stub(RefDao, "findSubjectsByName");
+		var bulkInsertConcernsStub = sandbox.stub(LdCreateDao, "insertConcerns");
+        var insertSubjectStub = sandbox.stub(LdCreateDao, "insertSubject");
+        var singleInsertConcernStub = sandbox.stub(LdCreateDao, "insertConcern");
+
+        var serviceCallback = function() {
+        	assert.equal(refDaoStub.callCount, 0);
+        	assert.equal(bulkInsertConcernsStub.callCount, 0);
+        	assert.equal(insertSubjectStub.callCount, 0);
+        	assert.equal(singleInsertConcernStub.callCount, 0);
+        	done();
+        };
+
+        TopicService.insertTopics(ldId, topicNames, serviceCallback);
 	});
 
 });
