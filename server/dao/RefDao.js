@@ -8,6 +8,7 @@ var GET_OBJECTIVES_MATCHING = "select descr from objective where descr like ? or
 
 var FIND_SUBJECTS_BY_NAME = "select id, name from subject where name in (?)";
 var FIND_OBJECTIVES_BY_NAME = "select id, descr from objective where descr in (?)";
+var FIND_SCOPE_BY_NAME = "select id, name from scope where ?";
 
 var addWildCard = function(partial) {
 	return '%' + partial + '%';
@@ -67,6 +68,16 @@ module.exports = {
 
   	findObjectivesByName: function(objectiveNames, callback) {
 	    dao.findAll(FIND_OBJECTIVES_BY_NAME, [objectiveNames], function(err, results) {
+	    	if (err) {
+				callback(err);
+			} else {
+				callback(null, results);
+			}
+	    });
+  	},
+
+  	findScopeByName: function(scopeName, callback) {
+  		dao.findAll(FIND_SCOPE_BY_NAME, [scopeName], function(err, results) {
 	    	if (err) {
 				callback(err);
 			} else {

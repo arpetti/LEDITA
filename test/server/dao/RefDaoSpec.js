@@ -46,6 +46,26 @@ describe('Reference Data Dao', function() {
 			});
 		});
 
+		it('Finds scope by name', function(done) {
+			var scope = {name: 'Lezione'};
+			RefDao.findScopeByName(scope, function(err, results) {
+				expect(err).to.be.null;
+				expect(results).to.have.length(1);
+				expect(results[0].id).to.equal(4);
+				expect(results[0].name).to.equal(scope.name);
+				done();
+			});
+		});
+
+		it('Finds scope by name returns empty list if not found', function(done) {
+			var scope = {name: 'Seminar'};
+			RefDao.findScopeByName(scope, function(err, results) {
+				expect(err).to.be.null;
+				expect(results).to.have.length(0);
+				done();
+			});
+		});
+
 	});
 
 	describe('SUBJECT', function() {

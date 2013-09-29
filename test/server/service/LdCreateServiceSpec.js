@@ -25,12 +25,15 @@ describe('LD Create Service', function() {
 		var ldData = {
     		name: "Test LD Create",
     		qcers: {"3": true, "6": true},
-    		scope: "Test LD Scope",
+    		scope: "Lesson",
     		topics: ["Topic 1","New Topic 23"],
     		objectives: ["Objective 1", "New Objective 98"],
     		requisites: ["Objective 3", "New Objective 216"],
     		studentsDescription: "Test Students Description"
     	};
+
+    	var scopeId = 1;
+    	//TODO service stub that returns scopeId
 
     	var addedLdId = 65;
         var ldCreateDaoStub = sandbox.stub(LdCreateDao, "createLd", function(ldObj, callback) {
@@ -57,7 +60,7 @@ describe('LD Create Service', function() {
         var ldMatcher = sinon.match({
         	user_id: userId,
             name: ldData.name,
-            scope: ldData.scope,
+            scope_id: scopeId,
             students_profile: ldData.studentsDescription
         });
 
@@ -90,12 +93,15 @@ describe('LD Create Service', function() {
 		var ldData = {
     		name: "Test LD Create",
     		qcers: {},
-    		scope: "Test LD Scope",
+    		scope: "Lesson",
     		topics: ["Topic 1","New Topic 23"],
     		objectives: ["Objective 1", "New Objective 98"],
     		requisites: ["Objective 3", "New Objective 216"],
     		studentsDescription: "Test Students Description"
     	};
+
+    	var scopeId = 1;
+    	//TODO service stub that returns scopeId
 
     	var addedLdId = 65;
         var ldCreateDaoStub = sandbox.stub(LdCreateDao, "createLd", function(ldObj, callback) {
@@ -119,7 +125,7 @@ describe('LD Create Service', function() {
         var ldMatcher = sinon.match({
         	user_id: userId,
             name: ldData.name,
-            scope: ldData.scope,
+            scope_id: scopeId,
             students_profile: ldData.studentsDescription
         });
 
@@ -151,6 +157,9 @@ describe('LD Create Service', function() {
     		studentsDescription: "Test Students Description"
     	};
 
+    	var scopeId = 1;
+    	//TODO service stub that returns scopeId
+
     	var daoError = new Error('something went wrong');
         var ldCreateDaoStub = sandbox.stub(LdCreateDao, "createLd", function(ldObj, callback) {
             callback(daoError);
@@ -164,7 +173,7 @@ describe('LD Create Service', function() {
         var ldMatcher = sinon.match({
         	user_id: userId,
             name: ldData.name,
-            scope: ldData.scope,
+            scope_id: scopeId,
             students_profile: ldData.studentsDescription
         });
 

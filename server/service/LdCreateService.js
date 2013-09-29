@@ -6,11 +6,11 @@ var async = require('async');
 var messages = require('./ValidationMessages');
 var _ = require('underscore');
 
-var createLdForInsert = function(userId, ldData) {
+var createLdForInsert = function(userId, scopeId, ldData) {
 	var ldObj = {
 		user_id: userId,
 		name: ldData.name,
-		scope: ldData.scope,
+		scope_id: scopeId,
 		students_profile: ldData.studentsDescription
 	};
 	return ldObj;
@@ -37,12 +37,17 @@ module.exports = {
 	// callback(err, ldid, message)
 	createLd: function(userId, ldData, callback) {
 
-		// TODO Input validation, make sure qcer ids are numbers, at least one topic
+		// TODO Input validation, make sure scope is provided, qcer ids are numbers, at least one topic
 
 		async.waterfall([
-			// Step 1: Create LD
-            function(callback) {
-            	var ldObj = createLdForInsert(userId, ldData);
+			// Step 1: Determine Scope Id
+			function(callback) {
+				var scopeId = 1; // TODO: Call ScopeService to insert or find scopeId based on ldData.scope
+				callback(null, scopeId);
+			},
+			// Step 2: Create LD
+            function(scopeId, callback) {
+            	var ldObj = createLdForInsert(userId, scopeId, ldData);
                 LdCreateDao.createLd(ldObj, function(err, ldid) {
                     if (err) {
                         callback(err);
@@ -51,7 +56,7 @@ module.exports = {
                     }
                 })
             },
-            // Step 2: Associate Qcer's to the LD
+            // Step 3: Associate Qcer's to the LD
             function(ldid, callback)  {
             	var qcersToAttach = buildClassificates(ldid, getSelectedQcers(ldData));
             	if (qcersToAttach.length > 0) {
@@ -66,19 +71,19 @@ module.exports = {
             		callback(null, ldid);
             	}
             },
-            // Step 3: Associate Topics to the LD (creating if necessary)
+            // Step 4: Associate Topics to the LD (creating if necessary)
             function(ldid, callback)  {
             	TopicService.insertTopics(ldid, ldData.topics, function() {
             		callback(null, ldid); 
             	});
             },
-            // Step 4: Associate Objectives to the LD (creating if necessary)
+            // Step 5: Associate Objectives to the LD (creating if necessary)
             function(ldid, callback)  {
             	ObjectiveService.insertObjectives(ldid, ldData.objectives, function() {
             		callback(null, ldid); 
             	});
             },
-            // Step 5: Associate Prerequisites (i.e. Objectives) to the LD (creating if necessary)
+            // Step 6: Associate Prerequisites (i.e. Objectives) to the LD (creating if necessary)
             function(ldid, callback)  {
             	PrerequisiteService.insertPrerequisites(ldid, ldData.requisites, function() {
             		callback(null, ldid); 

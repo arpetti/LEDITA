@@ -30,7 +30,7 @@ describe('LD Create Service Integration', function() {
 	var cleanupObjectives = 'DELETE FROM objective where descr = ?';
 	var cleanupPrerequisites = 'DELETE FROM objective where descr = ?';
 
-	var verifyLdQuery = 'select id, user_id, ld_model_id, name, scope, publication, students_profile, creation_date, last_edit_date from ld where id = ?';
+	var verifyLdQuery = 'select id, user_id, ld_model_id, name, scope_id, publication, students_profile, creation_date, last_edit_date from ld where id = ?';
 	var verifyLdQcerQuery = 'select ld_id, qcer_name from vw_ld_qcer where ld_id = ? order by qcer_name';
 	var verifyLdTopicQuery = 'select ld_name, subject_name from vw_ld_subject where ld_id = ? order by subject_name';
 	var verifySubjectQuery = 'select id, name from subject where name = ?';
@@ -86,6 +86,7 @@ describe('LD Create Service Integration', function() {
 		});
     });
 
+	// TODO: Add another integration test where new scope is created
 	it('Creates LD, child entities, and associations', function(done) {
 		var numExistingLds = 31; // known from demo data
 		var userId = 4;
@@ -94,7 +95,7 @@ describe('LD Create Service Integration', function() {
 		var ldData = {
     		name: ldName,
     		qcers: {"3": true, "6": true},
-    		scope: "Scope From Integration Test",
+    		scope: "Lesson",
     		topics: [existingTopicName, newTopicName],
     		objectives: [existingObjective, newObjective],
     		requisites: [existingRequisite, newRequisite],
@@ -115,7 +116,7 @@ describe('LD Create Service Integration', function() {
     			expect(results[0].user_id).to.equal(userId);
     			expect(results[0].ld_model_id).to.be.null;
     			expect(results[0].name).to.equal(ldData.name);
-    			expect(results[0].scope).to.equal(ldData.scope);
+    			expect(results[0].scope_id).to.equal(1);
     			expect(results[0].publication).to.equal(0);
     			expect(results[0].students_profile).to.equal(ldData.studentsDescription);
     			expect(results[0].creation_date).to.equalDate(today);

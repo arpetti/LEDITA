@@ -1,4 +1,4 @@
-    SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
@@ -174,7 +174,7 @@ CREATE  TABLE IF NOT EXISTS `ld` (
   `user_id` INT(11) NULL DEFAULT NULL ,
   `ld_model_id` INT(11) NULL DEFAULT NULL ,
   `name` VARCHAR(50) NOT NULL ,
-  `scope` VARCHAR(50) NOT NULL ,
+  `scope_id` INT(11) NULL DEFAULT NULL ,
   `publication` TINYINT(1) NOT NULL DEFAULT '0' ,
   `students_profile` VARCHAR(500) NULL DEFAULT NULL ,
   `creation_date` DATETIME NOT NULL ,
@@ -182,6 +182,7 @@ CREATE  TABLE IF NOT EXISTS `ld` (
   PRIMARY KEY (`id`) ,
   INDEX `fk_ld_user1_idx` (`user_id` ASC) ,
   INDEX `fk_ld_ld1_idx` (`ld_model_id` ASC) ,
+  INDEX `fk_ld_scope1_idx` (`scope_id` ASC) ,
   CONSTRAINT `fk_ld_ld1`
     FOREIGN KEY (`ld_model_id` )
     REFERENCES `ld` (`id` )
@@ -190,6 +191,11 @@ CREATE  TABLE IF NOT EXISTS `ld` (
   CONSTRAINT `fk_ld_user1`
     FOREIGN KEY (`user_id` )
     REFERENCES `user` (`id` )
+    ON DELETE SET NULL
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_ld_scope1`
+    FOREIGN KEY (`scope_id` )
+    REFERENCES `scope` (`id` )
     ON DELETE SET NULL
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -626,7 +632,6 @@ CREATE  TABLE IF NOT EXISTS `supports` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-USE `ledita-web-app` ;
 
 -- -----------------------------------------------------
 -- Views
@@ -636,7 +641,7 @@ CREATE OR REPLACE VIEW vw_ld_user AS
   SELECT ld.id as ld_id
     , ld.ld_model_id
     , ld.name as ld_name
-    , ld.scope as ld_scope
+    , scope.name as ld_scope
     , ld.publication as ld_publication
     , ld.students_profile as ld_students_profile
     , ld.creation_date as ld_creation_date
@@ -645,8 +650,10 @@ CREATE OR REPLACE VIEW vw_ld_user AS
     , user.name as user_name
     , user.last_name as user_last_name
   FROM ld
-    , user
-  WHERE ld.user_id = user.id;
+  INNER JOIN user
+  	ON ld.user_id = user.id
+  INNER JOIN scope
+  	on ld.scope_id = scope.id;
 
 CREATE OR REPLACE VIEW vw_ld_subject AS
   SELECT ld.id as ld_id
@@ -655,9 +662,9 @@ CREATE OR REPLACE VIEW vw_ld_subject AS
     , subject.name as subject_name
   FROM ld
   INNER JOIN concerns
-  ON ld.id = concerns.ld_id
+  	ON ld.id = concerns.ld_id
   INNER JOIN subject
-  ON concerns.subject_id = subject.id;
+  	ON concerns.subject_id = subject.id;
 
 CREATE OR REPLACE VIEW vw_ld_objective AS
   SELECT ld.id as ld_id
@@ -754,7 +761,7 @@ CREATE OR REPLACE VIEW vw_ld_node AS
     , composes.position as position
     , ldtarget.id as node_id
     , ldtarget.name as node_name
-    , ldtarget.scope as scope
+    , scope.name as scope
     , 'LD' as type
     , null as org_label
     , null as dur_min
@@ -768,7 +775,9 @@ CREATE OR REPLACE VIEW vw_ld_node AS
   INNER JOIN composes
     ON ldsource.id = composes.ld_id
   INNER JOIN ld ldtarget
-    on composes.ld_part_id = ldtarget.id)
+    on composes.ld_part_id = ldtarget.id
+  INNER JOIN scope
+  	on ldtarget.scope_id = scope.id)
   UNION
   (SELECT ldsource.id as ld_id
     , ldsource.name as ld_name
@@ -860,7 +869,7 @@ CREATE OR REPLACE VIEW vw_group AS
     , participates.position as position
     , ld.id as group_child_id
     , ld.name as group_child_name
-    , ld.scope as scope
+    , scope.name as scope
     , pos.max_position as max_position
     , 'LD' as group_child_type
     , null as org_label
@@ -877,26 +886,29 @@ CREATE OR REPLACE VIEW vw_group AS
   INNER JOIN participates
     ON activity_group.id = participates.activity_group_id
   INNER JOIN ld
-    ON participates.ld_is_part_id = ld.id);
+    ON participates.ld_is_part_id = ld.id
+  INNER JOIN scope
+  	on ld.scope_id = scope.id);
 
 CREATE OR REPLACE VIEW vw_user_profile AS
-(SELECT
-user.id as user_id,
-user.image_id,
-user.name as user_name,
-user.last_name,
-user.email,
-user.workplace,
-user.city,
-user.country,
-ld.id as ld_id,
-ld.name as ld_name,
-ld.scope,
-ld.publication,
-ld.creation_date
-FROM user
-RIGHT JOIN ld
-ON user.id = ld.user_id);
+	(SELECT user.id as user_id
+		, user.image_id
+		, user.name as user_name
+		, user.last_name
+		, user.email
+		, user.workplace
+		, user.city
+		, user.country
+		, ld.id as ld_id
+		, ld.name as ld_name
+		, scope.name as scope
+		, ld.publication
+		, ld.creation_date
+	FROM user
+	RIGHT JOIN ld
+		ON user.id = ld.user_id
+	INNER JOIN scope
+		on ld.scope_id = scope.id);
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

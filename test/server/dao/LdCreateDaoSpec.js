@@ -26,7 +26,7 @@ describe('LD Create DAO', function() {
 			var ldData = {
 				"user_id": 2,
 				"name": ldNameToInsert,
-				"scope": "Scope Test",
+				"scope_id": 1,
 				"students_profile": "Students Profile Test"
 			};
 			var today = new Date();
@@ -39,7 +39,7 @@ describe('LD Create DAO', function() {
 					expect(results).not.to.be.null;
 					expect(results).to.have.length(1);
 					expect(results[0].ld_name).to.equal(ldData.name);
-					expect(results[0].ld_scope).to.equal(ldData.scope);
+					expect(results[0].ld_scope).to.equal('Lesson');
 					expect(results[0].ld_students_profile).to.equal(ldData.students_profile);
 					expect(results[0].ld_creation_date).to.equalDate(today);
 					expect(results[0].ld_last_edit_date).to.equalDate(today);
@@ -54,12 +54,27 @@ describe('LD Create DAO', function() {
 			var ldData = {
 				"user_id": 999,
 				"name": ldNameToInsert,
-				"scope": "Scope Test",
+				"scope_id": 1,
 				"students_profile": "Students Profile Test"
 			};
 			LdCreateDao.createLd(ldData, function(err, ldid){
 				expect(err).not.to.be.null;
 				expect(err.message).to.contain('fk_ld_user1');
+				expect(ldid).to.be.undefined;
+				done();
+			}); 
+		});
+
+		it('Returns error if scope id does not exist', function(done) {
+			var ldData = {
+				"user_id": 1,
+				"name": ldNameToInsert,
+				"scope_id": 999,
+				"students_profile": "Students Profile Test"
+			};
+			LdCreateDao.createLd(ldData, function(err, ldid){
+				expect(err).not.to.be.null;
+				expect(err.message).to.contain('fk_ld_scope1');
 				expect(ldid).to.be.undefined;
 				done();
 			}); 
