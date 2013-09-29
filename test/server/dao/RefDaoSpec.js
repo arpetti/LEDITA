@@ -22,6 +22,32 @@ describe('Reference Data Dao', function() {
 
 	});
 
+	describe('SCOPE', function() {
+
+		it('Finds scopes matched by beginning and end of string, case insensitive', function(done) {
+			var partial = ['Le'];
+			RefDao.getScopesMatching(partial, function(err, results) {
+				expect(err).to.be.null;
+				expect(results).to.have.length(3);
+				expect(results[0].name).to.equal('Lesson');
+				expect(results[1].name).to.equal('Lezione');
+				expect(results[2].name).to.equal('Module');
+				done();
+			});
+		});
+
+		it('Scope matching returns empty list if nothing matched', function(done) {
+			var partial = ['xyz'];
+			RefDao.getScopesMatching(partial, function(err, results) {
+				expect(err).to.be.null;
+				expect(results).not.to.be.null;
+				expect(results).to.have.length(0);
+				done();
+			});
+		});
+
+	});
+
 	describe('SUBJECT', function() {
 
 		var verifySubjects = function(results) {

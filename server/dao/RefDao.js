@@ -2,6 +2,7 @@ var mysql = require('mysql')
 var dao = require('./Dao');
 
 var GET_QCERS = "select id, name from qcer order by name";
+var GET_SCOPES_MATCHING = "select name from scope where name like ? order by name";
 var GET_SUBJECTS_MATCHING = "select name from subject where name like ? order by name";
 var GET_OBJECTIVES_MATCHING = "select descr from objective where descr like ? order by descr";
 
@@ -21,6 +22,16 @@ module.exports = {
 				return;
 			}
 			callback(null, rows);
+		});
+	},
+
+	getScopesMatching: function(partial, callback) {
+		dao.findAll(GET_SCOPES_MATCHING, [addWildCard(partial)], function(err, results) {
+			if (err) {
+				callback(err);
+			} else {
+				callback(null, results);
+			}
 		});
 	},
 

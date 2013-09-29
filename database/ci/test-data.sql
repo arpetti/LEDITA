@@ -16,6 +16,12 @@ VALUES ('1', '1', 'Mario', 'Rossi', 'mario@email.it', '$2a$10$/MWGZW7cmwNdle.jiF
 ('5', '5', 'Silvia', 'Rosa', 'silvia@email.it', '$2a$10$/MWGZW7cmwNdle.jiFJb9OiWqVZjxbgJxYNpEraHkwzZ2muBHL7Gm', 'Scuola E', 'Pechino', 'Cina'),
 ('6', '6', 'Alessandro', 'Arpetti', 'arpetti@gmail.com', '$2a$10$/MWGZW7cmwNdle.jiFJb9OiWqVZjxbgJxYNpEraHkwzZ2muBHL7Gm', 'ProfessoreItaliano', 'Campinas', 'Brasile');
 
+INSERT INTO `scope` (`id`, `name`)
+VALUES ('1', 'Lesson'),
+('2', 'Module'),
+('3', 'Semester'),
+('4', 'Lezione');
+
 INSERT INTO `ld`(`id`, `user_id`, `ld_model_id`, `name`, `scope`, `publication`, `students_profile`, `creation_date`, `last_edit_date`)
 VALUES ('1','1', NULL,'Learningà Designè Titleì Demoò 1ù é','Lesson','1','20 studenti adolescenti di livello B1','2012-08-16 22:21:26', '2013-08-16 22:21:26'),
               ('2','1', '1','Learning Design Title Demo 2','Module','0','20 studenti adolescenti di livello B1','2012-08-15 22:21:26', '2013-08-14 22:21:26'),

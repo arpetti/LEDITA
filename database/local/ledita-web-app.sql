@@ -151,6 +151,20 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
+-- Table `scope`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `scope` ;
+
+CREATE  TABLE IF NOT EXISTS `scope` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(255) NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `UNIQ_SCOPE` (`name` ASC) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
 -- Table `ledita-web-app`.`ld`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `ledita-web-app`.`ld` ;

@@ -167,7 +167,7 @@ describe('Learning Design Controller', function() {
     	});
     });
 
-	describe.only('Create Learning Design', function() {
+	describe('Create Learning Design', function() {
 
 		var req = {}
 	        , res = {}
