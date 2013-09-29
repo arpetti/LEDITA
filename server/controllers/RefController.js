@@ -15,6 +15,17 @@ module.exports = {
 		});
 	},
 
+	getScopesMatching: function(req, res) {
+		var partial = req.params.partial;
+		RefService.getScopesMatching(partial, function(err, results, message) {
+			if (err) {
+				return res.send(500, message);
+			} else {
+				res.json(200, results);
+			}
+		});
+	},
+
 	getSubjectsMatching: function(req, res) {
 		var partial = req.params.partial;
 		RefService.getSubjectsMatching(partial, function(err, results, message) {

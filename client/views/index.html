@@ -147,7 +147,8 @@
                                 </div>
                                 <label class="formLabel"><i class="icon-bell"></i> Design Scope*:</label>
                                 <input class="formInput" type="text" name="ldScope" ng-model="ldScope"
-                                       placeholder="typeahead..." required ng-maxlength="50"
+                                	   typeahead="suggestion for suggestion in getScopes($viewValue)"
+                                       placeholder="Scope..." required ng-maxlength="50"
                                        ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
 
                                 <div class="formTag">

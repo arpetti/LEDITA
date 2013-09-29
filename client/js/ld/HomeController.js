@@ -58,7 +58,14 @@ angular.module('ledita-app')
     $scope.selectedObjectives = [];
     $scope.selectedPrerequisites = [];
 
-    $scope.getSubjects = function(subject) {
+    $scope.getScopes = function(scope) {
+    	var scopeMatchUrl = '/reference/scopes/' + scope;
+		return $http.get(scopeMatchUrl).then(function(response) {
+			return limitToFilter(response.data, 15);
+		});
+  	};
+
+  	$scope.getSubjects = function(subject) {
     	var subjectMatchUrl = '/reference/subjects/' + subject;
 		return $http.get(subjectMatchUrl).then(function(response) {
 			return limitToFilter(response.data, 15);

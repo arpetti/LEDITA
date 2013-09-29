@@ -100,6 +100,13 @@ var routes = [
     },
 
     {
+    	path: '/reference/scopes/:partial',
+    	httpMethod: 'GET',
+    	middleware: [ensureAuthenticated, ensureAuthorized, RefController.getScopesMatching],
+        accessLevel: accessLevels.user
+    },
+
+    {
     	path: '/reference/subjects/:partial',
     	httpMethod: 'GET',
     	middleware: [ensureAuthenticated, ensureAuthorized, RefController.getSubjectsMatching],
