@@ -48,6 +48,11 @@ describe('REST resources require authorization', function() {
 			expect(element('pre').text()).toBe('Unauthorized');
 		});
 
+		it('GET scopes matching', function() {
+			browser().navigateTo('/reference/scopes/Le');
+			expect(element('pre').text()).toBe('Unauthorized');
+		});
+
 		it('GET topics matching', function() {
 			browser().navigateTo('/reference/subjects/To');
 			expect(element('pre').text()).toBe('Unauthorized');

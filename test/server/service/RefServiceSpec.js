@@ -74,7 +74,79 @@ describe('Reference Data Service', function() {
 	    });
 	});
 
-    describe('SUBJECT', function() {
+    describe('SCOPE', function() {
+
+    	beforeEach(function() {
+	    });
+
+	    afterEach(function() {
+	        sandbox.restore();
+	    });
+
+	    it('Returns scope results', function(done) {
+
+	    	var partial = 'Le';
+	    	var scopes = [{"name":"Lesson"},{"name":"Lezione"}];
+	    	var refDaoStub = sandbox.stub(RefDao, "getScopesMatching", function(partial, callback) {
+	            callback(null, scopes);
+	        });
+
+	        var refServiceCallback = function(err, results, message) {
+	        	expect(err).to.be.null;
+	        	expect(message).to.be.null;
+	        	expect(results).not.to.be.null;
+	        	expect(results).to.have.length(scopes.length);
+	        	expect(results[0]).to.equal(scopes[0].name);
+	        	expect(results[1]).to.equal(scopes[1].name);
+
+	     		assert.isTrue(refDaoStub.withArgs(partial).calledOnce);
+	        	done();
+	        }
+	        RefService.getScopesMatching(partial, refServiceCallback);
+		});
+
+		it('Empty result is not considered an error', function(done) {
+
+			var partial = 'Zz';
+			var scopes = [];
+	    	var refDaoStub = sandbox.stub(RefDao, "getScopesMatching", function(partial, callback) {
+	            callback(null, scopes);
+	        });
+
+	        var refServiceCallback = function(err, results, message) {
+	        	expect(err).to.be.null;
+	        	expect(message).to.be.null;
+	        	expect(results).not.to.be.null;
+	        	expect(results).to.have.length(0);
+
+	     		assert.isTrue(refDaoStub.withArgs(partial).calledOnce);
+	        	done();
+	        }
+	        RefService.getScopesMatching(partial, refServiceCallback);
+		});
+
+		it('Returns error if error occurs calling dao', function(done) {
+
+			var partial = 'something';
+	    	var daoError = new Error('something went wrong');
+	    	var refDaoStub = sandbox.stub(RefDao, "getScopesMatching", function(partial, callback) {
+	            callback(daoError);
+	        });
+	        var refServiceCallback = function(err, results, message) {
+	        	expect(err).not.to.be.null;
+	        	expect(err).to.equal(daoError);
+	        	expect(message).to.equal(messages.UNABLE_TO_RETRIEVE_SCOPES);
+	        	expect(results).to.be.null;
+
+	     		assert.isTrue(refDaoStub.withArgs(partial).calledOnce);
+	        	done();
+	        }
+	        RefService.getScopesMatching(partial, refServiceCallback);
+	    });
+
+    });
+
+	describe('SUBJECT', function() {
 
     	beforeEach(function() {
 	    });

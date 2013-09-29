@@ -77,6 +77,59 @@ describe('Reference Data Controller', function() {
 
     });
 
+	describe('getScopesMatching', function() {
+
+		beforeEach(function() {
+	    });
+
+	    afterEach(function() {
+	        sandbox.restore();
+	    });
+
+	    it('Returns a 200 with Scope results from Reference Service', function(done) {
+
+	    	var partial = 'To';
+    		req.params = {partial: partial};
+
+	    	var scopes = [{"name":"Lesson"},{"name":"Lezione"}];
+    		var serviceStub = sandbox.stub(RefService, "getScopesMatching", function(partial, callback) {
+                callback(null, scopes, null);
+            });
+
+            res.json = function(httpStatus, result) {
+                expect(httpStatus).to.equal(200);
+                expect(result).to.equal(scopes);
+                
+                assert.isTrue(serviceStub.withArgs(partial).calledOnce);
+                done();
+            };
+
+            RefController.getScopesMatching(req, res);
+	    });
+
+	    it('Returns a 500 with message if Reference Service calls back with error', function(done) {
+
+	    	var partial = 'To';
+    		req.params = {partial: partial};
+
+    		var error = new Error("something went wrong");
+    		var refMessage = "Unable to retrieve scopes";
+    		var serviceStub = sandbox.stub(RefService, "getScopesMatching", function(partial, callback) {
+                callback(error, null, refMessage);
+            });
+
+            res.send = function(httpStatus, message) {
+                expect(httpStatus).to.equal(500);
+                expect(message).to.equal(refMessage);
+                
+                assert.isTrue(serviceStub.withArgs(partial).calledOnce);
+                done();
+            };
+
+            RefController.getScopesMatching(req, res);
+    	});
+	});
+
 	describe('getSubjectsMatching', function() {
 
 		beforeEach(function() {
