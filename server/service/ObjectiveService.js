@@ -1,17 +1,7 @@
 var RefDao = require('../dao/RefDao');
 var LdCreateDao = require('../dao/LdCreateDao');
+var ObjectiveHelper = require('../util/ObjectiveHelper');
 var async = require('async');
-var _ = require('underscore');
-
-var generateAims = function(existingObjectives, ldId) {
-	var objectiveIds = _.pluck(existingObjectives, 'id');	
-	return _.map(objectiveIds, function(objectiveId){ return [objectiveId, ldId]; });
-};
-
-var extractNewObjectives = function(objectiveNames, existingObjectives) {
-	var existingObjectiveNames = _.pluck(existingObjectives, 'descr');
-	return _.difference(objectiveNames, existingObjectiveNames);
-};
 
 module.exports = {
 
@@ -25,7 +15,7 @@ module.exports = {
 			    		if (err) {
 			    			callback(err); // If existing cannot be determined, halt entire flow
 			    		} else {
-			    			var aims = generateAims(existingObjectives, ldId);
+			    			var aims = ObjectiveHelper.generateRelationshipRecords(existingObjectives, ldId);
 			    			callback(null, aims, existingObjectives);
 			    		}
 			    	});
@@ -46,7 +36,7 @@ module.exports = {
 		    },
 		    // Step 3: For each new objective - insert it, get its id, and insert related aim
 		    function(existingObjectives, callback) {
-		    	var newObjectivesToInsert = extractNewObjectives(objectiveNames, existingObjectives);
+		    	var newObjectivesToInsert = ObjectiveHelper.extractNewObjectives(objectiveNames, existingObjectives);
 		    	if (newObjectivesToInsert.length > 0) {
 			    	async.each(newObjectivesToInsert, function(objectiveName, callback) {
 			    		LdCreateDao.insertObjective({descr: objectiveName}, function(err, objectiveId) {
