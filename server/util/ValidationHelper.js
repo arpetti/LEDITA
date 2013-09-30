@@ -11,12 +11,20 @@ module.exports = {
 		check(field, message).isAlpha();
 	},
 
+	validateAlphanumeric: function(field, message) {
+		check(field, message).isAlphanumeric();
+	},
+
 	validateLength: function(field, message, min, max) {
 		check(field, message).len(min, max);
 	},
 
 	validateEmail: function(field, message) {
 		check(field, message).isEmail();
+	},
+
+	validateRegEx: function(field, message, regex) {
+		check(field, message).regex(regex);
 	},
 
 	validateTrue: function(field, message) {
