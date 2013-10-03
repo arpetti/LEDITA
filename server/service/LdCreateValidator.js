@@ -13,6 +13,9 @@ Home.createLd({
 	studentsDescription: $scope.ldStudentsDescr
 }
 */
+
+var alphaNumericSpecialCharsSpacesRegEx = /^[a-zA-Z0-9.,!?:;... òàùèéì@#*]+$/;
+
 module.exports = {
 
 	validate: function(ld) {
@@ -24,13 +27,9 @@ module.exports = {
 			validationHelper.validateAny(validationHelper.validateNullEmpty, [ld.name, messages.LD_NAME_REQUIRED]));
 		errorMessages.push(
 			validationHelper.validateAny(validationHelper.validateLength, [ld.name, messages.LD_NAME_LENGTH, 1, 50]));
-
-		// FIXME - This doesn't allow spaces
 		errorMessages.push(
-			validationHelper.validateAny(validationHelper.validateAlpha, [ld.name, messages.LD_NAME_ALLOWED_CHARS]));
-		// errorMessages.push(
-		// 	validationHelper.validateAny(validationHelper.validateRegEx, 
-		// 		[ld.name, messages.LD_NAME_ALLOWED_CHARS, "/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/"]));
+			validationHelper.validateAny(validationHelper.validateRegEx, 
+				[ld.name, messages.LD_NAME_ALLOWED_CHARS, alphaNumericSpecialCharsSpacesRegEx]));
 
 		return _.filter(errorMessages, function(message){ return message !== null; });
 		
