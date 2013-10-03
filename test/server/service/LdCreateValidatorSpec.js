@@ -2,7 +2,7 @@ var expect = require('chai').expect;
 var LdCreateValidator = require('../../../server/service/LdCreateValidator');
 var messages = require('../../../server/service/ValidationMessages');
 
-describe.only('Learning Design Creation Validator', function() {
+describe('Learning Design Creation Validator', function() {
 
 	it('Valid LD gets no error messages', function() {
 		var ld = {
