@@ -1,4 +1,4 @@
-var validationHelper = require('../util/ValidationHelper');
+var ValidationHelper = require('../util/ValidationHelper');
 var messages = require('./ValidationMessages');
 var _ = require('underscore');
 
@@ -14,8 +14,6 @@ Home.createLd({
 }
 */
 
-var alphaNumericSpecialCharsSpacesRegEx = /^[a-zA-Z0-9.,!?:;... òàùèéì@#*]+$/;
-
 module.exports = {
 
 	validate: function(ld) {
@@ -24,12 +22,12 @@ module.exports = {
 
 		// Name
 		errorMessages.push(
-			validationHelper.validateAny(validationHelper.validateNullEmpty, [ld.name, messages.LD_NAME_REQUIRED]));
+			ValidationHelper.validateAny(ValidationHelper.validateNullEmpty, [ld.name, messages.LD_NAME_REQUIRED]));
 		errorMessages.push(
-			validationHelper.validateAny(validationHelper.validateLength, [ld.name, messages.LD_NAME_LENGTH, 1, 50]));
+			ValidationHelper.validateAny(ValidationHelper.validateLength, [ld.name, messages.LD_NAME_LENGTH, 1, 50]));
 		errorMessages.push(
-			validationHelper.validateAny(validationHelper.validateRegEx, 
-				[ld.name, messages.LD_NAME_ALLOWED_CHARS, alphaNumericSpecialCharsSpacesRegEx]));
+			ValidationHelper.validateAny(ValidationHelper.validateRegEx, 
+				[ld.name, messages.LD_NAME_ALLOWED_CHARS, ValidationHelper.FIRST_ALPHANUMERIC_REST_ANY_CHAR]));
 
 		return _.filter(errorMessages, function(message){ return message !== null; });
 		

@@ -2,6 +2,8 @@ var check = require('validator').check;
 
 module.exports = {
 
+	FIRST_ALPHANUMERIC_REST_ANY_CHAR: /^[A-Za-z0-9][A-Za-z-9, +-_&#'"òàùèéì@#*]+$/,
+
 	validateNullEmpty: function(field, message) {
 		check(field, message).notNull();
 		check(field, message).notEmpty();
