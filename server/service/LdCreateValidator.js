@@ -14,6 +14,14 @@ Home.createLd({
 }
 */
 
+var atLeastOneQcer = function(qcers) {
+	var selectedQcers = _.filter(_.values(qcers), function(qcer){ return qcer; });
+	if (selectedQcers.length === 0) {
+		return messages.LD_QCER_SELECTED;
+	}
+	return null;
+};
+
 module.exports = {
 
 	validate: function(ld) {
@@ -28,6 +36,9 @@ module.exports = {
 		errorMessages.push(
 			ValidationHelper.validateAny(ValidationHelper.validateRegEx, 
 				[ld.name, messages.LD_NAME_ALLOWED_CHARS, ValidationHelper.FIRST_ALPHANUMERIC_REST_ANY_CHAR]));
+
+		// Qcer
+		errorMessages.push(atLeastOneQcer(ld.qcers));
 
 		return _.filter(errorMessages, function(message){ return message !== null; });
 		
