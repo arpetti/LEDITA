@@ -68,111 +68,144 @@ describe('Learning Design Creation Validator', function() {
         expect(errorMessages).to.have.length(0);
 	});
 
-	it('Returns error messages if name is empty', function() {
-		var builder = new LdBuilder();
-		var ld = builder.withName("").build();
-		var errorMessages = LdCreateValidator.validate(ld);
-        expect(errorMessages).to.have.length(3);
-        expect(errorMessages[0]).to.equal(messages.LD_NAME_REQUIRED);
-        expect(errorMessages[1]).to.equal(messages.LD_NAME_LENGTH);
-        expect(errorMessages[2]).to.equal(messages.LD_NAME_ALLOWED_CHARS);
+	describe('name', function() {
+
+		it('Returns error messages if name is empty', function() {
+			var builder = new LdBuilder();
+			var ld = builder.withName("").build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(3);
+	        expect(errorMessages[0]).to.equal(messages.LD_NAME_REQUIRED);
+	        expect(errorMessages[1]).to.equal(messages.LD_NAME_LENGTH);
+	        expect(errorMessages[2]).to.equal(messages.LD_NAME_ALLOWED_CHARS);
+		});
+
+		it('Returns error messages if name is too long', function() {
+			var builder = new LdBuilder();
+			var ld = builder.withName(TestUtils.buildString(51, 'a')).build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(1);
+	        expect(errorMessages[0]).to.equal(messages.LD_NAME_LENGTH);
+		});
+
+		it('Returns error messages if name is null', function() {
+			var builder = new LdBuilder();
+			var ld = builder.withName(null).build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(3);
+	        expect(errorMessages[0]).to.equal(messages.LD_NAME_REQUIRED);
+	        expect(errorMessages[1]).to.equal(messages.LD_NAME_LENGTH);
+	        expect(errorMessages[2]).to.equal(messages.LD_NAME_ALLOWED_CHARS);
+		});
+
+		it('Returns error messages if name is undefined', function() {
+			var builder = new LdBuilder();
+			var ld = builder.withName(undefined).build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(3);
+	        expect(errorMessages[0]).to.equal(messages.LD_NAME_REQUIRED);
+	        expect(errorMessages[1]).to.equal(messages.LD_NAME_LENGTH);
+	        expect(errorMessages[2]).to.equal(messages.LD_NAME_ALLOWED_CHARS);
+		});
+
 	});
 
-	it('Returns error messages if name is too long', function() {
-		var builder = new LdBuilder();
-		var ld = builder.withName(TestUtils.buildString(51, 'a')).build();
-		var errorMessages = LdCreateValidator.validate(ld);
-        expect(errorMessages).to.have.length(1);
-        expect(errorMessages[0]).to.equal(messages.LD_NAME_LENGTH);
+	describe('scope', function() {
+
+		it('Returns error messages if scope is empty', function() {
+			var builder = new LdBuilder();
+			var ld = builder.withScope("").build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(3);
+	        expect(errorMessages[0]).to.equal(messages.LD_SCOPE_REQUIRED);
+	        expect(errorMessages[1]).to.equal(messages.LD_SCOPE_LENGTH);
+	        expect(errorMessages[2]).to.equal(messages.LD_SCOPE_ALLOWED_CHARS);
+		});
+
+		it('Returns error messages if scope is too long', function() {
+			var builder = new LdBuilder();
+			var ld = builder.withScope(TestUtils.buildString(51, 'b')).build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(1);
+	        expect(errorMessages[0]).to.equal(messages.LD_SCOPE_LENGTH);
+		});
+
+		it('Returns error messages if scope is null', function() {
+			var builder = new LdBuilder();
+			var ld = builder.withScope(null).build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(3);
+	        expect(errorMessages[0]).to.equal(messages.LD_SCOPE_REQUIRED);
+	        expect(errorMessages[1]).to.equal(messages.LD_SCOPE_LENGTH);
+	        expect(errorMessages[2]).to.equal(messages.LD_SCOPE_ALLOWED_CHARS);
+		});
+
+		it('Returns error messages if scope is undefined', function() {
+			var builder = new LdBuilder();
+			var ld = builder.withScope(undefined).build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(3);
+	        expect(errorMessages[0]).to.equal(messages.LD_SCOPE_REQUIRED);
+	        expect(errorMessages[1]).to.equal(messages.LD_SCOPE_LENGTH);
+	        expect(errorMessages[2]).to.equal(messages.LD_SCOPE_ALLOWED_CHARS);
+		});
+
 	});
 
-	it('Returns error messages if name is null', function() {
-		var builder = new LdBuilder();
-		var ld = builder.withName(null).build();
-		var errorMessages = LdCreateValidator.validate(ld);
-        expect(errorMessages).to.have.length(3);
-        expect(errorMessages[0]).to.equal(messages.LD_NAME_REQUIRED);
-        expect(errorMessages[1]).to.equal(messages.LD_NAME_LENGTH);
-        expect(errorMessages[2]).to.equal(messages.LD_NAME_ALLOWED_CHARS);
+	describe('qcers', function() {
+
+		it('Returns error message if qcers is empty', function() {
+			var builder = new LdBuilder();
+			var ld = builder.withQcers({}).build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(1);
+	        expect(errorMessages[0]).to.equal(messages.LD_QCER_SELECTED);
+		});
+
+		it('Returns error message if all qcers are false', function() {
+			var builder = new LdBuilder();
+			var ld = builder.withQcers({"3": false, "6": false}).build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(1);
+	        expect(errorMessages[0]).to.equal(messages.LD_QCER_SELECTED);
+		});
+
+		it('Returns error message if all qcers are null', function() {
+			var builder = new LdBuilder();
+			var ld = builder.withQcers(null).build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(1);
+	        expect(errorMessages[0]).to.equal(messages.LD_QCER_SELECTED);
+		});
+
+		it('Returns error message if all qcers are undefined', function() {
+			var builder = new LdBuilder();
+			var ld = builder.withQcers(undefined).build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(1);
+	        expect(errorMessages[0]).to.equal(messages.LD_QCER_SELECTED);
+		});
+
 	});
 
-	it('Returns error messages if name is undefined', function() {
-		var builder = new LdBuilder();
-		var ld = builder.withName(undefined).build();
-		var errorMessages = LdCreateValidator.validate(ld);
-        expect(errorMessages).to.have.length(3);
-        expect(errorMessages[0]).to.equal(messages.LD_NAME_REQUIRED);
-        expect(errorMessages[1]).to.equal(messages.LD_NAME_LENGTH);
-        expect(errorMessages[2]).to.equal(messages.LD_NAME_ALLOWED_CHARS);
+	describe('topics', function() {
+
+		it('Returns error message if topics is empty', function() {
+			var builder = new LdBuilder();
+			var ld = builder.withTopics([]).build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(1);
+	        expect(errorMessages[0]).to.equal(messages.LD_TOPIC_SELECTED);
+		});
+
+		it('Returns error message if topics is not an array', function() {
+			var builder = new LdBuilder();
+			var ld = builder.withTopics({"a": "b"}).build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(1);
+	        expect(errorMessages[0]).to.equal(messages.LD_TOPIC_SELECTED);
+		});
+
 	});
 
-	it('Returns error messages if scope is empty', function() {
-		var builder = new LdBuilder();
-		var ld = builder.withScope("").build();
-		var errorMessages = LdCreateValidator.validate(ld);
-        expect(errorMessages).to.have.length(3);
-        expect(errorMessages[0]).to.equal(messages.LD_SCOPE_REQUIRED);
-        expect(errorMessages[1]).to.equal(messages.LD_SCOPE_LENGTH);
-        expect(errorMessages[2]).to.equal(messages.LD_SCOPE_ALLOWED_CHARS);
-	});
-
-	it('Returns error messages if scope is too long', function() {
-		var builder = new LdBuilder();
-		var ld = builder.withScope(TestUtils.buildString(51, 'b')).build();
-		var errorMessages = LdCreateValidator.validate(ld);
-        expect(errorMessages).to.have.length(1);
-        expect(errorMessages[0]).to.equal(messages.LD_SCOPE_LENGTH);
-	});
-
-	it('Returns error messages if scope is null', function() {
-		var builder = new LdBuilder();
-		var ld = builder.withScope(null).build();
-		var errorMessages = LdCreateValidator.validate(ld);
-        expect(errorMessages).to.have.length(3);
-        expect(errorMessages[0]).to.equal(messages.LD_SCOPE_REQUIRED);
-        expect(errorMessages[1]).to.equal(messages.LD_SCOPE_LENGTH);
-        expect(errorMessages[2]).to.equal(messages.LD_SCOPE_ALLOWED_CHARS);
-	});
-
-	it('Returns error messages if scope is undefined', function() {
-		var builder = new LdBuilder();
-		var ld = builder.withScope(undefined).build();
-		var errorMessages = LdCreateValidator.validate(ld);
-        expect(errorMessages).to.have.length(3);
-        expect(errorMessages[0]).to.equal(messages.LD_SCOPE_REQUIRED);
-        expect(errorMessages[1]).to.equal(messages.LD_SCOPE_LENGTH);
-        expect(errorMessages[2]).to.equal(messages.LD_SCOPE_ALLOWED_CHARS);
-	});
-
-	it('Returns error message if qcers is empty', function() {
-		var builder = new LdBuilder();
-		var ld = builder.withQcers({}).build();
-		var errorMessages = LdCreateValidator.validate(ld);
-        expect(errorMessages).to.have.length(1);
-        expect(errorMessages[0]).to.equal(messages.LD_QCER_SELECTED);
-	});
-
-	it('Returns error message if all qcers are false', function() {
-		var builder = new LdBuilder();
-		var ld = builder.withQcers({"3": false, "6": false}).build();
-		var errorMessages = LdCreateValidator.validate(ld);
-        expect(errorMessages).to.have.length(1);
-        expect(errorMessages[0]).to.equal(messages.LD_QCER_SELECTED);
-	});
-
-	it('Returns error message if all qcers are null', function() {
-		var builder = new LdBuilder();
-		var ld = builder.withQcers(null).build();
-		var errorMessages = LdCreateValidator.validate(ld);
-        expect(errorMessages).to.have.length(1);
-        expect(errorMessages[0]).to.equal(messages.LD_QCER_SELECTED);
-	});
-
-	it('Returns error message if all qcers are undefined', function() {
-		var builder = new LdBuilder();
-		var ld = builder.withQcers(undefined).build();
-		var errorMessages = LdCreateValidator.validate(ld);
-        expect(errorMessages).to.have.length(1);
-        expect(errorMessages[0]).to.equal(messages.LD_QCER_SELECTED);
-	});
 });

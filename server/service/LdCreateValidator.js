@@ -21,8 +21,17 @@ var atLeastOneQcer = function(qcers) {
 	var selectedQcers = _.filter(_.values(qcers), function(qcer){ return qcer; });
 	if (selectedQcers.length === 0) {
 		return messages.LD_QCER_SELECTED;
-	}
+	};
 	return null;
+};
+
+var atLeastOneItemInList = function(values) {
+	if(typeof(values) == 'undefined' || values == null 
+		|| !_.isArray(values) || values.length === 0) {
+		return messages.LD_TOPIC_SELECTED;
+	} else {
+		return null;
+	};
 };
 
 module.exports = {
@@ -51,6 +60,9 @@ module.exports = {
 		errorMessages.push(
 			ValidationHelper.validateAny(ValidationHelper.validateRegEx, 
 				[ld.scope, messages.LD_SCOPE_ALLOWED_CHARS, ValidationHelper.FIRST_ALPHANUMERIC_REST_ANY_CHAR]));
+
+		// Topics
+		errorMessages.push(atLeastOneItemInList(ld.topics));
 
 		return _.filter(errorMessages, function(message){ return message !== null; });
 		
