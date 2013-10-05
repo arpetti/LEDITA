@@ -50,7 +50,7 @@ module.exports = {
 			ValidationHelper.validateAny(ValidationHelper.validateLength, [ld.scope, messages.LD_SCOPE_LENGTH, 1, 50]));
 		errorMessages.push(
 			ValidationHelper.validateAny(ValidationHelper.validateRegEx, 
-				[ld.name, messages.LD_SCOPE_ALLOWED_CHARS, ValidationHelper.FIRST_ALPHANUMERIC_REST_ANY_CHAR]));
+				[ld.scope, messages.LD_SCOPE_ALLOWED_CHARS, ValidationHelper.FIRST_ALPHANUMERIC_REST_ANY_CHAR]));
 
 		return _.filter(errorMessages, function(message){ return message !== null; });
 		
