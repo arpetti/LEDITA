@@ -103,6 +103,13 @@ describe('Learning Design Creation Validator', function() {
 	        expect(errorMessages[2]).to.equal(messages.LD_NAME_ALLOWED_CHARS);
 		});
 
+		it('Name cannot contain script tag', function() {
+			var ld = new LdBuilder().withName('<script>alert("evil")</alert>').build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(1);
+	        expect(errorMessages[0]).to.equal(messages.LD_NAME_ALLOWED_CHARS);
+		});
+
 	});
 
 	describe('scope', function() {
