@@ -15,6 +15,9 @@ Home.createLd({
 */
 
 var atLeastOneQcer = function(qcers) {
+	if(typeof(qcers) == 'undefined' || qcers == null) {
+		return messages.LD_QCER_SELECTED;
+	};
 	var selectedQcers = _.filter(_.values(qcers), function(qcer){ return qcer; });
 	if (selectedQcers.length === 0) {
 		return messages.LD_QCER_SELECTED;

@@ -48,8 +48,7 @@ describe('Learning Design Creation Validator', function() {
         expect(errorMessages[0]).to.equal(messages.LD_QCER_SELECTED);
 	});
 
-	// This passes locally but fails on Travis
-	it.skip('Returns error message if all qcers are null', function() {
+	it('Returns error message if all qcers are null', function() {
 		var ld = {
 			name: "This is ò valid Learni#ng * Desìgn N@meè 123?.",
     		qcers: null,
@@ -64,8 +63,7 @@ describe('Learning Design Creation Validator', function() {
         expect(errorMessages[0]).to.equal(messages.LD_QCER_SELECTED);
 	});
 
-	// This passes locally but fails on Travis
-	it.skip('Returns error message if all qcers are undefined', function() {
+	it('Returns error message if all qcers are undefined', function() {
 		var ld = {
 			name: "This is ò valid Learni#ng * Desìgn N@meè 123?.",
     		qcers: undefined,
