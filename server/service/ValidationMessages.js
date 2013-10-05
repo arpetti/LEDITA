@@ -67,8 +67,8 @@ module.exports.LD_OBJECTIVE_LENGTH = 'Objective must be 1-255 characters long.';
 module.exports.LD_OBJECTIVE_ALLOWED_CHARS = 'Objective can only contain letters and numbers.';
 
 // Learning Design Creation - Prerequisites
-module.exports.LD_PREREQ_LENGTH = 'Prerequisite must be 1-255 characters long.';
 module.exports.LD_PREREQ_EMPTY = "Prerequisite cannot be empty";
+module.exports.LD_PREREQ_LENGTH = 'Prerequisite must be 1-255 characters long.';
 module.exports.LD_PREREQ_ALLOWED_CHARS = 'Prerequisite can only contain letters and numbers.';
 
 // Learning Design Creation - Students Description

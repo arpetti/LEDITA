@@ -78,6 +78,9 @@ module.exports = {
 		em.push(atLeastOneItemInList(ld.objectives, m.LD_OBJECTIVE_SELECTED));
 		em = em.concat(validateListItems(ld.objectives, m.LD_OBJECTIVE_EMPTY, m.LD_OBJECTIVE_LENGTH, m.LD_OBJECTIVE_ALLOWED_CHARS));
 
+		// Prerequisites
+		em = em.concat(validateListItems(ld.requisites, m.LD_PREREQ_EMPTY, m.LD_PREREQ_LENGTH, m.LD_PREREQ_ALLOWED_CHARS));
+
 		return _.filter(em, function(message){ return message !== null; });
 		
 	}
