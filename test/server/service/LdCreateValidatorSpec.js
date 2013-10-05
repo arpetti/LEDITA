@@ -198,7 +198,7 @@ describe('Learning Design Creation Validator', function() {
 	        expect(errorMessages[0]).to.equal(messages.LD_TOPIC_SELECTED);
 		});
 
-		it('Returns error message if topics is not an array', function() {
+		it('Returns error messages if topics is not an array', function() {
 			var builder = new LdBuilder();
 			var ld = builder.withTopics({"a": "b"}).build();
 			var errorMessages = LdCreateValidator.validate(ld);
@@ -207,7 +207,7 @@ describe('Learning Design Creation Validator', function() {
 	        expect(errorMessages[1]).to.equal(messages.LD_TOPIC_ALLOWED_CHARS);
 		});
 
-		it('Returns unique error messages if topics contain empty topics', function() {
+		it('Returns unique error messages if topics contain empty items', function() {
 			var builder = new LdBuilder();
 			var ld = builder.withTopics(["", ""]).build();
 			var errorMessages = LdCreateValidator.validate(ld);
@@ -217,7 +217,7 @@ describe('Learning Design Creation Validator', function() {
 	        expect(errorMessages[2]).to.equal(messages.LD_TOPIC_ALLOWED_CHARS);
 		});
 
-		it('Returns error message if topics contain a too long topic', function() {
+		it('Returns error message if topics contain a too long item', function() {
 			var builder = new LdBuilder();
 			var ld = builder.withTopics(["V@l1d T0p#c.", TestUtils.buildString(256, 'c')]).build();
 			var errorMessages = LdCreateValidator.validate(ld);
@@ -225,13 +225,77 @@ describe('Learning Design Creation Validator', function() {
 	        expect(errorMessages[0]).to.equal(messages.LD_TOPIC_LENGTH);
 		});
 
-		it('Topics at exactly max length are allowed', function() {
+		it('Topic items at exactly max length are allowed', function() {
 			var builder = new LdBuilder();
 			var ld = builder.withTopics([
 				TestUtils.buildString(255, 'd'), TestUtils.buildString(255, 'e')
 			]).build();
 			var errorMessages = LdCreateValidator.validate(ld);
 	        expect(errorMessages).to.have.length(0);
+		});
+
+		it('Topic items cannot start with a special character', function() {
+			var builder = new LdBuilder();
+			var ld = builder.withTopics(["* This is bad", "This is good *"]).build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(1);
+	        expect(errorMessages[0]).to.equal(messages.LD_TOPIC_ALLOWED_CHARS);
+		});
+
+	});
+
+	describe('objectives', function() {
+
+		it('Returns error message if objectives is empty', function() {
+			var builder = new LdBuilder();
+			var ld = builder.withObjectives([]).build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(1);
+	        expect(errorMessages[0]).to.equal(messages.LD_OBJECTIVE_SELECTED);
+		});
+
+		it('Returns error messages if objectives is not an array', function() {
+			var builder = new LdBuilder();
+			var ld = builder.withObjectives({"a": "b"}).build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(2);
+	        expect(errorMessages[0]).to.equal(messages.LD_OBJECTIVE_SELECTED);
+	        expect(errorMessages[1]).to.equal(messages.LD_OBJECTIVE_ALLOWED_CHARS);
+		});
+
+		it('Returns unique error messages if objectives contain empty items', function() {
+			var builder = new LdBuilder();
+			var ld = builder.withObjectives(["", ""]).build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(3);
+	        expect(errorMessages[0]).to.equal(messages.LD_OBJECTIVE_EMPTY);
+	        expect(errorMessages[1]).to.equal(messages.LD_OBJECTIVE_LENGTH);
+	        expect(errorMessages[2]).to.equal(messages.LD_OBJECTIVE_ALLOWED_CHARS);
+		});
+
+		it('Returns error message if objectives contain a too long item', function() {
+			var builder = new LdBuilder();
+			var ld = builder.withObjectives(["V@l1d 0Bjectv30#.", TestUtils.buildString(256, 'f')]).build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(1);
+	        expect(errorMessages[0]).to.equal(messages.LD_OBJECTIVE_LENGTH);
+		});
+
+		it('Objective items at exactly max length are allowed', function() {
+			var builder = new LdBuilder();
+			var ld = builder.withObjectives([
+				TestUtils.buildString(255, 'g'), TestUtils.buildString(255, 'h')
+			]).build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(0);
+		});
+
+		it('Objective items cannot start with a special character', function() {
+			var builder = new LdBuilder();
+			var ld = builder.withObjectives(["* This is bad", "This is good *"]).build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(1);
+	        expect(errorMessages[0]).to.equal(messages.LD_OBJECTIVE_ALLOWED_CHARS);
 		});
 
 	});

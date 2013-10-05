@@ -61,8 +61,8 @@ module.exports.LD_TOPIC_LENGTH = 'Topic must be 1-255 characters long.';
 module.exports.LD_TOPIC_ALLOWED_CHARS = 'Topic can only contain letters and numbers.';
 
 // Learning Design Creation - Objective
-module.exports.LD_OBJECTIVE_SELECTED = 'At least one topic must be selected.';
-module.exports.LD_OBECTIVE_EMPTY = "Objective cannot be empty";
+module.exports.LD_OBJECTIVE_SELECTED = 'At least one objective must be selected.';
+module.exports.LD_OBJECTIVE_EMPTY = "Objective cannot be empty";
 module.exports.LD_OBJECTIVE_LENGTH = 'Objective must be 1-255 characters long.';
 module.exports.LD_OBJECTIVE_ALLOWED_CHARS = 'Objective can only contain letters and numbers.';
 
