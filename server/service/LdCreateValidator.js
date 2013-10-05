@@ -25,13 +25,27 @@ var atLeastOneQcer = function(qcers) {
 	return null;
 };
 
-var atLeastOneItemInList = function(values) {
+var atLeastOneItemInList = function(values, message) {
 	if(typeof(values) == 'undefined' || values == null 
 		|| !_.isArray(values) || values.length === 0) {
-		return messages.LD_TOPIC_SELECTED;
+		return message;
 	} else {
 		return null;
 	};
+};
+
+var validateTopic = function(topic) {
+	var message1 = ValidationHelper.validateAny(ValidationHelper.validateNullEmpty, [topic, messages.LD_TOPIC_EMPTY]);	
+	var message2 = ValidationHelper.validateAny(ValidationHelper.validateLength, [topic, messages.LD_TOPIC_LENGTH, 1, 255]);
+	var message3 = ValidationHelper.validateAny(ValidationHelper.validateRegEx, 
+			[topic, messages.LD_TOPIC_ALLOWED_CHARS, ValidationHelper.FIRST_ALPHANUMERIC_REST_ANY_CHAR]);
+	return [message1, message2, message3];
+};
+
+var validateTopics = function(topics) {
+	var topicMessages = _.map(topics, function(topic){ return validateTopic(topic); });
+	var cleanTopicMessages = _.uniq(_.compact(_.flatten(topicMessages)));
+	return cleanTopicMessages;
 };
 
 module.exports = {
@@ -62,7 +76,8 @@ module.exports = {
 				[ld.scope, messages.LD_SCOPE_ALLOWED_CHARS, ValidationHelper.FIRST_ALPHANUMERIC_REST_ANY_CHAR]));
 
 		// Topics
-		errorMessages.push(atLeastOneItemInList(ld.topics));
+		errorMessages.push(atLeastOneItemInList(ld.topics, messages.LD_TOPIC_SELECTED));
+		errorMessages = errorMessages.concat(validateTopics(ld.topics));
 
 		return _.filter(errorMessages, function(message){ return message !== null; });
 		

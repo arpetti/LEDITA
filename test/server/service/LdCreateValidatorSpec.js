@@ -202,8 +202,36 @@ describe('Learning Design Creation Validator', function() {
 			var builder = new LdBuilder();
 			var ld = builder.withTopics({"a": "b"}).build();
 			var errorMessages = LdCreateValidator.validate(ld);
-	        expect(errorMessages).to.have.length(1);
+	        expect(errorMessages).to.have.length(2);
 	        expect(errorMessages[0]).to.equal(messages.LD_TOPIC_SELECTED);
+	        expect(errorMessages[1]).to.equal(messages.LD_TOPIC_ALLOWED_CHARS);
+		});
+
+		it('Returns unique error messages if topics contain empty topics', function() {
+			var builder = new LdBuilder();
+			var ld = builder.withTopics(["", ""]).build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(3);
+	        expect(errorMessages[0]).to.equal(messages.LD_TOPIC_EMPTY);
+	        expect(errorMessages[1]).to.equal(messages.LD_TOPIC_LENGTH);
+	        expect(errorMessages[2]).to.equal(messages.LD_TOPIC_ALLOWED_CHARS);
+		});
+
+		it('Returns error message if topics contain a too long topic', function() {
+			var builder = new LdBuilder();
+			var ld = builder.withTopics(["V@l1d T0p#c.", TestUtils.buildString(256, 'c')]).build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(1);
+	        expect(errorMessages[0]).to.equal(messages.LD_TOPIC_LENGTH);
+		});
+
+		it('Topics at exactly max length are allowed', function() {
+			var builder = new LdBuilder();
+			var ld = builder.withTopics([
+				TestUtils.buildString(255, 'd'), TestUtils.buildString(255, 'e')
+			]).build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(0);
 		});
 
 	});
