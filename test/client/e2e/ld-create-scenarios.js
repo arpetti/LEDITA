@@ -4,10 +4,10 @@
 
 describe('Create a new Learning Design', function() {
 
-	it('Displays a modal popup when user clicks Create LD', function() {
-		var existingUserName = testUsers.getMarioUserName;
-        var existingUserPassword = testUsers.getMarioUserPassword;
+	var existingUserName = testUsers.getMarioUserName;
+    var existingUserPassword = testUsers.getMarioUserPassword;
 
+	it('Displays a modal popup when user clicks Create LD', function() {
         browser().navigateTo('/login');
         input('username').enter(existingUserName);
         input('password').enter(existingUserPassword);
@@ -28,8 +28,6 @@ describe('Create a new Learning Design', function() {
 	});
 
 	it('Logged in user can create a new Learning Design', function() {
-		var existingUserName = testUsers.getMarioUserName;
-        var existingUserPassword = testUsers.getMarioUserPassword;
         var newLdName = 'Learning Design E2E Test';
         var newLdScope = 'Scope E2E Test';
         var newTopic = 'Topic E2E Test';
@@ -86,6 +84,41 @@ describe('Create a new Learning Design', function() {
         // Logout
         element('#userActionsMenu').click();
         element('#logoutLink').click();
+	});
+
+	describe('Client Side Validation', function() {
+
+		var verify = function(field, invalidInput, validInput, fieldErrorId, expectedErrorMessage) {
+			input(field).enter(invalidInput);
+		    sleep(1);
+		    expect(element('#confirmCreateLD').attr('disabled')).toBe("disabled");
+		    expect(element(fieldErrorId).css('display')).toBe("inline");
+		    expect(element(fieldErrorId).text()).toMatch(expectedErrorMessage);
+		    input(field).enter(validInput);
+		    sleep(1);
+		    expect(element(fieldErrorId).css('display')).toBe("none");
+		}
+
+		it('Invalid input is not allowed', function() {
+			browser().navigateTo('/login');
+	        input('username').enter(existingUserName);
+	        input('password').enter(existingUserPassword);
+	        element('#loginButton').click();
+	        sleep(2);
+
+	        // open LD Create modal
+	        element('#createLd').click();
+	        sleep(1);
+
+	        verify('ldName', '<script>Bad not allowed</script>', 'Good ***', '#ldNamePatternError', 'The design name cannot contain this symbol.');
+
+	        element("#cancelCreateLd").click();
+
+	        // Logout
+	        element('#userActionsMenu').click();
+	        element('#logoutLink').click();
+		});
+
 	});
 
 });

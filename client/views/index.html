@@ -114,14 +114,12 @@
                          	<!-- Name -->
                             <div class="formLevel">
                                 <div class="errorBox">
-                                    <span class="errorTipModal"
-                                          ng-show="LdCreateForm.ldName.$dirty && LdCreateForm.ldName.$error.required">Required!</span>
-                                    <span class="errorTipModal" ng-show="LdCreateForm.ldName.$error.pattern">The design name cannot contain this symbol.</span>
-                                    <span class="errorTipModal" ng-show="LdCreateForm.ldName.$error.maxlength">The design name cannot be longer than 50 characters.</span>
+                                    <span class="errorTipModal" ng-show="LdCreateForm.ldName.$dirty && LdCreateForm.ldName.$error.required">Required!</span>
+                                    <span id="ldNamePatternError" class="errorTipModal" ng-show="LdCreateForm.ldName.$error.pattern">The design name cannot contain this symbol.</span>
+                                    <span id="ldNameLengthError" class="errorTipModal" ng-show="LdCreateForm.ldName.$error.maxlength">The design name cannot be longer than 50 characters.</span>
                                 </div>
                                 <label class="formLabel"><i class="icon-book"></i> Design Name*:</label>
-                                <input class="formInput" type="text" name="ldName" ng-model="ldName" required
-                                       ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
+                                <input class="formInput" type="text" name="ldName" ng-model="ldName" required ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                                 <span class="clearfix"></span>
                             </div>
 
