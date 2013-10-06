@@ -27,8 +27,7 @@ describe('Create a new Learning Design', function() {
         element('#logoutLink').click();
 	});
 
-	// do NOT commit iit, just for debugging
-	iit('Logged in user can create a new Learning Design', function() {
+	it('Logged in user can create a new Learning Design', function() {
 		var existingUserName = testUsers.getMarioUserName;
         var existingUserPassword = testUsers.getMarioUserPassword;
         var newLdName = 'Learning Design E2E Test';
