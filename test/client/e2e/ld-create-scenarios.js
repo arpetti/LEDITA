@@ -27,9 +27,11 @@ describe('Create a new Learning Design', function() {
         element('#logoutLink').click();
 	});
 
-	it('Logged in user can create a new Learning Design', function() {
+	// do NOT commit iit, just for debugging
+	iit('Logged in user can create a new Learning Design', function() {
 		var existingUserName = testUsers.getMarioUserName;
         var existingUserPassword = testUsers.getMarioUserPassword;
+        var newLdName = 'Learning Design E2E Test';
 
         browser().navigateTo('/login');
         input('username').enter(existingUserName);
@@ -37,10 +39,12 @@ describe('Create a new Learning Design', function() {
         element('#loginButton').click();
         sleep(2);
 
+        // open LD Create modal
         element('#createLd').click();
         sleep(1);
 
-        input('ldName').enter('Learning Design E2E Test');
+        // fill out the form
+        input('ldName').enter(newLdName);
         input('selectedQcers[qceropt.id]').check();
         input('ldScope').enter('Scope E2E Test');
         input('ldTopic').enter('Topic E2E Test');
@@ -51,7 +55,11 @@ describe('Create a new Learning Design', function() {
         element("#confirmCreateLD").click();
         sleep(1);
 
+        // should be on edit page
         expect(browser().location().url()).toMatch('/ldedit/');
+
+        // verify LD data entered in form matches whats displayed on edit page
+        expect(input('learningDesign.ld_name').val()).toBe(newLdName);
 
         // Logout
         element('#userActionsMenu').click();
