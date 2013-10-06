@@ -126,15 +126,12 @@
                             <!-- Qcers -->
                             <div class="formLevel">
                                 <div class="errorBox">
-                                        <span class="errorTipModal"
-                                              ng-show="LdCreateForm.qcer.$dirty && LdCreateForm.qcer.$error.required">Required!</span>
-
+                                    <span class="errorTipModal" ng-show="LdCreateForm.qcer.$dirty && LdCreateForm.qcer.$error.required">Required!</span>
                                 </div>
                                 <label class="formLabel formLabel"><i class="icon-tasks"></i> QCER Level*:</label>
-
                                 <div class="formCheck">
                                     <span ng-show="qcerError">{{ qcerError }}</span>
-                                    <!-- FIXME: validate at least one required -->
+                                    <!-- FIXME: validate at least one required on client side -->
 				                	<span ng-repeat="qceropt in qceropts" class="qcerOptData" >
 				                    	<input type="checkbox" ng-model="selectedQcers[qceropt.id]" name="qcer"> {{ qceropt.name }}
 				                	</span>
@@ -145,26 +142,16 @@
                             <!-- Scope -->
                             <div class="formLevel">
                                 <div class="errorBox">
-                                    <span class="errorTipModal"
-                                          ng-show="LdCreateForm.ldScope.$dirty && LdCreateForm.ldScope.$error.required">Required!</span>
-                                    <span class="errorTipModal" ng-show="LdCreateForm.ldScope.$error.pattern">The design scope cannot contain this symbol.</span>
-                                    <span class="errorTipModal" ng-show="LdCreateForm.ldScope.$error.maxlength">The design scope cannot be longer than 50 characters.</span><span
-                                        class="clearfix"></span>
+                                    <span class="errorTipModal" ng-show="LdCreateForm.ldScope.$dirty && LdCreateForm.ldScope.$error.required">Required!</span>
+                                    <span id="ldScopePatternError" class="errorTipModal" ng-show="LdCreateForm.ldScope.$error.pattern">The design scope cannot contain this symbol.</span>
+                                    <span id="ldScopeLengthError" class="errorTipModal" ng-show="LdCreateForm.ldScope.$error.maxlength">The design scope cannot be longer than 50 characters.</span>
+                                    <span class="clearfix"></span>
                                 </div>
                                 <label class="formLabel"><i class="icon-bell"></i> Design Scope*:</label>
                                 <input class="formInput" type="text" name="ldScope" ng-model="ldScope"
                                 	   typeahead="suggestion for suggestion in getScopes($viewValue)"
                                        placeholder="Scope..." required ng-maxlength="50"
                                        ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
-
-                                <div class="formTag">
-                                    <ul class="zeroMargin scopes" ng-show="ld.scope">
-                                        <li class="modalEditItem"><span class="modalEditItemLink">{{ld.scope}} <a
-                                                ng-href="#"><i
-                                                class="icon-remove-circle"></i> </a></span>
-                                        </li>
-                                    </ul>
-                                </div>
                             </div>
 
                             <!-- Topics -->

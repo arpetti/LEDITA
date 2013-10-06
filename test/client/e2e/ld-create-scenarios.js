@@ -111,6 +111,7 @@ describe('Create a new Learning Design', function() {
 	        sleep(1);
 
 	        verify('ldName', '<script>Bad not allowed</script>', 'Good ***', '#ldNamePatternError', 'The design name cannot contain this symbol.');
+	        verify('ldScope', '<script>Bad not allowed</script>', 'Good ***', '#ldScopePatternError', 'The design scope cannot contain this symbol.');
 
 	        element("#cancelCreateLd").click();
 
