@@ -35,12 +35,12 @@ describe('Registration', function() {
 
 		var verify = function(field, invalidInput, validInput, fieldErrorId, expectedErrorMessage) {
 			input(field).enter(invalidInput);
-		    sleep(1);
+		    sleep(0.3);
 		    expect(element('#signup').attr('disabled')).toBe("disabled");
 		    expect(element(fieldErrorId).css('display')).toBe("inline");
 		    expect(element(fieldErrorId).text()).toMatch(expectedErrorMessage);
 		    input(field).enter(validInput);
-		    sleep(1);
+		    sleep(0.3);
 		    expect(element(fieldErrorId).css('display')).toBe("none");
 		}
 
@@ -56,11 +56,11 @@ describe('Registration', function() {
 			browser().navigateTo('/login');
 			input('password').enter('12345678');
 			input('retypepassword').enter('12345677');
-			sleep(1);
+			sleep(0.3);
 			expect(element('#passwordNotMatch').css('display')).toBe("inline");
 			expect(element('#passwordNotMatch').text()).toMatch('Passwords do not match');
 			input('retypepassword').enter('12345678');
-			sleep(1);
+			sleep(0.3);
 			expect(element('#passwordNotMatch').css('display')).toBe("none");
 		});
 
@@ -71,10 +71,10 @@ describe('Registration', function() {
 			input('username').enter('john.smith@email.com');
 			input('password').enter('12345678');
 			input('retypepassword').enter('12345678');
-			sleep(1);
+			sleep(0.3);
 			expect(element('#signup').attr('disabled')).toBe("disabled");
 			input('terms').check();
-			sleep(1);
+			sleep(0.3);
 			expect(element('#signup').attr('disabled')).toBe(undefined);
 		});
 
