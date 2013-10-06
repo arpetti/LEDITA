@@ -163,7 +163,8 @@
                 <label class="editLabel"><i class="icon-tasks icon-white"></i> QCER Levels:</label>
 
                 <!-- FIXME: How to data bind selected checkboxes in Angular? -->
-                <input type="checkbox" ng-model="selectedQcers"> A1
+                <!-- FIXME: Need service to populate available list of qcers and repeat rather than hard code-->
+                <input type="checkbox" ng-model="selectedQcers[qceropt.id]"> A1
                 <input type="checkbox" ng-model="selectedQcers[qceropt.id]"> A2
                 <input type="checkbox" ng-model="selectedQcers[qceropt.id]"> B1
                 <input type="checkbox" ng-model="selectedQcers[qceropt.id]"> B2
