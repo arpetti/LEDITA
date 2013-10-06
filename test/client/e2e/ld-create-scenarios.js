@@ -31,6 +31,7 @@ describe('Create a new Learning Design', function() {
 		var existingUserName = testUsers.getMarioUserName;
         var existingUserPassword = testUsers.getMarioUserPassword;
         var newLdName = 'Learning Design E2E Test';
+        var newLdScope = 'Scope E2E Test';
 
         browser().navigateTo('/login');
         input('username').enter(existingUserName);
@@ -45,7 +46,7 @@ describe('Create a new Learning Design', function() {
         // fill out the form
         input('ldName').enter(newLdName);
         input('selectedQcers[qceropt.id]').check();
-        input('ldScope').enter('Scope E2E Test');
+        input('ldScope').enter(newLdScope);
         input('ldTopic').enter('Topic E2E Test');
         input('ldObjective').enter('Objective E2E Test');
         input('ldRequisite').enter('Prerequisite E2E Test');
@@ -59,6 +60,7 @@ describe('Create a new Learning Design', function() {
 
         // verify LD data entered in form matches whats displayed on edit page
         expect(input('learningDesign.ld_name').val()).toBe(newLdName);
+        expect(input('learningDesign.ld_scope').val()).toBe(newLdScope);
 
         // Logout
         element('#userActionsMenu').click();
