@@ -147,11 +147,12 @@ angular.module('ledita-app')
     		studentsDescription: $scope.ldStudentsDescr
     	},
         function(res) {
+        	$scope.ldCreateErrors = null;
             $location.path('/ldedit/' + res.ldid);
             $rootScope.$broadcast('closeLdCreateModal');
         },
         function(err) {
-            $scope.ldCreateError = err;
+            $scope.ldCreateErrors = err;
         });
     };
 

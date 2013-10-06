@@ -107,6 +107,10 @@
                     	<form novalidate class="createLdForm" name="LdCreateForm" ng-submit="submitLD()">
                          <div class="modal-body">
 
+                         	<div id="ldCreateErrors" ng-show="ldCreateErrors" class="alert alert-error">
+                           		{{ ldCreateErrors }}
+                			</div>
+
                          	<!-- Name -->
                             <div class="formLevel">
                                 <div class="errorBox">
