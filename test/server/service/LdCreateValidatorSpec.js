@@ -104,7 +104,7 @@ describe('Learning Design Creation Validator', function() {
 		});
 
 		it('Name cannot contain script tag', function() {
-			var ld = new LdBuilder().withName('<script>alert("evil")</alert>').build();
+			var ld = new LdBuilder().withName('<script>alert("evil")</script>').build();
 			var errorMessages = LdCreateValidator.validate(ld);
 	        expect(errorMessages).to.have.length(1);
 	        expect(errorMessages[0]).to.equal(messages.LD_NAME_ALLOWED_CHARS);
@@ -146,6 +146,58 @@ describe('Learning Design Creation Validator', function() {
 	        expect(errorMessages[0]).to.equal(messages.LD_SCOPE_REQUIRED);
 	        expect(errorMessages[1]).to.equal(messages.LD_SCOPE_LENGTH);
 	        expect(errorMessages[2]).to.equal(messages.LD_SCOPE_ALLOWED_CHARS);
+		});
+
+		it('Scope cannot contain script tag', function() {
+			var ld = new LdBuilder().withScope('<script>alert("evil")</script>').build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(1);
+	        expect(errorMessages[0]).to.equal(messages.LD_SCOPE_ALLOWED_CHARS);
+		});
+
+	});
+
+	describe('students description', function() {
+
+		it('Returns error messages if students description is empty', function() {
+			var ld = new LdBuilder().withStudentsDescription("").build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(3);
+	        expect(errorMessages[0]).to.equal(messages.LD_STUDENTS_DESC_REQUIRED);
+	        expect(errorMessages[1]).to.equal(messages.LD_STUDENTS_DESC_LENGTH);
+	        expect(errorMessages[2]).to.equal(messages.LD_STUDENTS_DESC_ALLOWED_CHARS);
+		});
+
+		it('Returns error messages if students description is too long', function() {
+			var ld = new LdBuilder().withStudentsDescription(TestUtils.buildString(501, 'j')).build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(1);
+	        expect(errorMessages[0]).to.equal(messages.LD_STUDENTS_DESC_LENGTH);
+		});
+
+		it('Returns error messages if students description is null', function() {
+			var ld = new LdBuilder().withStudentsDescription(null).build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(3);
+	        expect(errorMessages[0]).to.equal(messages.LD_STUDENTS_DESC_REQUIRED);
+	        expect(errorMessages[1]).to.equal(messages.LD_STUDENTS_DESC_LENGTH);
+	        expect(errorMessages[2]).to.equal(messages.LD_STUDENTS_DESC_ALLOWED_CHARS);
+		});
+
+		it('Returns error messages if students description is undefined', function() {
+			var ld = new LdBuilder().withStudentsDescription(undefined).build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(3);
+	        expect(errorMessages[0]).to.equal(messages.LD_STUDENTS_DESC_REQUIRED);
+	        expect(errorMessages[1]).to.equal(messages.LD_STUDENTS_DESC_LENGTH);
+	        expect(errorMessages[2]).to.equal(messages.LD_STUDENTS_DESC_ALLOWED_CHARS);
+		});
+
+		it('Students Description cannot contain script tag', function() {
+			var ld = new LdBuilder().withStudentsDescription('<script>alert("evil")</script>').build();
+			var errorMessages = LdCreateValidator.validate(ld);
+	        expect(errorMessages).to.have.length(1);
+	        expect(errorMessages[0]).to.equal(messages.LD_STUDENTS_DESC_ALLOWED_CHARS);
 		});
 
 	});

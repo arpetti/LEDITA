@@ -2,18 +2,6 @@ var vh = require('../util/ValidationHelper');
 var m = require('./ValidationMessages');
 var _ = require('underscore');
 
-/*
-Home.createLd({
-	name: $scope.ldName,
-	qcers: $scope.selectedQcers,
-	scope: $scope.ldScope,
-	topics: $scope.selectedTopics,
-	objectives: $scope.selectedObjectives,
-	requisites: $scope.selectedPrerequisites,
-	studentsDescription: $scope.ldStudentsDescr
-}
-*/
-
 var atLeastOneQcer = function(qcers) {
 	if(typeof(qcers) == 'undefined' || qcers == null) {
 		return m.LD_QCER_SELECTED;
@@ -61,14 +49,20 @@ module.exports = {
 		em.push(vh.validateAny(vh.validateRegEx, 
 			[ld.name, m.LD_NAME_ALLOWED_CHARS, vh.FIRST_ALPHANUMERIC_REST_ANY_CHAR]));
 
-		// Qcer
-		em.push(atLeastOneQcer(ld.qcers));
-
 		// Scope
 		em.push(vh.validateAny(vh.validateNullEmpty, [ld.scope, m.LD_SCOPE_REQUIRED]));
 		em.push(vh.validateAny(vh.validateLength, [ld.scope, m.LD_SCOPE_LENGTH, 1, 50]));
 		em.push(vh.validateAny(vh.validateRegEx, 
 			[ld.scope, m.LD_SCOPE_ALLOWED_CHARS, vh.FIRST_ALPHANUMERIC_REST_ANY_CHAR]));
+
+		// Students Description
+		em.push(vh.validateAny(vh.validateNullEmpty, [ld.studentsDescription, m.LD_STUDENTS_DESC_REQUIRED]));
+		em.push(vh.validateAny(vh.validateLength, [ld.studentsDescription, m.LD_STUDENTS_DESC_LENGTH, 1, 500]));
+		em.push(vh.validateAny(vh.validateRegEx, 
+			[ld.studentsDescription, m.LD_STUDENTS_DESC_ALLOWED_CHARS, vh.FIRST_ALPHANUMERIC_REST_ANY_CHAR]));
+
+		// Qcer
+		em.push(atLeastOneQcer(ld.qcers));
 
 		// Topics
 		em.push(atLeastOneItemInList(ld.topics, m.LD_TOPIC_SELECTED));
