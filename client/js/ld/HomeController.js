@@ -136,14 +136,22 @@ angular.module('ledita-app')
         clearCurrentPrerequisite();
     };
 
+    $scope.appendInputToItems = function(item, items) {
+    	if(item && item.length > 0 && item !== " ") {
+    		return items.concat(item);
+    	} else {
+    		return items;
+    	};
+    };
+
     $scope.submitLD = function() {
     	Home.createLd({
     		name: $scope.ldName,
     		qcers: $scope.selectedQcers,
     		scope: $scope.ldScope,
-    		topics: $scope.selectedTopics,
-    		objectives: $scope.selectedObjectives,
-    		requisites: $scope.selectedPrerequisites,
+    		topics: $scope.appendInputToItems($scope.ldTopic, $scope.selectedTopics),
+    		objectives: $scope.appendInputToItems($scope.ldObjective, $scope.selectedObjectives),
+    		requisites: $scope.appendInputToItems($scope.ldRequisite, $scope.selectedPrerequisites),
     		studentsDescription: $scope.ldStudentsDescr
     	},
         function(res) {

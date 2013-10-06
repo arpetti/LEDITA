@@ -90,5 +90,64 @@ describe('Create Learning Design Controller', function() {
 
   	});
 
+	describe('Append item to items', function() {
+
+		it('Appends a non empty item', function() {
+			var item = 'Add me';
+			var items = ['something 1', 'something 2'];
+			
+			var newItems = scope.appendInputToItems(item, items);
+
+			expect(newItems.length).toEqual(3);
+			expect(newItems[0]).toEqual(items[0]);
+			expect(newItems[1]).toEqual(items[1]);
+			expect(newItems[2]).toEqual(item);
+		});
+
+		it('Does not append a single space item', function() {
+			var item = ' ';
+			var items = ['something 1', 'something 2'];
+			
+			var newItems = scope.appendInputToItems(item, items);
+
+			expect(newItems.length).toEqual(2);
+			expect(newItems[0]).toEqual(items[0]);
+			expect(newItems[1]).toEqual(items[1]);
+		});
+
+		it('Does not append an empty item', function() {
+			var item = '';
+			var items = ['something 1', 'something 2'];
+			
+			var newItems = scope.appendInputToItems(item, items);
+
+			expect(newItems.length).toEqual(2);
+			expect(newItems[0]).toEqual(items[0]);
+			expect(newItems[1]).toEqual(items[1]);
+		});
+
+		it('Does not append a null item', function() {
+			var item = null;
+			var items = ['something 1', 'something 2'];
+			
+			var newItems = scope.appendInputToItems(item, items);
+
+			expect(newItems.length).toEqual(2);
+			expect(newItems[0]).toEqual(items[0]);
+			expect(newItems[1]).toEqual(items[1]);
+		});
+
+		it('Does not append an undefined item', function() {
+			var item = undefined;
+			var items = ['something 1', 'something 2'];
+			
+			var newItems = scope.appendInputToItems(item, items);
+
+			expect(newItems.length).toEqual(2);
+			expect(newItems[0]).toEqual(items[0]);
+			expect(newItems[1]).toEqual(items[1]);
+		});
+
+	});
 
 });
