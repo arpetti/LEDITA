@@ -20,6 +20,9 @@
 	
 	exports.buildLongEmailAddress = buildLongEmailAddress();
 
+	exports.buildLongLdName = buildLongString(51);
+	exports.buildMaxLdName = buildLongString(50);
+
 	function getUserName(user) {
 		return user.username;
 	};
@@ -35,6 +38,14 @@
         };
         var tempString = tempArray.join("");
         return tempString + "." + tempString + "@test.com";
+	};
+
+	function buildLongString(numChars) {
+		var tempArray = [];
+        for (var i=0; i<numChars; i++) {
+            tempArray.push('a');
+        };
+        return tempArray.join("");
 	};
 
 })(typeof exports === 'undefined' ? this['testUsers'] = {} : exports);	

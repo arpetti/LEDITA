@@ -133,11 +133,14 @@ describe('Create a new Learning Design', function() {
 		    input(field).enter(validInput);
 		    sleep(1);
 		    expect(element(fieldErrorId).css('display')).toBe("none");
-		}
+		};
 
 		it('Invalid input is not allowed', function() {
 			var badPatternText = '<script>Bad not allowed</script>';
 			var goodPatternText = 'Good *** 0123';
+
+			var ldNameTooLong = testUsers.buildLongLdName;
+			var ldNameMaxAllowed = testUsers.buildMaxLdName;
 
 			browser().navigateTo('/login');
 	        input('username').enter(existingUserName);
@@ -150,6 +153,8 @@ describe('Create a new Learning Design', function() {
 	        sleep(1);
 
 	        verify('ldName', badPatternText, goodPatternText, '#ldNamePatternError', 'The design name cannot contain this symbol');
+	        verify('ldName', ldNameTooLong, ldNameMaxAllowed, '#ldNameLengthError', 'The design name cannot be longer than 50 characters');
+	        
 	        verify('ldScope', badPatternText, goodPatternText, '#ldScopePatternError', 'The design scope cannot contain this symbol');
 	        verify('ldTopic', badPatternText, goodPatternText, '#topicPatternError', 'A topic cannot contain this symbol');
 	        verify('ldObjective', badPatternText, goodPatternText, '#objectivePatternError', 'An objective cannot contain this symbol');
