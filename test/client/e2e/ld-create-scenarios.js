@@ -27,8 +27,7 @@ describe('Create a new Learning Design', function() {
         element('#logoutLink').click();
 	});
 
-	// Work in progress, needs server-side fix for not showing private LD's rather than client side filter
-	xit('Logged in user can create a new Learning Design', function() {
+	it('Logged in user can create a new Learning Design', function() {
 		var existingUserName = testUsers.getMarioUserName;
         var existingUserPassword = testUsers.getMarioUserPassword;
 
