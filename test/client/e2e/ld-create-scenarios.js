@@ -57,29 +57,63 @@ describe('Create a new Learning Design', function() {
         element("#confirmCreateLD").click();
         sleep(1);
 
-        // should be on edit page
         expect(browser().location().url()).toMatch('/ldedit/');
-
-        // verify LD data entered in form matches whats displayed on edit page
         expect(input('learningDesign.ld_name').val()).toBe(newLdName);
         expect(input('learningDesign.ld_scope').val()).toBe(newLdScope);
-
-        // TODO: Verify qcers (need to figure out data binding for checkboxes)
-
-        // Verify subjects (a.k.a. topics)
         expect(repeater('.subjects li').count()).toBe(1);
         expect(repeater('.subjects li').column('subject.subject_name')).toEqual([newTopic]);
-
-        // Verify objectives
         expect(repeater('.objectives li').count()).toBe(1);
         expect(repeater('.objectives li').column('objective.objective_descr')).toEqual([newObjective]);
-
-        // Verify prerequisites
         expect(repeater('.prerequisites li').count()).toBe(1);
         expect(repeater('.prerequisites li').column('prereq.prereq_name')).toEqual([newPrereq]);
-
-        // Verify students description
         expect(input('learningDesign.ld_students_profile').val()).toBe(newLdStudentsDescription);
+        
+        // TODO: Verify qcers (need to figure out data binding for checkboxes)
+
+        // Logout
+        element('#userActionsMenu').click();
+        element('#logoutLink').click();
+	});
+
+	it('Logged in user can create a new Learning Design with no Prerequisites', function() {
+        var newLdName = 'Learning Design E2E Test no prereq';
+        var newLdScope = 'Scope E2E Test no prereq';
+        var newTopic = 'Topic E2E Test no prereq';
+        var newObjective = 'Objective E2E Test no prereq';
+        var newLdStudentsDescription = 'Students Description E2E Test no prereq';
+
+        browser().navigateTo('/login');
+        input('username').enter(existingUserName);
+        input('password').enter(existingUserPassword);
+        element('#loginButton').click();
+        sleep(2);
+
+        // open LD Create modal
+        element('#createLd').click();
+        sleep(1);
+
+        // fill out the form
+        input('ldName').enter(newLdName);
+        input('selectedQcers[qceropt.id]').check();  // this checks them all
+        input('ldScope').enter(newLdScope);
+        input('ldTopic').enter(newTopic);
+        input('ldObjective').enter(newObjective);
+        input('ldStudentsDescr').enter(newLdStudentsDescription);
+        
+        element("#confirmCreateLD").click();
+        sleep(1);
+
+        expect(browser().location().url()).toMatch('/ldedit/');
+        expect(input('learningDesign.ld_name').val()).toBe(newLdName);
+        expect(input('learningDesign.ld_scope').val()).toBe(newLdScope);
+        expect(repeater('.subjects li').count()).toBe(1);
+        expect(repeater('.subjects li').column('subject.subject_name')).toEqual([newTopic]);
+        expect(repeater('.objectives li').count()).toBe(1);
+        expect(repeater('.objectives li').column('objective.objective_descr')).toEqual([newObjective]);
+        expect(repeater('.prerequisites li').count()).toBe(0);
+        expect(input('learningDesign.ld_students_profile').val()).toBe(newLdStudentsDescription);
+        
+        // TODO: Verify qcers (need to figure out data binding for checkboxes)
 
         // Logout
         element('#userActionsMenu').click();
