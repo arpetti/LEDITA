@@ -2,6 +2,7 @@
 // Reference for mocha-promise testing: http://architects.dzone.com/articles/functional-testing-nodejs
 var expect = require('chai').expect
 var LdGetService = require('../../../server/service/LdGetService');
+var LdDao = require('../../../server/dao/LdDao');
 var messages = require('../../../server/service/ValidationMessages');
 var _ = require('underscore');
 
@@ -11,10 +12,11 @@ describe('LD Service Integration', function() {
             LdGetService.getAllLearningDesigns(function(err, result, message) {
                   expect(err).to.be.null;
                   expect(message).to.be.null;
-                  expect(result).to.have.length(30);
+                  expect(result).to.have.length(23);
 
                   var ldDemo1 = _.findWhere(result, {ld_id: 1});
                   expect(ldDemo1.ld_name).to.equal('Learningà Designè Titleì Demoò 1ù é');
+                  expect(ldDemo1.ld_publication).to.equal(LdDao.LD_PUBLIC_INDICATOR);
                   expect(ldDemo1.qcers).to.have.length(2);
                   expect(ldDemo1.qcers[0].qcer_name).to.equal('A1');
                   expect(ldDemo1.qcers[1].qcer_name).to.equal('A2');

@@ -1,11 +1,15 @@
-var expect = require('chai').expect
-    , LdDao = require('../../../server/dao/LdDao');
+var expect = require('chai').expect;
+var LdDao = require('../../../server/dao/LdDao');
+var _ = require('underscore');
 
 describe('Learning Design DAO', function() {    
 
 	it('Get all learning designs returns 30 results', function(done) {
 		LdDao.getLearningDesigns(function(err, learningDesigns){
-			expect(learningDesigns).to.have.length(30);
+			expect(learningDesigns).to.have.length(23);
+			var publications = _.uniq(_.pluck(learningDesigns, 'ld_publication'));
+			expect(publications).to.have.length(1);
+			expect(publications[0]).to.equal(LdDao.LD_PUBLIC_INDICATOR);
             done();
 		});
     });

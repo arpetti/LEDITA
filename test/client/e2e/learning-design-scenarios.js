@@ -15,7 +15,7 @@ describe('Learning Design', function() {
         sleep(2);
 
         // Verify total results
-        expect(repeater('.ld-border').count()).toEqual(30);
+        expect(repeater('.ld-border').count()).toBe(23);
 
         // Verify first LD
         var expectedLd1Data = ["Learningà Designè Titleì Demoò 1ù é","A1","A2","Lesson","Mario","Rossi"];
@@ -23,7 +23,7 @@ describe('Learning Design', function() {
 
         // Verify another LD
         var expectedLd5Data = ["Learning Design Title Demo 5","A1","A2","B1","B2","C1","C2","Semester","Sara","Neri"];
-        expect(repeater('.ld-border').row(4)).toEqual(expectedLd5Data);
+        expect(repeater('.ld-border').row(3)).toEqual(expectedLd5Data);
 
         // Logout
         element('#userActionsMenu').click();
@@ -130,9 +130,7 @@ describe('Learning Design', function() {
         // Click on a child link
         element(".childModalLink").click();
 
-        // Verify modal window content 
-      <!-- TODO: test for modal -->
-
+        // TODO: Verify modal window content 
 
         // Logout
         element('#userActionsMenu').click();
@@ -151,59 +149,46 @@ describe('Learning Design', function() {
 
         // Click on second result 
         element('#ldlist .ld-item:nth-child(2) a .ld-center').click();
-        sleep(2);
+        sleep(1);
 
         // Verify detail view
-        expect(browser().location().url()).toBe('/ld/2');
-        expect(binding('learningDesign.ld_name')).toBe('Learning Design Title Demo 2');
+        expect(browser().location().url()).toBe('/ld/3');
+        expect(binding('learningDesign.ld_name')).toBe('Learning Design Title Demo 3');
         expect(binding('learningDesign.ld_students_profile')).toBe('20 studenti adolescenti di livello B1');
-        expect(binding('learningDesign.ld_scope')).toBe('Module');
-        expect(repeater('.qceritem').column('qcer.qcer_name')).toEqual(["B1"]);
+        expect(binding('learningDesign.ld_scope')).toBe('Semester');
+        expect(repeater('.qceritem').column('qcer.qcer_name')).toEqual(["C1"]);
 
         // Verify subjects
-        expect(repeater('.subjects li').count()).toBe(2);
-        expect(repeater('.subjects li').column('subject.subject_name')).toEqual(["Topic 2", "Topic 4"]);
+        expect(repeater('.subjects li').count()).toBe(1);
+        expect(repeater('.subjects li').column('subject.subject_name')).toEqual(["Topic 3"]);
 
         // Verify objectives
         expect(repeater('.objectives li').count()).toBe(2);
-        expect(repeater('.objectives li').column('objective.objective_descr')).toEqual(["Objective 2", "Objective 6"]);
+        expect(repeater('.objectives li').column('objective.objective_descr')).toEqual(["Objective 3", "Objective 6"]);
 
         // Verify prerequisites
         expect(repeater('.prerequisites li').count()).toBe(1);
-        expect(repeater('.prerequisites li').column('prereq.prereq_name')).toEqual(["Learningà Designè Titleì Demoò 1ù é"]);
+        expect(repeater('.prerequisites li').column('prereq.prereq_name')).toEqual(["Objective 3"]);
 
         // Verify Global View
         expect(repeater('.levelBox').count()).toBe(4);
-        expect(repeater('.groupBox1').count()).toBe(2);
+        expect(repeater('.groupBox3').count()).toBe(1);
         expect(repeater('.actBox').count()).toBe(10);
 
         // Verify Textual View
         element("#textualTab").click();
         var expectedLd2TextualViewLevel1 = [
-            "","Learning Activity 8","Face to face","15 min.","INDIVIDUAL",
-            "Practical description: what to do for the execution of this activity",
-            "Pedagogical Description: how to obtain better results and improve learning during the activity",
-
-            "Learning Activity 9","Face to face","2 h.","INDIVIDUAL","PC","Smartphone","Tablet",
-            "Didactical resource name 5","website","www.copy.com","Description of the didactical resource number 5",
-            "Practical description: what to do for the execution of this activity",
-            "Pedagogical Description: how to obtain better results and improve learning during the activity",
-
-            "Group 3 Name","Learning Activity 10","Online","30 min.","INDIVIDUAL",
-            "Practical description: what to do for the execution of this activity",
-            "Pedagogical Description: how to obtain better results and improve learning during the activity",
-
-            "Learning Activity 11","Face to face","2 d.","INDIVIDUAL",
-            "Didactical resource name 6","image","Description of the didactical resource number 6",
-            "Practical description: what to do for the execution of this activity",
-            "Pedagogical Description: how to obtain better results and improve learning during the activity"];
+        	"Support Activity 22","Online","1 mo. 15 d.","PAIR","Smartphone","Whiteboard",
+        	"Practical description: what to do for the execution of this activity",
+        	"Pedagogical Description: how to obtain better results and improve learning during the activity"
+        ];
         expect(repeater(".teacherLevel").row(0)).toEqual(expectedLd2TextualViewLevel1);
 
 
         // Verify Global View after other Views
         element("#globalTab").click();
         expect(repeater('.levelBox').count()).toBe(4);
-        expect(repeater('.groupBox1').count()).toBe(2);
+        expect(repeater('.groupBox3').count()).toBe(1);
         expect(repeater('.actBox').count()).toBe(10);
 
         // Logout
