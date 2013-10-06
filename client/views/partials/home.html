@@ -1,7 +1,6 @@
 <div id="ldlist" class="row top-margin zeroLeft">
     <!-- LD BOX START -->
-    <div ng-repeat="learningDesign in learningDesigns | orderBy:'ld_last_edit_date':true" class="ld-border ld-item"
-         ng-show="learningDesign.ld_publication==1">
+    <div ng-repeat="learningDesign in learningDesigns | orderBy:'ld_last_edit_date':true" class="ld-border ld-item">
 
         <a ng-href="ld/{{ learningDesign.ld_id }}">
             <div class="ld-center text-center">
