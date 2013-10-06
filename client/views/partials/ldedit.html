@@ -136,29 +136,34 @@
 
 <div id="contentBody">
     <div id="contentHeader">
+        
+        <!-- LD Name -->
         <div >
             <form name="LdName" novalidate="" class="singleForm">
                 <div>
-
                     <label class="editLabel"><i class="icon-book icon-white"></i> Design name: </label>
                     <input class="editInputName" type="text"
-                                                                placeholder="{{ learningDesign.ld_name }}" name="ldName"
-                                                                ng-model="learningDesign.ld_name" required
-                                                                ng-maxlength="50"
-                                                                ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
+                        name="ldName"
+                        ng-model="learningDesign.ld_name" required
+                        ng-maxlength="50"
+                        ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
 
                     <div class="errorBoxTab">
-                                    <span class="errorTipTab"
-                                          ng-show="(learningDesign.ld_name == '') || (LdName.ldName.$dirty && LdName.ldName.$error.required)">Required!</span>
+                        <span class="errorTipTab"
+                              ng-show="(learningDesign.ld_name == '') || (LdName.ldName.$dirty && LdName.ldName.$error.required)">Required!</span>
                         <span class="errorTipTab" ng-show="LdName.ldName.$error.pattern">The design name cannot contain this symbol.</span>
                         <span class="errorTipTab" ng-show="LdName.ldName.$error.maxlength">The design name cannot be longer than 50 characters.</span>
-                    </div></div>
+                    </div>
+                </div>
             </form>
         </div>
+
         <div >
+        	<!-- LD Qcer -->
             <div class="titleQcer">
                 <label class="editLabel"><i class="icon-tasks icon-white"></i> QCER Levels:</label>
 
+                <!-- FIXME: How to data bind selected checkboxes in Angular? -->
                 <input type="checkbox" ng-model="selectedQcers"> A1
                 <input type="checkbox" ng-model="selectedQcers[qceropt.id]"> A2
                 <input type="checkbox" ng-model="selectedQcers[qceropt.id]"> B1
@@ -166,22 +171,26 @@
                 <input type="checkbox" ng-model="selectedQcers[qceropt.id]"> C1
                 <input type="checkbox" ng-model="selectedQcers[qceropt.id]"> C2
             </div>
+
+            <!-- LD Scope -->
             <div class="titleScope">
                 <form name="ScopeForm" novalidate="" class="singleForm">
                     <div >
                         <label class="editLabel"><i class="icon-bell icon-white"></i> Scope:</label>
-                        <input class="editInputScocpe" type="text" name="ldScope" ng-model="learningDesign.ld_scope"
-                               placeholder=" {{ learningDesign.ld_scope }}" required ng-maxlength="50"
-                               ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
+                        <input class="editInputScocpe" type="text" name="ldScope" 
+                        	ng-model="learningDesign.ld_scope"
+                           	required ng-maxlength="50"
+                           	ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
                         <div class="errorBoxTab">
-                                    <span class="errorTipTab"
-                                          ng-show="(learningDesign.ld_scope == '') || (ScopeForm.ldScope.$dirty && ScopeForm.ldScope.$error.required)">Required!</span>
+                            <span class="errorTipTab"
+                                  ng-show="(learningDesign.ld_scope == '') || (ScopeForm.ldScope.$dirty && ScopeForm.ldScope.$error.required)">Required!</span>
                             <span class="errorTipTab" ng-show="ScopeForm.ldScope.$error.pattern">The scope cannot contain this symbol.</span>
                             <span class="errorTipTab" ng-show="ScopeForm.ldScope.$error.maxlength">The scope cannot be longer than 50 characters.</span>
                         </div>
                     </div>
                 </form>
             </div>
+
         </div>
         <div class="clearfix"></div>
     </div>
