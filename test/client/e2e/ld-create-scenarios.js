@@ -86,7 +86,43 @@ describe('Create a new Learning Design', function() {
         element('#logoutLink').click();
 	});
 
-	describe('Client Side Validation', function() {
+	describe('Server side validation', function() {
+
+		it('Enforces at least one qcer must be selected', function() {
+			browser().navigateTo('/login');
+	        input('username').enter(existingUserName);
+	        input('password').enter(existingUserPassword);
+	        element('#loginButton').click();
+	        sleep(2);
+
+	        // open LD Create modal
+	        element('#createLd').click();
+	        sleep(1);
+
+	        // fill out the form, but don't select qcer
+	        input('ldName').enter('some name');
+	        input('ldScope').enter('some scope');
+	        input('ldTopic').enter('some topic');
+	        input('ldObjective').enter('some objective');
+	        input('ldRequisite').enter('some prereq');
+	        input('ldStudentsDescr').enter('some description');
+	        
+	        element("#confirmCreateLD").click();
+	        sleep(1);
+
+	        expect(element('#ldCreateErrors').css('display')).toBe("block");
+		    expect(element('#ldCreateErrors').text()).toMatch('At least one Qcer must be selected');
+
+		    element("#cancelCreateLd").click();
+
+	        // Logout
+	        element('#userActionsMenu').click();
+	        element('#logoutLink').click();
+		});
+
+	});
+
+	describe('Client side Validation', function() {
 
 		var verify = function(field, invalidInput, validInput, fieldErrorId, expectedErrorMessage) {
 			input(field).enter(invalidInput);
