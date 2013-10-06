@@ -157,11 +157,10 @@
                             <!-- Topics -->
                             <div class="formLevel">
                                 <div class="errorBox">
-                                    <span class="errorTipModal"
-                                          ng-show="LdCreateForm.ldTopic.$dirty && LdCreateForm.ldTopic.$error.required">Required!</span>
-                                    <span class="errorTipModal" ng-show="LdCreateForm.ldTopic.$error.pattern">A topic cannot contain this symbol.</span>
-                                    <span class="errorTipModal" ng-show="LdCreateForm.ldTopic.$error.maxlength">A topic cannot be longer than 255 characters.</span><span
-                                        class="clearfix"></span>
+                                    <span class="errorTipModal" ng-show="LdCreateForm.ldTopic.$dirty && LdCreateForm.ldTopic.$error.required">Required!</span>
+                                    <span id="topicPatternError" class="errorTipModal" ng-show="LdCreateForm.ldTopic.$error.pattern">A topic cannot contain this symbol.</span>
+                                    <span id="topicLengthError" class="errorTipModal" ng-show="LdCreateForm.ldTopic.$error.maxlength">A topic cannot be longer than 255 characters.</span>
+                                    <span class="clearfix"></span>
                                 </div>
                                 <label class="formLabel"><i class="icon-map-marker"></i> Topics*:</label>
                                 <input class="formInput" type="text" ng-model="ldTopic" name="ldTopic"
@@ -185,11 +184,10 @@
                             <!-- Objectives -->
                             <div class="formLevel">
                                 <div class="errorBox">
-                                    <span class="errorTipModal"
-                                          ng-show="LdCreateForm.ldObjective.$dirty && LdCreateForm.ldObjective.$error.required">Required!</span>
-                                    <span class="errorTipModal" ng-show="LdCreateForm.ldObjective.$error.pattern">An objective cannot contain this symbol.</span>
-                                    <span class="errorTipModal" ng-show="LdCreateForm.ldObjective.$error.maxlength">An objective cannot be longer than 255 characters.</span><span
-                                        class="clearfix"></span>
+                                    <span class="errorTipModal" ng-show="LdCreateForm.ldObjective.$dirty && LdCreateForm.ldObjective.$error.required">Required!</span>
+                                    <span id="objectivePatternError" class="errorTipModal" ng-show="LdCreateForm.ldObjective.$error.pattern">An objective cannot contain this symbol.</span>
+                                    <span id="objectiveLengthError" class="errorTipModal" ng-show="LdCreateForm.ldObjective.$error.maxlength">An objective cannot be longer than 255 characters.</span>
+                                    <span class="clearfix"></span>
                                 </div>
                             <label class="formLabel"><i class="icon-screenshot"></i> Objectives*:</label>
                             <input class="formInput" type="text" name="ldObjective" ng-model="ldObjective"
@@ -212,9 +210,8 @@
                     		<!-- Pre-requisites -->
 		                    <div class="formLevel">
 		                        <div class="errorBox">
-		                            <span class="errorTipModal" ng-show="LdCreateForm.ldRequisite.$error.pattern">A pre-requisite cannot contain this symbol.</span>
-		                            <span class="errorTipModal" ng-show="LdCreateForm.ldRequisite.$error.maxlength">A pre-requisite cannot be longer than 255 characters.</span>
-
+		                            <span id="prereqPatternError" class="errorTipModal" ng-show="LdCreateForm.ldRequisite.$error.pattern">A pre-requisite cannot contain this symbol.</span>
+		                            <span id="prereqLengthError" class="errorTipModal" ng-show="LdCreateForm.ldRequisite.$error.maxlength">A pre-requisite cannot be longer than 255 characters.</span>
 		                        </div>
 		                        <label class="formLabel"><i class="icon-backward"></i> Pre-Requisites:</label>
 		                        <input class="formInput" type="text" name="ldRequisite" ng-model="ldRequisite"
@@ -238,12 +235,9 @@
 		                    <!-- Students Description -->
 		                    <div class="formLevel">
 		                        <div class="errorBox">
-		                               <span class="errorTipModal"
-                                             ng-show="LdCreateForm.ldStudentsDescr.$dirty && LdCreateForm.ldStudentsDescr.$error.required">Required!</span>
-
-                                    <span class="errorTipModal" ng-show="LdCreateForm.ldStudentsDescr.$error.pattern">Students' description cannot contain this symbol.</span>
-		                            <span class="errorTipModal" ng-show="LdCreateForm.ldStudentsDescr.$error.maxlength">Students' description cannot be longer than 500 characters.</span>
-
+		                            <span class="errorTipModal" ng-show="LdCreateForm.ldStudentsDescr.$dirty && LdCreateForm.ldStudentsDescr.$error.required">Required!</span>
+                                    <span id="ldStudentDescrPatternError" class="errorTipModal" ng-show="LdCreateForm.ldStudentsDescr.$error.pattern">Students' description cannot contain this symbol.</span>
+		                            <span id="ldStudentDescrLengthError" class="errorTipModal" ng-show="LdCreateForm.ldStudentsDescr.$error.maxlength">Students' description cannot be longer than 500 characters.</span>
 		                        </div>
 		                        <label class="formLabel"><i class="icon-user"></i> Students' Description*:</label>
 		                        <textarea class="formInput" name="ldStudentsDescr" ng-model="ldStudentsDescr" required="" rows="4" ng-maxlength="500"  ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/"></textarea>

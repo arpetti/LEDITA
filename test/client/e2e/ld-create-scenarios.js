@@ -136,6 +136,9 @@ describe('Create a new Learning Design', function() {
 		}
 
 		it('Invalid input is not allowed', function() {
+			var badPatternText = '<script>Bad not allowed</script>';
+			var goodPatternText = 'Good *** 0123';
+
 			browser().navigateTo('/login');
 	        input('username').enter(existingUserName);
 	        input('password').enter(existingUserPassword);
@@ -146,8 +149,12 @@ describe('Create a new Learning Design', function() {
 	        element('#createLd').click();
 	        sleep(1);
 
-	        verify('ldName', '<script>Bad not allowed</script>', 'Good ***', '#ldNamePatternError', 'The design name cannot contain this symbol.');
-	        verify('ldScope', '<script>Bad not allowed</script>', 'Good ***', '#ldScopePatternError', 'The design scope cannot contain this symbol.');
+	        verify('ldName', badPatternText, goodPatternText, '#ldNamePatternError', 'The design name cannot contain this symbol');
+	        verify('ldScope', badPatternText, goodPatternText, '#ldScopePatternError', 'The design scope cannot contain this symbol');
+	        verify('ldTopic', badPatternText, goodPatternText, '#topicPatternError', 'A topic cannot contain this symbol');
+	        verify('ldObjective', badPatternText, goodPatternText, '#objectivePatternError', 'An objective cannot contain this symbol');
+	        verify('ldRequisite', badPatternText, goodPatternText, '#prereqPatternError', 'A pre-requisite cannot contain this symbol');
+	        verify('ldStudentsDescr', badPatternText, goodPatternText, '#ldStudentDescrPatternError', "Students' description cannot contain this symbol");
 
 	        element("#cancelCreateLd").click();
 
