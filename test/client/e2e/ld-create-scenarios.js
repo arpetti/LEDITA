@@ -126,21 +126,24 @@ describe('Create a new Learning Design', function() {
 
 		var verify = function(field, invalidInput, validInput, fieldErrorId, expectedErrorMessage) {
 			input(field).enter(invalidInput);
-		    sleep(1);
+		    sleep(0.3);
 		    expect(element('#confirmCreateLD').attr('disabled')).toBe("disabled");
 		    expect(element(fieldErrorId).css('display')).toBe("inline");
 		    expect(element(fieldErrorId).text()).toMatch(expectedErrorMessage);
 		    input(field).enter(validInput);
-		    sleep(1);
+		    sleep(0.3);
 		    expect(element(fieldErrorId).css('display')).toBe("none");
 		};
 
 		it('Invalid input is not allowed', function() {
 			var badPatternText = '<script>Bad not allowed</script>';
 			var goodPatternText = 'Good *** 0123';
-
 			var ldNameTooLong = testUsers.buildLongLdName;
 			var ldNameMaxAllowed = testUsers.buildMaxLdName;
+			var topicTooLong = testUsers.buildLongTopic;
+			var topicMaxAllowed = testUsers.buildMaxTopic;
+			var studentsDescrTooLong = testUsers.buildLongStudentsDescr;
+			var studentsDescrMaxAllowed = testUsers.buildMaxStudentsDescr;
 
 			browser().navigateTo('/login');
 	        input('username').enter(existingUserName);
@@ -152,14 +155,25 @@ describe('Create a new Learning Design', function() {
 	        element('#createLd').click();
 	        sleep(1);
 
-	        verify('ldName', badPatternText, goodPatternText, '#ldNamePatternError', 'The design name cannot contain this symbol');
-	        verify('ldName', ldNameTooLong, ldNameMaxAllowed, '#ldNameLengthError', 'The design name cannot be longer than 50 characters');
-	        
-	        verify('ldScope', badPatternText, goodPatternText, '#ldScopePatternError', 'The design scope cannot contain this symbol');
-	        verify('ldTopic', badPatternText, goodPatternText, '#topicPatternError', 'A topic cannot contain this symbol');
-	        verify('ldObjective', badPatternText, goodPatternText, '#objectivePatternError', 'An objective cannot contain this symbol');
-	        verify('ldRequisite', badPatternText, goodPatternText, '#prereqPatternError', 'A pre-requisite cannot contain this symbol');
-	        verify('ldStudentsDescr', badPatternText, goodPatternText, '#ldStudentDescrPatternError', "Students' description cannot contain this symbol");
+	        verify('ldName', badPatternText, goodPatternText, '#ldNamePatternErr', 'The design name cannot contain this symbol');
+	        verify('ldName', ldNameTooLong, ldNameMaxAllowed, '#ldNameLengthErr', 'The design name cannot be longer than 50 characters');
+	        verify('ldScope', badPatternText, goodPatternText, '#ldScopePatternErr', 'The design scope cannot contain this symbol');
+	        verify('ldScope', ldNameTooLong, ldNameMaxAllowed, '#ldScopeLengthErr', 'The design scope cannot be longer than 50 characters');
+	        verify('ldTopic', badPatternText, goodPatternText, '#topicPatternErr', 'A topic cannot contain this symbol');
+	        verify('ldTopic', topicTooLong, topicMaxAllowed, '#topicLengthErr', 'A topic cannot be longer than 255 characters');
+	        verify('ldObjective', badPatternText, goodPatternText, '#objectivePatternErr', 'An objective cannot contain this symbol');
+	        verify('ldObjective', topicTooLong, topicMaxAllowed, '#objectiveLengthErr', 'An objective cannot be longer than 255 characters');
+	        verify('ldRequisite', badPatternText, goodPatternText, '#prereqPatternErr', 'A pre-requisite cannot contain this symbol');
+	        verify('ldRequisite', topicTooLong, topicMaxAllowed, '#prereqLengthErr', 'A pre-requisite cannot be longer than 255 characters');
+	        verify('ldStudentsDescr', badPatternText, goodPatternText, '#ldStudentDescrPatternErr', "Students' description cannot contain this symbol");
+	        verify('ldStudentsDescr', studentsDescrTooLong, studentsDescrMaxAllowed, '#ldStudentDescrLengthErr', "Students' description cannot be longer than 500 characters");
+
+	        // Now that all the fields are filled out, blank them out and verify required (except prereq)
+	        verify('ldName', "", goodPatternText, '#ldNameReqErr', 'Required');
+	        verify('ldScope', "", goodPatternText, '#ldScopeReqErr', 'Required');
+	        verify('ldTopic', "", goodPatternText, '#topicReqErr', 'Required');
+	        verify('ldObjective', "", goodPatternText, '#objectiveReqErr', 'Required');
+	        verify('ldStudentsDescr', "", goodPatternText, '#studentsDescrReqErr', 'Required');
 
 	        element("#cancelCreateLd").click();
 

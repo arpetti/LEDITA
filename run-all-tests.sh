@@ -25,6 +25,9 @@ if [[ -n "$nodepid" ]]; then
 	sleep 2
 fi
 
+echo "Cleaning log files..."
+rm logs/*.log
+
 echo "Recreating database in preparation for server side tests..."
 database/local/create-db.sh
 
