@@ -32,7 +32,7 @@
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="rowTable" ng-repeat="learningDesign in learningDesigns | filter:search | orderBy:predicate:reverse"  ng-show="learningDesign.ld_publication==1">
+                    <div class="rowTable" ng-repeat="learningDesign in learningDesigns | filter:search | orderBy:predicate:reverse">
                         <div class="rowUserLink">
                             <a ng-href="/ld/{{ learningDesign.ld_id }}">
                                 <div class="colTable colLD1">
