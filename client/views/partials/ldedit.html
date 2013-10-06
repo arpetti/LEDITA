@@ -51,9 +51,10 @@
                 </li>
             </ul>
         </div>
-        <!-- FIXME: dynamic data with typeahead -->
+        
+        <!-- Prerequisites -->
+        <!-- FIXME: implement typeahead -->
         <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-backward"></i> Pre-Requisites:</h5>
-
             <form ng-submit="addNeeds()" class="sidebarForm">
                 <input type="text" class="sidebarInput" ng-model="needs" placeholder="add new pre-requisites">
                 <button class="btn sidebarButton" type="submit"><i class="icon-plus-sign icon-white"></i></button>
@@ -64,15 +65,13 @@
                 </li>
             </ul>
         </div>
-        <!-- FIXME: dynamic data -->
+        
+        <!-- LD Students Description -->
         <div class="clear marginTopSidebar">
             <h5 class="zeroMargin"><i class="icon-user"></i> Students' Description:</h5>
-
             <form class="sidebarForm">
-                <textarea class="sidebarTextarea" rows="4">{{ learningDesign.ld_students_profile }}</textarea>
-
+                <textarea ng-model="learningDesign.ld_students_profile" class="sidebarTextarea" rows="4"></textarea>
             </form>
-
         </div>
 
         <!-- TODO: 2nd phase - Tag system -->

@@ -14,7 +14,7 @@ describe('Learning Design', function() {
         element('#loginButton').click();
         sleep(2);
 
-        // Verify total results
+        // Verify total results (this is the number of public LDs)
         expect(repeater('.ld-border').count()).toBe(23);
 
         // Verify first LD
@@ -51,7 +51,7 @@ describe('Learning Design', function() {
         expect(binding('learningDesign.ld_scope')).toBe('Lesson');
         expect(repeater('.qceritem').column('qcer.qcer_name')).toEqual(["A1", "A2"]);
 
-        // Verify subjects
+        // Verify subjects (a.k.a. topics)
         expect(repeater('.subjects li').count()).toBe(2);
         expect(repeater('.subjects li').column('subject.subject_name')).toEqual(["Topic 1", "Topic 5"]);
 
