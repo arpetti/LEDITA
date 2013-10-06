@@ -1,5 +1,6 @@
 var LdDao =      require('../dao/LdDao.js');
 var LdGetService = require('../service/LdGetService');
+var LdCreateValidator = require('../service/LdCreateValidator');
 var LdCreateService = require('../service/LdCreateService');
 var messages = require('../service/ValidationMessages');
 
@@ -40,6 +41,12 @@ module.exports = {
 
     createLd: function(req, res) {
     	var ldData = req.body;
+
+    	var ldDataErrors = LdCreateValidator.validate(ldData);
+        if (ldDataErrors.length > 0) {
+            return res.send(400, ldDataErrors);
+        };
+
     	LdCreateService.createLd(req.user.id, ldData, function(err, ldid, message) {
     		if(err) {
                 return res.send(500, message); 

@@ -38,8 +38,6 @@ module.exports = {
 	// callback(err, ldid, message)
 	createLd: function(userId, ldData, callback) {
 
-		// TODO Input validation, make sure scope is provided, qcer ids are numbers, at least one topic
-
 		async.waterfall([
 			// Step 1: Determine Scope Id
 			function(callback) {

@@ -1,12 +1,13 @@
-var expect = require('chai').expect
-    , assert = require('chai').assert
-    , sinon = require('sinon')
-    , when   = require('when')
-    , LdController = require('../../../server/controllers/LdController')
-    , LearningDesignDao = require('../../../server/dao/LdDao')
-    , LdGetService = require('../../../server/service/LdGetService')
-    , LdCreateService = require('../../../server/service/LdCreateService')
-    , messages = require('../../../server/service/ValidationMessages');
+var expect = require('chai').expect;
+var assert = require('chai').assert;
+var sinon = require('sinon');
+var when   = require('when');
+var LdController = require('../../../server/controllers/LdController');
+var LearningDesignDao = require('../../../server/dao/LdDao');
+var LdGetService = require('../../../server/service/LdGetService');
+var LdCreateValidator = require('../../../server/service/LdCreateValidator')
+var LdCreateService = require('../../../server/service/LdCreateService');
+var messages = require('../../../server/service/ValidationMessages');
 
 describe('Learning Design Controller', function() {
 
@@ -195,6 +196,9 @@ describe('Learning Design Controller', function() {
 			req.user = user;
 			req.body = ldData;
 
+			var errorMessages = [];
+            var validateStub = sandbox.stub(LdCreateValidator, "validate").returns(errorMessages);
+
 			var serviceError = new Error("something went wrong");
             var serviceMessage = "Unable to create LD";
     		var serviceStub = sandbox.stub(LdCreateService, "createLd", function(userId, ldData, callback) {
@@ -204,7 +208,37 @@ describe('Learning Design Controller', function() {
 			res.send = function(httpStatus, errMessage) {
                 expect(httpStatus).to.equal(500);
                 expect(errMessage).to.equal(serviceMessage);
+                assert.isTrue(validateStub.withArgs(req.body).calledOnce);
                 assert.isTrue(serviceStub.withArgs(user.id, req.body).calledOnce);
+                done();
+            };
+            LdController.createLd(req, res);
+		});
+
+		it('Returns a 400 with validation messages when ld create validation fails', function(done) {
+			var user = {id: 12};
+			var ldData = {
+				name: "",
+	    		qcers: {},
+	    		scope: "",
+	    		topics: [],
+	    		objectives: [],
+	    		requisites: [],
+	    		studentsDescription: ""
+			};	
+			req.user = user;
+			req.body = ldData;
+
+			var errorMessages = ["bad data"];
+            var validateStub = sandbox.stub(LdCreateValidator, "validate").returns(errorMessages);
+
+            var serviceStub = sandbox.stub(LdCreateService, "createLd");
+
+            res.send = function(httpStatus, ldDataErrors) {
+                expect(httpStatus).to.equal(400);
+                expect(ldDataErrors).to.equal(errorMessages);
+                assert.isTrue(validateStub.withArgs(req.body).calledOnce);
+                assert.equal(serviceStub.callCount, 0, "ld is not created when there are validation errors");
                 done();
             };
             LdController.createLd(req, res);
@@ -224,6 +258,9 @@ describe('Learning Design Controller', function() {
 			req.user = user;
 			req.body = ldData;
 
+			var errorMessages = [];
+            var validateStub = sandbox.stub(LdCreateValidator, "validate").returns(errorMessages);
+
 			var ldId = 201;
     		var serviceStub = sandbox.stub(LdCreateService, "createLd", function(userId, ldData, callback) {
                 callback(null, ldId, null);
@@ -232,6 +269,7 @@ describe('Learning Design Controller', function() {
 			res.json = function(httpStatus, result) {
                 expect(httpStatus).to.equal(200);
                 expect(result.ldid).to.equal(ldId);
+                assert.isTrue(validateStub.withArgs(req.body).calledOnce);
                 assert.isTrue(serviceStub.withArgs(user.id, req.body).calledOnce);
                 done();
             };
