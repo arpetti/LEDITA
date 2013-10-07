@@ -27,6 +27,33 @@ describe('Create a new Learning Design', function() {
         element('#logoutLink').click();
 	});
 
+	//There may be a better way to do this, https://github.com/angular-ui/bootstrap/issues/1131
+	it('Displays typeahead matches', function() {
+		browser().navigateTo('/login');
+        input('username').enter(existingUserName);
+        input('password').enter(existingUserPassword);
+        element('#loginButton').click();
+        sleep(2);
+
+        element('#createLd').click();
+        
+        // Verify scope typeahead
+        input('ldScope').enter('L');
+        sleep(0.5);
+        expect(repeater('#scopeSection .ng-scope').row(0)).toEqual(["<strong>L</strong>esson"]);
+        expect(repeater('#scopeSection .ng-scope').row(1)).toEqual(["<strong>L</strong>ezione"]);
+        expect(repeater('#scopeSection .ng-scope').row(2)).toEqual(["Modu<strong>l</strong>e"]);
+        element('#scopeSection li a').click(); // pick the first one
+        expect(input('ldScope').val()).toBe('Lesson');
+
+        element("#cancelCreateLd").click();
+
+        // Logout
+        element('#userActionsMenu').click();
+        element('#logoutLink').click();
+
+	});
+
 	it('Logged in user can create a new Learning Design', function() {
         var newLdName = 'Learning Design E2E Test';
         var newLdScope = 'Scope E2E Test';
