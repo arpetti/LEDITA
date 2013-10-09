@@ -47,7 +47,11 @@ describe('Create a new Learning Design', function() {
 
         element('#createLd').click();
         
+        // Verify Scope Typeahead
         expect(element('#scopeSection .typeahead', 'scope typeahead hidden').css('display')).toBe('none');
+        input('ldScope').enter('X');
+        sleep(0.5);
+        expect(element('#scopeSection .typeahead', 'scope typeahead hidden when no match').css('display')).toBe('none');
         input('ldScope').enter('L');
         sleep(0.5);
         expect(element('#scopeSection .typeahead', 'scope typeahead is displayed').css('display')).toBe('block');
@@ -56,10 +60,30 @@ describe('Create a new Learning Design', function() {
         	{rowNum: 1, value: "<strong>L</strong>ezione"}, 
         	{rowNum: 2, value: "Modu<strong>l</strong>e"}
         ]);
-        
+
         // Pick the first match
         element('#scopeSection li a').click(); 
         expect(input('ldScope').val()).toBe('Lesson');
+
+        // Verify Topic Typeahead
+        expect(element('#topicSection .typeahead', 'topic typeahead hidden').css('display')).toBe('none');
+        input('ldTopic').enter('Z');
+        sleep(0.5)
+        expect(element('#topicSection .typeahead', 'topic typeahead hidden when no match').css('display')).toBe('none');
+        input('ldTopic').enter('Topic');
+        sleep(0.5);
+        expect(element('#topicSection .typeahead', 'topic typeahead is displayed').css('display')).toBe('block');
+        verifyTypeAheadValues('#topicSection .ng-scope', 'topic typeahead', [
+        	{rowNum: 0, value: "<strong>Topic</strong> 1"}, 
+        	{rowNum: 1, value: "<strong>Topic</strong> 2"}, 
+        	{rowNum: 2, value: "<strong>Topic</strong> 3"},
+        	{rowNum: 3, value: "<strong>Topic</strong> 4"},
+        	{rowNum: 4, value: "<strong>Topic</strong> 5"}
+        ]);
+
+        // Pick the first match
+        element('#topicSection li a').click(); 
+        // TODO: Verify Topic 1 tag displayed below input box
 
         element("#cancelCreateLd").click();
 
