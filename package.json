@@ -3,7 +3,7 @@
   "license": "MIT",
   "version": "0.0.1",
   "dependencies": {
-    "mysql": "~2.0.0-alpha8",
+    "mysql": "~2.0.0-alpha9",
     "log4js": "*",
     "bcrypt": "*",
     "express": "~3.3.4",
