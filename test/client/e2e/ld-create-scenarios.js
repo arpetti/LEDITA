@@ -27,8 +27,18 @@ describe('Create a new Learning Design', function() {
         element('#logoutLink').click();
 	});
 
-	//There may be a better way to do this, https://github.com/angular-ui/bootstrap/issues/1131
 	it('Displays typeahead matches', function() {
+
+		var verifyTypeAheadValues = function(cssSelector, message, expectedValues) {
+			for (var i=0; i<expectedValues.length; i++) {
+				verifyTypeAhead(cssSelector, message, expectedValues[i].rowNum, expectedValues[i].value);
+			};
+		};
+
+		var verifyTypeAhead = function(cssSelector, message, rowNum, value) {
+			expect(repeater(cssSelector, message).row(rowNum)).toEqual([value]);
+		};
+
 		browser().navigateTo('/login');
         input('username').enter(existingUserName);
         input('password').enter(existingUserPassword);
@@ -37,13 +47,18 @@ describe('Create a new Learning Design', function() {
 
         element('#createLd').click();
         
-        // Verify scope typeahead
+        expect(element('#scopeSection .typeahead', 'scope typeahead hidden').css('display')).toBe('none');
         input('ldScope').enter('L');
         sleep(0.5);
-        expect(repeater('#scopeSection .ng-scope').row(0)).toEqual(["<strong>L</strong>esson"]);
-        expect(repeater('#scopeSection .ng-scope').row(1)).toEqual(["<strong>L</strong>ezione"]);
-        expect(repeater('#scopeSection .ng-scope').row(2)).toEqual(["Modu<strong>l</strong>e"]);
-        element('#scopeSection li a').click(); // pick the first one
+        expect(element('#scopeSection .typeahead', 'scope typeahead is displayed').css('display')).toBe('block');
+        verifyTypeAheadValues('#scopeSection .ng-scope', 'scope typeahead', [
+        	{rowNum: 0, value: "<strong>L</strong>esson"}, 
+        	{rowNum: 1, value: "<strong>L</strong>ezione"}, 
+        	{rowNum: 2, value: "Modu<strong>l</strong>e"}
+        ]);
+        
+        // Pick the first match
+        element('#scopeSection li a').click(); 
         expect(input('ldScope').val()).toBe('Lesson');
 
         element("#cancelCreateLd").click();
