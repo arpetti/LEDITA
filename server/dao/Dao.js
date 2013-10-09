@@ -25,14 +25,14 @@ module.exports = {
       connection.query(queryString, queryParams, function(err, rows) {
         if (err) {
           logWrapper.log().error('db query error', err);
-          connection.end();
+          connection.release();
           callback(err);
           return;
         }
         for (var i = 0; i < rows.length; i++) {
           results.push(rows[i]);
         }
-        connection.end();
+        connection.release();
         callback(null, results);
       });
     });
@@ -49,11 +49,11 @@ module.exports = {
       connection.query(queryString, jsonData, function(err, result) {
         if (err) {
           logWrapper.log().error('db insert error', err);
-          connection.end();
+          connection.release();
           callback(err);
           return;
         }
-        connection.end();
+        connection.release();
         callback(null, result.insertId);
       });
     });
@@ -74,11 +74,11 @@ module.exports = {
       connection.query(queryString, [values], function(err, result) {
         if (err) {
           logWrapper.log().error('db bulk insert error', err);
-          connection.end();
+          connection.release();
           callback(err);
           return;
         }
-        connection.end();
+        connection.release();
         callback(null, result);
       });
     });
@@ -94,11 +94,11 @@ module.exports = {
       connection.query(queryString, jsonData, function(err, result) {
         if (err) {
           logWrapper.log().error('db delete error', err);
-          connection.end();
+          connection.release();
           callback(err);
           return;
         }
-        connection.end();
+        connection.release();
         callback(null, null);
       });
     });

@@ -116,7 +116,7 @@
                                     <span id="ldNameLengthErr" class="errorTipModal" ng-show="LdCreateForm.ldName.$error.maxlength">The design name cannot be longer than 50 characters.</span>
                                 </div>
                                 <label class="formLabel"><i class="icon-book"></i> Design Name*:</label>
-                                <input class="formInput" type="text" name="ldName" ng-model="ldName" required ng-maxlength="50" ng-pattern="/^[A-Za-z0-9][A-Za-z-9, +-_&#'&quot;òàùèéì@#*]*$/">
+                                <input class="formInput" type="text" name="ldName" ng-model="ldName" required ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                                 <span class="clearfix"></span>
                             </div>
 
@@ -148,7 +148,7 @@
                                 <input class="formInput" type="text" name="ldScope" ng-model="ldScope"
                                 	   typeahead="suggestion for suggestion in getScopes($viewValue)"
                                        placeholder="Scope..." required ng-maxlength="50"
-                                       ng-pattern="/^[A-Za-z0-9][A-Za-z-9, +-_&#'&quot;òàùèéì@#*]*$/">
+                                       ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                             </div>
 
                             <!-- Topics -->
@@ -165,7 +165,7 @@
                                        typeahead-on-select="addTopicFromSuggestion()"
                                        ui-keypress="{13:'addTopicFromUserInput($event)'}"
                                        placeholder="Topics..." required ng-maxlength="255"
-                                       ng-pattern="/^[A-Za-z-9, +-_&#'&quot;òàùèéì@#*]+$/">
+                                       ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                                 <span class="clearfix"></span>
 
                                 <div class="formTag">
@@ -192,7 +192,7 @@
                                    typeahead-on-select="addObjectiveFromSuggestion()"
                                    ui-keypress="{13:'addObjectiveFromUserInput($event)'}"
                                    placeholder="Objectives..." required ng-maxlength="255"
-                                   ng-pattern="/^[A-Za-z-9, +-_&#'&quot;òàùèéì@#*]+$/">
+                                   ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                             <span class="clearfix"></span>
 
                             <div class="formTag">
@@ -216,7 +216,7 @@
                                        typeahead-on-select="addPrerequisiteFromSuggestion()"
                                        ui-keypress="{13:'addPrerequisiteFromUserInput($event)'}"
 		                               placeholder="Prerequisites..."  ng-maxlength="255"
-                                       ng-pattern="/^[A-Za-z-9, +-_&#'&quot;òàùèéì@#*]+$/">
+                                       ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
 		                        <span class="clearfix"></span>
 
 		                        <div class="formTag">
@@ -237,7 +237,7 @@
 		                            <span id="ldStudentDescrLengthErr" class="errorTipModal" ng-show="LdCreateForm.ldStudentsDescr.$error.maxlength">Students' description cannot be longer than 500 characters.</span>
 		                        </div>
 		                        <label class="formLabel"><i class="icon-user"></i> Students' Description*:</label>
-		                        <textarea class="formInput" name="ldStudentsDescr" ng-model="ldStudentsDescr" required="" rows="4" ng-maxlength="500"  ng-pattern="/^[A-Za-z0-9][A-Za-z-9, +-_&#'&quot;òàùèéì@#*]*$/"></textarea>
+		                        <textarea class="formInput" name="ldStudentsDescr" ng-model="ldStudentsDescr" required="" rows="4" ng-maxlength="500"  ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/"></textarea>
 		                        <span class="clearfix"></span>
 		                    </div>
 
