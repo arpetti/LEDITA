@@ -107,9 +107,6 @@
                     	<form novalidate class="createLdForm" name="LdCreateForm" ng-submit="submitLD()">
                          <div class="modal-body">
 
-                         	<div id="ldCreateErrors" ng-show="ldCreateErrors" class="alert alert-error">
-                           		{{ ldCreateErrors }}
-                			</div>
 
                          	<!-- Name -->
                             <div class="formLevel">
@@ -246,7 +243,11 @@
 
                             </div>
 			                <div class="modal-footer">
-			                    <a id="cancelCreateLd" class="btn btnFormCancel" ng-click="closeLD()">Cancel</a>
+                                <div id="ldCreateErrors" ng-show="ldCreateErrors" class="alert alert-error">
+                                    {{ ldCreateErrors }}
+                                </div>
+
+                                <a id="cancelCreateLd" class="btn btnFormCancel" ng-click="closeLD()">Cancel</a>
 			                    <button id="confirmCreateLD" type="submit" class="btn btnForm " ng-disabled="LdCreateForm.$invalid">Create</button>
 			                </div>
                     	</form>
