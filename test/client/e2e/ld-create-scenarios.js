@@ -27,16 +27,18 @@ describe('Create a new Learning Design', function() {
         element('#logoutLink').click();
 	});
 
-	it('Displays typeahead matches', function() {
+	it('Creates LD with typeahead matches', function() {
+
+		var newLdName = "Learning Design E2E Test Typeahead";
+		var newLdStudentsDescription = "Students Description E2E Test Typeahead";
+		var scopeTypeaheadMatch = "Lesson";
+		var topicTypeaheadMatch = "Topic 2";
+		var objectiveTypeaheadMatch = "Frasi idiomatiche sui sentimenti";
 
 		var verifyTypeAheadValues = function(cssSelector, message, expectedValues) {
 			for (var i=0; i<expectedValues.length; i++) {
-				verifyTypeAhead(cssSelector, message, expectedValues[i].rowNum, expectedValues[i].value);
+				expect(repeater(cssSelector, message).row(expectedValues[i].rowNum)).toEqual([expectedValues[i].value]);
 			};
-		};
-
-		var verifyTypeAhead = function(cssSelector, message, rowNum, value) {
-			expect(repeater(cssSelector, message).row(rowNum)).toEqual([value]);
 		};
 
 		browser().navigateTo('/login');
@@ -46,6 +48,10 @@ describe('Create a new Learning Design', function() {
         sleep(2);
 
         element('#createLd').click();
+
+        input('ldName').enter(newLdName);
+        input('selectedQcers[qceropt.id]').check();  
+        input('ldStudentsDescr').enter(newLdStudentsDescription);
         
         // Verify Scope Typeahead
         expect(element('#scopeSection .typeahead', 'scope typeahead hidden').css('display')).toBe('none');
@@ -63,7 +69,7 @@ describe('Create a new Learning Design', function() {
 
         // Pick the first match
         element('#scopeSection li a').click(); 
-        expect(input('ldScope').val()).toBe('Lesson');
+        expect(input('ldScope').val()).toBe(scopeTypeaheadMatch);
 
         // Verify Topic Typeahead
         expect(element('#topicSection .typeahead', 'topic typeahead hidden').css('display')).toBe('none');
@@ -93,7 +99,37 @@ describe('Create a new Learning Design', function() {
         expect(repeater('#topicTags li').count()).toBe(2);
         expect(repeater('#topicTags li').column('topic')).toEqual(["Topic 1", "Topic 2"]);
 
-        element("#cancelCreateLd").click();
+        // Remove first topic tag
+        element('#topicTags a:eq(0)').click();
+        expect(repeater('#topicTags li').count()).toBe(1);
+        expect(repeater('#topicTags li').column('topic')).toEqual([topicTypeaheadMatch]);
+
+        // Verify Objective typeahead
+        expect(element('#objectiveSection .typeahead', 'objective typeahead hidden').css('display')).toBe('none');
+        input('ldObjective').enter('Frasi');
+        sleep(0.5);
+        expect(element('#objectiveSection .typeahead', 'objective typeahead is displayed').css('display')).toBe('block');
+        verifyTypeAheadValues('#objectiveSection .ng-scope', 'objective typeahead', [
+        	{rowNum: 0, value: "<strong>Frasi</strong> idiomatiche sui sentimenti"}
+        ]);
+
+         // Pick the first (only) match and verify tags
+        element('#objectiveSection li a').click(); 
+        expect(repeater('#objectiveTags li').count()).toBe(1);
+        expect(repeater('#objectiveTags li').column('objective')).toEqual([objectiveTypeaheadMatch]);
+
+        element("#confirmCreateLD").click();
+        sleep(0.5);
+
+        expect(browser().location().url()).toMatch('/ldedit/');
+        expect(input('learningDesign.ld_name').val()).toBe(newLdName);
+        expect(input('learningDesign.ld_scope').val()).toBe(scopeTypeaheadMatch);
+        expect(repeater('.subjects li').count()).toBe(1);
+        expect(repeater('.subjects li').column('subject.subject_name')).toEqual([topicTypeaheadMatch]);
+        expect(repeater('.objectives li').count()).toBe(1);
+        expect(repeater('.objectives li').column('objective.objective_descr')).toEqual([objectiveTypeaheadMatch]);
+        expect(repeater('.prerequisites li').count()).toBe(0);
+        expect(input('learningDesign.ld_students_profile').val()).toBe(newLdStudentsDescription);
 
         // Logout
         element('#userActionsMenu').click();
@@ -117,7 +153,7 @@ describe('Create a new Learning Design', function() {
 
         // open LD Create modal
         element('#createLd').click();
-        sleep(1);
+        sleep(0.5);
 
         // fill out the form
         input('ldName').enter(newLdName);
@@ -129,7 +165,7 @@ describe('Create a new Learning Design', function() {
         input('ldStudentsDescr').enter(newLdStudentsDescription);
         
         element("#confirmCreateLD").click();
-        sleep(1);
+        sleep(0.5);
 
         expect(browser().location().url()).toMatch('/ldedit/');
         expect(input('learningDesign.ld_name').val()).toBe(newLdName);

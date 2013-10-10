@@ -178,7 +178,7 @@
                             </div>
 
                             <!-- Objectives -->
-                            <div class="formLevel">
+                            <div id="objectiveSection" class="formLevel">
                                 <div class="errorBox">
                                     <span id="objectiveReqErr" class="errorTipModal" ng-show="LdCreateForm.ldObjective.$dirty && LdCreateForm.ldObjective.$error.required">Required!</span>
                                     <span id="objectivePatternErr" class="errorTipModal" ng-show="LdCreateForm.ldObjective.$error.pattern">An objective cannot contain this symbol.</span>
@@ -194,7 +194,7 @@
                                    ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                             <span class="clearfix"></span>
 
-                            <div class="formTag">
+                            <div id="objectiveTags" class="formTag">
                                 <ul ng-repeat="objective in selectedObjectives" class="zeroMargin objectives">
                                     <li class="modalEditItem"><span class="modalEditItemLink">{{objective}} 
                                     	<a ng-click="removeObjective(objective)"><i class="icon-remove-circle"></i> </a></span>
