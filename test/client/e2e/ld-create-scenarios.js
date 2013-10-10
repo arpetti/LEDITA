@@ -81,9 +81,17 @@ describe('Create a new Learning Design', function() {
         	{rowNum: 4, value: "<strong>Topic</strong> 5"}
         ]);
 
-        // Pick the first match
+        // Pick the first match and verify tags
         element('#topicSection li a').click(); 
-        // TODO: Verify Topic 1 tag displayed below input box
+        expect(repeater('#topicTags li').count()).toBe(1);
+        expect(repeater('#topicTags li').column('topic')).toEqual(["Topic 1"]);
+
+        // Pick second match and verify tags
+        input('ldTopic').enter('Topic');
+        sleep(0.5);
+        element('#topicSection li:eq(1) a').click(); 
+        expect(repeater('#topicTags li').count()).toBe(2);
+        expect(repeater('#topicTags li').column('topic')).toEqual(["Topic 1", "Topic 2"]);
 
         element("#cancelCreateLd").click();
 
