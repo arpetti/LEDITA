@@ -55,6 +55,75 @@ describe('Create Learning Design Controller', function() {
 	  		expect(scope.selectedTopics[0]).toEqual(userAddedTopic);
 	  		expect(scope.ldTopic).toEqual(clearSuggestion);
 	  	});
+
+	  	it('Removes topic from middle of list', function() {
+	  		var topics = ["Topic 1", "Topic 2", "Topic 3"];
+	  		scope.selectedTopics = topics;
+
+	  		scope.removeTopic("Topic 2");
+
+	  		expect(scope.selectedTopics.length).toEqual(2);
+	  		expect(scope.selectedTopics[0]).toEqual("Topic 1");
+	  		expect(scope.selectedTopics[1]).toEqual("Topic 3");
+	  	});
+
+	  	it('Removes topic from beginning of list', function() {
+	  		var topics = ["Topic 1", "Topic 2", "Topic 3"];
+	  		scope.selectedTopics = topics;
+
+	  		scope.removeTopic("Topic 1");
+
+	  		expect(scope.selectedTopics.length).toEqual(2);
+	  		expect(scope.selectedTopics[0]).toEqual("Topic 2");
+	  		expect(scope.selectedTopics[1]).toEqual("Topic 3");
+	  	});
+
+	  	it('Removes topic from end of list', function() {
+	  		var topics = ["Topic 1", "Topic 2", "Topic 3"];
+	  		scope.selectedTopics = topics;
+
+	  		scope.removeTopic("Topic 3");
+
+	  		expect(scope.selectedTopics.length).toEqual(2);
+	  		expect(scope.selectedTopics[0]).toEqual("Topic 1");
+	  		expect(scope.selectedTopics[1]).toEqual("Topic 2");
+	  	});
+
+	  	it('Remove does nothing if topic not found in list', function() {
+	  		var topics = ["Topic 1", "Topic 2", "Topic 3"];
+	  		scope.selectedTopics = topics;
+
+	  		scope.removeTopic("Topic 999");
+
+	  		expect(scope.selectedTopics.length).toEqual(3);
+	  		expect(scope.selectedTopics[0]).toEqual("Topic 1");
+	  		expect(scope.selectedTopics[1]).toEqual("Topic 2");
+	  		expect(scope.selectedTopics[2]).toEqual("Topic 3");
+	  	});
+
+	  	it('Remove does nothing if topic is null', function() {
+	  		var topics = ["Topic 1", "Topic 2", "Topic 3"];
+	  		scope.selectedTopics = topics;
+
+	  		scope.removeTopic(null);
+
+	  		expect(scope.selectedTopics.length).toEqual(3);
+	  		expect(scope.selectedTopics[0]).toEqual("Topic 1");
+	  		expect(scope.selectedTopics[1]).toEqual("Topic 2");
+	  		expect(scope.selectedTopics[2]).toEqual("Topic 3");
+	  	});
+
+	  	it('Remove does nothing if topic is undefined', function() {
+	  		var topics = ["Topic 1", "Topic 2", "Topic 3"];
+	  		scope.selectedTopics = topics;
+
+	  		scope.removeTopic();
+
+	  		expect(scope.selectedTopics.length).toEqual(3);
+	  		expect(scope.selectedTopics[0]).toEqual("Topic 1");
+	  		expect(scope.selectedTopics[1]).toEqual("Topic 2");
+	  		expect(scope.selectedTopics[2]).toEqual("Topic 3");
+	  	});
 	  	
   	});
 
