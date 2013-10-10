@@ -91,6 +91,14 @@ angular.module('ledita-app')
         clearCurrentTopic();
     };
 
+    // #3 work in progress - needs unit & e2e tests...
+    $scope.removeTopic = function(topic) {
+    	var index = $scope.selectedTopics.indexOf(topic);
+    	if(index >-1){
+    		$scope.selectedTopics.splice(index,1);
+		}
+    };
+
     $scope.getObjectives = function(objective) {
     	var objectiveMatchUrl = '/reference/objectives/' + objective;
 		return $http.get(objectiveMatchUrl).then(function(response) {

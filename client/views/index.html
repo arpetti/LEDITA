@@ -170,9 +170,8 @@
 
                                 <div id="topicTags" class="formTag">
                                     <ul ng-repeat="topic in selectedTopics" class="zeroMargin subjects">
-                                        <li class="modalEditItem"><span class="modalEditItemLink">{{topic}} <a
-                                                ng-href="#"><i
-                                                class="icon-remove-circle"></i> </a></span>
+                                        <li class="modalEditItem"><span class="modalEditItemLink">{{topic}} 
+                                        	<a ng-click="removeTopic(topic)"><i class="icon-remove-circle"></i> </a></span>
                                         </li>
                                     </ul>
                                 </div>
