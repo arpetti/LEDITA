@@ -91,14 +91,6 @@ angular.module('ledita-app')
         clearCurrentTopic();
     };
 
-    // #3 work in progress - needs unit & e2e tests...
-    $scope.removeTopic = function(topic) {
-    	var index = $scope.selectedTopics.indexOf(topic);
-    	if(index >-1){
-    		$scope.selectedTopics.splice(index,1);
-		}
-    };
-
     $scope.getObjectives = function(objective) {
     	var objectiveMatchUrl = '/reference/objectives/' + objective;
 		return $http.get(objectiveMatchUrl).then(function(response) {
@@ -150,6 +142,25 @@ angular.module('ledita-app')
     	} else {
     		return items;
     	};
+    };
+
+    var removeItem = function(item, list) {
+		var index = list.indexOf(item);
+    	if(index >-1){
+    		list.splice(index,1);
+		}
+    };
+
+    $scope.removeTopic = function(topic) {
+    	removeItem(topic, $scope.selectedTopics);
+    };
+
+    $scope.removeObjective = function(objective) {
+    	removeItem(objective, $scope.selectedObjectives);
+    };
+
+    $scope.removePrerequisite = function(prerequisite) {
+    	removeItem(prerequisite, $scope.selectedPrerequisites);
     };
 
     $scope.submitLD = function() {

@@ -196,8 +196,8 @@
 
                             <div class="formTag">
                                 <ul ng-repeat="objective in selectedObjectives" class="zeroMargin objectives">
-                                    <li class="modalEditItem"><span class="modalEditItemLink">{{objective}} <a ng-href="#"><i
-                                            class="icon-remove-circle"></i> </a></span>
+                                    <li class="modalEditItem"><span class="modalEditItemLink">{{objective}} 
+                                    	<a ng-click="removeObjective(objective)"><i class="icon-remove-circle"></i> </a></span>
                                     </li>
                                 </ul>
                             </div>
@@ -220,8 +220,8 @@
 
 		                        <div class="formTag">
 		                            <ul ng-repeat="prerequisite in selectedPrerequisites" class="zeroMargin prerequisites">
-		                                <li class="modalEditItem"><span class="modalEditItemLink">{{prerequisite}} <a ng-href="#"><i
-		                                        class="icon-remove-circle"></i> </a></span>
+		                                <li class="modalEditItem"><span class="modalEditItemLink">{{prerequisite}} 
+		                                	<a ng-click="removePrerequisite(prerequisite)"><i class="icon-remove-circle"></i> </a></span>
 		                                </li>
 		                            </ul>
 

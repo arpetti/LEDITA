@@ -124,6 +124,28 @@ describe('Create Learning Design Controller', function() {
 	  		expect(scope.selectedTopics[1]).toEqual("Topic 2");
 	  		expect(scope.selectedTopics[2]).toEqual("Topic 3");
 	  	});
+
+	  	it('Removes objective from middle of list', function() {
+	  		var objectives = ["Objective 1", "Objective 2", "Objective 3"];
+	  		scope.selectedObjectives = objectives;
+
+	  		scope.removeObjective("Objective 2");
+
+	  		expect(scope.selectedObjectives.length).toEqual(2);
+	  		expect(scope.selectedObjectives[0]).toEqual("Objective 1");
+	  		expect(scope.selectedObjectives[1]).toEqual("Objective 3");
+	  	});
+
+	  	it('Removes prerequisite from middle of list', function() {
+	  		var prerequisites = ["Prerequisite 1", "Prerequisite 2", "Prerequisite 3"];
+	  		scope.selectedPrerequisites = prerequisites;
+
+	  		scope.removePrerequisite("Prerequisite 2");
+
+	  		expect(scope.selectedPrerequisites.length).toEqual(2);
+	  		expect(scope.selectedPrerequisites[0]).toEqual("Prerequisite 1");
+	  		expect(scope.selectedPrerequisites[1]).toEqual("Prerequisite 3");
+	  	});
 	  	
   	});
 
