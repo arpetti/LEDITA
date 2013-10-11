@@ -65,6 +65,51 @@ describe('Learning Design DAO', function() {
         });
     });
 
+    describe('Get Learning Design User Id', function() {
+
+    	it('Gets user id that owns a learning design', function(done) {
+    		var learningDesignId = 6;
+    		var expectedUserId = 4;	// known from demo data
+    		LdDao.getLearningDesignUserId(learningDesignId, function(err, userId) {
+    			expect(err).to.be.null;
+    			expect(userId).to.equal(expectedUserId);
+    			done();
+    		});
+    	});
+
+    	it('Calls back with error if learning design not found', function(done) {
+    		var learningDesignId = 9999;
+    		LdDao.getLearningDesignUserId(learningDesignId, function(err, userId) {
+    			expect(err).not.to.be.null;
+    			done();
+    		});
+    	});
+
+    	it('Calls back with error if called with invalid id', function(done) {
+    		var learningDesignId = 'this is definitely not an id';
+    		LdDao.getLearningDesignUserId(learningDesignId, function(err, userId) {
+    			expect(err).not.to.be.null;
+    			done();
+    		});
+    	});
+
+    	it('Calls back with error if called with null id', function(done) {
+    		var learningDesignId = null;
+    		LdDao.getLearningDesignUserId(learningDesignId, function(err, userId) {
+    			expect(err).not.to.be.null;
+    			done();
+    		});
+    	});
+
+    	it('Calls back with error if called with undefined id', function(done) {
+    		var learningDesignId = undefined;
+    		LdDao.getLearningDesignUserId(learningDesignId, function(err, userId) {
+    			expect(err).not.to.be.null;
+    			done();
+    		});
+    	});
+    });
+
     describe('Subjects', function() {
 
         it('Get learning design subjects returns results', function(done) {

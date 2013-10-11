@@ -182,3 +182,9 @@ function ensureAuthorized(req, res, next) {
 
     return next();
 }
+
+// #27 wip...
+function ensureOwner(req, res, next) {
+	var ldId = req.params.id;
+	var userId = req.user.id
+}

@@ -57,5 +57,17 @@ module.exports = {
                 callback(null, result, null);
            }
         });
+    },
+
+    // #27 wip...
+    // callback(err, boolean)
+    isLdOwnedByUser: function(ldId, userId, callback) {
+    	LdDao.getLearningDesign(ldid, function(err, callback) {
+    		if (err) {
+    			callback(err);
+    		} else {
+    			callback(true); 
+    		};
+    	});
     }
 };
