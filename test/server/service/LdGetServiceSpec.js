@@ -43,4 +43,63 @@ describe('LD Service', function() {
 
     	});
     });
+
+    describe('Is LD owned by user', function() {
+
+    	it('Calls back with error if dao returns error', function(done) {
+    		var ldId = 1;
+    		var userId = 2;
+
+    		var daoError = new Error("something went wrong");
+            var daoStub = sandbox.stub(LdDao, "getLearningDesignUserId", function(id, callback) {
+                callback(daoError);
+            });
+
+            var serviceCb = function(err, result) {
+            	expect(err).to.equal(daoError);
+                assert.isTrue(daoStub.withArgs(ldId).calledOnce);
+            	done();
+            };
+
+            LdGetService.isLdOwnedByUser(ldId, userId, serviceCb);
+    	});
+
+    	it('Calls back with true if user is owner of LD', function(done) {
+    		var ldId = 1;
+    		var userId = 2;
+
+    		var daoUserId = 2;
+            var daoStub = sandbox.stub(LdDao, "getLearningDesignUserId", function(id, callback) {
+                callback(null, daoUserId);
+            });
+
+            var serviceCb = function(err, result) {
+            	expect(err).to.be.null;
+            	expect(result).to.be.true;
+                assert.isTrue(daoStub.withArgs(ldId).calledOnce);
+            	done();
+            };
+
+            LdGetService.isLdOwnedByUser(ldId, userId, serviceCb);
+    	});
+
+    	it('Calls back with false if user is not owner of LD', function(done) {
+    		var ldId = 1;
+    		var userId = 2;
+
+    		var daoUserId = 3;
+            var daoStub = sandbox.stub(LdDao, "getLearningDesignUserId", function(id, callback) {
+                callback(null, daoUserId);
+            });
+
+            var serviceCb = function(err, result) {
+            	expect(err).to.be.null;
+            	expect(result).to.be.false;
+                assert.isTrue(daoStub.withArgs(ldId).calledOnce);
+            	done();
+            };
+
+            LdGetService.isLdOwnedByUser(ldId, userId, serviceCb);
+    	});
+    });
 });

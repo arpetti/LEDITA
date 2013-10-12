@@ -62,11 +62,15 @@ module.exports = {
     // #27 wip...
     // callback(err, boolean)
     isLdOwnedByUser: function(ldId, userId, callback) {
-    	LdDao.getLearningDesign(ldid, function(err, callback) {
+    	LdDao.getLearningDesignUserId(ldId, function(err, ldUserId) {
     		if (err) {
     			callback(err);
+    			return;
+    		};
+    		if(userId === ldUserId) {
+    			callback(null, true);
     		} else {
-    			callback(true); 
+    			callback(null, false);
     		};
     	});
     }
