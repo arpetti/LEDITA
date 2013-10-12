@@ -25,7 +25,7 @@ angular.module('ledita-app')
         return LDService.getGroupBoxClass(node);
     };
 
-    $scope.isBtnActive = function (data) {
+    $scope.isBtnActive = function(data) {
        if (data == true)
        return "btnActive";
    }                      ;
@@ -48,64 +48,6 @@ angular.module('ledita-app')
         dialogFade:true
     };
 
-    $scope.createActivity = function (node) {
-        $scope.addActivity = true;
-        };
-
-    $scope.closeAddActivity = function () {
-        $scope.closeMsg = 'I was closed at: ' + new Date();
-        $scope.addActivity = false;
-    };
-    $scope.optsAddActivity = {
-        backdropFade: true,
-        dialogFade:true,
-        backdropClick:false
-    };
- $scope.createGroup = function (node) {
-        $scope.addGroup = true;
-        };
-
-    $scope.closeAddGroup = function () {
-        $scope.closeMsg = 'I was closed at: ' + new Date();
-        $scope.addGroup = false;
-    };
-    $scope.optsAddGroup = {
-        backdropFade: true,
-        dialogFade:true,
-        backdropClick:false
-    };
-
-    $scope.addingLD = function (node) {
-        $scope.addLD = true;
-        };
-
-    $scope.closeAddLD = function () {
-        $scope.closeMsg = 'I was closed at: ' + new Date();
-        $scope.addLD = false;
-    };
-    $scope.optsAddLD = {
-        backdropFade: true,
-        dialogFade:true,
-        backdropClick:false
-    };
-
-    $scope.createResource = function (node) {
-        $scope.addResource = true;
-    };
-
-    $scope.closeAddResource = function () {
-        $scope.closeMsg = 'I was closed at: ' + new Date();
-        $scope.addResource = false;
-        $scope.addActivity = true;
-    };
-
-    $scope.optsAddResource = {
-        backdropFade: true,
-        dialogFade:true,
-        backdropClick:false
-
-    };
-
     LDService.getLearningDesigns(function(res) {
         $scope.learningDesigns = res;
         $scope.loading = false;
@@ -115,26 +57,3 @@ angular.module('ledita-app')
     });
 
 }]);
-
-angular.module('ledita-app')
-    .controller('ActCreateCtrl',
-        ['$scope', '$http', 'Home', 'limitToFilter', '$location', function($scope, $http, Home, limitToFilter, $location) {
-
-
-
-        }]);
-angular.module('ledita-app')
-    .controller('AddResourceCtrl',
-        ['$scope', '$http', 'Home', 'limitToFilter', '$location', function($scope, $http, Home, limitToFilter, $location) {
-
-
-
-        }]);
-
-angular.module('ledita-app')
-    .controller('AddLDCtrl',
-        ['$scope', '$http', 'Home', 'limitToFilter', '$location', function($scope, $http, Home, limitToFilter, $location) {
-
-
-
-        }]);

@@ -60,18 +60,6 @@ angular.module('ledita-app', ['ngCookies', 'infinite-scroll', 'ui.bootstrap', 'u
                 controller: 'RegisterCtrl',
                 access: access.anon
             });
-        $routeProvider.when('/private',
-            {
-                templateUrl: '/partials/private',
-                controller: 'PrivateCtrl',
-                access: access.user
-            });
-        $routeProvider.when('/admin',
-            {
-                templateUrl: '/partials/admin',
-                controller: 'AdminCtrl',
-                access: access.admin
-            });
         $routeProvider.when('/404',
             {
                 templateUrl: '/partials/404',
