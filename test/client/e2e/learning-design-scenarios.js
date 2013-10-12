@@ -206,12 +206,14 @@ describe('Learning Design', function() {
         element('#loginButton').click();
         sleep(2);
 
-        // experimental - may not work on Travis
         browser().navigateTo('/ldedit/1'); 
         sleep(0.5);
-        // Sara is not owner of LD 1 so should be redirected to home page if tries to edit it
-        expect(browser().location().url()).toBe('/');
+        expect(browser().location().url()).toBe('/'); // non owner is redirected to home page
 
+        browser().navigateTo('/ldedit/5'); 
+        sleep(0.5);
+        expect(browser().location().url()).toBe('/ldedit/5'); // owner is allowed to edit
+        
         // Logout
         element('#userActionsMenu').click();
         element('#logoutLink').click();
