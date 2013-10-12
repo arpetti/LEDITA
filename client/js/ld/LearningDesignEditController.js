@@ -17,6 +17,10 @@ angular.module('ledita-app')
         $scope.alertMsg = err;
     });
 
+    $scope.updateLdName = function() {
+    	console.log('LD Name was changed to: ' + $scope.learningDesign.ld_name);
+    };
+
     $scope.getBoxClass = function(node) {
       return LDService.getBoxClass(node);
     };

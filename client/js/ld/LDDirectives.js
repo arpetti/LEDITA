@@ -79,3 +79,16 @@ angular.module('ledita-app')
         }
     };
 }]);
+
+/* Custom blur directive reference: http://jsfiddle.net/l_ong/7QFS7/ */
+angular.module('ledita-app')
+.directive('uiBlur', [function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+        	element.bind('blur', function() {
+        		scope.$apply(attrs.uiBlur);
+        	});
+        }
+    };
+}]);

@@ -144,6 +144,7 @@
                     <input class="editInputName" type="text"
                         name="ldName"
                         ng-model="learningDesign.ld_name" required
+                        ui-Blur="updateLdName()"
                         ng-maxlength="50"
                         ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
 
