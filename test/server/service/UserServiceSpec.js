@@ -4,7 +4,7 @@ var expect = require('chai').expect
     , UserService = require('../../../server/service/UserService')
     , UserDao = require('../../../server/dao/UserDao')
     , HashHelper = require('../../../server/util/HashHelper')
-    , messages = require('../../../server/service/ValidationMessages');
+    , messages = require('../../../server/validate/ValidationMessages');
 
 describe('User Service', function() {
 

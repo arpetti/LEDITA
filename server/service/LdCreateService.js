@@ -4,7 +4,7 @@ var TopicService = require('./TopicService');
 var ObjectiveService = require('./ObjectiveService');
 var PrerequisiteService = require('./PrerequisiteService');
 var async = require('async');
-var messages = require('./ValidationMessages');
+var messages = require('../validate/ValidationMessages');
 var _ = require('underscore');
 
 var createLdForInsert = function(userId, scopeId, ldData) {

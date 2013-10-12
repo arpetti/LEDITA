@@ -1,5 +1,5 @@
 var RefDao = require('../dao/RefDao');
-var messages = require('./ValidationMessages');
+var messages = require('../validate/ValidationMessages');
 var _ = require('underscore');
 
 module.exports = {

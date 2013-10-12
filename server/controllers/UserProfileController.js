@@ -1,6 +1,6 @@
 var UserProfileDao =      require('../dao/UserProfileDao.js')
     , UserProfileService = require('../service/UserProfileService')
-    , messages = require('../service/ValidationMessages');
+    , messages = require('../validate/ValidationMessages');
 
 module.exports = {
 

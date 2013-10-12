@@ -1,5 +1,5 @@
 var validationHelper = require('../util/ValidationHelper');
-var messages = require('./ValidationMessages');
+var messages = require('../validate/ValidationMessages');
 var UserDao = require('../dao/UserDao')
 var _ = require('underscore');
 

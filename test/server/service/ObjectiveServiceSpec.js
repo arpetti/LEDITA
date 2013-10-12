@@ -4,7 +4,7 @@ var sinon = require('sinon')
 var ObjectiveService = require('../../../server/service/ObjectiveService');
 var RefDao = require('../../../server/dao/RefDao');
 var LdCreateDao = require('../../../server/dao/LdCreateDao');
-var messages = require('../../../server/service/ValidationMessages');
+var messages = require('../../../server/validate/ValidationMessages');
 
 describe('Objective Service', function() {
 

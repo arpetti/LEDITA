@@ -1,7 +1,7 @@
 // This is an integration test because the dependencies are not mocked out
 var expect = require('chai').expect;
 var ActivityService = require('../../../server/service/ActivityService');
-var messages = require('../../../server/service/ValidationMessages');
+var messages = require('../../../server/validate/ValidationMessages');
 var _ = require('underscore');
 
 describe('Activity Service Integration', function() {

@@ -5,9 +5,9 @@ var when   = require('when');
 var LdController = require('../../../server/controllers/LdController');
 var LearningDesignDao = require('../../../server/dao/LdDao');
 var LdGetService = require('../../../server/service/LdGetService');
-var LdCreateValidator = require('../../../server/service/LdCreateValidator')
+var LdCreateValidator = require('../../../server/validate/LdCreateValidator')
 var LdCreateService = require('../../../server/service/LdCreateService');
-var messages = require('../../../server/service/ValidationMessages');
+var messages = require('../../../server/validate/ValidationMessages');
 
 describe('Learning Design Controller', function() {
 

@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
 var LdEditValidator = require('../../../server/validate/LdEditValidator');
-var messages = require('../../../server/service/ValidationMessages');
+var messages = require('../../../server/validate/ValidationMessages');
 var TestUtils = require('../testutils/TestUtils');
 
 describe('LD Edit Validation', function() {

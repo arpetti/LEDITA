@@ -3,7 +3,7 @@
 var expect = require('chai').expect
     , UserService = require('../../../server/service/UserService')
     , UserDao = require('../../../server/dao/UserDao')
-    , messages = require('../../../server/service/ValidationMessages');
+    , messages = require('../../../server/validate/ValidationMessages');
 
 describe('User Service Integration', function() {    
 

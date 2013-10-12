@@ -1,8 +1,8 @@
 var LdDao =      require('../dao/LdDao.js');
 var LdGetService = require('../service/LdGetService');
-var LdCreateValidator = require('../service/LdCreateValidator');
+var LdCreateValidator = require('../validate/LdCreateValidator');
 var LdCreateService = require('../service/LdCreateService');
-var messages = require('../service/ValidationMessages');
+var messages = require('../validate/ValidationMessages');
 
 module.exports = {
     

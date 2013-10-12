@@ -1,5 +1,5 @@
 var vh = require('../util/ValidationHelper');
-var m = require('../service/ValidationMessages');
+var m = require('../validate/ValidationMessages');
 var _ = require('underscore');
 
 module.exports = {

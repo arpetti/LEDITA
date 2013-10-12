@@ -1,5 +1,5 @@
 var ActivityDao = require('../dao/ActivityDao');
-var messages = require('./ValidationMessages');
+var messages = require('../validate/ValidationMessages');
 var _ = require('underscore');
 
 _.groupByMulti = function (obj, values, context) {

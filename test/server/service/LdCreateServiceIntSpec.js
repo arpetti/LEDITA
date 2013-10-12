@@ -3,7 +3,7 @@ var expect = require('chai').expect
 chai.use(require('chai-datetime'));
 
 var LDCreateService = require('../../../server/service/LdCreateService');
-var messages = require('../../../server/service/ValidationMessages');
+var messages = require('../../../server/validate/ValidationMessages');
 var Dao = require('../../../server/dao/Dao')
 var async = require('async');
 var _ = require('underscore');

@@ -1,5 +1,5 @@
 var vh = require('../util/ValidationHelper');
-var m = require('./ValidationMessages');
+var m = require('../validate/ValidationMessages');
 var _ = require('underscore');
 
 var atLeastOneQcer = function(qcers) {

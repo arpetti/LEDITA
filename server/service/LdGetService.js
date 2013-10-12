@@ -1,7 +1,7 @@
 var LdDao = require('../dao/LdDao');
 var when   = require('when');
 var nodefn = require('when/node/function');
-var messages = require('./ValidationMessages');
+var messages = require('../validate/ValidationMessages');
 var async = require('async');
 var _ = require('underscore');
 

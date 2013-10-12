@@ -1,5 +1,5 @@
 var LdEditDao = require('../dao/LdEditDao');
-var messages = require('./ValidationMessages');
+var messages = require('../validate/ValidationMessages');
 
 module.exports = {
 

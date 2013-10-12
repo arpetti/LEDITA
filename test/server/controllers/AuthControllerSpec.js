@@ -3,7 +3,7 @@ var expect = require('chai').expect
     , sinon = require('sinon')
     , AuthController = require('../../../server/controllers/AuthController')
     , User = require('../../../server/models/User')
-    , UserValidator = require('../../../server/service/UserValidator')
+    , UserValidator = require('../../../server/validate/UserValidator')
     , HashHelper = require('../../../server/util/HashHelper')
     , UserService = require('../../../server/service/UserService');
 

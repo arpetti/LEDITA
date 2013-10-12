@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
-var LdCreateValidator = require('../../../server/service/LdCreateValidator');
-var messages = require('../../../server/service/ValidationMessages');
+var LdCreateValidator = require('../../../server/validate/LdCreateValidator');
+var messages = require('../../../server/validate/ValidationMessages');
 var TestUtils = require('../testutils/TestUtils');
 
 // TODO: Ideally this would be in a module but having trouble exporting a constructor function

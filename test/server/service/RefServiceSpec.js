@@ -3,7 +3,7 @@ var assert = require('chai').assert;
 var sinon = require('sinon');
 var RefService = require('../../../server/service/RefService');
 var RefDao = require('../../../server/dao/RefDao');
-var messages = require('../../../server/service/ValidationMessages');
+var messages = require('../../../server/validate/ValidationMessages');
 
 describe('Reference Data Service', function() {
 

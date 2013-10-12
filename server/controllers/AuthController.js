@@ -1,6 +1,6 @@
 var passport =  require('passport')
     , User = require('../models/User.js')
-    , UserValidator = require('../service/UserValidator')
+    , UserValidator = require('../validate/UserValidator')
     , UserService = require('../service/UserService')
     , HashHelper = require('../util/HashHelper')
     , ConfigHelper = require('../util/ConfigHelper')

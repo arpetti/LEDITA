@@ -7,7 +7,7 @@ var TopicService = require('../../../server/service/TopicService');
 var ObjectiveService = require('../../../server/service/ObjectiveService');
 var PrerequisiteService = require('../../../server/service/PrerequisiteService');
 var LdCreateDao = require('../../../server/dao/LdCreateDao');
-var messages = require('../../../server/service/ValidationMessages');
+var messages = require('../../../server/validate/ValidationMessages');
 
 describe('LD Create Service', function() {
 

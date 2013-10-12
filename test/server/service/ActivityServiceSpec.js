@@ -3,7 +3,7 @@ var assert = require('chai').assert;
 var sinon = require('sinon');
 var ActivityService = require('../../../server/service/ActivityService');
 var ActivityDao = require('../../../server/dao/ActivityDao');
-var messages = require('../../../server/service/ValidationMessages');
+var messages = require('../../../server/validate/ValidationMessages');
 var _ = require('underscore');
 
 describe('Activity Service', function() {

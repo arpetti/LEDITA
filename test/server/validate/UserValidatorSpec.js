@@ -1,6 +1,6 @@
 var expect = require('chai').expect
-    , UserValidator = require('../../../server/service/UserValidator')
-    , messages = require('../../../server/service/ValidationMessages');
+    , UserValidator = require('../../../server/validate/UserValidator')
+    , messages = require('../../../server/validate/ValidationMessages');
 
 describe('User Validator', function() {  
 

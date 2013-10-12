@@ -3,7 +3,7 @@
 var expect = require('chai').expect
 var LdGetService = require('../../../server/service/LdGetService');
 var LdDao = require('../../../server/dao/LdDao');
-var messages = require('../../../server/service/ValidationMessages');
+var messages = require('../../../server/validate/ValidationMessages');
 var _ = require('underscore');
 
 describe('LD Service Integration', function() {

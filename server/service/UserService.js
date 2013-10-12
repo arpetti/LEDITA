@@ -1,7 +1,7 @@
 var HashHelper = require('../util/HashHelper')
   , UserDao = require('../dao/UserDao')
   , UserRoles = require('../../client/js/auth/AuthRoutingConfig').userRoles
-  , messages = require('./ValidationMessages');
+  , messages = require('../validate/ValidationMessages');
 
 module.exports = {
 
