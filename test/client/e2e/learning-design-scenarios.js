@@ -196,4 +196,25 @@ describe('Learning Design', function() {
         element('#logoutLink').click();
     });
 
+	it('Cannot edit LD that does not belong to you', function() {
+		var existingUserName = testUsers.getUserName;
+        var existingUserPassword = testUsers.getUserPassword;
+
+        browser().navigateTo('/login');
+        input('username').enter(existingUserName);
+        input('password').enter(existingUserPassword);
+        element('#loginButton').click();
+        sleep(2);
+
+        // experimental - may not work on Travis
+        browser().navigateTo('/ldedit/1'); 
+        sleep(0.5);
+        // Sara is not owner of LD 1 so should be redirected to home page if tries to edit it
+        expect(browser().location().url()).toBe('/');
+
+        // Logout
+        element('#userActionsMenu').click();
+        element('#logoutLink').click();
+	});
+
 }); 
