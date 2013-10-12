@@ -50,6 +50,9 @@ echo "Running client side end to end tests..."
 npm run-script client-e2e-test
 clientE2ETestStatus=$?
 
+echo "Restting database to original state..."
+database/local/create-db.sh
+
 echo "Stopping node web server..."
 nodepid=`ps -ax | pgrep node`
 if [[ -n "$nodepid" ]]; then

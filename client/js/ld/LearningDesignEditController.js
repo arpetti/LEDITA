@@ -17,6 +17,7 @@ angular.module('ledita-app')
         $scope.alertMsg = err;
     });
 
+    // TODO: value could be undefined in case of validation error
     $scope.updateLdName = function() {
     	console.log('LD Name was changed to: ' + $scope.learningDesign.ld_name);
     };

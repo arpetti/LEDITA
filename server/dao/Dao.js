@@ -38,6 +38,7 @@ module.exports = {
     });
   },
 
+  // TODO Rename insertOrUpdateRecord because it handles both
   insertRecord: function(queryString, jsonData, callback) {
     var insertedRowId;
     pool.getConnection(function(err, connection) {
