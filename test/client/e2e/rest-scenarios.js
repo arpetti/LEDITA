@@ -15,6 +15,11 @@ describe('REST resources require authorization', function() {
 			expect(element('pre').text()).toBe('Unauthorized');
 		});
 
+		it('GET learning design by id for edit', function() {
+			browser().navigateTo('/learningdesign/1');
+			expect(element('pre').text()).toBe('Unauthorized');
+		});
+
 		it('GET learning design structure by id', function() {
 			browser().navigateTo('/learningdesignstructure/1');
 			expect(element('pre').text()).toBe('Unauthorized');

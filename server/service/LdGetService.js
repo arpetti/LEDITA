@@ -59,7 +59,6 @@ module.exports = {
         });
     },
 
-    // #27 wip...
     // callback(err, boolean)
     isLdOwnedByUser: function(ldId, userId, callback) {
     	LdDao.getLearningDesignUserId(ldId, function(err, ldUserId) {

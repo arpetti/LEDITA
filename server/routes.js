@@ -1,14 +1,15 @@
-var _ =           require('underscore')
-    , path =      require('path')
-    , passport =  require('passport')
-    , AuthController =  require('./controllers/AuthController')
-    , LdController = require('./controllers/LdController')
-    , UserProfileController = require('./controllers/UserProfileController')
-    , ActivityController       = require('./controllers/ActivityController')
-    , RefController       = require('./controllers/RefController')
-    , User =      require('./models/User.js')
-    , userRoles = require('../client/js/auth/AuthRoutingConfig').userRoles
-    , accessLevels = require('../client/js/auth/AuthRoutingConfig').accessLevels;
+var _ =  require('underscore');
+var path =  require('path');
+var passport =  require('passport');
+var LdGetService = require('./service/LdGetService');
+var AuthController =  require('./controllers/AuthController');
+var LdController = require('./controllers/LdController');
+var UserProfileController = require('./controllers/UserProfileController');
+var ActivityController = require('./controllers/ActivityController');
+var RefController = require('./controllers/RefController');
+var User = require('./models/User.js');
+var userRoles = require('../client/js/auth/AuthRoutingConfig').userRoles;
+var accessLevels = require('../client/js/auth/AuthRoutingConfig').accessLevels;
 
 var routes = [
 
@@ -60,6 +61,12 @@ var routes = [
         path: '/learningdesign',
         httpMethod: 'POST',
         middleware: [ensureAuthenticated, ensureAuthorized, LdController.createLd],
+        accessLevel: accessLevels.user
+    },
+    {
+        path: '/learningdesign/:id',
+        httpMethod: 'GET',
+        middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, LdController.findById],
         accessLevel: accessLevels.user
     },
 
@@ -183,8 +190,14 @@ function ensureAuthorized(req, res, next) {
     return next();
 }
 
-// #27 wip...
 function ensureOwner(req, res, next) {
 	var ldId = req.params.id;
 	var userId = req.user.id
+	LdGetService.isLdOwnedByUser(ldId, userId, function(err, result) {
+		if(err || !result) {
+			return res.send(401);
+		} else {
+			return next();
+		}
+	});
 }
