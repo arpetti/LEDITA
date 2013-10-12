@@ -31,7 +31,7 @@
 
             <form ng-submit="addSubject()" class="sidebarForm">
                 <input type="text" class="sidebarInput" ng-model="subject" placeholder="add new topic">
-                <button class="btn sidebarButton" type="submit"><i class="icon-plus-sign icon-white"></i></button>
+                <span class="editButton" ng-click="addTopicFromUserInput($event)"><i class="icon-plus icon-white"></i> </span>
             </form>
             <ul ng-repeat="subject in learningDesign.subjects" class="zeroMargin subjects">
                 <li class="sidebarEditItem"><span class="sidebarEditItemLink">{{subject.subject_name}} <a ng-href="#"><i
@@ -43,7 +43,7 @@
 
             <form ng-submit="addAims()" class="sidebarForm">
                 <input type="text" class="sidebarInput" ng-model="aims" placeholder="add new objective">
-                <button class="btn sidebarButton" type="submit"><i class="icon-plus-sign icon-white"></i></button>
+                <span class="editButton" ng-click="addObjectiveFromUserInput($event)"><i class="icon-plus icon-white"></i> </span>
             </form>
             <ul ng-repeat="objective in learningDesign.objectives" class="zeroMargin objectives">
                 <li class="sidebarEditItem"><span class="sidebarEditItemLink">{{objective.objective_descr}} <a
@@ -57,7 +57,7 @@
         <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-backward"></i> Pre-Requisites:</h5>
             <form ng-submit="addNeeds()" class="sidebarForm">
                 <input type="text" class="sidebarInput" ng-model="needs" placeholder="add new pre-requisites">
-                <button class="btn sidebarButton" type="submit"><i class="icon-plus-sign icon-white"></i></button>
+                <span class="editButton" ng-click="addPrerequisiteFromUserInput($event)"><i class="icon-plus icon-white"></i> </span>
             </form>
             <ul ng-repeat="prereq in learningDesign.prerequisites" class="zeroMargin prerequisites">
                 <li class="sidebarEditItem"><span class="sidebarEditItemLink">{{prereq.prereq_name}} <a ng-href="#"><i
