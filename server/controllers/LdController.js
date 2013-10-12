@@ -1,4 +1,4 @@
-var LdDao =      require('../dao/LdDao.js');
+var LdDao =  require('../dao/LdDao.js');
 var LdGetService = require('../service/LdGetService');
 var LdCreateValidator = require('../validate/LdCreateValidator');
 var LdCreateService = require('../service/LdCreateService');

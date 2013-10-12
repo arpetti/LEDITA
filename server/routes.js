@@ -4,6 +4,7 @@ var passport =  require('passport');
 var LdGetService = require('./service/LdGetService');
 var AuthController =  require('./controllers/AuthController');
 var LdController = require('./controllers/LdController');
+var LdEditController = require('./controllers/LdEditController');
 var UserProfileController = require('./controllers/UserProfileController');
 var ActivityController = require('./controllers/ActivityController');
 var RefController = require('./controllers/RefController');
@@ -58,15 +59,21 @@ var routes = [
         accessLevel: accessLevels.user
     },
     {
+        path: '/learningdesign/:id',
+        httpMethod: 'GET',
+        middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, LdController.findById],
+        accessLevel: accessLevels.user
+    },
+    {
         path: '/learningdesign',
         httpMethod: 'POST',
         middleware: [ensureAuthenticated, ensureAuthorized, LdController.createLd],
         accessLevel: accessLevels.user
     },
     {
-        path: '/learningdesign/:id',
-        httpMethod: 'GET',
-        middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, LdController.findById],
+        path: '/learningdesign/name/:id',
+        httpMethod: 'PUT',
+        middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, LdEditController.updateLdName],
         accessLevel: accessLevels.user
     },
 
