@@ -4,7 +4,6 @@ var messages = require('../validate/ValidationMessages');
 
 module.exports = {
 
-	// #28 wip - needs unit tests
 	updateLdName: function(req, res) {
 		var ldId = req.params.id;
 		var ldData = req.body;
