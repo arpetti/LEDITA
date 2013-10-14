@@ -17,7 +17,6 @@ angular.module('ledita-app')
         $scope.alertMsg = err;
     });
 
-    // #28 wip...
     $scope.updateLdName = function() {
     	var modifiedLdName = $scope.learningDesign.ld_name;
     	if (modifiedLdName && modifiedLdName.length > 0) {

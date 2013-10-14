@@ -55,7 +55,7 @@ describe('Learning Design Edit Controller', function() {
             var validateStub = sandbox.stub(LdEditValidator, "validateLdName").returns(errorMessages);
 
             var serviceError = new Error("something went wrong");
-            var serviceMessage = "Unable to create LD";
+            var serviceMessage = "Unable to update LD Name";
     		var serviceStub = sandbox.stub(LdEditService, "updateLdName", function(ldName, ldId, callback) {
                 callback(serviceError, null, serviceMessage);
             });
@@ -92,6 +92,93 @@ describe('Learning Design Edit Controller', function() {
                 done();
             };
             LdEditController.updateLdName(req, res);
+		});
+	});
+
+	describe('Update Students Description', function() {
+
+		var req = {}
+	        , res = {}
+	        , sandbox = sinon.sandbox.create();
+
+	    beforeEach(function() {
+
+	    });
+
+	    afterEach(function() {
+	        sandbox.restore();
+	    });
+
+		it('Sends 400 if validator returns error messages', function(done) {
+			var ldId = 956;
+    		req.params = {id: ldId};
+
+    		var studentsDescr = 'this is a students description';
+    		req.body = {studentsDescr: studentsDescr};
+
+    		var errorMessages = ['something wrong with that description'];
+            var validateStub = sandbox.stub(LdEditValidator, "validateStudentsDescr").returns(errorMessages);
+
+            var serviceStub = sandbox.stub(LdEditService, "updateStudentsDescr");
+
+            res.send = function(httpStatus, ldDataErrors) {
+                expect(httpStatus).to.equal(400);
+                expect(ldDataErrors).to.equal(errorMessages);
+                assert.isTrue(validateStub.withArgs(studentsDescr).calledOnce);
+                assert.equal(serviceStub.callCount, 0, "students description is not updated when there are validation errors");
+                done();
+            };
+            LdEditController.updateStudentsDescr(req, res);
+		});
+
+		it('Sends 500 if service calls back with error', function(done) {
+			var ldId = 956;
+    		req.params = {id: ldId};
+
+    		var studentsDescr = 'this is a students description';
+    		req.body = {studentsDescr: studentsDescr};
+
+    		var errorMessages = [];
+            var validateStub = sandbox.stub(LdEditValidator, "validateStudentsDescr").returns(errorMessages);
+
+            var serviceError = new Error("something went wrong");
+            var serviceMessage = "Unable to update Students Description";
+    		var serviceStub = sandbox.stub(LdEditService, "updateStudentsDescr", function(studentsDescr, ldId, callback) {
+                callback(serviceError, null, serviceMessage);
+            });
+
+            res.send = function(httpStatus, errMessage) {
+                expect(httpStatus).to.equal(500);
+                expect(errMessage).to.equal(serviceMessage);
+                assert.isTrue(validateStub.withArgs(studentsDescr).calledOnce);
+                assert.isTrue(serviceStub.withArgs(studentsDescr, ldId).calledOnce);
+                done();
+            };
+            LdEditController.updateStudentsDescr(req, res);
+		});
+
+		it('Sends 200 if service update is successful', function(done) {
+			var ldId = 956;
+    		req.params = {id: ldId};
+
+    		var studentsDescr = 'this is a students description';
+    		req.body = {studentsDescr: studentsDescr};
+
+    		var errorMessages = [];
+            var validateStub = sandbox.stub(LdEditValidator, "validateStudentsDescr").returns(errorMessages);
+
+    		var serviceStub = sandbox.stub(LdEditService, "updateStudentsDescr", function(studentsDescr, ldId, callback) {
+                callback();
+            });
+
+            res.json = function(httpStatus, result) {
+                expect(httpStatus).to.equal(200);
+                expect(result.studentsDescr).to.equal(studentsDescr);
+                assert.isTrue(validateStub.withArgs(studentsDescr).calledOnce);
+                assert.isTrue(serviceStub.withArgs(studentsDescr, ldId).calledOnce);
+                done();
+            };
+            LdEditController.updateStudentsDescr(req, res);
 		});
 	});
 
