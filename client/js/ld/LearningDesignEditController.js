@@ -42,6 +42,19 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
     	};
     };
 
+    $scope.updateLdScope = function() {
+    	var modifiedLdScope = $scope.learningDesign.ld_scope;
+    	if (modifiedLdScope && modifiedLdScope.length > 0) {
+    		console.log('updateLdScope: ' + modifiedLdScope);
+    		LDEditService.updateLdScope($scope.ldid, {ldScope: modifiedLdScope},
+	        function(res) {
+	        },
+	        function(err) {
+	            $scope.ldUpdateErrors = err; // TODO UI to display these
+	        });
+    	};
+    };
+
     $scope.updateStudentsDescr = function() {
     	var modifiedStudentsDescr = $scope.learningDesign.ld_students_profile;
     	if (modifiedStudentsDescr && modifiedStudentsDescr.length > 0) {

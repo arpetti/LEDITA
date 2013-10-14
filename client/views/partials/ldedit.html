@@ -186,6 +186,7 @@
                         <input class="editInputScocpe" type="text" name="ldScope" 
                         	ng-model="learningDesign.ld_scope"
                         	typeahead="suggestion for suggestion in getScopes($viewValue)"
+                        	ui-Blur="updateLdScope()"
                            	required ng-maxlength="50"
                            	ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
                         <div class="errorBoxTab">

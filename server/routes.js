@@ -76,6 +76,13 @@ var routes = [
         middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, LdEditController.updateLdName],
         accessLevel: accessLevels.user
     },
+    // Update Scope is POST rather than PUT because not idempotent - could create new SCOPE entity
+    {
+        path: '/learningdesign/scope/:id',
+        httpMethod: 'POST',
+        middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, LdEditController.updateLdScope],
+        accessLevel: accessLevels.user
+    },
     {
         path: '/learningdesign/studentsdescr/:id',
         httpMethod: 'PUT',
