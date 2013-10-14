@@ -65,7 +65,9 @@ echo "Client unit test status is $clientUnitTestStatus"
 echo "Client e2e test status is: $clientE2ETestStatus"
 
 if [[ $serverTestStatus != 0 ]] || [[ $clientUnitTestStatus != 0 ]] || [[ $clientE2ETestStatus != 0 ]]; then
+	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
 	echo "ERROR: There were test failures"
+	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
 	exit 1
 else
 	echo "SUCCESS: All tests passed"

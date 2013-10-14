@@ -11,16 +11,18 @@ describe('LD Edit', function () {
 	
 	var ldOriginalLastEditDate = new Date('2013-01-11 22:21:26');
 	var ldOriginalName = 'Learning Design Title Demo 27';
+	var ldOriginalScopeId = 3;
 	var ldOriginalStudentsDescr = '20 studenti adolescenti di livello B1';
 	
-	var verifyLd = 'SELECT id, name, publication, students_profile, last_edit_date FROM ld where id = ?';
-	var resetLd = 'UPDATE ld SET name = ?, last_edit_date = ? WHERE id = ?';
+	var verifyLd = 'SELECT id, name, scope_id, publication, students_profile, last_edit_date FROM ld where id = ?';
+	var resetLdName = 'UPDATE ld SET name = ?, last_edit_date = ? WHERE id = ?';
+	var resetLdScope = 'UPDATE ld set scope_id = ?, last_edit_date = ? WHERE id = ?';
 	var resetStudentsDescr = 'UPDATE ld SET students_profile = ?, last_edit_date = ? WHERE id = ?';
 
 	describe('Update LD Name', function() {
 
 		afterEach(function(done) {
-			Dao.insertOrUpdateRecord(resetLd, [ldOriginalName, ldOriginalLastEditDate, ldIdToEdit], function(err, result) {
+			Dao.insertOrUpdateRecord(resetLdName, [ldOriginalName, ldOriginalLastEditDate, ldIdToEdit], function(err, result) {
 				done();
 			});
 		});
@@ -71,6 +73,69 @@ describe('LD Edit', function () {
 					expect(results).to.have.length(1);
 					expect(results[0].name).to.equal(ldName);
 					expect(results[0].last_edit_date).to.equalDate(today);
+					done();
+				})
+			});
+		});
+
+	});
+
+	describe('Update LD Scope', function() {
+
+		afterEach(function(done) {
+			Dao.insertOrUpdateRecord(resetLdScope, [ldOriginalScopeId, ldOriginalLastEditDate, ldIdToEdit], function(err, result) {
+				done();
+			});
+		});
+
+		it('Updates scope of existing LD', function(done) {
+			var today = new Date();
+			var ldScope = 4; // Lezione
+			LdEditDao.updateLdScope(ldScope, ldIdToEdit, function(err, result) {
+				expect(err).to.be.null;
+				expect(result).not.to.be.null;
+				Dao.findAll(verifyLd, [ldIdToEdit], function(err, results) {
+					expect(err).to.be.null;
+					expect(results).not.to.be.null;
+					expect(results).to.have.length(1);
+					expect(results[0].scope_id).to.equal(ldScope);
+					expect(results[0].last_edit_date).to.equalDate(today);
+					done();
+				})
+			});
+		});
+
+		it('Does nothing if LD ID not found', function(done) {
+			var ldScope = 4; // Lezione
+			var ldIdNotFound = 9999;
+			LdEditDao.updateLdScope(ldScope, ldIdNotFound, function(err, result) {
+				expect(err).to.be.null;
+				expect(result).not.to.be.null;
+				// Verify LD is unmodified
+				Dao.findAll(verifyLd, [ldIdToEdit], function(err, results) {
+					expect(err).to.be.null;
+					expect(results).not.to.be.null;
+					expect(results).to.have.length(1);
+					expect(results[0].scope_id).to.equal(ldOriginalScopeId);
+					expect(results[0].last_edit_date).to.equalDate(ldOriginalLastEditDate);
+					done();
+				})
+			});
+		});
+
+		it('Calls back with error if Scope ID does not match existing Scope', function(done) {
+			var ldScope = 9999;
+			LdEditDao.updateLdScope(ldScope, ldIdToEdit, function(err, result) {
+				expect(err).not.to.be.null;
+				expect(err.message).to.contain('fk_ld_scope1');
+				expect(result).to.be.undefined;
+				// Verify LD is unmodified
+				Dao.findAll(verifyLd, [ldIdToEdit], function(err, results) {
+					expect(err).to.be.null;
+					expect(results).not.to.be.null;
+					expect(results).to.have.length(1);
+					expect(results[0].scope_id).to.equal(ldOriginalScopeId);
+					expect(results[0].last_edit_date).to.equalDate(ldOriginalLastEditDate);
 					done();
 				})
 			});
