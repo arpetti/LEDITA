@@ -1,6 +1,7 @@
 angular.module('ledita-app')
 .controller('LdEditCtrl',
-['$scope', '$routeParams', '$location', 'LDService', 'LDEditService', function($scope, $routeParams, $location, LDService, LDEditService) {
+['$scope', '$routeParams', '$location', 'TypeaheadHelper', 'LDService', 'LDEditService', 
+function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditService) {
 
 	$scope.ldid = $routeParams.ldid;
 
@@ -16,6 +17,10 @@ angular.module('ledita-app')
         $scope.error = "Failed to fetch learning design activities.";
         $scope.alertMsg = err;
     });
+
+    $scope.getScopes = function(scope) {
+    	return TypeaheadHelper.getScopes(scope);
+  	};
 
     $scope.updateLdName = function() {
     	var modifiedLdName = $scope.learningDesign.ld_name;

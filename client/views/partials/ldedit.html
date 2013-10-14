@@ -185,11 +185,11 @@
                         <label class="editLabel"><i class="icon-bell icon-white"></i> Scope:</label>
                         <input class="editInputScocpe" type="text" name="ldScope" 
                         	ng-model="learningDesign.ld_scope"
+                        	typeahead="suggestion for suggestion in getScopes($viewValue)"
                            	required ng-maxlength="50"
                            	ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
                         <div class="errorBoxTab">
-                            <span class="errorTipTab"
-                                  ng-show="(learningDesign.ld_scope == '') || (ScopeForm.ldScope.$dirty && ScopeForm.ldScope.$error.required)">Required!</span>
+                            <span class="errorTipTab" ng-show="(learningDesign.ld_scope == '') || (ScopeForm.ldScope.$dirty && ScopeForm.ldScope.$error.required)">Required!</span>
                             <span class="errorTipTab" ng-show="ScopeForm.ldScope.$error.pattern">The scope cannot contain this symbol.</span>
                             <span class="errorTipTab" ng-show="ScopeForm.ldScope.$error.maxlength">The scope cannot be longer than 50 characters.</span>
                         </div>

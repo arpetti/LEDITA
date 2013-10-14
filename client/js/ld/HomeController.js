@@ -41,11 +41,11 @@ angular.module('ledita-app')
 
 }]);
 
-// TODO Implement Remove topic, objective etc. 
-// 	x href from UI should click to remove function here that splices the array
+// TODO Remove limitToFilter dependency after all typeahead functions refactored to TypeaheadHelper
 angular.module('ledita-app')
 .controller('LdCreateCtrl',
-['$rootScope', '$scope', '$http', 'Home', 'limitToFilter', '$location', function($rootScope, $scope, $http, Home, limitToFilter, $location) {
+['$rootScope', '$scope', '$http', 'Home', 'TypeaheadHelper', 'limitToFilter', '$location', 
+function($rootScope, $scope, $http, Home, TypeaheadHelper, limitToFilter, $location) {
 
 	Home.getQcers(function(res) {
         $scope.qceropts = res;
@@ -59,10 +59,7 @@ angular.module('ledita-app')
     $scope.selectedPrerequisites = [];
 
     $scope.getScopes = function(scope) {
-    	var scopeMatchUrl = '/reference/scopes/' + scope;
-		return $http.get(scopeMatchUrl).then(function(response) {
-			return limitToFilter(response.data, 15);
-		});
+    	return TypeaheadHelper.getScopes(scope);
   	};
 
   	$scope.getSubjects = function(subject) {
