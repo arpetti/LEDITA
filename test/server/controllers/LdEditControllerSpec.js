@@ -57,7 +57,7 @@ describe('Learning Design Edit Controller', function() {
             var serviceError = new Error("something went wrong");
             var serviceMessage = "Unable to update LD Name";
     		var serviceStub = sandbox.stub(LdEditService, "updateLdName", function(ldName, ldId, callback) {
-                callback(serviceError, null, serviceMessage);
+                callback(serviceError, serviceMessage);
             });
 
             res.send = function(httpStatus, errMessage) {
@@ -144,7 +144,7 @@ describe('Learning Design Edit Controller', function() {
             var serviceError = new Error("something went wrong");
             var serviceMessage = "Unable to update LD Scope";
     		var serviceStub = sandbox.stub(LdEditService, "updateLdScope", function(ldName, ldId, callback) {
-                callback(serviceError, null, serviceMessage);
+                callback(serviceError, serviceMessage);
             });
 
             res.send = function(httpStatus, errMessage) {
@@ -231,7 +231,7 @@ describe('Learning Design Edit Controller', function() {
             var serviceError = new Error("something went wrong");
             var serviceMessage = "Unable to update Students Description";
     		var serviceStub = sandbox.stub(LdEditService, "updateStudentsDescr", function(studentsDescr, ldId, callback) {
-                callback(serviceError, null, serviceMessage);
+                callback(serviceError, serviceMessage);
             });
 
             res.send = function(httpStatus, errMessage) {
@@ -267,6 +267,108 @@ describe('Learning Design Edit Controller', function() {
             };
             LdEditController.updateStudentsDescr(req, res);
 		});
+	});
+
+	describe('Update Publication to Public', function() {
+
+		var req = {}
+	        , res = {}
+	        , sandbox = sinon.sandbox.create();
+
+	    beforeEach(function() {
+
+	    });
+
+	    afterEach(function() {
+	        sandbox.restore();
+	    });
+
+		it('Sends 500 if service calls back with error', function(done) {
+			var ldId = 956;
+    		req.params = {id: ldId};
+
+    		var serviceError = new Error("something went wrong");
+            var serviceMessage = "Unable to update Publication";
+    		var serviceStub = sandbox.stub(LdEditService, "updateLdPublic", function(ldId, callback) {
+                callback(serviceError, serviceMessage);
+            });
+
+            res.send = function(httpStatus, errMessage) {
+                expect(httpStatus).to.equal(500);
+                expect(errMessage).to.equal(serviceMessage);
+                assert.isTrue(serviceStub.withArgs(ldId).calledOnce);
+                done();
+            };
+            LdEditController.updateLdPublic(req, res);
+		});
+
+		it('Sends 200 if service update is successful', function(done) {
+			var ldId = 956;
+    		req.params = {id: ldId};
+
+    		var serviceStub = sandbox.stub(LdEditService, "updateLdPublic", function(ldId, callback) {
+                callback();
+            });
+
+            res.json = function(httpStatus, result) {
+                expect(httpStatus).to.equal(200);
+                assert.isTrue(serviceStub.withArgs(ldId).calledOnce);
+                done();
+            };
+            LdEditController.updateLdPublic(req, res);
+		});
+
+	});
+
+	describe('Update Publication to Private', function() {
+
+		var req = {}
+	        , res = {}
+	        , sandbox = sinon.sandbox.create();
+
+	    beforeEach(function() {
+
+	    });
+
+	    afterEach(function() {
+	        sandbox.restore();
+	    });
+
+		it('Sends 500 if service calls back with error', function(done) {
+			var ldId = 956;
+    		req.params = {id: ldId};
+
+    		var serviceError = new Error("something went wrong");
+            var serviceMessage = "Unable to update Publication";
+    		var serviceStub = sandbox.stub(LdEditService, "updateLdPrivate", function(ldId, callback) {
+                callback(serviceError, serviceMessage);
+            });
+
+            res.send = function(httpStatus, errMessage) {
+                expect(httpStatus).to.equal(500);
+                expect(errMessage).to.equal(serviceMessage);
+                assert.isTrue(serviceStub.withArgs(ldId).calledOnce);
+                done();
+            };
+            LdEditController.updateLdPrivate(req, res);
+		});
+
+		it('Sends 200 if service update is successful', function(done) {
+			var ldId = 956;
+    		req.params = {id: ldId};
+
+    		var serviceStub = sandbox.stub(LdEditService, "updateLdPrivate", function(ldId, callback) {
+                callback();
+            });
+
+            res.json = function(httpStatus, result) {
+                expect(httpStatus).to.equal(200);
+                assert.isTrue(serviceStub.withArgs(ldId).calledOnce);
+                done();
+            };
+            LdEditController.updateLdPrivate(req, res);
+		});
+
 	});
 
 });

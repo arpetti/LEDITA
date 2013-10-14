@@ -13,7 +13,7 @@ module.exports = {
             return res.send(400, vmessages);
         };
 		
-		LdEditService.updateLdName(ldData.ldName, ldId, function(err, result, message) {
+		LdEditService.updateLdName(ldData.ldName, ldId, function(err, message) {
 			if (err) {
 				return res.send(500, message); 
 			} else {
@@ -31,7 +31,7 @@ module.exports = {
             return res.send(400, vmessages);
         };
 		
-		LdEditService.updateLdScope(ldData.ldScope, ldId, function(err, result, message) {
+		LdEditService.updateLdScope(ldData.ldScope, ldId, function(err, message) {
 			if (err) {
 				return res.send(500, message); 
 			} else {
@@ -49,11 +49,33 @@ module.exports = {
             return res.send(400, vmessages);
         };
 		
-		LdEditService.updateStudentsDescr(ldData.studentsDescr, ldId, function(err, result, message) {
+		LdEditService.updateStudentsDescr(ldData.studentsDescr, ldId, function(err, message) {
 			if (err) {
 				return res.send(500, message); 
 			} else {
 		        res.json(200, {studentsDescr: ldData.studentsDescr});
+			}
+		});
+	},
+
+	updateLdPublic: function(req, res) {
+		var ldId = req.params.id;
+		LdEditService.updateLdPublic(ldId, function(err, message) {
+			if (err) {
+				return res.send(500, message); 
+			} else {
+		        res.json(200, {});
+			}
+		});
+	},
+
+	updateLdPrivate: function(req, res) {
+		var ldId = req.params.id;
+		LdEditService.updateLdPrivate(ldId, function(err, message) {
+			if (err) {
+				return res.send(500, message); 
+			} else {
+		        res.json(200, {});
 			}
 		});
 	}
