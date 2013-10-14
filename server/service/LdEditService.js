@@ -2,7 +2,20 @@ var LdEditDao = require('../dao/LdEditDao');
 var ScopeService = require('./ScopeService');
 var messages = require('../validate/ValidationMessages');
 
+var updateLdPublicationCommon = function(publicationIndicator, ldId, cb) {
+	LdEditDao.updateLdPublication(publicationIndicator, ldId, function(err, result) {
+		if(err) {
+			cb(err, messages.LD_PUBLICATION_UPDATE_FAIL);
+		} else {
+			cb();
+		}
+	});
+};
+
 module.exports = {
+
+	LD_PUBLIC_INDICATOR: 1,
+	LD_PRIVATE_INDICATOR: 0,
 
 	// callback(err, message)
 	updateLdName: function(ldName, ldId, callback) {
@@ -30,6 +43,16 @@ module.exports = {
 				});
 			}
 		});
+	},
+
+	// callback(err, message)
+	updateLdPublic: function(ldId, callback) {
+		updateLdPublicationCommon(module.exports.LD_PUBLIC_INDICATOR, ldId, callback);
+	},
+
+	// callback(err, message)
+	updateLdPrivate: function(ldId, callback) {
+		updateLdPublicationCommon(module.exports.LD_PRIVATE_INDICATOR, ldId, callback);
 	},
 
 	// callback(err, message)

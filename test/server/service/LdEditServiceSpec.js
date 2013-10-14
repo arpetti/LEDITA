@@ -186,4 +186,84 @@ describe('Learning Design Edit Service', function() {
 
 	});
 
+	describe('Update Learning Design Publication', function() {
+
+		it('Public calls back with error and message if dao fails', function(done) {
+			var ldId = 882;
+
+			var daoError = new Error('something went wrong');
+	        var daoStub = sandbox.stub(LdEditDao, "updateLdPublication", function(publication, ldId, callback) {
+	            callback(daoError);
+	        });
+
+	        var serviceCB = function(err, message) {
+	        	expect(err).not.to.be.null;
+	        	expect(err).to.equal(daoError);
+	        	expect(message).to.equal(messages.LD_PUBLICATION_UPDATE_FAIL);
+
+	        	assert.isTrue(daoStub.withArgs(LdEditService.LD_PUBLIC_INDICATOR, ldId).calledOnce);
+	        	done();
+	        };
+
+	        LdEditService.updateLdPublic(ldId, serviceCB);
+		});
+
+		it('Public calls back with nothing if dao update successful', function(done) {
+			var ldId = 882;
+
+	        var daoStub = sandbox.stub(LdEditDao, "updateLdPublication", function(publication, ldId, callback) {
+	            callback();
+	        });
+
+	        var serviceCB = function(err, message) {
+	        	expect(err).to.be.undefined;
+	        	expect(message).to.be.undefined;
+
+	        	assert.isTrue(daoStub.withArgs(LdEditService.LD_PUBLIC_INDICATOR, ldId).calledOnce);
+	        	done();
+	        };
+
+	        LdEditService.updateLdPublic(ldId, serviceCB);
+		});
+
+		it('Private calls back with error and message if dao fails', function(done) {
+			var ldId = 882;
+
+			var daoError = new Error('something went wrong');
+	        var daoStub = sandbox.stub(LdEditDao, "updateLdPublication", function(publication, ldId, callback) {
+	            callback(daoError);
+	        });
+
+	        var serviceCB = function(err, message) {
+	        	expect(err).not.to.be.null;
+	        	expect(err).to.equal(daoError);
+	        	expect(message).to.equal(messages.LD_PUBLICATION_UPDATE_FAIL);
+
+	        	assert.isTrue(daoStub.withArgs(LdEditService.LD_PRIVATE_INDICATOR, ldId).calledOnce);
+	        	done();
+	        };
+
+	        LdEditService.updateLdPrivate(ldId, serviceCB);
+		});
+
+		it('Private calls back with nothing if dao update successful', function(done) {
+			var ldId = 882;
+
+	        var daoStub = sandbox.stub(LdEditDao, "updateLdPublication", function(publication, ldId, callback) {
+	            callback();
+	        });
+
+	        var serviceCB = function(err, message) {
+	        	expect(err).to.be.undefined;
+	        	expect(message).to.be.undefined;
+
+	        	assert.isTrue(daoStub.withArgs(LdEditService.LD_PRIVATE_INDICATOR, ldId).calledOnce);
+	        	done();
+	        };
+
+	        LdEditService.updateLdPrivate(ldId, serviceCB);
+		});
+
+	});
+
 });

@@ -207,10 +207,6 @@ describe('LD Edit', function () {
 
 	});
 
-	describe('Update LD Publication', function() {
-
-	});
-
 	describe('Update LD Students Desription', function() {
 
 		afterEach(function(done) {
