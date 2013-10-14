@@ -7,9 +7,18 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
 
     LDEditService.getLearningDesign($scope.ldid, function(res) {
         $scope.learningDesign = res;
+        initLdPublicationFlag($scope.learningDesign.ld_publication);
     }, function(err) {
         $location.path('/');
     });
+
+    initLdPublicationFlag = function(ld_publication) {
+    	if (ld_publication === 1) {
+    		$scope.ldPublicationFlag = true;
+    	} else {
+    		$scope.ldPublicationFlag = false;
+    	}
+    };
 
     LDService.getActivities($scope.ldid, function(res) {
         $scope.levels = res;
@@ -68,7 +77,6 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
 
     // #28 wip...
     $scope.updateLdPublication = function() {
-    	console.log('ldPublicationFlag: ' + $scope.ldPublicationFlag);
     	if ($scope.ldPublicationFlag) {
     		$scope.learningDesign.ld_publication = 1;
     	} else {
