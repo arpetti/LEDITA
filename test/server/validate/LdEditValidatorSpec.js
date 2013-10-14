@@ -61,6 +61,62 @@ describe('LD Edit Validation', function() {
 
 	});
 
+	describe('LD Scope', function() {
+
+		it('Can contain letters, numbers and some special chars', function() {
+			var ldScope = "123 ABC * - _ + & #";
+			var results = LdEditValidator.validateLdScope(ldScope);
+			expect(results).to.have.length(0);
+		});
+
+		it('Can be exactly 50 characters long', function() {
+			var ldScope = TestUtils.buildString(50, 'a');
+			var results = LdEditValidator.validateLdScope(ldScope);
+			expect(results).to.have.length(0);
+		});
+
+		it('Cannot exceed 50 characters', function() {
+			var ldScope = TestUtils.buildString(51, 'a');
+			var results = LdEditValidator.validateLdScope(ldScope);
+			expect(results).to.have.length(1);
+			expect(results[0]).to.equal(messages.LD_SCOPE_LENGTH);
+		});
+
+		it('Cannot be empty', function() {
+			var ldScope = "";
+			var results = LdEditValidator.validateLdScope(ldScope);
+			expect(results).to.have.length(3);
+			expect(results[0]).to.equal(messages.LD_SCOPE_REQUIRED);
+			expect(results[1]).to.equal(messages.LD_SCOPE_LENGTH);
+			expect(results[2]).to.equal(messages.LD_SCOPE_ALLOWED_CHARS);
+		});
+
+		it('Cannot be null', function() {
+			var ldScope = null;
+			var results = LdEditValidator.validateLdScope(ldScope);
+			expect(results).to.have.length(3);
+			expect(results[0]).to.equal(messages.LD_SCOPE_REQUIRED);
+			expect(results[1]).to.equal(messages.LD_SCOPE_LENGTH);
+			expect(results[2]).to.equal(messages.LD_SCOPE_ALLOWED_CHARS);
+		});
+
+		it('Cannot be undefined', function() {
+			var results = LdEditValidator.validateLdScope();
+			expect(results).to.have.length(3);
+			expect(results[0]).to.equal(messages.LD_SCOPE_REQUIRED);
+			expect(results[1]).to.equal(messages.LD_SCOPE_LENGTH);
+			expect(results[2]).to.equal(messages.LD_SCOPE_ALLOWED_CHARS);
+		});
+
+		it('Cannot contain script tags', function() {
+			var ldScope = '<script>window.location("evil.com");</script>'
+			var results = LdEditValidator.validateLdScope(ldScope);
+			expect(results).to.have.length(1);
+			expect(results[0]).to.equal(messages.LD_SCOPE_ALLOWED_CHARS);
+		});
+
+	});
+
 	describe('Students Description', function() {
 
 		it('Can contain letters, numbers and some special chars', function() {

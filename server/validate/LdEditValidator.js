@@ -13,6 +13,15 @@ module.exports = {
 		return _.filter(em, function(message){ return message !== null; });
 	},
 
+	validateLdScope: function(ldScope) {
+		var em = [];
+		em.push(vh.validateAny(vh.validateNullEmpty, [ldScope, m.LD_SCOPE_REQUIRED]));
+		em.push(vh.validateAny(vh.validateLength, [ldScope, m.LD_SCOPE_LENGTH, 1, 50]));
+		em.push(vh.validateAny(vh.validateRegEx, 
+			[ldScope, m.LD_SCOPE_ALLOWED_CHARS, vh.FIRST_ALPHANUMERIC_REST_ANY_CHAR]));
+		return _.filter(em, function(message){ return message !== null; });
+	},
+
 	validateStudentsDescr: function(studentsDescr) {
 		var em = [];
 		em.push(vh.validateAny(vh.validateNullEmpty, [studentsDescr, m.LD_STUDENTS_DESC_REQUIRED]));
