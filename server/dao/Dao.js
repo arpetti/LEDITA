@@ -38,8 +38,7 @@ module.exports = {
     });
   },
 
-  // TODO Rename insertOrUpdateRecord because it handles both
-  insertRecord: function(queryString, jsonData, callback) {
+  insertOrUpdateRecord: function(queryString, jsonData, callback) {
     var insertedRowId;
     pool.getConnection(function(err, connection) {
       if (err) {
@@ -49,7 +48,7 @@ module.exports = {
       }
       connection.query(queryString, jsonData, function(err, result) {
         if (err) {
-          logWrapper.log().error('db insert error', err);
+          logWrapper.log().error('db insert or update error', err);
           connection.release();
           callback(err);
           return;
@@ -62,7 +61,7 @@ module.exports = {
 
   insertRecordWithCreationDate: function(queryString, jsonData, callback) {
   	jsonData.creation_date = new Date();
-  	module.exports.insertRecord(queryString, jsonData, callback);
+  	module.exports.insertOrUpdateRecord(queryString, jsonData, callback);
   },
 
   bulkInsert: function(queryString, values, callback) {

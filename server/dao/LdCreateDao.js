@@ -80,7 +80,7 @@ module.exports = {
 	},
 
 	insertScope: function(scopeData, callback) {
-		dao.insertRecord(INSERT_SCOPE, scopeData, function(err, scopeId) {
+		dao.insertOrUpdateRecord(INSERT_SCOPE, scopeData, function(err, scopeId) {
 			if(err) {
 				callback(err);
 			} else {
@@ -90,7 +90,7 @@ module.exports = {
 	},
 
 	insertSubject: function(subjectData, callback) {
-		dao.insertRecord(INSERT_SUBJECT, subjectData, function(err, subjectId) {
+		dao.insertOrUpdateRecord(INSERT_SUBJECT, subjectData, function(err, subjectId) {
 			if(err) {
 				callback(err);
 			} else {
@@ -100,7 +100,7 @@ module.exports = {
 	},
 	
 	insertConcern: function(concernData, callback) {
-		dao.insertRecord(INSERT_CONCERN, concernData, function(err, id) {
+		dao.insertOrUpdateRecord(INSERT_CONCERN, concernData, function(err, id) {
 			if(err) {
 				callback(err);
 			} else {
@@ -110,7 +110,7 @@ module.exports = {
 	},
 
 	insertObjective: function(objectiveData, callback) {
-		dao.insertRecord(INSERT_OBJECTIVE, objectiveData, function(err, objectiveId) {
+		dao.insertOrUpdateRecord(INSERT_OBJECTIVE, objectiveData, function(err, objectiveId) {
 			if(err) {
 				callback(err);
 			} else {
@@ -120,7 +120,7 @@ module.exports = {
 	},
 	
 	insertAim: function(aimData, callback) {
-		dao.insertRecord(INSERT_AIM, aimData, function(err, id) {
+		dao.insertOrUpdateRecord(INSERT_AIM, aimData, function(err, id) {
 			if(err) {
 				callback(err);
 			} else {
@@ -130,7 +130,7 @@ module.exports = {
 	},
 
 	insertNeed: function(needData, callback) {
-		dao.insertRecord(INSERT_NEED, needData, function(err, id) {
+		dao.insertOrUpdateRecord(INSERT_NEED, needData, function(err, id) {
 			if(err) {
 				callback(err);
 			} else {

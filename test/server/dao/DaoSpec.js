@@ -60,7 +60,7 @@ describe('DAO', function() {
 	    it('Cannot insert duplicate QCER', function(done) {
 	    	var queryString = 'insert into qcer set ?';
 	    	var jsonData = {"name": "A1"};
-	    	Dao.insertRecord(queryString, jsonData, function(err, insertedId) {
+	    	Dao.insertOrUpdateRecord(queryString, jsonData, function(err, insertedId) {
 	    		expect(insertedId).to.be.undefined;
 	    		expect(err).not.to.be.null;
 	    		expect(err.message).to.contain('UNIQ_QCER');
@@ -71,7 +71,7 @@ describe('DAO', function() {
 	    it('Cannot insert duplicate SUBJECT', function(done) {
 	    	var queryString = 'insert into subject set ?';
 	    	var jsonData = {"name": "Topic 5"};
-	    	Dao.insertRecord(queryString, jsonData, function(err, insertedId) {
+	    	Dao.insertOrUpdateRecord(queryString, jsonData, function(err, insertedId) {
 	    		expect(insertedId).to.be.undefined;
 	    		expect(err).not.to.be.null;
 	    		expect(err.message).to.contain('UNIQ_SUBJECT');
@@ -82,7 +82,7 @@ describe('DAO', function() {
 	    it('Cannot insert duplicate OBJECTIVE', function(done) {
 	    	var queryString = 'insert into objective set ?';
 	    	var jsonData = {"descr": "Objective 6"};
-	    	Dao.insertRecord(queryString, jsonData, function(err, insertedId) {
+	    	Dao.insertOrUpdateRecord(queryString, jsonData, function(err, insertedId) {
 	    		expect(insertedId).to.be.undefined;
 	    		expect(err).not.to.be.null;
 	    		expect(err.message).to.contain('UNIQ_OBJECTIVE');

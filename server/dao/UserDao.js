@@ -29,7 +29,7 @@ module.exports = {
   },
 
   addUser: function(userJsonData, callback) {
-    dao.insertRecord(ADD_USER, userJsonData, function(err, result) {
+    dao.insertOrUpdateRecord(ADD_USER, userJsonData, function(err, result) {
       if (err) {
         callback(err);
         return;
