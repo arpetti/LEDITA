@@ -95,7 +95,6 @@ describe('LD Create Service Integration', function() {
 		});
     });
 
-	// TODO: Add another integration test where new scope is created
 	it('Creates LD, child entities, and associations', function(done) {
 		var userId = 4;
 		var qcer3Name = 'B1'; // known from demo data

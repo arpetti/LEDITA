@@ -24,7 +24,7 @@ describe('LD Edit Service Integration', function() {
 			last_edit_date: new Date('2013-02-22')
 		};
 		var scope = 'Year Long Seminar';
-		var verifyLdQuery = 'SELECT id, name, scope_id, publication, students_profile, creation_date, last_edit_date, user_id FROM LD where id = ?';
+		var verifyLdQuery = 'SELECT id, name, scope_id, publication, students_profile, creation_date, last_edit_date, user_id FROM ld where id = ?';
 		var deleteLdQuery = 'DELETE FROM ld WHERE name = ?';
 		var verifyScopeQuery = 'SELECT id, name FROM scope WHERE name = ?';
 		var deleteScopeQuery = 'DELETE FROM scope WHERE name = ?';
