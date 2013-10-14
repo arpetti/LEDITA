@@ -12,5 +12,16 @@ module.exports = {
 				callback();
 			}
 		});
+	},
+
+	// callback(err, message)
+	updateStudentsDescr: function(studentsDescr, ldId, callback) {
+		LdEditDao.updateLdStudentsDescr(studentsDescr, ldId, function(err, result) {
+			if(err) {
+				callback(err, messages.STUDENTS_DESCR_UPDATE_FAIL);
+			} else {
+				callback();
+			}
+		});
 	}
 };

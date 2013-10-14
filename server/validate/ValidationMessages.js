@@ -77,4 +77,5 @@ module.exports.LD_STUDENTS_DESC_LENGTH = 'Students Description must be 1-500 cha
 module.exports.LD_STUDENTS_DESC_ALLOWED_CHARS = 'Students Description can only contain letters and numbers.';
 
 // Learning Design Edits
-module.exports.LD_NAME_UPDATE_FAIL = 'Learning Design name could not be saved at this time, please try again later.';
+module.exports.LD_NAME_UPDATE_FAIL = 'Learning Design name could not be updated at this time, please try again later.';
+module.exports.STUDENTS_DESCR_UPDATE_FAIL = 'Students Description could not be updated at this time, please try again later.';
