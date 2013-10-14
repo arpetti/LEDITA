@@ -22,6 +22,24 @@ module.exports = {
 		});
 	},
 
+	updateLdScope: function(req, res) {
+		var ldId = req.params.id;
+		var ldData = req.body;
+
+		var vmessages = LdEditValidator.validateLdScope(ldData.ldScope);
+        if (vmessages.length > 0) {
+            return res.send(400, vmessages);
+        };
+		
+		LdEditService.updateLdScope(ldData.ldScope, ldId, function(err, result, message) {
+			if (err) {
+				return res.send(500, message); 
+			} else {
+		        res.json(200, {ldScope: ldData.ldScope});
+			}
+		});
+	},
+
 	updateStudentsDescr: function(req, res) {
 		var ldId = req.params.id;
 		var ldData = req.body;
