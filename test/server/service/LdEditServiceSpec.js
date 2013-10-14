@@ -2,6 +2,7 @@ var expect = require('chai').expect;
 var assert = require('chai').assert;
 var sinon = require('sinon');
 var LdEditService = require('../../../server/service/LdEditService');
+var ScopeService = require('../../../server/service/ScopeService');
 var LdEditDao = require('../../../server/dao/LdEditDao');
 var messages = require('../../../server/validate/ValidationMessages');
 
@@ -57,6 +58,86 @@ describe('Learning Design Edit Service', function() {
 	        };
 
 	        LdEditService.updateLdName(ldName, ldId, serviceCB);
+		});
+
+	});
+
+	describe('Update Learning Design Scope', function() {
+
+		it('Calls back with error if Scope Service returns error', function(done) {
+			var scope = 'Some other scope';
+			var ldId = 83;
+
+			var scopeError = new Error('something went wrong determining scope id')
+	    	var scopeServiceStub = sandbox.stub(ScopeService, "getScopeId", function(scope, callback) {
+	    		callback(scopeError);
+	    	});
+
+	    	var daoStub = sandbox.stub(LdEditDao, "updateLdScope");
+			
+			var serviceCB = function(err, message) {
+				expect(err).not.to.be.null;
+	        	expect(err).to.equal(scopeError);
+	        	expect(message).to.equal(messages.LD_SCOPE_UPDATE_FAIL);
+
+	        	assert.isTrue(scopeServiceStub.withArgs(scope).calledOnce);
+	        	assert.equal(daoStub.callCount, 0, "LD scope is not updated when scope service returns error");
+	        	done();
+			};
+
+			LdEditService.updateLdScope(scope, ldId, serviceCB);
+		});
+
+		it('Calls back with error if dao returns error', function(done) {
+			var scope = 'Some other scope';
+			var ldId = 83;
+			var scopeId = 64;
+
+			var scopeServiceStub = sandbox.stub(ScopeService, "getScopeId", function(scope, callback) {
+	    		callback(null, scopeId);
+	    	});
+
+	    	var daoError = new Error('something went wrong');
+	        var daoStub = sandbox.stub(LdEditDao, "updateLdScope", function(scopeId, ldId, callback) {
+	            callback(daoError);
+	        });
+
+	        var serviceCB = function(err, message) {
+				expect(err).not.to.be.null;
+	        	expect(err).to.equal(daoError);
+	        	expect(message).to.equal(messages.LD_SCOPE_UPDATE_FAIL);
+
+	        	assert.isTrue(scopeServiceStub.withArgs(scope).calledOnce);
+	        	assert.isTrue(daoStub.withArgs(scopeId, ldId).calledOnce);
+	        	done();
+			};
+
+			LdEditService.updateLdScope(scope, ldId, serviceCB);
+		});
+
+		it('Calls back with nothing if dao update successful', function(done) {
+			var scope = 'Some other scope';
+			var ldId = 83;
+			var scopeId = 64;
+
+			var scopeServiceStub = sandbox.stub(ScopeService, "getScopeId", function(scope, callback) {
+	    		callback(null, scopeId);
+	    	});
+
+	        var daoStub = sandbox.stub(LdEditDao, "updateLdScope", function(scopeId, ldId, callback) {
+	            callback();
+	        });
+
+	        var serviceCB = function(err, message) {
+	        	expect(err).to.be.undefined;
+	        	expect(message).to.be.undefined;
+
+	        	assert.isTrue(scopeServiceStub.withArgs(scope).calledOnce);
+	        	assert.isTrue(daoStub.withArgs(scopeId, ldId).calledOnce);
+	        	done();
+	        };
+
+	        LdEditService.updateLdScope(scope, ldId, serviceCB);
 		});
 
 	});

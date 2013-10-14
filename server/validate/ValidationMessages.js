@@ -78,4 +78,5 @@ module.exports.LD_STUDENTS_DESC_ALLOWED_CHARS = 'Students Description can only c
 
 // Learning Design Edits
 module.exports.LD_NAME_UPDATE_FAIL = 'Learning Design name could not be updated at this time, please try again later.';
+module.exports.LD_SCOPE_UPDATE_FAIL = 'Learning Design scope could not be updated at this time, please try again later.';
 module.exports.STUDENTS_DESCR_UPDATE_FAIL = 'Students Description could not be updated at this time, please try again later.';
