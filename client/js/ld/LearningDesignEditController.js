@@ -20,14 +20,23 @@ angular.module('ledita-app')
     $scope.updateLdName = function() {
     	var modifiedLdName = $scope.learningDesign.ld_name;
     	if (modifiedLdName && modifiedLdName.length > 0) {
-    		LDEditService.updateLdName($scope.ldid, 
-    		{ldName: modifiedLdName},
+    		LDEditService.updateLdName($scope.ldid, {ldName: modifiedLdName},
 	        function(res) {
-	        	console.log('LD Name Update Successful');
 	        },
 	        function(err) {
-	        	// TODO UI to display these
-	            $scope.ldUpdateErrors = err;
+	            $scope.ldUpdateErrors = err; // TODO UI to display these
+	        });
+    	};
+    };
+
+    $scope.updateStudentsDescr = function() {
+    	var modifiedStudentsDescr = $scope.learningDesign.ld_students_profile;
+    	if (modifiedStudentsDescr && modifiedStudentsDescr.length > 0) {
+    		LDEditService.updateStudentsDescr($scope.ldid, {studentsDescr: modifiedStudentsDescr},
+	        function(res) {
+	        },
+	        function(err) {
+	            $scope.ldUpdateErrors = err; // TODO UI to display these
 	        });
     	};
     };

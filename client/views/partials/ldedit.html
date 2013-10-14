@@ -70,7 +70,12 @@
         <div class="clear marginTopSidebar">
             <h5 class="zeroMargin"><i class="icon-user"></i> Students' Description:</h5>
             <form class="sidebarForm">
-                <textarea ng-model="learningDesign.ld_students_profile" class="sidebarTextarea" rows="4"></textarea>
+                <textarea 
+                	ng-model="learningDesign.ld_students_profile" 
+                	ui-Blur="updateStudentsDescr()" 
+                	class="sidebarTextarea" 
+                	rows="4">
+                </textarea>
             </form>
         </div>
 

@@ -11,6 +11,12 @@ angular.module('ledita-app')
             $http.put('/learningdesign/name/' + ldId, ldData).success(function(res) {
                 success(res);
             }).error(error);
+        },
+
+        updateStudentsDescr: function(ldId, ldData, success, error) {
+            $http.put('/learningdesign/studentsDescr/' + ldId, ldData).success(function(res) {
+                success(res);
+            }).error(error);
         }
 
     };
