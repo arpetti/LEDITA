@@ -10,6 +10,7 @@ describe('Create Learning Design Controller', function() {
     		return [];
     	}
 	};
+	var mockTypeaheadHelper = {};
 
 	beforeEach(module('ledita-app'));
 
@@ -18,7 +19,8 @@ describe('Create Learning Design Controller', function() {
     	$httpBackend = _$httpBackend_;
     	ctrl = $controller('LdCreateCtrl', {
       		$scope: scope,
-      		Home: mockHomeService
+      		Home: mockHomeService,	
+      		TypeaheadHelper: mockTypeaheadHelper
     	});
 	}));
 

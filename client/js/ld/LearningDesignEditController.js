@@ -22,6 +22,14 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
     	return TypeaheadHelper.getScopes(scope);
   	};
 
+  	$scope.getSubjects = function(subject) {
+    	return TypeaheadHelper.getSubjects(subject);
+  	};
+
+  	$scope.getObjectives = function(objective) {
+    	return TypeaheadHelper.getObjectives(objective);
+  	};
+
     $scope.updateLdName = function() {
     	var modifiedLdName = $scope.learningDesign.ld_name;
     	if (modifiedLdName && modifiedLdName.length > 0) {

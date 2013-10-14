@@ -41,11 +41,10 @@ angular.module('ledita-app')
 
 }]);
 
-// TODO Remove limitToFilter dependency after all typeahead functions refactored to TypeaheadHelper
 angular.module('ledita-app')
 .controller('LdCreateCtrl',
-['$rootScope', '$scope', '$http', 'Home', 'TypeaheadHelper', 'limitToFilter', '$location', 
-function($rootScope, $scope, $http, Home, TypeaheadHelper, limitToFilter, $location) {
+['$rootScope', '$scope', '$http', 'Home', 'TypeaheadHelper', '$location', 
+function($rootScope, $scope, $http, Home, TypeaheadHelper, $location) {
 
 	Home.getQcers(function(res) {
         $scope.qceropts = res;
@@ -63,10 +62,11 @@ function($rootScope, $scope, $http, Home, TypeaheadHelper, limitToFilter, $locat
   	};
 
   	$scope.getSubjects = function(subject) {
-    	var subjectMatchUrl = '/reference/subjects/' + subject;
-		return $http.get(subjectMatchUrl).then(function(response) {
-			return limitToFilter(response.data, 15);
-		});
+    	return TypeaheadHelper.getSubjects(subject);
+  	};
+
+  	$scope.getObjectives = function(objective) {
+    	return TypeaheadHelper.getObjectives(objective);
   	};
 
   	var addTopic = function(topic) {
@@ -87,13 +87,6 @@ function($rootScope, $scope, $http, Home, TypeaheadHelper, limitToFilter, $locat
         addTopic($scope.ldTopic);
         clearCurrentTopic();
     };
-
-    $scope.getObjectives = function(objective) {
-    	var objectiveMatchUrl = '/reference/objectives/' + objective;
-		return $http.get(objectiveMatchUrl).then(function(response) {
-			return limitToFilter(response.data, 15);
-		});
-  	};
 
   	var addObjective = function(objective) {
   		$scope.selectedObjectives.push(objective);

@@ -7,6 +7,20 @@ angular.module('ledita-app')
 			return $http.get(scopeMatchUrl).then(function(response) {
 				return limitToFilter(response.data, 15);
 			});
+    	},
+
+    	getSubjects: function(subject) {
+    		var subjectMatchUrl = '/reference/subjects/' + subject;
+			return $http.get(subjectMatchUrl).then(function(response) {
+				return limitToFilter(response.data, 15);
+			});
+    	},
+
+    	getObjectives: function(objective) {
+    		var objectiveMatchUrl = '/reference/objectives/' + objective;
+			return $http.get(objectiveMatchUrl).then(function(response) {
+				return limitToFilter(response.data, 15);
+			});
     	}
         
     };
