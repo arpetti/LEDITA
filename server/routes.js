@@ -89,6 +89,18 @@ var routes = [
         middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, LdEditController.updateStudentsDescr],
         accessLevel: accessLevels.user
     },
+    {
+        path: '/learningdesign/public/:id',
+        httpMethod: 'PUT',
+        middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, LdEditController.updateLdPublic],
+        accessLevel: accessLevels.user
+    },
+    {
+        path: '/learningdesign/private/:id',
+        httpMethod: 'PUT',
+        middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, LdEditController.updateLdPrivate],
+        accessLevel: accessLevels.user
+    },
 
     // User Profile
     {

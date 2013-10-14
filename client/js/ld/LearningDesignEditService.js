@@ -23,6 +23,18 @@ angular.module('ledita-app')
             $http.put('/learningdesign/studentsDescr/' + ldId, ldData).success(function(res) {
                 success(res);
             }).error(error);
+        },
+
+        updateLdPublic: function(ldId, success, error) {
+            $http.put('/learningdesign/public/' + ldId).success(function(res) {
+                success(res);
+            }).error(error);
+        },
+
+        updateLdPrivate: function(ldId, success, error) {
+            $http.put('/learningdesign/private/' + ldId).success(function(res) {
+                success(res);
+            }).error(error);
         }
 
     };

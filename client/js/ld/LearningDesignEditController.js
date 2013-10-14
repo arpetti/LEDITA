@@ -13,10 +13,10 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
     });
 
     initLdPublicationFlag = function(ld_publication) {
-    	if (ld_publication === 1) {
-    		$scope.ldPublicationFlag = true;
-    	} else {
+    	if (ld_publication === 0) {
     		$scope.ldPublicationFlag = false;
+    	} else {
+    		$scope.ldPublicationFlag = true;
     	}
     };
 
@@ -75,12 +75,21 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
     	};
     };
 
-    // #28 wip...
     $scope.updateLdPublication = function() {
     	if ($scope.ldPublicationFlag) {
-    		$scope.learningDesign.ld_publication = 1;
+    		LDEditService.updateLdPublic($scope.ldid,
+	        function(res) {
+	        },
+	        function(err) {
+	            $scope.ldUpdateErrors = err; // TODO UI to display these
+	        });
     	} else {
-    		$scope.learningDesign.ld_publication = 0;
+    		LDEditService.updateLdPrivate($scope.ldid,
+	        function(res) {
+	        },
+	        function(err) {
+	            $scope.ldUpdateErrors = err; // TODO UI to display these
+	        });
     	}
     };
 
