@@ -15,7 +15,6 @@ module.exports = {
 		});
 	},
 
-	// TODO integration test
 	// callback(err, message)
 	updateLdScope: function(scope, ldId, callback) {
 		ScopeService.getScopeId(scope, function(err, scopeId) {
