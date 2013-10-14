@@ -45,7 +45,6 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
     $scope.updateLdScope = function() {
     	var modifiedLdScope = $scope.learningDesign.ld_scope;
     	if (modifiedLdScope && modifiedLdScope.length > 0) {
-    		console.log('updateLdScope: ' + modifiedLdScope);
     		LDEditService.updateLdScope($scope.ldid, {ldScope: modifiedLdScope},
 	        function(res) {
 	        },
@@ -65,6 +64,16 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
 	            $scope.ldUpdateErrors = err; // TODO UI to display these
 	        });
     	};
+    };
+
+    // #28 wip...
+    $scope.updateLdPublication = function() {
+    	console.log('ldPublicationFlag: ' + $scope.ldPublicationFlag);
+    	if ($scope.ldPublicationFlag) {
+    		$scope.learningDesign.ld_publication = 1;
+    	} else {
+    		$scope.learningDesign.ld_publication = 0;
+    	}
     };
 
     $scope.getBoxClass = function(node) {

@@ -207,11 +207,11 @@ describe('Learning Design', function() {
         sleep(2);
 
         browser().navigateTo('/ldedit/1'); 
-        sleep(0.5);
+        sleep(1);
         expect(browser().location().url()).toBe('/'); // non owner is redirected to home page
 
         browser().navigateTo('/ldedit/5'); 
-        sleep(0.5);
+        sleep(1);
         expect(browser().location().url()).toBe('/ldedit/5'); // owner is allowed to edit
         
         // Logout
