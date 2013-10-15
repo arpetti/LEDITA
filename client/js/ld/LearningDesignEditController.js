@@ -39,13 +39,6 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
         $scope.alertMsg = err;
     });
 
-    Home.getQcers(function(res) {
-        $scope.qceropts = res;
-    }, function(err) {
-        $scope.qcerError = err;
-    });
-
-
     $scope.getScopes = function(scope) {
     	return TypeaheadHelper.getScopes(scope);
   	};
