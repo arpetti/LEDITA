@@ -176,7 +176,7 @@
             	<span ng-repeat="qceropt in qceropts" class="qcerOptData" >
                 	<input type="checkbox" 
                 		ng-model="selectedQcers[qceropt.id]" 
-                		ng-change="updateQcer(qceropt, selectedQcers[qceropt.id])"
+                		ng-change="updateQcer()"
                 		name="qcer"> {{ qceropt.name }}
             	</span>
             </div>

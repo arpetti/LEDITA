@@ -52,8 +52,9 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
   	};
 
   	// #28 wip...
-  	$scope.updateQcer = function(qceropt, isChecked) {
-  		console.log('qceropt: ' + JSON.stringify(qceropt) + ', isChecked: ' + isChecked);
+  	// TODO: client-side validation: if all are false, display error
+  	$scope.updateQcer = function() {
+  		console.log('Will submit this: ' + JSON.stringify($scope.selectedQcers));
   	};
 
     $scope.updateLdName = function() {
