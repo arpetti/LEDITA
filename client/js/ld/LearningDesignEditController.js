@@ -4,10 +4,17 @@ angular.module('ledita-app')
 function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditService, Home) {
 
 	$scope.ldid = $routeParams.ldid;
+	$scope.selectedQcers = {};
 
     LDEditService.getLearningDesign($scope.ldid, function(res) {
         $scope.learningDesign = res;
         initLdPublicationFlag($scope.learningDesign.ld_publication);
+        Home.getQcers(function(res) {
+	        $scope.qceropts = res;
+        	initSelectedQcers()
+	    }, function(err) {
+	        $scope.qcerError = err;
+	    });
     }, function(err) {
         $location.path('/');
     });
@@ -18,6 +25,11 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
     	} else {
     		$scope.ldPublicationFlag = true;
     	}
+    };
+
+    initSelectedQcers = function() {
+		$scope.selectedQcers = LDEditService.generateSelectedQcers($scope.learningDesign.qcers, $scope.qceropts); 
+		console.log('$scope.selectedQcers: ' + JSON.stringify($scope.selectedQcers));
     };
 
     LDService.getActivities($scope.ldid, function(res) {
@@ -33,14 +45,6 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
         $scope.qcerError = err;
     });
 
-	// TODO generate value for $scope.selectedQcers from $scope.learningDesign.qcers and $scope.qceropts
-	// $scope.selectedQcers = {"1":true,"2":true};  
-	// currently we have $scope.learningDesign.qcers:
-	//  [{"qcer_name": "A1"}, {"qcer_name": "A2"}]
-	// and qceropts:
-	//   [{"id":1,"name":"A1"},{"id":2,"name":"A2"},{"id":3,"name":"B1"},{"id":4,"name":"B2"},{"id":5,"name":"C1"},{"id":6,"name":"C2"}] 
-	LDEditService.generateSelectedQcers();
-	$scope.selectedQcers = {};  
 
     $scope.getScopes = function(scope) {
     	return TypeaheadHelper.getScopes(scope);

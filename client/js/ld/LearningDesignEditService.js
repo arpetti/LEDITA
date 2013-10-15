@@ -2,13 +2,35 @@ angular.module('ledita-app')
 .factory('LDEditService', function($http, _) {
     return {
 
-    	// #28 wip on binding selected qcers, for now just verify we can call underscore from angular
-    	generateSelectedQcers: function() {
-    		var stooges = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}];
-    		var stoogeNames = _.pluck(stooges, 'name')
-			console.log('underscore is working: ' + JSON.stringify(stoogeNames));
+    	buildList: function(size, value) {
+    		var result = [];
+    		for(var i=0; i<size; i++) {
+    			result.push(value);
+    		}
+    		return result;
     	},
-        
+
+		/**
+		 * Returns an object of each LD selected qcer ID with true flag.
+		 *
+		 * @param {list} ldQcers, the current list of selected qcers for an LD, for example 
+		 *	[{"qcer_name": "A1"}, {"qcer_name": "A2"}]
+		 *
+		 * @param {list} qcerOpts, all possible qcer id/name pairs, for example: 
+		 *	[{"id":1,"name":"A1"},{"id":2,"name":"A2"},{"id":3,"name":"B1"},{"id":4,"name":"B2"},{"id":5,"name":"C1"},{"id":6,"name":"C2"}] 
+		 *
+		 * @return {object} ID of each selected qcer with true flag, for example: 
+		 *	{"1":true,"2":true}
+		 */
+    	generateSelectedQcers: function(ldQcers, qcerOpts) {
+			var ldQcerNames = _.pluck(ldQcers, 'qcer_name'); 
+			var ldQcerIds = _.map(ldQcerNames, function(element) {
+					return _.pluck(_.where(qcerOpts, {'name': element}), 'id'); 
+				});
+			var ldQcerIdsFlat = _.flatten(ldQcerIds)
+			return _.object(ldQcerIdsFlat, this.buildList(ldQcerIdsFlat.length, true));
+    	},
+
         getLearningDesign: function(ldId, success, error) {
         	var ldUrl = '/learningdesign/' + ldId;
             $http.get(ldUrl).success(success).error(error);
