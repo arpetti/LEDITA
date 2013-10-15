@@ -8,6 +8,7 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
+            '../../client/js/lib/underscore-min.js',
             '../../client/js/lib/angular/angular.js',
             '../../client/js/lib/angular/angular-cookies.js',
             '../../client/js/lib/ng-infinite-scroll.min.js',
@@ -15,6 +16,7 @@ module.exports = function(config) {
             '../../client/js/lib/ui-utils.min.js',
             '../../client/js/app.js',
             '../../client/js/auth/*.js',
+            '../../client/js/common/*.js',
             '../../client/js/ld/*.js',
             '../../client/js/lib/angular/angular-mocks.js',
             'unit/**/*.js'

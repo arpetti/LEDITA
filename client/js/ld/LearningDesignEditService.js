@@ -1,6 +1,13 @@
 angular.module('ledita-app')
-.factory('LDEditService', function($http) {
+.factory('LDEditService', function($http, _) {
     return {
+
+    	// #28 wip on binding selected qcers, for now just verify we can call underscore from angular
+    	generateSelectedQcers: function() {
+    		var stooges = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}];
+    		var stoogeNames = _.pluck(stooges, 'name')
+			console.log('underscore is working: ' + JSON.stringify(stoogeNames));
+    	},
         
         getLearningDesign: function(ldId, success, error) {
         	var ldUrl = '/learningdesign/' + ldId;
