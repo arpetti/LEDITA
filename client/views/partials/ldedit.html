@@ -172,11 +172,12 @@
         	<!-- LD Qcer -->
             <div class="titleQcer">
                 <label class="editLabel"><i class="icon-tasks icon-white"></i> QCER Levels:</label>
-
-                <!-- FIXME: Check off qcers that are already selected in current LD -->
                 <span ng-show="qcerError">{{ qcerError }}</span>
             	<span ng-repeat="qceropt in qceropts" class="qcerOptData" >
-                	<input type="checkbox" ng-model="selectedQcers[qceropt.id]" name="qcer"> {{ qceropt.name }}
+                	<input type="checkbox" 
+                		ng-model="selectedQcers[qceropt.id]" 
+                		ng-change="updateQcer(qceropt, selectedQcers[qceropt.id])"
+                		name="qcer"> {{ qceropt.name }}
             	</span>
             </div>
 

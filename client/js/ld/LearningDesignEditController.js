@@ -51,6 +51,11 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
     	return TypeaheadHelper.getObjectives(objective);
   	};
 
+  	// #28 wip...
+  	$scope.updateQcer = function(qceropt, isChecked) {
+  		console.log('qceropt: ' + JSON.stringify(qceropt) + ', isChecked: ' + isChecked);
+  	};
+
     $scope.updateLdName = function() {
     	var modifiedLdName = $scope.learningDesign.ld_name;
     	if (modifiedLdName && modifiedLdName.length > 0) {
