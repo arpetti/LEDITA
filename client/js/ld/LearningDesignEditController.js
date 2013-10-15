@@ -8,7 +8,7 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
 
     LDEditService.getLearningDesign($scope.ldid, function(res) {
         $scope.learningDesign = res;
-        initLdPublicationFlag($scope.learningDesign.ld_publication);
+        initLdPublicationFlag();
         Home.getQcers(function(res) {
 	        $scope.qceropts = res;
         	initSelectedQcers()
@@ -19,8 +19,8 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
         $location.path('/');
     });
 
-    initLdPublicationFlag = function(ld_publication) {
-    	if (ld_publication === 0) {
+    initLdPublicationFlag = function() {
+    	if ($scope.learningDesign.ld_publication === 0) {
     		$scope.ldPublicationFlag = false;
     	} else {
     		$scope.ldPublicationFlag = true;
@@ -28,8 +28,8 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
     };
 
     initSelectedQcers = function() {
-		$scope.selectedQcers = LDEditService.generateSelectedQcers($scope.learningDesign.qcers, $scope.qceropts); 
-		console.log('$scope.selectedQcers: ' + JSON.stringify($scope.selectedQcers));
+		$scope.selectedQcers = LDEditService.generateSelectedQcers(
+			$scope.learningDesign.qcers, $scope.qceropts); 
     };
 
     LDService.getActivities($scope.ldid, function(res) {
