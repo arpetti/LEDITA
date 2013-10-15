@@ -251,4 +251,40 @@ describe('LD Edit', function () {
 
 	});
 
+	describe('Delete Classificates', function() {
+
+		var originalClassificate = {qcer_id: 4, ld_id: ldIdToEdit};
+		var verifyClassificates = 'SELECT qcer_id FROM classificates WHERE ld_id = ?';
+		var resetClassificates = 'INSERT INTO classificates set ?';
+
+		it('Deletes classificates for an existing LD', function(done) {
+			LdEditDao.deleteClassificates(ldIdToEdit, function(err, result) {
+				expect(err).to.be.null;
+				Dao.findAll(verifyClassificates, [ldIdToEdit], function(err, results) {
+					expect(err).to.be.null;
+					expect(results).to.have.length(0);
+					// Put things back the way they were
+					Dao.insertOrUpdateRecord(resetClassificates, originalClassificate, function(err, result) {
+						done();
+					});
+				});
+			});
+		});
+
+		it('Does nothing if LD ID not found', function(done) {
+			var ldIdNotFound = 9999;
+			LdEditDao.deleteClassificates(ldIdNotFound, function(err, result) {
+				expect(err).to.be.null;
+				// Verify ldIdToEdit not modified
+				Dao.findAll(verifyClassificates, [ldIdToEdit], function(err, results) {
+					expect(err).to.be.null;
+					expect(results).to.have.length(1);
+					expect(results[0].qcer_id).to.equal(originalClassificate.qcer_id);
+					done();
+				});
+			});
+		});
+
+	});
+
 });
