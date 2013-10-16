@@ -34,7 +34,7 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
     initMultiSelections = function() {
     	$scope.selectedTopics = LDEditService.extractTopicNames($scope.learningDesign.subjects);
     	$scope.selectedObjectives = LDEditService.extractObjectiveNames($scope.learningDesign.objectives);
-    	$scope.selectedPrerequisites = LDEditService.extractPrereqNames($scope.learningDesign.prerequisites);
+    	$scope.selectedPrerequisites = LDEditService.extractPrerequisiteNames($scope.learningDesign.prerequisites);
     };
 
     initSelectedQcers = function() {

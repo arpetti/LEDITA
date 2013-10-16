@@ -36,22 +36,17 @@ angular.module('ledita-app')
 			return _.object(ldQcerIdsFlat, this.buildList(ldQcerIdsFlat.length, true));
     	},
 
-    	// #28 wip - sample input: [{"subject_name":"Topic 1"},{"subject_name":"Topic 5"}] 
     	extractTopicNames: function(ldTopics) {
-    		console.log('extractTopicNames: ' + JSON.stringify(ldTopics));
-    		return [];
+    		return _.pluck(ldTopics, 'subject_name');
     	},
 
-    	// #28 wip - sample input: [{"objective_descr":"Objective 1"},{"objective_descr":"Objective 6"}] 
     	extractObjectiveNames: function(ldOjectives) {
-    		console.log('extractObjectiveNames: ' + JSON.stringify(ldOjectives));
-    		return [];
+    		return _.pluck(ldOjectives, 'objective_descr');
     	},
 
     	// #28 wip - sample input: [{"prereq_name":"Objective 1","prereq_type":"OBJECTIVE"},{"prereq_name":"Objective 2","prereq_type":"OBJECTIVE"}]  
-    	extractPrereqNames: function(ldPrereqs) {
-    		console.log('extractPrereqNames: ' + JSON.stringify(ldPrereqs));
-    		return [];
+    	extractPrerequisiteNames: function(ldPrereqs) {
+    		return _.pluck(ldPrereqs, 'prereq_name');
     	},
 
         updateLdName: function(ldId, ldData, success, error) {
