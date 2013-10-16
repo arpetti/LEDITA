@@ -29,5 +29,16 @@ module.exports = {
 		em.push(vh.validateAny(vh.validateRegEx, 
 			[studentsDescr, m.LD_STUDENTS_DESC_ALLOWED_CHARS, vh.FIRST_ALPHANUMERIC_REST_ANY_CHAR]));
 		return _.filter(em, function(message){ return message !== null; });
+	},
+
+	/**
+	 * Validates at least one qcer in list is set to true
+	 * @param {object} qcers, for example: {"1":true, "2":true}
+	 * @return {list} messages to be returned if validation error occurs
+	 */
+	validateQcers: function(qcers) {
+		var em = [];
+		em.push(vh.validateAtLeastOneQcer(qcers, m.LD_QCER_SELECTED));
+		return _.filter(em, function(message){ return message !== null; });
 	}
 };

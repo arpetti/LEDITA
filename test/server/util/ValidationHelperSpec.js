@@ -48,5 +48,58 @@ describe('Validation Helper', function() {
 
 	});
 
+	describe('Validate at least one qcer', function() {
+
+		var qcerValidationMessage = 'At least one qcer must be selected.';
+
+		it('Returns message if qcers are undefined', function() {
+			var qcers = undefined;
+			var result = ValidationHelper.validateAtLeastOneQcer(qcers, qcerValidationMessage);
+			expect(result).to.equal(qcerValidationMessage);
+		});
+
+		it('Returns message if qcers are null', function() {
+			var qcers = null;
+			var result = ValidationHelper.validateAtLeastOneQcer(qcers, qcerValidationMessage);
+			expect(result).to.equal(qcerValidationMessage);
+		});
+
+		it('Returns message if all qcers are empty', function() {
+			var qcers = {};
+			var result = ValidationHelper.validateAtLeastOneQcer(qcers, qcerValidationMessage);
+			expect(result).to.equal(qcerValidationMessage);
+		});
+
+		it('Returns message if all qcers are false', function() {
+			var qcers = {"1":false, "2":false};
+			var result = ValidationHelper.validateAtLeastOneQcer(qcers, qcerValidationMessage);
+			expect(result).to.equal(qcerValidationMessage);
+		});
+
+		it('Returns message if qcer list has one item and its false', function() {
+			var qcers = {"1":false};
+			var result = ValidationHelper.validateAtLeastOneQcer(qcers, qcerValidationMessage);
+			expect(result).to.equal(qcerValidationMessage);
+		});
+
+		it('Returns null if qcer list has one item and its true', function() {
+			var qcers = {"1":true};
+			var result = ValidationHelper.validateAtLeastOneQcer(qcers, qcerValidationMessage);
+			expect(result).to.be.null;
+		});
+
+		it('Returns null if qcer list has multiple items all true', function() {
+			var qcers = {"1":true, "4":true};
+			var result = ValidationHelper.validateAtLeastOneQcer(qcers, qcerValidationMessage);
+			expect(result).to.be.null;
+		});
+
+		it('Returns null if qcer list has multiple items some true', function() {
+			var qcers = {"1":false, "4":false, "6":true};
+			var result = ValidationHelper.validateAtLeastOneQcer(qcers, qcerValidationMessage);
+			expect(result).to.be.null;
+		});
+
+	});
 
 });

@@ -1,4 +1,5 @@
 var check = require('validator').check;
+var _ = require('underscore');
 
 module.exports = {
 
@@ -42,6 +43,22 @@ module.exports = {
 		} catch(err) {
 			return err.message;
 		}
+		return null;
+	},
+
+	/**
+	 * Validates at least one qcer in list is set to true. Returns null if validation passes.
+	 * @param {object} qcers, for example: {"1":true, "2":true}
+	 * @return {string} message to be returned if validation error occurs
+	 */
+	validateAtLeastOneQcer: function(qcers, message) {
+		if(typeof(qcers) == 'undefined' || qcers == null) {
+			return message;
+		};
+		var selectedQcers = _.filter(_.values(qcers), function(qcer){ return qcer; });
+		if (selectedQcers.length === 0) {
+			return message;
+		};
 		return null;
 	}
 };

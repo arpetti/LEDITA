@@ -2,17 +2,6 @@ var vh = require('../util/ValidationHelper');
 var m = require('../validate/ValidationMessages');
 var _ = require('underscore');
 
-var atLeastOneQcer = function(qcers) {
-	if(typeof(qcers) == 'undefined' || qcers == null) {
-		return m.LD_QCER_SELECTED;
-	};
-	var selectedQcers = _.filter(_.values(qcers), function(qcer){ return qcer; });
-	if (selectedQcers.length === 0) {
-		return m.LD_QCER_SELECTED;
-	};
-	return null;
-};
-
 var atLeastOneItemInList = function(values, message) {
 	if(typeof(values) == 'undefined' || values == null 
 		|| !_.isArray(values) || values.length === 0) {
@@ -62,7 +51,7 @@ module.exports = {
 			[ld.studentsDescription, m.LD_STUDENTS_DESC_ALLOWED_CHARS, vh.FIRST_ALPHANUMERIC_REST_ANY_CHAR]));
 
 		// Qcer
-		em.push(atLeastOneQcer(ld.qcers));
+		em.push(vh.validateAtLeastOneQcer(ld.qcers, m.LD_QCER_SELECTED));
 
 		// Topics
 		em.push(atLeastOneItemInList(ld.topics, m.LD_TOPIC_SELECTED));

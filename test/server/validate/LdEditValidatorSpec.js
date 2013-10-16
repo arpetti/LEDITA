@@ -1,5 +1,8 @@
 var expect = require('chai').expect;
+var assert = require('chai').assert;
+var sinon = require('sinon');
 var LdEditValidator = require('../../../server/validate/LdEditValidator');
+var ValidationHelper = require('../../../server/util/ValidationHelper');
 var messages = require('../../../server/validate/ValidationMessages');
 var TestUtils = require('../testutils/TestUtils');
 
@@ -170,6 +173,44 @@ describe('LD Edit Validation', function() {
 			expect(results).to.have.length(1);
 			expect(results[0]).to.equal(messages.LD_STUDENTS_DESC_ALLOWED_CHARS);
 		});
+
+	});
+
+	// Mock interaction with Validator Helper since that's already been tested in great detail re: qcer
+	describe('Qcer', function() {
+
+		var sandbox = sinon.sandbox.create();
+
+	    beforeEach(function() {
+
+	    });
+
+	    afterEach(function() {
+	        sandbox.restore();
+	    });
+
+	    it('Returns list of single error message if validation helper returns message', function() {
+	    	var qcers = {"1":false, "2":false};
+
+	    	var vhResponse = messages.LD_QCER_SELECTED;
+	    	var vhStub = sandbox.stub(ValidationHelper, "validateAtLeastOneQcer").returns(vhResponse);
+	    	
+	    	var results = LdEditValidator.validateQcers(qcers);
+	    	expect(results).to.have.length(1);
+	    	expect(results[0]).to.equal(vhResponse);
+	    	assert.isTrue(vhStub.withArgs(qcers).calledOnce);
+	    });
+
+	    it('Returns empty list if validation helper returns null', function() {
+	    	var qcers = {"1":false, "2":false};
+
+	    	var vhResponse = null;
+	    	var vhStub = sandbox.stub(ValidationHelper, "validateAtLeastOneQcer").returns(vhResponse);
+	    	
+	    	var results = LdEditValidator.validateQcers(qcers);
+	    	expect(results).to.have.length(0);
+	    	assert.isTrue(vhStub.withArgs(qcers).calledOnce);
+	    });
 
 	});
 
