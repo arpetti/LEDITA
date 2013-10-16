@@ -26,28 +26,31 @@
             <span class="zeroMargin">{{learningDesign.ld_creation_date | date:'yyyy-MM-dd'}}</span>
         </div>
 
-        <!-- FIXME: dynamic data with typeahead -->
-        <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-map-marker"></i> Topics:</h5>
-
-            <form ng-submit="addSubject()" class="sidebarForm">
-                <input type="text" class="sidebarInput" ng-model="subject" placeholder="add new topic">
-                <span class="editButton" ng-click="addTopicFromUserInput($event)"><i class="icon-plus icon-white"></i> </span>
-            </form>
+        <!-- Topics -->
+        <!-- #28 wip put back form so we can have Angular validation -->
+        <div id="editTopics" class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-map-marker"></i> Topics:</h5>
+            <input class="sidebarInput" type="text" ng-model="ldTopic" name="ldTopic"
+               	typeahead="suggestion for suggestion in getSubjects($viewValue)"
+               	typeahead-on-select="addTopic()"
+               	ui-keypress="{13:'addTopic()'}"
+               	placeholder="Topics..." required ng-maxlength="255"
+               	ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
+            <span class="editButton" ng-click="addTopic()"><i class="icon-plus icon-white"></i></span>
             <ul ng-repeat="subject in learningDesign.subjects" class="zeroMargin subjects">
-                <li class="sidebarEditItem"><span class="sidebarEditItemLink">{{subject.subject_name}} <a ng-href="#"><i
-                        class="icon-remove-circle"></i> </a></span></li>
+                <li class="sidebarEditItem">
+                	<span class="sidebarEditItemLink">{{subject.subject_name}} 
+                		<a ng-click="removeTopic(subject.subject_name)"><i class="icon-remove-circle"></i> </a></span></li>
             </ul>
         </div>
-        <!-- FIXME: dynamic data with typeahead -->
+        
+        <!-- Objectives -->
+        <!-- TODO implement typeahead & automatic update -->
         <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-screenshot"></i> Objectives:</h5>
-
-            <form ng-submit="addAims()" class="sidebarForm">
-                <input type="text" class="sidebarInput" ng-model="aims" placeholder="add new objective">
-                <span class="editButton" ng-click="addObjectiveFromUserInput($event)"><i class="icon-plus icon-white"></i> </span>
-            </form>
+            <input type="text" class="sidebarInput" ng-model="aims" placeholder="add new objective">
+            <span class="editButton" ng-click="addObjectiveFromUserInput($event)"><i class="icon-plus icon-white"></i> </span>
             <ul ng-repeat="objective in learningDesign.objectives" class="zeroMargin objectives">
-                <li class="sidebarEditItem"><span class="sidebarEditItemLink">{{objective.objective_descr}} <a
-                        ng-href="#"><i class="icon-remove-circle"></i> </a></span>
+                <li class="sidebarEditItem">
+                	<span class="sidebarEditItemLink">{{objective.objective_descr}} <a ng-click="removeObjective(objective)"><i class="icon-remove-circle"></i> </a></span>
                 </li>
             </ul>
         </div>

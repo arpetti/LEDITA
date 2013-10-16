@@ -2,6 +2,11 @@ angular.module('ledita-app')
 .factory('LDEditService', function($http, _) {
     return {
 
+        getLearningDesign: function(ldId, success, error) {
+        	var ldUrl = '/learningdesign/' + ldId;
+            $http.get(ldUrl).success(success).error(error);
+        },
+
     	buildList: function(size, value) {
     		var result = [];
     		for(var i=0; i<size; i++) {
@@ -31,10 +36,23 @@ angular.module('ledita-app')
 			return _.object(ldQcerIdsFlat, this.buildList(ldQcerIdsFlat.length, true));
     	},
 
-        getLearningDesign: function(ldId, success, error) {
-        	var ldUrl = '/learningdesign/' + ldId;
-            $http.get(ldUrl).success(success).error(error);
-        },
+    	// #28 wip - sample input: [{"subject_name":"Topic 1"},{"subject_name":"Topic 5"}] 
+    	extractTopicNames: function(ldTopics) {
+    		console.log('extractTopicNames: ' + JSON.stringify(ldTopics));
+    		return [];
+    	},
+
+    	// #28 wip - sample input: [{"objective_descr":"Objective 1"},{"objective_descr":"Objective 6"}] 
+    	extractObjectiveNames: function(ldOjectives) {
+    		console.log('extractObjectiveNames: ' + JSON.stringify(ldOjectives));
+    		return [];
+    	},
+
+    	// #28 wip - sample input: [{"prereq_name":"Objective 1","prereq_type":"OBJECTIVE"},{"prereq_name":"Objective 2","prereq_type":"OBJECTIVE"}]  
+    	extractPrereqNames: function(ldPrereqs) {
+    		console.log('extractPrereqNames: ' + JSON.stringify(ldPrereqs));
+    		return [];
+    	},
 
         updateLdName: function(ldId, ldData, success, error) {
             $http.put('/learningdesign/name/' + ldId, ldData).success(function(res) {

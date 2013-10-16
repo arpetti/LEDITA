@@ -6,9 +6,15 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
 	$scope.ldid = $routeParams.ldid;
 	$scope.selectedQcers = {};
 
+	// #28 wip These should be initialized
+	$scope.selectedTopics = [];
+    $scope.selectedObjectives = [];
+    $scope.selectedPrerequisites = [];
+
     LDEditService.getLearningDesign($scope.ldid, function(res) {
         $scope.learningDesign = res;
         initLdPublicationFlag();
+        initMultiSelections();
         Home.getQcers(function(res) {
 	        $scope.qceropts = res;
         	initSelectedQcers()
@@ -25,6 +31,12 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
     	} else {
     		$scope.ldPublicationFlag = true;
     	}
+    };
+
+    initMultiSelections = function() {
+    	$scope.selectedTopics = LDEditService.extractTopicNames($scope.learningDesign.subjects);
+    	$scope.selectedObjectives = LDEditService.extractObjectiveNames($scope.learningDesign.objectives);
+    	$scope.selectedPrerequisites = LDEditService.extractPrereqNames($scope.learningDesign.prerequisites);
     };
 
     initSelectedQcers = function() {
@@ -49,6 +61,11 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
 
   	$scope.getObjectives = function(objective) {
     	return TypeaheadHelper.getObjectives(objective);
+  	};
+
+  	// #28 wip - only add to the selected items list if not already there
+  	$scope.addTopic = function() {
+  		console.log('addTopic: ' + $scope.ldTopic);
   	};
 
   	// TODO: client-side validation: if all are false, display error instead of calling service
