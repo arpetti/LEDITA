@@ -1,5 +1,6 @@
 var LdCreateDao = require('../dao/LdCreateDao');
 var ScopeService = require('./ScopeService');
+var QcerService = require('./QcerService');
 var TopicService = require('./TopicService');
 var ObjectiveService = require('./ObjectiveService');
 var PrerequisiteService = require('./PrerequisiteService');
@@ -15,22 +16,6 @@ var createLdForInsert = function(userId, scopeId, ldData) {
 		students_profile: ldData.studentsDescription
 	};
 	return ldObj;
-};
-
-var getSelectedQcers = function(ldData) {
-	var potentialQcers = ldData.qcers;
-	var selectedQcers = [];
-	for (var key in potentialQcers) {
-		var value = potentialQcers[key];
-		if(value === true) {
-			selectedQcers.push(key);
-		}
-	};
-	return _.map(selectedQcers, function(element) {return parseInt(element,10); });
-}
-
-var buildClassificates = function(ldid, qcerIds) {
-	return _.map(qcerIds, function(qcerId){ return [qcerId, ldid]; });
 };
 
 module.exports = {
@@ -62,18 +47,9 @@ module.exports = {
             },
             // Step 3: Associate Qcer's to the LD
             function(ldid, callback)  {
-            	var qcersToAttach = buildClassificates(ldid, getSelectedQcers(ldData));
-            	if (qcersToAttach.length > 0) {
-	            	LdCreateDao.insertClassificates(qcersToAttach, function(err, results) {
-	            		if (err) {
-	            			callback(err);
-	            		} else {
-	            			callback(null, ldid);
-	            		}
-	            	})
-            	} else {
+            	QcerService.attachQcers(ldid, ldData.qcers, function(err, results) {
             		callback(null, ldid);
-            	}
+            	});
             },
             // Step 4: Associate Topics to the LD (creating if necessary)
             function(ldid, callback)  {
