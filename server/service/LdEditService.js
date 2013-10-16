@@ -1,5 +1,6 @@
 var LdEditDao = require('../dao/LdEditDao');
 var ScopeService = require('./ScopeService');
+var QcerService = require('./QcerService');
 var messages = require('../validate/ValidationMessages');
 
 var updateLdPublicationCommon = function(publicationIndicator, ldId, cb) {
@@ -64,5 +65,16 @@ module.exports = {
 				callback();
 			}
 		});
+	},
+
+	// callback(err, message)
+	updateQcers: function(qcers, ldId, callback) {
+		QcerService.attachQcers(ldId, qcers, function(err) {
+			if (err) {
+				callback(err, messages.QCER_UPDATE_FAIL)
+			} else {
+				callback();
+			}
+		})
 	}
 };

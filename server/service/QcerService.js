@@ -12,7 +12,7 @@ module.exports = {
 	 * Populates classificates to relate an LD to Qcers, by deleting existing, then inserting new.
 	 * Does nothing if all qcers are set to false.
 	 * @param {number} ldId, ID of the Learning Design for which classificates will be inserted 
-	 * @param {object} qcers, for example: {"1":true,"2":true}
+	 * @param {object} qcers, for example: {"1":true, "2":true}
 	 * @param {function} callback(err, results)
 	 */
 	attachQcers: function(ldId, qcers, callback) {
@@ -51,7 +51,7 @@ module.exports = {
 		    }
 		],
 		function(err, results) {
-			callback(err); // Caller is free to ignore the err
+			callback(err); 
 		});
 	},
 

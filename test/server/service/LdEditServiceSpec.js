@@ -3,6 +3,7 @@ var assert = require('chai').assert;
 var sinon = require('sinon');
 var LdEditService = require('../../../server/service/LdEditService');
 var ScopeService = require('../../../server/service/ScopeService');
+var QcerService = require('../../../server/service/QcerService');
 var LdEditDao = require('../../../server/dao/LdEditDao');
 var messages = require('../../../server/validate/ValidationMessages');
 
@@ -262,6 +263,45 @@ describe('Learning Design Edit Service', function() {
 	        };
 
 	        LdEditService.updateLdPrivate(ldId, serviceCB);
+		});
+
+	});
+
+	describe('Update Qcers', function() {
+
+		it('Calls back with error and message if Qcer Service fails', function(done) {
+			var ldId = 908;
+			var qcers = {"1":true, "6":true, "3":false}
+
+			var qcerServiceError = new Error('Something went wrong in qcer service.');
+			var qcerServiceStub = sandbox.stub(QcerService, "attachQcers", function(ldId, qcers, callback) {
+				callback(qcerServiceError);
+			});
+
+			var serviceCB = function(err, message) {
+				expect(err).to.equal(qcerServiceError);
+				expect(message).to.equal(messages.QCER_UPDATE_FAIL);
+				assert.isTrue(qcerServiceStub.withArgs(ldId, qcers).calledOnce);
+				done();
+			};
+			LdEditService.updateQcers(qcers, ldId, serviceCB);
+		});
+
+		it('Calls back with nothing if service completes successfully', function(done) {
+			var ldId = 908;
+			var qcers = {"1":true, "6":true, "3":false}
+
+			var qcerServiceStub = sandbox.stub(QcerService, "attachQcers", function(ldId, qcers, callback) {
+				callback(null);
+			});
+
+			var serviceCB = function(err, message) {
+				expect(err).to.be.undefined;
+				expect(message).to.be.undefined
+				assert.isTrue(qcerServiceStub.withArgs(ldId, qcers).calledOnce);
+				done();
+			};
+			LdEditService.updateQcers(qcers, ldId, serviceCB);
 		});
 
 	});
