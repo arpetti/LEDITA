@@ -40,6 +40,24 @@ module.exports = {
 		});
 	},
 
+	updateQcers: function(req, res) {
+		var ldId = req.params.id;
+		var ldData = req.body;
+
+		var vmessages = LdEditValidator.validateQcers(ldData.ldQcers);
+        if (vmessages.length > 0) {
+            return res.send(400, vmessages);
+        };
+		
+		LdEditService.updateQcers(ldData.ldQcers, ldId, function(err, message) {
+			if (err) {
+				return res.send(500, message); 
+			} else {
+		        res.json(200, {});
+			}
+		}); 
+	},
+
 	updateStudentsDescr: function(req, res) {
 		var ldId = req.params.id;
 		var ldData = req.body;

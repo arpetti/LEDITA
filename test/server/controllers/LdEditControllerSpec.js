@@ -182,6 +182,92 @@ describe('Learning Design Edit Controller', function() {
 		});
 	});
 
+	describe('Update Learning Design Qcers', function() {
+
+		var req = {}
+	        , res = {}
+	        , sandbox = sinon.sandbox.create();
+
+	    beforeEach(function() {
+
+	    });
+
+	    afterEach(function() {
+	        sandbox.restore();
+	    });
+
+		it('Sends 400 if validator returns error messages', function(done) {
+			var ldId = 956;
+    		req.params = {id: ldId};
+
+    		var ldQcers = {"1":false, "2":false};
+    		req.body = {ldQcers: ldQcers};
+
+    		var errorMessages = ['something wrong with that qcers'];
+            var validateStub = sandbox.stub(LdEditValidator, "validateQcers").returns(errorMessages);
+
+            var serviceStub = sandbox.stub(LdEditService, "updateQcers");
+
+            res.send = function(httpStatus, ldDataErrors) {
+                expect(httpStatus).to.equal(400);
+                expect(ldDataErrors).to.equal(errorMessages);
+                assert.isTrue(validateStub.withArgs(ldQcers).calledOnce);
+                assert.equal(serviceStub.callCount, 0, "ld qcers are not updated when there are validation errors");
+                done();
+            };
+            LdEditController.updateQcers(req, res);
+		});
+
+		it('Sends 500 if service calls back with error', function(done) {
+			var ldId = 956;
+    		req.params = {id: ldId};
+
+    		var ldQcers = {"1":false, "2":false};
+    		req.body = {ldQcers: ldQcers};
+
+    		var errorMessages = [];
+            var validateStub = sandbox.stub(LdEditValidator, "validateQcers").returns(errorMessages);
+
+            var serviceError = new Error("something went wrong");
+            var serviceMessage = "Unable to update LD Qcers";
+    		var serviceStub = sandbox.stub(LdEditService, "updateQcers", function(qcers, ldId, callback) {
+                callback(serviceError, serviceMessage);
+            });
+
+            res.send = function(httpStatus, errMessage) {
+                expect(httpStatus).to.equal(500);
+                expect(errMessage).to.equal(serviceMessage);
+                assert.isTrue(validateStub.withArgs(ldQcers).calledOnce);
+                assert.isTrue(serviceStub.withArgs(ldQcers, ldId).calledOnce);
+                done();
+            };
+            LdEditController.updateQcers(req, res);
+		});
+
+		it('Sends 200 if service update is successful', function(done) {
+			var ldId = 956;
+    		req.params = {id: ldId};
+
+    		var ldQcers = {"1":false, "2":false};
+    		req.body = {ldQcers: ldQcers};
+
+    		var errorMessages = [];
+            var validateStub = sandbox.stub(LdEditValidator, "validateQcers").returns(errorMessages);
+
+    		var serviceStub = sandbox.stub(LdEditService, "updateQcers", function(qcers, ldId, callback) {
+                callback();
+            });
+
+            res.json = function(httpStatus, result) {
+                expect(httpStatus).to.equal(200);
+                assert.isTrue(validateStub.withArgs(ldQcers).calledOnce);
+                assert.isTrue(serviceStub.withArgs(ldQcers, ldId).calledOnce);
+                done();
+            };
+            LdEditController.updateQcers(req, res);
+		});
+	});
+
 	describe('Update Students Description', function() {
 
 		var req = {}
