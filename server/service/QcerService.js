@@ -1,45 +1,57 @@
 var LdCreateDao = require('../dao/LdCreateDao');
+var LdEditDao = require('../dao/LdEditDao');
+var LogWrapper = require('../util/LogWrapper');
+var async = require('async');
+var _ = require('underscore');
 
 // #28 wip - refactoring Qcer handling out of LdCreateService and into common module here,
 //           so that it can be re-used for LD Edit Update Qcers
 module.exports = {
 
 	/**
-	 * Populates classificates to relate an LD to Qcers.
+	 * Populates classificates to relate an LD to Qcers, by deleting existing, then inserting new.
 	 * Does nothing if all qcers are set to false.
 	 * @param {number} ldId, ID of the Learning Design for which classificates will be inserted 
 	 * @param {object} qcers, for example: {"1":true,"2":true}
-	 * @param {object} options, for example: {"editMode": true}
+	 * @param {function} callback(err, results)
 	 */
-	attachQcers: function(ldId, qcers, options, callback) {
-		async.series([
-			// Step 1: Delete all existing classificates for ldId - ONLY if edit mode is true
+	attachQcers: function(ldId, qcers, callback) {
+		async.waterfall([
+			// Step 1: Determine if there's any work to do
 			function(callback){
-			    callback(null, null);
+				var qcersToAttach = module.exports.buildClassificates(ldId, module.exports.getSelectedQcers(qcers));
+				if (qcersToAttach.length > 0) {
+					callback(null, qcersToAttach);
+				} else {
+					LogWrapper.log().warn('All qcers are false, will not delete or insert any.');
+					callback(new Error('No qcers to attach'));
+				}
+			},
+			// Step 2: Delete all existing classificates for ldId
+			function(qcersToAttach, callback){
+				LdEditDao.deleteClassificates(ldId, function(err, results) {
+					if (err) {
+						LogWrapper.log().error('Error occurred deleting classificates.', err);
+            			callback(err);
+            		} else {
+            			callback(null, qcersToAttach);
+            		}
+				});
 		    },
-		    // Step 2: Bulk insert new classificates (if any)
-			function(callback){
-			    var qcersToAttach = buildClassificates(ldid, getSelectedQcers(ldData));
-            	if (qcersToAttach.length > 0) {
-	            	LdCreateDao.insertClassificates(qcersToAttach, function(err, results) {
-	            		if (err) {
-	            			callback(err);
-	            		} else {
-	            			callback(null, null);
-	            		}
-	            	})
-            	} else {
-            		callback(null, null);
-            	}
-		    },
-		    // Step 3: Update LD last_edit_date (waiting on Alessandro if this is necessary) - ONLY if edit mode is true
-			function(callback){
-			    callback(null, null);
+		    // Step 3: Insert new classificates
+			function(qcersToAttach, callback){
+            	LdCreateDao.insertClassificates(qcersToAttach, function(err, results) {
+            		if (err) {
+						LogWrapper.log().error('Error occurred inserting classificates.', err);
+            			callback(err);
+            		} else {
+            			callback(null, 'done');
+            		}
+            	})
 		    }
 		],
-		function(err, results ) {
-			// TODO check for err
-		    callback();
+		function(err, results) {
+			callback(err); // Caller is free to ignore the err
 		});
 	},
 
@@ -57,6 +69,6 @@ module.exports = {
 
 	buildClassificates: function(ldid, qcerIds) {
 		return _.map(qcerIds, function(qcerId){ return [qcerId, ldid]; });
-	};
+	}
 
 };
