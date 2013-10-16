@@ -48,6 +48,12 @@ angular.module('ledita-app')
             }).error(error);
         },
 
+        updateLdQcers: function(ldId, ldData, success, error) {
+            $http.post('/learningdesign/qcer/' + ldId, ldData).success(function(res) {
+                success(res);
+            }).error(error);
+        },
+
         updateStudentsDescr: function(ldId, ldData, success, error) {
             $http.put('/learningdesign/studentsDescr/' + ldId, ldData).success(function(res) {
                 success(res);

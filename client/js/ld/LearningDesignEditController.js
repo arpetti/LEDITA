@@ -51,10 +51,14 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
     	return TypeaheadHelper.getObjectives(objective);
   	};
 
-  	// #28 wip...
-  	// TODO: client-side validation: if all are false, display error
+  	// TODO: client-side validation: if all are false, display error instead of calling service
   	$scope.updateQcer = function() {
-  		console.log('Will submit this: ' + JSON.stringify($scope.selectedQcers));
+  		LDEditService.updateLdQcers($scope.ldid, {ldQcers: $scope.selectedQcers},
+        function(res) {
+        },
+        function(err) {
+            $scope.ldUpdateErrors = err; // TODO UI to display these
+        });
   	};
 
     $scope.updateLdName = function() {

@@ -45,7 +45,7 @@ var routes = [
         accessLevel: accessLevels.public
     },
 
-    // Learning Design
+    // Learning Design - Read
     {
         path: '/learningdesigns',
         httpMethod: 'GET',
@@ -64,23 +64,20 @@ var routes = [
         middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, LdController.findById],
         accessLevel: accessLevels.user
     },
+
+    // Learning Design - Create
     {
         path: '/learningdesign',
         httpMethod: 'POST',
         middleware: [ensureAuthenticated, ensureAuthorized, LdController.createLd],
         accessLevel: accessLevels.user
     },
+
+    // Learning Design - Update
     {
         path: '/learningdesign/name/:id',
         httpMethod: 'PUT',
         middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, LdEditController.updateLdName],
-        accessLevel: accessLevels.user
-    },
-    // Update Scope is POST rather than PUT because not idempotent - could create new SCOPE entity
-    {
-        path: '/learningdesign/scope/:id',
-        httpMethod: 'POST',
-        middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, LdEditController.updateLdScope],
         accessLevel: accessLevels.user
     },
     {
@@ -99,6 +96,20 @@ var routes = [
         path: '/learningdesign/private/:id',
         httpMethod: 'PUT',
         middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, LdEditController.updateLdPrivate],
+        accessLevel: accessLevels.user
+    },
+    
+    // Learning Design - Create and/or Update related entities
+    {
+        path: '/learningdesign/scope/:id',
+        httpMethod: 'POST',
+        middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, LdEditController.updateLdScope],
+        accessLevel: accessLevels.user
+    },
+    {
+        path: '/learningdesign/qcer/:id',
+        httpMethod: 'POST',
+        middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, LdEditController.updateQcers],
         accessLevel: accessLevels.user
     },
 
