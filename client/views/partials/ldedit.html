@@ -27,8 +27,14 @@
         </div>
 
         <!-- Topics -->
-        <!-- #28 wip put back form so we can have Angular validation -->
         <div id="editTopics" class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-map-marker"></i> Topics:</h5>
+			<form novalidate class="sidebarForm" name="LdTopicForm">  
+			<div class="errorBox">
+                <span id="topicReqErr" class="errorTipModal" ng-show="LdTopicForm.ldTopic.$dirty && LdTopicForm.ldTopic.$error.required">Required!</span>
+                <span id="topicPatternErr" class="errorTipModal" ng-show="LdTopicForm.ldTopic.$error.pattern">A topic cannot contain this symbol.</span>
+                <span id="topicLengthErr" class="errorTipModal" ng-show="LdTopicForm.ldTopic.$error.maxlength">A topic cannot be longer than 255 characters.</span>
+                <span class="clearfix"></span>
+            </div>      	
             <input class="sidebarInput" type="text" ng-model="ldTopic" name="ldTopic"
                	typeahead="suggestion for suggestion in getSubjects($viewValue)"
                	typeahead-on-select="addTopic()"
@@ -39,34 +45,58 @@
             <ul ng-repeat="subject in learningDesign.subjects" class="zeroMargin subjects">
                 <li class="sidebarEditItem">
                 	<span class="sidebarEditItemLink">{{subject.subject_name}} 
-                		<a ng-click="removeTopic(subject.subject_name)"><i class="icon-remove-circle"></i> </a></span></li>
+                	<a ng-click="removeTopic(subject.subject_name)"><i class="icon-remove-circle"></i> </a></span>
+                </li>
             </ul>
+        	</form>
         </div>
         
         <!-- Objectives -->
-        <!-- TODO implement typeahead & automatic update -->
         <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-screenshot"></i> Objectives:</h5>
-            <input type="text" class="sidebarInput" ng-model="aims" placeholder="add new objective">
-            <span class="editButton" ng-click="addObjectiveFromUserInput($event)"><i class="icon-plus icon-white"></i> </span>
+        	<form novalidate class="sidebarForm" name="LdObjectiveForm">
+        	<div class="errorBox">
+                <span id="objectiveReqErr" class="errorTipModal" ng-show="LdObjectiveForm.ldObjective.$dirty && LdObjectiveForm.ldObjective.$error.required">Required!</span>
+                <span id="objectivePatternErr" class="errorTipModal" ng-show="LdObjectiveForm.ldObjective.$error.pattern">An objective cannot contain this symbol.</span>
+                <span id="objectiveLengthErr" class="errorTipModal" ng-show="LdObjectiveForm.ldObjective.$error.maxlength">An objective cannot be longer than 255 characters.</span>
+                <span class="clearfix"></span>
+            </div>
+            <input class="sidebarInput" type="text" ng-model="ldObjective" name="ldObjective"
+               	typeahead="suggestion for suggestion in getObjectives($viewValue)"
+               	typeahead-on-select="addObjective()"
+               	ui-keypress="{13:'addObjective()'}"
+               	placeholder="Objectives..." required ng-maxlength="255"
+               	ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
+            <span class="editButton" ng-click="addObjective()"><i class="icon-plus icon-white"></i> </span>
             <ul ng-repeat="objective in learningDesign.objectives" class="zeroMargin objectives">
                 <li class="sidebarEditItem">
-                	<span class="sidebarEditItemLink">{{objective.objective_descr}} <a ng-click="removeObjective(objective)"><i class="icon-remove-circle"></i> </a></span>
+                	<span class="sidebarEditItemLink">{{objective.objective_descr}} 
+                	<a ng-click="removeObjective(objective)"><i class="icon-remove-circle"></i></a></span>
                 </li>
             </ul>
+        	</form>
         </div>
         
         <!-- Prerequisites -->
-        <!-- FIXME: implement typeahead -->
         <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-backward"></i> Pre-Requisites:</h5>
-            <form ng-submit="addNeeds()" class="sidebarForm">
-                <input type="text" class="sidebarInput" ng-model="needs" placeholder="add new pre-requisites">
-                <span class="editButton" ng-click="addPrerequisiteFromUserInput($event)"><i class="icon-plus icon-white"></i> </span>
-            </form>
+            <form novalidate class="sidebarForm" name="LdPrereqForm">
+            <div class="errorBox">
+                <span id="prereqPatternErr" class="errorTipModal" ng-show="LdPrereqForm.ldRequisite.$error.pattern">A pre-requisite cannot contain this symbol.</span>
+                <span id="prereqLengthErr" class="errorTipModal" ng-show="LdPrereqForm.ldRequisite.$error.maxlength">A pre-requisite cannot be longer than 255 characters.</span>
+            </div>
+            <input class="sidebarInput" type="text" ng-model="ldRequisite" name="ldRequisite"
+               	typeahead="suggestion for suggestion in getObjectives($viewValue)"
+               	typeahead-on-select="addPrerequisite()"
+               	ui-keypress="{13:'addPrerequisite()'}"
+               	placeholder="Prerequisites..." required ng-maxlength="255"
+               	ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
+            <span class="editButton" ng-click="addPrerequisite()"><i class="icon-plus icon-white"></i> </span>
             <ul ng-repeat="prereq in learningDesign.prerequisites" class="zeroMargin prerequisites">
-                <li class="sidebarEditItem"><span class="sidebarEditItemLink">{{prereq.prereq_name}} <a ng-href="#"><i
-                        class="icon-remove-circle"></i> </a></span>
+                <li class="sidebarEditItem">
+                	<span class="sidebarEditItemLink">{{prereq.prereq_name}} 
+                	<a ng-href="#"><i class="icon-remove-circle"></i> </a></span>
                 </li>
             </ul>
+            </form>
         </div>
         
         <!-- LD Students Description -->

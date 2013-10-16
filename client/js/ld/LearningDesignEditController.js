@@ -5,8 +5,6 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
 
 	$scope.ldid = $routeParams.ldid;
 	$scope.selectedQcers = {};
-
-	// #28 wip These should be initialized
 	$scope.selectedTopics = [];
     $scope.selectedObjectives = [];
     $scope.selectedPrerequisites = [];
@@ -66,6 +64,12 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
   	// #28 wip - only add to the selected items list if not already there
   	$scope.addTopic = function() {
   		console.log('addTopic: ' + $scope.ldTopic);
+  	};
+  	$scope.addObjective = function() {
+  		console.log('addObjective: ' + $scope.ldObjective);
+  	};
+  	$scope.addPrerequisite = function() {
+  		console.log('addPrerequisite: ' + $scope.ldRequisite);
   	};
 
   	// TODO: client-side validation: if all are false, display error instead of calling service
