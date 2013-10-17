@@ -82,3 +82,4 @@ module.exports.LD_SCOPE_UPDATE_FAIL = 'Learning Design scope could not be update
 module.exports.STUDENTS_DESCR_UPDATE_FAIL = 'Students Description could not be updated at this time, please try again later.';
 module.exports.LD_PUBLICATION_UPDATE_FAIL = 'Learning Design publication could not be updated at this time, please try again later.'
 module.exports.QCER_UPDATE_FAIL = 'Qcers could not be updated at this time, please try again later.'
+module.exports.TOPIC_ADD_FAIL = 'Topic could not be added at this time, please try again later.';

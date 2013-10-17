@@ -1,6 +1,7 @@
 var LdEditDao = require('../dao/LdEditDao');
 var ScopeService = require('./ScopeService');
 var QcerService = require('./QcerService');
+var TopicService = require('./TopicService');
 var messages = require('../validate/ValidationMessages');
 
 var updateLdPublicationCommon = function(publicationIndicator, ldId, cb) {
@@ -75,6 +76,13 @@ module.exports = {
 			} else {
 				callback();
 			}
-		})
+		});
+	},
+
+	// callback()
+	addTopic: function(topic, ldId, callback) {
+		TopicService.insertTopics(ldId, [topic], function() {
+			callback();
+		});
 	}
 };
