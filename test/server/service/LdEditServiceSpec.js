@@ -4,6 +4,7 @@ var sinon = require('sinon');
 var LdEditService = require('../../../server/service/LdEditService');
 var ScopeService = require('../../../server/service/ScopeService');
 var QcerService = require('../../../server/service/QcerService');
+var TopicService = require('../../../server/service/TopicService');
 var LdEditDao = require('../../../server/dao/LdEditDao');
 var messages = require('../../../server/validate/ValidationMessages');
 
@@ -304,6 +305,28 @@ describe('Learning Design Edit Service', function() {
 			LdEditService.updateQcers(qcers, ldId, serviceCB);
 		});
 
+	});
+
+	describe('Add Topic', function() {
+
+		it('Delegates to Topic Service', function(done) {
+			var ldId = 334;
+			var topic = 'something to add';
+
+			var serviceStub = sandbox.stub(TopicService, "insertTopics", function(ldId, topics, callback) {
+				callback();
+			});
+
+			var topicMatcher = sinon.match(function(value) {
+				return value.length === 1 && value[0] === topic;
+			});
+
+			var serviceCB = function() {
+				assert.isTrue(serviceStub.withArgs(ldId, topicMatcher).calledOnce);
+				done();
+			};
+			LdEditService.addTopic(topic, ldId, serviceCB);
+		});
 	});
 
 });

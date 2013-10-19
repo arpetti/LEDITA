@@ -112,6 +112,12 @@ var routes = [
         middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, LdEditController.updateQcers],
         accessLevel: accessLevels.user
     },
+    {
+        path: '/learningdesign/addtopic/:id',
+        httpMethod: 'POST',
+        middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, LdEditController.addTopic],
+        accessLevel: accessLevels.user
+    },
 
     // User Profile
     {

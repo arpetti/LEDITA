@@ -176,6 +176,69 @@ describe('LD Edit Validation', function() {
 
 	});
 
+	describe('Topic', function() {
+
+		it('Can contain letters and numbers', function() {
+			var topic = "Topic ABC abc 1234567890";
+			var results = LdEditValidator.validateTopic(topic);
+			expect(results).to.have.length(0);
+		});
+
+		it('Can be exactly 255 characters long', function() {
+			var topic = TestUtils.buildString(255, 'a');
+			var results = LdEditValidator.validateTopic(topic);
+			expect(results).to.have.length(0);
+		});
+
+		it('Cannot exceed 255 characters', function() {
+			var topic = TestUtils.buildString(256, 'a');
+			var results = LdEditValidator.validateTopic(topic);
+			expect(results).to.have.length(1);
+			expect(results[0]).to.equal(messages.LD_TOPIC_LENGTH);
+		});
+
+		it('Cannot be empty', function() {
+			var topic = "";
+			var results = LdEditValidator.validateTopic(topic);
+			expect(results).to.have.length(3);
+			expect(results[0]).to.equal(messages.LD_TOPIC_EMPTY);
+			expect(results[1]).to.equal(messages.LD_TOPIC_LENGTH);
+			expect(results[2]).to.equal(messages.LD_TOPIC_ALLOWED_CHARS);
+		});
+
+		it('Cannot be null', function() {
+			var topic = null;
+			var results = LdEditValidator.validateTopic(topic);
+			expect(results).to.have.length(3);
+			expect(results[0]).to.equal(messages.LD_TOPIC_EMPTY);
+			expect(results[1]).to.equal(messages.LD_TOPIC_LENGTH);
+			expect(results[2]).to.equal(messages.LD_TOPIC_ALLOWED_CHARS);
+		});
+
+		it('Cannot be undefined', function() {
+			var results = LdEditValidator.validateTopic();
+			expect(results).to.have.length(3);
+			expect(results[0]).to.equal(messages.LD_TOPIC_EMPTY);
+			expect(results[1]).to.equal(messages.LD_TOPIC_LENGTH);
+			expect(results[2]).to.equal(messages.LD_TOPIC_ALLOWED_CHARS);
+		});
+
+		it('Cannot contain script tags', function() {
+			var topic = '<script>window.location("evil.com");</script>'
+			var results = LdEditValidator.validateTopic(topic);
+			expect(results).to.have.length(1);
+			expect(results[0]).to.equal(messages.LD_TOPIC_ALLOWED_CHARS);
+		});
+
+		it('Cannot contain special characters', function() {
+			var topic = 'Topic *&^%$#@!)(';
+			var results = LdEditValidator.validateTopic(topic);
+			expect(results).to.have.length(1);
+			expect(results[0]).to.equal(messages.LD_TOPIC_ALLOWED_CHARS);
+		});
+
+	});
+
 	// Mock interaction with Validator Helper since that's already been tested in great detail re: qcer
 	describe('Qcer', function() {
 
