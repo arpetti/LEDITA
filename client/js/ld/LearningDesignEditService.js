@@ -44,7 +44,6 @@ angular.module('ledita-app')
     		return _.pluck(ldOjectives, 'objective_descr');
     	},
 
-    	// #28 wip - sample input: [{"prereq_name":"Objective 1","prereq_type":"OBJECTIVE"},{"prereq_name":"Objective 2","prereq_type":"OBJECTIVE"}]  
     	extractPrerequisiteNames: function(ldPrereqs) {
     		return _.pluck(ldPrereqs, 'prereq_name');
     	},
@@ -69,6 +68,12 @@ angular.module('ledita-app')
 
         updateStudentsDescr: function(ldId, ldData, success, error) {
             $http.put('/learningdesign/studentsDescr/' + ldId, ldData).success(function(res) {
+                success(res);
+            }).error(error);
+        },
+
+        addTopic: function(ldId, ldData, success, error) {
+            $http.post('/learningdesign/addtopic/' + ldId, ldData).success(function(res) {
                 success(res);
             }).error(error);
         },

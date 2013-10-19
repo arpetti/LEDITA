@@ -42,10 +42,10 @@
                	placeholder="Topics..." required ng-maxlength="255"
                	ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
             <span class="editButton" ng-click="addTopic()"><i class="icon-plus icon-white"></i></span>
-            <ul ng-repeat="subject in learningDesign.subjects" class="zeroMargin subjects">
+            <ul ng-repeat="topic in selectedTopics" class="zeroMargin subjects">
                 <li class="sidebarEditItem">
-                	<span class="sidebarEditItemLink">{{subject.subject_name}} 
-                	<a ng-click="removeTopic(subject.subject_name)"><i class="icon-remove-circle"></i> </a></span>
+                	<span class="sidebarEditItemLink">{{topic}} 
+                	<a ng-click="removeTopic(topic)"><i class="icon-remove-circle"></i> </a></span>
                 </li>
             </ul>
         	</form>

@@ -125,7 +125,7 @@ describe('Create a new Learning Design', function() {
         expect(input('learningDesign.ld_name').val()).toBe(newLdName);
         expect(input('learningDesign.ld_scope').val()).toBe(scopeTypeaheadMatch);
         expect(repeater('.subjects li').count()).toBe(1);
-        expect(repeater('.subjects li').column('subject.subject_name')).toEqual([topicTypeaheadMatch]);
+        expect(repeater('.subjects li').column('topic')).toEqual([topicTypeaheadMatch]);
         expect(repeater('.objectives li').count()).toBe(1);
         expect(repeater('.objectives li').column('objective.objective_descr')).toEqual([objectiveTypeaheadMatch]);
         expect(repeater('.prerequisites li').count()).toBe(0);
@@ -171,7 +171,7 @@ describe('Create a new Learning Design', function() {
         expect(input('learningDesign.ld_name').val()).toBe(newLdName);
         expect(input('learningDesign.ld_scope').val()).toBe(newLdScope);
         expect(repeater('.subjects li').count()).toBe(1);
-        expect(repeater('.subjects li').column('subject.subject_name')).toEqual([newTopic]);
+        expect(repeater('.subjects li').column('topic')).toEqual([newTopic]);
         expect(repeater('.objectives li').count()).toBe(1);
         expect(repeater('.objectives li').column('objective.objective_descr')).toEqual([newObjective]);
         expect(repeater('.prerequisites li').count()).toBe(1);
@@ -217,7 +217,7 @@ describe('Create a new Learning Design', function() {
         expect(input('learningDesign.ld_name').val()).toBe(newLdName);
         expect(input('learningDesign.ld_scope').val()).toBe(newLdScope);
         expect(repeater('.subjects li').count()).toBe(1);
-        expect(repeater('.subjects li').column('subject.subject_name')).toEqual([newTopic]);
+        expect(repeater('.subjects li').column('topic')).toEqual([newTopic]);
         expect(repeater('.objectives li').count()).toBe(1);
         expect(repeater('.objectives li').column('objective.objective_descr')).toEqual([newObjective]);
         expect(repeater('.prerequisites li').count()).toBe(0);

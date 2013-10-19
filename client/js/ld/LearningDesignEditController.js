@@ -63,11 +63,20 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
 
   	// #28 wip - only add to the selected items list if not already there
   	$scope.addTopic = function() {
-  		console.log('addTopic: ' + $scope.ldTopic);
+  		LDEditService.addTopic($scope.ldid, {topic: $scope.ldTopic},
+        function(res) {
+        	$scope.selectedTopics.push($scope.ldTopic);
+        	$scope.ldTopic = " ";
+        },
+        function(err) {
+            $scope.ldUpdateErrors = err; // TODO UI to display these
+        });
   	};
+
   	$scope.addObjective = function() {
   		console.log('addObjective: ' + $scope.ldObjective);
   	};
+
   	$scope.addPrerequisite = function() {
   		console.log('addPrerequisite: ' + $scope.ldRequisite);
   	};
