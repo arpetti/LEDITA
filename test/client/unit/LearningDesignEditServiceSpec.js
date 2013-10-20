@@ -6,9 +6,6 @@ describe('Learning Design Edit Service', function() {
 
     var service;
     var $httpBackend;
-    var ldId = 7;
-    var ldData = {"ld_id": 7};
-    var ldName = {ldName: "update name"};
 
     beforeEach(inject(function (LDEditService) {
         service = LDEditService;
@@ -16,8 +13,6 @@ describe('Learning Design Edit Service', function() {
 
     beforeEach(inject(function($injector) {
   		$httpBackend = $injector.get('$httpBackend');
-  		$httpBackend.when('GET', '/learningdesign/' + ldId).respond(ldData);
-  		$httpBackend.when('PUT', '/learningdesign/name/' + ldId, ldName).respond(ldName);
 	}));
 
 	afterEach(function() {
@@ -30,6 +25,9 @@ describe('Learning Design Edit Service', function() {
     });
 
     it('Gets a Learning Design by ID', function() {
+    	var ldId = 7;
+    	var ldData = {"ld_id": 7};
+
     	var success = function(res) {
     		expect(res.ld_id).toEqual(ldData.ld_id);
     	};
@@ -37,11 +35,15 @@ describe('Learning Design Edit Service', function() {
 			expect(false).toBe(true); // should not get here
 		};
 
+		$httpBackend.when('GET', '/learningdesign/' + ldId).respond(ldData);
     	service.getLearningDesign(ldId, success, error);
     	$httpBackend.flush();
     });
 
     it('Updates LD Name', function() {
+    	var ldId = 7;
+    	var ldName = {ldName: "update name"};
+
     	var success = function(res) {
     		expect(res.ldName).toEqual(ldName.ldName);
     	};
@@ -49,6 +51,7 @@ describe('Learning Design Edit Service', function() {
 			expect(false).toBe(true); // should not get here
 		};
 
+		$httpBackend.when('PUT', '/learningdesign/name/' + ldId, ldName).respond(ldName);
     	service.updateLdName(ldId, ldName, success, error);
     	$httpBackend.flush();
     })
