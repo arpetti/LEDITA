@@ -28,7 +28,7 @@ describe('Edit Learning Design', function() {
         expect(repeater('.subjects li').count()).toBe(1);
         expect(repeater('.subjects li').column('topic')).toEqual(['Topic 3']);
         expect(repeater('.objectives li').count()).toBe(2);
-        expect(repeater('.objectives li').column('objective.objective_descr')).toEqual(['Objective 3','Objective 6']);
+        expect(repeater('.objectives li').column('objective')).toEqual(['Objective 3','Objective 6']);
         expect(repeater('.prerequisites li').count()).toBe(0);
         expect(input('learningDesign.ld_students_profile').val()).toBe('20 studenti adolescenti di livello B1');
 

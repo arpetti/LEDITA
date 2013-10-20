@@ -67,9 +67,9 @@
                	placeholder="Objectives..." required ng-maxlength="255"
                	ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
             <span class="editButton" ng-click="addObjective()"><i class="icon-plus icon-white"></i> </span>
-            <ul ng-repeat="objective in learningDesign.objectives" class="zeroMargin objectives">
+            <ul ng-repeat="objective in selectedObjectives" class="zeroMargin objectives">
                 <li class="sidebarEditItem">
-                	<span class="sidebarEditItemLink">{{objective.objective_descr}} 
+                	<span class="sidebarEditItemLink">{{objective}} 
                 	<a ng-click="removeObjective(objective)"><i class="icon-remove-circle"></i></a></span>
                 </li>
             </ul>

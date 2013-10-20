@@ -69,12 +69,18 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
         	$scope.ldTopic = " ";
         },
         function(err) {
-            $scope.ldUpdateErrors = err; // TODO UI to display these
         });
   	};
 
+  	// #28 wip - only add to the selected items list if not already there
   	$scope.addObjective = function() {
-  		console.log('addObjective: ' + $scope.ldObjective);
+  		LDEditService.addObjective($scope.ldid, {objective: $scope.ldObjective},
+        function(res) {
+        	$scope.selectedObjectives.push($scope.ldObjective);
+        	$scope.ldObjective = " ";
+        },
+        function(err) {
+        });
   	};
 
   	$scope.addPrerequisite = function() {

@@ -127,7 +127,7 @@ describe('Create a new Learning Design', function() {
         expect(repeater('.subjects li').count()).toBe(1);
         expect(repeater('.subjects li').column('topic')).toEqual([topicTypeaheadMatch]);
         expect(repeater('.objectives li').count()).toBe(1);
-        expect(repeater('.objectives li').column('objective.objective_descr')).toEqual([objectiveTypeaheadMatch]);
+        expect(repeater('.objectives li').column('objective')).toEqual([objectiveTypeaheadMatch]);
         expect(repeater('.prerequisites li').count()).toBe(0);
         expect(input('learningDesign.ld_students_profile').val()).toBe(newLdStudentsDescription);
 
@@ -173,7 +173,7 @@ describe('Create a new Learning Design', function() {
         expect(repeater('.subjects li').count()).toBe(1);
         expect(repeater('.subjects li').column('topic')).toEqual([newTopic]);
         expect(repeater('.objectives li').count()).toBe(1);
-        expect(repeater('.objectives li').column('objective.objective_descr')).toEqual([newObjective]);
+        expect(repeater('.objectives li').column('objective')).toEqual([newObjective]);
         expect(repeater('.prerequisites li').count()).toBe(1);
         expect(repeater('.prerequisites li').column('prereq.prereq_name')).toEqual([newPrereq]);
         expect(input('learningDesign.ld_students_profile').val()).toBe(newLdStudentsDescription);
@@ -219,7 +219,7 @@ describe('Create a new Learning Design', function() {
         expect(repeater('.subjects li').count()).toBe(1);
         expect(repeater('.subjects li').column('topic')).toEqual([newTopic]);
         expect(repeater('.objectives li').count()).toBe(1);
-        expect(repeater('.objectives li').column('objective.objective_descr')).toEqual([newObjective]);
+        expect(repeater('.objectives li').column('objective')).toEqual([newObjective]);
         expect(repeater('.prerequisites li').count()).toBe(0);
         expect(input('learningDesign.ld_students_profile').val()).toBe(newLdStudentsDescription);
         
