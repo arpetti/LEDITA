@@ -16,6 +16,9 @@ describe('Edit Learning Design', function() {
    	 	var marioPswd = testUsers.getMarioUserPassword;
    	 	var privateLdOwnedByMario = 18;
    	 	var scopeTypeaheadMatch = "Lesson";
+   	 	var topicTypeaheadMatch = "Topic 1";
+   	 	var objectiveTypeaheadMatch = "Frasi idiomatiche sui sentimenti";
+   	 	var prerequisiteTypeaheadMatch = "Registro formale e informale con i sentimenti";
 
    	 	// Login
    	 	browser().navigateTo('/login');
@@ -69,7 +72,32 @@ describe('Edit Learning Design', function() {
         ]);
         element('#editTopics li a').click(); 
         expect(repeater('#editTopics li').count()).toBe(2);
-        expect(repeater('#editTopics li').column('topic')).toEqual(["Topic 3", "Topic 1"]);
+        expect(repeater('#editTopics li').column('topic')).toEqual(["Topic 3", topicTypeaheadMatch]);
+
+        // Add Objective using Typeaead
+        expect(element('#editObjectives .typeahead', 'objective typeahead hidden').css('display')).toBe('none');
+        input('ldObjective').enter('Frasi');
+        sleep(0.5);
+        expect(element('#editObjectives .typeahead', 'objective typeahead is displayed').css('display')).toBe('block');
+        verifyTypeAheadValues('#editObjectives .ng-scope', 'objective typeahead', [
+        	{rowNum: 0, value: "<strong>Frasi</strong> idiomatiche sui sentimenti"}
+        ]);
+        element('#editObjectives li a').click(); 
+        expect(repeater('#editObjectives li').count()).toBe(3);
+        expect(repeater('#editObjectives li').column('objective')).toEqual(
+        	["Objective 3", "Objective 6", objectiveTypeaheadMatch]);
+
+        // Add Prerequisite using Typeahead
+        expect(element('#editPrerequisites .typeahead', 'prereq typeahead hidden').css('display')).toBe('none');
+        input('ldRequisite').enter('regi');
+        sleep(0.5);
+        expect(element('#editPrerequisites .typeahead', 'prereq typeahead displayed').css('display')).toBe('block');
+        verifyTypeAheadValues('#editPrerequisites .ng-scope', 'prereq typeahead', [
+        	{rowNum: 0, value: "<strong>Regi</strong>stro formale e informale con i sentimenti"}
+        ]);
+        element('#editPrerequisites li a').click(); 
+        expect(repeater('#editPrerequisites li').count()).toBe(1);
+        expect(repeater('#editPrerequisites li').column('prereq')).toEqual([prerequisiteTypeaheadMatch]);
 
         // Make this LD public 
         input('ldPublicationFlag').check();
@@ -87,7 +115,13 @@ describe('Edit Learning Design', function() {
         expect(binding('learningDesign.ld_name')).toBe('Learning Design Title Demo 18');
         expect(repeater('.qceritem').column('qcer.qcer_name')).toEqual(["A1", "A2"]);
         expect(repeater('.subjects li').count()).toBe(2);
-        expect(repeater('.subjects li').column('subject.subject_name')).toEqual(["Topic 1", "Topic 3"]);
+        expect(repeater('.subjects li').column('subject.subject_name')).toEqual([topicTypeaheadMatch, "Topic 3"]);
+        expect(repeater('.objectives li').count()).toBe(3);
+        expect(repeater('.objectives li').column('objective.objective_descr')).toEqual(
+        	["Objective 3", "Objective 6", objectiveTypeaheadMatch]);
+        expect(repeater('.prerequisites li').count()).toBe(1);
+        expect(repeater('.prerequisites li').column('prereq.prereq_name')).toEqual([prerequisiteTypeaheadMatch]);
+
 
         // Go back to Edit Page and make LD Private
         browser().navigateTo('/ldedit/' + privateLdOwnedByMario);

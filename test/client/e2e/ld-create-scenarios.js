@@ -175,7 +175,7 @@ describe('Create a new Learning Design', function() {
         expect(repeater('.objectives li').count()).toBe(1);
         expect(repeater('.objectives li').column('objective')).toEqual([newObjective]);
         expect(repeater('.prerequisites li').count()).toBe(1);
-        expect(repeater('.prerequisites li').column('prereq.prereq_name')).toEqual([newPrereq]);
+        expect(repeater('.prerequisites li').column('prereq')).toEqual([newPrereq]);
         expect(input('learningDesign.ld_students_profile').val()).toBe(newLdStudentsDescription);
         
         // TODO: Verify qcers (need to figure out data binding for checkboxes)

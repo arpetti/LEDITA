@@ -83,8 +83,15 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
         });
   	};
 
+  	// #28 wip - only add to the selected items list if not already there
   	$scope.addPrerequisite = function() {
-  		console.log('addPrerequisite: ' + $scope.ldRequisite);
+  		LDEditService.addPrerequisite($scope.ldid, {prerequisite: $scope.ldRequisite},
+        function(res) {
+        	$scope.selectedPrerequisites.push($scope.ldRequisite);
+        	$scope.ldRequisite = " ";
+        },
+        function(err) {
+        });
   	};
 
   	// TODO: client-side validation: if all are false, display error instead of calling service

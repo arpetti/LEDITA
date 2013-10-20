@@ -52,7 +52,7 @@
         </div>
         
         <!-- Objectives -->
-        <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-screenshot"></i> Objectives:</h5>
+        <div id="editObjectives" class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-screenshot"></i> Objectives:</h5>
         	<form novalidate class="sidebarForm" name="LdObjectiveForm">
         	<div class="errorBox">
                 <span id="objectiveReqErr" class="errorTipModal" ng-show="LdObjectiveForm.ldObjective.$dirty && LdObjectiveForm.ldObjective.$error.required">Required!</span>
@@ -77,7 +77,7 @@
         </div>
         
         <!-- Prerequisites -->
-        <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-backward"></i> Pre-Requisites:</h5>
+        <div id="editPrerequisites" class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-backward"></i> Pre-Requisites:</h5>
             <form novalidate class="sidebarForm" name="LdPrereqForm">
             <div class="errorBox">
                 <span id="prereqPatternErr" class="errorTipModal" ng-show="LdPrereqForm.ldRequisite.$error.pattern">A pre-requisite cannot contain this symbol.</span>
@@ -90,9 +90,9 @@
                	placeholder="Prerequisites..." required ng-maxlength="255"
                	ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
             <span class="editButton" ng-click="addPrerequisite()"><i class="icon-plus icon-white"></i> </span>
-            <ul ng-repeat="prereq in learningDesign.prerequisites" class="zeroMargin prerequisites">
+            <ul ng-repeat="prereq in selectedPrerequisites" class="zeroMargin prerequisites">
                 <li class="sidebarEditItem">
-                	<span class="sidebarEditItemLink">{{prereq.prereq_name}} 
+                	<span class="sidebarEditItemLink">{{prereq}} 
                 	<a ng-href="#"><i class="icon-remove-circle"></i> </a></span>
                 </li>
             </ul>
