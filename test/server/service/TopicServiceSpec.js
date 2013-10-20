@@ -380,5 +380,4 @@ describe('Topic Service', function() {
 
 	});
 
-
 });
