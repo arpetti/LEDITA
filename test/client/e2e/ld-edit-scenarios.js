@@ -55,7 +55,21 @@ describe('Edit Learning Design', function() {
         element('#scopeFormSection li a').click(); 
         expect(input('learningDesign.ld_scope').val()).toBe(scopeTypeaheadMatch);
 
-        // TODO: Edit Topic and other typeaheads
+        // Add Topic using Typeahead
+        expect(element('#editTopics .typeahead', 'topic typeahead hidden').css('display')).toBe('none');
+        input('ldTopic').enter('Topic');
+        sleep(0.5);
+        expect(element('#editTopics .typeahead', 'topic typeahead is displayed').css('display')).toBe('block');
+        verifyTypeAheadValues('#editTopics .ng-scope', 'topic typeahead', [
+        	{rowNum: 0, value: "<strong>Topic</strong> 1"}, 
+        	{rowNum: 1, value: "<strong>Topic</strong> 2"}, 
+        	{rowNum: 2, value: "<strong>Topic</strong> 3"},
+        	{rowNum: 3, value: "<strong>Topic</strong> 4"},
+        	{rowNum: 4, value: "<strong>Topic</strong> 5"}
+        ]);
+        element('#editTopics li a').click(); 
+        expect(repeater('#editTopics li').count()).toBe(2);
+        expect(repeater('#editTopics li').column('topic')).toEqual(["Topic 3", "Topic 1"]);
 
         // Make this LD public 
         input('ldPublicationFlag').check();
@@ -66,7 +80,14 @@ describe('Edit Learning Design', function() {
         expect(browser().location().url()).toBe('/'); 
         expect(repeater('.ld-border').row(0)).toEqual(["Learning Design Title Demo 18","A1","A2","Module","Mario","Rossi"]);
 
-        // TODO Click on ld, verify we're on view page and verify all other modified data
+        // Click on detail view and verify modified detail data
+        element('#ldlist .ld-item:nth-child(1) a .ld-center').click();
+        sleep(1);
+        expect(browser().location().url()).toBe('/ld/' + privateLdOwnedByMario);
+        expect(binding('learningDesign.ld_name')).toBe('Learning Design Title Demo 18');
+        expect(repeater('.qceritem').column('qcer.qcer_name')).toEqual(["A1", "A2"]);
+        expect(repeater('.subjects li').count()).toBe(2);
+        expect(repeater('.subjects li').column('subject.subject_name')).toEqual(["Topic 1", "Topic 3"]);
 
         // Go back to Edit Page and make LD Private
         browser().navigateTo('/ldedit/' + privateLdOwnedByMario);
