@@ -10,6 +10,7 @@ var UPDATE_STUDENTS_DESCR = 'UPDATE ld set students_profile = ?' + UPDATE_LD_COM
 
 var DELETE_CLASSIFICATES = 'DELETE FROM classificates WHERE ld_id = ?';
 var DELETE_CONCERN = 'DELETE FROM concerns WHERE ld_id = ? AND subject_id = ?';
+var DELETE_AIM = 'DELETE FROM aims where ld_id = ? and objective_id = ?';
 
 var buildLdData = function(item, ldId) {
 	return [item, new Date(), ldId];
@@ -57,6 +58,12 @@ module.exports = {
 
 	deleteConcern: function(ldId, subjectId, callback) {
 		dao.deleteRecord(DELETE_CONCERN, [ldId, subjectId], function(err, result) {
+			handleResult(callback, err, result);
+		});
+	},
+
+	deleteAim: function(ldId, objectiveId, callback) {
+		dao.deleteRecord(DELETE_AIM, [ldId, objectiveId], function(err, result) {
 			handleResult(callback, err, result);
 		});
 	}

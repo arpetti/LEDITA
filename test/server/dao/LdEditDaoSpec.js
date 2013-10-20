@@ -423,4 +423,139 @@ describe('LD Edit', function () {
 		});
 	});
 
+	describe('Delete Aim', function() {
+
+		var originalAim = {ld_id: 15, objective_id: 4};
+		var verifyAim = 'SELECT ld_id, objective_id FROM aims WHERE ld_id = ? and objective_id = ?';
+		var resetAim = 'INSERT INTO aims set ?';
+
+		it('Deletes an aim', function(done) {
+			async.series([
+			    function(callback){
+			        console.log('Step 1: Verify aim exists');
+			        Dao.findAll(verifyAim, [originalAim.ld_id, originalAim.objective_id], function(err, results) {
+			        	expect(err).to.be.null;
+			        	expect(results).to.have.length(1);
+			        	expect(results[0].ld_id).to.equal(originalAim.ld_id);
+			        	expect(results[0].objective_id).to.equal(originalAim.objective_id);
+			        	callback(null, 'Step 1');
+			        });
+			    },
+			    function(callback){
+			        console.log('Step 2: Delete the aim');
+			        LdEditDao.deleteAim(originalAim.ld_id, originalAim.objective_id, function(err, results) {
+			        	expect(err).to.be.null;
+			        	callback(null, 'Step 2');
+			        });
+			    },
+			    function(callback){
+			        console.log('Step 3: Verify aim has been removed');
+			        Dao.findAll(verifyAim, [originalAim.ld_id, originalAim.objective_id], function(err, results) {
+			        	expect(err).to.be.null;
+			        	expect(results).to.have.length(0);
+			        	callback(null, 'Step 3');
+			        });
+			    },
+			    function(callback){
+			        console.log('Step 4: Put aim back the way we found it');
+			        Dao.insertOrUpdateRecord(resetAim, originalAim, function(err, result) {
+			        	expect(err).to.to.be.null;
+			        	callback(null, 'Step 4');
+			        });
+			    },
+			    function(callback){
+			        console.log('Step 5: Verify aim is back to original state');
+			        Dao.findAll(verifyAim, [originalAim.ld_id, originalAim.objective_id], function(err, results) {
+			        	expect(err).to.be.null;
+			        	expect(results).to.have.length(1);
+			        	expect(results[0].ld_id).to.equal(originalAim.ld_id);
+			        	expect(results[0].objective_id).to.equal(originalAim.objective_id);
+			        	callback(null, 'Step 5');
+			        });
+			    },
+			],
+			function(err, results){
+				expect(err).to.be.null;
+				expect(results).to.have.length(5); // test should have executed all 5 steps above
+				done();
+			});
+		});
+
+		it('Does nothing if LD ID not found', function(done) {
+			var ldIdNotFound = 9999;
+			async.series([
+			    function(callback){
+			        console.log('Step 1: Verify aim exists');
+			        Dao.findAll(verifyAim, [originalAim.ld_id, originalAim.objective_id], function(err, results) {
+			        	expect(err).to.be.null;
+			        	expect(results).to.have.length(1);
+			        	expect(results[0].ld_id).to.equal(originalAim.ld_id);
+			        	expect(results[0].objective_id).to.equal(originalAim.objective_id);
+			        	callback(null, 'Step 1');
+			        });
+			    },
+			    function(callback){
+			        console.log('Step 2: Try to delete aim with unknown LD ID');
+			        LdEditDao.deleteAim(ldIdNotFound, originalAim.objective_id, function(err, results) {
+			        	expect(err).to.be.null;
+			        	callback(null, 'Step 2');
+			        });
+			    },
+			    function(callback){
+			        console.log('Step 3: Verify aim is unmodified');
+			        Dao.findAll(verifyAim, [originalAim.ld_id, originalAim.objective_id], function(err, results) {
+			        	expect(err).to.be.null;
+			        	expect(results).to.have.length(1);
+			        	expect(results[0].ld_id).to.equal(originalAim.ld_id);
+			        	expect(results[0].objective_id).to.equal(originalAim.objective_id);
+			        	callback(null, 'Step 3');
+			        });
+			    },
+			],
+			function(err, results){
+				expect(err).to.be.null;
+				expect(results).to.have.length(3); // test should have executed all 3 steps above
+				done();
+			});
+		});
+
+		it('Does nothing if OBJECTIVE ID not found', function(done) {
+			var objectiveIdNotFound = 9999;
+			async.series([
+			    function(callback){
+			        console.log('Step 1: Verify aim exists');
+			        Dao.findAll(verifyAim, [originalAim.ld_id, originalAim.objective_id], function(err, results) {
+			        	expect(err).to.be.null;
+			        	expect(results).to.have.length(1);
+			        	expect(results[0].ld_id).to.equal(originalAim.ld_id);
+			        	expect(results[0].objective_id).to.equal(originalAim.objective_id);
+			        	callback(null, 'Step 1');
+			        });
+			    },
+			    function(callback){
+			        console.log('Step 2: Try to delete aim with unknown SUBJECT ID');
+			        LdEditDao.deleteAim(originalAim.ld_id, objectiveIdNotFound, function(err, results) {
+			        	expect(err).to.be.null;
+			        	callback(null, 'Step 2');
+			        });
+			    },
+			    function(callback){
+			        console.log('Step 3: Verify aim is unmodified');
+			        Dao.findAll(verifyAim, [originalAim.ld_id, originalAim.objective_id], function(err, results) {
+			        	expect(err).to.be.null;
+			        	expect(results).to.have.length(1);
+			        	expect(results[0].ld_id).to.equal(originalAim.ld_id);
+			        	expect(results[0].objective_id).to.equal(originalAim.objective_id);
+			        	callback(null, 'Step 3');
+			        });
+			    },
+			],
+			function(err, results){
+				expect(err).to.be.null;
+				expect(results).to.have.length(3); // test should have executed all 3 steps above
+				done();
+			});
+		});
+	});
+
 });
