@@ -8,6 +8,7 @@ describe('Learning Design Edit Service', function() {
     var $httpBackend;
     var ldId = 7;
     var ldData = {"ld_id": 7};
+    var ldName = {ldName: "update name"};
 
     beforeEach(inject(function (LDEditService) {
         service = LDEditService;
@@ -16,6 +17,7 @@ describe('Learning Design Edit Service', function() {
     beforeEach(inject(function($injector) {
   		$httpBackend = $injector.get('$httpBackend');
   		$httpBackend.when('GET', '/learningdesign/' + ldId).respond(ldData);
+  		$httpBackend.when('PUT', '/learningdesign/name/' + ldId, ldName).respond(ldName);
 	}));
 
 	afterEach(function() {
@@ -38,6 +40,18 @@ describe('Learning Design Edit Service', function() {
     	service.getLearningDesign(ldId, success, error);
     	$httpBackend.flush();
     });
+
+    it('Updates LD Name', function() {
+    	var success = function(res) {
+    		expect(res.ldName).toEqual(ldName.ldName);
+    	};
+		var error = function() {
+			expect(false).toBe(true); // should not get here
+		};
+
+    	service.updateLdName(ldId, ldName, success, error);
+    	$httpBackend.flush();
+    })
 
     describe('Generate selected qcers', function() {
 
