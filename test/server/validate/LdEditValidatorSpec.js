@@ -314,6 +314,75 @@ describe('LD Edit Validation', function() {
 
 	});
 
+	describe('Prerequisite', function() {
+
+		it('Can contain letters and numbers', function() {
+			var prerequisite = "prerequisite ABC abc 1234567890";
+			var results = LdEditValidator.validatePrerequisite(prerequisite);
+			expect(results).to.have.length(0);
+		});
+
+		it('Can be exactly 255 characters long', function() {
+			var prerequisite = TestUtils.buildString(255, 'a');
+			var results = LdEditValidator.validatePrerequisite(prerequisite);
+			expect(results).to.have.length(0);
+		});
+
+		it('Cannot exceed 255 characters', function() {
+			var prerequisite = TestUtils.buildString(256, 'a');
+			var results = LdEditValidator.validatePrerequisite(prerequisite);
+			expect(results).to.have.length(1);
+			expect(results[0]).to.equal(messages.LD_PREREQ_LENGTH);
+		});
+
+		it('Cannot be empty', function() {
+			var prerequisite = "";
+			var results = LdEditValidator.validatePrerequisite(prerequisite);
+			expect(results).to.have.length(3);
+			expect(results[0]).to.equal(messages.LD_PREREQ_EMPTY);
+			expect(results[1]).to.equal(messages.LD_PREREQ_LENGTH);
+			expect(results[2]).to.equal(messages.LD_PREREQ_ALLOWED_CHARS);
+		});
+
+		it('Cannot be null', function() {
+			var prerequisite = null;
+			var results = LdEditValidator.validatePrerequisite(prerequisite);
+			expect(results).to.have.length(3);
+			expect(results[0]).to.equal(messages.LD_PREREQ_EMPTY);
+			expect(results[1]).to.equal(messages.LD_PREREQ_LENGTH);
+			expect(results[2]).to.equal(messages.LD_PREREQ_ALLOWED_CHARS);
+		});
+
+		it('Cannot be undefined', function() {
+			var results = LdEditValidator.validatePrerequisite();
+			expect(results).to.have.length(3);
+			expect(results[0]).to.equal(messages.LD_PREREQ_EMPTY);
+			expect(results[1]).to.equal(messages.LD_PREREQ_LENGTH);
+			expect(results[2]).to.equal(messages.LD_PREREQ_ALLOWED_CHARS);
+		});
+
+		it('Cannot contain script tags', function() {
+			var prerequisite = '<script>window.location("evil.com");</script>'
+			var results = LdEditValidator.validatePrerequisite(prerequisite);
+			expect(results).to.have.length(1);
+			expect(results[0]).to.equal(messages.LD_PREREQ_ALLOWED_CHARS);
+		});
+
+		it('Cannot contain special characters', function() {
+			var prerequisite = 'prerequisite *&^%$#@!)(';
+			var results = LdEditValidator.validatePrerequisite(prerequisite);
+			expect(results).to.have.length(1);
+			expect(results[0]).to.equal(messages.LD_PREREQ_ALLOWED_CHARS);
+		});
+
+		it('Can contain numbers', function() {
+			var prerequisite = 'prerequisite 123';
+			var results = LdEditValidator.validatePrerequisite(prerequisite);
+			expect(results).to.have.length(0);
+		});
+
+	});
+
 	// Mock interaction with Validator Helper since that's already been tested in great detail re: qcer
 	describe('Qcer', function() {
 

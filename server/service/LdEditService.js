@@ -3,6 +3,7 @@ var ScopeService = require('./ScopeService');
 var QcerService = require('./QcerService');
 var TopicService = require('./TopicService');
 var ObjectiveService = require('./ObjectiveService');
+var PrerequisiteService = require('./PrerequisiteService');
 var messages = require('../validate/ValidationMessages');
 
 var updateLdPublicationCommon = function(publicationIndicator, ldId, cb) {
@@ -90,6 +91,13 @@ module.exports = {
 	// callback()
 	addObjective: function(objective, ldId, callback) {
 		ObjectiveService.insertObjectives(ldId, [objective], function() {
+			callback();
+		});
+	},
+
+	// callback()
+	addPrerequisite: function(prerequiste, ldId, callback) {
+		PrerequisiteService.insertPrerequisites(ldId, [prerequiste], function() {
 			callback();
 		});
 	}

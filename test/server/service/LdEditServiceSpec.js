@@ -6,6 +6,7 @@ var ScopeService = require('../../../server/service/ScopeService');
 var QcerService = require('../../../server/service/QcerService');
 var TopicService = require('../../../server/service/TopicService');
 var ObjectiveService = require('../../../server/service/ObjectiveService');
+var PrerequisiteService = require('../../../server/service/PrerequisiteService');
 var LdEditDao = require('../../../server/dao/LdEditDao');
 var messages = require('../../../server/validate/ValidationMessages');
 
@@ -349,6 +350,28 @@ describe('Learning Design Edit Service', function() {
 				done();
 			};
 			LdEditService.addObjective(objective, ldId, serviceCB);
+		});
+	});
+
+	describe('Add Prerequiste', function() {
+
+		it('Delegates to Prerequiste Service', function(done) {
+			var ldId = 334;
+			var prerequiste = 'something to add';
+
+			var serviceStub = sandbox.stub(PrerequisiteService, "insertPrerequisites", function(ldId, prerequiste, callback) {
+				callback();
+			});
+
+			var prerequisteMatcher = sinon.match(function(value) {
+				return value.length === 1 && value[0] === prerequiste;
+			});
+
+			var serviceCB = function() {
+				assert.isTrue(serviceStub.withArgs(ldId, prerequisteMatcher).calledOnce);
+				done();
+			};
+			LdEditService.addPrerequisite(prerequiste, ldId, serviceCB);
 		});
 	});
 

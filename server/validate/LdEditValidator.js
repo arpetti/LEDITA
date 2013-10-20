@@ -49,6 +49,15 @@ module.exports = {
 		return _.filter(em, function(message){ return message !== null; });
 	},
 
+	validatePrerequisite: function(prerequisite) {
+		var em = [];
+		em.push(vh.validateAny(vh.validateNullEmpty, [prerequisite, m.LD_PREREQ_EMPTY]));
+		em.push(vh.validateAny(vh.validateLength, [prerequisite, m.LD_PREREQ_LENGTH, 1, 255]));
+		em.push(vh.validateAny(vh.validateRegEx, 
+			[prerequisite, m.LD_PREREQ_ALLOWED_CHARS, vh.FIRST_ALPHANUMERIC_REST_ANY_CHAR]));
+		return _.filter(em, function(message){ return message !== null; });
+	},
+
 	/**
 	 * Validates at least one qcer in list is set to true
 	 * @param {object} qcers, for example: {"1":true, "2":true}

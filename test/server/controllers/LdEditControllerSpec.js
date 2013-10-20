@@ -440,6 +440,92 @@ describe('Learning Design Edit Controller', function() {
 		});
 	});
 
+	describe('Add Prerequisite', function() {
+
+		var req = {}
+	        , res = {}
+	        , sandbox = sinon.sandbox.create();
+
+	    beforeEach(function() {
+
+	    });
+
+	    afterEach(function() {
+	        sandbox.restore();
+	    });
+
+		it('Sends 400 if validator returns error messages', function(done) {
+			var ldId = 956;
+    		req.params = {id: ldId};
+
+    		var prerequisite = "something to add";
+    		req.body = {prerequisite: prerequisite};
+
+    		var errorMessages = ['something wrong with that prerequisite'];
+            var validateStub = sandbox.stub(LdEditValidator, "validatePrerequisite").returns(errorMessages);
+
+            var serviceStub = sandbox.stub(LdEditService, "addPrerequisite");
+
+            res.send = function(httpStatus, ldDataErrors) {
+                expect(httpStatus).to.equal(400);
+                expect(ldDataErrors).to.equal(errorMessages);
+                assert.isTrue(validateStub.withArgs(prerequisite).calledOnce);
+                assert.equal(serviceStub.callCount, 0, "prerequisite is not added when there are validation errors");
+                done();
+            };
+            LdEditController.addPrerequisite(req, res);
+		});
+
+		it('Sends 500 if service calls back with error', function(done) {
+			var ldId = 956;
+    		req.params = {id: ldId};
+
+    		var prerequisite = "something to add";
+    		req.body = {prerequisite: prerequisite};
+
+    		var errorMessages = [];
+            var validateStub = sandbox.stub(LdEditValidator, "validatePrerequisite").returns(errorMessages);
+
+            var serviceError = new Error("something went wrong");
+            var serviceMessage = "Unable to add prerequisite";
+    		var serviceStub = sandbox.stub(LdEditService, "addPrerequisite", function(qcers, ldId, callback) {
+                callback(serviceError, serviceMessage);
+            });
+
+            res.send = function(httpStatus, errMessage) {
+                expect(httpStatus).to.equal(500);
+                expect(errMessage).to.equal(serviceMessage);
+                assert.isTrue(validateStub.withArgs(prerequisite).calledOnce);
+                assert.isTrue(serviceStub.withArgs(prerequisite, ldId).calledOnce);
+                done();
+            };
+            LdEditController.addPrerequisite(req, res);
+		});
+
+		it('Sends 200 if service update is successful', function(done) {
+			var ldId = 956;
+    		req.params = {id: ldId};
+
+    		var prerequisite = "something to add";
+    		req.body = {prerequisite: prerequisite};
+
+    		var errorMessages = [];
+            var validateStub = sandbox.stub(LdEditValidator, "validatePrerequisite").returns(errorMessages);
+
+    		var serviceStub = sandbox.stub(LdEditService, "addPrerequisite", function(qcers, ldId, callback) {
+                callback();
+            });
+
+            res.json = function(httpStatus, result) {
+                expect(httpStatus).to.equal(200);
+                assert.isTrue(validateStub.withArgs(prerequisite).calledOnce);
+                assert.isTrue(serviceStub.withArgs(prerequisite, ldId).calledOnce);
+                done();
+            };
+            LdEditController.addPrerequisite(req, res);
+		});
+	});
+
 	describe('Update Students Description', function() {
 
 		var req = {}

@@ -94,6 +94,24 @@ module.exports = {
 		}); 
 	},
 
+	addPrerequisite: function(req, res) {
+		var ldId = req.params.id;
+		var ldData = req.body;
+
+		var vmessages = LdEditValidator.validatePrerequisite(ldData.prerequisite);
+        if (vmessages.length > 0) {
+            return res.send(400, vmessages);
+        };
+		
+		LdEditService.addPrerequisite(ldData.prerequisite, ldId, function(err, message) {
+			if (err) {
+				return res.send(500, message); 
+			} else {
+		        res.json(200, {});
+			}
+		}); 
+	},
+
 	updateStudentsDescr: function(req, res) {
 		var ldId = req.params.id;
 		var ldData = req.body;

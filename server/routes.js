@@ -124,6 +124,12 @@ var routes = [
         middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, LdEditController.addObjective],
         accessLevel: accessLevels.user
     },
+    {
+        path: '/learningdesign/addprerequisite/:id',
+        httpMethod: 'POST',
+        middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, LdEditController.addPrerequisite],
+        accessLevel: accessLevels.user
+    },
 
     // User Profile
     {
