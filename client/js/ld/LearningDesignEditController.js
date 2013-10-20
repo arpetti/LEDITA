@@ -61,15 +61,35 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
     	return TypeaheadHelper.getObjectives(objective);
   	};
 
+  	// TODO: Same logic also in HomeController, refactor to common service like ListHelper
+  	var removeItem = function(item, list) {
+		var index = list.indexOf(item);
+    	if(index >-1){
+    		list.splice(index,1);
+		}
+    };
+
   	// #28 wip - only add to the selected items list if not already there
   	$scope.addTopic = function() {
-  		LDEditService.addTopic($scope.ldid, {topic: $scope.ldTopic},
-        function(res) {
-        	$scope.selectedTopics.push($scope.ldTopic);
-        	$scope.ldTopic = " ";
-        },
-        function(err) {
-        });
+	  		LDEditService.addTopic($scope.ldid, {topic: $scope.ldTopic},
+	        function(res) {
+	        	$scope.selectedTopics.push($scope.ldTopic);
+	        	$scope.ldTopic = " ";
+	        },
+	        function(err) {
+	        }
+	    );
+  	};
+
+  	$scope.removeTopic = function(topic) {
+  		LDEditService.removeTopic($scope.ldid, {topic: topic},
+	        function(res) {
+	        	removeItem(topic, $scope.selectedTopics);
+	        },
+	        function(err) {
+	        	$scope.ldUpdateErrors = err; // TODO UI to display these
+	        }
+		);
   	};
 
   	// #28 wip - only add to the selected items list if not already there

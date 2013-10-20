@@ -70,7 +70,7 @@ describe('Edit Learning Design', function() {
         	{rowNum: 3, value: "<strong>Topic</strong> 4"},
         	{rowNum: 4, value: "<strong>Topic</strong> 5"}
         ]);
-        element('#editTopics li a').click(); 
+        element('#editTopics li:eq(0) a').click(); 
         expect(repeater('#editTopics li').count()).toBe(2);
         expect(repeater('#editTopics li').column('topic')).toEqual(["Topic 3", topicTypeaheadMatch]);
 
@@ -82,7 +82,7 @@ describe('Edit Learning Design', function() {
         verifyTypeAheadValues('#editObjectives .ng-scope', 'objective typeahead', [
         	{rowNum: 0, value: "<strong>Frasi</strong> idiomatiche sui sentimenti"}
         ]);
-        element('#editObjectives li a').click(); 
+        element('#editObjectives li:eq(0) a').click(); 
         expect(repeater('#editObjectives li').count()).toBe(3);
         expect(repeater('#editObjectives li').column('objective')).toEqual(
         	["Objective 3", "Objective 6", objectiveTypeaheadMatch]);
@@ -95,7 +95,7 @@ describe('Edit Learning Design', function() {
         verifyTypeAheadValues('#editPrerequisites .ng-scope', 'prereq typeahead', [
         	{rowNum: 0, value: "<strong>Regi</strong>stro formale e informale con i sentimenti"}
         ]);
-        element('#editPrerequisites li a').click(); 
+        element('#editPrerequisites li:eq(0) a').click(); 
         expect(repeater('#editPrerequisites li').count()).toBe(1);
         expect(repeater('#editPrerequisites li').column('prereq')).toEqual([prerequisiteTypeaheadMatch]);
 

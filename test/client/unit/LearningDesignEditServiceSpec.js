@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Learning Design Edit Service', function() {
+ddescribe('Learning Design Edit Service', function() {
 
 	beforeEach(module('ledita-app'));
 
@@ -55,6 +55,156 @@ describe('Learning Design Edit Service', function() {
     	service.updateLdName(ldId, ldName, success, error);
     	$httpBackend.flush();
     })
+
+	it('Updates LD Scope', function() {
+    	var ldId = 7;
+    	var ldScope = {ldScope: "update scope"};
+
+    	var success = function(res) {
+    		expect(res.ldScope).toEqual(ldScope.ldScope);
+    	};
+		var error = function() {
+			expect(false).toBe(true); // should not get here
+		};
+
+		$httpBackend.when('POST', '/learningdesign/scope/' + ldId, ldScope).respond(ldScope);
+    	service.updateLdScope(ldId, ldScope, success, error);
+    	$httpBackend.flush();
+    });
+
+    it('Updates LD Qcers', function() {
+    	var ldId = 7;
+    	var qcers = {"1":true,"2":true};
+    	var qcerResponse = {};
+
+    	var success = function(res) {
+    		expect(res).toEqual(qcerResponse);
+    	};
+		var error = function() {
+			expect(false).toBe(true); // should not get here
+		};
+
+		$httpBackend.when('POST', '/learningdesign/qcer/' + ldId, qcers).respond(qcerResponse);
+    	service.updateLdQcers(ldId, qcers, success, error);
+    	$httpBackend.flush();
+    });
+
+    it('Updates Students Description', function() {
+    	var ldId = 7;
+    	var ldData = {studentsDescr: "this is a description"};
+    	var serviceResponse = {studentsDescr: "this is a description"};
+
+    	var success = function(res) {
+    		expect(res).toEqual(serviceResponse);
+    	};
+		var error = function() {
+			expect(false).toBe(true); // should not get here
+		};
+
+		$httpBackend.when('PUT', '/learningdesign/studentsDescr/' + ldId, ldData).respond(serviceResponse);
+    	service.updateStudentsDescr(ldId, ldData, success, error);
+    	$httpBackend.flush();
+    });
+
+    it('Adds a Topic', function() {
+    	var ldId = 7;
+    	var ldData = {topic: "add this topic"};
+    	var serviceResponse = {};
+
+    	var success = function(res) {
+    		expect(res).toEqual(serviceResponse);
+    	};
+		var error = function() {
+			expect(false).toBe(true); // should not get here
+		};
+
+		$httpBackend.when('POST', '/learningdesign/addtopic/' + ldId, ldData).respond(serviceResponse);
+    	service.addTopic(ldId, ldData, success, error);
+    	$httpBackend.flush();
+    });
+
+    it('Removes a Topic', function() {
+    	var ldId = 7;
+    	var ldData = {topic: "remove this topic"};
+    	var serviceResponse = {};
+
+    	var success = function(res) {
+    		expect(res).toEqual(serviceResponse);
+    	};
+		var error = function() {
+			expect(false).toBe(true); // should not get here
+		};
+
+		$httpBackend.when('POST', '/learningdesign/removetopic/' + ldId, ldData).respond(serviceResponse);
+    	service.removeTopic(ldId, ldData, success, error);
+    	$httpBackend.flush();
+    });
+
+    it('Adds an Objective', function() {
+    	var ldId = 7;
+    	var ldData = {objective: "add this objective"};
+    	var serviceResponse = {};
+
+    	var success = function(res) {
+    		expect(res).toEqual(serviceResponse);
+    	};
+		var error = function() {
+			expect(false).toBe(true); // should not get here
+		};
+
+		$httpBackend.when('POST', '/learningdesign/addobjective/' + ldId, ldData).respond(serviceResponse);
+    	service.addObjective(ldId, ldData, success, error);
+    	$httpBackend.flush();
+    });
+
+    it('Adds a Prerequisite', function() {
+    	var ldId = 7;
+    	var ldData = {prerequisite: "add this prerequisite"};
+    	var serviceResponse = {};
+
+    	var success = function(res) {
+    		expect(res).toEqual(serviceResponse);
+    	};
+		var error = function() {
+			expect(false).toBe(true); // should not get here
+		};
+
+		$httpBackend.when('POST', '/learningdesign/addprerequisite/' + ldId, ldData).respond(serviceResponse);
+    	service.addPrerequisite(ldId, ldData, success, error);
+    	$httpBackend.flush();
+    });
+
+    it('Makes LD Public', function() {
+    	var ldId = 7;
+    	var serviceResponse = {};
+
+    	var success = function(res) {
+    		expect(res).toEqual(serviceResponse);
+    	};
+		var error = function() {
+			expect(false).toBe(true); // should not get here
+		};
+
+		$httpBackend.when('PUT', '/learningdesign/public/' + ldId).respond(serviceResponse);
+    	service.updateLdPublic(ldId, success, error);
+    	$httpBackend.flush();
+    });
+
+    it('Makes LD Private', function() {
+    	var ldId = 7;
+    	var serviceResponse = {};
+
+    	var success = function(res) {
+    		expect(res).toEqual(serviceResponse);
+    	};
+		var error = function() {
+			expect(false).toBe(true); // should not get here
+		};
+
+		$httpBackend.when('PUT', '/learningdesign/private/' + ldId).respond(serviceResponse);
+    	service.updateLdPrivate(ldId, success, error);
+    	$httpBackend.flush();
+    });
 
     describe('Generate selected qcers', function() {
 
