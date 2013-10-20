@@ -1,6 +1,7 @@
 var chai = require('chai');
 var expect = require('chai').expect
 chai.use(require('chai-datetime'));
+var async = require('async');
 
 var LdEditDao = require('../../../server/dao/LdEditDao');
 var Dao = require('../../../server/dao/Dao');
@@ -285,6 +286,141 @@ describe('LD Edit', function () {
 			});
 		});
 
+	});
+
+	describe('Delete Concern', function() {
+
+		var originalConcern = {ld_id: 15, subject_id: 5};
+		var verifyConcern = 'SELECT ld_id, subject_id FROM concerns WHERE ld_id = ? and subject_id = ?';
+		var resetConcern = 'INSERT INTO concerns set ?';
+
+		it('Deletes a concern', function(done) {
+			async.series([
+			    function(callback){
+			        console.log('Step 1: Verify concern exists');
+			        Dao.findAll(verifyConcern, [originalConcern.ld_id, originalConcern.subject_id], function(err, results) {
+			        	expect(err).to.be.null;
+			        	expect(results).to.have.length(1);
+			        	expect(results[0].ld_id).to.equal(originalConcern.ld_id);
+			        	expect(results[0].subject_id).to.equal(originalConcern.subject_id);
+			        	callback(null, 'Step 1');
+			        });
+			    },
+			    function(callback){
+			        console.log('Step 2: Delete the concern');
+			        LdEditDao.deleteConcern(originalConcern.ld_id, originalConcern.subject_id, function(err, results) {
+			        	expect(err).to.be.null;
+			        	callback(null, 'Step 2');
+			        });
+			    },
+			    function(callback){
+			        console.log('Step 3: Verify concern has been removed');
+			        Dao.findAll(verifyConcern, [originalConcern.ld_id, originalConcern.subject_id], function(err, results) {
+			        	expect(err).to.be.null;
+			        	expect(results).to.have.length(0);
+			        	callback(null, 'Step 3');
+			        });
+			    },
+			    function(callback){
+			        console.log('Step 4: Put concern back the way we found it');
+			        Dao.insertOrUpdateRecord(resetConcern, originalConcern, function(err, result) {
+			        	expect(err).to.to.be.null;
+			        	callback(null, 'Step 4');
+			        });
+			    },
+			    function(callback){
+			        console.log('Step 5: Verify concern is back to original state');
+			        Dao.findAll(verifyConcern, [originalConcern.ld_id, originalConcern.subject_id], function(err, results) {
+			        	expect(err).to.be.null;
+			        	expect(results).to.have.length(1);
+			        	expect(results[0].ld_id).to.equal(originalConcern.ld_id);
+			        	expect(results[0].subject_id).to.equal(originalConcern.subject_id);
+			        	callback(null, 'Step 5');
+			        });
+			    },
+			],
+			function(err, results){
+				expect(err).to.be.null;
+				expect(results).to.have.length(5); // test should have executed all 5 steps above
+				done();
+			});
+		});
+
+		it('Does nothing if LD ID not found', function(done) {
+			var ldIdNotFound = 9999;
+			async.series([
+			    function(callback){
+			        console.log('Step 1: Verify concern exists');
+			        Dao.findAll(verifyConcern, [originalConcern.ld_id, originalConcern.subject_id], function(err, results) {
+			        	expect(err).to.be.null;
+			        	expect(results).to.have.length(1);
+			        	expect(results[0].ld_id).to.equal(originalConcern.ld_id);
+			        	expect(results[0].subject_id).to.equal(originalConcern.subject_id);
+			        	callback(null, 'Step 1');
+			        });
+			    },
+			    function(callback){
+			        console.log('Step 2: Try to delete concern with unknown LD ID');
+			        LdEditDao.deleteConcern(ldIdNotFound, originalConcern.subject_id, function(err, results) {
+			        	expect(err).to.be.null;
+			        	callback(null, 'Step 2');
+			        });
+			    },
+			    function(callback){
+			        console.log('Step 3: Verify concern is unmodified');
+			        Dao.findAll(verifyConcern, [originalConcern.ld_id, originalConcern.subject_id], function(err, results) {
+			        	expect(err).to.be.null;
+			        	expect(results).to.have.length(1);
+			        	expect(results[0].ld_id).to.equal(originalConcern.ld_id);
+			        	expect(results[0].subject_id).to.equal(originalConcern.subject_id);
+			        	callback(null, 'Step 3');
+			        });
+			    },
+			],
+			function(err, results){
+				expect(err).to.be.null;
+				expect(results).to.have.length(3); // test should have executed all 3 steps above
+				done();
+			});
+		});
+
+		it('Does nothing if SUBJECT ID not found', function(done) {
+			var subjectIdNotFound = 9999;
+			async.series([
+			    function(callback){
+			        console.log('Step 1: Verify concern exists');
+			        Dao.findAll(verifyConcern, [originalConcern.ld_id, originalConcern.subject_id], function(err, results) {
+			        	expect(err).to.be.null;
+			        	expect(results).to.have.length(1);
+			        	expect(results[0].ld_id).to.equal(originalConcern.ld_id);
+			        	expect(results[0].subject_id).to.equal(originalConcern.subject_id);
+			        	callback(null, 'Step 1');
+			        });
+			    },
+			    function(callback){
+			        console.log('Step 2: Try to delete concern with unknown SUBJECT ID');
+			        LdEditDao.deleteConcern(originalConcern.ld_id, subjectIdNotFound, function(err, results) {
+			        	expect(err).to.be.null;
+			        	callback(null, 'Step 2');
+			        });
+			    },
+			    function(callback){
+			        console.log('Step 3: Verify concern is unmodified');
+			        Dao.findAll(verifyConcern, [originalConcern.ld_id, originalConcern.subject_id], function(err, results) {
+			        	expect(err).to.be.null;
+			        	expect(results).to.have.length(1);
+			        	expect(results[0].ld_id).to.equal(originalConcern.ld_id);
+			        	expect(results[0].subject_id).to.equal(originalConcern.subject_id);
+			        	callback(null, 'Step 3');
+			        });
+			    },
+			],
+			function(err, results){
+				expect(err).to.be.null;
+				expect(results).to.have.length(3); // test should have executed all 3 steps above
+				done();
+			});
+		});
 	});
 
 });
