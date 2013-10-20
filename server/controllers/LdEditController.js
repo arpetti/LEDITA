@@ -72,8 +72,21 @@ module.exports = {
 				return res.send(500, message); 
 			} else {
 		        res.json(200, {});
-			}
+			};
 		}); 
+	},
+
+	removeTopic: function(req, res) {
+		var ldId = req.params.id;
+		var ldData = req.body;
+
+		LdEditService.removeTopic(ldData.topic, ldId, function(err, message) {
+			if (err) {
+				return res.send(500, message); 
+			} else {
+		        res.json(200, {});
+			};
+		});
 	},
 
 	addObjective: function(req, res) {

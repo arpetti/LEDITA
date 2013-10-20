@@ -340,7 +340,7 @@ describe('Learning Design Edit Controller', function() {
     		var errorMessages = [];
             var validateStub = sandbox.stub(LdEditValidator, "validateTopic").returns(errorMessages);
 
-    		var serviceStub = sandbox.stub(LdEditService, "addTopic", function(qcers, ldId, callback) {
+    		var serviceStub = sandbox.stub(LdEditService, "addTopic", function(topic, ldId, callback) {
                 callback();
             });
 
@@ -352,6 +352,62 @@ describe('Learning Design Edit Controller', function() {
             };
             LdEditController.addTopic(req, res);
 		});
+	});
+
+	describe('Remove Topic', function() {
+
+		var req = {}
+	        , res = {}
+	        , sandbox = sinon.sandbox.create();
+
+	    beforeEach(function() {
+
+	    });
+
+	    afterEach(function() {
+	        sandbox.restore();
+	    });
+
+	    it('Sends 200 if service update is successful', function(done) {
+	    	var ldId = 956;
+    		req.params = {id: ldId};
+
+    		var topic = "something to remove";
+    		req.body = {topic: topic};
+
+    		var serviceStub = sandbox.stub(LdEditService, "removeTopic", function(topic, ldId, callback) {
+                callback();
+            });
+
+            res.json = function(httpStatus, result) {
+                expect(httpStatus).to.equal(200);
+                assert.isTrue(serviceStub.withArgs(topic, ldId).calledOnce);
+                done();
+            };
+            LdEditController.removeTopic(req, res);
+	    });
+
+	    it('Sends 500 with message if service update fails', function(done) {
+	    	var ldId = 956;
+    		req.params = {id: ldId};
+
+    		var topic = "something to remove";
+    		req.body = {topic: topic};
+
+    		var serviceError = new Error('something went wrong');
+    		var serviceMessage = 'failed to remove';
+    		var serviceStub = sandbox.stub(LdEditService, "removeTopic", function(topic, ldId, callback) {
+                callback(serviceError, serviceMessage);
+            });
+
+            res.send = function(httpStatus, errMessage) {
+                expect(httpStatus).to.equal(500);
+                expect(errMessage).to.equal(serviceMessage);
+                assert.isTrue(serviceStub.withArgs(topic, ldId).calledOnce);
+                done();
+            };
+            LdEditController.removeTopic(req, res);
+	    });
 	});
 
 	describe('Add Objective', function() {

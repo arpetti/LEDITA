@@ -119,6 +119,12 @@ var routes = [
         accessLevel: accessLevels.user
     },
     {
+        path: '/learningdesign/removetopic/:id',
+        httpMethod: 'POST',
+        middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, LdEditController.removeTopic],
+        accessLevel: accessLevels.user
+    },
+    {
         path: '/learningdesign/addobjective/:id',
         httpMethod: 'POST',
         middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, LdEditController.addObjective],

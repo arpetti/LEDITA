@@ -88,6 +88,17 @@ module.exports = {
 		});
 	},
 
+	// callback(err, message)
+	removeTopic: function(topic, ldId, callback) {
+		TopicService.removeConcern(ldId, topic, function(err, message) {
+			if(err){
+				callback(err, message);
+			} else {
+				callback();
+			}
+		});
+	},
+
 	// callback()
 	addObjective: function(objective, ldId, callback) {
 		ObjectiveService.insertObjectives(ldId, [objective], function() {

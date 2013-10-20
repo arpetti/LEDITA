@@ -331,6 +331,46 @@ describe('Learning Design Edit Service', function() {
 		});
 	});
 
+	describe('Remove Topic', function() {
+
+		it('Delegates to Topic Service', function(done) {
+			var ldId = 334;
+			var topic = 'something to remove';
+
+			var serviceStub = sandbox.stub(TopicService, "removeConcern", function(ldId, topic, callback) {
+				callback();
+			}); 
+
+			var serviceCB = function(err, message) {
+				expect(err).to.be.undefined;
+				expect(message).to.be.undefined;
+				assert.isTrue(serviceStub.withArgs(ldId, topic).calledOnce);
+				done();
+			};
+			LdEditService.removeTopic(topic, ldId, serviceCB);
+		});
+
+		it('Calls back with error and message if Topic Service calls back with error', function(done) {
+			var ldId = 334;
+			var topic = 'something to remove';
+
+			var serviceError = new Error('something went wrong');
+			var serviceMessage = "Failed to remove";
+			var serviceStub = sandbox.stub(TopicService, "removeConcern", function(ldId, topic, callback) {
+				callback(serviceError, serviceMessage);
+			}); 
+
+			var serviceCB = function(err, message) {
+				expect(err).to.equal(serviceError);
+				expect(message).to.equal(serviceMessage);
+				assert.isTrue(serviceStub.withArgs(ldId, topic).calledOnce);
+				done();
+			};
+			LdEditService.removeTopic(topic, ldId, serviceCB);
+		});
+
+	});
+
 	describe('Add Objective', function() {
 
 		it('Delegates to Objective Service', function(done) {
