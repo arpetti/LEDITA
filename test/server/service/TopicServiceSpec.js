@@ -4,6 +4,7 @@ var sinon = require('sinon')
 var TopicService = require('../../../server/service/TopicService');
 var RefDao = require('../../../server/dao/RefDao');
 var LdCreateDao = require('../../../server/dao/LdCreateDao');
+var LdEditDao = require('../../../server/dao/LdEditDao');
 var messages = require('../../../server/validate/ValidationMessages');
 
 describe('Topic Service', function() {
@@ -260,5 +261,124 @@ describe('Topic Service', function() {
 
         TopicService.insertTopics(ldId, topicNames, serviceCallback);
 	});
+
+	describe('Remove Concern', function() {
+
+		it('Removes a concern', function(done) {
+			var ldId = 200;
+			var topicName = 'Topic 222';
+			var topicId = 222;
+
+			var daoResults = [{"id": topicId, "name": topicName}];
+			var refDaoStub = sandbox.stub(RefDao, "findSubjectsByName", function(topicNames, callback) {
+	            callback(null, daoResults);
+	        });
+
+	        var deleteResult = 0;
+	        var deleteDaoStub = sandbox.stub(LdEditDao, "deleteConcern", function(ldId, topicId, callback) {
+	        	callback(null, deleteResult);
+	        });
+
+	        var listMatcher = sinon.match(function(value) {
+					return value.length === 1 && value[0] === topicName;
+				});
+
+	        var serviceCB = function(err, message) {
+	        	expect(err).to.be.undefined;
+	        	expect(message).to.be.undefined;
+	        	assert.isTrue(refDaoStub.withArgs(listMatcher).calledOnce);
+	        	assert.isTrue(deleteDaoStub.withArgs(ldId, topicId).calledOnce);
+	        	done();	
+	        };
+			
+			TopicService.removeConcern(ldId, topicName, serviceCB);
+		});
+
+		it('Calls back with error and message if Reference Dao calls back with error', function(done) {
+			var ldId = 200;
+			var topicName = 'Topic 222';
+			var topicId = 222;
+
+			var daoError = new Error('Something went wrong in Ref Dao');
+			var refDaoStub = sandbox.stub(RefDao, "findSubjectsByName", function(topicNames, callback) {
+	            callback(daoError);
+	        });
+
+	        var deleteDaoStub = sandbox.stub(LdEditDao, "deleteConcern");
+
+	        var listMatcher = sinon.match(function(value) {
+					return value.length === 1 && value[0] === topicName;
+				});
+
+	        var serviceCB = function(err, message) {
+	        	expect(err).to.equal(daoError);
+	        	expect(message).to.equal(messages.TOPIC_REMOVE_FAIL);
+	        	assert.isTrue(refDaoStub.withArgs(listMatcher).calledOnce);
+	        	assert.equal(deleteDaoStub.callCount, 0);
+	        	done();	
+	        };
+			
+			TopicService.removeConcern(ldId, topicName, serviceCB);
+		});
+
+		it('Calls back with error and message if Reference Dao calls back 0 results', function(done) {
+			var ldId = 200;
+			var topicName = 'Topic 222';
+			var topicId = 222;
+
+			var daoResults = [];
+			var refDaoStub = sandbox.stub(RefDao, "findSubjectsByName", function(topicNames, callback) {
+	            callback(null, daoResults);
+	        });
+
+	        var deleteDaoStub = sandbox.stub(LdEditDao, "deleteConcern");
+
+	        var listMatcher = sinon.match(function(value) {
+					return value.length === 1 && value[0] === topicName;
+				});
+
+	        var serviceCB = function(err, message) {
+	        	expect(err).not.to.be.null;
+	        	expect(message).to.equal(messages.TOPIC_REMOVE_FAIL);
+	        	assert.isTrue(refDaoStub.withArgs(listMatcher).calledOnce);
+	        	assert.equal(deleteDaoStub.callCount, 0);
+	        	done();	
+	        };
+			
+			TopicService.removeConcern(ldId, topicName, serviceCB);
+		});
+
+		it('Calls back with error and message if Delete Dao calls back with error', function(done) {
+			var ldId = 200;
+			var topicName = 'Topic 222';
+			var topicId = 222;
+
+			var daoResults = [{"id": topicId, "name": topicName}];
+			var refDaoStub = sandbox.stub(RefDao, "findSubjectsByName", function(topicNames, callback) {
+	            callback(null, daoResults);
+	        });
+
+	        var deleteDaoError = new Error('something went wrong with delete');
+	        var deleteDaoStub = sandbox.stub(LdEditDao, "deleteConcern", function(ldId, topicId, callback) {
+	        	callback(deleteDaoError);
+	        });
+
+	        var listMatcher = sinon.match(function(value) {
+					return value.length === 1 && value[0] === topicName;
+				});
+
+	        var serviceCB = function(err, message) {
+	        	expect(err).to.equal(deleteDaoError)
+	        	expect(message).to.equal(messages.TOPIC_REMOVE_FAIL);
+	        	assert.isTrue(refDaoStub.withArgs(listMatcher).calledOnce);
+	        	assert.isTrue(deleteDaoStub.withArgs(ldId, topicId).calledOnce);
+	        	done();	
+	        };
+			
+			TopicService.removeConcern(ldId, topicName, serviceCB);
+		});
+
+	});
+
 
 });
