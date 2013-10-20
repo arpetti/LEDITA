@@ -237,6 +237,81 @@ describe('LD Edit Validation', function() {
 			expect(results[0]).to.equal(messages.LD_TOPIC_ALLOWED_CHARS);
 		});
 
+		it('Can contain numbers', function() {
+			var topic = 'Topic 123';
+			var results = LdEditValidator.validateTopic(topic);
+			expect(results).to.have.length(0);
+		});
+
+	});
+
+	describe('Objective', function() {
+
+		it('Can contain letters and numbers', function() {
+			var objective = "objective ABC abc 1234567890";
+			var results = LdEditValidator.validateObjective(objective);
+			expect(results).to.have.length(0);
+		});
+
+		it('Can be exactly 255 characters long', function() {
+			var objective = TestUtils.buildString(255, 'a');
+			var results = LdEditValidator.validateObjective(objective);
+			expect(results).to.have.length(0);
+		});
+
+		it('Cannot exceed 255 characters', function() {
+			var objective = TestUtils.buildString(256, 'a');
+			var results = LdEditValidator.validateObjective(objective);
+			expect(results).to.have.length(1);
+			expect(results[0]).to.equal(messages.LD_OBJECTIVE_LENGTH);
+		});
+
+		it('Cannot be empty', function() {
+			var objective = "";
+			var results = LdEditValidator.validateObjective(objective);
+			expect(results).to.have.length(3);
+			expect(results[0]).to.equal(messages.LD_OBJECTIVE_EMPTY);
+			expect(results[1]).to.equal(messages.LD_OBJECTIVE_LENGTH);
+			expect(results[2]).to.equal(messages.LD_OBJECTIVE_ALLOWED_CHARS);
+		});
+
+		it('Cannot be null', function() {
+			var objective = null;
+			var results = LdEditValidator.validateObjective(objective);
+			expect(results).to.have.length(3);
+			expect(results[0]).to.equal(messages.LD_OBJECTIVE_EMPTY);
+			expect(results[1]).to.equal(messages.LD_OBJECTIVE_LENGTH);
+			expect(results[2]).to.equal(messages.LD_OBJECTIVE_ALLOWED_CHARS);
+		});
+
+		it('Cannot be undefined', function() {
+			var results = LdEditValidator.validateObjective();
+			expect(results).to.have.length(3);
+			expect(results[0]).to.equal(messages.LD_OBJECTIVE_EMPTY);
+			expect(results[1]).to.equal(messages.LD_OBJECTIVE_LENGTH);
+			expect(results[2]).to.equal(messages.LD_OBJECTIVE_ALLOWED_CHARS);
+		});
+
+		it('Cannot contain script tags', function() {
+			var objective = '<script>window.location("evil.com");</script>'
+			var results = LdEditValidator.validateObjective(objective);
+			expect(results).to.have.length(1);
+			expect(results[0]).to.equal(messages.LD_OBJECTIVE_ALLOWED_CHARS);
+		});
+
+		it('Cannot contain special characters', function() {
+			var objective = 'objective *&^%$#@!)(';
+			var results = LdEditValidator.validateObjective(objective);
+			expect(results).to.have.length(1);
+			expect(results[0]).to.equal(messages.LD_OBJECTIVE_ALLOWED_CHARS);
+		});
+
+		it('Can contain numbers', function() {
+			var objective = 'objective 123';
+			var results = LdEditValidator.validateObjective(objective);
+			expect(results).to.have.length(0);
+		});
+
 	});
 
 	// Mock interaction with Validator Helper since that's already been tested in great detail re: qcer

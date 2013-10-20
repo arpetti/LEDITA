@@ -5,6 +5,7 @@ var LdEditService = require('../../../server/service/LdEditService');
 var ScopeService = require('../../../server/service/ScopeService');
 var QcerService = require('../../../server/service/QcerService');
 var TopicService = require('../../../server/service/TopicService');
+var ObjectiveService = require('../../../server/service/ObjectiveService');
 var LdEditDao = require('../../../server/dao/LdEditDao');
 var messages = require('../../../server/validate/ValidationMessages');
 
@@ -326,6 +327,28 @@ describe('Learning Design Edit Service', function() {
 				done();
 			};
 			LdEditService.addTopic(topic, ldId, serviceCB);
+		});
+	});
+
+	describe('Add Objective', function() {
+
+		it('Delegates to Objective Service', function(done) {
+			var ldId = 334;
+			var objective = 'something to add';
+
+			var serviceStub = sandbox.stub(ObjectiveService, "insertObjectives", function(ldId, objectives, callback) {
+				callback();
+			});
+
+			var objectiveMatcher = sinon.match(function(value) {
+				return value.length === 1 && value[0] === objective;
+			});
+
+			var serviceCB = function() {
+				assert.isTrue(serviceStub.withArgs(ldId, objectiveMatcher).calledOnce);
+				done();
+			};
+			LdEditService.addObjective(objective, ldId, serviceCB);
 		});
 	});
 

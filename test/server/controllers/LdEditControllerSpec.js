@@ -315,7 +315,7 @@ describe('Learning Design Edit Controller', function() {
             var validateStub = sandbox.stub(LdEditValidator, "validateTopic").returns(errorMessages);
 
             var serviceError = new Error("something went wrong");
-            var serviceMessage = "Unable to update LD Qcers";
+            var serviceMessage = "Unable to add topic";
     		var serviceStub = sandbox.stub(LdEditService, "addTopic", function(qcers, ldId, callback) {
                 callback(serviceError, serviceMessage);
             });
@@ -351,6 +351,92 @@ describe('Learning Design Edit Controller', function() {
                 done();
             };
             LdEditController.addTopic(req, res);
+		});
+	});
+
+	describe('Add Objective', function() {
+
+		var req = {}
+	        , res = {}
+	        , sandbox = sinon.sandbox.create();
+
+	    beforeEach(function() {
+
+	    });
+
+	    afterEach(function() {
+	        sandbox.restore();
+	    });
+
+		it('Sends 400 if validator returns error messages', function(done) {
+			var ldId = 956;
+    		req.params = {id: ldId};
+
+    		var objective = "something to add";
+    		req.body = {objective: objective};
+
+    		var errorMessages = ['something wrong with that objective'];
+            var validateStub = sandbox.stub(LdEditValidator, "validateObjective").returns(errorMessages);
+
+            var serviceStub = sandbox.stub(LdEditService, "addObjective");
+
+            res.send = function(httpStatus, ldDataErrors) {
+                expect(httpStatus).to.equal(400);
+                expect(ldDataErrors).to.equal(errorMessages);
+                assert.isTrue(validateStub.withArgs(objective).calledOnce);
+                assert.equal(serviceStub.callCount, 0, "objective is not added when there are validation errors");
+                done();
+            };
+            LdEditController.addObjective(req, res);
+		});
+
+		it('Sends 500 if service calls back with error', function(done) {
+			var ldId = 956;
+    		req.params = {id: ldId};
+
+    		var objective = "something to add";
+    		req.body = {objective: objective};
+
+    		var errorMessages = [];
+            var validateStub = sandbox.stub(LdEditValidator, "validateObjective").returns(errorMessages);
+
+            var serviceError = new Error("something went wrong");
+            var serviceMessage = "Unable to add objective";
+    		var serviceStub = sandbox.stub(LdEditService, "addObjective", function(qcers, ldId, callback) {
+                callback(serviceError, serviceMessage);
+            });
+
+            res.send = function(httpStatus, errMessage) {
+                expect(httpStatus).to.equal(500);
+                expect(errMessage).to.equal(serviceMessage);
+                assert.isTrue(validateStub.withArgs(objective).calledOnce);
+                assert.isTrue(serviceStub.withArgs(objective, ldId).calledOnce);
+                done();
+            };
+            LdEditController.addObjective(req, res);
+		});
+
+		it('Sends 200 if service update is successful', function(done) {
+			var ldId = 956;
+    		req.params = {id: ldId};
+
+    		var objective = "something to add";
+    		req.body = {objective: objective};
+
+    		var errorMessages = [];
+            var validateStub = sandbox.stub(LdEditValidator, "validateObjective").returns(errorMessages);
+
+    		var serviceStub = sandbox.stub(LdEditService, "addObjective", function(qcers, ldId, callback) {
+                callback();
+            });
+
+            res.json = function(httpStatus, result) {
+                expect(httpStatus).to.equal(200);
+                assert.isTrue(validateStub.withArgs(objective).calledOnce);
+                assert.isTrue(serviceStub.withArgs(objective, ldId).calledOnce);
+                done();
+            };
+            LdEditController.addObjective(req, res);
 		});
 	});
 

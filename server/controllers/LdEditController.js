@@ -76,6 +76,24 @@ module.exports = {
 		}); 
 	},
 
+	addObjective: function(req, res) {
+		var ldId = req.params.id;
+		var ldData = req.body;
+
+		var vmessages = LdEditValidator.validateObjective(ldData.objective);
+        if (vmessages.length > 0) {
+            return res.send(400, vmessages);
+        };
+		
+		LdEditService.addObjective(ldData.objective, ldId, function(err, message) {
+			if (err) {
+				return res.send(500, message); 
+			} else {
+		        res.json(200, {});
+			}
+		}); 
+	},
+
 	updateStudentsDescr: function(req, res) {
 		var ldId = req.params.id;
 		var ldData = req.body;

@@ -78,6 +78,12 @@ angular.module('ledita-app')
             }).error(error);
         },
 
+        addObjective: function(ldId, ldData, success, error) {
+            $http.post('/learningdesign/addobjective/' + ldId, ldData).success(function(res) {
+                success(res);
+            }).error(error);
+        },
+
         updateLdPublic: function(ldId, success, error) {
             $http.put('/learningdesign/public/' + ldId).success(function(res) {
                 success(res);

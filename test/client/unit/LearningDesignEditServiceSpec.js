@@ -5,13 +5,38 @@ describe('Learning Design Edit Service', function() {
 	beforeEach(module('ledita-app'));
 
     var service;
+    var $httpBackend;
+    var ldId = 7;
+    var ldData = {"ld_id": 7};
 
     beforeEach(inject(function (LDEditService) {
         service = LDEditService;
     }));
 
+    beforeEach(inject(function($injector) {
+  		$httpBackend = $injector.get('$httpBackend');
+  		$httpBackend.when('GET', '/learningdesign/' + ldId).respond(ldData);
+	}));
+
+	afterEach(function() {
+	  $httpBackend.verifyNoOutstandingExpectation();
+	  $httpBackend.verifyNoOutstandingRequest();
+	});
+
     it('Service is defined', function () {
         expect(service).toBeDefined();
+    });
+
+    it('Gets a Learning Design by ID', function() {
+    	var success = function(res) {
+    		expect(res.ld_id).toEqual(ldData.ld_id);
+    	};
+		var error = function() {
+			expect(false).toBe(true); // should not get here
+		};
+
+    	service.getLearningDesign(ldId, success, error);
+    	$httpBackend.flush();
     });
 
     describe('Generate selected qcers', function() {
