@@ -106,6 +106,17 @@ module.exports = {
 		});
 	},
 
+	// callback(err, message)
+	removeObjective: function(objective, ldId, callback) {
+		ObjectiveService.removeAim(ldId, objective, function(err, message) {
+			if(err){
+				callback(err, message);
+			} else {
+				callback();
+			}
+		});
+	},
+
 	// callback()
 	addPrerequisite: function(prerequiste, ldId, callback) {
 		PrerequisiteService.insertPrerequisites(ldId, [prerequiste], function() {
