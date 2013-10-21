@@ -157,6 +157,23 @@ ddescribe('Learning Design Edit Service', function() {
     	$httpBackend.flush();
     });
 
+    it('Removes an Objective', function() {
+    	var ldId = 7;
+    	var ldData = {objective: "remove this objective"};
+    	var serviceResponse = {};
+
+    	var success = function(res) {
+    		expect(res).toEqual(serviceResponse);
+    	};
+		var error = function() {
+			expect(false).toBe(true); // should not get here
+		};
+
+		$httpBackend.when('POST', '/learningdesign/removeobjective/' + ldId, ldData).respond(serviceResponse);
+    	service.removeObjective(ldId, ldData, success, error);
+    	$httpBackend.flush();
+    });
+
     it('Adds a Prerequisite', function() {
     	var ldId = 7;
     	var ldData = {prerequisite: "add this prerequisite"};

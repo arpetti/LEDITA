@@ -103,6 +103,17 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
         });
   	};
 
+  	$scope.removeObjective = function(objective) {
+  		LDEditService.removeObjective($scope.ldid, {objective: objective},
+	        function(res) {
+	        	removeItem(objective, $scope.selectedObjectives);
+	        },
+	        function(err) {
+	        	$scope.ldUpdateErrors = err; // TODO UI to display these
+	        }
+		);
+  	};
+
   	// #28 wip - only add to the selected items list if not already there
   	$scope.addPrerequisite = function() {
   		LDEditService.addPrerequisite($scope.ldid, {prerequisite: $scope.ldRequisite},

@@ -90,6 +90,12 @@ angular.module('ledita-app')
             }).error(error);
         },
 
+        removeObjective: function(ldId, ldData, success, error) {
+            $http.post('/learningdesign/removeobjective/' + ldId, ldData).success(function(res) {
+                success(res);
+            }).error(error);
+        },
+
         addPrerequisite: function(ldId, ldData, success, error) {
             $http.post('/learningdesign/addprerequisite/' + ldId, ldData).success(function(res) {
                 success(res);

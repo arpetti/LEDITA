@@ -107,6 +107,19 @@ module.exports = {
 		}); 
 	},
 
+	removeObjective: function(req, res) {
+		var ldId = req.params.id;
+		var ldData = req.body;
+
+		LdEditService.removeObjective(ldData.objective, ldId, function(err, message) {
+			if (err) {
+				return res.send(500, message); 
+			} else {
+		        res.json(200, {});
+			};
+		});
+	},
+
 	addPrerequisite: function(req, res) {
 		var ldId = req.params.id;
 		var ldData = req.body;

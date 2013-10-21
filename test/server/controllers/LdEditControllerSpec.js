@@ -496,6 +496,62 @@ describe('Learning Design Edit Controller', function() {
 		});
 	});
 
+	describe('Remove Objective', function() {
+
+		var req = {}
+	        , res = {}
+	        , sandbox = sinon.sandbox.create();
+
+	    beforeEach(function() {
+
+	    });
+
+	    afterEach(function() {
+	        sandbox.restore();
+	    });
+
+	    it('Sends 200 if service update is successful', function(done) {
+	    	var ldId = 956;
+    		req.params = {id: ldId};
+
+    		var objective = "something to remove";
+    		req.body = {objective: objective};
+
+    		var serviceStub = sandbox.stub(LdEditService, "removeObjective", function(objective, ldId, callback) {
+                callback();
+            });
+
+            res.json = function(httpStatus, result) {
+                expect(httpStatus).to.equal(200);
+                assert.isTrue(serviceStub.withArgs(objective, ldId).calledOnce);
+                done();
+            };
+            LdEditController.removeObjective(req, res);
+	    });
+
+	    it('Sends 500 with message if service update fails', function(done) {
+	    	var ldId = 956;
+    		req.params = {id: ldId};
+
+    		var objective = "something to remove";
+    		req.body = {objective: objective};
+
+    		var serviceError = new Error('something went wrong');
+    		var serviceMessage = 'failed to remove';
+    		var serviceStub = sandbox.stub(LdEditService, "removeObjective", function(objective, ldId, callback) {
+                callback(serviceError, serviceMessage);
+            });
+
+            res.send = function(httpStatus, errMessage) {
+                expect(httpStatus).to.equal(500);
+                expect(errMessage).to.equal(serviceMessage);
+                assert.isTrue(serviceStub.withArgs(objective, ldId).calledOnce);
+                done();
+            };
+            LdEditController.removeObjective(req, res);
+	    });
+	});
+
 	describe('Add Prerequisite', function() {
 
 		var req = {}
