@@ -41,13 +41,15 @@
                	ui-keypress="{13:'addTopic()'}"
                	placeholder="Topics..." required ng-maxlength="255"
                	ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
-            <span class="editButton" ng-click="addTopic()"><i class="icon-plus icon-white"></i></span>
-            <ul ng-repeat="topic in selectedTopics" class="zeroMargin subjects">
-                <li class="sidebarEditItem">
-                	<span class="sidebarEditItemLink">{{topic}} 
-                	<a ng-click="removeTopic(topic)"><i class="icon-remove-circle"></i> </a></span>
-                </li>
-            </ul>
+            <span id="addTopicIcon" class="editButton" ng-click="addTopic()"><i class="icon-plus icon-white"></i></span>
+            <div id="topicTagsEdit">
+	            <ul ng-repeat="topic in selectedTopics" class="zeroMargin subjects">
+	                <li class="sidebarEditItem">
+	                	<span class="sidebarEditItemLink">{{topic}} 
+	                	<a ng-click="removeTopic(topic)"><i class="icon-remove-circle"></i> </a></span>
+	                </li>
+	            </ul>
+        	</div>
         	</form>
         </div>
         

@@ -122,7 +122,6 @@ describe('Edit Learning Design', function() {
         expect(repeater('.prerequisites li').count()).toBe(1);
         expect(repeater('.prerequisites li').column('prereq.prereq_name')).toEqual([prerequisiteTypeaheadMatch]);
 
-
         // Go back to Edit Page and make LD Private
         browser().navigateTo('/ldedit/' + privateLdOwnedByMario);
         sleep(0.5);
@@ -135,6 +134,44 @@ describe('Edit Learning Design', function() {
         expect(browser().location().url()).toBe('/'); // This might not work on Travis?
         var expectedLd1Data = ["Learningà Designè Titleì Demoò 1ù é","A1","A2","Lesson","Mario","Rossi"];
         expect(repeater('.ld-border').row(0)).toEqual(expectedLd1Data);
+
+         // Logout
+        element('#userActionsMenu').click();
+        element('#logoutLink').click();
+	});
+
+	it('Multi-item selections are removed', function() {
+		var saraUser = testUsers.getUserName;
+   	 	var saraPswd = testUsers.getUserPassword;
+   	 	var privateLdOwnedBySara = 22;
+
+   	 	// Login
+   	 	browser().navigateTo('/login');
+        input('username').enter(saraUser);
+        input('password').enter(saraPswd);
+        element('#loginButton').click();
+        sleep(2);
+
+        // Navigate to edit page (for now url access, future will have button or link)
+        browser().navigateTo('/ldedit/' + privateLdOwnedBySara);
+        sleep(0.5);
+        expect(browser().location().url()).toBe('/ldedit/' + privateLdOwnedBySara);
+
+        // Verify LD data
+        expect(input('learningDesign.ld_name').val()).toBe('Learning Design Title Demo 22');
+        expect(input('learningDesign.ld_scope').val()).toBe('Module');
+        expect(repeater('.subjects li').count()).toBe(2);
+        expect(repeater('.subjects li').column('topic')).toEqual(['Topic 2', 'Topic 4']);
+        expect(repeater('.objectives li').count()).toBe(2);
+        expect(repeater('.objectives li').column('objective')).toEqual(['Objective 2','Objective 4']);
+        expect(repeater('.prerequisites li').count()).toBe(0);
+        expect(input('learningDesign.ld_students_profile').val()).toBe('20 studenti adolescenti di livello B1');
+
+        // Remove second topic and verify
+        element('#topicTagsEdit li:eq(1) a').click(); 
+        sleep(0.5);
+        expect(repeater('.subjects li').count()).toBe(1);
+        expect(repeater('.subjects li').column('topic')).toEqual(['Topic 2']);
 
          // Logout
         element('#userActionsMenu').click();
