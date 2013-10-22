@@ -1,6 +1,6 @@
 'use strict';
 
-ddescribe('Learning Design Edit Service', function() {
+describe('Learning Design Edit Service', function() {
 
 	beforeEach(module('ledita-app'));
 
