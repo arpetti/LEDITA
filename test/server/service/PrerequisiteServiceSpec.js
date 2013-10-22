@@ -4,6 +4,7 @@ var sinon = require('sinon')
 var PrerequisiteService = require('../../../server/service/PrerequisiteService');
 var RefDao = require('../../../server/dao/RefDao');
 var LdCreateDao = require('../../../server/dao/LdCreateDao');
+var LdEditDao = require('../../../server/dao/LdEditDao');
 var messages = require('../../../server/validate/ValidationMessages');
 
 describe('Prerequisite Service', function() {
@@ -259,6 +260,124 @@ describe('Prerequisite Service', function() {
         };
 
         PrerequisiteService.insertPrerequisites(ldId, prerequisiteNames, serviceCallback);
+	});
+
+	describe('Remove Need', function() {
+
+		it('Removes a need', function(done) {
+			var ldId = 200;
+			var objectiveName = 'Objective 222';
+			var objectiveId = 222;
+
+			var daoResults = [{"id": objectiveId, "name": objectiveName}];
+			var refDaoStub = sandbox.stub(RefDao, "findObjectivesByName", function(objectiveNames, callback) {
+	            callback(null, daoResults);
+	        });
+
+	        var deleteResult = 0;
+	        var deleteDaoStub = sandbox.stub(LdEditDao, "deleteNeed", function(ldId, objectiveId, callback) {
+	        	callback(null, deleteResult);
+	        });
+
+	        var listMatcher = sinon.match(function(value) {
+					return value.length === 1 && value[0] === objectiveName;
+				});
+
+	        var serviceCB = function(err, message) {
+	        	expect(err).to.be.undefined;
+	        	expect(message).to.be.undefined;
+	        	assert.isTrue(refDaoStub.withArgs(listMatcher).calledOnce);
+	        	assert.isTrue(deleteDaoStub.withArgs(ldId, objectiveId).calledOnce);
+	        	done();	
+	        };
+			
+			PrerequisiteService.removeNeed(ldId, objectiveName, serviceCB);
+		});
+
+		it('Calls back with error and message if Reference Dao calls back with error', function(done) {
+			var ldId = 200;
+			var objectiveName = 'Objective 222';
+			var objectiveId = 222;
+
+			var daoError = new Error('Something went wrong in Ref Dao');
+			var refDaoStub = sandbox.stub(RefDao, "findObjectivesByName", function(objectiveNames, callback) {
+	            callback(daoError);
+	        });
+
+	        var deleteDaoStub = sandbox.stub(LdEditDao, "deleteNeed");
+
+	        var listMatcher = sinon.match(function(value) {
+					return value.length === 1 && value[0] === objectiveName;
+				});
+
+	        var serviceCB = function(err, message) {
+	        	expect(err).to.equal(daoError);
+	        	expect(message).to.equal(messages.PREREQUISITE_REMOVE_FAIL);
+	        	assert.isTrue(refDaoStub.withArgs(listMatcher).calledOnce);
+	        	assert.equal(deleteDaoStub.callCount, 0);
+	        	done();	
+	        };
+			
+			PrerequisiteService.removeNeed(ldId, objectiveName, serviceCB);
+		});
+
+		it('Calls back with error and message if Reference Dao calls back 0 results', function(done) {
+			var ldId = 200;
+			var objectiveName = 'Objective 222';
+			var objectiveId = 222;
+
+			var daoResults = [];
+			var refDaoStub = sandbox.stub(RefDao, "findObjectivesByName", function(objectiveNames, callback) {
+	            callback(null, daoResults);
+	        });
+
+	        var deleteDaoStub = sandbox.stub(LdEditDao, "deleteNeed");
+
+	        var listMatcher = sinon.match(function(value) {
+					return value.length === 1 && value[0] === objectiveName;
+				});
+
+	        var serviceCB = function(err, message) {
+	        	expect(err).not.to.be.null;
+	        	expect(message).to.equal(messages.PREREQUISITE_REMOVE_FAIL);
+	        	assert.isTrue(refDaoStub.withArgs(listMatcher).calledOnce);
+	        	assert.equal(deleteDaoStub.callCount, 0);
+	        	done();	
+	        };
+			
+			PrerequisiteService.removeNeed(ldId, objectiveName, serviceCB);
+		});
+
+		it('Calls back with error and message if Delete Dao calls back with error', function(done) {
+			var ldId = 200;
+			var objectiveName = 'Objective 222';
+			var objectiveId = 222;
+
+			var daoResults = [{"id": objectiveId, "name": objectiveName}];
+			var refDaoStub = sandbox.stub(RefDao, "findObjectivesByName", function(objectiveNames, callback) {
+	            callback(null, daoResults);
+	        });
+
+	        var deleteDaoError = new Error('something went wrong with delete');
+	        var deleteDaoStub = sandbox.stub(LdEditDao, "deleteNeed", function(ldId, objectiveId, callback) {
+	        	callback(deleteDaoError);
+	        });
+
+	        var listMatcher = sinon.match(function(value) {
+					return value.length === 1 && value[0] === objectiveName;
+				});
+
+	        var serviceCB = function(err, message) {
+	        	expect(err).to.equal(deleteDaoError)
+	        	expect(message).to.equal(messages.PREREQUISITE_REMOVE_FAIL);
+	        	assert.isTrue(refDaoStub.withArgs(listMatcher).calledOnce);
+	        	assert.isTrue(deleteDaoStub.withArgs(ldId, objectiveId).calledOnce);
+	        	done();	
+	        };
+			
+			PrerequisiteService.removeNeed(ldId, objectiveName, serviceCB);
+		});
+
 	});
 
 });

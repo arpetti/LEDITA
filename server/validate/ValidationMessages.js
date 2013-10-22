@@ -84,3 +84,4 @@ module.exports.LD_PUBLICATION_UPDATE_FAIL = 'Learning Design publication could n
 module.exports.QCER_UPDATE_FAIL = 'Qcers could not be updated at this time, please try again later.'
 module.exports.TOPIC_REMOVE_FAIL = 'Topic could not be removed.';
 module.exports.OBJECTIVE_REMOVE_FAIL = 'Objective could not be removed.';
+module.exports.PREREQUISITE_REMOVE_FAIL = 'Prerequisite could not be removed.';

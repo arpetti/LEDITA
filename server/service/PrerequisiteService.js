@@ -1,6 +1,8 @@
 var RefDao = require('../dao/RefDao');
 var LdCreateDao = require('../dao/LdCreateDao');
+var LdEditDao = require('../dao/LdEditDao');
 var ObjectiveHelper = require('../util/ObjectiveHelper');
+var messages = require('../validate/ValidationMessages');
 var async = require('async');
 
 module.exports = {
@@ -53,6 +55,42 @@ module.exports = {
 		    }
 		], function (err, result) {
 		   callback(); // don't cb with err because shouldn't halt rest of callers' flow   
+		});
+	},
+
+	// callback(err, message)
+	removeNeed: function(ldId, objectiveName, callback) {
+		async.waterfall([
+			// Step 1: Find objective id
+		    function(callback){
+		    	RefDao.findObjectivesByName([objectiveName], function(err, results) {
+		    		if(err) {
+		    			callback(err);
+		    		} else {
+		    			if(results.length === 0) {
+		    				callback(new Error('Objective not found'));
+		    			} else {
+		    				callback(null, results[0].id);
+		    			}
+		    		}
+		    	});
+		    },
+		    // Step 2: Delete the need
+		    function(objectiveId, callback) {
+		    	LdEditDao.deleteNeed(ldId, objectiveId, function(err, result) {
+		    		if(err) {
+		    			callback(err);
+		    		} else {
+		    			callback(null, 'done');
+		    		}
+		    	});
+		    }
+		], function (err, result) {
+			if(err) {
+				callback(err, messages.PREREQUISITE_REMOVE_FAIL);
+			} else {
+		   		callback(); 
+			};
 		});
 	}
 
