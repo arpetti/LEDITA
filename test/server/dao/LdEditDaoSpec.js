@@ -533,7 +533,7 @@ describe('LD Edit', function () {
 			        });
 			    },
 			    function(callback){
-			        console.log('Step 2: Try to delete aim with unknown SUBJECT ID');
+			        console.log('Step 2: Try to delete aim with unknown OBJECTIVE ID');
 			        LdEditDao.deleteAim(originalAim.ld_id, objectiveIdNotFound, function(err, results) {
 			        	expect(err).to.be.null;
 			        	callback(null, 'Step 2');
@@ -546,6 +546,141 @@ describe('LD Edit', function () {
 			        	expect(results).to.have.length(1);
 			        	expect(results[0].ld_id).to.equal(originalAim.ld_id);
 			        	expect(results[0].objective_id).to.equal(originalAim.objective_id);
+			        	callback(null, 'Step 3');
+			        });
+			    },
+			],
+			function(err, results){
+				expect(err).to.be.null;
+				expect(results).to.have.length(3); // test should have executed all 3 steps above
+				done();
+			});
+		});
+	});
+
+	describe('Delete Need', function() {
+
+		var originalNeed = {ld_id: 8, objective_id: 6};
+		var verifyNeed = 'SELECT ld_id, objective_id FROM needs WHERE ld_id = ? and objective_id = ?';
+		var resetNeed = 'INSERT INTO needs set ?';
+
+		it('Deletes an need', function(done) {
+			async.series([
+			    function(callback){
+			        console.log('Step 1: Verify need exists');
+			        Dao.findAll(verifyNeed, [originalNeed.ld_id, originalNeed.objective_id], function(err, results) {
+			        	expect(err).to.be.null;
+			        	expect(results).to.have.length(1);
+			        	expect(results[0].ld_id).to.equal(originalNeed.ld_id);
+			        	expect(results[0].objective_id).to.equal(originalNeed.objective_id);
+			        	callback(null, 'Step 1');
+			        });
+			    },
+			    function(callback){
+			        console.log('Step 2: Delete the need');
+			        LdEditDao.deleteNeed(originalNeed.ld_id, originalNeed.objective_id, function(err, results) {
+			        	expect(err).to.be.null;
+			        	callback(null, 'Step 2');
+			        });
+			    },
+			    function(callback){
+			        console.log('Step 3: Verify need has been removed');
+			        Dao.findAll(verifyNeed, [originalNeed.ld_id, originalNeed.objective_id], function(err, results) {
+			        	expect(err).to.be.null;
+			        	expect(results).to.have.length(0);
+			        	callback(null, 'Step 3');
+			        });
+			    },
+			    function(callback){
+			        console.log('Step 4: Put need back the way we found it');
+			        Dao.insertOrUpdateRecord(resetNeed, originalNeed, function(err, result) {
+			        	expect(err).to.to.be.null;
+			        	callback(null, 'Step 4');
+			        });
+			    },
+			    function(callback){
+			        console.log('Step 5: Verify need is back to original state');
+			        Dao.findAll(verifyNeed, [originalNeed.ld_id, originalNeed.objective_id], function(err, results) {
+			        	expect(err).to.be.null;
+			        	expect(results).to.have.length(1);
+			        	expect(results[0].ld_id).to.equal(originalNeed.ld_id);
+			        	expect(results[0].objective_id).to.equal(originalNeed.objective_id);
+			        	callback(null, 'Step 5');
+			        });
+			    },
+			],
+			function(err, results){
+				expect(err).to.be.null;
+				expect(results).to.have.length(5); // test should have executed all 5 steps above
+				done();
+			});
+		});
+
+		it('Does nothing if LD ID not found', function(done) {
+			var ldIdNotFound = 9999;
+			async.series([
+			    function(callback){
+			        console.log('Step 1: Verify need exists');
+			        Dao.findAll(verifyNeed, [originalNeed.ld_id, originalNeed.objective_id], function(err, results) {
+			        	expect(err).to.be.null;
+			        	expect(results).to.have.length(1);
+			        	expect(results[0].ld_id).to.equal(originalNeed.ld_id);
+			        	expect(results[0].objective_id).to.equal(originalNeed.objective_id);
+			        	callback(null, 'Step 1');
+			        });
+			    },
+			    function(callback){
+			        console.log('Step 2: Try to delete need with unknown LD ID');
+			        LdEditDao.deleteNeed(ldIdNotFound, originalNeed.objective_id, function(err, results) {
+			        	expect(err).to.be.null;
+			        	callback(null, 'Step 2');
+			        });
+			    },
+			    function(callback){
+			        console.log('Step 3: Verify need is unmodified');
+			        Dao.findAll(verifyNeed, [originalNeed.ld_id, originalNeed.objective_id], function(err, results) {
+			        	expect(err).to.be.null;
+			        	expect(results).to.have.length(1);
+			        	expect(results[0].ld_id).to.equal(originalNeed.ld_id);
+			        	expect(results[0].objective_id).to.equal(originalNeed.objective_id);
+			        	callback(null, 'Step 3');
+			        });
+			    },
+			],
+			function(err, results){
+				expect(err).to.be.null;
+				expect(results).to.have.length(3); // test should have executed all 3 steps above
+				done();
+			});
+		});
+
+		it('Does nothing if OBJECTIVE ID not found', function(done) {
+			var objectiveIdNotFound = 9999;
+			async.series([
+			    function(callback){
+			        console.log('Step 1: Verify need exists');
+			        Dao.findAll(verifyNeed, [originalNeed.ld_id, originalNeed.objective_id], function(err, results) {
+			        	expect(err).to.be.null;
+			        	expect(results).to.have.length(1);
+			        	expect(results[0].ld_id).to.equal(originalNeed.ld_id);
+			        	expect(results[0].objective_id).to.equal(originalNeed.objective_id);
+			        	callback(null, 'Step 1');
+			        });
+			    },
+			    function(callback){
+			        console.log('Step 2: Try to delete need with unknown OBJECTIVE ID');
+			        LdEditDao.deleteNeed(originalNeed.ld_id, objectiveIdNotFound, function(err, results) {
+			        	expect(err).to.be.null;
+			        	callback(null, 'Step 2');
+			        });
+			    },
+			    function(callback){
+			        console.log('Step 3: Verify need is unmodified');
+			        Dao.findAll(verifyNeed, [originalNeed.ld_id, originalNeed.objective_id], function(err, results) {
+			        	expect(err).to.be.null;
+			        	expect(results).to.have.length(1);
+			        	expect(results[0].ld_id).to.equal(originalNeed.ld_id);
+			        	expect(results[0].objective_id).to.equal(originalNeed.objective_id);
 			        	callback(null, 'Step 3');
 			        });
 			    },
