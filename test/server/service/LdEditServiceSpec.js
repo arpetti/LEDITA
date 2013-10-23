@@ -455,4 +455,44 @@ describe('Learning Design Edit Service', function() {
 		});
 	});
 
+	describe('Remove Prerequiste', function() {
+
+		it('Delegates to Prerequiste Service', function(done) {
+			var ldId = 334;
+			var objective = 'something to remove';
+
+			var serviceStub = sandbox.stub(PrerequisiteService, "removeNeed", function(ldId, objective, callback) {
+				callback();
+			}); 
+
+			var serviceCB = function(err, message) {
+				expect(err).to.be.undefined;
+				expect(message).to.be.undefined;
+				assert.isTrue(serviceStub.withArgs(ldId, objective).calledOnce);
+				done();
+			};
+			LdEditService.removePrerequisite(objective, ldId, serviceCB);
+		});
+
+		it('Calls back with error and message if Prerequiste Service calls back with error', function(done) {
+			var ldId = 334;
+			var objective = 'something to remove';
+
+			var serviceError = new Error('something went wrong');
+			var serviceMessage = "Failed to remove";
+			var serviceStub = sandbox.stub(PrerequisiteService, "removeNeed", function(ldId, objective, callback) {
+				callback(serviceError, serviceMessage);
+			}); 
+
+			var serviceCB = function(err, message) {
+				expect(err).to.equal(serviceError);
+				expect(message).to.equal(serviceMessage);
+				assert.isTrue(serviceStub.withArgs(ldId, objective).calledOnce);
+				done();
+			};
+			LdEditService.removePrerequisite(objective, ldId, serviceCB);
+		});
+
+	});
+
 });

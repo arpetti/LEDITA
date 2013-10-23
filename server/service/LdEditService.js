@@ -122,5 +122,16 @@ module.exports = {
 		PrerequisiteService.insertPrerequisites(ldId, [prerequiste], function() {
 			callback();
 		});
+	},
+
+	// callback(err, message)
+	removePrerequisite: function(objective, ldId, callback) {
+		PrerequisiteService.removeNeed(ldId, objective, function(err, message) {
+			if(err){
+				callback(err, message);
+			} else {
+				callback();
+			}
+		});
 	}
 };
