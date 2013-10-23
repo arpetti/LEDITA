@@ -125,8 +125,8 @@ module.exports = {
 	},
 
 	// callback(err, message)
-	removePrerequisite: function(objective, ldId, callback) {
-		PrerequisiteService.removeNeed(ldId, objective, function(err, message) {
+	removePrerequisite: function(prerequiste, ldId, callback) {
+		PrerequisiteService.removeNeed(ldId, prerequiste, function(err, message) {
 			if(err){
 				callback(err, message);
 			} else {

@@ -95,7 +95,7 @@
             <ul ng-repeat="prereq in selectedPrerequisites" class="zeroMargin prerequisites">
                 <li class="sidebarEditItem">
                 	<span class="sidebarEditItemLink">{{prereq}} 
-                	<a ng-href="#"><i class="icon-remove-circle"></i> </a></span>
+                	<a ng-click="removePrerequisite(prereq)"><i class="icon-remove-circle"></i> </a></span>
                 </li>
             </ul>
             </form>

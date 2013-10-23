@@ -638,6 +638,62 @@ describe('Learning Design Edit Controller', function() {
 		});
 	});
 
+	describe('Remove Prerequisite', function() {
+
+		var req = {}
+	        , res = {}
+	        , sandbox = sinon.sandbox.create();
+
+	    beforeEach(function() {
+
+	    });
+
+	    afterEach(function() {
+	        sandbox.restore();
+	    });
+
+	    it('Sends 200 if service update is successful', function(done) {
+	    	var ldId = 956;
+    		req.params = {id: ldId};
+
+    		var prerequisite = "something to remove";
+    		req.body = {prerequisite: prerequisite};
+
+    		var serviceStub = sandbox.stub(LdEditService, "removePrerequisite", function(prerequisite, ldId, callback) {
+                callback();
+            });
+
+            res.json = function(httpStatus, result) {
+                expect(httpStatus).to.equal(200);
+                assert.isTrue(serviceStub.withArgs(prerequisite, ldId).calledOnce);
+                done();
+            };
+            LdEditController.removePrerequisite(req, res);
+	    });
+
+	    it('Sends 500 with message if service update fails', function(done) {
+	    	var ldId = 956;
+    		req.params = {id: ldId};
+
+    		var prerequisite = "something to remove";
+    		req.body = {prerequisite: prerequisite};
+
+    		var serviceError = new Error('something went wrong');
+    		var serviceMessage = 'failed to remove';
+    		var serviceStub = sandbox.stub(LdEditService, "removePrerequisite", function(prerequisite, ldId, callback) {
+                callback(serviceError, serviceMessage);
+            });
+
+            res.send = function(httpStatus, errMessage) {
+                expect(httpStatus).to.equal(500);
+                expect(errMessage).to.equal(serviceMessage);
+                assert.isTrue(serviceStub.withArgs(prerequisite, ldId).calledOnce);
+                done();
+            };
+            LdEditController.removePrerequisite(req, res);
+	    });
+	});
+
 	describe('Update Students Description', function() {
 
 		var req = {}

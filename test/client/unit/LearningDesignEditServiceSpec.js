@@ -191,6 +191,23 @@ describe('Learning Design Edit Service', function() {
     	$httpBackend.flush();
     });
 
+    it('Removes a Prerequisite', function() {
+    	var ldId = 7;
+    	var ldData = {prerequisite: "remove this prerequisite"};
+    	var serviceResponse = {};
+
+    	var success = function(res) {
+    		expect(res).toEqual(serviceResponse);
+    	};
+		var error = function() {
+			expect(false).toBe(true); // should not get here
+		};
+
+		$httpBackend.when('POST', '/learningdesign/removeprerequisite/' + ldId, ldData).respond(serviceResponse);
+    	service.removePrerequisite(ldId, ldData, success, error);
+    	$httpBackend.flush();
+    });
+
     it('Makes LD Public', function() {
     	var ldId = 7;
     	var serviceResponse = {};

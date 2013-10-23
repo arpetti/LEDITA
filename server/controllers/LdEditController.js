@@ -138,6 +138,19 @@ module.exports = {
 		}); 
 	},
 
+	removePrerequisite: function(req, res) {
+		var ldId = req.params.id;
+		var ldData = req.body;
+
+		LdEditService.removePrerequisite(ldData.prerequisite, ldId, function(err, message) {
+			if (err) {
+				return res.send(500, message); 
+			} else {
+		        res.json(200, {});
+			};
+		});
+	},
+
 	updateStudentsDescr: function(req, res) {
 		var ldId = req.params.id;
 		var ldData = req.body;

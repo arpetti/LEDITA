@@ -125,6 +125,17 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
         });
   	};
 
+  	$scope.removePrerequisite = function(prerequisite) {
+  		LDEditService.removePrerequisite($scope.ldid, {prerequisite: prerequisite},
+	        function(res) {
+	        	removeItem(prerequisite, $scope.selectedPrerequisites);
+	        },
+	        function(err) {
+	        	$scope.ldUpdateErrors = err; // TODO UI to display these
+	        }
+		);
+  	};
+
   	// TODO: client-side validation: if all are false, display error instead of calling service
   	$scope.updateQcer = function() {
   		LDEditService.updateLdQcers($scope.ldid, {ldQcers: $scope.selectedQcers},

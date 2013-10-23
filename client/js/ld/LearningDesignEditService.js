@@ -102,6 +102,12 @@ angular.module('ledita-app')
             }).error(error);
         },
 
+        removePrerequisite: function(ldId, ldData, success, error) {
+            $http.post('/learningdesign/removeprerequisite/' + ldId, ldData).success(function(res) {
+                success(res);
+            }).error(error);
+        },
+
         updateLdPublic: function(ldId, success, error) {
             $http.put('/learningdesign/public/' + ldId).success(function(res) {
                 success(res);
