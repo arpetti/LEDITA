@@ -131,7 +131,7 @@ describe('Edit Learning Design', function() {
         // Verify it no longer appears on homepage
         element('#homeLink').click();
         sleep(0.5);
-        expect(browser().location().url()).toBe('/'); // This might not work on Travis?
+        expect(browser().location().url()).toBe('/'); 
         var expectedLd1Data = ["Learningà Designè Titleì Demoò 1ù é","A1","A2","Lesson","Mario","Rossi"];
         expect(repeater('.ld-border').row(0)).toEqual(expectedLd1Data);
 
@@ -193,6 +193,42 @@ describe('Edit Learning Design', function() {
         expect(repeater('.prerequisites li').count()).toBe(1);
         expect(repeater('.prerequisites li').column('prereq')).toEqual(['BBB']);
 
+        // begin wip...
+        // Make this LD public 
+        input('ldPublicationFlag').check();
+
+        // Verify this modified LD is first result
+        element('#homeLink').click();
+        sleep(0.5);
+        expect(browser().location().url()).toBe('/'); 
+        expect(repeater('.ld-border').row(0)).toEqual(["Learning Design Title Demo 22","B1","Module","Sara","Neri"]);
+
+        // Click on detail view and verify modified detail data
+        element('#ldlist .ld-item:nth-child(1) a .ld-center').click();
+        sleep(1);
+        expect(browser().location().url()).toBe('/ld/' + privateLdOwnedBySara);
+        expect(binding('learningDesign.ld_name')).toBe('Learning Design Title Demo 22');
+        expect(repeater('.qceritem').column('qcer.qcer_name')).toEqual(["B1"]);
+        expect(repeater('.subjects li').count()).toBe(1);
+        expect(repeater('.subjects li').column('subject.subject_name')).toEqual(["Topic 2"]);
+        expect(repeater('.objectives li').count()).toBe(1);
+        expect(repeater('.objectives li').column('objective.objective_descr')).toEqual(["Objective 4"]);
+        expect(repeater('.prerequisites li').count()).toBe(1);
+        expect(repeater('.prerequisites li').column('prereq.prereq_name')).toEqual(["BBB"]);
+
+        // Go back to Edit Page and make LD Private
+        browser().navigateTo('/ldedit/' + privateLdOwnedBySara);
+        sleep(0.5);
+        expect(browser().location().url()).toBe('/ldedit/' + privateLdOwnedBySara);
+        input('ldPublicationFlag').check();
+
+        // Verify it no longer appears on homepage
+        element('#homeLink').click();
+        sleep(0.5);
+        expect(browser().location().url()).toBe('/'); 
+        var expectedLd1Data = ["Learningà Designè Titleì Demoò 1ù é","A1","A2","Lesson","Mario","Rossi"];
+        expect(repeater('.ld-border').row(0)).toEqual(expectedLd1Data);
+        // end wip
 
          // Logout
         element('#userActionsMenu').click();
