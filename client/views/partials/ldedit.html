@@ -68,13 +68,15 @@
                	ui-keypress="{13:'addObjective()'}"
                	placeholder="Objectives..." required ng-maxlength="255"
                	ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
-            <span class="editButton" ng-click="addObjective()"><i class="icon-plus icon-white"></i> </span>
-            <ul ng-repeat="objective in selectedObjectives" class="zeroMargin objectives">
-                <li class="sidebarEditItem">
-                	<span class="sidebarEditItemLink">{{objective}} 
-                	<a ng-click="removeObjective(objective)"><i class="icon-remove-circle"></i></a></span>
-                </li>
-            </ul>
+            <span id="addObjectiveIcon" class="editButton" ng-click="addObjective()"><i class="icon-plus icon-white"></i> </span>
+            <div id="objectiveTagsEdit">
+	            <ul ng-repeat="objective in selectedObjectives" class="zeroMargin objectives">
+	                <li class="sidebarEditItem">
+	                	<span class="sidebarEditItemLink">{{objective}} 
+	                	<a ng-click="removeObjective(objective)"><i class="icon-remove-circle"></i></a></span>
+	                </li>
+	            </ul>
+        	</div>
         	</form>
         </div>
         
@@ -91,13 +93,15 @@
                	ui-keypress="{13:'addPrerequisite()'}"
                	placeholder="Prerequisites..." required ng-maxlength="255"
                	ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
-            <span class="editButton" ng-click="addPrerequisite()"><i class="icon-plus icon-white"></i> </span>
-            <ul ng-repeat="prereq in selectedPrerequisites" class="zeroMargin prerequisites">
-                <li class="sidebarEditItem">
-                	<span class="sidebarEditItemLink">{{prereq}} 
-                	<a ng-click="removePrerequisite(prereq)"><i class="icon-remove-circle"></i> </a></span>
-                </li>
-            </ul>
+            <span id="addPrerequisiteIcon" class="editButton" ng-click="addPrerequisite()"><i class="icon-plus icon-white"></i> </span>
+            <div id="prerequisiteTagsEdit">
+	            <ul ng-repeat="prereq in selectedPrerequisites" class="zeroMargin prerequisites">
+	                <li class="sidebarEditItem">
+	                	<span class="sidebarEditItemLink">{{prereq}} 
+	                	<a ng-click="removePrerequisite(prereq)"><i class="icon-remove-circle"></i> </a></span>
+	                </li>
+	            </ul>
+        	</div>
             </form>
         </div>
         

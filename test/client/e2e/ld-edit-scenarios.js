@@ -173,6 +173,27 @@ describe('Edit Learning Design', function() {
         expect(repeater('.subjects li').count()).toBe(1);
         expect(repeater('.subjects li').column('topic')).toEqual(['Topic 2']);
 
+        // Remove first objective and verify
+        element('#objectiveTagsEdit li:eq(0) a').click();
+        sleep(0.5);
+        expect(repeater('.objectives li').count()).toBe(1);
+        expect(repeater('.objectives li').column('objective')).toEqual(['Objective 4']);
+
+        // Add and remove some prerequisites
+        input('ldRequisite').enter('AAA');
+        element('#addPrerequisiteIcon').click();
+        expect(repeater('.prerequisites li').count()).toBe(1);
+        expect(repeater('.prerequisites li').column('prereq')).toEqual(['AAA']);
+        input('ldRequisite').enter('BBB');
+        element('#addPrerequisiteIcon').click();
+        expect(repeater('.prerequisites li').count()).toBe(2);
+        expect(repeater('.prerequisites li').column('prereq')).toEqual(['AAA', 'BBB']);
+        element('#prerequisiteTagsEdit li:eq(0) a').click(); 
+        sleep(0.5);
+        expect(repeater('.prerequisites li').count()).toBe(1);
+        expect(repeater('.prerequisites li').column('prereq')).toEqual(['BBB']);
+
+
          // Logout
         element('#userActionsMenu').click();
         element('#logoutLink').click();
