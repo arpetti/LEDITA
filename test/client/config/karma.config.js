@@ -18,6 +18,7 @@ module.exports = function(config) {
             '../../client/js/auth/*.js',
             '../../client/js/common/*.js',
             '../../client/js/ld/*.js',
+            '../../client/js/activity/*.js',
             '../../client/js/lib/angular/angular-mocks.js',
             'unit/**/*.js'
         ],

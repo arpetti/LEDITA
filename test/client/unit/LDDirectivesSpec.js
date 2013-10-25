@@ -124,5 +124,17 @@ describe('LD Directives', function () {
         expect(element.html()).toMatch(
             'span ng-repeat="qcer in node.qcers" class="nodeBodyText ng-scope ng-binding">' + ldnode.qcers[1].qcer_name + '</span>');
     });
+
+	it('Responds to blur', function() {
+		$rootScope.doSomething = function(){}
+		spyOn($rootScope, 'doSomething');
+
+		var element = $compile("<input ng-model='mymodel' ui-Blur='doSomething()' />")($rootScope);
+		$rootScope.$digest();
+		angular.element(element).triggerHandler('blur');
+
+		expect($rootScope.doSomething).toHaveBeenCalledWith();
+	});
+
 });
 
