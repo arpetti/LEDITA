@@ -9,7 +9,7 @@ angular.module('ledita-app').directive('lvlDraggable', ['$rootScope',
 				attrs.$observe('id', function(value) {
 					if (value) {
 						id = value;
-						console.log('draggable id = ' + id);
+						// console.log('draggable id = ' + id);
 					}
 				 });
 
@@ -33,15 +33,22 @@ angular.module('ledita-app').directive('lvlDropTarget', ['$rootScope',
 			scope: {
 				onDrop: '&',
 				targetdata: "@",
+				id: "@"
 			},
 			link: function(scope, el, attrs, controller) {
 				var id = angular.element(el).attr("id");
+
+				attrs.$observe('id', function(value) {
+					if (value) {
+						console.log('lvl-drop observe id = ' + value);
+						id = value;
+					}
+				 });
 				
 				var targetdata;
 	            attrs.$observe('targetdata', function(value) {
-	            	// console.log('level-drop is observing');
 					if (value) {
-						// console.log('lvl-drop observe value = ' + value);
+						console.log('lvl-drop observe targetdata = ' + value);
 						targetdata = value;
 					}
 				 });

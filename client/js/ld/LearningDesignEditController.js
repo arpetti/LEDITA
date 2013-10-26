@@ -11,7 +11,7 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
 
     $scope.dropped = function(dragEl, dropEl) { 
     	console.log('LD Edit Controller: dragEl.id = ' + dragEl.id);
-    	console.log('LD Edit Controller: dropEl = ' + dropEl);
+    	console.log('LD Edit Controller: dropEl.id = ' + dropEl.id);
     }
 
     LDEditService.getLearningDesign($scope.ldid, function(res) {
