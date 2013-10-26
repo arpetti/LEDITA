@@ -32,7 +32,6 @@ angular.module('ledita-app').directive('lvlDropTarget', ['$rootScope',
 			restrict: 'A',
 			scope: {
 				onDrop: '&',
-				targetdata: "@",
 				id: "@"
 			},
 			link: function(scope, el, attrs, controller) {
@@ -43,16 +42,8 @@ angular.module('ledita-app').directive('lvlDropTarget', ['$rootScope',
 						console.log('lvl-drop observe id = ' + value);
 						id = value;
 					}
-				 });
+				});
 				
-				var targetdata;
-	            attrs.$observe('targetdata', function(value) {
-					if (value) {
-						console.log('lvl-drop observe targetdata = ' + value);
-						targetdata = value;
-					}
-				 });
-
 				el.bind("dragover", function(e) {
 					if (e.preventDefault) {
 						e.preventDefault(); // Necessary. Allows us to drop.
