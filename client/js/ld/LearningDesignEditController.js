@@ -9,6 +9,11 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
     $scope.selectedObjectives = [];
     $scope.selectedPrerequisites = [];
 
+    $scope.dropped = function(dragEl, dropEl) { 
+    	console.log('LD Edit Controller: dragEl.id = ' + dragEl.id);
+    	console.log('LD Edit Controller: dropEl = ' + dropEl);
+    }
+
     LDEditService.getLearningDesign($scope.ldid, function(res) {
         $scope.learningDesign = res;
         initLdPublicationFlag();

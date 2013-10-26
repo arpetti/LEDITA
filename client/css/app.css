@@ -9,6 +9,19 @@ F5F4ED = light grey
 ACE500 = green
 =================== */
 
+.lvl-over {
+	border: 2px dashed black !important;
+}
+
+.lvl-target {
+	background-color: #ddd; 
+	opacity: .5;
+}
+
+[draggable] {
+	cursor: move;
+}
+
 /* resets and overrides
 ===================== */
 * {

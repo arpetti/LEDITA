@@ -265,7 +265,18 @@
 
 <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Global View) -->
 <div ng-repeat="(level, nodes) in levels" class="levelBox">
-    <div ng-repeat="node in nodes" ng-class="getBoxClass(node)" id="node">
+	
+	<!-- #43 Drag target must not have any angular bound data inside it -->
+	<!-- #43 wip, id should be unique but having trouble with directive not interpolating id and getting literal instead -->
+	<!--      so for now, it always finds first dropzone, and removes dotted style after drop -->
+	<div id="droplevelid" targetdata="{{level}}-level" class="lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)">
+		Drop Zone
+	</div>
+	
+	<!-- #43 wip, id should reflect node type, for now, make them all activity -->
+	<!-- #43 Chrome requires position absolute for draggable to work, but breaks layout, for now, d&d only works in FF -->
+    <div id="{{node.node_id}}-activity" ng-repeat="node in nodes" x-lvl-draggable="true" ng-class="getBoxClass(node)">
+        
         <!-- If it's a group:  -->
         <div ng-show="node.children" class="groupName">{{ node.node_name }}</div>
         <div class="clearfix"></div>
@@ -298,6 +309,7 @@
         <!-- End Children -->
         <!-- If it's NOT a group:  -->
         <div ng-show="!node.children" class="actName">
+        <!-- <div id="{{node.node_id}}-activity" ng-show="!node.children" style="position: absolute;" class="actName lvl-over" x-lvl-draggable="true"> -->
             <div class="tools">
                 <a class="edit" ng-href="#"><i class="icon-edit icon-white"></i> </a>
                 <a class="delete" ng-href="#"><i class="icon-remove icon-white"></i> </a>
