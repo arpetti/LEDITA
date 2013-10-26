@@ -267,11 +267,10 @@
 <div ng-repeat="(level, nodes) in levels" class="levelBox">
 	
 	<!-- #43 Drag target must not have any angular bound data inside it -->
-	<!-- #43 wip, id should be unique but having trouble with directive not interpolating id and getting literal instead -->
-	<!--      so for now, it always finds first dropzone, and removes dotted style after drop -->
-	<!-- #43 wip, each level should further sub-divide into 4 positions, id's should be like L1P1, L1P2, etc... -->
-	<div id="{{$index}}-level" class="lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)">
-		Drop Zone
+	<!-- #43 styling required to make position boxes layout beside eachother instead of underneath one another -->
+	<div id="{{$index}}-level-{{levelPosition}}-pos" ng-repeat="levelPosition in positionsPerLevel"
+		class="lvl-target dropzone" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)">
+			Drop Zone
 	</div>
 	
 	<!-- #43 wip, id should reflect node type, for now, make them all activity -->

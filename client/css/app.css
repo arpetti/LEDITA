@@ -18,6 +18,12 @@ ACE500 = green
 	opacity: .5;
 }
 
+.dropzone {
+	display: inline-block;
+	margin: 5px;
+	padding: 5px;
+}
+
 [draggable] {
 	cursor: move;
 }

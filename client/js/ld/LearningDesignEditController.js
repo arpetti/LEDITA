@@ -9,6 +9,11 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
     $scope.selectedObjectives = [];
     $scope.selectedPrerequisites = [];
 
+    // #43 wip - this should come from server
+    $scope.positionsPerLevel = [1, 2, 3, 4];
+    // $scope.positionsPerLevel = ['P1', 'P2', 'P3', 'P4'];
+
+    // #43 wip...
     $scope.dropped = function(dragEl, dropEl) { 
     	console.log('LD Edit Controller: dragEl.id = ' + dragEl.id);
     	console.log('LD Edit Controller: dropEl.id = ' + dropEl.id);
