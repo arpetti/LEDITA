@@ -1,5 +1,6 @@
 var expect = require('chai').expect;
 var ActivityEditDao = require('../../../server/dao/ActivityEditDao');
+var Dao = require('../../../server/dao/Dao');
 
 describe('Activity Edit DAO', function() {
 
@@ -94,6 +95,38 @@ describe('Activity Edit DAO', function() {
 				expect(err).to.be.null;
 				expect(result).to.have.length(0);
 				done();
+			});
+		});
+
+	});
+
+	describe('Updates Composes', function() {
+
+		var composesIdToUpdate = 8;
+		var originalLevel = 1;
+		var originalPosition = 1;
+		var verifyComposes = 'SELECT level, position FROM composes WHERE id = ?';
+		var resetComposes = 'UPDATE composes set level = ?, position = ? WHERE id = ?';
+
+		afterEach(function(done) {
+			Dao.insertOrUpdateRecord(resetComposes, [originalLevel, originalPosition, composesIdToUpdate], function(err, result) {
+				expect(err).to.be.null;
+				done();
+			});
+		});
+
+		it('Updates Composes relationship', function(done) {
+			var newLevel = 2;
+			var newPosition = 3;
+			ActivityEditDao.updateComposes([newLevel, newPosition, composesIdToUpdate], function(err, result) {
+				expect(err).to.be.null;
+				Dao.findAll(verifyComposes, [composesIdToUpdate], function(err, result) {
+					expect(err).to.be.null;
+					expect(result).to.have.length(1);
+					expect(result[0].level).to.equal(newLevel);
+					expect(result[0].position).to.equal(newPosition);
+					done();
+				});
 			});
 		});
 
