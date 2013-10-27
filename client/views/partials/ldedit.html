@@ -267,14 +267,13 @@
 <div ng-repeat="(level, nodes) in levels" class="levelBox">
 	
 	<!-- #43 Drag target must not have any angular bound data inside it -->
-	<!-- #43 styling required to make position boxes layout beside eachother instead of underneath one another -->
-	<div id="{{$index}}-level-{{levelPosition}}-pos" ng-repeat="levelPosition in positionsPerLevel"
+	<!-- #43 Instead of text, put some appropriate background image to indicate user an drag to here -->
+	<div id="{{$parent.$index+1}}-level-{{levelPosition}}-pos" ng-repeat="levelPosition in positionsPerLevel"
 		class="lvl-target dropzone" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)">
 			Drop Zone
 	</div>
 	
 	<!-- #43 wip, id should reflect node type, for now, make them all activity -->
-	<!-- #43 Chrome requires position absolute for draggable to work, but breaks layout, for now, d&d only works in FF -->
     <div id="{{node.node_id}}-activity" ng-repeat="node in nodes" x-lvl-draggable="true" ng-class="getBoxClass(node)">
         
         <!-- If it's a group:  -->
