@@ -6,13 +6,23 @@ angular.module('ledita-app')
   		this.nodeType = data[1];
   		this.level = parseInt(data[2]);
   		this.position = parseInt(data[3]);
-	}
+	};
+
+	var DropTarget = function DropTarget(data) {
+		this.level = parseInt(data[0]);
+		this.position = parseInt(data[1]);
+	};
 
     return {
         
 		parseDragSource: function(dragElementId) {
 			var data = dragElementId.split('-');
 			return new DragSource(data);
+		},
+
+		parseDropTarget: function(dropElementId) {
+			var data = dropElementId.split('-');
+			return new DropTarget(data);
 		}  
 
     };

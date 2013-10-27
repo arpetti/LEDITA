@@ -14,13 +14,11 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
 
     // #43 wip...
     $scope.dropped = function(dragEl, dropEl) { 
-    	console.log('LD Edit Controller: dragEl.id (node_id, node_type, level, position) = ' + dragEl.id);
-    	console.log('LD Edit Controller: dropEl.id (level, position) = ' + dropEl.id);
-
-    	// TOOD: 
-    	//	parse drag and drop id's to figure out what needs to change in $scope.levels
     	var dragSource = ActivityService.parseDragSource(dragEl.id);
     	console.log('dragSource: ' + JSON.stringify(dragSource));
+    	var dropTarget = ActivityService.parseDropTarget(dropEl.id);
+    	console.log('dropTarget: ' + JSON.stringify(dropTarget));
+    	// TOOD: 
     	//	xhr with source & target data, to make change happen for real in the database
     	//  on xhr success, also make the change in browser memory to $scope.levels
     	// 	$scope.$apply(); // because its not all ng-model, need to force angular to redraw

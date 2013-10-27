@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Activity Service', function() {
+ddescribe('Activity Service', function() {
 
 	beforeEach(module('ledita-app'));
 
@@ -21,6 +21,13 @@ describe('Activity Service', function() {
     	expect(actual.nodeType).toEqual('LD');
     	expect(actual.level).toEqual(2);
     	expect(actual.position).toEqual(1);
+    });
+
+    it('Parses Drop Target', function() {
+    	var dropElementId = '4-3';
+    	var actual = service.parseDropTarget(dropElementId);
+    	expect(actual.level).toEqual(4);
+    	expect(actual.position).toEqual(3);
     });
 
 });
