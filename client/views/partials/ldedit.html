@@ -268,12 +268,12 @@
 	
 	<!-- #43 Drag target must not have any angular bound data inside it -->
 	<!-- #43 Instead of text, put some appropriate background image to indicate user an drag to here -->
-	<div id="{{$parent.$index+1}}-level-{{levelPosition}}-pos" ng-repeat="levelPosition in positionsPerLevel"
+	<div id="{{$parent.$index+1}}-{{levelPosition}}" ng-repeat="levelPosition in positionsPerLevel"
 		class="lvl-target dropzone" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)">
 			Drop Zone
 	</div>
 	
-    <div id="{{node.node_id}}-{{node.type}}" ng-repeat="node in nodes" x-lvl-draggable="true" ng-class="getBoxClass(node)">
+    <div id="{{node.node_id}}-{{node.type}}-{{node.level}}-{{node.position}}" ng-repeat="node in nodes" x-lvl-draggable="true" ng-class="getBoxClass(node)">
         <!-- If it's a group:  -->
         <div ng-show="node.children" class="groupName">{{ node.node_name }}</div>
         <div class="clearfix"></div>

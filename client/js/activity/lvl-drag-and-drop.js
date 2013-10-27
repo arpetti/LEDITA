@@ -38,7 +38,6 @@ angular.module('ledita-app').directive('lvlDropTarget', ['$rootScope',
 
 				attrs.$observe('id', function(value) {
 					if (value) {
-						console.log('lvl-drop observe id = ' + value);
 						id = value;
 					}
 				});
