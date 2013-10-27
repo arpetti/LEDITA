@@ -9,7 +9,6 @@ angular.module('ledita-app').directive('lvlDraggable', ['$rootScope',
 				attrs.$observe('id', function(value) {
 					if (value) {
 						id = value;
-						// console.log('draggable id = ' + id);
 					}
 				 });
 
