@@ -1,6 +1,6 @@
 'use strict';
 
-ddescribe('Activity Service', function() {
+describe('Activity Service', function() {
 
 	beforeEach(module('ledita-app'));
 
