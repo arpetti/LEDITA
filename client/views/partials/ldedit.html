@@ -273,9 +273,7 @@
 			Drop Zone
 	</div>
 	
-	<!-- #43 wip, id should reflect node type, for now, make them all activity -->
     <div id="{{node.node_id}}-{{node.type}}" ng-repeat="node in nodes" x-lvl-draggable="true" ng-class="getBoxClass(node)">
-        
         <!-- If it's a group:  -->
         <div ng-show="node.children" class="groupName">{{ node.node_name }}</div>
         <div class="clearfix"></div>
