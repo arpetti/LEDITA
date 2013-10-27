@@ -1,7 +1,7 @@
 angular.module('ledita-app')
 .controller('LdEditCtrl',
-['$scope', '$routeParams', '$location', 'TypeaheadHelper', 'LDService', 'LDEditService', 'Home', 
-function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditService, Home) {
+['$scope', '$routeParams', '$location', 'TypeaheadHelper', 'LDService', 'LDEditService', 'Home', 'ActivityService',
+function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditService, Home, ActivityService) {
 
 	$scope.ldid = $routeParams.ldid;
 	$scope.selectedQcers = {};
@@ -19,6 +19,8 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
 
     	// TOOD: 
     	//	parse drag and drop id's to figure out what needs to change in $scope.levels
+    	var dragSource = ActivityService.parseDragSource(dragEl.id);
+    	console.log('dragSource: ' + JSON.stringify(dragSource));
     	//	xhr with source & target data, to make change happen for real in the database
     	//  on xhr success, also make the change in browser memory to $scope.levels
     	// 	$scope.$apply(); // because its not all ng-model, need to force angular to redraw
