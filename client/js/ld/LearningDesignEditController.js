@@ -14,14 +14,21 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
 
     // #43 wip...
     $scope.dropped = function(dragEl, dropEl) { 
-    	var dragSource = ActivityService.parseDragSource(dragEl.id);
-    	console.log('dragSource: ' + JSON.stringify(dragSource));
-    	var dropTarget = ActivityService.parseDropTarget(dropEl.id);
-    	console.log('dropTarget: ' + JSON.stringify(dropTarget));
-    	// TOOD: 
-    	//	xhr with source & target data, to make change happen for real in the database
-    	//  on xhr success, also make the change in browser memory to $scope.levels
-    	// 	$scope.$apply(); // because its not all ng-model, need to force angular to redraw
+    	// TODO verify source level & position not same as target source & position (no point calling server in this case)
+    	var sourceTargetData = {
+    		dragSource: ActivityService.parseDragSource(dragEl.id),
+    		dropTarget: ActivityService.parseDropTarget(dropEl.id)
+    	};
+    	console.log('drag&drop: ' + JSON.stringify(sourceTargetData));
+    	
+    	LDEditService.updateActivityLevelPosition($scope.ldid, sourceTargetData,
+	        function(res) {
+	        	// TODO Make corresponding level-position change in $scope.levels, then $scope.$apply()
+	        },
+	        function(err) {
+	        	$scope.ldUpdateErrors = err; // TODO UI to display these
+	        }
+		);
     }
 
     LDEditService.getLearningDesign($scope.ldid, function(res) {

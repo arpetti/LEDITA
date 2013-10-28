@@ -72,6 +72,26 @@ describe('Learning Design Edit Service', function() {
     	$httpBackend.flush();
     });
 
+    it('Updates Activity Level Position', function() {
+    	var ldId = 7;
+    	var sourceTargetData = {
+    		dragSource: {"nodeId":"41","nodeType":"ACTIVITY","level":1,"position":1},
+    		dropTarget: {"level":1,"position":2}
+    	};
+    	var serviceResponse = {};
+
+    	var success = function(res) {
+    		expect(res).toEqual(serviceResponse);
+    	};
+		var error = function() {
+			expect(false).toBe(true); // should not get here
+		};
+
+		$httpBackend.when('PUT', '/learningdesign/composes/' + ldId, sourceTargetData).respond(serviceResponse);
+    	service.updateActivityLevelPosition(ldId, sourceTargetData, success, error);
+    	$httpBackend.flush();
+    });	
+
     it('Updates LD Qcers', function() {
     	var ldId = 7;
     	var qcers = {"1":true,"2":true};

@@ -72,6 +72,12 @@ angular.module('ledita-app')
             }).error(error);
         },
 
+        updateActivityLevelPosition: function(ldId, sourceTargetData, success, error) {
+        	$http.put('/learningdesign/composes/' + ldId, sourceTargetData).success(function(res) {
+                success(res);
+            }).error(error);
+        },
+
         addTopic: function(ldId, ldData, success, error) {
             $http.post('/learningdesign/addtopic/' + ldId, ldData).success(function(res) {
                 success(res);
