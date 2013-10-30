@@ -1218,6 +1218,74 @@ a .likeButton:hover {
     background-color: #dddddd
 }
 
+/* activity diagram drag and drop
+===================== */
+
+.topDrop {
+    background-color: #000000;
+    opacity: 0.1;
+    height: 30px;
+    top: -15px;
+    position: relative;
+}
+
+.bottomDrop {
+    background-color: #000000;
+    opacity: 0.1;
+    height: 30px;
+    bottom: 35px;
+    position: relative;
+}
+.leftDrop {
+    width: 30px;
+    height: 100px;
+    float: left;
+    position: relative;
+    left: -10px;
+    top: -30px;
+    background-color: #000000;
+    opacity: 0.1;
+}
+.rightDrop {
+    width: 30px;
+    height: 100px;
+    float: right;
+    position: relative;
+    right: -10px;
+    top: -30px;
+    background-color: #000000;
+    opacity: 0.1;
+}
+
+
+.dropBox {
+    height: 100px;
+}
+
+.topUp1 {
+    top: -25px;
+    position: relative;
+}
+.topUp2 {
+    top: -25px;
+    position: relative;
+}
+
+.moveLeft {
+    position: relative;
+    left: -30px;
+}
+.moveRight {
+    position: relative;
+    right: -30px;
+}
+
+.noClear {
+    clear: none;
+}
+
+.bigHeight {
+}
 /* activity text
 ===================== */
 .border {

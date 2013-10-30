@@ -268,24 +268,30 @@
 	
 	<!-- #43 Drag target must not have any angular bound data inside it -->
 	<!-- #43 Instead of text, put some appropriate background image to indicate user an drag to here -->
+    <!--
 	<div id="{{$parent.$index+1}}-{{levelPosition}}" ng-repeat="levelPosition in positionsPerLevel"
 		class="lvl-target dropzone" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)">
 			Drop Zone
 	</div>
-	
-    <div id="{{node.node_id}}-{{node.type}}-{{node.level}}-{{node.position}}" ng-repeat="node in nodes" x-lvl-draggable="true" ng-class="getBoxClass(node)">
+	-->
+    <div id="{{node.node_id}}-{{node.type}}-{{node.level}}-{{node.position}}" ng-repeat="node in nodes" x-lvl-draggable="true" ng-class="getBoxClass(node)" class="dropBox" >
         <!-- If it's a group:  -->
-        <div ng-show="node.children" class="groupName">{{ node.node_name }}</div>
+        <div ng-show="node.children" class="groupName bigHeight">{{ node.node_name }}</div>
         <div class="clearfix"></div>
         <!-- Children are also in levels: Create unstyled div for each level -->
         <div ng-repeat="(childLevel, subChildren) in node.children" class="levelBoxChild">
-            <div ng-repeat="child in subChildren" ng-class="getGroupBoxClass(child)">
-                <div class="tools">
-                    <a class="edit" ng-href="#"><i class="icon-edit icon-white"></i> </a>
-                    <a class="delete" ng-href="#"><i class="icon-remove icon-white"></i> </a>
-                    <span class="clearfix"></span>
+            <div ng-repeat="child in subChildren" ng-class="getGroupBoxClass(child)" class="dropBox">
+            <!-- TOP DROP ZONE BORDER-->
+                <div id="{{node.node_id}}-top" class="topDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
+                <!-- LEFT DROP ZONE BORDER-->
+                <div id="{{node.node_id}}-left" class="leftDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
+                <!-- RIGHT DROP ZONE BORDER-->
+                <div id="{{node.node_id}}-right" class="rightDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
+                <div class="tools topUp1">
+                    <a class="edit moveLeft" ng-href="#"><i class="icon-edit icon-white"></i> </a>
+                    <a class="delete moveRight" ng-href="#"><i class="icon-remove icon-white"></i> </a>
                 </div>
-                <a class="whiteText childModalLink" ng-click="open(child)"><h6 class="actName">{{
+                <a class="whiteText childModalLink topUp2" ng-click="open(child)"><h6 class="actName noClear">{{
                     child.group_child_name }}</h6>
 
                     <div class="actLabel" ng-show="child.group_child_type!='LD'">
@@ -301,18 +307,25 @@
                                             ng-repeat="qcer in child.qcers">{{ qcer.qcer_name }} </span></span>
                     </div>
                 </a>
+                <!-- BOTTOM DROP ZONE BORDER-->
+                <div id="{{node.node_id}}-bottom" class="bottomDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
             </div>
         </div>
         <!-- End Children -->
         <!-- If it's NOT a group:  -->
-        <div ng-show="!node.children" class="actName">
-            <div class="tools">
-                <a class="edit" ng-href="#"><i class="icon-edit icon-white"></i> </a>
-                <a class="delete" ng-href="#"><i class="icon-remove icon-white"></i> </a>
-                <span class="clearfix"></span>
+        <div ng-show="!node.children" class="actName dropBox">
+            <!-- TOP DROP ZONE BORDER-->
+            <div class="topDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
+            <!-- LEFT DROP ZONE BORDER-->
+            <div class="leftDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
+            <!-- RIGHT DROP ZONE BORDER-->
+            <div class="rightDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
+            <div class="tools topUp1">
+                <a class="edit moveLeft" ng-href="#"><i class="icon-edit icon-white"></i> </a>
+                <a class="delete moveRight" ng-href="#"><i class="icon-remove icon-white"></i> </a>
             </div>
-            <a class="whiteText" ng-click="open(node)">
-                <h6>{{ node.node_name }}</h6>
+            <a class="whiteText topUp2" ng-click="open(node)">
+                <h6 class="actName noClear">{{ node.node_name }}</h6>
 
                 <div class="actLabel" ng-show="node.type!='LD'">
                             <span class="timeLabel"><i
@@ -326,6 +339,8 @@
                                     ng-repeat="qcer in node.qcers"> {{ qcer.qcer_name }} </span></span>
                 </div>
             </a>
+            <!-- BOTTOM DROP ZONE BORDER-->
+            <div class="bottomDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
         </div>
     </div>
     <!-- End Activity or Group Box -->
