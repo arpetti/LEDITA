@@ -29,7 +29,15 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
 	        	$scope.ldUpdateErrors = err; // TODO UI to display these
 	        }
 		);
-    }
+    };
+
+    $scope.droppedGroup = function(dragEl, dropEl) {
+    	var sourceTargetData = {
+    		dragSource: ActivityService.parseDragSource(dragEl.id),
+    		dropTarget: ActivityService.parseDropTargetGroup(dropEl.id)
+    	};
+    	console.log('drag&drop group: ' + JSON.stringify(sourceTargetData));
+    };
 
     LDEditService.getLearningDesign($scope.ldid, function(res) {
         $scope.learningDesign = res;

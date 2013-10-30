@@ -16,6 +16,15 @@ angular.module('ledita-app')
   		this.move = data[4];
 	};
 
+	var DropTargetGroup = function DropTarget(data) {
+		this.groupId = parseInt(data[0]);
+		this.nodeId = data[1];
+  		this.nodeType = data[2];
+  		this.level = parseInt(data[3]);
+  		this.position = parseInt(data[4]);
+  		this.move = data[5];
+	};
+
     return {
         
 		parseDragSource: function(dragElementId) {
@@ -26,6 +35,11 @@ angular.module('ledita-app')
 		parseDropTarget: function(dropElementId) {
 			var data = dropElementId.split('-');
 			return new DropTarget(data);
+		},
+
+		parseDropTargetGroup: function(dropElementId) {
+			var data = dropElementId.split('-');
+			return new DropTargetGroup(data);
 		}  
 
     };
