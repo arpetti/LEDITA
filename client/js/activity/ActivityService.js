@@ -9,8 +9,11 @@ angular.module('ledita-app')
 	};
 
 	var DropTarget = function DropTarget(data) {
-		this.level = parseInt(data[0]);
-		this.position = parseInt(data[1]);
+		this.nodeId = data[0];
+  		this.nodeType = data[1];
+  		this.level = parseInt(data[2]);
+  		this.position = parseInt(data[3]);
+  		this.move = data[4];
 	};
 
     return {

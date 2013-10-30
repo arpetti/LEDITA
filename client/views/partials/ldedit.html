@@ -281,6 +281,7 @@
         <!-- Children are also in levels: Create unstyled div for each level -->
         <div ng-repeat="(childLevel, subChildren) in node.children" class="levelBoxChild">
             <div ng-repeat="child in subChildren" ng-class="getGroupBoxClass(child)" class="dropBox">
+            <!-- TODO: Children in a group will require different handling for drag-drop -->	
             <!-- TOP DROP ZONE BORDER-->
                 <div id="{{node.node_id}}-top" class="topDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
                 <!-- LEFT DROP ZONE BORDER-->
@@ -315,11 +316,11 @@
         <!-- If it's NOT a group:  -->
         <div ng-show="!node.children" class="actName dropBox">
             <!-- TOP DROP ZONE BORDER-->
-            <div class="topDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
+            <div id="{{node.node_id}}-{{node.type}}-{{node.level}}-{{node.position}}-top" class="topDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
             <!-- LEFT DROP ZONE BORDER-->
-            <div class="leftDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
+            <div id="{{node.node_id}}-{{node.type}}-{{node.level}}-{{node.position}}-left" class="leftDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
             <!-- RIGHT DROP ZONE BORDER-->
-            <div class="rightDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
+            <div id="{{node.node_id}}-{{node.type}}-{{node.level}}-{{node.position}}-right" class="rightDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
             <div class="tools topUp1">
                 <a class="edit moveLeft" ng-href="#"><i class="icon-edit icon-white"></i> </a>
                 <a class="delete moveRight" ng-href="#"><i class="icon-remove icon-white"></i> </a>
@@ -340,7 +341,7 @@
                 </div>
             </a>
             <!-- BOTTOM DROP ZONE BORDER-->
-            <div class="bottomDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
+            <div id="{{node.node_id}}-{{node.type}}-{{node.level}}-{{node.position}}-bottom" class="bottomDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
         </div>
     </div>
     <!-- End Activity or Group Box -->

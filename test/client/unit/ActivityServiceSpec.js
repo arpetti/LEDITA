@@ -24,10 +24,13 @@ describe('Activity Service', function() {
     });
 
     it('Parses Drop Target', function() {
-    	var dropElementId = '4-3';
+    	var dropElementId = '12-ACTIVITY-3-4-top';
     	var actual = service.parseDropTarget(dropElementId);
-    	expect(actual.level).toEqual(4);
-    	expect(actual.position).toEqual(3);
+    	expect(actual.nodeId).toEqual('12');
+    	expect(actual.nodeType).toEqual('ACTIVITY');
+    	expect(actual.level).toEqual(3);
+    	expect(actual.position).toEqual(4);
+    	expect(actual.move).toEqual('top');
     });
 
 });
