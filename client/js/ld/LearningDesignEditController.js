@@ -9,12 +9,8 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
     $scope.selectedObjectives = [];
     $scope.selectedPrerequisites = [];
 
-    // #43 wip - this should come from server
-    $scope.positionsPerLevel = [1, 2, 3, 4];
-
     // #43 wip...
     $scope.dropped = function(dragEl, dropEl) { 
-    	// TODO verify source level & position not same as target source & position (no point calling server in this case)
     	var sourceTargetData = {
     		dragSource: ActivityService.parseDragSource(dragEl.id),
     		dropTarget: ActivityService.parseDropTarget(dropEl.id)
