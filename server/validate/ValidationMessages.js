@@ -85,3 +85,6 @@ module.exports.QCER_UPDATE_FAIL = 'Qcers could not be updated at this time, plea
 module.exports.TOPIC_REMOVE_FAIL = 'Topic could not be removed.';
 module.exports.OBJECTIVE_REMOVE_FAIL = 'Objective could not be removed.';
 module.exports.PREREQUISITE_REMOVE_FAIL = 'Prerequisite could not be removed.';
+
+// Drag and Drop Activity Structure
+module.exports.DRAG_DROP_FAIL = 'Could not move the node, please try again later.';
