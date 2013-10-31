@@ -4,6 +4,30 @@ var Dao = require('../../../server/dao/Dao');
 
 describe('Activity Edit DAO', function() {
 
+	describe('Find All Composes for LD', function() {
+
+		it('Finds results for existing LD', function(done) {
+			var ld_id = 1;
+			var criteria = [ld_id];
+			ComposesDao.findAllComposes(criteria, function(err, results) {
+				expect(err).to.be.null;
+				expect(results).to.have.length(7);
+				done();
+			});
+		});
+
+		it('Returns no results if LD not found', function(done) {
+			var ld_id = 9999;
+			var criteria = [ld_id];
+			ComposesDao.findAllComposes(criteria, function(err, results) {
+				expect(err).to.be.null;
+				expect(results).to.have.length(0);
+				done();
+			});
+		});
+
+	});
+
 	describe('Find Composes Activity', function() {
 
 		it('Finds Relationship from LD to Activity', function(done) {
