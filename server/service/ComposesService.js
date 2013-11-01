@@ -1,6 +1,5 @@
 var composesDao = require('../dao/ComposesDao');
 var messages = require('../validate/ValidationMessages');
-var _ = require('underscore');
 var logger = require('../util/LogWrapper');
 // var ch = require('../util/ComposesHelper');
 
@@ -17,7 +16,8 @@ module.exports = {
 			} else {
 				logger.log().info(JSON.stringify(results));
 				callback(null, results, null); 
-				// var sourceComposesId = ch.findId(source.nodeId, source.type, source.level, source.position)
+				// var sourceComposes = ch.findComposes(results, source.nodeId, source.type, source.level, source.position)
+				// sourceComposes.level = target.level; sourceComposes.position = target.position
 				// var nodesToMove = ch.findPath(results, target.move, target.pos, target.level)
 
 				// Returns new list with node level/pos incremented/decremented according to target.move
@@ -26,6 +26,7 @@ module.exports = {
 				// validate moves (pos must be between 1 and 4, level must be between 1 and 10)
 				// var isValid = ch.validateMoves(nodesMoved) -> if not valid, callback with err/msg
 
+				// append sourceComposes to nodesMoved
 				// persist nodesMoved to db (async each?)
 				// get fresh activity structure from db and return it
 			}
