@@ -2,7 +2,7 @@ var expect = require('chai').expect;
 var fixture = require('../../../server/service/ComposesService');
 
 var SourceBuilder = function() {
-	var nodeId = 1;
+	var nodeId = 5;
 	var nodeType = 'ACTIVITY';
 	var level = 1;
 	var position = 1;
@@ -78,13 +78,13 @@ var TargetBuilder = function() {
 describe('Composes Service Integration', function() {
 
 	it('Retrieves composes data', function(done) {
-		//nodeToNode: function(ldId, source, target, callback) {
 		var ldId = 1;
 		var source = new SourceBuilder().build();
 		var target = new TargetBuilder().build();
 		fixture.nodeToNode(ldId, source, target, function(err, results, message) {
 			expect(err).to.be.null;
 			expect(message).to.be.null;
+			expect(results).not.to.be.null;
 			done();
 		});
 	});
