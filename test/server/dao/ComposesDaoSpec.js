@@ -1,15 +1,15 @@
 var expect = require('chai').expect;
-var ComposesDao = require('../../../server/dao/ComposesDao');
+var fixture = require('../../../server/dao/ComposesDao');
 var Dao = require('../../../server/dao/Dao');
 
-describe('Activity Edit DAO', function() {
+describe('Composes DAO', function() {
 
 	describe('Find All Composes for LD', function() {
 
 		it('Finds results for existing LD', function(done) {
 			var ld_id = 1;
 			var criteria = [ld_id];
-			ComposesDao.findAllComposes(criteria, function(err, results) {
+			fixture.findAllComposes(criteria, function(err, results) {
 				expect(err).to.be.null;
 				expect(results).to.have.length(7);
 				done();
@@ -19,7 +19,7 @@ describe('Activity Edit DAO', function() {
 		it('Returns no results if LD not found', function(done) {
 			var ld_id = 9999;
 			var criteria = [ld_id];
-			ComposesDao.findAllComposes(criteria, function(err, results) {
+			fixture.findAllComposes(criteria, function(err, results) {
 				expect(err).to.be.null;
 				expect(results).to.have.length(0);
 				done();
@@ -28,132 +28,57 @@ describe('Activity Edit DAO', function() {
 
 	});
 
-	describe('Find Composes Activity', function() {
+	describe('Updates Composes Multi', function() {
 
-		it('Finds Relationship from LD to Activity', function(done) {
-			var ld_id = 2;
-			var activity_id = 20;
-			var level = 4;
-			var position = 1;
-			var criteria = [ld_id, activity_id, level, position];
-			var expectedComposesId = 15; // known from demo data
-			ComposesDao.findComposesActivity(criteria, function(err, result) {
-				expect(err).to.be.null;
-				expect(result).to.have.length(1);
-				expect(result[0].id).to.equal(expectedComposesId);
-				done();
-			});
-		});
+		var composesIdToUpdate1 = 1;
+		var originalLevel1 = 1;
+		var originalPosition1 = 1;
 
-		it('Returns no results if criteria not found', function(done) {
-			var ld_id = 2;
-			var activity_id = 20;
-			var level = 4;
-			var position = 99; // LD has Activity, but not in this position
-			var criteria = [ld_id, activity_id, level, position];
-			ComposesDao.findComposesActivity(criteria, function(err, result) {
-				expect(err).to.be.null;
-				expect(result).to.have.length(0);
-				done();
-			});
-		});
+		var composesIdToUpdate2 = 2;
+		var originalLevel2 = 2;
+		var originalPosition2 = 1;
 
-	});
+		var verifyComposes = 'SELECT id, level, position FROM composes WHERE id IN (?)';
+		var verifyCompseIds = [composesIdToUpdate1, composesIdToUpdate2];
 
-	describe('Find Composes LD', function() {
-
-		it('Finds Relationship from LD to LD', function(done) {
-			var ld_id = 5;
-			var ld_part_id = 2;
-			var level = 6;
-			var position = 2;
-			var criteria = [ld_id, ld_part_id, level, position];
-			var expectedComposesId = 36; // known from demo data
-			ComposesDao.findComposesLd(criteria, function(err, result) {
-				expect(err).to.be.null;
-				expect(result).to.have.length(1);
-				expect(result[0].id).to.equal(expectedComposesId);
-				done();
-			});
-		});
-
-		it('Returns no results if criteria not found', function(done) {
-			var ld_id = 5;
-			var ld_part_id = 2;
-			var level = 6;
-			var position = 99; // LD has LD, but not in this position
-			var criteria = [ld_id, ld_part_id, level, position];
-			ComposesDao.findComposesLd(criteria, function(err, result) {
-				expect(err).to.be.null;
-				expect(result).to.have.length(0);
-				done();
-			});
-		});
-
-	});
-
-	describe('Find Composes Group', function() {
-
-		it('Finds Relationship from LD to Group', function(done) {
-			var ld_id = 1;
-			var activity_group_id = 1;
-			var level = 2;
-			var position = 1;
-			var criteria = [ld_id, activity_group_id, level, position];
-			var expectedComposesId = 2; // known from demo data
-			ComposesDao.findComposesGroup(criteria, function(err, result) {
-				expect(err).to.be.null;
-				expect(result).to.have.length(1);
-				expect(result[0].id).to.equal(expectedComposesId);
-				done();
-			});
-		});
-
-		it('Returns no results if criteria not found', function(done) {
-			var ld_id = 1;
-			var activity_group_id = 1;
-			var level = 2;
-			var position = 99; // LD has Group, but not in this position
-			var criteria = [ld_id, activity_group_id, level, position];
-			ComposesDao.findComposesGroup(criteria, function(err, result) {
-				expect(err).to.be.null;
-				expect(result).to.have.length(0);
-				done();
-			});
-		});
-
-	});
-
-	describe('Updates Composes', function() {
-
-		var composesIdToUpdate = 8;
-		var originalLevel = 1;
-		var originalPosition = 1;
-		var verifyComposes = 'SELECT level, position FROM composes WHERE id = ?';
-		var resetComposes = 'UPDATE composes set level = ?, position = ? WHERE id = ?';
+		var resetComposes = 'UPDATE composes set level = ?, position = ? WHERE id = ?; UPDATE composes set level = ?, position = ? WHERE id = ?;';
+		var resetParams = [originalLevel1, originalPosition1, composesIdToUpdate1, originalLevel2, originalPosition2, composesIdToUpdate2];
 
 		afterEach(function(done) {
-			Dao.insertOrUpdateRecord(resetComposes, [originalLevel, originalPosition, composesIdToUpdate], function(err, result) {
+			Dao.multiStatement(resetComposes, resetParams, function(err, results) {
 				expect(err).to.be.null;
 				done();
 			});
 		});
 
-		it('Updates Composes relationship', function(done) {
-			var newLevel = 2;
-			var newPosition = 3;
-			ComposesDao.updateComposes([newLevel, newPosition, composesIdToUpdate], function(err, result) {
+		it('Generates update statements', function() {
+			var nodes = [
+				{"id":1,"ld_id":1,"activity_id":1,"ld_part_id":null,"activity_group_id":null,"level":1,"position":4},
+				{"id":2,"ld_id":1,"activity_id":2,"ld_part_id":null,"activity_group_id":null,"level":2,"position":5},
+				{"id":3,"ld_id":1,"activity_id":3,"ld_part_id":null,"activity_group_id":null,"level":3,"position":6}
+			];
+			var expectedConcatStatement = 'UPDATE composes set level = ?, position = ? WHERE id = ?; UPDATE composes set level = ?, position = ? WHERE id = ?; UPDATE composes set level = ?, position = ? WHERE id = ?';
+			var expectedParams = [1,4,1,2,5,2,3,6,3];
+			
+			var results = fixture.generateComposeUpdates(nodes);
+			expect(results.concatStatement).to.equal(expectedConcatStatement);
+			expect(results.params).to.have.members(expectedParams);
+		});
+
+		it('Updates multiple composes records', function(done) {
+			var nodes = [
+				{"id":composesIdToUpdate1,"ld_id":1,"activity_id":1,"ld_part_id":null,"activity_group_id":null,"level":9,"position":3},
+				{"id":composesIdToUpdate2,"ld_id":1,"activity_id":3,"ld_part_id":null,"activity_group_id":null,"level":10,"position":4}
+			];
+			fixture.updateComposesMulti(nodes, function(err, results) {
 				expect(err).to.be.null;
-				Dao.findAll(verifyComposes, [composesIdToUpdate], function(err, result) {
+				Dao.findAll(verifyComposes, [verifyCompseIds], function(err, results) {
 					expect(err).to.be.null;
-					expect(result).to.have.length(1);
-					expect(result[0].level).to.equal(newLevel);
-					expect(result[0].position).to.equal(newPosition);
+					expect(results).to.have.length(2);
 					done();
 				});
 			});
 		});
-
 	});
 
 });
