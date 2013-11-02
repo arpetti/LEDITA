@@ -6,7 +6,7 @@ describe('Composes Helper', function() {
 
 	var composesRecords = [
 		{"id":1,"ld_id":1,"activity_id":5,"ld_part_id":null,"activity_group_id":null,"level":1,"position":1},
-		{"id":2,"ld_id":1,"activity_id":999,"ld_part_id":null,"activity_group_id":1,"level":2,"position":1},
+		{"id":2,"ld_id":1,"activity_id":null,"ld_part_id":null,"activity_group_id":1,"level":2,"position":1},
 		{"id":3,"ld_id":1,"activity_id":9,"ld_part_id":null,"activity_group_id":null,"level":3,"position":1},
 		{"id":4,"ld_id":1,"activity_id":8,"ld_part_id":null,"activity_group_id":null,"level":3,"position":2},
 		{"id":5,"ld_id":1,"activity_id":null,"ld_part_id":2,"activity_group_id":null,"level":4,"position":1},
@@ -61,12 +61,60 @@ describe('Composes Helper', function() {
 	describe('Finds Nodes in Path', function() {
 
 		it('Finds nodes for move = top', function() {
-			var results = fixture.getNodesInPath('top', composesRecords, 3, 1);
+			var move = 'top';
+			var startLevel = 3;
+			var startPosition = 1;
+			var filterComposesId = 2; 
+			var results = fixture.getNodesInPath(move, composesRecords, startLevel, startPosition, filterComposesId);
 			expect(results).to.have.length(4);
 			expect(_.isEqual(composesRecords[2], results[0])).to.be.true;
 			expect(_.isEqual(composesRecords[4], results[1])).to.be.true;
 			expect(_.isEqual(composesRecords[5], results[2])).to.be.true;
 			expect(_.isEqual(composesRecords[6], results[3])).to.be.true;
+		});
+
+		it('Finds nodes for move = bottom', function() {
+			var move = 'bottom';
+			var startLevel = 3;
+			var startPosition = 1;
+			var filterComposesId = 5; 
+			var results = fixture.getNodesInPath(move, composesRecords, startLevel, startPosition, filterComposesId);
+			expect(results).to.have.length(3);
+			expect(_.isEqual(composesRecords[0], results[0])).to.be.true;
+			expect(_.isEqual(composesRecords[1], results[1])).to.be.true;
+			expect(_.isEqual(composesRecords[2], results[2])).to.be.true;
+		});
+
+		it('Finds nodes for move = bottom, filters node in path', function() {
+			var move = 'bottom';
+			var startLevel = 3;
+			var startPosition = 1;
+			var filterComposesId = 2; 
+			var results = fixture.getNodesInPath(move, composesRecords, startLevel, startPosition, filterComposesId);
+			expect(results).to.have.length(2);
+			expect(_.isEqual(composesRecords[0], results[0])).to.be.true;
+			expect(_.isEqual(composesRecords[2], results[1])).to.be.true;
+		});
+
+		it('Finds nodes for move = left', function() {
+			var move = 'left';
+			var startLevel = 3;
+			var startPosition = 1;
+			var filterComposesId = 2; 
+			var results = fixture.getNodesInPath(move, composesRecords, startLevel, startPosition, filterComposesId);
+			expect(results).to.have.length(2);
+			expect(_.isEqual(composesRecords[2], results[0])).to.be.true;
+			expect(_.isEqual(composesRecords[3], results[1])).to.be.true;
+		});
+
+		it('Finds nodes for move = right', function() {
+			var move = 'right';
+			var startLevel = 4;
+			var startPosition = 1;
+			var filterComposesId = 2; 
+			var results = fixture.getNodesInPath(move, composesRecords, startLevel, startPosition, filterComposesId);
+			expect(results).to.have.length(1);
+			expect(_.isEqual(composesRecords[4], results[0])).to.be.true;
 		});
 
 	});

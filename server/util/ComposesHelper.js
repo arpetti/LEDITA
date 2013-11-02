@@ -22,7 +22,7 @@ module.exports = {
 		}
 	},
 
-	getNodesInPath: function(move, composesRecords, startLevel, startPosition) {
+	getNodesInPath: function(move, composesRecords, startLevel, startPosition, filterComposesId) {
 		var moveTypes = {
 			top: module.exports.getNodesInPathTop,
 			bottom: module.exports.getNodesInPathBottom,
@@ -30,15 +30,38 @@ module.exports = {
 			right: module.exports.getNodesInPathRight
 		};
 		var findFunc = moveTypes[move];
-		return findFunc.apply(null, [composesRecords, startLevel, startPosition]);
+		var nodesInPath = findFunc.apply(null, [composesRecords, startLevel, startPosition]);
+		return _.reject(nodesInPath, function(node){return node.id === filterComposesId;});
 	},
 
 	getNodesInPathTop: function(composesRecords, startLevel, startPosition) {
 		var criteria = {position: startPosition};
 		var posResults = _.where(composesRecords, criteria);
-		var filterFunc = function(num) {
-			return num.level >= startLevel;
-		};
+		var filterFunc = function(node) {return node.level >= startLevel;};
+		var results = _.filter(_.where(composesRecords, criteria), filterFunc);
+		return results;
+	},
+
+	getNodesInPathBottom: function(composesRecords, startLevel, startPosition) {
+		var criteria = {position: startPosition};
+		var posResults = _.where(composesRecords, criteria);
+		var filterFunc = function(node) {return node.level <= startLevel;};
+		var results = _.filter(_.where(composesRecords, criteria), filterFunc);
+		return results;
+	},
+
+	getNodesInPathLeft: function(composesRecords, startLevel, startPosition) {
+		var criteria = {level: startLevel};
+		var levelResults = _.where(composesRecords, criteria);
+		var filterFunc = function(node) {return node.position >= startPosition;};
+		var results = _.filter(_.where(composesRecords, criteria), filterFunc);
+		return results;
+	},
+
+	getNodesInPathRight: function(composesRecords, startLevel, startPosition) {
+		var criteria = {level: startLevel};
+		var levelResults = _.where(composesRecords, criteria);
+		var filterFunc = function(node) {return node.position <= startPosition;};
 		var results = _.filter(_.where(composesRecords, criteria), filterFunc);
 		return results;
 	}

@@ -22,7 +22,7 @@ module.exports = {
 				if (!sourceRecord || !targetRecord) {
 					callback(err, null, messages.DRAG_DROP_FAIL);
 				}
-				var nodesToMove = ch.getNodesInPath(target.move, results, target.level, target.position)
+				var nodesToMove = ch.getNodesInPath(target.move, results, target.level, target.position, sourceRecord.id);
 				logger.log().info('nodesToMove: ' + JSON.stringify(nodesToMove));
 
 				// Returns new list with node level/pos incremented/decremented according to target.move
