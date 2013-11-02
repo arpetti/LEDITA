@@ -2,6 +2,7 @@ var composesDao = require('../dao/ComposesDao');
 var messages = require('../validate/ValidationMessages');
 var logger = require('../util/LogWrapper');
 var ch = require('../util/ComposesHelper');
+var activityService = require('./ActivityService');
 
 module.exports = {
 
@@ -28,16 +29,36 @@ module.exports = {
 				sourceRecord.position = targetRecord.position;
 				nodesMoved.push(sourceRecord);
 
-				logger.log().info('validating: ' + JSON.stringify(nodesMoved));
 				var isValid = ch.validateNodes(nodesMoved);
 				if (!isValid) {
 					callback(err, null, messages.DRAG_DROP_FAIL);
 					return;
 				}
 
-				// persist nodesMoved to db (async each?)
-				// get fresh activity structure from db and return it
-				callback(null, results, null); 
+				module.exports.updateStructure(nodesMoved, ldId, function(err, results) {
+					if(err) {
+						callback(err, null, messages.DRAG_DROP_FAIL);
+					} else {
+						callback(null, results);
+					}
+				});
+			}
+		});
+	},
+
+	// cb(err, result, message)
+	updateStructure: function(nodes, ldId, cb) {
+		composesDao.updateComposesMulti(nodes, function(err, results) {
+			if(err) {
+				cb(err, null, messages.DRAG_DROP_FAIL);
+			} else {
+				activityService.getEnrichedLDActivityStructure(ldId, function(err, results) {
+					if(err) {
+						cb(err, null, messages.DRAG_DROP_FAIL);
+					} else {
+						cb(null, results);
+					}
+				})
 			}
 		});
 	}
