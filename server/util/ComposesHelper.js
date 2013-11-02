@@ -1,5 +1,49 @@
 var _ = require('underscore');
 
+var getNodesInPathTop = function(composesRecords, startLevel, startPosition) {
+	var criteria = {position: startPosition};
+	var posResults = _.where(composesRecords, criteria);
+	var filterFunc = function(node) {return node.level >= startLevel;};
+	return _.filter(_.where(composesRecords, criteria), filterFunc);
+};
+
+var getNodesInPathBottom =  function(composesRecords, startLevel, startPosition) {
+	var criteria = {position: startPosition};
+	var posResults = _.where(composesRecords, criteria);
+	var filterFunc = function(node) {return node.level <= startLevel;};
+	return _.filter(_.where(composesRecords, criteria), filterFunc);
+};
+
+var getNodesInPathLeft = function(composesRecords, startLevel, startPosition) {
+	var criteria = {level: startLevel};
+	var levelResults = _.where(composesRecords, criteria);
+	var filterFunc = function(node) {return node.position >= startPosition;};
+	return _.filter(_.where(composesRecords, criteria), filterFunc);
+};
+
+var getNodesInPathRight =  function(composesRecords, startLevel, startPosition) {
+	var criteria = {level: startLevel};
+	var levelResults = _.where(composesRecords, criteria);
+	var filterFunc = function(node) {return node.position <= startPosition;};
+	return _.filter(_.where(composesRecords, criteria), filterFunc);
+};
+
+var cloneNode = function(node) {
+	return JSON.parse(JSON.stringify(node));
+};
+
+var incrementLevel = function(node) {var newNode = cloneNode(node); newNode.level = node.level + 1; return newNode;};
+var decrementLevel = function(node) {var newNode = cloneNode(node); newNode.level = node.level - 1; return newNode;};
+var incrementPosition = function(node) {var newNode = cloneNode(node); newNode.position = node.position + 1; return newNode;};
+var decrementPosition = function(node) {var newNode = cloneNode(node); newNode.position = node.position - 1; return newNode;};
+
+var moveTypes = {
+	top: {pathFunc: getNodesInPathTop, moveFunc: incrementLevel},
+	bottom: {pathFunc: getNodesInPathBottom, moveFunc: decrementLevel},
+	left: {pathFunc: getNodesInPathLeft, moveFunc: incrementPosition},
+	right: {pathFunc: getNodesInPathRight, moveFunc: decrementPosition}
+};
+
 module.exports = {
 
 	getComposesRecord: function(composesRecords, nodeId, nodeType, level, position) {
@@ -23,51 +67,12 @@ module.exports = {
 	},
 
 	getNodesInPath: function(move, composesRecords, startLevel, startPosition, filterComposesId) {
-		var moveTypes = {
-			top: module.exports.getNodesInPathTop,
-			bottom: module.exports.getNodesInPathBottom,
-			left: module.exports.getNodesInPathLeft,
-			right: module.exports.getNodesInPathRight
-		};
-		var findFunc = moveTypes[move];
+		var findFunc = moveTypes[move].pathFunc;
 		var nodesInPath = findFunc.apply(null, [composesRecords, startLevel, startPosition]);
 		return _.reject(nodesInPath, function(node){return node.id === filterComposesId;});
 	},
 
-	getNodesInPathTop: function(composesRecords, startLevel, startPosition) {
-		var criteria = {position: startPosition};
-		var posResults = _.where(composesRecords, criteria);
-		var filterFunc = function(node) {return node.level >= startLevel;};
-		var results = _.filter(_.where(composesRecords, criteria), filterFunc);
-		return results;
-	},
-
-	getNodesInPathBottom: function(composesRecords, startLevel, startPosition) {
-		var criteria = {position: startPosition};
-		var posResults = _.where(composesRecords, criteria);
-		var filterFunc = function(node) {return node.level <= startLevel;};
-		var results = _.filter(_.where(composesRecords, criteria), filterFunc);
-		return results;
-	},
-
-	getNodesInPathLeft: function(composesRecords, startLevel, startPosition) {
-		var criteria = {level: startLevel};
-		var levelResults = _.where(composesRecords, criteria);
-		var filterFunc = function(node) {return node.position >= startPosition;};
-		var results = _.filter(_.where(composesRecords, criteria), filterFunc);
-		return results;
-	},
-
-	getNodesInPathRight: function(composesRecords, startLevel, startPosition) {
-		var criteria = {level: startLevel};
-		var levelResults = _.where(composesRecords, criteria);
-		var filterFunc = function(node) {return node.position <= startPosition;};
-		var results = _.filter(_.where(composesRecords, criteria), filterFunc);
-		return results;
-	},
-
-	//var nodesMoved = ch.moveNodes(target.move, nodesToMove)
 	moveNodes: function(move, nodes) {
-		
+		return _.map(nodes, moveTypes[move].moveFunc);
 	}
 };

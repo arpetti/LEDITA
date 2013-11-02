@@ -14,17 +14,24 @@ module.exports = {
 			} else if (results.length === 0) {
 				callback(err, null, messages.DRAG_DROP_FAIL);
 			} else {
+				
 				logger.log().info('results: ' + JSON.stringify(results));
+				
 				var sourceRecord = ch.getComposesRecord(results, source.nodeId, source.nodeType, source.level, source.position);
 				logger.log().info('sourceRecord: ' + JSON.stringify(sourceRecord));
+				
 				var targetRecord = ch.getComposesRecord(results, target.nodeId, target.nodeType, target.level, target.position);
 				logger.log().info('targetRecord: ' + JSON.stringify(targetRecord));
+				
 				if (!sourceRecord || !targetRecord) {
 					callback(err, null, messages.DRAG_DROP_FAIL);
 				}
+				
 				var nodesToMove = ch.getNodesInPath(target.move, results, target.level, target.position, sourceRecord.id);
 				logger.log().info('nodesToMove: ' + JSON.stringify(nodesToMove));
 
+				var nodesMoved = ch.moveNodes(target.move, nodesToMove);
+				logger.log().info('nodesMoved: ' + JSON.stringify(nodesMoved));
 				// Returns new list with node level/pos incremented/decremented according to target.move
 				// var nodesMoved = ch.moveNodes(target.move, nodesToMove)
 
