@@ -64,5 +64,10 @@ module.exports = {
 		var filterFunc = function(node) {return node.position <= startPosition;};
 		var results = _.filter(_.where(composesRecords, criteria), filterFunc);
 		return results;
+	},
+
+	//var nodesMoved = ch.moveNodes(target.move, nodesToMove)
+	moveNodes: function(move, nodes) {
+		
 	}
 };
