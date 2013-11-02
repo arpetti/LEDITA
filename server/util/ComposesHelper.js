@@ -44,7 +44,13 @@ var moveTypes = {
 	right: {pathFunc: getNodesInPathRight, moveFunc: decrementPosition}
 };
 
+var MIN_LEVEL = 1;
+var MAX_LEVEL = 10;
+var MIN_POSITION = 1;
+var MAX_POSITION = 4;
+
 module.exports = {
+
 
 	getComposesRecord: function(composesRecords, nodeId, nodeType, level, position) {
 		var activityTypes = {
@@ -74,5 +80,13 @@ module.exports = {
 
 	moveNodes: function(move, nodes) {
 		return _.map(nodes, moveTypes[move].moveFunc);
+	},
+
+	validateNodes: function(nodes) {
+		var validateFunc = function(node) {
+			return node.level >= MIN_LEVEL && node.level <= MAX_LEVEL &&
+				node.position >= MIN_POSITION && node.position <= MAX_POSITION;
+		};
+		return _.every(nodes, validateFunc);
 	}
 };

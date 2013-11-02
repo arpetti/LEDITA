@@ -206,4 +206,58 @@ describe('Composes Helper', function() {
 
 	});
 
+	describe('Validates node levels and positions', function() {
+
+		it('Returns true when all nodes are valid', function() {
+			var nodes = [
+				{"id":1,"ld_id":1,"activity_id":1,"ld_part_id":null,"activity_group_id":null,"level":1,"position":1},
+				{"id":2,"ld_id":1,"activity_id":2,"ld_part_id":null,"activity_group_id":null,"level":2,"position":2},
+				{"id":3,"ld_id":1,"activity_id":3,"ld_part_id":null,"activity_group_id":null,"level":3,"position":3}
+			];
+			var result = fixture.validateNodes(nodes);
+			expect(result).to.be.true; 
+		});
+
+		it('Returns false when if any level is less than 1', function() {
+			var nodes = [
+				{"id":1,"ld_id":1,"activity_id":1,"ld_part_id":null,"activity_group_id":null,"level":1,"position":1},
+				{"id":2,"ld_id":1,"activity_id":2,"ld_part_id":null,"activity_group_id":null,"level":0,"position":2},
+				{"id":3,"ld_id":1,"activity_id":3,"ld_part_id":null,"activity_group_id":null,"level":3,"position":3}
+			];
+			var result = fixture.validateNodes(nodes);
+			expect(result).to.be.false; 
+		});
+
+		it('Returns false when if any level is greater than 10', function() {
+			var nodes = [
+				{"id":1,"ld_id":1,"activity_id":1,"ld_part_id":null,"activity_group_id":null,"level":1,"position":1},
+				{"id":2,"ld_id":1,"activity_id":2,"ld_part_id":null,"activity_group_id":null,"level":2,"position":2},
+				{"id":3,"ld_id":1,"activity_id":3,"ld_part_id":null,"activity_group_id":null,"level":11,"position":3}
+			];
+			var result = fixture.validateNodes(nodes);
+			expect(result).to.be.false; 
+		});
+
+		it('Returns false when if any position is less than 1', function() {
+			var nodes = [
+				{"id":1,"ld_id":1,"activity_id":1,"ld_part_id":null,"activity_group_id":null,"level":1,"position":-1},
+				{"id":2,"ld_id":1,"activity_id":2,"ld_part_id":null,"activity_group_id":null,"level":2,"position":2},
+				{"id":3,"ld_id":1,"activity_id":3,"ld_part_id":null,"activity_group_id":null,"level":3,"position":3}
+			];
+			var result = fixture.validateNodes(nodes);
+			expect(result).to.be.false; 
+		});
+
+		it('Returns false when if any position is greater than 4', function() {
+			var nodes = [
+				{"id":1,"ld_id":1,"activity_id":1,"ld_part_id":null,"activity_group_id":null,"level":1,"position":1},
+				{"id":2,"ld_id":1,"activity_id":2,"ld_part_id":null,"activity_group_id":null,"level":2,"position":5},
+				{"id":3,"ld_id":1,"activity_id":3,"ld_part_id":null,"activity_group_id":null,"level":3,"position":3}
+			];
+			var result = fixture.validateNodes(nodes);
+			expect(result).to.be.false; 
+		});
+
+	});
+
 });
