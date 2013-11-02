@@ -9,7 +9,8 @@ var pool = mysql.createPool({
   password: config.db_pswd,
   database: config.db_schema,
   connectionLimit: config.db_pool_connection_limit,
-  debug: config.db_debug_sql
+  debug: config.db_debug_sql,
+  multipleStatements: true
 });
 
 module.exports = {
@@ -74,6 +75,26 @@ module.exports = {
       connection.query(queryString, [values], function(err, result) {
         if (err) {
           logWrapper.log().error('db bulk insert error', err);
+          connection.release();
+          callback(err);
+          return;
+        }
+        connection.release();
+        callback(null, result);
+      });
+    });
+  },
+
+  multiStatement: function(concatenatedQueries, values, callback) {
+  	pool.getConnection(function(err, connection) {
+      if (err) {
+        logWrapper.log().error('db connection error', err);
+        callback(err);
+        return;
+      }
+      connection.query(concatenatedQueries, values, function(err, result) {
+        if (err) {
+          logWrapper.log().error('db multiple statement error', err);
           connection.release();
           callback(err);
           return;

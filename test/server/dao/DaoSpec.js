@@ -3,6 +3,7 @@ var Dao = require('../../../server/dao/Dao');
 var configHelper = require('../../../server/util/ConfigHelper');
 var config = configHelper.config();
 var async = require('async');
+var _ = require('underscore');
 
 describe('DAO', function() {    
 
@@ -53,6 +54,38 @@ describe('DAO', function() {
             expect(results[0].ld_model_id).to.equal(5);
             done();
         });
+    });
+
+    it('Supports multiple statements', function(done) {
+    	var statement1 = 'select id, name from ld where id = ?';
+    	var statement2 = 'select id, name from ld where id = ?';
+    	var statements = statement1 + '; ' + statement2;
+    	var params = [2, 3];
+    	Dao.multiStatement(statements, params, function(err, results) {
+    		expect(err).to.be.null;
+    		expect(results).to.have.length(2);
+    		expect(_.contains(_.pluck(_.flatten(results), "id"), params[0])).to.be.true;
+    		expect(_.contains(_.pluck(_.flatten(results), "name"), 'Learning Design Title Demo 2')).to.be.true;
+    		expect(_.contains(_.pluck(_.flatten(results), "id"), params[1])).to.be.true;
+    		expect(_.contains(_.pluck(_.flatten(results), "name"), 'Learning Design Title Demo 3')).to.be.true;
+    		done();
+    	});
+    });
+
+    it('Multi statement parameters are escaped', function(done) {
+    	var statement1 = 'select id, name from ld where id = ?';
+    	var statement2 = 'select id, name from ld where id = ?';
+    	var statements = statement1 + '; ' + statement2;
+    	var params = [2, '3 or 1=1'];
+    	Dao.multiStatement(statements, params, function(err, results) {
+    		expect(err).to.be.null;
+    		expect(results).to.have.length(2);
+    		expect(_.contains(_.pluck(_.flatten(results), "id"), params[0])).to.be.true;
+    		expect(_.contains(_.pluck(_.flatten(results), "name"), 'Learning Design Title Demo 2')).to.be.true;
+    		expect(_.contains(_.pluck(_.flatten(results), "id"), 3)).to.be.true;
+    		expect(_.contains(_.pluck(_.flatten(results), "name"), 'Learning Design Title Demo 3')).to.be.true;
+    		done();
+    	});
     });
 
     describe('Unique Constraints', function() {

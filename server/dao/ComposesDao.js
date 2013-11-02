@@ -48,6 +48,24 @@ module.exports = {
 		dao.insertOrUpdateRecord(UPDATE_COMPOSES, criteria, function(err, result) {
 			handleResult(callback, err, result);
 		});
+	},
+
+	// #43 wip...
+	generateUpdates: function(nodes) {
+		var statementArray = [];
+		var paramArray = [];
+        for (var i=0; i<nodes.length; i++) {
+            statementArray.push(UPDATE_COMPOSES);
+            paramArray.push(node[i].level);
+            paramArray.push(node[i].position);
+            paramArray.push(node[i].id);
+        };
+        var statements = statementArray.join("; ");
+        var result = {
+        	statements: statements,
+        	params: paramArray
+        };
+        return result;
 	}
 
 }
