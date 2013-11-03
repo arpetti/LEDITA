@@ -30,7 +30,7 @@ module.exports = {
 
 				var isValid = ch.validateNodes(nodesMoved);
 				if (!isValid) {
-					callback(err, null, messages.DRAG_DROP_FAIL);
+					callback(new Error('Invalid move'), null, messages.DRAG_DROP_INVALID);
 					return;
 				}
 
