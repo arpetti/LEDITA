@@ -99,12 +99,16 @@ describe('Composes Service', function() {
 		it('Calls back with error if dao returns error', function(done) {
 			
 			var daoError = new Error('something went wrong in dao');
-			var daoStub = sandbox.stub(composesDao, "findAllComposes", function(criteria, callback) {
+			var daoFindStub = sandbox.stub(composesDao, "findAllComposes", function(criteria, callback) {
                 callback(daoError);
             });
+			var daoUpdateStub = sandbox.stub(composesDao, "updateComposesMulti");
 
-            var helperStub = sandbox.stub(composesHelper);
-            var serviceStub = sandbox.stub(activityService);
+            var helperGetRecordStub = sandbox.stub(composesHelper, "getComposesRecord");
+            var helperGetPathStub = sandbox.stub(composesHelper, "getNodesInPath");
+            var helperValidateStub = sandbox.stub(composesHelper, "validateNodes");
+            
+            var activityServiceStub = sandbox.stub(activityService, "getEnrichedLDActivityStructure");
 
             var ldId = 9;
             var source = new SourceBuilder().build();
@@ -114,6 +118,13 @@ describe('Composes Service', function() {
 				expect(err).to.equal(daoError);
 				expect(result).to.be.null;
 				expect(message).to.equal(messages.DRAG_DROP_FAIL);
+				
+				assert.isTrue(daoFindStub.calledOnce);
+				assert.equal(helperGetRecordStub.callCount, 0);
+				assert.equal(helperGetPathStub.callCount, 0);
+				assert.equal(helperValidateStub.callCount, 0);
+				assert.equal(daoUpdateStub.callCount, 0);
+				assert.equal(activityServiceStub.callCount, 0);
 				done();
 			};
 
