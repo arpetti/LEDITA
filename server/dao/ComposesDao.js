@@ -1,5 +1,6 @@
 var mysql = require('mysql')
 var dao = require('./Dao.js');
+var logger = require('../util/LogWrapper');
 
 var FIND_ALL_COMPOSES = 'SELECT id, ld_id, activity_id, ld_part_id, activity_group_id, level, position FROM composes where ld_id = ? ORDER BY level, position';
 var UPDATE_COMPOSES = 'UPDATE composes set level = ?, position = ? WHERE id = ?';

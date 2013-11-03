@@ -56,7 +56,42 @@ describe('Composes Helper', function() {
 			expect(result).to.be.null;
 		});
 
+		it('Example from site - Finds Activity 27', function() {
+			var composesRecords = [
+				{"id":16,"ld_id":3,"activity_id":25,"ld_part_id":null,"activity_group_id":null,"level":1,"position":1},
+				{"id":17,"ld_id":3,"activity_id":null,"ld_part_id":null,"activity_group_id":5,"level":2,"position":1},
+				{"id":18,"ld_id":3,"activity_id":27,"ld_part_id":null,"activity_group_id":null,"level":3,"position":1},
+				{"id":19,"ld_id":3,"activity_id":28,"ld_part_id":null,"activity_group_id":null,"level":3,"position":2},
+				{"id":20,"ld_id":3,"activity_id":29,"ld_part_id":null,"activity_group_id":null,"level":4,"position":1},
+				{"id":21,"ld_id":3,"activity_id":30,"ld_part_id":null,"activity_group_id":null,"level":4,"position":2}
+			];
+			var nodeId = 27;
+			var nodeType = 'ACTIVITY';
+			var level = 3;
+			var position = 1;
+			var result = fixture.getComposesRecord(composesRecords, nodeId, nodeType, level, position);
+			expect(result).not.to.be.null;
+		});
+
+		it('Example from site - Finds Activity 29', function() {
+			var composesRecords = [
+				{"id":16,"ld_id":3,"activity_id":25,"ld_part_id":null,"activity_group_id":null,"level":1,"position":1},
+				{"id":17,"ld_id":3,"activity_id":null,"ld_part_id":null,"activity_group_id":5,"level":2,"position":1},
+				{"id":18,"ld_id":3,"activity_id":27,"ld_part_id":null,"activity_group_id":null,"level":3,"position":1},
+				{"id":19,"ld_id":3,"activity_id":28,"ld_part_id":null,"activity_group_id":null,"level":3,"position":2},
+				{"id":20,"ld_id":3,"activity_id":29,"ld_part_id":null,"activity_group_id":null,"level":4,"position":1},
+				{"id":21,"ld_id":3,"activity_id":30,"ld_part_id":null,"activity_group_id":null,"level":4,"position":2}
+			];
+			var nodeId = 29;
+			var nodeType = 'ACTIVITY';
+			var level = 4;
+			var position = 1;
+			var result = fixture.getComposesRecord(composesRecords, nodeId, nodeType, level, position);
+			expect(result).not.to.be.null;
+		});
+
 	});
+
 
 	describe('Finds Nodes in Path', function() {
 

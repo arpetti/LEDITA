@@ -9,7 +9,27 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
     $scope.selectedObjectives = [];
     $scope.selectedPrerequisites = [];
 
-    // #43 wip...
+    LDEditService.getLearningDesign($scope.ldid, function(res) {
+        $scope.learningDesign = res;
+        initLdPublicationFlag();
+        initMultiSelections();
+        Home.getQcers(function(res) {
+	        $scope.qceropts = res;
+        	initSelectedQcers()
+	    }, function(err) {
+	        $scope.qcerError = err;
+	    });
+    }, function(err) {
+        $location.path('/');
+    });
+
+    LDService.getActivities($scope.ldid, function(res) {
+        $scope.levels = res;
+    }, function(err) {
+        $scope.error = "Failed to fetch learning design activities.";
+        $scope.alertMsg = err;
+    });
+
     $scope.dropped = function(dragEl, dropEl) { 
     	var sourceTargetData = {
     		dragSource: ActivityService.parseDragSource(dragEl.id),
@@ -19,7 +39,7 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
     	
     	LDEditService.updateActivityLevelPosition($scope.ldid, sourceTargetData,
 	        function(res) {
-	        	// TODO Make corresponding level-position change in $scope.levels, then $scope.$apply()
+	        	$scope.levels = res;
 	        },
 	        function(err) {
 	        	$scope.ldUpdateErrors = err; // TODO UI to display these
@@ -34,20 +54,6 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
     	};
     	console.log('drag&drop group: ' + JSON.stringify(sourceTargetData));
     };
-
-    LDEditService.getLearningDesign($scope.ldid, function(res) {
-        $scope.learningDesign = res;
-        initLdPublicationFlag();
-        initMultiSelections();
-        Home.getQcers(function(res) {
-	        $scope.qceropts = res;
-        	initSelectedQcers()
-	    }, function(err) {
-	        $scope.qcerError = err;
-	    });
-    }, function(err) {
-        $location.path('/');
-    });
 
     initLdPublicationFlag = function() {
     	if ($scope.learningDesign.ld_publication === 0) {
@@ -67,13 +73,6 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
 		$scope.selectedQcers = LDEditService.generateSelectedQcers(
 			$scope.learningDesign.qcers, $scope.qceropts); 
     };
-
-    LDService.getActivities($scope.ldid, function(res) {
-        $scope.levels = res;
-    }, function(err) {
-        $scope.error = "Failed to fetch learning design activities.";
-        $scope.alertMsg = err;
-    });
 
     $scope.getScopes = function(scope) {
     	return TypeaheadHelper.getScopes(scope);

@@ -6,7 +6,6 @@ var activityService = require('./ActivityService');
 
 module.exports = {
 
-	// #43 wip...
 	// callback(err, result, message)
 	nodeToNode: function(ldId, source, target, callback) {
 		composesDao.findAllComposes([ldId], function(err, results) {
@@ -18,7 +17,7 @@ module.exports = {
 				var sourceRecord = ch.getComposesRecord(results, source.nodeId, source.nodeType, source.level, source.position);
 				var targetRecord = ch.getComposesRecord(results, target.nodeId, target.nodeType, target.level, target.position);
 				if (!sourceRecord || !targetRecord) {
-					callback(err, null, messages.DRAG_DROP_FAIL);
+					callback(new Error('Drag and drop source or target not found.'), null, messages.DRAG_DROP_FAIL);
 					return;
 				}
 				

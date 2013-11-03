@@ -73,7 +73,7 @@ angular.module('ledita-app')
         },
 
         updateActivityLevelPosition: function(ldId, sourceTargetData, success, error) {
-        	$http.put('/learningdesign/composes/' + ldId, sourceTargetData).success(function(res) {
+        	$http.put('/learningdesign/composes/nodetonode/' + ldId, sourceTargetData).success(function(res) {
                 success(res);
             }).error(error);
         },

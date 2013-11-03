@@ -150,9 +150,9 @@ var routes = [
         accessLevel: accessLevels.user
     },
     {
-    	path: '/learningdesign/composes/:id',
+    	path: '/learningdesign/composes/nodetonode/:id',
     	httpMethod: 'PUT',
-    	middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, ComposesController.updateLevelPosition],
+    	middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, ComposesController.nodeToNode],
         accessLevel: accessLevels.user
     },
 

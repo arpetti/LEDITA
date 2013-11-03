@@ -87,7 +87,7 @@ describe('Learning Design Edit Service', function() {
 			expect(false).toBe(true); // should not get here
 		};
 
-		$httpBackend.when('PUT', '/learningdesign/composes/' + ldId, sourceTargetData).respond(serviceResponse);
+		$httpBackend.when('PUT', '/learningdesign/composes/nodetonode/' + ldId, sourceTargetData).respond(serviceResponse);
     	service.updateActivityLevelPosition(ldId, sourceTargetData, success, error);
     	$httpBackend.flush();
     });	

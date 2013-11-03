@@ -1,4 +1,5 @@
 var _ = require('underscore');
+var logger = require('../util/LogWrapper');
 
 var getNodesInPathTop = function(composesRecords, startLevel, startPosition) {
 	var criteria = {position: startPosition};
@@ -60,7 +61,7 @@ module.exports = {
 		};
 		var idType = activityTypes[nodeType];
 		var criteria = {};
-		criteria[idType] = nodeId;
+		criteria[idType] = parseInt(nodeId); // parseInt not required for test, but for site, nodeId gets converted to string
 		criteria.level= level;
 		criteria.position = position;
 

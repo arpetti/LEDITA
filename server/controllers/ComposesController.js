@@ -1,12 +1,17 @@
-var logWrapper = require('../util/LogWrapper');
+var logger = require('../util/LogWrapper');
+var composesService = require('../service/ComposesService');
 
 module.exports = {
 
-	// #43 wip, verifying client to server communication w.r.t dragSource and dropTarget
-	updateLevelPosition: function(req, res) {
+	nodeToNode: function(req, res) {
 		var ldId = req.params.id;
-		var levelPositionData = req.body;
-		logWrapper.log().info('Update Level Position, ldId = ' + ldId + ' levelPositionData = ' + JSON.stringify(levelPositionData));
-		res.json(200, {});
+		var requestData = req.body;
+		composesService.nodeToNode(ldId, requestData.dragSource, requestData.dropTarget, function(err, result, message) {
+			if(err) {
+                return res.send(500, message);
+            } else {
+            	res.json(200, result);
+            }
+		})
 	}
 };
