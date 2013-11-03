@@ -12,12 +12,14 @@ module.exports = {
 			if(err){
 				callback(err, null, messages.DRAG_DROP_FAIL);
 			} else if (results.length === 0) {
-				callback(err, null, messages.DRAG_DROP_FAIL);
+				logger.log().warn('Drag Drop no composes records found for LD');
+				callback(new Error('Drag Drop no composes records found for LD'), null, messages.DRAG_DROP_FAIL);
 			} else {
 				var sourceRecord = ch.getComposesRecord(results, source.nodeId, source.nodeType, source.level, source.position);
 				var targetRecord = ch.getComposesRecord(results, target.nodeId, target.nodeType, target.level, target.position);
 				if (!sourceRecord || !targetRecord) {
-					callback(new Error('Drag and drop source or target not found.'), null, messages.DRAG_DROP_FAIL);
+					logger.log().warn('Drag Drop source or target not found');
+					callback(new Error('Drag Drop source or target not found'), null, messages.DRAG_DROP_FAIL);
 					return;
 				}
 				
@@ -30,15 +32,16 @@ module.exports = {
 
 				var isValid = ch.validateNodes(nodesMoved);
 				if (!isValid) {
+					logger.log().warn('Drag Drop invalid move');
 					callback(new Error('Invalid move'), null, messages.DRAG_DROP_INVALID);
 					return;
 				}
 
-				module.exports.updateStructure(nodesMoved, ldId, function(err, results) {
+				module.exports.updateStructure(nodesMoved, ldId, function(err, result, message) {
 					if(err) {
-						callback(err, null, messages.DRAG_DROP_FAIL);
+						callback(err, null, message);
 					} else {
-						callback(null, results);
+						callback(null, result);
 					}
 				});
 			}
@@ -49,13 +52,15 @@ module.exports = {
 	updateStructure: function(nodes, ldId, cb) {
 		composesDao.updateComposesMulti(nodes, function(err, results) {
 			if(err) {
+				logger.log().error('Drag Drop move was valid but unable to update composes', err);
 				cb(err, null, messages.DRAG_DROP_FAIL);
 			} else {
-				activityService.getEnrichedLDActivityStructure(ldId, function(err, results) {
+				activityService.getEnrichedLDActivityStructure(ldId, function(err, result, message) {
 					if(err) {
-						cb(err, null, messages.DRAG_DROP_FAIL);
+						logger.log().error('Drag Drop updates completed successfully but unable to retrieve LD nodes', err);
+						cb(err, null, message);
 					} else {
-						cb(null, results);
+						cb(null, result);
 					}
 				})
 			}
