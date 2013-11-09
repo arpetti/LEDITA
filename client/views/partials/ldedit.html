@@ -286,18 +286,22 @@
 
 <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Global View) -->
 <div ng-repeat="(level, nodes) in levels" class="levelBoxEdit">
+    <!-- TODO: add drop directives -->
     <div class="dropHorizontal dropWidth">Level {{level}}</div>
     <div id="{{node.node_id}}-{{node.type}}-{{node.level}}-{{node.position}}" ng-repeat="node in nodes"
          x-lvl-draggable="true" ng-class="getBoxEditClass(node)">
         <!-- If it's a group:  -->
         <div ng-show="node.children" class="groupName">{{ node.node_name }}</div>
         <div class="clearfix"></div>
+        <!-- TODO: add drop directives - This drop zone always has position == 1 -->
         <div ng-show="node.children " class="leftGroupDrop"> 1</div>
 
         <!-- Children are also in levels: Create unstyled div for each level -->
         <div ng-repeat="(childLevel, subChildren) in node.children" class="levelBoxChildEdit">
+            <!-- TODO: add drop directives -->
             <div class="dropHorizontal">Group Level {{childLevel}}</div>
             <div ng-repeat="child in subChildren" ng-class="getGroupEditBoxClass(child)">
+                <!-- TODO: add drop directives -->
                 <div class="leftActDrop">{{child.position}}</div>
                 <!-- TOP DROP ZONE BORDER
                 <div id="{{child.group_id}}-{{child.group_child_id}}-{{child.group_child_type}}-{{child.level}}-{{child.position}}-top"
@@ -338,16 +342,16 @@
                     <a class="deleteEdit " ng-href="#"><i class="icon-remove icon-white"></i> </a>
                 </div>
             </div>
-            <!-- TODO: dynamic child.position  + 1 -->
-            <!-- TODO: add class reporting the max number of levels inside the group  -->
+            <!-- TODO: add drop directives - make dynamic the 'child.position +1' -->
             <div class="rightActDrop">{{child.position}} +1</div>
 
-            <!-- TODO: change == 'maxChildLevel' -->
+            <!-- TODO: add drop directives - change '1' with a directive that show the maxChildLevel number -->
             <div ng-show="childLevel == 1" class="dropHorizontal ">Group Level {{childLevel}} + 1</div>
         </div>
         <!-- End Children -->
         <!-- If it's NOT a group:  -->
         <div ng-show="!node.children" class="actNameEditSingle">
+            <!-- TODO: add drop directives -->
             <div class="leftActDrop">{{node.position}}</div>
             <!-- TOP DROP ZONE BORDER
                       <div id="{{node.node_id}}-{{node.type}}-{{node.level}}-{{node.position}}-top" class="topDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
@@ -388,9 +392,11 @@
         </div>
 
     </div>
+    <!-- TODO: add drop directives - make dynamic node.position +1 -->
     <div class="rightActDrop">{{node.position}} +1</div>
     <!-- End Activity or Group Box -->
 </div>
+<!-- TODO: add drop directives - make dynamic max level +1 -->
 <div class="dropHorizontal dropWidth ">Max Level +1</div>
 <div id="activityErrors" ng-show="alertMsg" class="alert alert-warning">
     {{ alertMsg }}
