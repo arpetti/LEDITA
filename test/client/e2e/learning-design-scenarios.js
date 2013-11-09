@@ -4,6 +4,10 @@
 
 describe('Learning Design', function() {
 
+	afterEach(function() {
+		browser().navigateTo('/logout');
+	});
+
     it('Logged in user can see all learning designs on home page', function() {
         var existingUserName = testUsers.getUserName;
         var existingUserPassword = testUsers.getUserPassword;

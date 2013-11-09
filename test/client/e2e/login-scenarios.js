@@ -4,6 +4,10 @@
 
 describe('Login Flow', function() {
 
+	afterEach(function() {
+		browser().navigateTo('/logout');
+	});
+
     it('Non logged in user sees anon view on login page', function() {
         browser().navigateTo('/login');
         sleep(3);

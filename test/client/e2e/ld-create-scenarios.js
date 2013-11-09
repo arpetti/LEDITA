@@ -4,6 +4,10 @@
 
 describe('Create a new Learning Design', function() {
 
+	afterEach(function() {
+		browser().navigateTo('/logout');
+	});
+
 	var existingUserName = testUsers.getMarioUserName;
     var existingUserPassword = testUsers.getMarioUserPassword;
 
@@ -232,6 +236,10 @@ describe('Create a new Learning Design', function() {
 
 	describe('Server side validation', function() {
 
+		afterEach(function() {
+			browser().navigateTo('/logout');
+		});
+
 		it('Enforces at least one qcer must be selected', function() {
 			browser().navigateTo('/login');
 	        input('username').enter(existingUserName);
@@ -267,6 +275,10 @@ describe('Create a new Learning Design', function() {
 	});
 
 	describe('Client side Validation', function() {
+
+		afterEach(function() {
+			browser().navigateTo('/logout');
+		});
 
 		var verify = function(field, invalidInput, validInput, fieldErrorId, expectedErrorMessage) {
 			input(field).enter(invalidInput);

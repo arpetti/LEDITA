@@ -1,5 +1,9 @@
 describe('Navigation', function() {
 
+	afterEach(function() {
+		browser().navigateTo('/logout');
+	});
+
 	it('Default page', function() {
     	browser().navigateTo('/');
     	// This remains commented until have a fix - https://github.com/angular/angular.js/issues/3149

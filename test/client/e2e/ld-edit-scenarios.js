@@ -4,6 +4,10 @@
 
 describe('Edit Learning Design', function() {
 
+	afterEach(function() {
+		browser().navigateTo('/logout');
+	});
+
 	it('Updates are saved', function() {
 
 		var verifyTypeAheadValues = function(cssSelector, message, expectedValues) {

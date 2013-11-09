@@ -4,6 +4,10 @@
 
 describe('Registration', function() {
 
+	afterEach(function() {
+		browser().navigateTo('/logout');
+	});
+
 	it('New user can register', function() {
 		var userNameToRegister = 'john.smith@test.com';
 
@@ -81,6 +85,10 @@ describe('Registration', function() {
 	});
 
 	describe('Server side validation', function() {
+
+		afterEach(function() {
+			browser().navigateTo('/logout');
+		});
 
 		it('Cannot register a user that already exists', function() {
 			var existingUserName = testUsers.getUserName;

@@ -45,6 +45,12 @@ var routes = [
         middleware: [AuthController.logout],
         accessLevel: accessLevels.public
     },
+    {
+        path: '/logout',
+        httpMethod: 'GET',
+        middleware: [AuthController.logout],
+        accessLevel: accessLevels.public
+    },
 
     // Learning Design - Read
     {
