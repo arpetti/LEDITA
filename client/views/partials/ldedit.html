@@ -369,7 +369,7 @@
                                     ng-show="!(node | durationDisplay)"> Free</span> </span>
                     <span class="orgLabel"><i class="icon-th-large icon-white"></i> {{ node.org_label }}</span>
                 </div>
-                <div class="actLabel" ng-show="node.type=='LD'">
+                <div class="actLabelEdit" ng-show="node.type=='LD'">
                     <span class="timeLabel"><i class="icon-bell icon-white"></i> {{ node.scope }}</span>
                             <span class="orgLabel"><i class="icon-signal icon-white" ng-show="node.qcers"></i> <span
                                     ng-repeat="qcer in node.qcers"
