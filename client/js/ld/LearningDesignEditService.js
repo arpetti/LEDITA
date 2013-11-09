@@ -124,6 +124,33 @@ angular.module('ledita-app')
             $http.put('/learningdesign/private/' + ldId).success(function(res) {
                 success(res);
             }).error(error);
+        },
+
+        getBoxEditClass: function(node) {
+            if (node.type === 'ACTIVITY') {
+                return 'actBoxEdit';
+            }
+            if (node.type === 'LD') {
+                return 'ldBoxEdit';
+            }
+            if (node.type === 'ACTIVITY_GROUP') {
+                if (node.max_position >= 1 && node.max_position <= 4) {
+                    return 'groupBoxEdit' + node.max_position;
+                }
+            }
+            console.log('WARNING: Could not determine box class for node.');
+            return '';
+        },
+
+        getGroupEditBoxClass: function(node) {
+            if (node.group_child_type === 'ACTIVITY') {
+                return 'actBoxEdit';
+            }
+            if (node.group_child_type === 'LD') {
+                return 'ldBoxEdit';
+            }
+            console.log('WARNING: Could not determine box class for node.');
+            return '';
         }
 
     };

@@ -317,4 +317,12 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
         backdropClick:false
     };
 
+    $scope.getBoxEditClass = function(node) {
+        return LDEditService.getBoxEditClass(node);
+    };
+    $scope.getGroupEditBoxClass = function(node) {
+        return LDEditService.getGroupEditBoxClass(node);
+    };
+
+
 }]);

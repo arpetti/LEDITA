@@ -848,6 +848,41 @@ input.scopeLDInput {
 .delete {
     float: right;
 }
+
+.toolsEdit {
+    position: relative;
+    left: -10px;
+    bottom: 7px;
+    width: 99px;
+}
+
+.editEdit {
+    float: left;
+    position: relative;
+    left: -7px;
+}
+
+.editEdit, .deleteEdit {
+    margin:0;
+    background-color: #4f4f4f;
+    border-radius: 16px;
+    width: 16px;
+    height: 16px;
+    line-height: 14px;
+    border: 2px solid #ffffff;
+    padding: 0;
+    text-align: center;
+}
+
+.editEdit:hover, .deleteEdit:hover {
+    background-color: #990000;
+}
+
+.deleteEdit {
+    float: right;
+    position: relative;
+    right: -7px;
+}
 .durationBox {
     margin: 0;
     padding: 0;
@@ -982,6 +1017,7 @@ input.formInputDuration[type=number]::-webkit-inner-spin-button:after {
     -webkit-border-radius: 0 0 6px 6px;
     border-top: none;
     padding:  5px 0 0 0;
+    overflow: hidden;
 }
 
 .actBox {
@@ -1003,6 +1039,43 @@ input.formInputDuration[type=number]::-webkit-inner-spin-button:after {
     min-height: 40px;
     width: 21%;
     margin: 10px 1%;
+    display: inline-block;
+    border: 6px solid #FFFFFF;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.actBoxEdit {
+    border-radius: 6px;
+    color: #FFF;
+    height: 120px;
+    width: 99px;
+    margin: 0 0 0 33px;
+    display: inline-block;
+    border: 6px solid #ebc786;
+    background: url("../img/boardBody.png");
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.dropHorizontal {
+    height: 20px;
+    border: 1px dashed #999;
+    margin: 5px;
+    border-radius: 4px;
+}
+
+.groupBoxEdit4 .actBoxEdit, .groupBoxEdit3 .actBoxEdit, .groupBoxEdit2 .actBoxEdit, .groupBoxEdit1 .actBoxEdit {
+    width: 99px;
+    height: 120px;
+    margin: 0 0 0 33px;
+}
+
+.ldBoxEdit {
+    background-color: #0099CC;
+    border-radius: 6px;
+    color: #FFF;
+    height: 120px;
+    width: 99px;
+    margin: 0 0 0 33px;
     display: inline-block;
     border: 6px solid #FFFFFF;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
@@ -1030,12 +1103,38 @@ input.formInputDuration[type=number]::-webkit-inner-spin-button:after {
     background: url("../img/arw.png") no-repeat top;
 }
 
+.levelBoxEdit {
+    text-align: center;
+    margin-top: -10px;
+    padding-top: 20px;
+    background: url("../img/arw.png") no-repeat top;
+}
+.levelBoxChildEdit {
+    text-align: center;
+    padding-top: 30px;
+    background: url("../img/arw.png") no-repeat top;
+}
+
+.dropWidth {
+ width: 150px;
+    margin: 5px auto;
+}
+
 div.clearfix+div.levelBox, div.levelBox:first-child,
 div.newActBox+div.levelBox, div.newActBox:first-child,
 div.clearfix+div.levelBoxChild, div.levelBoxChild:first-child  {
     background: none;
     padding-top: 0;
 }
+
+div.clearfix+div.levelBoxEdit, div.levelBoxEdit:first-child,
+div.newActBox+div.levelBoxEdit, div.newActBox:first-child,
+div.leftGroupDrop+div.levelBoxChildEdit, div.levelBoxChildEdit:first-child  {
+    background: none;
+    padding-top: 0;
+}
+
+
 
 
 .actId {
@@ -1059,6 +1158,36 @@ div.clearfix+div.levelBoxChild, div.levelBoxChild:first-child  {
 
 }
 
+.actNameEdit {
+    clear: left;
+    position: relative;
+    font-family: 'arial', sans-serif;
+    left: -20px;
+    padding: 0;
+    margin: 3px 0;
+    width: 115px;
+    font-size: 12px;
+    line-height: 16px;
+    cursor: pointer;
+    text-align: center;
+    height: 64px ;
+
+}
+.actNameEditSingle {
+    clear: left;
+    position: relative;
+    font-family: 'arial', sans-serif;
+    padding: 0;
+    margin: 3px 0;
+    width: 115px;
+    font-size: 12px;
+    line-height: 16px;
+    cursor: pointer;
+    text-align: center;
+    height: 64px ;
+
+}
+
 .groupBox1, .groupBox2, .groupBox3, .groupBox4 {
     background-color: #dddddd;
     margin: 10px 0.5%;
@@ -1069,8 +1198,17 @@ div.clearfix+div.levelBoxChild, div.levelBoxChild:first-child  {
 
 }
 
+.groupBoxEdit1, .groupBoxEdit2, .groupBoxEdit3, .groupBoxEdit4 {
+    background-color: #dddddd;
+    border-radius: 6px;
+    padding: 0;
+    display: inline-block;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+
+}
+
 .groupBox1 {
-    width: 22.5%;
+    width: 19%;
 }
 
 .groupBox2 {
@@ -1083,6 +1221,103 @@ div.clearfix+div.levelBoxChild, div.levelBoxChild:first-child  {
 
 .groupBox4 {
     width: 96%;
+}
+
+.smallTextQCER {
+    font-size: 8px;
+}
+
+.groupBoxEdit1 {
+    width: 180px;
+    margin: 10px 0;
+    padding: 0;
+}
+
+.groupBoxEdit2 {
+    width: 320px;
+    margin: 10px 0;
+    padding: 0;
+}
+
+.groupBoxEdit3 {
+    width: 460px;
+    margin: 10px 0;
+    padding: 0;
+}
+
+.groupBoxEdit4 {
+    width: 600px;
+    margin: 10px 0;
+    padding: 0;
+}
+
+.groupBoxEdit4 .actBoxEdit {
+    width: 99px;
+    height: 120px;
+    margin: 0 0 0 33px;
+}
+
+.leftActDrop {
+    border: 1px dashed #999999;
+    color: #999999;
+    height: 120px;
+ position: relative;
+    float: left;
+    width: 20px;
+    left: -33px;
+    border-radius: 4px;
+}
+
+.leftGroupDrop {
+    border: 1px dashed #999999;
+    color: #999999;
+    height: 120px;
+ position: relative;
+    left: -28px;
+    float: left;
+    width: 20px;
+    border-radius: 4px;
+    margin-right: -33px;
+    top: 37px
+}
+
+.rightActDrop {
+    border: 1px dashed #999999;
+    color: #999999;
+    height: 120px;
+    border-radius: 4px;
+    width: 20px;
+    margin-top: 5px;
+display: inline-block;
+    top: -85px;
+    margin-bottom: -65px;
+    position: relative;
+ }
+
+
+div.groupBoxEdit1 ~ div.rightActDrop,
+div.groupBoxEdit2 ~ div.rightActDrop,
+div.groupBoxEdit3 ~ div.rightActDrop
+{
+    border: 1px dashed #999999;
+    color: #999999;
+    height: 120px;
+    border-radius: 4px;
+    width: 20px;
+    margin-top: 5px;
+display: inline-block;
+    top: -145px;
+    margin-bottom: -65px;
+    position: relative;
+ }
+
+
+div.groupBoxEdit4 ~ div.rightActDrop {
+    display: none;
+}
+
+div.groupBoxEdit4 div.leftGroupDrop {
+    display: none;
 }
 
 .groupName {
@@ -1114,6 +1349,28 @@ div.clearfix+div.levelBoxChild, div.levelBoxChild:first-child  {
     padding: 5px 0;
     width: 95%;
     margin: 0 auto;
+
+}
+.separator {
+    border-top: 1px dashed #FFFFFF ;
+height: 1px;
+    width: 99px;
+}
+
+
+.actLabelEdit {
+    font-size: 11px;
+    font-weight: bold;
+    font-family: 'arial', sans-serif;
+    text-align: center;
+    cursor: pointer;
+    padding:3px 0;
+    left: -20px;
+    position: relative;
+    width: 115px;
+    line-height: 16px;
+    margin: 0 auto;
+    height: 40px;
 
 }
 

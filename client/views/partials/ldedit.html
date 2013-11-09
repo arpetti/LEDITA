@@ -27,93 +27,111 @@
         </div>
 
         <!-- Topics -->
-        <div id="editTopics" class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-map-marker"></i> Topics:</h5>
-			<form novalidate class="sidebarForm" name="LdTopicForm">  
-			<div class="errorBox">
-                <span id="topicReqErr" class="errorTipModal" ng-show="LdTopicForm.ldTopic.$dirty && LdTopicForm.ldTopic.$error.required">Required!</span>
-                <span id="topicPatternErr" class="errorTipModal" ng-show="LdTopicForm.ldTopic.$error.pattern">A topic cannot contain this symbol.</span>
-                <span id="topicLengthErr" class="errorTipModal" ng-show="LdTopicForm.ldTopic.$error.maxlength">A topic cannot be longer than 255 characters.</span>
-                <span class="clearfix"></span>
-            </div>      	
-            <input class="sidebarInput" type="text" ng-model="ldTopic" name="ldTopic"
-               	typeahead="suggestion for suggestion in getSubjects($viewValue)"
-               	typeahead-on-select="addTopic()"
-               	ui-keypress="{13:'addTopic()'}"
-               	placeholder="Topics..." required ng-maxlength="255"
-               	ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
-            <span id="addTopicIcon" class="editButton" ng-click="addTopic()"><i class="icon-plus icon-white"></i></span>
-            <div id="topicTagsEdit">
-	            <ul ng-repeat="topic in selectedTopics" class="zeroMargin subjects">
-	                <li class="sidebarEditItem">
+        <div id="editTopics" class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-map-marker"></i>
+            Topics:</h5>
+
+            <form novalidate class="sidebarForm" name="LdTopicForm">
+                <div class="errorBox">
+                    <span id="topicReqErr" class="errorTipModal"
+                          ng-show="LdTopicForm.ldTopic.$dirty && LdTopicForm.ldTopic.$error.required">Required!</span>
+                    <span id="topicPatternErr" class="errorTipModal" ng-show="LdTopicForm.ldTopic.$error.pattern">A topic cannot contain this symbol.</span>
+                    <span id="topicLengthErr" class="errorTipModal" ng-show="LdTopicForm.ldTopic.$error.maxlength">A topic cannot be longer than 255 characters.</span>
+                    <span class="clearfix"></span>
+                </div>
+                <input class="sidebarInput" type="text" ng-model="ldTopic" name="ldTopic"
+                       typeahead="suggestion for suggestion in getSubjects($viewValue)"
+                       typeahead-on-select="addTopic()"
+                       ui-keypress="{13:'addTopic()'}"
+                       placeholder="Topics..." required ng-maxlength="255"
+                       ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
+                <span id="addTopicIcon" class="editButton" ng-click="addTopic()"><i
+                        class="icon-plus icon-white"></i></span>
+
+                <div id="topicTagsEdit">
+                    <ul ng-repeat="topic in selectedTopics" class="zeroMargin subjects">
+                        <li class="sidebarEditItem">
 	                	<span class="sidebarEditItemLink">{{topic}} 
 	                	<a ng-click="removeTopic(topic)"><i class="icon-remove-circle"></i> </a></span>
-	                </li>
-	            </ul>
-        	</div>
-        	</form>
-        </div>
-        
-        <!-- Objectives -->
-        <div id="editObjectives" class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-screenshot"></i> Objectives:</h5>
-        	<form novalidate class="sidebarForm" name="LdObjectiveForm">
-        	<div class="errorBox">
-                <span id="objectiveReqErr" class="errorTipModal" ng-show="LdObjectiveForm.ldObjective.$dirty && LdObjectiveForm.ldObjective.$error.required">Required!</span>
-                <span id="objectivePatternErr" class="errorTipModal" ng-show="LdObjectiveForm.ldObjective.$error.pattern">An objective cannot contain this symbol.</span>
-                <span id="objectiveLengthErr" class="errorTipModal" ng-show="LdObjectiveForm.ldObjective.$error.maxlength">An objective cannot be longer than 255 characters.</span>
-                <span class="clearfix"></span>
-            </div>
-            <input class="sidebarInput" type="text" ng-model="ldObjective" name="ldObjective"
-               	typeahead="suggestion for suggestion in getObjectives($viewValue)"
-               	typeahead-on-select="addObjective()"
-               	ui-keypress="{13:'addObjective()'}"
-               	placeholder="Objectives..." required ng-maxlength="255"
-               	ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
-            <span id="addObjectiveIcon" class="editButton" ng-click="addObjective()"><i class="icon-plus icon-white"></i> </span>
-            <div id="objectiveTagsEdit">
-	            <ul ng-repeat="objective in selectedObjectives" class="zeroMargin objectives">
-	                <li class="sidebarEditItem">
-	                	<span class="sidebarEditItemLink">{{objective}} 
-	                	<a ng-click="removeObjective(objective)"><i class="icon-remove-circle"></i></a></span>
-	                </li>
-	            </ul>
-        	</div>
-        	</form>
-        </div>
-        
-        <!-- Prerequisites -->
-        <div id="editPrerequisites" class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-backward"></i> Pre-Requisites:</h5>
-            <form novalidate class="sidebarForm" name="LdPrereqForm">
-            <div class="errorBox">
-                <span id="prereqPatternErr" class="errorTipModal" ng-show="LdPrereqForm.ldRequisite.$error.pattern">A pre-requisite cannot contain this symbol.</span>
-                <span id="prereqLengthErr" class="errorTipModal" ng-show="LdPrereqForm.ldRequisite.$error.maxlength">A pre-requisite cannot be longer than 255 characters.</span>
-            </div>
-            <input class="sidebarInput" type="text" ng-model="ldRequisite" name="ldRequisite"
-               	typeahead="suggestion for suggestion in getObjectives($viewValue)"
-               	typeahead-on-select="addPrerequisite()"
-               	ui-keypress="{13:'addPrerequisite()'}"
-               	placeholder="Prerequisites..." required ng-maxlength="255"
-               	ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
-            <span id="addPrerequisiteIcon" class="editButton" ng-click="addPrerequisite()"><i class="icon-plus icon-white"></i> </span>
-            <div id="prerequisiteTagsEdit">
-	            <ul ng-repeat="prereq in selectedPrerequisites" class="zeroMargin prerequisites">
-	                <li class="sidebarEditItem">
-	                	<span class="sidebarEditItemLink">{{prereq}} 
-	                	<a ng-click="removePrerequisite(prereq)"><i class="icon-remove-circle"></i> </a></span>
-	                </li>
-	            </ul>
-        	</div>
+                        </li>
+                    </ul>
+                </div>
             </form>
         </div>
-        
+
+        <!-- Objectives -->
+        <div id="editObjectives" class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-screenshot"></i>
+            Objectives:</h5>
+
+            <form novalidate class="sidebarForm" name="LdObjectiveForm">
+                <div class="errorBox">
+                    <span id="objectiveReqErr" class="errorTipModal"
+                          ng-show="LdObjectiveForm.ldObjective.$dirty && LdObjectiveForm.ldObjective.$error.required">Required!</span>
+                    <span id="objectivePatternErr" class="errorTipModal"
+                          ng-show="LdObjectiveForm.ldObjective.$error.pattern">An objective cannot contain this symbol.</span>
+                    <span id="objectiveLengthErr" class="errorTipModal"
+                          ng-show="LdObjectiveForm.ldObjective.$error.maxlength">An objective cannot be longer than 255 characters.</span>
+                    <span class="clearfix"></span>
+                </div>
+                <input class="sidebarInput" type="text" ng-model="ldObjective" name="ldObjective"
+                       typeahead="suggestion for suggestion in getObjectives($viewValue)"
+                       typeahead-on-select="addObjective()"
+                       ui-keypress="{13:'addObjective()'}"
+                       placeholder="Objectives..." required ng-maxlength="255"
+                       ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
+                <span id="addObjectiveIcon" class="editButton" ng-click="addObjective()"><i
+                        class="icon-plus icon-white"></i> </span>
+
+                <div id="objectiveTagsEdit">
+                    <ul ng-repeat="objective in selectedObjectives" class="zeroMargin objectives">
+                        <li class="sidebarEditItem">
+	                	<span class="sidebarEditItemLink">{{objective}} 
+	                	<a ng-click="removeObjective(objective)"><i class="icon-remove-circle"></i></a></span>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <!-- Prerequisites -->
+        <div id="editPrerequisites" class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-backward"></i>
+            Pre-Requisites:</h5>
+
+            <form novalidate class="sidebarForm" name="LdPrereqForm">
+                <div class="errorBox">
+                    <span id="prereqPatternErr" class="errorTipModal" ng-show="LdPrereqForm.ldRequisite.$error.pattern">A pre-requisite cannot contain this symbol.</span>
+                    <span id="prereqLengthErr" class="errorTipModal"
+                          ng-show="LdPrereqForm.ldRequisite.$error.maxlength">A pre-requisite cannot be longer than 255 characters.</span>
+                </div>
+                <input class="sidebarInput" type="text" ng-model="ldRequisite" name="ldRequisite"
+                       typeahead="suggestion for suggestion in getObjectives($viewValue)"
+                       typeahead-on-select="addPrerequisite()"
+                       ui-keypress="{13:'addPrerequisite()'}"
+                       placeholder="Prerequisites..." required ng-maxlength="255"
+                       ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
+                <span id="addPrerequisiteIcon" class="editButton" ng-click="addPrerequisite()"><i
+                        class="icon-plus icon-white"></i> </span>
+
+                <div id="prerequisiteTagsEdit">
+                    <ul ng-repeat="prereq in selectedPrerequisites" class="zeroMargin prerequisites">
+                        <li class="sidebarEditItem">
+	                	<span class="sidebarEditItemLink">{{prereq}} 
+	                	<a ng-click="removePrerequisite(prereq)"><i class="icon-remove-circle"></i> </a></span>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
         <!-- LD Students Description -->
         <div class="clear marginTopSidebar">
             <h5 class="zeroMargin"><i class="icon-user"></i> Students' Description:</h5>
+
             <form class="sidebarForm">
-                <textarea 
-                	ng-model="learningDesign.ld_students_profile" 
-                	ui-Blur="updateStudentsDescr()" 
-                	class="sidebarTextarea" 
-                	rows="4">
+                <textarea
+                        ng-model="learningDesign.ld_students_profile"
+                        ui-Blur="updateStudentsDescr()"
+                        class="sidebarTextarea"
+                        rows="4">
                 </textarea>
             </form>
         </div>
@@ -138,16 +156,17 @@
 
         <div class="clearfix"></div>
         <div class="clear marginTopSidebar">
-            
+
             <!-- LD Publication -->
             <h5 class="zeroMargin"><i class="icon-bullhorn"></i> Publication:</h5>
+
             <div class="onoffswitch">
-                <input type="checkbox" 
-                	ng-model="ldPublicationFlag"
-                	ng-change="updateLdPublication()"
-                	name="onoffswitch" 
-                	class="onoffswitch-checkbox" 
-                	id="myonoffswitch">
+                <input type="checkbox"
+                       ng-model="ldPublicationFlag"
+                       ng-change="updateLdPublication()"
+                       name="onoffswitch"
+                       class="onoffswitch-checkbox"
+                       id="myonoffswitch">
                 <label class="onoffswitch-label" for="myonoffswitch">
                     <div class="onoffswitch-inner"></div>
                     <div class="onoffswitch-switch"></div>
@@ -184,18 +203,18 @@
 
 <div id="contentBody">
     <div id="contentHeader">
-        
+
         <!-- LD Name -->
-        <div >
+        <div>
             <form name="LdName" novalidate="" class="singleForm">
                 <div>
                     <label class="editLabel"><i class="icon-book icon-white"></i> Design name: </label>
                     <input class="editInputName" type="text"
-                        name="ldName"
-                        ng-model="learningDesign.ld_name" required
-                        ui-Blur="updateLdName()"
-                        ng-maxlength="50"
-                        ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
+                           name="ldName"
+                           ng-model="learningDesign.ld_name" required
+                           ui-Blur="updateLdName()"
+                           ng-maxlength="50"
+                           ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
 
                     <div class="errorBoxTab">
                         <span class="errorTipTab"
@@ -207,16 +226,16 @@
             </form>
         </div>
 
-        <div >
-        	<!-- LD Qcer -->
+        <div>
+            <!-- LD Qcer -->
             <div class="titleQcer">
                 <label class="editLabel"><i class="icon-tasks icon-white"></i> QCER Levels:</label>
                 <span ng-show="qcerError">{{ qcerError }}</span>
-            	<span ng-repeat="qceropt in qceropts" class="qcerOptData" >
-                	<input type="checkbox" 
-                		ng-model="selectedQcers[qceropt.id]" 
-                		ng-change="updateQcer()"
-                		name="qcer"> {{ qceropt.name }}
+            	<span ng-repeat="qceropt in qceropts" class="qcerOptData">
+                	<input type="checkbox"
+                           ng-model="selectedQcers[qceropt.id]"
+                           ng-change="updateQcer()"
+                           name="qcer"> {{ qceropt.name }}
             	</span>
             </div>
 
@@ -225,14 +244,16 @@
                 <form name="ScopeForm" novalidate="" class="singleForm">
                     <div id="scopeFormSection">
                         <label class="editLabel"><i class="icon-bell icon-white"></i> Scope:</label>
-                        <input class="editInputScocpe" type="text" name="ldScope" 
-                        	ng-model="learningDesign.ld_scope"
-                        	typeahead="suggestion for suggestion in getScopes($viewValue)"
-                        	ui-Blur="updateLdScope()"
-                           	required ng-maxlength="50"
-                           	ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
+                        <input class="editInputScocpe" type="text" name="ldScope"
+                               ng-model="learningDesign.ld_scope"
+                               typeahead="suggestion for suggestion in getScopes($viewValue)"
+                               ui-Blur="updateLdScope()"
+                               required ng-maxlength="50"
+                               ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
+
                         <div class="errorBoxTab">
-                            <span class="errorTipTab" ng-show="(learningDesign.ld_scope == '') || (ScopeForm.ldScope.$dirty && ScopeForm.ldScope.$error.required)">Required!</span>
+                            <span class="errorTipTab"
+                                  ng-show="(learningDesign.ld_scope == '') || (ScopeForm.ldScope.$dirty && ScopeForm.ldScope.$error.required)">Required!</span>
                             <span class="errorTipTab" ng-show="ScopeForm.ldScope.$error.pattern">The scope cannot contain this symbol.</span>
                             <span class="errorTipTab" ng-show="ScopeForm.ldScope.$error.maxlength">The scope cannot be longer than 50 characters.</span>
                         </div>
@@ -264,65 +285,85 @@
 </div>
 
 <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Global View) -->
-<div ng-repeat="(level, nodes) in levels" class="levelBox">
-    <div id="{{node.node_id}}-{{node.type}}-{{node.level}}-{{node.position}}" ng-repeat="node in nodes" x-lvl-draggable="true" ng-class="getBoxClass(node)" class="dropBox" >
+<div ng-repeat="(level, nodes) in levels" class="levelBoxEdit">
+    <div class="dropHorizontal dropWidth">Level {{level}}</div>
+    <div id="{{node.node_id}}-{{node.type}}-{{node.level}}-{{node.position}}" ng-repeat="node in nodes"
+         x-lvl-draggable="true" ng-class="getBoxEditClass(node)">
         <!-- If it's a group:  -->
-        <div ng-show="node.children" class="groupName bigHeight">{{ node.node_name }}</div>
+        <div ng-show="node.children" class="groupName">{{ node.node_name }}</div>
         <div class="clearfix"></div>
+        <div ng-show="node.children " class="leftGroupDrop"> 1</div>
+
         <!-- Children are also in levels: Create unstyled div for each level -->
-        <div ng-repeat="(childLevel, subChildren) in node.children" class="levelBoxChild">
-            <div ng-repeat="child in subChildren" ng-class="getGroupBoxClass(child)" class="dropBox">
-            <!-- TOP DROP ZONE BORDER-->
-                <div id="{{child.group_id}}-{{child.group_child_id}}-{{child.group_child_type}}-{{child.level}}-{{child.position}}-top" 
+        <div ng-repeat="(childLevel, subChildren) in node.children" class="levelBoxChildEdit">
+            <div class="dropHorizontal">Group Level {{childLevel}}</div>
+            <div ng-repeat="child in subChildren" ng-class="getGroupEditBoxClass(child)">
+                <div class="leftActDrop">{{child.position}}</div>
+                <!-- TOP DROP ZONE BORDER
+                <div id="{{child.group_id}}-{{child.group_child_id}}-{{child.group_child_type}}-{{child.level}}-{{child.position}}-top"
                 	class="topDrop lvl-target" x-lvl-drop-target="true" x-on-drop="droppedGroup(dragEl, dropEl)"></div>
-                <!-- LEFT DROP ZONE BORDER-->
-                <div id="{{child.group_id}}-{{child.group_child_id}}-{{child.group_child_type}}-{{child.level}}-{{child.position}}-left" 
+                -->
+                <!-- LEFT DROP ZONE BORDER
+                <div id="{{child.group_id}}-{{child.group_child_id}}-{{child.group_child_type}}-{{child.level}}-{{child.position}}-left"
                 	class="leftDrop lvl-target" x-lvl-drop-target="true" x-on-drop="droppedGroup(dragEl, dropEl)"></div>
-                <!-- RIGHT DROP ZONE BORDER-->
-                <div id="{{child.group_id}}-{{child.group_child_id}}-{{child.group_child_type}}-{{child.level}}-{{child.position}}" 
+                -->
+                <!-- RIGHT DROP ZONE BORDER
+                <div id="{{child.group_id}}-{{child.group_child_id}}-{{child.group_child_type}}-{{child.level}}-{{child.position}}"
                 	class="rightDrop lvl-target" x-lvl-drop-target="true" x-on-drop="droppedGroup(dragEl, dropEl)"></div>
-                <div class="tools topUp1">
-                    <a class="edit moveLeft" ng-href="#"><i class="icon-edit icon-white"></i> </a>
-                    <a class="delete moveRight" ng-href="#"><i class="icon-remove icon-white"></i> </a>
-                </div>
-                <a class="whiteText childModalLink topUp2" ng-click="open(child)"><h6 class="actName noClear">{{
+                -->
+                <a class="whiteText childModalLink " ng-click="open(child)"><h6 class="actNameEdit noClear">{{
                     child.group_child_name }}</h6>
 
-                    <div class="actLabel" ng-show="child.group_child_type!='LD'">
+                    <div class="separator"></div>
+                    <div class="actLabelEdit" ng-show="child.group_child_type!='LD'">
                                 <span class="timeLabel"><i class="icon-time icon-white"></i> {{ child | durationDisplay}} <span
                                         ng-show="!(child | durationDisplay)"> Free</span></span>
                                 <span class="orgLabel"><i
                                         class="icon-th-large icon-white"></i> {{ child.org_label}}</span>
                     </div>
-                    <div class="actLabel" ng-show="child.group_child_type=='LD'">
+                    <div class="actLabelEdit" ng-show="child.group_child_type=='LD'">
                         <span class="timeLabel"><i class="icon-bell icon-white"></i> {{ child.scope}}</span>
                                     <span class="orgLabel"><i class="icon-signal icon-white"
                                                               ng-show="child.qcers"></i> <span
-                                            ng-repeat="qcer in child.qcers">{{ qcer.qcer_name }} </span></span>
+                                            ng-repeat="qcer in child.qcers"
+                                            class="smallTextQCER">{{ qcer.qcer_name }} </span></span>
                     </div>
                 </a>
-                <!-- BOTTOM DROP ZONE BORDER-->
-                <div id="{{child.group_id}}-{{child.group_child_id}}-{{child.group_child_type}}-{{child.level}}-{{child.position}}-bottom" 
+                <!-- BOTTOM DROP ZONE BORDER
+                <div id="{{child.group_id}}-{{child.group_child_id}}-{{child.group_child_type}}-{{child.level}}-{{child.position}}-bottom"
                 	class="bottomDrop lvl-target" x-lvl-drop-target="true" x-on-drop="droppedGroup(dragEl, dropEl)"></div>
+                -->
+                <div class="toolsEdit">
+                    <a class="editEdit " ng-href="#"><i class="icon-edit icon-white"></i> </a>
+                    <a class="deleteEdit " ng-href="#"><i class="icon-remove icon-white"></i> </a>
+                </div>
             </div>
+            <!-- TODO: dynamic child.position  + 1 -->
+            <!-- TODO: add class reporting the max number of levels inside the group  -->
+            <div class="rightActDrop">{{child.position}} +1</div>
+
+            <!-- TODO: change == 'maxChildLevel' -->
+            <div ng-show="childLevel == 1" class="dropHorizontal ">Group Level {{childLevel}} + 1</div>
         </div>
         <!-- End Children -->
         <!-- If it's NOT a group:  -->
-        <div ng-show="!node.children" class="actName dropBox">
-            <!-- TOP DROP ZONE BORDER-->
-            <div id="{{node.node_id}}-{{node.type}}-{{node.level}}-{{node.position}}-top" class="topDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
-            <!-- LEFT DROP ZONE BORDER-->
+        <div ng-show="!node.children" class="actNameEditSingle">
+            <div class="leftActDrop">{{node.position}}</div>
+            <!-- TOP DROP ZONE BORDER
+                      <div id="{{node.node_id}}-{{node.type}}-{{node.level}}-{{node.position}}-top" class="topDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
+                      -->
+            <!-- LEFT DROP ZONE BORDER
             <div id="{{node.node_id}}-{{node.type}}-{{node.level}}-{{node.position}}-left" class="leftDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
-            <!-- RIGHT DROP ZONE BORDER-->
+            -->
+            <!-- RIGHT DROP ZONE BORDER
             <div id="{{node.node_id}}-{{node.type}}-{{node.level}}-{{node.position}}-right" class="rightDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
-            <div class="tools topUp1">
-                <a class="edit moveLeft" ng-href="#"><i class="icon-edit icon-white"></i> </a>
-                <a class="delete moveRight" ng-href="#"><i class="icon-remove icon-white"></i> </a>
-            </div>
-            <a class="whiteText topUp2" ng-click="open(node)">
-                <h6 class="actName noClear">{{ node.node_name }}</h6>
+            -->
+            <a class="whiteText" ng-click="open(node)">
+                <h6 class="actNameEdit noClear">{{ node.node_name }}</h6>
 
-                <div class="actLabel" ng-show="node.type!='LD'">
+                <div class="separator"></div>
+
+                <div class="actLabelEdit" ng-show="node.type!='LD'">
                             <span class="timeLabel"><i
                                     class="icon-time icon-white"></i> {{ node | durationDisplay }} <span
                                     ng-show="!(node | durationDisplay)"> Free</span> </span>
@@ -331,15 +372,26 @@
                 <div class="actLabel" ng-show="node.type=='LD'">
                     <span class="timeLabel"><i class="icon-bell icon-white"></i> {{ node.scope }}</span>
                             <span class="orgLabel"><i class="icon-signal icon-white" ng-show="node.qcers"></i> <span
-                                    ng-repeat="qcer in node.qcers"> {{ qcer.qcer_name }} </span></span>
+                                    ng-repeat="qcer in node.qcers"
+                                    class="smallTextQCER"> {{ qcer.qcer_name }} </span></span>
                 </div>
             </a>
-            <!-- BOTTOM DROP ZONE BORDER-->
+
+            <div class="toolsEdit">
+                <a class="editEdit" ng-href="#"><i class="icon-edit icon-white"></i> </a>
+                <a class="deleteEdit" ng-href="#"><i class="icon-remove icon-white"></i> </a>
+            </div>
+
+            <!-- BOTTOM DROP ZONE BORDER
             <div id="{{node.node_id}}-{{node.type}}-{{node.level}}-{{node.position}}-bottom" class="bottomDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
+            -->
         </div>
+
     </div>
+    <div class="rightActDrop">{{node.position}} +1</div>
     <!-- End Activity or Group Box -->
 </div>
+<div class="dropHorizontal dropWidth ">Max Level +1</div>
 <div id="activityErrors" ng-show="alertMsg" class="alert alert-warning">
     {{ alertMsg }}
 </div>
