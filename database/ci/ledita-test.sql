@@ -69,7 +69,6 @@ CREATE  TABLE IF NOT EXISTS `activity` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `students_id` INT(11) NOT NULL ,
   `name` VARCHAR(255) NOT NULL ,
-  `type` CHAR(1) NOT NULL COMMENT 'VALUES:\n1 = LEARNING;\n2 = SUPPORT;\n3 = EVALUATION \n' ,
   `dur_min` INT(2) NOT NULL DEFAULT 0 ,
   `dur_hh` INT(2) NULL DEFAULT NULL ,
   `dur_dd` INT(2) NULL DEFAULT NULL ,
