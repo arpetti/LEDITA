@@ -290,4 +290,76 @@ describe('Reference Data Service', function() {
 
     });
 
+	describe('TECHNOLOGY', function() {
+
+    	beforeEach(function() {
+	    });
+
+	    afterEach(function() {
+	        sandbox.restore();
+	    });
+
+	    it('Returns technology results', function(done) {
+
+	    	var partial = 'et';
+	    	var technologies = [{"name":"Internet"},{"name":"Tablet"}];
+	    	var refDaoStub = sandbox.stub(RefDao, "getTechnologiesMatching", function(partial, callback) {
+	            callback(null, technologies);
+	        });
+
+	        var refServiceCallback = function(err, results, message) {
+	        	expect(err).to.be.null;
+	        	expect(message).to.be.null;
+	        	expect(results).not.to.be.null;
+	        	expect(results).to.have.length(technologies.length);
+	        	expect(results[0]).to.equal(technologies[0].name);
+	        	expect(results[1]).to.equal(technologies[1].name);
+
+	     		assert.isTrue(refDaoStub.withArgs(partial).calledOnce);
+	        	done();
+	        }
+	        RefService.getTechnologiesMatching(partial, refServiceCallback);
+		});
+
+		it('Empty result is not considered an error', function(done) {
+
+			var partial = 'Zz';
+			var technologies = [];
+	    	var refDaoStub = sandbox.stub(RefDao, "getTechnologiesMatching", function(partial, callback) {
+	            callback(null, technologies);
+	        });
+
+	        var refServiceCallback = function(err, results, message) {
+	        	expect(err).to.be.null;
+	        	expect(message).to.be.null;
+	        	expect(results).not.to.be.null;
+	        	expect(results).to.have.length(0);
+
+	     		assert.isTrue(refDaoStub.withArgs(partial).calledOnce);
+	        	done();
+	        }
+	        RefService.getTechnologiesMatching(partial, refServiceCallback);
+		});
+
+		it('Returns error if error occurs calling dao', function(done) {
+
+			var partial = 'something';
+	    	var daoError = new Error('something went wrong');
+	    	var refDaoStub = sandbox.stub(RefDao, "getTechnologiesMatching", function(partial, callback) {
+	            callback(daoError);
+	        });
+	        var refServiceCallback = function(err, results, message) {
+	        	expect(err).not.to.be.null;
+	        	expect(err).to.equal(daoError);
+	        	expect(message).to.equal(messages.UNABLE_TO_RETRIEVE_TECHNOLOGIES);
+	        	expect(results).to.be.null;
+
+	     		assert.isTrue(refDaoStub.withArgs(partial).calledOnce);
+	        	done();
+	        }
+	        RefService.getTechnologiesMatching(partial, refServiceCallback);
+	    });
+
+    });
+
 });

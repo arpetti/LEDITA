@@ -50,6 +50,17 @@ module.exports = {
     			callback(null, _.pluck(results, "descr") , null);
     		}
     	});
+    },
+
+    // callback(err, result, message)
+    getTechnologiesMatching: function(partial, callback) {
+    	RefDao.getTechnologiesMatching(partial, function(err, results) {
+    		if (err) {
+    			callback(err, null, messages.UNABLE_TO_RETRIEVE_TECHNOLOGIES);
+    		} else {
+    			callback(null, _.pluck(results, "name") , null);
+    		}
+    	});
     }
 
 };

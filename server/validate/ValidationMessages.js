@@ -36,6 +36,7 @@ module.exports.QCERS_NOT_FOUND = "No qcers could be found, please contact system
 module.UNABLE_TO_RETRIEVE_SCOPES= "Unable to retrieve scopes at this time, please try again later.";
 module.UNABLE_TO_RETRIEVE_SUBJECTS = "Unable to retrieve subjects at this time, please try again later.";
 module.UNABLE_TO_RETRIEVE_OBJECTIVES = "Unable to retrieve objectives at this time, please try again later.";
+module.UNABLE_TO_RETRIEVE_TECHNOLOGIES = "Unable to retrieve technologies at this time, please try again later.";
 
 // User Profile
 module.exports.USER_DETAIL_NOT_FOUND = "User's profile details could not be found";
