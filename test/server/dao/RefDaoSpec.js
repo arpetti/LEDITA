@@ -234,4 +234,49 @@ describe('Reference Data Dao', function() {
 
 	});
 
+	describe('TECHNOLOGY', function() {
+
+		it('Finds technologies matched by beginning of string', function(done) {
+			var partial = ['Sma'];
+			RefDao.getTechnologiesMatching(partial, function(err, results) {
+				expect(err).to.be.null;
+				expect(results).to.have.length(1);
+				expect(results[0].name).to.equal('Smartphone');
+				done();
+			});
+		});
+
+		it('Finds technologies matched by end of string, multiple matches alpha ordered', function(done) {
+			var partial = ['et'];
+			RefDao.getTechnologiesMatching(partial, function(err, results) {
+				expect(err).to.be.null;
+				expect(results).to.have.length(2);
+				expect(results[0].name).to.equal('Internet');
+				expect(results[1].name).to.equal('Tablet');
+				done();
+			});
+		});
+
+		it('Technology matching is case insensitive', function(done) {
+			var partial = ['pc'];
+			RefDao.getTechnologiesMatching(partial, function(err, results) {
+				expect(err).to.be.null;
+				expect(results).to.have.length(1);
+				expect(results[0].name).to.equal('PC');
+				done();
+			});
+		});
+
+		it('Technology matching returns empty list if nothing matched', function(done) {
+			var partial = ['xyz'];
+			RefDao.getTechnologiesMatching(partial, function(err, results) {
+				expect(err).to.be.null;
+				expect(results).not.to.be.null;
+				expect(results).to.have.length(0);
+				done();
+			});
+		});
+
+	});
+
 });

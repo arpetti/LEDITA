@@ -5,6 +5,7 @@ var GET_QCERS = "select id, name from qcer order by name";
 var GET_SCOPES_MATCHING = "select name from scope where name like ? order by name";
 var GET_SUBJECTS_MATCHING = "select name from subject where name like ? order by name";
 var GET_OBJECTIVES_MATCHING = "select descr from objective where descr like ? order by descr";
+var GET_TECHNOLOGY_MATCHING	= 'select name from technology where name like ? order by name';
 
 var FIND_SUBJECTS_BY_NAME = "select id, name from subject where name in (?)";
 var FIND_OBJECTIVES_BY_NAME = "select id, descr from objective where descr in (?)";
@@ -13,6 +14,26 @@ var FIND_SCOPE_BY_NAME = "select id, name from scope where ?";
 var addWildCard = function(partial) {
 	return '%' + partial + '%';
 }
+
+var handleMatchingResults = function(query, partial, cb) {
+	dao.findAll(query, [addWildCard(partial)], function(err, results) {
+		if (err) {
+			cb(err);
+		} else {
+			cb(null, results);
+		}
+	});
+};
+
+var handleByNameResults = function(query, values, cb) {
+	dao.findAll(query, values, function(err, results) {
+    	if (err) {
+			cb(err);
+		} else {
+			cb(null, results);
+		}
+    });
+};
 
 module.exports = {
 
@@ -27,63 +48,31 @@ module.exports = {
 	},
 
 	getScopesMatching: function(partial, callback) {
-		dao.findAll(GET_SCOPES_MATCHING, [addWildCard(partial)], function(err, results) {
-			if (err) {
-				callback(err);
-			} else {
-				callback(null, results);
-			}
-		});
+		handleMatchingResults(GET_SCOPES_MATCHING, partial, callback);
 	},
 
 	getSubjectsMatching: function(partial, callback) {
-		dao.findAll(GET_SUBJECTS_MATCHING, [addWildCard(partial)], function(err, results) {
-			if (err) {
-				callback(err);
-			} else {
-				callback(null, results);
-			}
-		});
+		handleMatchingResults(GET_SUBJECTS_MATCHING, partial, callback);
 	},
 
 	getObjectivesMatching: function(partial, callback) {
-		dao.findAll(GET_OBJECTIVES_MATCHING, [addWildCard(partial)], function(err, results) {
-			if (err) {
-				callback(err);
-			} else {
-				callback(null, results);
-			}
-		});
+		handleMatchingResults(GET_OBJECTIVES_MATCHING, partial, callback);
+	},
+
+	getTechnologiesMatching: function(partial, callback) {
+		handleMatchingResults(GET_TECHNOLOGY_MATCHING, partial, callback);
 	},
 
 	findSubjectsByName: function(subjectNames, callback) {
-	    dao.findAll(FIND_SUBJECTS_BY_NAME, [subjectNames], function(err, results) {
-	    	if (err) {
-				callback(err);
-			} else {
-				callback(null, results);
-			}
-	    });
+		handleByNameResults(FIND_SUBJECTS_BY_NAME, [subjectNames], callback);
   	},
 
   	findObjectivesByName: function(objectiveNames, callback) {
-	    dao.findAll(FIND_OBJECTIVES_BY_NAME, [objectiveNames], function(err, results) {
-	    	if (err) {
-				callback(err);
-			} else {
-				callback(null, results);
-			}
-	    });
+		handleByNameResults(FIND_OBJECTIVES_BY_NAME, [objectiveNames], callback);
   	},
 
   	findScopeByName: function(scopeName, callback) {
-  		dao.findAll(FIND_SCOPE_BY_NAME, [scopeName], function(err, results) {
-	    	if (err) {
-				callback(err);
-			} else {
-				callback(null, results);
-			}
-	    });
+		handleByNameResults(FIND_SCOPE_BY_NAME, [scopeName], callback);
   	}
 
 };
