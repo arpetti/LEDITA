@@ -659,23 +659,21 @@
                 <!-- Activity Technologies -->
                 <div class="formLevel">
                     <div class="errorBox">
-                        <span class="errorTipModal" ng-show="ActCreateForm.technologies.$error.pattern">A technology cannot contain this symbol.</span>
-                        <span class="errorTipModal" ng-show="ActCreateForm.technologies.$error.maxlength">A technology cannot be longer than 50 characters.</span>
+                        <span class="errorTipModal" ng-show="ActCreateForm.technology.$error.pattern">A technology cannot contain this symbol.</span>
+                        <span class="errorTipModal" ng-show="ActCreateForm.technology.$error.maxlength">A technology cannot be longer than 50 characters.</span>
                         <span class="clearfix"></span>
                     </div>
                     <label class="formLabel"><i class="icon-facetime-video"></i> Technologies:</label>
-                    <!-- FIXME: typeahead for technologies -->
-                    <input class="formInput" type="text" ng-model="technologies" name="technologies"
-                           typeahead="suggestion for suggestion in getSubjects($viewValue)"
-                           typeahead-on-select="addTopicFromSuggestion()"
-                           ui-keypress="{13:'addTopicFromUserInput($event)'}"
+                    <input class="formInput" type="text" ng-model="technology" name="technology"
+                           typeahead="suggestion for suggestion in getTechnologies($viewValue)"
+                           typeahead-on-select="addTechnologyFromSuggestion()"
+                           ui-keypress="{13:'addTechnologyFromUserInput($event)'}"
                            placeholder="Technologies..." ng-maxlength="50"
                            ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
-
                     <div class="formTag">
-                        <ul ng-repeat="technology in technologies" class="zeroMargin subjects">
-                            <li class="modalEditItem"><span class="modalEditItemLink">{{technology}} 
-                            	<a ng-href="#"><i class="icon-remove-circle"></i> </a></span>
+                        <ul ng-repeat="tech in selectedTechnologies" class="zeroMargin subjects">
+                            <li class="modalEditItem"><span class="modalEditItemLink">{{tech}} 
+                            	<a ng-click="removeTechnology(tech)"><i class="icon-remove-circle"></i> </a></span>
                             </li>
                         </ul>
                     </div>
