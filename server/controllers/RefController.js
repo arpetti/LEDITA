@@ -46,6 +46,17 @@ module.exports = {
 				res.json(200, results);
 			}
 		});
+	},
+
+	getTechnologiesMatching: function(req, res) {
+		var partial = req.params.partial;
+		RefService.getTechnologiesMatching(partial, function(err, results, message) {
+			if (err) {
+				return res.send(500, message);
+			} else {
+				res.json(200, results);
+			}
+		});
 	}
 
 };

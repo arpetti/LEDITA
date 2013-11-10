@@ -234,6 +234,60 @@ describe('Reference Data Controller', function() {
 
             RefController.getObjectivesMatching(req, res);
     	});
+
+	});
+
+	describe('getTechnologiesMatching', function() {
+
+		beforeEach(function() {
+	    });
+
+	    afterEach(function() {
+	        sandbox.restore();
+	    });
+
+	    it('Returns a 200 with Technology results from Reference Service', function(done) {
+
+	    	var partial = 'et';
+    		req.params = {partial: partial};
+
+	    	var technologies = [{"name":"Internet"},{"name":"Tablet"}];
+    		var serviceStub = sandbox.stub(RefService, "getTechnologiesMatching", function(partial, callback) {
+                callback(null, technologies, null);
+            });
+
+            res.json = function(httpStatus, result) {
+                expect(httpStatus).to.equal(200);
+                expect(result).to.equal(technologies);
+                
+                assert.isTrue(serviceStub.withArgs(partial).calledOnce);
+                done();
+            };
+
+            RefController.getTechnologiesMatching(req, res);
+	    });
+
+	    it('Returns a 500 with message if Reference Service calls back with error', function(done) {
+
+	    	var partial = 'et';
+    		req.params = {partial: partial};
+
+    		var error = new Error("something went wrong");
+    		var refMessage = "Unable to retrieve scopes";
+    		var serviceStub = sandbox.stub(RefService, "getTechnologiesMatching", function(partial, callback) {
+                callback(error, null, refMessage);
+            });
+
+            res.send = function(httpStatus, message) {
+                expect(httpStatus).to.equal(500);
+                expect(message).to.equal(refMessage);
+                
+                assert.isTrue(serviceStub.withArgs(partial).calledOnce);
+                done();
+            };
+
+            RefController.getTechnologiesMatching(req, res);
+    	});
 	});
 
 });    
