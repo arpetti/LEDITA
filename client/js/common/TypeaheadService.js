@@ -28,6 +28,14 @@ angular.module('ledita-app')
 			return $http.get(objectiveMatchUrl).then(function(response) {
 				return limitToFilter(response.data, maxNumResults);
 			});
+    	},
+
+    	getTechnologies: function(technology) {
+    		var objectiveMatchUrl = '/reference/technologies/' + technology;
+    		var maxNumResults = this.getMaxNumberResults();
+			return $http.get(objectiveMatchUrl).then(function(response) {
+				return limitToFilter(response.data, maxNumResults);
+			});
     	}
         
     };

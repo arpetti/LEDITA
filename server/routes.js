@@ -219,6 +219,13 @@ var routes = [
         accessLevel: accessLevels.user
     },
 
+    {
+    	path: '/reference/technologies/:partial',
+    	httpMethod: 'GET',
+    	middleware: [ensureAuthenticated, ensureAuthorized, RefController.getTechnologiesMatching],
+        accessLevel: accessLevels.user
+    },
+
     // All other get requests should be handled by AngularJS's client-side routing system
     {
         path: '/*',

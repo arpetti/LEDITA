@@ -559,10 +559,11 @@
     <div ng-controller="ActCreateCtrl">
         <form novalidate class="createLdForm" name="ActCreateForm" ng-submit="submitLD()">
             <div class="modal-body">
+                
+            	<!-- Activity Name -->
                 <div class="formLevel">
                     <div class="errorBox">
-                                    <span class="errorTipModal"
-                                          ng-show="ActCreateForm.actName.$dirty && ActCreateForm.actName.$error.required">Required!</span>
+                        <span class="errorTipModal" ng-show="ActCreateForm.actName.$dirty && ActCreateForm.actName.$error.required">Required!</span>
                         <span class="errorTipModal" ng-show="ActCreateForm.actName.$error.pattern">The activity name cannot contain this symbol.</span>
                         <span class="errorTipModal" ng-show="ActCreateForm.actName.$error.maxlength">The activity name cannot be longer than 255 characters.</span>
                     </div>
@@ -571,11 +572,11 @@
                            ng-maxlength="255" ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                     <span class="clearfix"></span>
                 </div>
-                <div class="formLevel">
-                    <div class="errorBox">
-                    </div>
-                    <label class="formLabel"><i class="icon-home"></i> Modality*:</label>
 
+                <!-- Activity Modality -->
+                <div class="formLevel">
+                    <div class="errorBox"></div>
+                    <label class="formLabel"><i class="icon-home"></i> Modality*:</label>
                     <div class="formInput">
                         <span class="checkModality"><input type="radio" name="f2f" ng-model="modality" value="1"
                                                            required> Face to face    </span>
@@ -585,14 +586,12 @@
                                                            required> Blended </span>
                     </div>
                     <span class="clearfix"></span>
-
                 </div>
 
+                <!-- Activity Duration -->
                 <div class="formLevel">
-                    <div class="errorBox">
-                    </div>
+                    <div class="errorBox"></div>
                     <label class="formLabel formLabel"><i class="icon-time"></i> Duration:</label>
-
                     <div class="formInput">
                         <span class="durationBox">
                                 <input class="formInputDuration" type="number" name="dur_mon" ng-model="dur_mon"
@@ -618,16 +617,15 @@
                     <span class="clearfix"></span>
                 </div>
 
+                <!-- Activity Organization -->
                 <div class="formLevel">
                     <div class="errorBox">
-                                    <span class="errorTipModal"
-                                          ng-show="LdCreateForm.ldScope.$dirty && LdCreateForm.ldScope.$error.required">Required!</span>
+                        <span class="errorTipModal" ng-show="LdCreateForm.ldScope.$dirty && LdCreateForm.ldScope.$error.required">Required!</span>
                         <span class="errorTipModal" ng-show="LdCreateForm.ldScope.$error.pattern">The design scope cannot contain this symbol.</span>
-                        <span class="errorTipModal" ng-show="LdCreateForm.ldScope.$error.maxlength">The design scope cannot be longer than 50 characters.</span><span
-                            class="clearfix"></span>
+                        <span class="errorTipModal" ng-show="LdCreateForm.ldScope.$error.maxlength">The design scope cannot be longer than 50 characters.</span>
+                        <span class="clearfix"></span>
                     </div>
                     <label class="formLabel"><i class="icon-th-large"></i> Organization*:</label>
-
                     <div class="formInput">
                         <span class="checkModality"><input type="radio" name="org_all" ng-model="org" value="1"
                                                            required> All    </span>
@@ -640,8 +638,9 @@
                     </div>
                     <span class="clearfix"></span>
 
+                    <!-- Activity Organization Group Additional Input -->
                     <div class="formInput" ng-show="org=='4'">
-                  <span class="orgGroupBox">
+                  		<span class="orgGroupBox">
                                 <input class="formInputDuration org" type="number" name="group_number"
                                        ng-model="group_number"
                                        required
@@ -653,17 +652,16 @@
                                        required
                                        min="0" max="99" maxlength="2" placeholder="0"> People per group
                         </span>
-
                     </div>
-
 
                 </div>
 
+                <!-- Activity Technologies -->
                 <div class="formLevel">
                     <div class="errorBox">
                         <span class="errorTipModal" ng-show="ActCreateForm.technologies.$error.pattern">A technology cannot contain this symbol.</span>
-                        <span class="errorTipModal" ng-show="ActCreateForm.technologies.$error.maxlength">A technology cannot be longer than 50 characters.</span><span
-                            class="clearfix"></span>
+                        <span class="errorTipModal" ng-show="ActCreateForm.technologies.$error.maxlength">A technology cannot be longer than 50 characters.</span>
+                        <span class="clearfix"></span>
                     </div>
                     <label class="formLabel"><i class="icon-facetime-video"></i> Technologies:</label>
                     <!-- FIXME: typeahead for technologies -->
@@ -676,47 +674,45 @@
 
                     <div class="formTag">
                         <ul ng-repeat="technology in technologies" class="zeroMargin subjects">
-                            <li class="modalEditItem"><span class="modalEditItemLink">{{technology}} <a
-                                    ng-href="#"><i
-                                    class="icon-remove-circle"></i> </a></span>
+                            <li class="modalEditItem"><span class="modalEditItemLink">{{technology}} 
+                            	<a ng-href="#"><i class="icon-remove-circle"></i> </a></span>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div class="formLevel">
 
+                <!-- Activity Resources -->
+                <div class="formLevel">
                     <label class="formLabel"><i class="icon-briefcase"></i> Resources:</label>
                     <span class="formInput">
-                    <button class="btn-mini btn" ng-click="createResource()"><i class="icon-plus"></i> Add a resource
-                    </button>
-                        </span>
+                    	<button class="btn-mini btn" ng-click="createResource()"><i class="icon-plus"></i> Add a resource</button>
+                    </span>
                     <span class="clearfix"></span>
-
                 </div>
 
+                <!-- Activity Description -->
                 <div class="formLevel">
                     <div class="errorBox">
                         <span class="errorTipModal" ng-show="ActCreateForm.pract_descr.$error.pattern">Activity description cannot contain this symbol.</span>
                         <span class="errorTipModal" ng-show="ActCreateForm.pract_descr.$error.maxlength">Activity description cannot be longer than 2000 characters.</span>
-
                     </div>
                     <label class="formLabel"><i class="icon-info-sign"></i> Practical Description:</label>
                     <textarea class="formInput" name="pract_descr" ng-model="pract_descr" rows="5"
                               ng-maxlength="200" ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/"></textarea>
                     <span class="clearfix"></span>
                 </div>
+
+                <!-- Activity Pedagogical -->
                 <div class="formLevel">
                     <div class="errorBox">
                         <span class="errorTipModal" ng-show="ActCreateForm.edu_descr.$error.pattern">Pedagogical suggestions cannot contain this symbol.</span>
                         <span class="errorTipModal" ng-show="ActCreateForm.edu_descr.$error.maxlength">Pedagogical suggestions cannot be longer than 2000 characters.</span>
-
                     </div>
                     <label class="formLabel"><i class="icon-question-sign"></i> Pedagogical Suggestions:</label>
                     <textarea class="formInput" name="edu_descr" ng-model="edu_descr" rows="5"
                               ng-maxlength="200" ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/"></textarea>
                     <span class="clearfix"></span>
                 </div>
-
 
             </div>
             <div class="modal-footer">

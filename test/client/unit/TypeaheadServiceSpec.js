@@ -139,4 +139,38 @@ describe('Typeahead Service', function() {
     	$httpBackend.flush();
     });
 
+    it('Gets Technologies', function() {
+    	var maxNumResults = service.getMaxNumberResults();
+    	var technology = 'Tech';
+    	var technologyMatches = buildList(maxNumResults, technology);
+
+		$httpBackend.expect('GET', '/reference/technologies/' + technology).respond(200, technologyMatches);
+    	
+    	service.getTechnologies(technology).then(function(data) {
+    		expect(data.length).toEqual(technologyMatches.length);
+    		for(var i=0; i<technologyMatches.length; i++) {
+    			expect(data[i]).toEqual(technologyMatches[i]);
+    		};
+  		});
+    	
+    	$httpBackend.flush();
+    });
+
+    it('Gets Technologies returns first max number of results', function() {
+    	var maxNumResults = service.getMaxNumberResults();
+    	var technology = 'Tech';
+    	var technologyMatches = buildList(maxNumResults+1, technology);
+
+		$httpBackend.expect('GET', '/reference/technologies/' + technology).respond(200, technologyMatches);
+    	
+    	service.getTechnologies(technology).then(function(data) {
+    		expect(data.length).toEqual(technologyMatches.length-1);
+    		for(var i=0; i<technologyMatches.length-1; i++) {
+    			expect(data[i]).toEqual(technologyMatches[i]);
+    		};
+  		});
+    	
+    	$httpBackend.flush();
+    });
+
 });
