@@ -34,8 +34,16 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
     	console.log('droppedLevel: dragSource.id = ' + dragSource.id + ', dropTarget.id = ' + dropTarget.id);
     };
 
+    $scope.droppedMaxLevelPlusOne = function(dragSource, dropTarget) {
+    	console.log('droppedMaxLevelPlusOne: dragSource.id = ' + dragSource.id + ', dropTarget.id = ' + dropTarget.id);
+    };
+
     $scope.droppedPosition = function(dragSource, dropTarget) {
     	console.log('droppedPosition: dragSource.id = ' + dragSource.id + ', dropTarget.id = ' + dropTarget.id);
+    };
+
+    $scope.droppedMaxPositionPlusOne = function(dragSource, dropTarget) {
+    	console.log('droppedMaxPositionPlusOne: dragSource.id = ' + dragSource.id + ', dropTarget.id = ' + dropTarget.id);
     };
 
     // FIXME: This is the old code from first version of d&d, get rid of it when we have new version working

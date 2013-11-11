@@ -298,6 +298,7 @@
         <!-- If it's a group:  -->
         <div ng-show="node.children" class="groupName">{{ node.node_name }}</div>
         <div class="clearfix"></div>
+        
         <!-- TODO: add drop directives - This drop zone always has position == 1 -->
         <div ng-show="node.children " class="leftGroupDrop"> 1</div>
 
@@ -306,20 +307,10 @@
             <!-- TODO: add drop directives -->
             <div class="dropHorizontal">Group Level {{childLevel}}</div>
             <div ng-repeat="child in subChildren" ng-class="getGroupEditBoxClass(child)">
+                
                 <!-- TODO: add drop directives -->
                 <div class="leftActDrop">{{child.position}}</div>
-                <!-- TOP DROP ZONE BORDER
-                <div id="{{child.group_id}}-{{child.group_child_id}}-{{child.group_child_type}}-{{child.level}}-{{child.position}}-top"
-                	class="topDrop lvl-target" x-lvl-drop-target="true" x-on-drop="droppedGroup(dragEl, dropEl)"></div>
-                -->
-                <!-- LEFT DROP ZONE BORDER
-                <div id="{{child.group_id}}-{{child.group_child_id}}-{{child.group_child_type}}-{{child.level}}-{{child.position}}-left"
-                	class="leftDrop lvl-target" x-lvl-drop-target="true" x-on-drop="droppedGroup(dragEl, dropEl)"></div>
-                -->
-                <!-- RIGHT DROP ZONE BORDER
-                <div id="{{child.group_id}}-{{child.group_child_id}}-{{child.group_child_type}}-{{child.level}}-{{child.position}}"
-                	class="rightDrop lvl-target" x-lvl-drop-target="true" x-on-drop="droppedGroup(dragEl, dropEl)"></div>
-                -->
+                
                 <a class="whiteText childModalLink " ng-click="open(child)"><h6 class="actNameEdit noClear">{{
                     child.group_child_name }}</h6>
 
@@ -338,15 +329,12 @@
                                             class="smallTextQCER">{{ qcer.qcer_name }} </span></span>
                     </div>
                 </a>
-                <!-- BOTTOM DROP ZONE BORDER
-                <div id="{{child.group_id}}-{{child.group_child_id}}-{{child.group_child_type}}-{{child.level}}-{{child.position}}-bottom"
-                	class="bottomDrop lvl-target" x-lvl-drop-target="true" x-on-drop="droppedGroup(dragEl, dropEl)"></div>
-                -->
                 <div class="toolsEdit">
                     <a class="editEdit " ng-href="#"><i class="icon-edit icon-white"></i> </a>
                     <a class="deleteEdit " ng-href="#"><i class="icon-remove icon-white"></i> </a>
                 </div>
             </div>
+            
             <!-- TODO: add drop directives - make dynamic the 'child.position +1' -->
             <div class="rightActDrop">{{child.position}} +1</div>
 
@@ -358,18 +346,10 @@
         <!-- If it's NOT a group:  -->
         <div ng-show="!node.children" class="actNameEditSingle">
             
-        	<!-- Position Drop Target -->
+        	<!-- Left Position Drop Target -->
             <div id="{{level}}-{{node.position}}" class="lvl-target leftActDrop"
             	x-lvl-drop-target="true" x-on-drop="droppedPosition(dragEl, dropEl)">left-pos</div>
-            <!-- TOP DROP ZONE BORDER
-                      <div id="{{node.node_id}}-{{node.type}}-{{node.level}}-{{node.position}}-top" class="topDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
-                      -->
-            <!-- LEFT DROP ZONE BORDER
-            <div id="{{node.node_id}}-{{node.type}}-{{node.level}}-{{node.position}}-left" class="leftDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
-            -->
-            <!-- RIGHT DROP ZONE BORDER
-            <div id="{{node.node_id}}-{{node.type}}-{{node.level}}-{{node.position}}-right" class="rightDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
-            -->
+            
             <a class="whiteText" ng-click="open(node)">
                 <h6 class="actNameEdit noClear">{{ node.node_name }}</h6>
 
@@ -394,18 +374,21 @@
                 <a class="deleteEdit" ng-href="#"><i class="icon-remove icon-white"></i> </a>
             </div>
 
-            <!-- BOTTOM DROP ZONE BORDER
-            <div id="{{node.node_id}}-{{node.type}}-{{node.level}}-{{node.position}}-bottom" class="bottomDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
-            -->
         </div>
 
     </div>
-    <!-- TODO: add drop directives - make dynamic node.position +1 -->
-    <div class="rightActDrop">{{node.position}} +1</div>
+    
+    <!-- Right Position Drop Target Plus One -->
+    <div id="{{level}}-maxPosPlusOne" class="lvl-target rightActDrop" 
+    	x-lvl-drop-target="true" x-on-drop="droppedMaxPositionPlusOne(dragEl, dropEl)">rgt-pos</div>
     <!-- End Activity or Group Box -->
+
 </div>
-<!-- TODO: add drop directives - make dynamic max level +1 -->
-<div class="dropHorizontal dropWidth ">Max Level +1</div>
+
+<!-- Level Drop Target Plus One -->
+<div id="maxLevelPlusOne" class="lvl-target dropHorizontal dropWidth" 
+	x-lvl-drop-target="true" x-on-drop="droppedMaxLevelPlusOne(dragEl, dropEl)">Max Level+1</div>
+
 <div id="activityErrors" ng-show="alertMsg" class="alert alert-warning">
     {{ alertMsg }}
 </div>
