@@ -286,10 +286,15 @@
 
 <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Global View) -->
 <div ng-repeat="(level, nodes) in levels" class="levelBoxEdit">
-    <!-- TODO: add drop directives -->
-    <div class="dropHorizontal dropWidth">Level {{level}}</div>
+    
+    <!-- Level Drop Target -->
+    <div id="{{level}}" class="lvl-target dropHorizontal dropWidth" 
+    	x-lvl-drop-target="true" x-on-drop="droppedLevel(dragEl, dropEl)">Level {{level}}</div>
+
+    <!-- Every node is a Drag Source --> 
     <div id="{{node.node_id}}-{{node.type}}-{{node.level}}-{{node.position}}" ng-repeat="node in nodes"
          x-lvl-draggable="true" ng-class="getBoxEditClass(node)">
+        
         <!-- If it's a group:  -->
         <div ng-show="node.children" class="groupName">{{ node.node_name }}</div>
         <div class="clearfix"></div>

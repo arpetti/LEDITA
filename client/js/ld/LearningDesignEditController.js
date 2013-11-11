@@ -30,30 +30,39 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
         $scope.alertMsg = err;
     });
 
-    $scope.dropped = function(dragEl, dropEl) { 
-    	var sourceTargetData = {
-    		dragSource: ActivityService.parseDragSource(dragEl.id),
-    		dropTarget: ActivityService.parseDropTarget(dropEl.id)
-    	};
-    	console.log('drag&drop: ' + JSON.stringify(sourceTargetData));
-    	
-    	LDEditService.updateActivityLevelPosition($scope.ldid, sourceTargetData,
-	        function(res) {
-	        	$scope.levels = res;
-	        },
-	        function(err) {
-	        	$scope.ldUpdateErrors = err; // TODO UI to display these
-	        }
-		);
+    $scope.droppedLevel = function(dragSource, dropTarget) {
+    	console.log('droppedLevel: dragSource.id = ' + dragSource.id + ', dropTarget.id = ' + dropTarget.id);
     };
 
-    $scope.droppedGroup = function(dragEl, dropEl) {
-    	var sourceTargetData = {
-    		dragSource: ActivityService.parseDragSource(dragEl.id),
-    		dropTarget: ActivityService.parseDropTargetGroup(dropEl.id)
-    	};
-    	console.log('drag&drop group: ' + JSON.stringify(sourceTargetData));
+    $scope.droppedPosition = function(dragSource, dropTarget) {
+    	console.log('droppedPosition: dragSource.id = ' + dragSource.id + ', dropTarget.id = ' + dropTarget.id);
     };
+
+    // FIXME: This is the old code from first version of d&d, get rid of it when we have new version working
+  //   $scope.dropped = function(dragEl, dropEl) { 
+  //   	var sourceTargetData = {
+  //   		dragSource: ActivityService.parseDragSource(dragEl.id),
+  //   		dropTarget: ActivityService.parseDropTarget(dropEl.id)
+  //   	};
+  //   	console.log('drag&drop: ' + JSON.stringify(sourceTargetData));
+    	
+  //   	LDEditService.updateActivityLevelPosition($scope.ldid, sourceTargetData,
+	 //        function(res) {
+	 //        	$scope.levels = res;
+	 //        },
+	 //        function(err) {
+	 //        	$scope.ldUpdateErrors = err; // TODO UI to display these
+	 //        }
+		// );
+  //   };
+
+  //   $scope.droppedGroup = function(dragEl, dropEl) {
+  //   	var sourceTargetData = {
+  //   		dragSource: ActivityService.parseDragSource(dragEl.id),
+  //   		dropTarget: ActivityService.parseDropTargetGroup(dropEl.id)
+  //   	};
+  //   	console.log('drag&drop group: ' + JSON.stringify(sourceTargetData));
+  //   };
 
     initLdPublicationFlag = function() {
     	if ($scope.learningDesign.ld_publication === 0) {
