@@ -289,7 +289,7 @@
     
     <!-- Level Drop Target -->
     <div id="{{level}}" class="lvl-target dropHorizontal dropWidth" 
-    	x-lvl-drop-target="true" x-on-drop="droppedLevel(dragEl, dropEl)">Level {{level}}</div>
+    	x-lvl-drop-target="true" x-on-drop="droppedLevel(dragEl, dropEl)">Level</div>
 
     <!-- Every node is a Drag Source --> 
     <div id="{{node.node_id}}-{{node.type}}-{{node.level}}-{{node.position}}" ng-repeat="node in nodes"
@@ -354,10 +354,13 @@
             <div ng-show="childLevel == 1" class="dropHorizontal ">Group Level {{childLevel}} + 1</div>
         </div>
         <!-- End Children -->
+        
         <!-- If it's NOT a group:  -->
         <div ng-show="!node.children" class="actNameEditSingle">
-            <!-- TODO: add drop directives -->
-            <div class="leftActDrop">{{node.position}}</div>
+            
+        	<!-- Position Drop Target -->
+            <div id="{{level}}-{{node.position}}" class="lvl-target leftActDrop"
+            	x-lvl-drop-target="true" x-on-drop="droppedPosition(dragEl, dropEl)">left-pos</div>
             <!-- TOP DROP ZONE BORDER
                       <div id="{{node.node_id}}-{{node.type}}-{{node.level}}-{{node.position}}-top" class="topDrop lvl-target" x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
                       -->
