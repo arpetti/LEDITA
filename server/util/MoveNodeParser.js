@@ -12,11 +12,6 @@ var DropTarget = function DropTarget(moveType, level, position) {
 	this.position = position ? parseInt(position) : null;
 };
 
-var parseDragSource = function(id) {
-	var data = id.split('-');
-	return new DragSource(data);
-};
-
 var parseDropTargetLevel = function(id) {
 	var data = id.split('-');
 	return new DropTarget(data[0], data[1]);
@@ -46,14 +41,14 @@ var moveTypeParser = {
 
 module.exports = {
 
-	parseSourceTargetIds: function(sourceId, targetId) {
-		var dragSource = parseDragSource(sourceId);
+	parseTargetId: function(targetId) {
 		var moveType = targetId.split('-')[0];
 		var targetParseFunc = moveTypeParser[moveType];
-		var dropTarget = targetParseFunc.apply(null, [targetId]);
-		return {
-			source: dragSource,
-			target: dropTarget
-		};
+		return targetParseFunc.apply(null, [targetId]);
+	},
+
+	parseSourceId: function(sourceId) {
+		var data = sourceId.split('-');
+		return new DragSource(data);
 	}
 };
