@@ -288,7 +288,7 @@
 <div ng-repeat="(level, nodes) in levels" class="levelBoxEdit">
     
     <!-- Level Drop Target -->
-    <div id="{{level}}" class="lvl-target dropHorizontal dropWidth" 
+    <div id="level-{{level}}" class="lvl-target dropHorizontal dropWidth" 
     	x-lvl-drop-target="true" x-on-drop="droppedLevel(dragEl, dropEl)">Level</div>
 
     <!-- Every node is a Drag Source --> 
@@ -347,7 +347,7 @@
         <div ng-show="!node.children" class="actNameEditSingle">
             
         	<!-- Left Position Drop Target -->
-            <div id="{{level}}-{{node.position}}" class="lvl-target leftActDrop"
+            <div id="levelPosition-{{level}}-{{node.position}}" class="lvl-target leftActDrop"
             	x-lvl-drop-target="true" x-on-drop="droppedPosition(dragEl, dropEl)">left-pos</div>
             
             <a class="whiteText" ng-click="open(node)">
@@ -379,15 +379,15 @@
     </div>
     
     <!-- Right Position Drop Target Plus One -->
-    <div id="{{level}}-maxPosPlusOne" class="lvl-target rightActDrop" 
-    	x-lvl-drop-target="true" x-on-drop="droppedMaxPositionPlusOne(dragEl, dropEl)">rgt-pos</div>
+    <div id="maxPosition-{{level}}" class="lvl-target rightActDrop" 
+    	x-lvl-drop-target="true" x-on-drop="droppedMaxPosition(dragEl, dropEl)">rgt-pos</div>
     <!-- End Activity or Group Box -->
 
 </div>
 
 <!-- Level Drop Target Plus One -->
-<div id="maxLevelPlusOne" class="lvl-target dropHorizontal dropWidth" 
-	x-lvl-drop-target="true" x-on-drop="droppedMaxLevelPlusOne(dragEl, dropEl)">Max Level+1</div>
+<div id="maxLevel" class="lvl-target dropHorizontal dropWidth" 
+	x-lvl-drop-target="true" x-on-drop="droppedMaxLevel(dragEl, dropEl)">Max Level+1</div>
 
 <div id="activityErrors" ng-show="alertMsg" class="alert alert-warning">
     {{ alertMsg }}

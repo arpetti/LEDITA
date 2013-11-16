@@ -1,3 +1,4 @@
+// This is the old code from first attempt at drag & drop, get rid of it when new version is working
 angular.module('ledita-app')
 .factory('ActivityService', function($http) {
 
