@@ -1,37 +1,42 @@
 var _ =  require('underscore');
 
+// wip...
+var fillPositionHolesMapFunc = function(nodesInALevel, key) {
+	result = ['a', 'b', 'c'];
+	return result;
+};
+
 module.exports = {
 
 	fillHoles: function(composesRecords) {
-		var sortedByLevel = _.sortBy(composesRecords, function(rec){return rec.level;});
-		this.fillLevelHoles(sortedByLevel);
+		var sortedByLevel = _.sortBy(composesRecords, function(rec) {return rec.level;} );
+		var recordsWithLevelHolesFilled = this.fillLevelHoles(sortedByLevel);
+		
 		//TODO fillPositionHoles
+		// this.fillPositionHoles(recordsWithLevelHolesFilled);
+
+		return recordsWithLevelHolesFilled;
 	},
 
-	fillLevelHoles: function(composesRecords) {
-		var numRecords = composesRecords.length;
-		var currentRecord;
-		var nextRecord;
-		var levelDiff;
+	// wip...
+	fillPositionHoles: function(recordsWithLevelHolesFilled) {
+		var byLevel = _.groupBy(recordsWithLevelHolesFilled, function(rec) {return rec.level;});
+		console.log('byLevel: ' + JSON.stringify(byLevel));
+		var processed = _.map(byLevel, fillPositionHoles);
+		console.log('processed: ' + JSON.stringify(processed));
+	},
 
-		for(var i=0; i<numRecords; i++) {
-			
-			// First record must always have level = 1
-			if(i === 0 && composesRecords[i].level !== 1) {
-				composesRecords[i].level = 1;
-			}
-			
-			// If diff between current record and next is > 1, reset next level (diff of 0 is ok)
-			if ((i+1) < numRecords) {
-				currentRecord = composesRecords[i];
-				nextRecord = composesRecords[i+1];
-				levelDiff = Math.abs(nextRecord.level - currentRecord.level);
-				if (levelDiff > 1) {
-					nextRecord.level = currentRecord.level + 1;
-				}
-			}
-		}
-
+	fillLevelHoles: function(recordsSortedByLevel) {
+		var byLevel = _.groupBy(recordsSortedByLevel, function(rec) {return rec.level;});
+		var levels = _.keys(byLevel);
+		
+		_.each(byLevel, function(records, level) {
+			var indexPlusOne = _.indexOf(levels, level) + 1;
+			_.each(records, function(rec) {
+				rec.level = indexPlusOne;
+			});
+		});
+		return _.flatten(_.values(byLevel));
 	}
 
 };

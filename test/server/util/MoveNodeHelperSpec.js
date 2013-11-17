@@ -40,7 +40,10 @@ describe('Move Node Helper', function() {
 		var expectedComposesIdToHaveBeenModified = 3;
 		var expectedMaxLevelPlusOne = 7;
 		
-		var fillHoleHelperStub = sandbox.stub(moveNodeFillHoleHelper, "fillHoles");
+		var fillHoleFunc = function(input) {
+			return input;
+		};
+		var fillHoleHelperStub = sandbox.stub(moveNodeFillHoleHelper, "fillHoles", fillHoleFunc);
 		
 		var result = fixture.moveNode(sourceId, targetId, composesRecords);
 		var resultById = _.indexBy(result, 'id');
@@ -50,11 +53,14 @@ describe('Move Node Helper', function() {
 		assert.isTrue(fillHoleHelperStub.called);
 	});
 
-	it('Move type: level - is not implemented yet, returns unmodified records', function() {
+	it('Move type: level increments levels after target', function() {
 		var sourceId = '9-ACTIVITY-3-1';
 		var targetId = 'level-2';
 
-		var fillHoleHelperStub = sandbox.stub(moveNodeFillHoleHelper, "fillHoles");
+		var fillHoleFunc = function(input) {
+			return input;
+		};
+		var fillHoleHelperStub = sandbox.stub(moveNodeFillHoleHelper, "fillHoles", fillHoleFunc);
 
 		var result = fixture.moveNode(sourceId, targetId, composesRecords);
 		var resultById = _.indexBy(result, 'id');
@@ -76,6 +82,39 @@ describe('Move Node Helper', function() {
 		expect(resultById[7].level).to.equal(7);
 		
 		assert.isTrue(fillHoleHelperStub.called);
+	});
+
+	it('Move type: level - example from demo data LD3', function() {
+		var testRecords = [
+			{"id":16,"ld_id":3,"activity_id":25,"ld_part_id":null,"activity_group_id":null,"level":1,"position":1},
+			{"id":17,"ld_id":3,"activity_id":null,"ld_part_id":null,"activity_group_id":5,"level":2,"position":1},
+			{"id":18,"ld_id":3,"activity_id":27,"ld_part_id":null,"activity_group_id":null,"level":3,"position":1},
+			{"id":19,"ld_id":3,"activity_id":28,"ld_part_id":null,"activity_group_id":null,"level":3,"position":2},
+			{"id":20,"ld_id":3,"activity_id":29,"ld_part_id":null,"activity_group_id":null,"level":4,"position":1},
+			{"id":21,"ld_id":3,"activity_id":30,"ld_part_id":null,"activity_group_id":null,"level":4,"position":2}
+		];
+		var sourceId = '5-ACTIVITY_GROUP-2-1';
+		var targetId = 'level-4';
+
+		var fillHoleFunc = function(input) {
+			return input;
+		};
+		var fillHoleHelperStub = sandbox.stub(moveNodeFillHoleHelper, "fillHoles", fillHoleFunc);
+
+		var result = fixture.moveNode(sourceId, targetId, testRecords);
+		var resultById = _.indexBy(result, 'id');
+		
+		// Source node is moved to target level
+		expect(resultById[17].level).to.equal(4);
+
+		// Nodes that were in level smaller than target should not be modified
+		expect(resultById[16].level).to.equal(1);
+		expect(resultById[18].level).to.equal(3);
+		expect(resultById[19].level).to.equal(3);
+
+		// Nodes that were in level greater than target should be incremented by one
+		expect(resultById[20].level).to.equal(5);
+		expect(resultById[21].level).to.equal(5);
 	});
 
 	it('Move type: levelPosition - is not implemented yet, returns unmodified records', function() {

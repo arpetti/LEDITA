@@ -80,8 +80,8 @@ module.exports = {
 		var sourceComposesRecord = findComposesRecord(source, composesRecords);
 		var moveFunc = moveTypeFuncMap[target.moveType];
 		var modifiedComposesRecords = moveFunc.apply(null, [sourceComposesRecord.id, composesRecords, target]);
-		moveNodeFillHoleHelper.fillHoles(modifiedComposesRecords);
-		return modifiedComposesRecords;
+		var recordsWithHolesFilled = moveNodeFillHoleHelper.fillHoles(modifiedComposesRecords);
+		return recordsWithHolesFilled;
 	}
 	
 };
