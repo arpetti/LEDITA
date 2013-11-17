@@ -1,9 +1,13 @@
-var expect = require('chai').expect
+var expect = require('chai').expect;
+var assert = require('chai').assert;
+var sinon = require('sinon');
 var fixture = require('../../../server/util/MoveNodeHelper');
+var moveNodeFillHoleHelper = require('../../../server/util/MoveNodeFillHoleHelper');
 var _ =  require('underscore');
 
-// TODO: Mock MoveNodeFillHoleHelper so can test move separate from filling holes
-describe('Move Node Helper', function() {
+describe.only('Move Node Helper', function() {
+
+	var sandbox = sinon.sandbox.create();
 
 	var l1P1;
 	var l2P1;
@@ -25,6 +29,10 @@ describe('Move Node Helper', function() {
 		composesRecords = [l1P1, l2P1, l3P1, l3P2, l4P1, l5P1, l6P1];
     });
 
+    afterEach(function() {
+        sandbox.restore();
+    });
+
 	it('Move type: maxLevel -  sets source node level to max level plus 1', function() {
 		var sourceId = '9-ACTIVITY-3-1';
 		var targetId = 'maxLevel';
@@ -32,11 +40,14 @@ describe('Move Node Helper', function() {
 		var expectedComposesIdToHaveBeenModified = 3;
 		var expectedMaxLevelPlusOne = 7;
 		
+		var fillHoleHelperStub = sandbox.stub(moveNodeFillHoleHelper, "fillHoles");
+		
 		var result = fixture.moveNode(sourceId, targetId, composesRecords);
 		var resultById = _.indexBy(result, 'id');
 
 		expect(result).to.have.length(composesRecords.length);
 		expect(resultById[expectedComposesIdToHaveBeenModified].level).to.equal(expectedMaxLevelPlusOne);
+		assert.isTrue(fillHoleHelperStub.called);
 	});
 
 	it('Move type: level - is not implemented yet, returns unmodified records', function() {
