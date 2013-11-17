@@ -35,10 +35,30 @@ var moveMaxPosition = function(sourceComposesId, composesRecords, target) {
 	return composesRecords;
 };
 
-// TODO: Implement
 var moveLevel = function(sourceComposesId, composesRecords, target) {
-	return composesRecords;
-};
+	var results = [];
+	var composesRecordsById = _.indexBy(composesRecords, function(rec){return rec.id;});
+	
+	var composesRecordToModify = composesRecordsById[sourceComposesId];
+	composesRecordToModify.level = target.level;
+
+	var recordsToIncrementLevel = _.filter(composesRecords, function(rec) { 
+		return (rec.level >= target.level) && (rec.id !== sourceComposesId); 
+	});
+
+	var recordsNotToIncrementLevel = _.filter(composesRecords, function(rec) { 
+		return (rec.level < target.level) && (rec.id !== sourceComposesId); 
+	});
+
+	var recordsWithLevelIncremented = _.map(recordsToIncrementLevel, function(rec){ 
+		var newRec = _.clone(rec); 
+		newRec.level = rec.level + 1; 
+		return newRec;
+	});
+
+	results.push(composesRecordToModify, recordsNotToIncrementLevel, recordsWithLevelIncremented)
+	return _.flatten(results);
+}
 
 // TODO: Implement
 var moveLevelPosition = function(sourceComposesId, composesRecords, target) {

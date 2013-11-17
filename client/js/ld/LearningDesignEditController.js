@@ -30,12 +30,12 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
         $scope.alertMsg = err;
     });
 
-    $scope.droppedLevel = function(dragSource, dropTarget) {
-    	console.log('droppedLevel: dragSource.id = ' + dragSource.id + ', dropTarget.id = ' + dropTarget.id);
-    };
+    // $scope.droppedLevel = function(dragSource, dropTarget) {
+    // 	console.log('droppedLevel: dragSource.id = ' + dragSource.id + ', dropTarget.id = ' + dropTarget.id);
+    // };
 
-    $scope.droppedMaxLevel = function(dragSource, dropTarget) {
-    	console.log('droppedMaxLevel: dragSource.id = ' + dragSource.id + ', dropTarget.id = ' + dropTarget.id);
+    $scope.dropped = function(dragSource, dropTarget) {
+    	console.log('dropped: dragSource.id = ' + dragSource.id + ', dropTarget.id = ' + dropTarget.id);
     	var data = {
     		dragSourceId: dragSource.id,
     		dropTargetId: dropTarget.id
@@ -50,13 +50,13 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
 		);
     };
 
-    $scope.droppedPosition = function(dragSource, dropTarget) {
-    	console.log('droppedPosition: dragSource.id = ' + dragSource.id + ', dropTarget.id = ' + dropTarget.id);
-    };
+    // $scope.droppedPosition = function(dragSource, dropTarget) {
+    // 	console.log('droppedPosition: dragSource.id = ' + dragSource.id + ', dropTarget.id = ' + dropTarget.id);
+    // };
 
-    $scope.droppedMaxPosition = function(dragSource, dropTarget) {
-    	console.log('droppedMaxPosition: dragSource.id = ' + dragSource.id + ', dropTarget.id = ' + dropTarget.id);
-    };
+    // $scope.droppedMaxPosition = function(dragSource, dropTarget) {
+    // 	console.log('droppedMaxPosition: dragSource.id = ' + dragSource.id + ', dropTarget.id = ' + dropTarget.id);
+    // };
 
     // FIXME: This is the old code from first version of d&d, get rid of it when we have new version working
   //   $scope.dropped = function(dragEl, dropEl) { 

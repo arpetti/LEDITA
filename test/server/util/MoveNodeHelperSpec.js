@@ -5,7 +5,7 @@ var fixture = require('../../../server/util/MoveNodeHelper');
 var moveNodeFillHoleHelper = require('../../../server/util/MoveNodeFillHoleHelper');
 var _ =  require('underscore');
 
-describe.only('Move Node Helper', function() {
+describe('Move Node Helper', function() {
 
 	var sandbox = sinon.sandbox.create();
 
@@ -52,16 +52,30 @@ describe.only('Move Node Helper', function() {
 
 	it('Move type: level - is not implemented yet, returns unmodified records', function() {
 		var sourceId = '9-ACTIVITY-3-1';
-		var targetId = 'level-1';
+		var targetId = 'level-2';
+
+		var fillHoleHelperStub = sandbox.stub(moveNodeFillHoleHelper, "fillHoles");
 
 		var result = fixture.moveNode(sourceId, targetId, composesRecords);
-
 		var resultById = _.indexBy(result, 'id');
+		
 		var expectedComposesId = 3;
 
 		expect(result).to.have.length(composesRecords.length);
-		expect(resultById[expectedComposesId].level).to.equal(3);
+		expect(resultById[expectedComposesId].level).to.equal(2);
 		expect(resultById[expectedComposesId].position).to.equal(1);
+		
+		// Nodes that were in level smaller than target should not have moved
+		expect(resultById[1].level).to.equal(1); 
+		
+		// All other nodes should have their level incremented
+		expect(resultById[2].level).to.equal(3);
+		expect(resultById[4].level).to.equal(4);
+		expect(resultById[5].level).to.equal(5);
+		expect(resultById[6].level).to.equal(6);
+		expect(resultById[7].level).to.equal(7);
+		
+		assert.isTrue(fillHoleHelperStub.called);
 	});
 
 	it('Move type: levelPosition - is not implemented yet, returns unmodified records', function() {
