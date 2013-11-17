@@ -5,7 +5,7 @@ var LdGetService = require('./service/LdGetService');
 var AuthController =  require('./controllers/AuthController');
 var LdController = require('./controllers/LdController');
 var LdEditController = require('./controllers/LdEditController');
-var ComposesController = require('./controllers/ComposesController');
+var MoveNodeController = require('./controllers/MoveNodeController');
 var UserProfileController = require('./controllers/UserProfileController');
 var ActivityController = require('./controllers/ActivityController');
 var RefController = require('./controllers/RefController');
@@ -158,7 +158,7 @@ var routes = [
     {
     	path: '/learningdesign/composes/nodetonode/:id',
     	httpMethod: 'PUT',
-    	middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, ComposesController.nodeToNode],
+    	middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, MoveNodeController.nodeToNode],
         accessLevel: accessLevels.user
     },
 

@@ -59,7 +59,7 @@ module.exports = {
 		var sourceComposesRecord = findComposesRecord(source, composesRecords);
 		var moveFunc = moveTypeFuncMap[target.moveType];
 		var modifiedComposesRecords = moveFunc.apply(null, [sourceComposesRecord.id, composesRecords, target]);
-		this.fillHoles(modifiedComposesRecords, sourceComposesRecord.id);
+		this.fillHoles(modifiedComposesRecords);
 		return modifiedComposesRecords;
 	},
 

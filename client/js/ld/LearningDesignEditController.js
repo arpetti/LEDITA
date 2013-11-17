@@ -36,6 +36,18 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
 
     $scope.droppedMaxLevel = function(dragSource, dropTarget) {
     	console.log('droppedMaxLevel: dragSource.id = ' + dragSource.id + ', dropTarget.id = ' + dropTarget.id);
+    	var data = {
+    		dragSourceId: dragSource.id,
+    		dropTargetId: dropTarget.id
+    	};
+    	LDEditService.updateActivityLevelPosition($scope.ldid, data,
+	        function(res) {
+	        	$scope.levels = res;
+	        },
+	        function(err) {
+	        	$scope.ldUpdateErrors = err; // TODO UI to display these
+	        }
+		);
     };
 
     $scope.droppedPosition = function(dragSource, dropTarget) {
