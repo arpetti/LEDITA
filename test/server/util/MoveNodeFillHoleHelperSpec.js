@@ -82,4 +82,27 @@ describe('Move Node Fill Hole Helper', function() {
 
 	});
 
+	describe('Fill Position Holes', function() {
+
+		it('Fills Position Holes for each Level', function() {
+			var testRecords = [
+				{"id": 90, "level": 1, "position": 2},
+				{"id": 91, "level": 1, "position": 4},
+				{"id": 92, "level": 2, "position": 1},
+				{"id": 93, "level": 2, "position": 3},
+				{"id": 94, "level": 2, "position": 4},
+			];
+
+			var results = fixture.fillPositionHoles(testRecords);
+			var resultById = _.indexBy(testRecords, 'id');
+
+			expect(resultById[90].position).to.equal(1);
+			expect(resultById[91].position).to.equal(2);
+			expect(resultById[92].position).to.equal(1);
+			expect(resultById[93].position).to.equal(2);
+			expect(resultById[94].position).to.equal(3);
+		});
+
+	});
+
 });

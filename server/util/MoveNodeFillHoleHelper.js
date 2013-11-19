@@ -1,9 +1,17 @@
 var _ =  require('underscore');
 
 // wip...
-var fillPositionHolesMapFunc = function(nodesInALevel, key) {
-	result = ['a', 'b', 'c'];
-	return result;
+var processFillPositionHoles = function(nodesInALevel, key) {
+	var byPosition = _.groupBy(nodesInALevel, function(rec) {return rec.position;});
+	var positions = _.keys(byPosition);
+
+	_.each(byPosition, function(records, position) {
+		var indexPlusOne = _.indexOf(positions, position) + 1;
+		_.each(records, function(rec) {
+			rec.position = indexPlusOne;
+		});
+	});
+	return _.flatten(_.values(byPosition));
 };
 
 module.exports = {
@@ -18,12 +26,10 @@ module.exports = {
 		return recordsWithLevelHolesFilled;
 	},
 
-	// wip...
 	fillPositionHoles: function(recordsWithLevelHolesFilled) {
 		var byLevel = _.groupBy(recordsWithLevelHolesFilled, function(rec) {return rec.level;});
-		console.log('byLevel: ' + JSON.stringify(byLevel));
-		var processed = _.map(byLevel, fillPositionHoles);
-		console.log('processed: ' + JSON.stringify(processed));
+		var processed = _.map(byLevel, processFillPositionHoles);
+		return _.flatten(processed);
 	},
 
 	fillLevelHoles: function(recordsSortedByLevel) {
