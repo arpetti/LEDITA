@@ -1107,8 +1107,8 @@ input.formInputDuration[type=number]::-webkit-inner-spin-button:after {
 
 .levelBoxEdit {
     text-align: center;
-    margin-top: -10px;
-    padding-top: 20px;
+    margin-top: 10px;
+    padding-top: 0;
     background: url("../img/arw.png") no-repeat top;
 }
 .levelBoxChildEdit {
@@ -1291,7 +1291,7 @@ div.leftGroupDrop+div.levelBoxChildEdit, div.levelBoxChildEdit:first-child  {
     width: 20px;
     margin-top: 5px;
 display: inline-block;
-    top: -85px;
+    top: -65px;
     margin-bottom: -65px;
     position: relative;
  }
