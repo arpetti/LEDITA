@@ -4,6 +4,38 @@ var _ =  require('underscore');
 
 describe('Move Node Fill Hole Helper', function() {
 
+	it('Fills Level and Position Holes', function() {
+		var testRecords = [
+			{"id": 91, "level": 1, "position": 1},
+			{"id": 92, "level": 3, "position": 2},
+			{"id": 93, "level": 3, "position": 4},
+			{"id": 94, "level": 4, "position": 1},
+			{"id": 95, "level": 5, "position": 1},
+			{"id": 96, "level": 5, "position": 4}
+		];
+
+		var results = fixture.fillHoles(testRecords);
+		var resultById = _.indexBy(results, 'id');
+		
+		expect(resultById[91].level).to.equal(1);
+		expect(resultById[91].position).to.equal(1);
+
+		expect(resultById[92].level).to.equal(2);
+		expect(resultById[92].position).to.equal(1);
+
+		expect(resultById[93].level).to.equal(2);
+		expect(resultById[93].position).to.equal(2);
+
+		expect(resultById[94].level).to.equal(3);
+		expect(resultById[94].position).to.equal(1);
+
+		expect(resultById[95].level).to.equal(4);
+		expect(resultById[95].position).to.equal(1);
+
+		expect(resultById[96].level).to.equal(4);
+		expect(resultById[96].position).to.equal(2);
+	});
+
 	describe('Fill Level Holes', function() {
 
 		it('Fills level holes in the middle', function() {

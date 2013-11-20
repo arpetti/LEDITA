@@ -1,6 +1,5 @@
 var _ =  require('underscore');
 
-// wip...
 var processFillPositionHoles = function(nodesInALevel, key) {
 	var byPosition = _.groupBy(nodesInALevel, function(rec) {return rec.position;});
 	var positions = _.keys(byPosition);
@@ -19,11 +18,7 @@ module.exports = {
 	fillHoles: function(composesRecords) {
 		var sortedByLevel = _.sortBy(composesRecords, function(rec) {return rec.level;} );
 		var recordsWithLevelHolesFilled = this.fillLevelHoles(sortedByLevel);
-		
-		//TODO fillPositionHoles
-		// this.fillPositionHoles(recordsWithLevelHolesFilled);
-
-		return recordsWithLevelHolesFilled;
+		return this.fillPositionHoles(recordsWithLevelHolesFilled);
 	},
 
 	fillPositionHoles: function(recordsWithLevelHolesFilled) {
