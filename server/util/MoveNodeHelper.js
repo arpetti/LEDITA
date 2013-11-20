@@ -67,9 +67,30 @@ var moveLevel = function(sourceComposesId, composesRecords, target) {
 	return _.flatten(results);
 }
 
-// TODO: Implement
 var moveLevelPosition = function(sourceComposesId, composesRecords, target) {
-	return composesRecords;
+	var results = [];
+	var composesRecordsById = _.indexBy(composesRecords, function(rec){return rec.id;});
+
+	var composesRecordToModify = composesRecordsById[sourceComposesId];
+	composesRecordToModify.level = target.level;
+	composesRecordToModify.position = target.position;
+
+	var recordsToIncrementPosition = _.filter(composesRecords, function(rec) {
+		return (rec.level === target.level) && (rec.position >= target.position) && (rec.id !== sourceComposesId);
+	});
+
+	var recordsNotToIncrementPosition = _.filter(composesRecords, function(rec) {
+		return ((rec.level !== target.level) || (rec.position < target.position)) && (rec.id !== sourceComposesId);
+	});
+
+	var recordsWithPositionIncremented = _.map(recordsToIncrementPosition, function(rec){ 
+		var newRec = _.clone(rec); 
+		newRec.position = rec.level + 1; 
+		return newRec;
+	});
+
+	results.push(composesRecordToModify, recordsNotToIncrementPosition, recordsWithPositionIncremented)
+	return _.flatten(results);
 };
 
 var moveTypeFuncMap = {

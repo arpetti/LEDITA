@@ -117,9 +117,9 @@ describe('Move Node Helper', function() {
 		expect(resultById[21].level).to.equal(5);
 	});
 
-	it('Move type: levelPosition - is not implemented yet, returns unmodified records', function() {
+	it('Move type: levelPosition - moves source node to target level and position', function() {
 		var sourceId = '9-ACTIVITY-3-1';
-		var targetId = 'levelPosition-1-4';
+		var targetId = 'levelPosition-5-1';
 
 		var result = fixture.moveNode(sourceId, targetId, composesRecords);
 
@@ -127,8 +127,14 @@ describe('Move Node Helper', function() {
 		var expectedComposesId = 3;
 
 		expect(result).to.have.length(composesRecords.length);
-		expect(resultById[expectedComposesId].level).to.equal(3);
+
+		// Source node is moved to target level and position
+		expect(resultById[expectedComposesId].level).to.equal(5);
 		expect(resultById[expectedComposesId].position).to.equal(1);
+
+		// Nodes that were on target level and position greater or equal to target should have position incremented
+		expect(resultById[6].level).to.equal(5); // no change
+		expect(resultById[6].position).to.equal(2);
 	});
 
 	it('Move type: maxPosition - moves node to max position at same level', function() {
