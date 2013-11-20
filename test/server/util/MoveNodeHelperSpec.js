@@ -131,9 +131,33 @@ describe('Move Node Helper', function() {
 		expect(resultById[expectedComposesId].position).to.equal(1);
 	});
 
-	it('Move type: maxPosition - is not implemented yet, returns unmodified records', function() {
+	it('Move type: maxPosition - moves node to max position at same level', function() {
 		var sourceId = '9-ACTIVITY-3-1';
-		var targetId = 'maxPosition-1';
+		var targetId = 'maxPosition-3';
+
+		var fillHoleFunc = function(input) {
+			return input;
+		};
+		var fillHoleHelperStub = sandbox.stub(moveNodeFillHoleHelper, "fillHoles", fillHoleFunc);
+
+		var result = fixture.moveNode(sourceId, targetId, composesRecords);
+		var resultById = _.indexBy(result, 'id');
+		var expectedComposesId = 3;
+
+		expect(result).to.have.length(composesRecords.length);
+		expect(resultById[expectedComposesId].level).to.equal(3);
+		expect(resultById[expectedComposesId].position).to.equal(3);
+		assert.isTrue(fillHoleHelperStub.called);
+	});
+
+	it('Move type: maxPosition - moves node to max position at different level', function() {
+		var sourceId = '9-ACTIVITY-3-1';
+		var targetId = 'maxPosition-4';
+
+		var fillHoleFunc = function(input) {
+			return input;
+		};
+		var fillHoleHelperStub = sandbox.stub(moveNodeFillHoleHelper, "fillHoles", fillHoleFunc);
 
 		var result = fixture.moveNode(sourceId, targetId, composesRecords);
 
@@ -141,8 +165,8 @@ describe('Move Node Helper', function() {
 		var expectedComposesId = 3;
 
 		expect(result).to.have.length(composesRecords.length);
-		expect(resultById[expectedComposesId].level).to.equal(3);
-		expect(resultById[expectedComposesId].position).to.equal(1);
+		expect(resultById[expectedComposesId].level).to.equal(4);
+		expect(resultById[expectedComposesId].position).to.equal(2);
 	});
 
 });

@@ -30,9 +30,16 @@ var moveMaxLevel = function(sourceComposesId, composesRecords, target) {
 	return _.values(composesRecordsById);
 };
 
-// TODO: Implement
 var moveMaxPosition = function(sourceComposesId, composesRecords, target) {
-	return composesRecords;
+	var recordsAtTargetLevel = _.where(composesRecords, {level: target.level});
+	var maxPositionAtLevelRecord = _.max(recordsAtTargetLevel, function(rec) { return rec.position; } );
+	
+	var composesRecordsById = _.indexBy(composesRecords, function(rec){return rec.id;});
+	var composesRecordToModify = composesRecordsById[sourceComposesId];
+
+	composesRecordToModify.level = target.level;
+	composesRecordToModify.position = maxPositionAtLevelRecord.position + 1;
+	return _.values(composesRecordsById);
 };
 
 var moveLevel = function(sourceComposesId, composesRecords, target) {
