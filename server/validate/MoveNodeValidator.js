@@ -9,20 +9,47 @@ var validateMaxPosition = function(source, target, composesRecords) {
 	var recordsAtTargetLevel = _.where(composesRecords, {level: target.level});
 	var maxPositionAtLevelRecord = _.max(recordsAtTargetLevel, function(rec) { return rec.position; } );
 	if (maxPositionAtLevelRecord.position >= MAX_POSITION) {
-		return messages.INVALID_LEVEL_POSITION_MOVE;
+		return messages.INVALID_MOVE_MAX_POSITION;
 	} else {
 		return null;
 	}
 }
 
 var validateLevelPosition = function(source, target, composesRecords) {
+	
+	// Is this level already full?
+	var maxPosErrMsg = validateMaxPosition(source, target, composesRecords);
+	if (maxPosErrMsg) {
+		return maxPosErrMsg;
+	}
+	
+	// is target immediately to the left of source?
+	if (source.level === target.level && target.position === source.position) {
+		return messages.INVALID_MOVE_LEVEL_POSITION_LEFT;
+	}
+
+	// is target immediately to the right of source?
+	if (source.level === target.level && target.position === source.position + 1) {
+		return messages.INVALID_MOVE_LEVEL_POSITION_RIGHT;
+	}
+
+	return null;
+}
+
+// TODO: Implement
+var validateLevel = function(source, target, composesRecords) {
+	return null;
+}
+
+// TODO: Implement
+var validateMaxLevel = function(source, target, composesRecords) {
 	return null;
 }
 
 var moveTypeValFuncMap = {
-	level: null,
+	level: validateLevel,
 	levelPosition: validateLevelPosition,
-	maxLevel: null,
+	maxLevel: validateMaxLevel,
 	maxPosition: validateMaxPosition
 };
 

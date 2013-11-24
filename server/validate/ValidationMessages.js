@@ -90,4 +90,6 @@ module.exports.PREREQUISITE_REMOVE_FAIL = 'Prerequisite could not be removed.';
 // Drag and Drop Activity Structure
 module.exports.DRAG_DROP_FAIL = 'Could not move the node, please try again later.';
 module.exports.DRAG_DROP_INVALID = 'Invalid move.';
-module.exports.INVALID_LEVEL_POSITION_MOVE = 'Cannot move to this position.';
+module.exports.INVALID_MOVE_MAX_POSITION = 'Cannot move to max position when level is full.';
+module.exports.INVALID_MOVE_LEVEL_POSITION_LEFT = 'Cannot move node to its immediate left.';
+module.exports.INVALID_MOVE_LEVEL_POSITION_RIGHT = 'Cannot move node to its immediate right.';
