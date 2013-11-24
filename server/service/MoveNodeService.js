@@ -6,6 +6,7 @@ var activityService = require('./ActivityService');
 
 module.exports = {
 
+	// TODO: Add unit test
 	// callback(err, result, message)
 	nodeToNode: function(ldId, sourceId, targetId, callback) {
 		composesDao.findAllComposes([ldId], function(err, results) {

@@ -106,6 +106,7 @@ module.exports = {
 		var source = moveNodeParser.parseSourceId(sourceId);
 		var target = moveNodeParser.parseTargetId(targetId);
 		var sourceComposesRecord = findComposesRecord(source, composesRecords);
+		// FIXME: if sourceComposesRecord not found, LOG an ERROR and return unmodified composesRecords
 		var moveFunc = moveTypeFuncMap[target.moveType];
 		var modifiedComposesRecords = moveFunc.apply(null, [sourceComposesRecord.id, composesRecords, target]);
 		var recordsWithHolesFilled = moveNodeFillHoleHelper.fillHoles(modifiedComposesRecords);
