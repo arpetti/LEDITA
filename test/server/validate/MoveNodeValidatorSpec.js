@@ -5,7 +5,7 @@ var fixture = require('../../../server/validate/MoveNodeValidator');
 var composesDao = require('../../../server/dao/ComposesDao');
 var messages = require('../../../server/validate/ValidationMessages');
 
-describe.only('Move Node Validator', function() {
+describe('Move Node Validator', function() {
 
 	var sandbox = sinon.sandbox.create();
 	var composesRecords;
