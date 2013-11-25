@@ -1,7 +1,7 @@
 angular.module('ledita-app')
 .controller('LdEditCtrl',
-['$scope', '$routeParams', '$location', 'TypeaheadHelper', 'LDService', 'LDEditService', 'Home', 
-function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditService, Home) {
+['$scope', '$log', '$routeParams', '$location', 'TypeaheadHelper', 'LDService', 'LDEditService', 'Home', 
+function($scope, $log, $routeParams, $location, TypeaheadHelper, LDService, LDEditService, Home) {
 
 	$scope.ldid = $routeParams.ldid;
 	$scope.selectedQcers = {};
@@ -41,6 +41,7 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
 	        	$scope.levels = res;
 	        },
 	        function(err) {
+	        	$log.error(err);
 	        	$scope.ldUpdateErrors = err; // TODO UI to display these
 	        }
 		);
@@ -93,6 +94,8 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
 	        	$scope.ldTopic = " ";
 	        },
 	        function(err) {
+	        	$log.error(err);
+	        	$scope.ldUpdateErrors = err; // TODO UI to display these
 	        }
 	    );
   	};
@@ -103,6 +106,7 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
 	        	removeItem(topic, $scope.selectedTopics);
 	        },
 	        function(err) {
+	        	$log.error(err);
 	        	$scope.ldUpdateErrors = err; // TODO UI to display these
 	        }
 		);
@@ -116,6 +120,8 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
         	$scope.ldObjective = " ";
         },
         function(err) {
+        	$log.error(err);
+	        $scope.ldUpdateErrors = err; // TODO UI to display these
         });
   	};
 
@@ -125,6 +131,7 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
 	        	removeItem(objective, $scope.selectedObjectives);
 	        },
 	        function(err) {
+	        	$log.error(err);
 	        	$scope.ldUpdateErrors = err; // TODO UI to display these
 	        }
 		);
@@ -138,6 +145,8 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
         	$scope.ldRequisite = " ";
         },
         function(err) {
+        	$log.error(err);
+	        $scope.ldUpdateErrors = err; // TODO UI to display these
         });
   	};
 
@@ -147,6 +156,7 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
 	        	removeItem(prerequisite, $scope.selectedPrerequisites);
 	        },
 	        function(err) {
+	        	$log.error(err);
 	        	$scope.ldUpdateErrors = err; // TODO UI to display these
 	        }
 		);
@@ -156,8 +166,10 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
   	$scope.updateQcer = function() {
   		LDEditService.updateLdQcers($scope.ldid, {ldQcers: $scope.selectedQcers},
         function(res) {
+        	$log.info('updateQcer successful');
         },
         function(err) {
+        	$log.error(err);
             $scope.ldUpdateErrors = err; // TODO UI to display these
         });
   	};
@@ -167,8 +179,10 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
     	if (modifiedLdName && modifiedLdName.length > 0) {
     		LDEditService.updateLdName($scope.ldid, {ldName: modifiedLdName},
 	        function(res) {
+	        	$log.info('updateLdName successful');
 	        },
 	        function(err) {
+	        	$log.error(err);
 	            $scope.ldUpdateErrors = err; // TODO UI to display these
 	        });
     	};
@@ -179,8 +193,10 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
     	if (modifiedLdScope && modifiedLdScope.length > 0) {
     		LDEditService.updateLdScope($scope.ldid, {ldScope: modifiedLdScope},
 	        function(res) {
+	        	$log.info('updateLdScope successful');
 	        },
 	        function(err) {
+	        	$log.error(err);
 	            $scope.ldUpdateErrors = err; // TODO UI to display these
 	        });
     	};
@@ -191,8 +207,10 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
     	if (modifiedStudentsDescr && modifiedStudentsDescr.length > 0) {
     		LDEditService.updateStudentsDescr($scope.ldid, {studentsDescr: modifiedStudentsDescr},
 	        function(res) {
+	        	$log.info('updateStudentsDescr successful');
 	        },
 	        function(err) {
+	        	$log.error(err);
 	            $scope.ldUpdateErrors = err; // TODO UI to display these
 	        });
     	};
@@ -209,8 +227,10 @@ function($scope, $routeParams, $location, TypeaheadHelper, LDService, LDEditServ
     	} else {
     		LDEditService.updateLdPrivate($scope.ldid,
 	        function(res) {
+	        	$log.info('updateLdPublication successful');
 	        },
 	        function(err) {
+	        	$log.error(err);
 	            $scope.ldUpdateErrors = err; // TODO UI to display these
 	        });
     	}
