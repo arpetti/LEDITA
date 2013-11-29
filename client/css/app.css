@@ -35,7 +35,8 @@ ACE500 = green
 * {
     margin: 0;
     padding: 0;
-}
+    border: 0;
+  }
 
 img {
     border: none;
@@ -1321,9 +1322,9 @@ div.leftGroupDrop+div.levelBoxChildEdit, div.levelBoxChildEdit:first-child  {
     width: 20px;
     margin-top: 5px;
 display: inline-block;
-    top: -65px;
-    margin-bottom: -65px;
     position: relative;
+    top: -85px;
+    margin-bottom: -85px;
  }
 
 
