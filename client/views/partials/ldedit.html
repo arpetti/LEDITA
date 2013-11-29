@@ -31,11 +31,9 @@
             Topics:</h5>
 
             <form novalidate class="sidebarForm" name="LdTopicForm">
-                <div class="errorBox">
-                    <span id="topicReqErr" class="errorTipModal"
-                          ng-show="LdTopicForm.ldTopic.$dirty && LdTopicForm.ldTopic.$error.required">Required!</span>
-                    <span id="topicPatternErr" class="errorTipModal" ng-show="LdTopicForm.ldTopic.$error.pattern">A topic cannot contain this symbol.</span>
-                    <span id="topicLengthErr" class="errorTipModal" ng-show="LdTopicForm.ldTopic.$error.maxlength">A topic cannot be longer than 255 characters.</span>
+                <div class="errorBoxSidebar">
+                    <span id="topicPatternErr" class="errorTipSidebar" ng-show="LdTopicForm.ldTopic.$error.pattern">Symbol not allowed</span>
+                    <span id="topicLengthErr" class="errorTipSidebar" ng-show="LdTopicForm.ldTopic.$error.maxlength">Too long (max 255)</span>
                     <span class="clearfix"></span>
                 </div>
                 <input class="sidebarInput" type="text" ng-model="ldTopic" name="ldTopic"
@@ -51,7 +49,7 @@
                     <ul ng-repeat="topic in selectedTopics" class="zeroMargin subjects">
                         <li class="sidebarEditItem">
 	                	<span class="sidebarEditItemLink">{{topic}} 
-	                	<a ng-click="removeTopic(topic)"><i class="icon-remove-circle"></i> </a></span>
+	                	<a ng-click="removeTopic(topic)" class="hand"><i class="icon-remove-circle"></i> </a></span>
                         </li>
                     </ul>
                 </div>
@@ -63,13 +61,11 @@
             Objectives:</h5>
 
             <form novalidate class="sidebarForm" name="LdObjectiveForm">
-                <div class="errorBox">
-                    <span id="objectiveReqErr" class="errorTipModal"
-                          ng-show="LdObjectiveForm.ldObjective.$dirty && LdObjectiveForm.ldObjective.$error.required">Required!</span>
-                    <span id="objectivePatternErr" class="errorTipModal"
-                          ng-show="LdObjectiveForm.ldObjective.$error.pattern">An objective cannot contain this symbol.</span>
-                    <span id="objectiveLengthErr" class="errorTipModal"
-                          ng-show="LdObjectiveForm.ldObjective.$error.maxlength">An objective cannot be longer than 255 characters.</span>
+                <div class="errorBoxSidebar">
+                  <span id="objectivePatternErr" class="errorTipSidebar"
+                          ng-show="LdObjectiveForm.ldObjective.$error.pattern">Symbol not allowed</span>
+                    <span id="objectiveLengthErr" class="errorTipSidebar"
+                          ng-show="LdObjectiveForm.ldObjective.$error.maxlength">Too long (max 255)</span>
                     <span class="clearfix"></span>
                 </div>
                 <input class="sidebarInput" type="text" ng-model="ldObjective" name="ldObjective"
@@ -85,7 +81,7 @@
                     <ul ng-repeat="objective in selectedObjectives" class="zeroMargin objectives">
                         <li class="sidebarEditItem">
 	                	<span class="sidebarEditItemLink">{{objective}} 
-	                	<a ng-click="removeObjective(objective)"><i class="icon-remove-circle"></i></a></span>
+	                	<a ng-click="removeObjective(objective)" class="hand"><i class="icon-remove-circle"></i></a></span>
                         </li>
                     </ul>
                 </div>
@@ -97,10 +93,10 @@
             Pre-Requisites:</h5>
 
             <form novalidate class="sidebarForm" name="LdPrereqForm">
-                <div class="errorBox">
-                    <span id="prereqPatternErr" class="errorTipModal" ng-show="LdPrereqForm.ldRequisite.$error.pattern">A pre-requisite cannot contain this symbol.</span>
-                    <span id="prereqLengthErr" class="errorTipModal"
-                          ng-show="LdPrereqForm.ldRequisite.$error.maxlength">A pre-requisite cannot be longer than 255 characters.</span>
+                <div class="errorBoxSidebar">
+                    <span id="prereqPatternErr" class="errorTipSidebar" ng-show="LdPrereqForm.ldRequisite.$error.pattern">Symbol not allowed</span>
+                    <span id="prereqLengthErr" class="errorTipSidebar"
+                          ng-show="LdPrereqForm.ldRequisite.$error.maxlength">Too long (max 255)</span>
                 </div>
                 <input class="sidebarInput" type="text" ng-model="ldRequisite" name="ldRequisite"
                        typeahead="suggestion for suggestion in getObjectives($viewValue)"
@@ -115,7 +111,7 @@
                     <ul ng-repeat="prereq in selectedPrerequisites" class="zeroMargin prerequisites">
                         <li class="sidebarEditItem">
 	                	<span class="sidebarEditItemLink">{{prereq}} 
-	                	<a ng-click="removePrerequisite(prereq)"><i class="icon-remove-circle"></i> </a></span>
+	                	<a ng-click="removePrerequisite(prereq)" class="hand"><i class="icon-remove-circle"></i> </a></span>
                         </li>
                     </ul>
                 </div>
