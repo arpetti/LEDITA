@@ -79,7 +79,7 @@
                 <h5 class="btnModel">USE THIS DESIGN AS A MODEL</h5>
             </a>
         </div>
-        <div ng-hide="{{learningDesign.user_id}} != 1">
+        <div ng-show=" learningDesign.user_id  ==  ">
             <a ng-href="/ldedit/{{learningDesign.ld_id}}">
                 <h4 class="editingMode">Edit this design</h4>
             </a>
