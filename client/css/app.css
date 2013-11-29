@@ -160,12 +160,21 @@ a:hover {
 }
 
 #sidebarHeader {
+    background-color: #CCCCCC;
+    color: #666666;
+    border: 1px dashed #FFFFFF;
+    text-align: center;
+    padding: 5px;
+    margin: 0 0 15px 0;
+}
+.editingMode {
     background-color: #990000;
     color: #FFFFFF;
     border: 1px dashed #FFFFFF;
     text-align: center;
     padding: 5px;
-    margin: 0 0 15px 0;
+    margin: 10px 0 0 0;
+
 }
 
 .marginTopSidebar {
@@ -2468,26 +2477,6 @@ border: 1px solid #0099CC;
     text-overflow: ellipsis;
     height: 78px;
     margin: 5px;
-
-    /* Internet Explorer 10 */
-    display:-ms-flexbox;
-    -ms-flex-pack:center;
-    -ms-flex-align:center;
-
-    /* Firefox */
-    display:-moz-box;
-    -moz-box-pack:center;
-    -moz-box-align:center;
-
-    /* Safari, Opera, and Chrome */
-    display:-webkit-box;
-    -webkit-box-pack:center;
-    -webkit-box-align:center;
-
-    /* W3C */
-    display:box;
-    box-pack:center;
-    box-align:center;
 }
 
 .ld-name-text  {
@@ -3009,6 +2998,16 @@ border: 1px solid #0099CC;
 
     .userTable {
      font-size: 12px;
+    }
+
+    .brand img {
+        width: 85%;
+        heigth: 85%;
+    }
+
+    .navbar .brand {
+        padding: 10px 0 5px 20px;
+        margin: 0;
     }
 }
 
