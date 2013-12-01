@@ -30,6 +30,12 @@ angular.module('ledita-app', ['ngCookies', 'infinite-scroll', 'ui.bootstrap', 'u
                 controller: 'UserProfileCtrl',
                 access: access.user
             });
+        $routeProvider.when('/useredit/:userid',
+            {
+                templateUrl: '/partials/useredit',
+                controller: 'UserProfileCtrl',
+                access: access.user
+            });
         $routeProvider.when('/users',
             {
                 templateUrl: '/partials/users',
@@ -39,6 +45,12 @@ angular.module('ledita-app', ['ngCookies', 'infinite-scroll', 'ui.bootstrap', 'u
         $routeProvider.when('/lds',
             {
                 templateUrl: '/partials/lds',
+                controller: 'HomeCtrl',
+                access: access.user
+            });
+          $routeProvider.when('/userlds/:userid',
+            {
+                templateUrl: '/partials/userlds',
                 controller: 'HomeCtrl',
                 access: access.user
             });

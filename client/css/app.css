@@ -2306,6 +2306,26 @@ input.searchBoxInput {
     margin: 0;
     padding: 0 5px;
 }
+
+.userDesignsButton {
+    text-align: center;
+    margin: 40px auto 10px;
+    background-color: #0099CC;
+    color: #ffffff;
+    padding: 20px;
+    width: 180px;
+    border-radius: 8px;
+    border: 1px dashed #ffffff;
+}
+
+.userLabel {
+}
+
+.userForm {
+    font-weight: bold;
+    width: 80%;
+    max-width: 450px;
+}
 /* misc
 ===================== */
 .top-margin {
