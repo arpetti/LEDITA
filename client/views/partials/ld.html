@@ -14,31 +14,31 @@
             </a>
         </div>
         -->
-        <h4 id="sidebarHeader">General Info</h4>
+        <h4 id="sidebarHeader">Informazioni</h4>
 
         <div>
-            <h5 class="zeroMargin date"><i class="icon-pencil"></i> Author:</h5>
+            <h5 class="zeroMargin date"><i class="icon-pencil"></i> Autore:</h5>
             <!-- FIXME: add dynamic link to author profile page -->
             <a ng-href="/user/{{ learningDesign.user_id }}" class="zeroMargin">{{ learningDesign.user_name}} {{ learningDesign.user_last_name}}</a>
         </div>
         <div class="marginTopSidebar">
-            <h5 class="zeroMargin date "><i class="icon-calendar"></i> Created in:</h5>
-            <span class="zeroMargin">{{learningDesign.ld_creation_date | date:'yyyy-MM-dd'}}</span>
+            <h5 class="zeroMargin date "><i class="icon-calendar"></i> Creato il:</h5>
+            <span class="zeroMargin">{{learningDesign.ld_creation_date | date:'d-M-yyyy'}}</span>
         </div>
-        <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-map-marker"></i> Topics:</h5>
+        <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-map-marker"></i> Argomenti:</h5>
             <ul ng-repeat="subject in learningDesign.subjects" class="zeroMargin subjects">
                 <!-- FIXME: add dynamic link to  LDs page with subject.subject_name as filter -->
                 <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{subject.subject_name}}</a></li>
             </ul>
         </div>
-        <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-screenshot"></i> Objectives:</h5>
+        <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-screenshot"></i> Obiettivi:</h5>
             <ul ng-repeat="objective in learningDesign.objectives" class="zeroMargin objectives">
                 <!-- FIXME: add dynamic link to  LDs page with objective.objective_descr as filter -->
                 <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{objective.objective_descr}}</a>
                 </li>
             </ul>
         </div>
-        <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-backward"></i> Pre-Requisites:</h5>
+        <div class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-backward"></i> Prerequisiti:</h5>
             <ul ng-repeat="prereq in learningDesign.prerequisites" class="zeroMargin prerequisites">
                 <!-- FIXME: add dynamic link to  LDs page with prereq.prereq_name as filter -->
                 <li class="sidebarItem"><a ng-href="#" class="sidebarItemLink">{{prereq.prereq_name}}</a>
@@ -46,7 +46,7 @@
             </ul>
         </div>
         <div class="clear marginTopSidebar">
-            <h5 class="zeroMargin"><i class="icon-user"></i> Students' Description:</h5>
+            <h5 class="zeroMargin"><i class="icon-user"></i> Descrizione degli studenti:</h5>
             <span>{{ learningDesign.ld_students_profile }}</span>
         </div>
         <!-- TODO: 2nd phase - Tag system -->
@@ -76,12 +76,12 @@
             <!-- FIXME: add a dynamic link to use the LD as a model -->
             <a href="#">
                 <img src="../../img/model.png" class="btnModelImg">
-                <h5 class="btnModel">USE THIS DESIGN AS A MODEL</h5>
+                <h5 class="btnModel">USA PROGETTO COME MODELLO</h5>
             </a>
         </div>
         <div ng-show=" learningDesign.user_id  ==  ">
             <a ng-href="/ldedit/{{learningDesign.ld_id}}">
-                <h4 class="editingMode">Edit this design</h4>
+                <h4 class="editingMode">Modifica questo progetto </h4>
             </a>
         </div>
         <!--Sidebar content-->
@@ -93,14 +93,14 @@
     <tab-heading>
         <button id="globalTab" class="btnContent" ng-class="isBtnActive(data.static1)" ng-click="data.static1 = true">
             <img
-                    src="../../img/board.png" class="btnImage"> Global View
+                    src="../../img/board.png" class="btnImage"> Vista globale
         </button>
     </tab-heading>
     <tab-heading>
         <button id="textualTab" class="btnContent" ng-class="isBtnActive(data.static2)" ng-click="data.static2 = true">
             <img
                     src="../../img/text.png"
-                    class="btnImage"> Textual View
+                    class="btnImage"> Vista testuale
         </button>
     </tab-heading>
 
@@ -110,15 +110,15 @@
 <div id="contentBody">
     <div id="contentHeader">
         <div class="titleLDBox" >
-            <label class="editLabel"><i class="icon-book icon-white"></i> Design name:</label>
+            <label class="editLabel"><i class="icon-book icon-white"></i> Nome del progetto:</label>
             <h4 class="titleLD">{{learningDesign.ld_name }}</h4>
         </div>
         <div >
            <div class="titleQcer" ng-show="learningDesign.qcers">
-               <label class="editLabel"><i class="icon-tasks icon-white"></i> QCER Levels:</label>
+               <label class="editLabel"><i class="icon-tasks icon-white"></i> Livelli QCER:</label>
                    <span ng-repeat="qcer in learningDesign.qcers" class="round qceritem ">{{ qcer.qcer_name }}</span></div>
             <div class="titleScope">
-                <label class="editLabel"><i class="icon-bell icon-white"></i> Scope:</label>
+                <label class="editLabel"><i class="icon-bell icon-white"></i> Ambito:</label>
         <span class="titleScopeName">{{learningDesign.ld_scope }}</span></div>
         </div>
         <div class="clearfix"></div>
@@ -143,7 +143,7 @@
 
                             <div class="actLabel" ng-show="child.group_child_type!='LD'">
                                 <span class="timeLabel"><i class="icon-time icon-white"></i> {{ child | durationDisplay}} <span
-                                        ng-show="!(child | durationDisplay)"> Free</span></span>
+                                        ng-show="!(child | durationDisplay)"> A scelta</span></span>
                                 <span class="orgLabel"><i
                                         class="icon-th-large icon-white"></i> {{ child.org_label}}</span>
                             </div>
@@ -164,7 +164,7 @@
                    <div class="actLabel" ng-show="node.type!='LD'">
                             <span class="timeLabel"><i
                                     class="icon-time icon-white"></i> {{ node | durationDisplay }} <span
-                                    ng-show="!(node | durationDisplay)"> Free</span> </span>
+                                    ng-show="!(node | durationDisplay)"> A scelta</span> </span>
                         <span class="orgLabel"><i class="icon-th-large icon-white"></i> {{ node.org_label }}</span>
                     </div>
                     <div class="actLabel" ng-show="node.type=='LD'">
@@ -190,7 +190,7 @@
         <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Modal View) -->
         <div id="modalView" modal="shouldBeOpen" close="close()" options="opts">
             <div class="modal-header">
-                <h4>Activity Details</h4>
+                <h4>Dettagli dell'attività</h4>
                 <button id="activityModalClose" class="btn modalButton float-right" ng-click="close()">x</button>
                 <div class="clearfix"></div>
             </div>

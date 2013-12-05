@@ -16,22 +16,22 @@
         <div class="top-margin zero">
             <div class="btnContent btnActive btnTitle">
                 <!-- FIXME: GET REAL USER DATA FROM DB -->
-                <h3>{{ user.user_name }}'s Designs</h3>
+                <h3>Progetti di {{ user.user_name }}</h3>
             </div>
             <div id="contentBodyUser">
                 <div class="ldTable">
                     <div class="headerTable">
                         <div class="colTable col1">
-                            <p><a href="" ng-click="predicate = 'ld_name'; reverse=!reverse" class="whiteText">Design Name <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
+                            <p><a href="" ng-click="predicate = 'ld_name'; reverse=!reverse" class="whiteText">Nome del progetto <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
                         </div>
                         <div class="colTable col2">
-                            <p><a href="" ng-click="predicate = 'qcers[0].qcer_name'; reverse=!reverse" class="whiteText">QCER Level <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
+                            <p><a href="" ng-click="predicate = 'qcers[0].qcer_name'; reverse=!reverse" class="whiteText">Livelli QCER <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
                         </div>
                         <div class="colTable col3">
-                            <p><a href="" ng-click="predicate = 'scope'; reverse=!reverse" class="whiteText">Scope <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
+                            <p><a href="" ng-click="predicate = 'scope'; reverse=!reverse" class="whiteText">Ambito <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
                         </div>
                         <div class="colTable col4">
-                            <p><a href="" ng-click="predicate = 'creation_date'; reverse=!reverse" class="whiteText">Created <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
+                            <p><a href="" ng-click="predicate = 'creation_date'; reverse=!reverse" class="whiteText">Creato il <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -42,14 +42,14 @@
                                     <p>{{ profile.ld_name }}</p>
                                 </div>
                                 <div class="colTable col2">
-                                    <p ng-repeat="qcer in profile.qcers" class="qcerList">{{ qcer.qcer_name }}</p> <p ng-show="!profile.qcers">Not defined</p>
+                                    <p ng-repeat="qcer in profile.qcers" class="qcerList">{{ qcer.qcer_name }}</p> <p ng-show="!profile.qcers">Non definito </p>
 
                                 </div>
                                 <div class="colTable col3">
                                     <p>{{ profile.scope }}</p>
                                 </div>
                                 <div class="colTable col4">
-                                    <p>{{ profile.creation_date | date:'yyyy MMM d' }} </p>
+                                    <p>{{ profile.creation_date | date:'d-m-yyyy' }} </p>
                                 </div>
                             </a>
                         </div>

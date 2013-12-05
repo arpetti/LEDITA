@@ -821,14 +821,14 @@ input.scopeLDInput {
 }
 
 .onoffswitch-inner:before {
-    content: "Public";
+    content: "Pubblico";
     padding-left: 10px;
     background-color: #0099CC;
     color: #FFFFFF;
 }
 
 .onoffswitch-inner:after {
-    content: "Private";
+    content: "Privato";
     padding-right: 10px;
     background-color: #DDDDDD;
     color: #666666;

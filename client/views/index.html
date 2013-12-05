@@ -2,7 +2,7 @@
 <html lang="en" ng-app="ledita-app">
 <head>
     <meta charset="utf-8">
-    <title>LEDITA: Learning Design for Italian Language</title>
+    <title>LEDITA: Progettazione didattica per l'italiano L2/LS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
@@ -38,8 +38,8 @@
 
                     <input ng-model="username" class="span2" type="email" placeholder="Email" required="">
                     <input ng-model="password" class="span2" type="password" placeholder="Password" required="">
-                    <button id="loginButton" type="submit" class="btn">Login</button>
-                    <span id="pwRec"><a href="#">Forgot your password?</a></span>
+                    <button id="loginButton" type="submit" class="btn">Entra</button>
+                    <span id="pwRec"><a href="#">Password dimenticata?</a></span>
                 </form>
             </div>
             <!--/.nav-collapse -->
@@ -62,17 +62,16 @@
             <div ng-controller="NavActionCtrl" class="nav-collapse collapse">
                 <ul class="nav-top-pad nav">
                     <li>
-                        <button type="button" class="btn btn-small btn-menu" onclick="location.href='/lds'">Explore LDs</button>
+                        <button type="button" class="btn btn-small btn-menu" onclick="location.href='/lds'">Esplora progetti</button>
                     </li>
                     <li>
                         <button id="createLd" type="button" class="btn btn-small btn-menu" href ng-click="createLD()">
-                            Create a New
-                            LD
+                            Nuovo progetto
                         </button>
 
                     </li>
                     <li>
-                        <button type="button" class="btn btn-small btn-menu" onclick="location.href='/users'" >Find Users</button>
+                        <button type="button" class="btn btn-small btn-menu" onclick="location.href='/users'" >Trova colleghi</button>
                     </li>
 
                 </ul>
@@ -87,10 +86,10 @@
                         </a>
                         <ul class="dropdown-menu">
                             <!-- FIXME: add dynamic links -->
-                            <li><a href="/useredit/1"><i class="icon-cog"></i> My Profile</a></li>
-                            <li><a href="/userlds/1"><i class="icon-pencil"></i> My Designs</a></li>
+                            <li><a href="/useredit/1"><i class="icon-cog"></i> Il mio profilo</a></li>
+                            <li><a href="/userlds/1"><i class="icon-pencil"></i> I miei progetti</a></li>
                             <li class="divider"></li>
-                            <li><a id="logoutLink" ng-click="logout()" href=""><i class="icon-off"></i> Logout</a></li>
+                            <li><a id="logoutLink" ng-click="logout()" href=""><i class="icon-off"></i> Esci</a></li>
                         </ul>
                         </li>
                     </ul>
@@ -100,7 +99,7 @@
                 <div modal="beOpen" close="closeLD()" options="opts" id="modal">
 
                     <div class="modal-header">
-                        <h4>Create a New Design</h4>
+                        <h4>Crea un nuovo progetto didattico</h4>
 
                         <div class="clearfix"></div>
                     </div>
@@ -112,11 +111,11 @@
                          	<!-- Name -->
                             <div class="formLevel">
                                 <div class="errorBox">
-                                    <span id="ldNameReqErr" class="errorTipModal" ng-show="LdCreateForm.ldName.$dirty && LdCreateForm.ldName.$error.required">Required!</span>
-                                    <span id="ldNamePatternErr" class="errorTipModal" ng-show="LdCreateForm.ldName.$error.pattern">The design name cannot contain this symbol.</span>
-                                    <span id="ldNameLengthErr" class="errorTipModal" ng-show="LdCreateForm.ldName.$error.maxlength">The design name cannot be longer than 50 characters.</span>
+                                    <span id="ldNameReqErr" class="errorTipModal" ng-show="LdCreateForm.ldName.$dirty && LdCreateForm.ldName.$error.required">Necessario!</span>
+                                    <span id="ldNamePatternErr" class="errorTipModal" ng-show="LdCreateForm.ldName.$error.pattern">Simbolo non permesso.</span>
+                                    <span id="ldNameLengthErr" class="errorTipModal" ng-show="LdCreateForm.ldName.$error.maxlength">Massimo 50 caratteri.</span>
                                 </div>
-                                <label class="formLabel"><i class="icon-book"></i> Design Name*:</label>
+                                <label class="formLabel"><i class="icon-book"></i> Nome del progetto*:</label>
                                 <input class="formInput" type="text" name="ldName" ng-model="ldName" required ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                                 <span class="clearfix"></span>
                             </div>
@@ -124,9 +123,9 @@
                             <!-- Qcers -->
                             <div class="formLevel">
                                 <div class="errorBox">
-                                    <span class="errorTipModal" ng-show="LdCreateForm.qcer.$dirty && LdCreateForm.qcer.$error.required">Required!</span>
+                                    <span class="errorTipModal" ng-show="LdCreateForm.qcer.$dirty && LdCreateForm.qcer.$error.required">Necessario!</span>
                                 </div>
-                                <label class="formLabel formLabel"><i class="icon-tasks"></i> QCER Level*:</label>
+                                <label class="formLabel formLabel"><i class="icon-tasks"></i> Livelli QCER*:</label>
                                 <div class="formCheck">
                                     <span ng-show="qcerError">{{ qcerError }}</span>
 				                	<span ng-repeat="qceropt in qceropts" class="qcerOptData" >
@@ -139,32 +138,32 @@
                             <!-- Scope -->
                             <div id="scopeSection" class="formLevel">
                                 <div class="errorBox">
-                                    <span id="ldScopeReqErr" class="errorTipModal" ng-show="LdCreateForm.ldScope.$dirty && LdCreateForm.ldScope.$error.required">Required!</span>
-                                    <span id="ldScopePatternErr" class="errorTipModal" ng-show="LdCreateForm.ldScope.$error.pattern">The design scope cannot contain this symbol.</span>
-                                    <span id="ldScopeLengthErr" class="errorTipModal" ng-show="LdCreateForm.ldScope.$error.maxlength">The design scope cannot be longer than 50 characters.</span>
+                                    <span id="ldScopeReqErr" class="errorTipModal" ng-show="LdCreateForm.ldScope.$dirty && LdCreateForm.ldScope.$error.required">Necessario!</span>
+                                    <span id="ldScopePatternErr" class="errorTipModal" ng-show="LdCreateForm.ldScope.$error.pattern">Simbolo non permesso.</span>
+                                    <span id="ldScopeLengthErr" class="errorTipModal" ng-show="LdCreateForm.ldScope.$error.maxlength">Massimo 50 caratteri.</span>
                                     <span class="clearfix"></span>
                                 </div>
-                                <label class="formLabel"><i class="icon-bell"></i> Design Scope*:</label>
+                                <label class="formLabel"><i class="icon-bell"></i> Ambito del progetto*:</label>
                                 <input class="formInput" type="text" name="ldScope" ng-model="ldScope"
                                 	   typeahead="suggestion for suggestion in getScopes($viewValue)"
-                                       placeholder="Scope..." required ng-maxlength="50"
+                                       placeholder="es. lezione..." required ng-maxlength="50"
                                        ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                             </div>
 
                             <!-- Topics -->
                             <div id="topicSection" class="formLevel">
                                 <div class="errorBox">
-                                    <span id="topicReqErr" class="errorTipModal" ng-show="LdCreateForm.ldTopic.$dirty && LdCreateForm.ldTopic.$error.required">Required!</span>
-                                    <span id="topicPatternErr" class="errorTipModal" ng-show="LdCreateForm.ldTopic.$error.pattern">A topic cannot contain this symbol.</span>
-                                    <span id="topicLengthErr" class="errorTipModal" ng-show="LdCreateForm.ldTopic.$error.maxlength">A topic cannot be longer than 255 characters.</span>
+                                    <span id="topicReqErr" class="errorTipModal" ng-show="LdCreateForm.ldTopic.$dirty && LdCreateForm.ldTopic.$error.required">Necessario!</span>
+                                    <span id="topicPatternErr" class="errorTipModal" ng-show="LdCreateForm.ldTopic.$error.pattern">Simbolo non permesso.</span>
+                                    <span id="topicLengthErr" class="errorTipModal" ng-show="LdCreateForm.ldTopic.$error.maxlength">Massimo 255 caratteri.</span>
                                     <span class="clearfix"></span>
                                 </div>
-                                <label class="formLabel"><i class="icon-map-marker"></i> Topics*:</label>
+                                <label class="formLabel"><i class="icon-map-marker"></i> Argomenti*:</label>
                                 <input class="formInputMulti" type="text" ng-model="ldTopic" name="ldTopic"
                                        typeahead="suggestion for suggestion in getSubjects($viewValue)"
                                        typeahead-on-select="addTopicFromSuggestion()"
                                        ui-keypress="{13:'addTopicFromUserInput($event)'}"
-                                       placeholder="Topics..." required ng-maxlength="255"
+                                       placeholder="es. articoli determinativi..." required ng-maxlength="255"
                                        ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                                 <span class="editButton" ng-click="addTopicFromUserInput($event)"><i class="icon-plus icon-white"></i> </span>
                                 <span class="clearfix"></span>
@@ -181,17 +180,17 @@
                             <!-- Objectives -->
                             <div id="objectiveSection" class="formLevel">
                                 <div class="errorBox">
-                                    <span id="objectiveReqErr" class="errorTipModal" ng-show="LdCreateForm.ldObjective.$dirty && LdCreateForm.ldObjective.$error.required">Required!</span>
-                                    <span id="objectivePatternErr" class="errorTipModal" ng-show="LdCreateForm.ldObjective.$error.pattern">An objective cannot contain this symbol.</span>
-                                    <span id="objectiveLengthErr" class="errorTipModal" ng-show="LdCreateForm.ldObjective.$error.maxlength">An objective cannot be longer than 255 characters.</span>
+                                    <span id="objectiveReqErr" class="errorTipModal" ng-show="LdCreateForm.ldObjective.$dirty && LdCreateForm.ldObjective.$error.required">Necessario!</span>
+                                    <span id="objectivePatternErr" class="errorTipModal" ng-show="LdCreateForm.ldObjective.$error.pattern">Simbolo non permesso.</span>
+                                    <span id="objectiveLengthErr" class="errorTipModal" ng-show="LdCreateForm.ldObjective.$error.maxlength">Massimo 255 caratteri.</span>
                                     <span class="clearfix"></span>
                                 </div>
-                            <label class="formLabel"><i class="icon-screenshot"></i> Objectives*:</label>
+                            <label class="formLabel"><i class="icon-screenshot"></i> Obiettivi*:</label>
                             <input class="formInputMulti" type="text" name="ldObjective" ng-model="ldObjective"
                                    typeahead="suggestion for suggestion in getObjectives($viewValue)"
                                    typeahead-on-select="addObjectiveFromSuggestion()"
                                    ui-keypress="{13:'addObjectiveFromUserInput($event)'}"
-                                   placeholder="Objectives..." required ng-maxlength="255"
+                                   placeholder="es. articoli determinativi plurali..." required ng-maxlength="255"
                                    ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                                 <span class="editButton" ng-click="addObjectiveFromUserInput($event)"><i class="icon-plus icon-white"></i> </span>
                                 <span class="clearfix"></span>
@@ -208,15 +207,15 @@
                     		<!-- Pre-requisites -->
 		                    <div class="formLevel">
 		                        <div class="errorBox">
-		                            <span id="prereqPatternErr" class="errorTipModal" ng-show="LdCreateForm.ldRequisite.$error.pattern">A pre-requisite cannot contain this symbol.</span>
-		                            <span id="prereqLengthErr" class="errorTipModal" ng-show="LdCreateForm.ldRequisite.$error.maxlength">A pre-requisite cannot be longer than 255 characters.</span>
+		                            <span id="prereqPatternErr" class="errorTipModal" ng-show="LdCreateForm.ldRequisite.$error.pattern">Simbolo non permesso.</span>
+		                            <span id="prereqLengthErr" class="errorTipModal" ng-show="LdCreateForm.ldRequisite.$error.maxlength">Massimo 255 caratteri.</span>
 		                        </div>
-		                        <label class="formLabel"><i class="icon-backward"></i> Pre-Requisites:</label>
+		                        <label class="formLabel"><i class="icon-backward"></i> Prerequisiti:</label>
 		                        <input class="formInputMulti" type="text" name="ldRequisite" ng-model="ldRequisite"
 		                        	   typeahead="suggestion for suggestion in getObjectives($viewValue)"
                                        typeahead-on-select="addPrerequisiteFromSuggestion()"
                                        ui-keypress="{13:'addPrerequisiteFromUserInput($event)'}"
-		                               placeholder="Prerequisites..."  ng-maxlength="255"
+		                               placeholder="es. articoli determinativi singolari..."  ng-maxlength="255"
                                        ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                                 <span class="editButton" ng-click="addPrerequisiteFromUserInput($event)"><i class="icon-plus icon-white"></i> </span>
                                 <span class="clearfix"></span>
@@ -234,11 +233,11 @@
 		                    <!-- Students Description -->
 		                    <div class="formLevel">
 		                        <div class="errorBox">
-		                            <span id="studentsDescrReqErr" class="errorTipModal" ng-show="LdCreateForm.ldStudentsDescr.$dirty && LdCreateForm.ldStudentsDescr.$error.required">Required!</span>
-                                    <span id="ldStudentDescrPatternErr" class="errorTipModal" ng-show="LdCreateForm.ldStudentsDescr.$error.pattern">Students' description cannot contain this symbol.</span>
-		                            <span id="ldStudentDescrLengthErr" class="errorTipModal" ng-show="LdCreateForm.ldStudentsDescr.$error.maxlength">Students' description cannot be longer than 500 characters.</span>
+		                            <span id="studentsDescrReqErr" class="errorTipModal" ng-show="LdCreateForm.ldStudentsDescr.$dirty && LdCreateForm.ldStudentsDescr.$error.required">Necessario!</span>
+                                    <span id="ldStudentDescrPatternErr" class="errorTipModal" ng-show="LdCreateForm.ldStudentsDescr.$error.pattern">Simbolo non permesso.</span>
+		                            <span id="ldStudentDescrLengthErr" class="errorTipModal" ng-show="LdCreateForm.ldStudentsDescr.$error.maxlength">Massimo 500 caratteri.</span>
 		                        </div>
-		                        <label class="formLabel"><i class="icon-user"></i> Students' Description*:</label>
+		                        <label class="formLabel"><i class="icon-user"></i> Descrizione degli studenti*:</label>
 		                        <textarea class="formInput" name="ldStudentsDescr" ng-model="ldStudentsDescr" required="" rows="4" ng-maxlength="500"  ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/"></textarea>
 		                        <span class="clearfix"></span>
 		                    </div>
@@ -249,8 +248,8 @@
                                     {{ ldCreateErrors }}
                                 </div>
 
-                                <a id="cancelCreateLd" class="btn btnFormCancel" ng-click="closeLD()">Cancel</a>
-			                    <button id="confirmCreateLD" type="submit" class="btn btnForm " ng-disabled="LdCreateForm.$invalid">Create</button>
+                                <a id="cancelCreateLd" class="btn btnFormCancel" ng-click="closeLD()">Cancella</a>
+			                    <button id="confirmCreateLD" type="submit" class="btn btnForm " ng-disabled="LdCreateForm.$invalid">Crea</button>
 			                </div>
                     	</form>
                     </div><!-- End Modal Body -->
@@ -267,10 +266,10 @@
 <div ng-view class="container">
 </div>
 <div id="footer">
-    <a class="scrollup" href="#">Scroll</a>
+    <a class="scrollup" href="#">Torna sù </a>
 
-    <div id="copyInfo">LEDITA is distributed under <a href="http://opensource.org/licenses/MIT" target="_blank">MIT
-        Licence</a><br>&copy; 2011-2013 <a href="https://github.com/arpetti" target="_blank">Alessandro Arpetti</a> and
+    <div id="copyInfo">LEDITA è distribuito con <a href="http://opensource.org/licenses/MIT" target="_blank">Licenza MIT
+        </a><br>&copy; 2011-2013 <a href="https://github.com/arpetti" target="_blank">Alessandro Arpetti</a> e
         <a href="https://github.com/danielabar" target="_blank">Daniela Baron</a></div>
 </div>
 

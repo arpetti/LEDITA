@@ -1,72 +1,71 @@
 <div class="row">
   <div class="span6 top-margin">
-    <h1 class="homeHeader">The Learning Design Tool for Italian Language Teachers</h1>
+    <h1 class="homeHeader">La progettazione didattica per linsegnamento dell'italiano L2/LS</h1>
     <p class="centered"><img src="../img/toolbox.png" class="toolbox"></p>
-     <p>Ledita is a free web application created for teachers of Italian as a second/foreign language. The aim of this application is to support the educational planning carried out by the teachers, proposing a simple, fast and intuitive design process.</p>
-      <p>With Ledita, teachers can create educational designs and make them visible to colleagues all around the world, to share educational experiences and learn from the dialogue and collaboration with other professionals.</p>
-  </div>
-  <div class="span6">
+     <p>Ledita &egrave; un'applicazione web gratuita sviluppata per gli insegnanti di italiano come lingua seconda / straniera. L'obiettivo di LEDITA è supportare la progettazione didattica e la riflessione sulla propria pratica professionale da parte degli insegnanti, per mezzo di un semplice, rapido e intuitivo processo di design.</p>
+      <p>Con Ledita, gli insegnanti possono creare progetti didattici e renderli visibili ai colleghi in tutto il mondo, per condividere esperienze educative e apprendere dal dialogo e dalla collaborazione con altri professionisti.</p>
+  </div>  <div class="span6">
 
     <!-- The RegisterCtrl is specified here because this partial also has login form in top nav
           and the route provides it with LoginCtrl -->
     <div ng-controller="RegisterCtrl" class="login-border">
       <form name="registrationForm" novalidate ng-submit="register()" class="form-horizontal">
-        <fieldset>
+        <div>
 
-          <legend id="signUpHeader">Create a New Account</legend>
+          <legend id="signUpHeader">Crea un nuovo Account</legend>
             <div id="registrationErrors" ng-show="alertMsg" class="alert alert-error">
                            {{ alertMsg }}
                 </div>
           <div class="control-group">
             <div class="controls">
-                <span class="errorTip" ng-show="registrationForm.firstname.$dirty && registrationForm.firstname.$error.required">Required!</span>
-                <span id="firstNameLetters" class="errorTip" ng-show="registrationForm.firstname.$error.pattern">Your name can contain only letters.</span>
-                <span class="errorTip" ng-show="registrationForm.firstname.$error.minlength">Your name is required to be at least 2 characters.</span>
-                <span class="errorTip" ng-show="registrationForm.firstname.$error.maxlength">Your name cannot be longer than 20 characters.</span><br>
-                <input ng-model="firstname" name="firstname" type="text" placeholder="Name" class="input-xlarge" required ng-minlength="2" ng-maxlength="20" ng-pattern="/^[a-zA-Z]+$/"  />
+                <span class="errorTip" ng-show="registrationForm.firstname.$dirty && registrationForm.firstname.$error.required">Necessario!</span>
+                <span id="firstNameLetters" class="errorTip" ng-show="registrationForm.firstname.$error.pattern">Il tuo nome può contenere solo lettere.</span>
+                <span class="errorTip" ng-show="registrationForm.firstname.$error.minlength">Minimo 2 caratteri.</span>
+                <span class="errorTip" ng-show="registrationForm.firstname.$error.maxlength">Massimo 20 caratteri.</span><br>
+                <input ng-model="firstname" name="firstname" type="text" placeholder="Nome" class="input-xlarge" required ng-minlength="2" ng-maxlength="20" ng-pattern="/^[a-zA-Z]+$/"  />
                 </div>
           </div>
 
           <div class="control-group">
             <div class="controls">
-                <span class="errorTip" ng-show="registrationForm.surname.$dirty && registrationForm.surname.$error.required">Required!</span>
-                <span id="surnameLetters" class="errorTip" ng-show="registrationForm.surname.$error.pattern">Your surname can contain only letters.</span>
-                <span class="errorTip" ng-show="registrationForm.surname.$error.minlength">Your surname is required to be at least 2 characters.</span>
-                <span class="errorTip" ng-show="registrationForm.surname.$error.maxlength">Your surname cannot be longer than 20 characters.</span><br>
-                <input ng-model="surname" name="surname" type="text" placeholder="Surname" class="input-xlarge" required="" ng-minlength="2" ng-maxlength="20" ng-pattern="/^[a-zA-Z]+$/" />
+                <span class="errorTip" ng-show="registrationForm.surname.$dirty && registrationForm.surname.$error.required">Necessario!</span>
+                <span id="surnameLetters" class="errorTip" ng-show="registrationForm.surname.$error.pattern">Il tuo cognome può contenere solo lettere.</span>
+                <span class="errorTip" ng-show="registrationForm.surname.$error.minlength">Minimo 2 caratteri.</span>
+                <span class="errorTip" ng-show="registrationForm.surname.$error.maxlength">Massimo 20 caratteri.</span><br>
+                <input ng-model="surname" name="surname" type="text" placeholder="Cognome" class="input-xlarge" required="" ng-minlength="2" ng-maxlength="20" ng-pattern="/^[a-zA-Z]+$/" />
             </div>
           </div>
 
           <div class="control-group">
             <div class="controls">
-                <span class="errorTip" ng-show="registrationForm.email.$dirty && registrationForm.email.$error.required">Required!</span>
-                <span id="emailFormat" class="errorTip" ng-show="registrationForm.email.$error.email">Please, input a valid email.</span><br>
+                <span class="errorTip" ng-show="registrationForm.email.$dirty && registrationForm.email.$error.required">Necessario!</span>
+                <span id="emailFormat" class="errorTip" ng-show="registrationForm.email.$error.email">Per favore, inserisci un email valido.</span><br>
                 <input ng-model="username" name="email" type="email" placeholder="E-mail" class="input-xlarge" required="" />
             </div>
           </div>
 
           <div class="control-group">
             <div class="controls">
-                <span class="errorTip" ng-show="registrationForm.password.$dirty && registrationForm.password.$error.required">Required!</span>
-                <span id="passwordMinLength" class="errorTip" ng-show="registrationForm.password.$error.minlength">Your password is required to be at least 8 characters.</span>
-                <span class="errorTip" ng-show="registrationForm.password.$error.maxlength">Your password cannot be longer than 40 characters.</span><br>
+                <span class="errorTip" ng-show="registrationForm.password.$dirty && registrationForm.password.$error.required">Necessario!</span>
+                <span id="passwordMinLength" class="errorTip" ng-show="registrationForm.password.$error.minlength">Minimo 8 caratteri.</span>
+                <span class="errorTip" ng-show="registrationForm.password.$error.maxlength">Massimo 40 caratteri.</span><br>
                 <input ng-model="password" name="password" type="password" placeholder="Password" class="input-xlarge" required="" ng-minlength="8" ng-maxlength="40" />
             </div>
           </div>
 
           <div class="control-group">
             <div class="controls">
-                <span id="passwordNotMatch" class="errorTip" ng-show="registrationForm.retypepassword.$error.passwordVerify">Passwords do not match.</span><br>
-                <input ng-model="retypepassword" name="retypepassword" type="password" placeholder="Retype Password" class="input-xlarge" required="" data-password-verify="password" />
+                <span id="passwordNotMatch" class="errorTip" ng-show="registrationForm.retypepassword.$error.passwordVerify">Le Passwords non coincidono.</span><br>
+                <input ng-model="retypepassword" name="retypepassword" type="password" placeholder="Ridigita Password" class="input-xlarge" required="" data-password-verify="password" />
             </div>
           </div>
 
           <div class="control-group">
             <div class="controls">
-                <span class="errorTip" ng-show="registrationForm.terms.$dirty && registrationForm.terms.$error.required">Required!</span><br>
+                <span class="errorTip" ng-show="registrationForm.terms.$dirty && registrationForm.terms.$error.required">Necessario!</span><br>
                 <label class="checkbox, whiteText">
                 <input type="checkbox" ng-model="terms"  name="terms"  required="" class="checkbox"  />
-                I agree to the <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>
+                Accetto <a href="#">i Termini d'uso</a> e <a href="#">la Politica sulla Privacy</a>
               </label>
 
           </div>
@@ -74,10 +73,10 @@
         </div>
 
         <div class="form-actions">
-          <button id="signup" type="submit" ng-disabled="registrationForm.$invalid" class="btn signup btn-large btn-signup">Sign Up</button>
+          <button id="signup" type="submit" ng-disabled="registrationForm.$invalid" class="btn signup btn-large btn-signup">Registrati</button>
         </div>
 
-      </fieldset>
+      </div>
     </form>
   </div>
 

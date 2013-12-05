@@ -14,33 +14,33 @@
             </a>
         </div>
         -->
-        <h4 id="sidebarHeader">General Info</h4>
+        <h4 id="sidebarHeader">Informazioni</h4>
 
         <div>
-            <h5 class="zeroMargin date"><i class="icon-pencil"></i> Author:</h5>
+            <h5 class="zeroMargin date"><i class="icon-pencil"></i> Autore:</h5>
             <span class="zeroMargin"> <a href="#">{{ learningDesign.user_name}} {{
                 learningDesign.user_last_name}}</a></span>
         </div>
         <div class="marginTopSidebar">
-            <h5 class="zeroMargin date "><i class="icon-calendar"></i> Created in:</h5>
-            <span class="zeroMargin">{{learningDesign.ld_creation_date | date:'yyyy-MM-dd'}}</span>
+            <h5 class="zeroMargin date "><i class="icon-calendar"></i> Creato il:</h5>
+            <span class="zeroMargin">{{learningDesign.ld_creation_date | date:'d-M-yyyy'}}</span>
         </div>
 
         <!-- Topics -->
         <div id="editTopics" class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-map-marker"></i>
-            Topics:</h5>
+            Argomenti:</h5>
 
             <form novalidate class="sidebarForm" name="LdTopicForm">
                 <div class="errorBoxSidebar">
-                    <span id="topicPatternErr" class="errorTipSidebar" ng-show="LdTopicForm.ldTopic.$error.pattern">Symbol not allowed</span>
-                    <span id="topicLengthErr" class="errorTipSidebar" ng-show="LdTopicForm.ldTopic.$error.maxlength">Too long (max 255)</span>
+                    <span id="topicPatternErr" class="errorTipSidebar" ng-show="LdTopicForm.ldTopic.$error.pattern">Simbolo non permesso.</span>
+                    <span id="topicLengthErr" class="errorTipSidebar" ng-show="LdTopicForm.ldTopic.$error.maxlength">)Massimo 255 caratteri.</span>
                     <span class="clearfix"></span>
                 </div>
                 <input class="sidebarInput" type="text" ng-model="ldTopic" name="ldTopic"
                        typeahead="suggestion for suggestion in getSubjects($viewValue)"
                        typeahead-on-select="addTopic()"
                        ui-keypress="{13:'addTopic()'}"
-                       placeholder="Topics..." required ng-maxlength="255"
+                       placeholder="argomenti..." required ng-maxlength="255"
                        ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                 <span id="addTopicIcon" class="editButton" ng-click="addTopic()"><i
                         class="icon-plus icon-white"></i></span>
@@ -58,21 +58,21 @@
 
         <!-- Objectives -->
         <div id="editObjectives" class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-screenshot"></i>
-            Objectives:</h5>
+            Obiettivi:</h5>
 
             <form novalidate class="sidebarForm" name="LdObjectiveForm">
                 <div class="errorBoxSidebar">
                   <span id="objectivePatternErr" class="errorTipSidebar"
-                          ng-show="LdObjectiveForm.ldObjective.$error.pattern">Symbol not allowed</span>
+                          ng-show="LdObjectiveForm.ldObjective.$error.pattern">Simbolo non permesso.</span>
                     <span id="objectiveLengthErr" class="errorTipSidebar"
-                          ng-show="LdObjectiveForm.ldObjective.$error.maxlength">Too long (max 255)</span>
+                          ng-show="LdObjectiveForm.ldObjective.$error.maxlength">Massimo 255 caratteri.</span>
                     <span class="clearfix"></span>
                 </div>
                 <input class="sidebarInput" type="text" ng-model="ldObjective" name="ldObjective"
                        typeahead="suggestion for suggestion in getObjectives($viewValue)"
                        typeahead-on-select="addObjective()"
                        ui-keypress="{13:'addObjective()'}"
-                       placeholder="Objectives..." required ng-maxlength="255"
+                       placeholder="obiettivi..." required ng-maxlength="255"
                        ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                 <span id="addObjectiveIcon" class="editButton" ng-click="addObjective()"><i
                         class="icon-plus icon-white"></i> </span>
@@ -90,19 +90,19 @@
 
         <!-- Prerequisites -->
         <div id="editPrerequisites" class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-backward"></i>
-            Pre-Requisites:</h5>
+            Prerequisiti:</h5>
 
             <form novalidate class="sidebarForm" name="LdPrereqForm">
                 <div class="errorBoxSidebar">
-                    <span id="prereqPatternErr" class="errorTipSidebar" ng-show="LdPrereqForm.ldRequisite.$error.pattern">Symbol not allowed</span>
+                    <span id="prereqPatternErr" class="errorTipSidebar" ng-show="LdPrereqForm.ldRequisite.$error.pattern">Simbolo non permesso.</span>
                     <span id="prereqLengthErr" class="errorTipSidebar"
-                          ng-show="LdPrereqForm.ldRequisite.$error.maxlength">Too long (max 255)</span>
+                          ng-show="LdPrereqForm.ldRequisite.$error.maxlength">Massimo 255 caratteri.</span>
                 </div>
                 <input class="sidebarInput" type="text" ng-model="ldRequisite" name="ldRequisite"
                        typeahead="suggestion for suggestion in getObjectives($viewValue)"
                        typeahead-on-select="addPrerequisite()"
                        ui-keypress="{13:'addPrerequisite()'}"
-                       placeholder="Prerequisites..." required ng-maxlength="255"
+                       placeholder="prerequisiti..." required ng-maxlength="255"
                        ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                 <span id="addPrerequisiteIcon" class="editButton" ng-click="addPrerequisite()"><i
                         class="icon-plus icon-white"></i> </span>
@@ -120,7 +120,7 @@
 
         <!-- LD Students Description -->
         <div class="clear marginTopSidebar">
-            <h5 class="zeroMargin"><i class="icon-user"></i> Students' Description:</h5>
+            <h5 class="zeroMargin"><i class="icon-user"></i> Descrizione degli studenti:</h5>
 
             <form class="sidebarForm">
                 <textarea
@@ -154,7 +154,7 @@
         <div class="clear marginTopSidebar">
 
             <!-- LD Publication -->
-            <h5 class="zeroMargin"><i class="icon-bullhorn"></i> Publication:</h5>
+            <h5 class="zeroMargin"><i class="icon-bullhorn"></i> Pubblicazione:</h5>
 
             <div class="onoffswitch">
                 <input type="checkbox"
@@ -173,7 +173,7 @@
 
         <div  >
             <a ng-href="/ld/{{learningDesign.ld_id}}">
-                <h4 class="editingMode">Finish edit</h4>
+                <h4 class="editingMode">Finisci modifica</h4>
             </a>
         </div>
         <!--Sidebar content-->
@@ -189,13 +189,13 @@
 <div id="contentButtons">
     <tab-heading>
         <button class="btnContent" ng-class="isBtnActive(data.static1)" ng-click="data.static1 = true"><img
-                src="../../img/board.png" class="btnImage"> Global View
+                src="../../img/board.png" class="btnImage"> Vista globale
         </button>
     </tab-heading>
     <tab-heading>
         <button class="btnContent" ng-class="isBtnActive(data.static2)" ng-click="data.static2 = true"><img
                 src="../../img/text.png"
-                class="btnImage"> Textual View
+                class="btnImage"> Vista testuale
         </button>
     </tab-heading>
 
@@ -209,7 +209,7 @@
         <div>
             <form name="LdName" novalidate="" class="singleForm">
                 <div>
-                    <label class="editLabel"><i class="icon-book icon-white"></i> Design name: </label>
+                    <label class="editLabel"><i class="icon-book icon-white"></i> Nome del progetto: </label>
                     <input class="editInputName" type="text"
                            name="ldName"
                            ng-model="learningDesign.ld_name" required
@@ -219,9 +219,9 @@
 
                     <div class="errorBoxTab">
                         <span class="errorTipTab"
-                              ng-show="(learningDesign.ld_name == '') || (LdName.ldName.$dirty && LdName.ldName.$error.required)">Required!</span>
-                        <span class="errorTipTab" ng-show="LdName.ldName.$error.pattern">The design name cannot contain this symbol.</span>
-                        <span class="errorTipTab" ng-show="LdName.ldName.$error.maxlength">The design name cannot be longer than 50 characters.</span>
+                              ng-show="(learningDesign.ld_name == '') || (LdName.ldName.$dirty && LdName.ldName.$error.required)">Necessario!</span>
+                        <span class="errorTipTab" ng-show="LdName.ldName.$error.pattern">Simbolo non permesso.</span>
+                        <span class="errorTipTab" ng-show="LdName.ldName.$error.maxlength">Massimo 50 caratteri.</span>
                     </div>
                 </div>
             </form>
@@ -230,7 +230,7 @@
         <div>
             <!-- LD Qcer -->
             <div class="titleQcer">
-                <label class="editLabel"><i class="icon-tasks icon-white"></i> QCER Levels:</label>
+                <label class="editLabel"><i class="icon-tasks icon-white"></i> Livelli QCER:</label>
                 <span ng-show="qcerError">{{ qcerError }}</span>
             	<span ng-repeat="qceropt in qceropts" class="qcerOptData">
                 	<input type="checkbox"
@@ -244,7 +244,7 @@
             <div class="titleScope">
                 <form name="ScopeForm" novalidate="" class="singleForm">
                     <div id="scopeFormSection">
-                        <label class="editLabel"><i class="icon-bell icon-white"></i> Scope:</label>
+                        <label class="editLabel"><i class="icon-bell icon-white"></i> Ambito:</label>
                         <input class="editInputScocpe" type="text" name="ldScope"
                                ng-model="learningDesign.ld_scope"
                                typeahead="suggestion for suggestion in getScopes($viewValue)"
@@ -254,9 +254,9 @@
 
                         <div class="errorBoxTab">
                             <span class="errorTipTab"
-                                  ng-show="(learningDesign.ld_scope == '') || (ScopeForm.ldScope.$dirty && ScopeForm.ldScope.$error.required)">Required!</span>
-                            <span class="errorTipTab" ng-show="ScopeForm.ldScope.$error.pattern">The scope cannot contain this symbol.</span>
-                            <span class="errorTipTab" ng-show="ScopeForm.ldScope.$error.maxlength">The scope cannot be longer than 50 characters.</span>
+                                  ng-show="(learningDesign.ld_scope == '') || (ScopeForm.ldScope.$dirty && ScopeForm.ldScope.$error.required)">Necessario!</span>
+                            <span class="errorTipTab" ng-show="ScopeForm.ldScope.$error.pattern">Simbolo non permesso.</span>
+                            <span class="errorTipTab" ng-show="ScopeForm.ldScope.$error.maxlength">Massimo 50 caratteri.</span>
                         </div>
                     </div>
                 </form>
@@ -274,13 +274,13 @@
 <div class="tabContent">
 <div class="newActBox">
     <button id="createActivity" type="button" class="newActButton1" href ng-click="createActivity()">
-        <i class="icon-plus icon-white"></i><br>Activity
+        <i class="icon-plus icon-white"></i><br>Attività
     </button>
     <button id="addLD" type="button" class="newActButton2" href ng-click="addingLD()">
-        <i class="icon-plus icon-white"></i><br>Design
+        <i class="icon-plus icon-white"></i><br>Progetto
     </button>
     <button id="createGroup" type="button" class="newActButton3" href ng-click="createGroup()">
-        <i class="icon-plus icon-white"></i><br>Group
+        <i class="icon-plus icon-white"></i><br>Gruppo
     </button>
 
 </div>
@@ -290,7 +290,7 @@
     
     <!-- Level Drop Target -->
     <div id="level-{{level}}" class="lvl-target dropHorizontal dropWidth" 
-    	x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)">Level</div>
+    	x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)">Livello</div>
 
     <!-- Every node is a Drag Source --> 
     <div id="{{node.node_id}}-{{node.type}}-{{node.level}}-{{node.position}}" ng-repeat="node in nodes"
@@ -318,7 +318,7 @@
                     <div class="separator"></div>
                     <div class="actLabelEdit" ng-show="child.group_child_type!='LD'">
                                 <span class="timeLabel"><i class="icon-time icon-white"></i> {{ child | durationDisplay}} <span
-                                        ng-show="!(child | durationDisplay)"> Free</span></span>
+                                        ng-show="!(child | durationDisplay)"> A scelta</span></span>
                                 <span class="orgLabel"><i
                                         class="icon-th-large icon-white"></i> {{ child.org_label}}</span>
                     </div>
@@ -401,7 +401,7 @@
 <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Modal View) -->
 <div id="modalView" modal="shouldBeOpen" close="close()" options="opts">
     <div class="modal-header">
-        <h4>Activity Details</h4>
+        <h4>Dettagli dell'attività</h4>
         <button id="activityModalClose" class="btn modalButton float-right" ng-click="close()">x</button>
         <div class="clearfix"></div>
     </div>
@@ -452,7 +452,7 @@
 <div id="modalAddResource" modal="addResource" close="closeAddResource()" options="optsAddResource"
      class="modal-activity">
     <div class="modal-header">
-        <h4>Add a New Resource</h4>
+        <h4>Aggiungi una risorsa</h4>
 
         <div class="clearfix"></div>
     </div>
@@ -462,11 +462,11 @@
                 <div class="formLevel">
                     <div class="errorBox">
                                     <span class="errorTipModal"
-                                          ng-show="AddResourceForm.resourceName.$dirty && AddResourceForm.resourceName.$error.required">Required!</span>
-                        <span class="errorTipModal" ng-show="AddResourceForm.resourceName.$error.pattern">The resource name cannot contain this symbol.</span>
-                        <span class="errorTipModal" ng-show="AddResourceForm.resourceName.$error.maxlength">The resource name cannot be longer than 50 characters.</span>
+                                          ng-show="AddResourceForm.resourceName.$dirty && AddResourceForm.resourceName.$error.required">Necessario!</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.resourceName.$error.pattern">The resource name Simbolo non permesso.</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.resourceName.$error.maxlength">The resource name Massimo 50 caratteri..</span>
                     </div>
-                    <label class="formLabel"><i class="icon-ok"></i> Resource Name*:</label>
+                    <label class="formLabel"><i class="icon-ok"></i> Nome della risorsa*:</label>
                     <input class="formInput" type="text" name="resourceName" ng-model="resourceName" required
                            ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                     <span class="clearfix"></span>
@@ -474,11 +474,11 @@
                 <div class="formLevel">
                     <div class="errorBox">
                                     <span class="errorTipModal"
-                                          ng-show="AddResourceForm.type.$dirty && AddResourceForm.type.$error.required">Required!</span>
-                        <span class="errorTipModal" ng-show="AddResourceForm.type.$error.pattern">The type name cannot contain this symbol.</span>
-                        <span class="errorTipModal" ng-show="AddResourceForm.type.$error.maxlength">The type name cannot be longer than 50 characters.</span>
+                                          ng-show="AddResourceForm.type.$dirty && AddResourceForm.type.$error.required">Necessario!</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.type.$error.pattern">The type name Simbolo non permesso.</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.type.$error.maxlength">The type name Massimo 50 caratteri..</span>
                     </div>
-                    <label class="formLabel"><i class="icon-ok"></i> Type*:</label>
+                    <label class="formLabel"><i class="icon-ok"></i> Tipo*:</label>
                     <input class="formInput" type="text" ng-model="type" name="type"
                            typeahead="suggestion for suggestion in getSubjects($viewValue)"
                            typeahead-on-select="addTopicFromSuggestion()"
@@ -495,8 +495,8 @@
                 </div>
                 <div class="formLevel">
                     <div class="errorBox">
-                        <span class="errorTipModal" ng-show="AddResourceForm.copy.$error.pattern">The copyright cannot contain this symbol.</span>
-                        <span class="errorTipModal" ng-show="AddResourceForm.copy.$error.maxlength">The copyright cannot be longer than 255 characters.</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.copy.$error.pattern">Simbolo non permesso.</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.copy.$error.maxlength">Massimo 255 caratteri.</span>
                     </div>
                     <label class="formLabel"><i class="icon-ok"></i> Copyright:</label>
                     <input class="formInput" type="text" name="copy" ng-model="copy"
@@ -505,11 +505,11 @@
                 </div>
                 <div class="formLevel">
                     <div class="errorBox">
-                        <span class="errorTipModal" ng-show="AddResourceForm.descr.$error.pattern">Type description cannot contain this symbol.</span>
-                        <span class="errorTipModal" ng-show="AddResourceForm.descr.$error.maxlength">Type description cannot be longer than 500 characters.</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.descr.$error.pattern">Simbolo non permesso.</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.descr.$error.maxlength">Massimo 500 caratteri.</span>
 
                     </div>
-                    <label class="formLabel"><i class="icon-ok"></i> Description:</label>
+                    <label class="formLabel"><i class="icon-ok"></i> Descrizione:</label>
                     <textarea class="formInput" name="descr" ng-model="descr" rows="10"
                               ng-maxlength="500" ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/"></textarea>
                     <span class="clearfix"></span>
@@ -517,8 +517,8 @@
                 <div class="formLevel">
                     <div class="errorBox">
                         <span class="errorTipModal"
-                              ng-show="AddResourceForm.url.$dirty && AddResourceForm.url.$error.url">Insert a valid url starting with http://</span>
-                        <span class="errorTipModal" ng-show="AddResourceForm.url.$error.maxlength">The resource name cannot be longer than 255 characters.</span>
+                              ng-show="AddResourceForm.url.$dirty && AddResourceForm.url.$error.url">Inserisci un url valido che inizia con http://</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.url.$error.maxlength">Massimo 255 caratteri.</span>
                     </div>
                     <label class="formLabel"><i class="icon-ok"></i> Link:</label>
                     <input class="formInput" type="url" placeholder="don't forget http://" name="url" ng-model="url"
@@ -528,10 +528,10 @@
 
             </div>
             <div class="modal-footer">
-                <button id="cancelAddResource" class="btn btnFormCancel" ng-click="closeAddResource()">Cancel</button>
+                <button id="cancelAddResource" class="btn btnFormCancel" ng-click="closeAddResource()">Cancella</button>
                 <button id="confirmAddResource" type="submit" class="btn btnForm "
                         ng-disabled="AddResourceForm.$invalid">
-                    Add this resource
+                    Aggiungi questa risorsa
                 </button>
             </div>
         </form>
@@ -544,7 +544,7 @@
 <div id="modalAddActivity" modal="addActivity" close="closeAddActivity()" options="optsAddActivity"
      class="modal-activity">
     <div class="modal-header">
-        <h4>Add a New Activity</h4>
+        <h4>Aggiungi una nuova attività</h4>
 
         <div class="clearfix"></div>
     </div>
@@ -555,11 +555,11 @@
             	<!-- Activity Name -->
                 <div class="formLevel">
                     <div class="errorBox">
-                        <span class="errorTipModal" ng-show="ActCreateForm.actName.$dirty && ActCreateForm.actName.$error.required">Required!</span>
-                        <span class="errorTipModal" ng-show="ActCreateForm.actName.$error.pattern">The activity name cannot contain this symbol.</span>
-                        <span class="errorTipModal" ng-show="ActCreateForm.actName.$error.maxlength">The activity name cannot be longer than 255 characters.</span>
+                        <span class="errorTipModal" ng-show="ActCreateForm.actName.$dirty && ActCreateForm.actName.$error.required">Necessario!</span>
+                        <span class="errorTipModal" ng-show="ActCreateForm.actName.$error.pattern">Simbolo non permesso.</span>
+                        <span class="errorTipModal" ng-show="ActCreateForm.actName.$error.maxlength">Massimo 255 caratteri.</span>
                     </div>
-                    <label class="formLabel"><i class="icon-file"></i> Activity Name*:</label>
+                    <label class="formLabel"><i class="icon-file"></i> Nome dell'attività*:</label>
                     <input class="formInput" type="text" name="actName" ng-model="actName" required
                            ng-maxlength="255" ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                     <span class="clearfix"></span>
@@ -568,14 +568,14 @@
                 <!-- Activity Modality -->
                 <div class="formLevel">
                     <div class="errorBox"></div>
-                    <label class="formLabel"><i class="icon-home"></i> Modality*:</label>
+                    <label class="formLabel"><i class="icon-home"></i> Modalità*:</label>
                     <div class="formInput">
                         <span class="checkModality"><input type="radio" name="f2f" ng-model="modality" value="1"
-                                                           required> Face to face    </span>
+                                                           required> Presenziale</span>
                         <span class="checkModality"><input type="radio" name="distance" ng-model="modality" value="2"
-                                                           required> Distance </span>
+                                                           required> Online</span>
                         <span class="checkModality"><input type="radio" name="blended" ng-model="modality" value="3"
-                                                           required> Blended </span>
+                                                           required> Mista </span>
                     </div>
                     <span class="clearfix"></span>
                 </div>
@@ -583,17 +583,17 @@
                 <!-- Activity Duration -->
                 <div class="formLevel">
                     <div class="errorBox"></div>
-                    <label class="formLabel formLabel"><i class="icon-time"></i> Duration:</label>
+                    <label class="formLabel formLabel"><i class="icon-time"></i> Durata:</label>
                     <div class="formInput">
                         <span class="durationBox">
                                 <input class="formInputDuration" type="number" name="dur_mon" ng-model="dur_mon"
                                        required
-                                       min="0" max="60" maxlength="2" placeholder="0"> mon.
+                                       min="0" max="60" maxlength="2" placeholder="0"> mesi
                         </span>
                         <span class="durationBox">
                                 <input class="formInputDuration" type="number" name="dur_d" ng-model="dur_d"
                                        required
-                                       min="0" max="30" maxlength="2" placeholder="0"> d.
+                                       min="0" max="30" maxlength="2" placeholder="0"> g.
                         </span>
                         <span class="durationBox">
                                 <input class="formInputDuration" type="number" name="dur_h" ng-model="dur_h"
@@ -612,21 +612,21 @@
                 <!-- Activity Organization -->
                 <div class="formLevel">
                     <div class="errorBox">
-                        <span class="errorTipModal" ng-show="LdCreateForm.ldScope.$dirty && LdCreateForm.ldScope.$error.required">Required!</span>
-                        <span class="errorTipModal" ng-show="LdCreateForm.ldScope.$error.pattern">The design scope cannot contain this symbol.</span>
-                        <span class="errorTipModal" ng-show="LdCreateForm.ldScope.$error.maxlength">The design scope cannot be longer than 50 characters.</span>
+                        <span class="errorTipModal" ng-show="LdCreateForm.ldScope.$dirty && LdCreateForm.ldScope.$error.required">Necessario!</span>
+                        <span class="errorTipModal" ng-show="LdCreateForm.ldScope.$error.pattern">Simbolo non permesso.</span>
+                        <span class="errorTipModal" ng-show="LdCreateForm.ldScope.$error.maxlength">Massimo 50 caratteri.</span>
                         <span class="clearfix"></span>
                     </div>
-                    <label class="formLabel"><i class="icon-th-large"></i> Organization*:</label>
+                    <label class="formLabel"><i class="icon-th-large"></i> Organizzazione*:</label>
                     <div class="formInput">
                         <span class="checkModality"><input type="radio" name="org_all" ng-model="org" value="1"
-                                                           required> All    </span>
+                                                           required> Classe    </span>
                         <span class="checkModality"><input type="radio" name="org_ind" ng-model="org" value="2"
-                                                           required> Individual </span>
+                                                           required> Individuale</span>
                         <span class="checkModality"><input type="radio" name="org_pair" ng-model="org" value="3"
-                                                           required> Pairs </span>
+                                                           required> Coppie </span>
                         <span class="checkModality"><input type="radio" name="org_group" ng-model="org" value="4"
-                                                           required> Groups </span>
+                                                           required> Gruppi </span>
                     </div>
                     <span class="clearfix"></span>
 
@@ -636,13 +636,13 @@
                                 <input class="formInputDuration org" type="number" name="group_number"
                                        ng-model="group_number"
                                        required
-                                       min="0" max="99" maxlength="2" placeholder="0"> No. of groups
+                                       min="0" max="99" maxlength="2" placeholder="0"> N. di gruppi
                         </span>
                         <span class="orgGroupBox">
                                 <input class="formInputDuration org" type="number" name="people_per_group"
                                        ng-model="people_per_group"
                                        required
-                                       min="0" max="99" maxlength="2" placeholder="0"> People per group
+                                       min="0" max="99" maxlength="2" placeholder="0"> Pers. per gruppo
                         </span>
                     </div>
 
@@ -651,16 +651,16 @@
                 <!-- Activity Technologies -->
                 <div class="formLevel">
                     <div class="errorBox">
-                        <span class="errorTipModal" ng-show="ActCreateForm.technology.$error.pattern">A technology cannot contain this symbol.</span>
-                        <span class="errorTipModal" ng-show="ActCreateForm.technology.$error.maxlength">A technology cannot be longer than 50 characters.</span>
+                        <span class="errorTipModal" ng-show="ActCreateForm.technology.$error.pattern">Simbolo non permesso.</span>
+                        <span class="errorTipModal" ng-show="ActCreateForm.technology.$error.maxlength">Massimo 50 caratteri.</span>
                         <span class="clearfix"></span>
                     </div>
-                    <label class="formLabel"><i class="icon-facetime-video"></i> Technologies:</label>
+                    <label class="formLabel"><i class="icon-facetime-video"></i> Tecnologie:</label>
                     <input class="formInput" type="text" ng-model="technology" name="technology"
                            typeahead="suggestion for suggestion in getTechnologies($viewValue)"
                            typeahead-on-select="addTechnologyFromSuggestion()"
                            ui-keypress="{13:'addTechnologyFromUserInput($event)'}"
-                           placeholder="Technologies..." ng-maxlength="50"
+                           placeholder="pc, lavagna, cd..." ng-maxlength="50"
                            ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
                     <div class="formTag">
                         <ul ng-repeat="tech in selectedTechnologies" class="zeroMargin subjects">
@@ -673,9 +673,9 @@
 
                 <!-- Activity Resources -->
                 <div class="formLevel">
-                    <label class="formLabel"><i class="icon-briefcase"></i> Resources:</label>
+                    <label class="formLabel"><i class="icon-briefcase"></i> Risorse didattiche:</label>
                     <span class="formInput">
-                    	<button class="btn-mini btn" ng-click="createResource()"><i class="icon-plus"></i> Add a resource</button>
+                    	<button class="btn-mini btn" ng-click="createResource()"><i class="icon-plus"></i> Aggiungi una risorsa</button>
                     </span>
                     <span class="clearfix"></span>
                 </div>
@@ -683,10 +683,10 @@
                 <!-- Activity Description -->
                 <div class="formLevel">
                     <div class="errorBox">
-                        <span class="errorTipModal" ng-show="ActCreateForm.pract_descr.$error.pattern">Activity description cannot contain this symbol.</span>
-                        <span class="errorTipModal" ng-show="ActCreateForm.pract_descr.$error.maxlength">Activity description cannot be longer than 2000 characters.</span>
+                        <span class="errorTipModal" ng-show="ActCreateForm.pract_descr.$error.pattern">Simbolo non permesso.</span>
+                        <span class="errorTipModal" ng-show="ActCreateForm.pract_descr.$error.maxlength">Massimo 2000 caratteri.</span>
                     </div>
-                    <label class="formLabel"><i class="icon-info-sign"></i> Practical Description:</label>
+                    <label class="formLabel"><i class="icon-info-sign"></i> Descrizione dell'attività:</label>
                     <textarea class="formInput" name="pract_descr" ng-model="pract_descr" rows="5"
                               ng-maxlength="200" ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/"></textarea>
                     <span class="clearfix"></span>
@@ -695,10 +695,10 @@
                 <!-- Activity Pedagogical -->
                 <div class="formLevel">
                     <div class="errorBox">
-                        <span class="errorTipModal" ng-show="ActCreateForm.edu_descr.$error.pattern">Pedagogical suggestions cannot contain this symbol.</span>
-                        <span class="errorTipModal" ng-show="ActCreateForm.edu_descr.$error.maxlength">Pedagogical suggestions cannot be longer than 2000 characters.</span>
+                        <span class="errorTipModal" ng-show="ActCreateForm.edu_descr.$error.pattern">Simbolo non permesso.</span>
+                        <span class="errorTipModal" ng-show="ActCreateForm.edu_descr.$error.maxlength">Massimo 2000 caratteri.</span>
                     </div>
-                    <label class="formLabel"><i class="icon-question-sign"></i> Pedagogical Suggestions:</label>
+                    <label class="formLabel"><i class="icon-question-sign"></i> Suggerimenti pedagogici:</label>
                     <textarea class="formInput" name="edu_descr" ng-model="edu_descr" rows="5"
                               ng-maxlength="200" ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/"></textarea>
                     <span class="clearfix"></span>
@@ -706,9 +706,9 @@
 
             </div>
             <div class="modal-footer">
-                <button id="cancelCreateLd" class="btn btnFormCancel" ng-click="closeAddActivity()">Cancel</button>
+                <button id="cancelCreateLd" class="btn btnFormCancel" ng-click="closeAddActivity()">Cancella</button>
                 <button id="confirmCreateLD" type="submit" class="btn btnForm " ng-disabled="LdCreateForm.$invalid">
-                    Create
+                    Crea
                 </button>
             </div>
         </form>
@@ -721,7 +721,7 @@
 <div id="modalAddLD" modal="addLD" close="closeAddLD()" options="optsAddLD"
      class="modal-activity">
     <div class="modal-header">
-        <h4>Add a Design</h4>
+        <h4>Aggiungi un progetto</h4>
 
         <div class="clearfix"></div>
     </div>
@@ -751,14 +751,14 @@
                                                                             class="qcerLDList"> {{ qcer.qcer_name }}</span>
                             </p>
 
-                            <p ng-show="!learningDesign.qcers">Not defined</p>
+                            <p ng-show="!learningDesign.qcers">Non definito</p>
 
                             <p><i class="icon-bell"></i> {{ learningDesign.ld_scope }}</p>
 
                             <p><i class="icon-pencil"></i> {{ learningDesign.user_name }} {{
                                 learningDesign.user_last_name }} </p>
 
-                            <p><i class="icon-calendar"></i> {{ learningDesign.ld_creation_date | date:'yyyy MMM d' }}
+                            <p><i class="icon-calendar"></i> {{ learningDesign.ld_creation_date | date:'d-M-yyyy' }}
                             </p>
                         </div>
 
@@ -770,10 +770,10 @@
 
             </div>
             <div class="modal-footer">
-                <button id="cancelAddLD" class="btn btnFormCancel" ng-click="closeAddLD()">Cancel</button>
+                <button id="cancelAddLD" class="btn btnFormCancel" ng-click="closeAddLD()">Cancella</button>
                 <button id="confirmAddLD" type="submit" class="btn btnForm "
                         ng-disabled="AddLDForm.$invalid">
-                    Add this LD
+                    Aggiungi questo progetto
                 </button>
             </div>
         </form>

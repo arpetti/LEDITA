@@ -19,10 +19,10 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 INSERT INTO `students_type` (`type`, `description`)
-VALUES  ('1', 'ALL'),
-        ('2', 'INDIVIDUAL'),
-        ('3', 'PAIR'),
-        ('4', 'GROUP');
+VALUES  ('1', 'Classe'),
+        ('2', 'Individuale'),
+        ('3', 'Coppie'),
+        ('4', 'Gruppi');
 
 -- -----------------------------------------------------
 -- Table `students`
