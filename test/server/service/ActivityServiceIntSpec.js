@@ -23,12 +23,12 @@ describe('Activity Service Integration', function() {
                   expect(result[1][0].children[1]).to.have.length(1); // First level of children has 1 activity
                   
                   expect(result[1][0].children[1][0].group_child_name).to.equal('Learning Activity 8');
-                  expect(result[1][0].children[1][0].org_label).to.equal('INDIVIDUAL');	
+                  expect(result[1][0].children[1][0].org_label).to.equal('Individuale');
                   expect(result[1][0].children[1][0].dur_min).to.equal(15);
                   expect(result[1][0].children[1][0].dur_hh).to.equal(0);
                   expect(result[1][0].children[1][0].dur_dd).to.equal(0);
                   expect(result[1][0].children[1][0].dur_mon).to.equal(0);
-                  expect(result[1][0].children[1][0].modality).to.equal('Face to face');
+                  expect(result[1][0].children[1][0].modality).to.equal('Presenziale');
                   
                   expect(result[1][0].children[2]).to.have.length(1); // Second level of children has 1 activity
                   expect(result[1][0].children[2][0].group_child_name).to.equal('Learning Activity 9');
@@ -38,7 +38,7 @@ describe('Activity Service Integration', function() {
 
                   expect(result[2][0].type).to.equal('ACTIVITY') // Level 2 first node is ACTIVITY
                   expect(result[2][0].node_name).to.equal('Support Activity 12');
-                  expect(result[2][0].org_label).to.equal('INDIVIDUAL');
+                  expect(result[2][0].org_label).to.equal('Individuale');
                   expect(result[2][0].dur_min).to.equal(0);
                   expect(result[2][0].dur_hh).to.equal(0);
                   expect(result[2][0].dur_dd).to.equal(15);

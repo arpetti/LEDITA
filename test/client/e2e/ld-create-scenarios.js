@@ -311,25 +311,25 @@ describe('Create a new Learning Design', function() {
 	        element('#createLd').click();
 	        sleep(1);
 
-	        verify('ldName', badPatternText, goodPatternText, '#ldNamePatternErr', 'The design name cannot contain this symbol');
-	        verify('ldName', ldNameTooLong, ldNameMaxAllowed, '#ldNameLengthErr', 'The design name cannot be longer than 50 characters');
-	        verify('ldScope', badPatternText, goodPatternText, '#ldScopePatternErr', 'The design scope cannot contain this symbol');
-	        verify('ldScope', ldNameTooLong, ldNameMaxAllowed, '#ldScopeLengthErr', 'The design scope cannot be longer than 50 characters');
-	        verify('ldTopic', badPatternText, goodPatternText, '#topicPatternErr', 'A topic cannot contain this symbol');
-	        verify('ldTopic', topicTooLong, topicMaxAllowed, '#topicLengthErr', 'A topic cannot be longer than 255 characters');
-	        verify('ldObjective', badPatternText, goodPatternText, '#objectivePatternErr', 'An objective cannot contain this symbol');
-	        verify('ldObjective', topicTooLong, topicMaxAllowed, '#objectiveLengthErr', 'An objective cannot be longer than 255 characters');
-	        verify('ldRequisite', badPatternText, goodPatternText, '#prereqPatternErr', 'A pre-requisite cannot contain this symbol');
-	        verify('ldRequisite', topicTooLong, topicMaxAllowed, '#prereqLengthErr', 'A pre-requisite cannot be longer than 255 characters');
-	        verify('ldStudentsDescr', badPatternText, goodPatternText, '#ldStudentDescrPatternErr', "Students' description cannot contain this symbol");
-	        verify('ldStudentsDescr', studentsDescrTooLong, studentsDescrMaxAllowed, '#ldStudentDescrLengthErr', "Students' description cannot be longer than 500 characters");
+	        verify('ldName', badPatternText, goodPatternText, '#ldNamePatternErr', 'Simbolo non permesso');
+	        verify('ldName', ldNameTooLong, ldNameMaxAllowed, '#ldNameLengthErr', 'Massimo 50 caratteri');
+	        verify('ldScope', badPatternText, goodPatternText, '#ldScopePatternErr', 'Simbolo non permesso');
+	        verify('ldScope', ldNameTooLong, ldNameMaxAllowed, '#ldScopeLengthErr', 'Massimo 50 caratteri');
+	        verify('ldTopic', badPatternText, goodPatternText, '#topicPatternErr', 'Simbolo non permesso');
+	        verify('ldTopic', topicTooLong, topicMaxAllowed, '#topicLengthErr', 'Massimo 255 caratteri');
+	        verify('ldObjective', badPatternText, goodPatternText, '#objectivePatternErr', 'Simbolo non permesso');
+	        verify('ldObjective', topicTooLong, topicMaxAllowed, '#objectiveLengthErr', 'Massimo 255 caratteri');
+	        verify('ldRequisite', badPatternText, goodPatternText, '#prereqPatternErr', 'Simbolo non permesso');
+	        verify('ldRequisite', topicTooLong, topicMaxAllowed, '#prereqLengthErr', 'Massimo 255 caratteri');
+	        verify('ldStudentsDescr', badPatternText, goodPatternText, '#ldStudentDescrPatternErr', "Simbolo non permesso");
+	        verify('ldStudentsDescr', studentsDescrTooLong, studentsDescrMaxAllowed, '#ldStudentDescrLengthErr', "Massimo 500 caratteri");
 
 	        // Now that all the fields are filled out, blank them out and verify required (except prereq)
-	        verify('ldName', "", goodPatternText, '#ldNameReqErr', 'Required');
-	        verify('ldScope', "", goodPatternText, '#ldScopeReqErr', 'Required');
-	        verify('ldTopic', "", goodPatternText, '#topicReqErr', 'Required');
-	        verify('ldObjective', "", goodPatternText, '#objectiveReqErr', 'Required');
-	        verify('ldStudentsDescr', "", goodPatternText, '#studentsDescrReqErr', 'Required');
+	        verify('ldName', "", goodPatternText, '#ldNameReqErr', 'Necessario');
+	        verify('ldScope', "", goodPatternText, '#ldScopeReqErr', 'Necessario');
+	        verify('ldTopic', "", goodPatternText, '#topicReqErr', 'Necessario');
+	        verify('ldObjective', "", goodPatternText, '#objectiveReqErr', 'Necessario');
+	        verify('ldStudentsDescr', "", goodPatternText, '#studentsDescrReqErr', 'Necessario');
 
 	        element("#cancelCreateLd").click();
 

@@ -75,28 +75,28 @@ describe('Learning Design', function() {
         // Verify Textual View
         element("#textualTab").click();
         var expectedLd1TextualViewLevel1 = [
-            "Support Activity 1","Online", "1 mo. 15 d.", "ALL", "Internet",
+            "Support Activity 1","Online", "1 m. 15 g.", "Classe", "Internet",
             "Didactical resource name 3", "video", "Description of the didactical resource number 3",
             "Practical description: what to do for the execution of this activity",
             "Pedagogical Description: how to obtain better results and improve learning during the activity"];
         expect(repeater(".teacherLevel").row(0)).toEqual(expectedLd1TextualViewLevel1);
         
         var expectedLd1TextualViewLevel2 = [
-            "", "Learning Activity 1", "Face to face", "15 min.", "ALL", "Tablet",
+            "", "Learning Activity 1", "Presenziale", "15 min.", "Classe", "Tablet",
             "Didactical resource name 1", "website", "Description of the didactical resource number 1",
             "Practical description: what to do for the execution of this activity",
             "Pedagogical Description: how to obtain better results and improve learning during the activity",
             
-            "Learning Activity 2","Face to face", "", "ALL", "PC", "Smartphone",
+            "Learning Activity 2","Presenziale", "", "Classe", "PC", "Smartphone",
             "Didactical resource name 2", "document", "Carlo Neri", "Description of the didactical resource number 2",
             "Practical description: what to do for the execution of this activity",
             "Pedagogical Description: how to obtain better results and improve learning during the activity",
 
-            "Learning Activity 3","Online","30 min.","ALL","Whiteboard",
+            "Learning Activity 3","Online","30 min.","Classe","Whiteboard",
             "Practical description: what to do for the execution of this activity",
             "Pedagogical Description: how to obtain better results and improve learning during the activity",
 
-            "Learning Activity 4","Face to face","2 d.","ALL",
+            "Learning Activity 4","Presenziale","2 g.","Classe",
             "Practical description: what to do for the execution of this activity",
             "Pedagogical Description: how to obtain better results and improve learning during the activity"];
         expect(repeater(".teacherLevel").row(1)).toEqual(expectedLd1TextualViewLevel2);
@@ -182,7 +182,7 @@ describe('Learning Design', function() {
         // Verify Textual View
         element("#textualTab").click();
         var expectedLd2TextualViewLevel1 = [
-        	"Support Activity 22","Online","1 mo. 15 d.","PAIR","Smartphone","Whiteboard",
+        	"Support Activity 22","Online","1 m. 15 g.","Coppie","Smartphone","Whiteboard",
         	"Practical description: what to do for the execution of this activity",
         	"Pedagogical Description: how to obtain better results and improve learning during the activity"
         ];

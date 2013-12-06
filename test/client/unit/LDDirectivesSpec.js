@@ -21,7 +21,7 @@ describe('LD Directives', function () {
             "node_name": "Support Activity 1",
             "scope": null,
             "type": "ACTIVITY",
-            "org_label": "ALL",
+            "org_label": "Classe",
             "dur_min": 0,
             "dur_hh": 0,
             "dur_dd": 15,

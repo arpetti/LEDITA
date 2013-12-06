@@ -50,10 +50,10 @@ describe('Registration', function() {
 
 		it('Invalid input is not allowed', function() {
 			browser().navigateTo('/login');
-			verify('firstname', 'John123', 'John', '#firstNameLetters', 'Your name can contain only letters');
-			verify('surname', 'Smith*&^%', 'Smith', '#surnameLetters', 'Your surname can contain only letters');
-			verify('username', 'john.smith.email.com', 'john.smith@email.com', '#emailFormat', 'Please, input a valid email');
-			verify('password', '1234567', '12345678', '#passwordMinLength', 'Your password is required to be at least 8 characters');
+			verify('firstname', 'John123', 'John', '#firstNameLetters', 'Il tuo nome può contenere solo lettere');
+			verify('surname', 'Smith*&^%', 'Smith', '#surnameLetters', 'Il tuo cognome può contenere solo lettere');
+			verify('username', 'john.smith.email.com', 'john.smith@email.com', '#emailFormat', 'Per favore, inserisci un email valido');
+			verify('password', '1234567', '12345678', '#passwordMinLength', 'Minimo 8 caratteri');
 		});
 
 		it('Password and Retype Password must match', function() {
@@ -62,7 +62,7 @@ describe('Registration', function() {
 			input('retypepassword').enter('12345677');
 			sleep(0.3);
 			expect(element('#passwordNotMatch').css('display')).toBe("inline");
-			expect(element('#passwordNotMatch').text()).toMatch('Passwords do not match');
+			expect(element('#passwordNotMatch').text()).toMatch('Le Passwords non coincidono');
 			input('retypepassword').enter('12345678');
 			sleep(0.3);
 			expect(element('#passwordNotMatch').css('display')).toBe("none");

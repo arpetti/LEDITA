@@ -16,7 +16,7 @@ describe('Activity DAO', function() {
     			expect(results[0].node_name).to.equal('Support Activity 22');
     			expect(results[0].scope).to.be.null;
     			expect(results[0].type).to.equal('ACTIVITY');
-    			expect(results[0].org_label).to.equal('PAIR')
+    			expect(results[0].org_label).to.equal('Coppie')
     			expect(results[0].dur_min).to.equal(0);
     			expect(results[0].dur_hh).to.equal(0);
     			expect(results[0].dur_dd).to.equal(15);
@@ -71,7 +71,7 @@ describe('Activity DAO', function() {
 			
 			ActivityDao.getGroups(groupids, function(err, results) {
 				expect(results).to.have.length(6);
-				expect(results[0].org_label).to.equal('PAIR');
+				expect(results[0].org_label).to.equal('Coppie');
 				expect(results[0].dur_min).to.equal(15);
 				expect(results[0].dur_hh).to.equal(0);
 				expect(results[0].dur_dd).to.equal(0);

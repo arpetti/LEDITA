@@ -55,9 +55,9 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 INSERT INTO `modality_type` (`type`, `description`)
-VALUES  ('1', 'Face to face'),
+VALUES  ('1', 'Presenziale'),
         ('2', 'Online'),
-        ('3', 'Blended');
+        ('3', 'Mista');
 
 
 -- -----------------------------------------------------

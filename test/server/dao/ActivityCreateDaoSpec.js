@@ -37,7 +37,7 @@ describe('Activity Create DAO', function() {
 			});
 		});
 
-		it('Inserts Students - PAIR type: returns inserted students id', function(done) {
+		it('Inserts Students - Coppie type: returns inserted students id', function(done) {
 			var data = {
 				type: 3
 			};

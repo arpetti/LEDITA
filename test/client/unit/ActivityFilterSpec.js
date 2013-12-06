@@ -18,12 +18,12 @@ describe('Activity Duration Display', function() {
 
             it('Displays days', inject(function(durationDisplayFilter) {
                 var node = {"dur_dd": 10};
-                expect(durationDisplayFilter(node)).toBe('10 d.');
+                expect(durationDisplayFilter(node)).toBe('10 g.');
             }));
 
             it('Displays months', inject(function(durationDisplayFilter) {
                 var node = {"dur_mon": 3};
-                expect(durationDisplayFilter(node)).toBe('3 mo.');
+                expect(durationDisplayFilter(node)).toBe('3 m.');
             }));
 
             it('Displays minutes and hours', inject(function(durationDisplayFilter) {
@@ -33,7 +33,7 @@ describe('Activity Duration Display', function() {
 
             it('Does not show 0 units', inject(function(durationDisplayFilter) {
                 var node = {"dur_min": 15, "dur_hh": 0, "dur_dd": 5};
-                expect(durationDisplayFilter(node)).toBe('5 d. 15 min.');
+                expect(durationDisplayFilter(node)).toBe('5 g. 15 min.');
             }));
 
             it('Does not show anything if all units are 0', inject(function(durationDisplayFilter) {
