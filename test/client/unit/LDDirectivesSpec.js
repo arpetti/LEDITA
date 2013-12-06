@@ -61,18 +61,18 @@ describe('LD Directives', function () {
         expect(element.html()).not.toBe(null);
 
         expect(element.html()).toMatch(
-            'Modality: <span class="nodeBodyText ng-binding">' + node.modality + '</span>');
+            'Modalità: <span class="nodeBodyText ng-binding">' + node.modality + '</span>');
         expect(element.html()).toMatch(
-            'Duration: <span class="nodeBodyText ng-binding">1 mo. 15 d. ');
+            'Durata: <span class="nodeBodyText ng-binding">1 m. 15g. ');
         expect(element.html()).toMatch(
-            'organization:     <span class="nodeBodyText ng-binding">' + node.org_label + '</span>');
+            'Organizzazione desgli studenti:     <span class="nodeBodyText ng-binding">' + node.org_label + '</span>');
         expect(element.html()).toMatch(
             '<span ng-repeat="tech in node.technologies" class="nodeBodyText border ng-scope ng-binding">' +
                 node.technologies[0].technology_name + '</span>');
         expect(element.html()).toMatch(
             '<span class="nodeBodyText ng-binding">' + node.resources[0].resource_name + '</span>');
         expect(element.html()).toMatch(
-            'Type:<span class="nodeBodyText ng-binding">' + node.resources[0].resource_type + '</span>');
+            'Tipo:<span class="nodeBodyText ng-binding">' + node.resources[0].resource_type + '</span>');
         expect(element.html()).toMatch(
             '<span class="nodeBodyText ng-binding">' + node.pract_descr + '</span>');
     });
@@ -118,7 +118,7 @@ describe('LD Directives', function () {
         $rootScope.$digest();
         expect(element.html()).not.toBe(null);
         expect(element.html()).toMatch(
-            'Scope: <span class="nodeBodyText ng-binding">' + ldnode.scope + '</span>');
+            'Ambito: <span class="nodeBodyText ng-binding">' + ldnode.scope + '</span>');
         expect(element.html()).toMatch(
             'span ng-repeat="qcer in node.qcers" class="nodeBodyText ng-scope ng-binding">' + ldnode.qcers[0].qcer_name + '</span>');
         expect(element.html()).toMatch(
