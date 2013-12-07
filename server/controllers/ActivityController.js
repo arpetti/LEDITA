@@ -1,4 +1,5 @@
 var ActivityService = require('../service/ActivityService');
+var logger = require('../util/LogWrapper');
 
 module.exports = {
 
@@ -18,6 +19,10 @@ module.exports = {
 
 	// #34 wip... 
 	createActivity: function(req, res) {
+		var ldId = req.params.id;
+		var activityData = req.body;
+		logger.log().info('Server Activity Controller: ldId = ' + ldId);
+		logger.log().info('Server Activity Controller: activityData = ' + JSON.stringify(activityData));
 		//ActivityCreateService.createActivity...
 		res.json(200, {});
 	}

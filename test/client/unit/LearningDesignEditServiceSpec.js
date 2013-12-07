@@ -38,13 +38,13 @@ describe('Learning Design Edit Service', function() {
     	var success = function(res) {
     		expect(res.ld_id).toEqual(ldData.ld_id);
     	};
-		var error = function() {
-			expect(false).toBe(true); // should not get here
-		};
+			var error = function() {
+				expect(false).toBe(true); // should not get here
+			};
 
-		$httpBackend.when('GET', '/learningdesign/' + ldId).respond(ldData);
-    	service.getLearningDesign(ldId, success, error);
-    	$httpBackend.flush();
+			$httpBackend.when('GET', '/learningdesign/' + ldId).respond(ldData);
+	    service.getLearningDesign(ldId, success, error);
+	    $httpBackend.flush();
     });
 
     it('Updates LD Name', function() {

@@ -161,6 +161,12 @@ var routes = [
     	middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, MoveNodeController.nodeToNode],
         accessLevel: accessLevels.user
     },
+    {
+    	path: '/learningdesign/activity/:id',
+    	httpMethod: 'POST',
+    	middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, ActivityController.createActivity],
+        accessLevel: accessLevels.user
+    },
 
     // User Profile
     {

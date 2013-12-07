@@ -1,6 +1,6 @@
 angular.module('ledita-app')
 .controller('ActCreateCtrl',
-['$scope', 'TypeaheadHelper', '$log', 'LDEditService', function($scope, TypeaheadHelper, $log, LDEditService) {
+['$scope', 'TypeaheadHelper', '$log', 'LDEditService', 'ActivityService', function($scope, TypeaheadHelper, $log, LDEditService, ActivityService) {
 
 	$scope.selectedTechnologies = [];
     
@@ -47,10 +47,8 @@ angular.module('ledita-app')
     };
 
     // #34 wip...
-    // TODO Determine current ldId and submit it (eg: LearningDesignEditController.addTopic)
     $scope.submitActivity = function() {
     	var currentLdId = LDEditService.getCurrentLdId();
-    	$log.info('submitActivity currentLdId: ' + currentLdId);
     	var activityData = {
     		actName: $scope.actName,
     		modality: $scope.modality,
@@ -65,7 +63,18 @@ angular.module('ledita-app')
     		pract_descr: $scope.pract_descr,
     		edu_descr: $scope.edu_descr
     	};
-    	$log.info('submitActivity data: ' + JSON.stringify(activityData));
+    	ActivityService.createActivity(currentLdId, activityData,
+	        function(res) {
+	        	$log.info('Activity created');
+	        	// Hmm.. what should happen now?
+	        	// Probably broadcast an event so that modal can be be closed from the other controller that launched it
+	        	// And somehow, the new activity structure must be fetched from server, and underlying controller must put that in scope
+	        },
+	        function(err) {
+	        	$log.error(err);
+	        	$scope.activityCreateError = err; // TODO UI to display this
+	        }
+	    );
     };
 
 }]);
