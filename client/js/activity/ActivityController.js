@@ -49,26 +49,11 @@ angular.module('ledita-app')
     // #34 wip...
     $scope.submitActivity = function() {
     	var currentLdId = LDEditService.getCurrentLdId();
-    	var activityData = {
-    		actName: $scope.actName,
-    		modality: $scope.modality,
-    		dur_mon: $scope.dur_mon,
-    		dur_d: $scope.dur_d,
-    		dur_h: $scope.dur_h,
-    		dur_min: $scope.dur_min,
-    		org: $scope.org,
-    		group_number: $scope.group_number,
-    		people_per_group: $scope.people_per_group,
-    		technologies: $scope.appendInputToItems($scope.technology, $scope.selectedTechnologies),
-    		pract_descr: $scope.pract_descr,
-    		edu_descr: $scope.edu_descr
-    	};
-    	ActivityService.createActivity(currentLdId, activityData,
+    	ActivityService.createActivity(currentLdId, $scope.buildActivityData(),
 	        function(res) {
-	        	$log.info('Activity created');
-	        	// Hmm.. what should happen now?
-	        	// Probably broadcast an event so that modal can be be closed from the other controller that launched it
-	        	// And somehow, the new activity structure must be fetched from server, and underlying controller must put that in scope
+	        	$log.info('Activity creation - mock response');
+	        	// Broadcast an event so that modal can be be closed from the other controller that launched it
+	        	// Updated activity structure must be fetched from server, and underlying controller must put that in scope
 	        },
 	        function(err) {
 	        	$log.error(err);
@@ -76,5 +61,31 @@ angular.module('ledita-app')
 	        }
 	    );
     };
+
+    $scope.buildActivityData = function() {
+    	var activityData = {
+    		actName: getValueOrNull($scope.actName),
+    		modality: getValueOrNull($scope.modality),
+    		dur_mon: getValueOrNull($scope.dur_mon),
+    		dur_d: getValueOrNull($scope.dur_d),
+    		dur_h: getValueOrNull($scope.dur_h),
+    		dur_min: getValueOrNull($scope.dur_min),
+    		org: getValueOrNull($scope.org),
+    		group_number: getValueOrNull($scope.group_number),
+    		people_per_group: getValueOrNull($scope.people_per_group),
+    		technologies: $scope.appendInputToItems($scope.technology, $scope.selectedTechnologies),
+    		pract_descr: getValueOrNull($scope.pract_descr),
+    		edu_descr: getValueOrNull($scope.edu_descr)
+    	};
+    	return activityData;
+    }
+
+    var getValueOrNull = function(value) {
+    	return getValueOrDefault(value, null);
+    };
+
+    var getValueOrDefault = function(value, defaultVal) {
+    	return value ? value : defaultVal;
+    }
 
 }]);
