@@ -63,9 +63,9 @@ describe('LD Directives', function () {
         expect(element.html()).toMatch(
             'Modalità: <span class="nodeBodyText ng-binding">' + node.modality + '</span>');
         expect(element.html()).toMatch(
-            'Durata: <span class="nodeBodyText ng-binding">1 m. 15g. ');
+            'Durata: <span class="nodeBodyText ng-binding">1 m. 15 g.');
         expect(element.html()).toMatch(
-            'Organizzazione desgli studenti:     <span class="nodeBodyText ng-binding">' + node.org_label + '</span>');
+            'Organizzazione degli studenti:     <span class="nodeBodyText ng-binding">' + node.org_label + '</span>');
         expect(element.html()).toMatch(
             '<span ng-repeat="tech in node.technologies" class="nodeBodyText border ng-scope ng-binding">' +
                 node.technologies[0].technology_name + '</span>');
