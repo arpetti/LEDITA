@@ -24,6 +24,13 @@ describe('Learning Design Edit Service', function() {
         expect(service).toBeDefined();
     });
 
+    it('Stores the current LD ID', function() {
+    	var myLdId = 97;
+    	service.setCurrentLdId(myLdId);
+    	var storedLdId = service.getCurrentLdId();
+    	expect(storedLdId).toEqual(myLdId);
+    });
+
     it('Gets a Learning Design by ID', function() {
     	var ldId = 7;
     	var ldData = {"ld_id": 7};

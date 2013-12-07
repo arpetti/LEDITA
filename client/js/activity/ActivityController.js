@@ -1,6 +1,6 @@
 angular.module('ledita-app')
 .controller('ActCreateCtrl',
-['$scope', 'TypeaheadHelper', '$log', function($scope, TypeaheadHelper, $log) {
+['$scope', 'TypeaheadHelper', '$log', 'LDEditService', function($scope, TypeaheadHelper, $log, LDEditService) {
 
 	$scope.selectedTechnologies = [];
     
@@ -46,7 +46,11 @@ angular.module('ledita-app')
     	};
     };
 
+    // #34 wip...
+    // TODO Determine current ldId and submit it (eg: LearningDesignEditController.addTopic)
     $scope.submitActivity = function() {
+    	var currentLdId = LDEditService.getCurrentLdId();
+    	$log.info('submitActivity currentLdId: ' + currentLdId);
     	var activityData = {
     		actName: $scope.actName,
     		modality: $scope.modality,

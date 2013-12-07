@@ -14,6 +14,12 @@ module.exports = {
             	res.json(200, result);
             }
 		});
+	},
+
+	// #34 wip... 
+	createActivity: function(req, res) {
+		//ActivityCreateService.createActivity...
+		res.json(200, {});
 	}
 
 };

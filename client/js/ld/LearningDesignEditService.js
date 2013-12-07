@@ -1,6 +1,17 @@
 angular.module('ledita-app')
 .factory('LDEditService', function($http, _) {
+
+	var currentLdId;
+
     return {
+
+    	setCurrentLdId: function(ldId) {
+    		this.currentLdId = ldId;
+    	},
+
+    	getCurrentLdId: function() {
+    		return this.currentLdId;
+    	},
 
         getLearningDesign: function(ldId, success, error) {
         	var ldUrl = '/learningdesign/' + ldId;

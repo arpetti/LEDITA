@@ -6,22 +6,23 @@ function($scope, $log, $routeParams, $location, TypeaheadHelper, LDService, LDEd
 	$scope.ldid = $routeParams.ldid;
 	$scope.selectedQcers = {};
 	$scope.selectedTopics = [];
-    $scope.selectedObjectives = [];
-    $scope.selectedPrerequisites = [];
+  $scope.selectedObjectives = [];
+  $scope.selectedPrerequisites = [];
 
-    LDEditService.getLearningDesign($scope.ldid, function(res) {
-        $scope.learningDesign = res;
-        initLdPublicationFlag();
-        initMultiSelections();
-        Home.getQcers(function(res) {
-	        $scope.qceropts = res;
-        	initSelectedQcers()
-	    }, function(err) {
-	        $scope.qcerError = err;
-	    });
+  LDEditService.getLearningDesign($scope.ldid, function(res) {
+  	LDEditService.setCurrentLdId($scope.ldid);
+    $scope.learningDesign = res;
+    initLdPublicationFlag();
+    initMultiSelections();
+    Home.getQcers(function(res) {
+      $scope.qceropts = res;
+    	initSelectedQcers()
     }, function(err) {
-        $location.path('/');
+        $scope.qcerError = err;
     });
+  }, function(err) {
+      $location.path('/');
+  });
 
     LDService.getActivities($scope.ldid, function(res) {
         $scope.levels = res;
