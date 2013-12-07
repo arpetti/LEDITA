@@ -549,7 +549,7 @@
         <div class="clearfix"></div>
     </div>
     <div ng-controller="ActCreateCtrl">
-        <form novalidate class="createLdForm" name="ActCreateForm" ng-submit="submitLD()">
+        <form novalidate class="createLdForm" name="ActCreateForm" ng-submit="submitActivity()">
             <div class="modal-body">
                 
             	<!-- Activity Name -->
@@ -570,6 +570,7 @@
                     <div class="errorBox"></div>
                     <label class="formLabel"><i class="icon-home"></i> Modalità*:</label>
                     <div class="formInput">
+                    		<!-- FIXME description & values should come from service rather than hard-coded -->
                         <span class="checkModality"><input type="radio" name="f2f" ng-model="modality" value="1"
                                                            required> Presenziale</span>
                         <span class="checkModality"><input type="radio" name="distance" ng-model="modality" value="2"
@@ -619,6 +620,7 @@
                     </div>
                     <label class="formLabel"><i class="icon-th-large"></i> Organizzazione degli studenti*:</label>
                     <div class="formInput">
+                    		<!-- FIXME description and value should come from service rather than hard-coded -->
                         <span class="checkModality"><input type="radio" name="org_all" ng-model="org" value="1"
                                                            required> Classe    </span>
                         <span class="checkModality"><input type="radio" name="org_ind" ng-model="org" value="2"
