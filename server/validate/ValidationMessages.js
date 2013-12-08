@@ -1,21 +1,21 @@
 // Registration
-module.exports.FIRST_nome_REQUIRED = 'Il nome è necessario.';
-module.exports.FIRST_nome_LENGTH = 'Il nome deve essere lungo tra 2 e 20 caratteri.';
-module.exports.FIRST_nome_ALLOWED_CHARS = 'Il nome può contenere solo lettere.';
-module.exports.SURnome_REQUIRED = 'Il cognome è necessario.';
-module.exports.SURnome_LENGTH = 'Il cognome deve essere lungo tra 2 e 20 caratteri.';
-module.exports.SURnome_ALLOWED_CHARS = 'Il cognome può contenere solo lettere.';
+module.exports.FIRST_NAME_REQUIRED = 'Il nome è necessario.';
+module.exports.FIRST_NAME_LENGTH = 'Il nome deve essere lungo tra 2 e 20 caratteri.';
+module.exports.FIRST_NAME_ALLOWED_CHARS = 'Il nome può contenere solo lettere.';
+module.exports.SURNAME_REQUIRED = 'Il cognome è necessario.';
+module.exports.SURNAME_LENGTH = 'Il cognome deve essere lungo tra 2 e 20 caratteri.';
+module.exports.SURNAME_ALLOWED_CHARS = 'Il cognome può contenere solo lettere.';
 module.exports.EMAIL_REQUIRED = 'L\'indirizzo email è necessario.';
 module.exports.EMAIL_LENGTH = 'L\'indirizzo email deve essere lungo meno di 255 caratteri.';
 module.exports.EMAIL_FORMAT = 'Per favore, inserisci un email valido.';
 module.exports.PASSWORD_REQUIRED = 'La password è necessaria.';
 module.exports.PASSWORD_LENGTH = 'La password deve essere lunga tra 8 e 40 caratteri.';
 module.exports.TERMS = 'Devi concordare con i termini e condizioni e la politica sulla privacy.';
-module.exports.USERnome_EXISTS = 'Questo indirizzo email è già registrato.';
+module.exports.USERNAME_EXISTS = 'Questo indirizzo email è già registrato.';
 
 // Login
 module.exports.UNABLE_TO_RETRIEVE_USER = 'Impossibile recuperare i dettagli dell\'utente in questo momento, per favore, tenta più tardi.';
-module.exports.INVALID_USERnome_PASSWORD = 'Email o password invalidi.';
+module.exports.INVALID_USERNAME_PASSWORD = 'Email o password invalidi.';
 module.exports.LOGIN_SUCCESS = "Login effetuato con successo.";
 
 // Learning Design Retrieval
@@ -43,9 +43,9 @@ module.exports.USER_DETAIL_NOT_FOUND = "Impossibile trovare i dettagli del profi
 module.exports.USER_NOT_FOUND = "Impossibile trovare l\'utente.";
 
 // Learning Design Creation - nome
-module.exports.LD_nome_REQUIRED = 'Il nome del progetto è necessario.';
-module.exports.LD_nome_LENGTH = 'Il nome del progetto deve essere lungo tra 1-50 caratteri.';
-module.exports.LD_nome_ALLOWED_CHARS = 'Il nome del progetto può contenere solo lettere e numeri.';
+module.exports.LD_NAME_REQUIRED = 'Il nome del progetto è necessario.';
+module.exports.LD_NAME_LENGTH = 'Il nome del progetto deve essere lungo tra 1-50 caratteri.';
+module.exports.LD_NAME_ALLOWED_CHARS = 'Il nome del progetto può contenere solo lettere e numeri.';
 
 // Learning Design Creation - Qcers
 module.exports.LD_QCER_SELECTED = 'Selezionare almeno un livello QCER.';
@@ -78,7 +78,7 @@ module.exports.LD_STUDENTS_DESC_LENGTH = 'La descrizione degli studenti deve ess
 module.exports.LD_STUDENTS_DESC_ALLOWED_CHARS = 'La descrizione degli studenti può contenere solo lettere e numeri.';
 
 // Learning Design Edits
-module.exports.LD_nome_UPDATE_FAIL = 'Il nome del progetto non può essere aggiornato in questo momento, per favore, tenta più tardi.';
+module.exports.LD_NAME_UPDATE_FAIL = 'Il nome del progetto non può essere aggiornato in questo momento, per favore, tenta più tardi.';
 module.exports.LD_SCOPE_UPDATE_FAIL = 'L\'ambito del progetto non può essere aggiornato in questo momento, per favore, tenta più tardi.';
 module.exports.STUDENTS_DESCR_UPDATE_FAIL = 'La descrizione degli studenti non può essere aggiornata in questo momento, per favore, tenta più tardi.';
 module.exports.LD_PUBLICATION_UPDATE_FAIL = 'La pubblicazione del progetto non può essere aggiornata in questo momento, per favore, tenta più tardi.'
