@@ -23,6 +23,7 @@ module.exports = {
 		var activityData = req.body;
 		logger.log().info('Server Activity Controller: ldId = ' + ldId);
 		logger.log().info('Server Activity Controller: activityData = ' + JSON.stringify(activityData));
+		//ActivityValidator.validate...
 		//ActivityCreateService.createActivity...
 		res.json(200, {});
 	}

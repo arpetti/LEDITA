@@ -87,6 +87,11 @@ module.exports.TOPIC_REMOVE_FAIL = 'L\'argomento non può essere rimosso.';
 module.exports.OBJECTIVE_REMOVE_FAIL = 'L\'obiettivo non può essere rimosso.';
 module.exports.PREREQUISITE_REMOVE_FAIL = 'I prerequisiti non possono essere rimossi.';
 
+// Activity Creation
+module.exports.ACTIVITY_STUDENTS_TYPE_FIND_ERROR = 'Error occurred finding students organization.'
+module.exports.ACTIVITY_STUDENTS_TYPE_INVALID = 'Invalid students organization.';
+module.exports.ACTIVITY_STUDENTS_TYPE_INSERT_FAIL = 'Could not insert students type.';
+
 // Drag and Drop Activity Structure
 module.exports.DRAG_DROP_FAIL = 'Non è possibile spostare l\'attività, per favore, tenta più tardi.';
 module.exports.DRAG_DROP_INVALID = 'Spostamento non valido.';

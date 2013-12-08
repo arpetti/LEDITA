@@ -4,7 +4,7 @@ chai.use(require('chai-datetime'));
 
 var LdEditService = require('../../../server/service/LdEditService');
 var messages = require('../../../server/validate/ValidationMessages');
-var Dao = require('../../../server/dao/Dao')
+var Dao = require('../../../server/dao/Dao');
 var async = require('async');
 var _ = require('underscore');
 
