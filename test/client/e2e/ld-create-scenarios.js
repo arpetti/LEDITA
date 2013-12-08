@@ -263,7 +263,7 @@ describe('Create a new Learning Design', function() {
 	        sleep(1);
 
 	        expect(element('#ldCreateErrors').css('display')).toBe("block");
-		    expect(element('#ldCreateErrors').text()).toMatch('At least one Qcer must be selected');
+		    expect(element('#ldCreateErrors').text()).toMatch('Selezionare almeno un livello QCER.');
 
 		    element("#cancelCreateLd").click();
 
