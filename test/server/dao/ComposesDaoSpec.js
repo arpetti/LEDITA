@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
 var fixture = require('../../../server/dao/ComposesDao');
-var Dao = require('../../../server/dao/Dao');
+var dao = require('../../../server/dao/Dao');
 
 describe('Composes DAO', function() {
 
@@ -63,6 +63,66 @@ describe('Composes DAO', function() {
 
 	});
 
+	describe('Insert composes', function() {
+
+		var cleanupComposes = 'delete from composes where id = ?';
+
+		it('Inserts composes record for activity', function(done) {
+			var composesObj = {
+				"ld_id" : 15,
+				"activity_id" : 12,
+				"level" : 1,
+				"position" : 1
+			};
+			fixture.insertComposes(composesObj, function(err, composesId) {
+				expect(err).to.be.null;
+				expect(composesId).not.to.be.null;
+				expect(composesId).to.be.above(0);
+				dao.deleteRecord(cleanupComposes, [composesId], function(err, result) {
+					expect(err).to.be.null;
+					done();
+				});
+			});
+		});
+
+		it('Inserts composes record for LD', function(done) {
+			var composesObj = {
+				"ld_id" : 15,
+				"ld_part_id" : 16,
+				"level" : 1,
+				"position" : 1
+			};
+			fixture.insertComposes(composesObj, function(err, composesId) {
+				expect(err).to.be.null;
+				expect(composesId).not.to.be.null;
+				expect(composesId).to.be.above(0);
+				dao.deleteRecord(cleanupComposes, [composesId], function(err, result) {
+					expect(err).to.be.null;
+					done();
+				});
+			});
+		});
+
+		it('Inserts composes record for activity group', function(done) {
+			var composesObj = {
+				"ld_id" : 15,
+				"activity_group_id" : 13,
+				"level" : 1,
+				"position" : 1
+			};
+			fixture.insertComposes(composesObj, function(err, composesId) {
+				expect(err).to.be.null;
+				expect(composesId).not.to.be.null;
+				expect(composesId).to.be.above(0);
+				dao.deleteRecord(cleanupComposes, [composesId], function(err, result) {
+					expect(err).to.be.null;
+					done();
+				});
+			});
+		});
+
+	});
+
 	describe('Updates Composes Multi', function() {
 
 		var composesIdToUpdate1 = 1;
@@ -80,7 +140,7 @@ describe('Composes DAO', function() {
 		var resetParams = [originalLevel1, originalPosition1, composesIdToUpdate1, originalLevel2, originalPosition2, composesIdToUpdate2];
 
 		afterEach(function(done) {
-			Dao.multiStatement(resetComposes, resetParams, function(err, results) {
+			dao.multiStatement(resetComposes, resetParams, function(err, results) {
 				expect(err).to.be.null;
 				done();
 			});
@@ -107,7 +167,7 @@ describe('Composes DAO', function() {
 			];
 			fixture.updateComposesMulti(nodes, function(err, results) {
 				expect(err).to.be.null;
-				Dao.findAll(verifyComposes, [verifyCompseIds], function(err, results) {
+				dao.findAll(verifyComposes, [verifyCompseIds], function(err, results) {
 					expect(err).to.be.null;
 					expect(results).to.have.length(2);
 					done();
