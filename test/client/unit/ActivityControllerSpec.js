@@ -1,7 +1,7 @@
 'use strict';
 
 
-ddescribe('Activity Controller', function() {
+describe('Activity Controller', function() {
 
 	var scope;
 	var ctrl;
@@ -23,13 +23,13 @@ ddescribe('Activity Controller', function() {
 
   	it('Builds a fully populated Activity from scope', function() {
   		scope.selectedTechnologies = ['techA'];
-  		scope.actName = "my new activity";
-  		scope.modality = 1;
+  		scope.actName = 'my new activity';
+  		scope.modality = '1';
   		scope.dur_mon = 2;
   		scope.dur_d = 3;
   		scope.dur_h = 4;
   		scope.dur_min = 5;
-  		scope.org = 4;
+  		scope.org = '4';
   		scope.group_number = 6;
   		scope.people_per_group = 7;
   		scope.technology = 'techB';
