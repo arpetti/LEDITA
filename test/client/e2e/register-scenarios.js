@@ -105,7 +105,7 @@ describe('Registration', function() {
 		    element('#signup').click();
 		    sleep(2);
 		    expect(element('#registrationErrors').css('display')).toBe("block");
-		    expect(element('#registrationErrors').text()).toMatch('Username already exists');
+		    expect(element('#registrationErrors').text()).toMatch('Questo indirizzo email è già registrato.');
 
 		});
 
@@ -123,7 +123,7 @@ describe('Registration', function() {
 		    element('#signup').click();
 		    sleep(2);
 		    expect(element('#registrationErrors').css('display')).toBe("block");
-		    expect(element('#registrationErrors').text()).toMatch('Email must be less than 255 characters long');
+		    expect(element('#registrationErrors').text()).toMatch('L\'indirizzo email deve essere lungo meno di 255 caratteri.');
 
 		});
 

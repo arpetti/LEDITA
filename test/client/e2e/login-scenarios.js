@@ -52,7 +52,7 @@ describe('Login Flow', function() {
 
         // Verify login error
         expect(element('#loginError', 'Login error is displayed').count()).toBe(1);
-        expect(element('#loginError').text()).toMatch('Invalid username or password');
+        expect(element('#loginError').text()).toMatch('Email o password invalidi');
 
         // Verify user is still in anon view
         expect(element('#navBarAnon', 'anon nav is displayed after user fails to log in').css('display')).toBe('block');
