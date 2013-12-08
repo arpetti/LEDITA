@@ -1,95 +1,95 @@
 // Registration
-module.exports.FIRST_NAME_REQUIRED = 'First name is required.';
-module.exports.FIRST_NAME_LENGTH = 'First name must be 2-20 characters long.';
-module.exports.FIRST_NAME_ALLOWED_CHARS = 'First name can contain only letters.';
-module.exports.SURNAME_REQUIRED = 'Surname is required.';
-module.exports.SURNAME_LENGTH = 'Surname must be 2-20 characters long.';
-module.exports.SURNAME_ALLOWED_CHARS = 'Surname can contain only letters.';
-module.exports.EMAIL_REQUIRED = 'Email address is required.';
-module.exports.EMAIL_LENGTH = 'Email must be less than 255 characters long.';
-module.exports.EMAIL_FORMAT = 'Please input a valid email address.';
-module.exports.PASSWORD_REQUIRED = 'Password is required.';
-module.exports.PASSWORD_LENGTH = 'Password must be 8-40 characters long.';
-module.exports.TERMS = 'You must agree the terms and conditions and privacy policy.';
-module.exports.USERNAME_EXISTS = 'Username already exists';
+module.exports.FIRST_nome_REQUIRED = 'Il nome è necessario.';
+module.exports.FIRST_nome_LENGTH = 'Il nome deve essere lungo tra 2 e 20 caratteri.';
+module.exports.FIRST_nome_ALLOWED_CHARS = 'Il nome può contenere solo lettere.';
+module.exports.SURnome_REQUIRED = 'Il cognome è necessario.';
+module.exports.SURnome_LENGTH = 'Il cognome deve essere lungo tra 2 e 20 caratteri.';
+module.exports.SURnome_ALLOWED_CHARS = 'Il cognome può contenere solo lettere.';
+module.exports.EMAIL_REQUIRED = 'L\'indirizzo email è necessario.';
+module.exports.EMAIL_LENGTH = 'L\'indirizzo email deve essere lungo meno di 255 caratteri.';
+module.exports.EMAIL_FORMAT = 'Per favore, inserisci un email valido.';
+module.exports.PASSWORD_REQUIRED = 'La password è necessaria.';
+module.exports.PASSWORD_LENGTH = 'La password deve essere lunga tra 8 e 40 caratteri.';
+module.exports.TERMS = 'Devi concordare con i termini e condizioni e la politica sulla privacy.';
+module.exports.USERnome_EXISTS = 'Questo indirizzo email è già registrato.';
 
 // Login
-module.exports.UNABLE_TO_RETRIEVE_USER = 'Unable to retrieve user details at this time, please try again later.';
-module.exports.INVALID_USERNAME_PASSWORD = 'Invalid username or password.';
-module.exports.LOGIN_SUCCESS = "Login successful.";
+module.exports.UNABLE_TO_RETRIEVE_USER = 'Impossibile recuperare i dettagli dell\'utente in questo momento, per favore, tenta più tardi.';
+module.exports.INVALID_USERnome_PASSWORD = 'Email o password invalidi.';
+module.exports.LOGIN_SUCCESS = "Login effetuato con successo.";
 
 // Learning Design Retrieval
-module.exports.UNABLE_TO_RETRIEVE_LDS = 'Unable to retrieve learning designs at this time, please try again later.';
-module.exports.LD_NOT_FOUND = "Unable to find learning design.";
-module.exports.LD_DETAIL_NOT_FOUND = "Learning Design details could not be found";
-module.exports.UNABLE_TO_CREATE_LD = "Unable to create learning design at this time, please try again later.";
+module.exports.UNABLE_TO_RETRIEVE_LDS = 'Impossibile recuperare i progetti in questo momento, per favore, tenta più tardi.';
+module.exports.LD_NOT_FOUND = "Impossibile trovare questo progetto.";
+module.exports.LD_DETAIL_NOT_FOUND = "Non è possibile trovare i dettagli di questo progetto";
+module.exports.UNABLE_TO_CREATE_LD = "Impossibile creare un progetto in questo momento, per favore, tenta più tardi.";
 
 // Activities Retrieval
-module.exports.UNABLE_TO_RETRIEVE_LD_NODES = "Unable to retrieve learning design nodes at this time, please try again later.";
-module.exports.NO_LD_NODES_FOUND = "This design has no contents";
-module.exports.UNABLE_TO_RETRIEVE_ACTIVITIES = "Unable to retrieve activities at this time, please try again later.";
-module.exports.NO_ACTIVITIES_FOUND = "This learning design has no activities.";
+module.exports.UNABLE_TO_RETRIEVE_LD_NODES = "Impossibile recuperare le attività del progetto in questo momento, per favore, tenta più tardi.";
+module.exports.NO_LD_NODES_FOUND = "Questo progetto non ha contenuti";
+module.exports.UNABLE_TO_RETRIEVE_ACTIVITIES = "Impossibile recuperare le attività in questo momento, per favore, tenta più tardi.";
+module.exports.NO_ACTIVITIES_FOUND = "Questo progetto non ha attività.";
 
 // Reference Data
-module.exports.UNABLE_TO_RETRIEVE_QCERS = "Unable to retrieve qcers at this time, please try again later.";
-module.exports.QCERS_NOT_FOUND = "No qcers could be found, please contact system administrator.";
-module.UNABLE_TO_RETRIEVE_SCOPES= "Unable to retrieve scopes at this time, please try again later.";
-module.UNABLE_TO_RETRIEVE_SUBJECTS = "Unable to retrieve subjects at this time, please try again later.";
-module.UNABLE_TO_RETRIEVE_OBJECTIVES = "Unable to retrieve objectives at this time, please try again later.";
-module.UNABLE_TO_RETRIEVE_TECHNOLOGIES = "Unable to retrieve technologies at this time, please try again later.";
+module.exports.UNABLE_TO_RETRIEVE_QCERS = "Impossibile recuperare i livelli QCER in questo momento, per favore, tenta più tardi.";
+module.exports.QCERS_NOT_FOUND = "Nessun livello QCER trovato, per favore contattare l\'amministratore del sistema.";
+module.UNABLE_TO_RETRIEVE_SCOPES= "Impossibile recuperare gli ambiti in questo momento, per favore, tenta più tardi.";
+module.UNABLE_TO_RETRIEVE_SUBJECTS = "Impossibile recuperare gli argomenti in questo momento, per favore, tenta più tardi.";
+module.UNABLE_TO_RETRIEVE_OBJECTIVES = "Impossibile recuperare gli obiettivi in questo momento, per favore, tenta più tardi.";
+module.UNABLE_TO_RETRIEVE_TECHNOLOGIES = "Impossibile recuperare le tecnologie in questo momento, per favore, tenta più tardi.";
 
 // User Profile
-module.exports.USER_DETAIL_NOT_FOUND = "User's profile details could not be found";
-module.exports.USER_NOT_FOUND = "Unable to find user.";
+module.exports.USER_DETAIL_NOT_FOUND = "Impossibile trovare i dettagli del profilo utente";
+module.exports.USER_NOT_FOUND = "Impossibile trovare l\'utente.";
 
-// Learning Design Creation - Name
-module.exports.LD_NAME_REQUIRED = 'Learning Design name is required.';
-module.exports.LD_NAME_LENGTH = 'Learning Design name must be 1-50 characters long.';
-module.exports.LD_NAME_ALLOWED_CHARS = 'Learning Design name can only contain letters and numbers.';
+// Learning Design Creation - nome
+module.exports.LD_nome_REQUIRED = 'Il nome del progetto è necessario.';
+module.exports.LD_nome_LENGTH = 'Il nome del progetto deve essere lungo tra 1-50 caratteri.';
+module.exports.LD_nome_ALLOWED_CHARS = 'Il nome del progetto può contenere solo lettere e numeri.';
 
 // Learning Design Creation - Qcers
-module.exports.LD_QCER_SELECTED = 'At least one Qcer must be selected.';
+module.exports.LD_QCER_SELECTED = 'Selezionare almeno un livello QCER.';
 
 // Learning Design Creation - Scope
-module.exports.LD_SCOPE_REQUIRED = 'Learning Design scope is required.';
-module.exports.LD_SCOPE_LENGTH = 'Learning Design scope must be 1-50 characters long.';
-module.exports.LD_SCOPE_ALLOWED_CHARS = 'Learning Design scope can only contain letters and numbers.';
+module.exports.LD_SCOPE_REQUIRED = 'L\'ambito del progetto è necessario.';
+module.exports.LD_SCOPE_LENGTH = 'L\'ambito del progetto deve essere lungo tra 1-50 caratteri.';
+module.exports.LD_SCOPE_ALLOWED_CHARS = 'L\'ambito del progetto può contenere solo lettere e numeri.';
 
 // Learning Design Creation - Topic
-module.exports.LD_TOPIC_SELECTED = 'At least one topic must be selected.';
-module.exports.LD_TOPIC_EMPTY = "Topic cannot be empty";
-module.exports.LD_TOPIC_LENGTH = 'Topic must be 1-255 characters long.';
-module.exports.LD_TOPIC_ALLOWED_CHARS = 'Topic can only contain letters and numbers.';
+module.exports.LD_TOPIC_SELECTED = 'Almeno un argomento deve essere selezionato.';
+module.exports.LD_TOPIC_EMPTY = "L\'argomento non può essere vuoto";
+module.exports.LD_TOPIC_LENGTH = 'L\'argomento deve essere lungo tra 1-255 caratteri.';
+module.exports.LD_TOPIC_ALLOWED_CHARS = 'L\'argomento può contenere solo lettere e numeri.';
 
 // Learning Design Creation - Objective
-module.exports.LD_OBJECTIVE_SELECTED = 'At least one objective must be selected.';
-module.exports.LD_OBJECTIVE_EMPTY = "Objective cannot be empty";
-module.exports.LD_OBJECTIVE_LENGTH = 'Objective must be 1-255 characters long.';
-module.exports.LD_OBJECTIVE_ALLOWED_CHARS = 'Objective can only contain letters and numbers.';
+module.exports.LD_OBJECTIVE_SELECTED = 'Almeno un obiettivo deve essere lungo tra selected.';
+module.exports.LD_OBJECTIVE_EMPTY = "L\'obiettivo non può essere vuoto";
+module.exports.LD_OBJECTIVE_LENGTH = 'L\'obiettivo deve essere lungo tra 1-255 caratteri.';
+module.exports.LD_OBJECTIVE_ALLOWED_CHARS = 'L\'obiettivo può contenere solo lettere e numeri.';
 
 // Learning Design Creation - Prerequisites
-module.exports.LD_PREREQ_EMPTY = "Prerequisite cannot be empty";
-module.exports.LD_PREREQ_LENGTH = 'Prerequisite must be 1-255 characters long.';
-module.exports.LD_PREREQ_ALLOWED_CHARS = 'Prerequisite can only contain letters and numbers.';
+module.exports.LD_PREREQ_EMPTY = "I prerequisiti non possono essere vuoti.";
+module.exports.LD_PREREQ_LENGTH = 'Un prerequisito deve essere lungo tra 1-255 caratteri.';
+module.exports.LD_PREREQ_ALLOWED_CHARS = 'Un prerequisito può contenere solo lettere e numeri.';
 
 // Learning Design Creation - Students Description
-module.exports.LD_STUDENTS_DESC_REQUIRED = 'Students Description is required.';
-module.exports.LD_STUDENTS_DESC_LENGTH = 'Students Description must be 1-500 characters long.';
-module.exports.LD_STUDENTS_DESC_ALLOWED_CHARS = 'Students Description can only contain letters and numbers.';
+module.exports.LD_STUDENTS_DESC_REQUIRED = 'La descrizione degli studenti è necessario.';
+module.exports.LD_STUDENTS_DESC_LENGTH = 'La descrizione degli studenti deve essere lunga tra 1-500 caratteri.';
+module.exports.LD_STUDENTS_DESC_ALLOWED_CHARS = 'La descrizione degli studenti può contenere solo lettere e numeri.';
 
 // Learning Design Edits
-module.exports.LD_NAME_UPDATE_FAIL = 'Learning Design name could not be updated at this time, please try again later.';
-module.exports.LD_SCOPE_UPDATE_FAIL = 'Learning Design scope could not be updated at this time, please try again later.';
-module.exports.STUDENTS_DESCR_UPDATE_FAIL = 'Students Description could not be updated at this time, please try again later.';
-module.exports.LD_PUBLICATION_UPDATE_FAIL = 'Learning Design publication could not be updated at this time, please try again later.'
-module.exports.QCER_UPDATE_FAIL = 'Qcers could not be updated at this time, please try again later.'
-module.exports.TOPIC_REMOVE_FAIL = 'Topic could not be removed.';
-module.exports.OBJECTIVE_REMOVE_FAIL = 'Objective could not be removed.';
-module.exports.PREREQUISITE_REMOVE_FAIL = 'Prerequisite could not be removed.';
+module.exports.LD_nome_UPDATE_FAIL = 'Il nome del progetto non può essere aggiornato in questo momento, per favore, tenta più tardi.';
+module.exports.LD_SCOPE_UPDATE_FAIL = 'L\'ambito del progetto non può essere aggiornato in questo momento, per favore, tenta più tardi.';
+module.exports.STUDENTS_DESCR_UPDATE_FAIL = 'La descrizione degli studenti non può essere aggiornata in questo momento, per favore, tenta più tardi.';
+module.exports.LD_PUBLICATION_UPDATE_FAIL = 'La pubblicazione del progetto non può essere aggiornata in questo momento, per favore, tenta più tardi.'
+module.exports.QCER_UPDATE_FAIL = 'I livelli QCER non possono essere aggiornati in questo momento, per favore, tenta più tardi.'
+module.exports.TOPIC_REMOVE_FAIL = 'L\'argomento non può essere rimosso.';
+module.exports.OBJECTIVE_REMOVE_FAIL = 'L\'obiettivo non può essere rimosso.';
+module.exports.PREREQUISITE_REMOVE_FAIL = 'I prerequisiti non possono essere rimossi.';
 
 // Drag and Drop Activity Structure
-module.exports.DRAG_DROP_FAIL = 'Could not move the node, please try again later.';
-module.exports.DRAG_DROP_INVALID = 'Invalid move.';
-module.exports.INVALID_MOVE_MAX_POSITION = 'Cannot move to max position when level is full.';
-module.exports.INVALID_MOVE_LEVEL_POSITION_LEFT = 'Cannot move node to its immediate left.';
-module.exports.INVALID_MOVE_LEVEL_POSITION_RIGHT = 'Cannot move node to its immediate right.';
+module.exports.DRAG_DROP_FAIL = 'Non è possibile spostare l\'attività, per favore, tenta più tardi.';
+module.exports.DRAG_DROP_INVALID = 'Spostamento non valido.';
+module.exports.INVALID_MOVE_MAX_POSITION = 'Non è possibile muovere nella posizione massima quando il livello è pieno.';
+module.exports.INVALID_MOVE_LEVEL_POSITION_LEFT = 'Non è possibile spostare un\'attività alla sua immediata sinistra.';
+module.exports.INVALID_MOVE_LEVEL_POSITION_RIGHT = 'Non è possibile spostare un\'attività alla sua immediata destra.';
