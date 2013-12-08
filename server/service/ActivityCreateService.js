@@ -23,7 +23,8 @@ module.exports = {
 
 			// Step 1: Delegate to StudentsService --> get students_id
 			// Step 2: Insert into ACTIVITY --> delegate to ActivityCreateDao
-			// Step 3: get activity.id and delegate to TechnologyService, passing tchnologies
+			// Step 3: get activity.id and delegate to ComposesService.addActivity
+			// Step 4: get activity.id and delegate to TechnologyService, passing tchnologies
 
 		};
 

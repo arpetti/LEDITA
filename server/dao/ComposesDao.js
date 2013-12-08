@@ -3,6 +3,7 @@ var dao = require('./Dao.js');
 var logger = require('../util/LogWrapper');
 
 var FIND_ALL_COMPOSES = 'SELECT id, ld_id, activity_id, ld_part_id, activity_group_id, level, position FROM composes where ld_id = ? ORDER BY level, position';
+var FIND_MAX_LEVEL = 'SELECT MAX(level) AS max_level FROM composes WHERE ld_id = ?'
 var UPDATE_COMPOSES = 'UPDATE composes set level = ?, position = ? WHERE id = ?';
 
 // TODO: Same method in LdEditDao, refactor to Dao.js to make it common
@@ -20,6 +21,12 @@ module.exports = {
 		dao.findAll(FIND_ALL_COMPOSES, criteria, function(err, result) {
 			handleResult(callback, err, result);
 		});
+	},
+
+	findMaxLevel: function(ldId, callback) {
+		dao.findAll(FIND_MAX_LEVEL, [ldId], function(err, result) {
+			handleResult(callback, err, result);
+		})
 	},
 
 	updateComposesMulti: function(nodes, callback) {

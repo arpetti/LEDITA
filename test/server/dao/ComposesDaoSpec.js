@@ -28,6 +28,41 @@ describe('Composes DAO', function() {
 
 	});
 
+	describe('Find max level for LD', function() {
+
+		it('Finds max level for an existing LD having composes records', function(done) {
+			var ldId = 1;
+			var expectedMaxLevel = 6; // known from demo data
+			fixture.findMaxLevel(ldId, function(err, result) {
+				expect(err).to.be.null;
+				expect(result).to.have.length(1);
+				expect(result[0].max_level).to.equal(expectedMaxLevel);
+				done();
+			});
+		});
+
+		it('Returns max_level of null for LD not having composes records', function(done) {
+			var ldId = 29; // known from demo data this LD has no composes
+			fixture.findMaxLevel(ldId, function(err, result) {
+				expect(err).to.be.null;
+				expect(result).to.have.length(1);
+				expect(result[0].max_level).to.be.null;
+				done();
+			});
+		});
+
+		it('Returns max_level of null for non existing LD', function(done) {
+			var ldId = 999;
+			fixture.findMaxLevel(ldId, function(err, result) {
+				expect(err).to.be.null;
+				expect(result).to.have.length(1);
+				expect(result[0].max_level).to.be.null;
+				done();
+			});
+		});
+
+	});
+
 	describe('Updates Composes Multi', function() {
 
 		var composesIdToUpdate1 = 1;
