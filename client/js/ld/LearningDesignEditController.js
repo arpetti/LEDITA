@@ -1,7 +1,7 @@
 angular.module('ledita-app')
 .controller('LdEditCtrl',
-['$scope', '$log', '$routeParams', '$location', 'TypeaheadHelper', 'LDService', 'LDEditService', 'Home', 
-function($scope, $log, $routeParams, $location, TypeaheadHelper, LDService, LDEditService, Home) {
+['$scope', '$log', '$routeParams', '$location', '$timeout', 'TypeaheadHelper', 'LDService', 'LDEditService', 'Home', 
+function($scope, $log, $routeParams, $location, $timeout, TypeaheadHelper, LDService, LDEditService, Home) {
 
 	$scope.ldid = $routeParams.ldid;
 	$scope.selectedQcers = {};
@@ -24,12 +24,19 @@ function($scope, $log, $routeParams, $location, TypeaheadHelper, LDService, LDEd
       $location.path('/');
   });
 
-    LDService.getActivities($scope.ldid, function(res) {
-        $scope.levels = res;
-    }, function(err) {
-        $scope.error = "Failed to fetch learning design activities.";
-        $scope.alertMsg = err;
-    });
+  $scope.$on('activityCreated', function (event) {
+    $timeout(function () {
+      $log.warn('Activity Created, need to fetch updated structure');
+    }, 10);
+  });
+
+  // TODO #34 wrap this in a function so it can be called both from controller init, and on activityCreated event
+  LDService.getActivities($scope.ldid, function(res) {
+      $scope.levels = res;
+  }, function(err) {
+      $scope.error = "Failed to fetch learning design activities.";
+      $scope.alertMsg = err;
+  });
 
     $scope.dropped = function(dragSource, dropTarget) {
     	console.log('dropped: dragSource.id = ' + dragSource.id + ', dropTarget.id = ' + dropTarget.id);
@@ -276,6 +283,12 @@ function($scope, $log, $routeParams, $location, TypeaheadHelper, LDService, LDEd
         $scope.closeMsg = 'I was closed at: ' + new Date();
         $scope.addActivity = false;
     };
+
+    $scope.$on('closeActivityModal', function (event) {
+      $timeout(function () {
+        $scope.closeAddActivity();
+      }, 10);
+    });
 
     $scope.optsAddActivity = {
         backdropFade: true,

@@ -1,6 +1,7 @@
 angular.module('ledita-app')
 .controller('ActCreateCtrl',
-['$scope', 'TypeaheadHelper', '$log', 'LDEditService', 'ActivityService', function($scope, TypeaheadHelper, $log, LDEditService, ActivityService) {
+['$scope', '$rootScope', 'TypeaheadHelper', '$log', 'LDEditService', 'ActivityService', 
+	function($scope, $rootScope, TypeaheadHelper, $log, LDEditService, ActivityService) {
 
 	$scope.selectedTechnologies = [];
     
@@ -51,9 +52,9 @@ angular.module('ledita-app')
     	var currentLdId = LDEditService.getCurrentLdId();
     	ActivityService.createActivity(currentLdId, $scope.buildActivityData(),
 	        function(res) {
-	        	$log.info('Activity creation - mock response');
-	        	// Broadcast an event so that modal can be be closed from the other controller that launched it
-	        	// Updated activity structure must be fetched from server, and underlying controller must put that in scope
+	        	$log.info('Activity created successfully');
+	        	$rootScope.$broadcast('closeActivityModal');
+	        	$rootScope.$broadcast('activityCreated');
 	        },
 	        function(err) {
 	        	$log.error(err);
