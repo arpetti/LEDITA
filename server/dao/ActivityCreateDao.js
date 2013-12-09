@@ -1,17 +1,21 @@
 var mysql = require('mysql')
 var dao = require('./Dao');
 
-var INSERT_STUDENTS = 'INSERT INTO students SET ?';
+var INSERT_ACTIVITY = 'INSERT INTO activity SET ?';
+
+var handleResult = function(cb, err, result) {
+	if(err) {
+		cb(err);
+	} else {
+		cb(null, result);
+	}
+};
 
 module.exports = {
 
-	insertStudents: function(data, callback) {
-		dao.insertOrUpdateRecord(INSERT_STUDENTS, data, function(err, studentsId) {
-			if(err) {
-				callback(err);
-			} else {
-				callback(null, studentsId);
-			}
+	insertActivity: function(activityObj, callback) {
+		dao.insertOrUpdateRecord(INSERT_ACTIVITY, activityObj, function(err, activityId) {
+			handleResult(callback, err, activityId);
 		});
 	}
 

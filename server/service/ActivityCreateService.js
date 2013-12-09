@@ -1,33 +1,96 @@
 var async = require('async');
+var studentsService = require('./StudentsService');
+var activityCreateDao = require('../dao/ActivityCreateDao');
+var composesService = require('./ComposesService');
+var messages = require('../validate/ValidationMessages');
+var logger = require('../util/LogWrapper');
+
+var createActivityObj = function(studentsId, activityData) {
+	return {
+		students_id : studentsId,
+		name : activityData.actName,
+		dur_min : activityData.dur_min,
+		dur_hh : activityData.dur_h,
+		dur_dd : activityData.dur_d,
+		dur_mon : activityData.dur_mon,
+		pract_descr : activityData.pract_descr,
+		edu_descr : activityData.edu_descr,
+		modality : activityData.modality
+	};
+};
 
 module.exports = {
 
-	return {
+	// cb(err, {activity_id : activityId, composes_id : composesId}, message)
+	createActivity: function(ldId, activityData, cb) {
+		// Sample Data:
+		// {
+		// 	"actName":"my activity name",										name
+		// 	"modality":"1",																	modality
+		//	"dur_mon":1,																		dur_mon
+		// 	"dur_d":2,																			dur_dd
+		// 	"dur_h":3,																			dur_hh
+		// 	"dur_min":4,																		dur_min
+		// 	"org":"1",																			--> ref: students_type.type
+		//	"group_number":5,																--> insert: students.group_number
+		//	"people_per_group":6,														--> insert: students.people_per_group
+		// 	"technologies":["Whiteboard","touch screen"],		--> get activity.id after insert, pass to TechnologyService
+		// 	"pract_descr":"long description",								pract_descr
+		// 	"edu_descr":"pedagogical long description"			edu_descr
+		// }
 
-		createActivity: function(ldId, activityData) {
-			// Sample Data:
-			// {
-			// 	"actName":"my activity name",										name
-			// 	"modality":"1",																	modality
-			//	"dur_mon":1,																		dur_mon
-			// 	"dur_d":2,																			dur_dd
-			// 	"dur_h":3,																			dur_hh
-			// 	"dur_min":4,																		dur_min
-			// 	"org":"1",																			--> ref: students_type.type
-			//	"group_number":5,																--> insert: students.group_number
-			//	"people_per_group":6,														--> insert: students.people_per_group
-			// 	"technologies":["Whiteboard","touch screen"],		--> get activity.id after insert, pass to TechnologyService
-			// 	"pract_descr":"long description",								pract_descr
-			// 	"edu_descr":"pedagogical long description"			edu_descr
-			// }
+		async.waterfall([
+				
+				// TODO - Add: Step 4: get activity.id and delegate to TechnologyService, passing tchnologies
+				
+				// Step 1: Insert STUDENTS
+		    function(callback){
+		    	studentsService.insertStudents(activityData.org, activityData.group_number, activityData.people_per_group, function(err, studentsId, message) {
+		    		if(err) {
+		    			callback(new Error(message));
+		    		} else {
+		      		callback(null, studentsId);
+		    		}
+		    	});
+		    },
+				
+				// Step 2: Insert ACTIVITY
+		    function(studentsId, callback){
+		    	var activityObj = createActivityObj(studentsId, activityData)
+		    	activityCreateDao.insertActivity(activityObj, function(err, activityId) {
+		    		if(err) {
+		    			logger.log().error('Activity Create Service error inserting activity', err);
+		    			callback(new Error(messages.ACTIVITY_INSERT_FAIL));
+		    		} else {
+		      		callback(null, activityId, studentsId);
+		    		}
+		    	});
+		    },
+				
+				// Step 3: Insert COMPOSES
+		    function(activityId, studentsId, callback){
+		      composesService.addActivity(ldId, activityId, function(err, composesId, message) {
+		      	if(err) {
+		    			callback(new Error(message));
+		    		} else {
+		    			var successInfo = {
+		    				activity_id : activityId,
+		    				students_id : studentsId,
+		    				composes_id : composesId
+		    			};
+		      		callback(null, successInfo);
+		    		}
+		      });
+		    }
 
-			// Step 1: Delegate to StudentsService --> get students_id
-			// Step 2: Insert into ACTIVITY --> delegate to ActivityCreateDao
-			// Step 3: get activity.id and delegate to ComposesService.addActivity
-			// Step 4: get activity.id and delegate to TechnologyService, passing tchnologies
-
-		};
-
-	};
+		], function (err, successInfo) {
+		   if(err) {
+		   	cb(err, null, err.message);
+		   } else {
+		   	logger.log().info('Activity successfully created: ' + JSON.stringify(successInfo));
+		   	cb(null, successInfo, null);
+		   }       
+		});
+	}
 
 };
