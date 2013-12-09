@@ -1,5 +1,6 @@
 var ActivityService = require('../service/ActivityService');
 var logger = require('../util/LogWrapper');
+var ActivityCreateService = require('../service/ActivityCreateService');
 
 module.exports = {
 
@@ -18,14 +19,15 @@ module.exports = {
 	},
 
 	// #34 wip... 
-	createActivity: function(req, res) {
-		var ldId = req.params.id;
-		var activityData = req.body;
-		logger.log().info('Server Activity Controller: ldId = ' + ldId);
-		logger.log().info('Server Activity Controller: activityData = ' + JSON.stringify(activityData));
-		//ActivityValidator.validate...
-		//ActivityCreateService.createActivity...
-		res.json(200, {});
-	}
+    createActivity: function(req, res) {
+    var ldId = req.params.id;
+var activityData = req.body;
+        ActivityCreateService.createActivity(ldId, activityData, function(err, successInfo, message) {
+    if(err){
+        res.send(400, message);
+    } else {
+        res.json(200,{});
+    }
+})}
 
-};
+}

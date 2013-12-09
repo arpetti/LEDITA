@@ -69,7 +69,7 @@ CREATE  TABLE IF NOT EXISTS `activity` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `students_id` INT(11) NOT NULL ,
   `name` VARCHAR(255) NOT NULL ,
-  `dur_min` INT(2) NOT NULL DEFAULT 0 ,
+  `dur_min` INT(2) NULL DEFAULT 0 ,
   `dur_hh` INT(2) NULL DEFAULT NULL ,
   `dur_dd` INT(2) NULL DEFAULT NULL ,
   `dur_mon` INT(2) NULL DEFAULT NULL ,
@@ -87,6 +87,7 @@ CREATE  TABLE IF NOT EXISTS `activity` (
     FOREIGN KEY (`modality` )
     REFERENCES `modality_type` (`type` ))
 ENGINE = InnoDB
+AUTO_INCREMENT = 100
 DEFAULT CHARACTER SET = utf8;
 
 
