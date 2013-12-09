@@ -91,6 +91,8 @@ module.exports.PREREQUISITE_REMOVE_FAIL = 'I prerequisiti non possono essere rim
 module.exports.ACTIVITY_STUDENTS_TYPE_FIND_ERROR = 'Error occurred finding students organization.'
 module.exports.ACTIVITY_STUDENTS_TYPE_INVALID = 'Invalid students organization.';
 module.exports.ACTIVITY_STUDENTS_TYPE_INSERT_FAIL = 'Could not insert students type.';
+module.exports.ACTIVITY_FIND_MAX_LEVEL_FAIL = 'Error occurred finding max level.';
+module.exports.ACTIVITY_INSERT_COMPOSES_FAIL = 'Error occurred inserting activity into the structure.';
 
 // Drag and Drop Activity Structure
 module.exports.DRAG_DROP_FAIL = 'Non è possibile spostare l\'attività, per favore, tenta più tardi.';

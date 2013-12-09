@@ -13,7 +13,7 @@ var createStudentsObj = function(studentsType, groupNumber, peoplePerGroup) {
 
 module.exports = {
 	
-	// callback(err, studentsId, message)
+	// cb(err, studentsId, message)
 	insertStudents: function(studentsType, groupNumber, peoplePerGroup, cb) {
 		async.waterfall([
 				
