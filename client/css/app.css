@@ -17,7 +17,7 @@ ACE500 = green
 
 .lvl-target {
 	background-color: #ddd; 
-	opacity: .5;
+	opacity: .3;
 }
 
 .dropzone {
@@ -26,8 +26,12 @@ ACE500 = green
 	padding: 5px;
 }
 
-[draggable] {
-	cursor: move;
+[draggable] , [draggable] .actNameEdit {
+	cursor: move !important;
+}
+
+[draggable]:active {
+    opacity: 0.2;
 }
 
 /* resets and overrides
@@ -1300,6 +1304,7 @@ div.leftGroupDrop+div.levelBoxChildEdit, div.levelBoxChildEdit:first-child  {
     left: -33px;
     border-radius: 4px;
 }
+
 
 .leftGroupDrop {
     border: 1px dashed #999999;
