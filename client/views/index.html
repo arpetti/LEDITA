@@ -161,14 +161,16 @@
                                   <span class="clearfix"></span>
                               </div>
                               <label class="formLabel"><i class="icon-map-marker"></i> Argomenti*:</label>
-                              <input class="formInputMulti" type="text" ng-model="ldTopic" name="ldTopic"
+                              <input class="formInputMultiple" type="text" ng-model="ldTopic" name="ldTopic"
                                      typeahead="suggestion for suggestion in getSubjects($viewValue)"
                                      typeahead-on-select="addTopicFromSuggestion()"
                                      ui-keypress="{13:'addTopicFromUserInput($event)'}"
                                      placeholder="es. articoli determinativi..." required ng-maxlength="255"
                                      ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                               <span class="editButton" ng-click="addTopicFromUserInput($event)"><i class="icon-plus icon-white"></i> </span>
-                              <span class="clearfix"></span>
+
+                                <span class="clearfix"></span>
+                                <span class="multiValue">Puoi inserire più di un valore</span>
 
                               <div id="topicTags" class="formTag">
                                   <ul ng-repeat="topic in selectedTopics" class="zeroMargin subjects">
@@ -190,7 +192,7 @@
                                     <span class="clearfix"></span>
                                 </div>
                             <label class="formLabel"><i class="icon-screenshot"></i> Obiettivi*:</label>
-                            <input class="formInputMulti" type="text" name="ldObjective" ng-model="ldObjective"
+                            <input class="formInputMultiple" type="text" name="ldObjective" ng-model="ldObjective"
                                    typeahead="suggestion for suggestion in getObjectives($viewValue)"
                                    typeahead-on-select="addObjectiveFromSuggestion()"
                                    ui-keypress="{13:'addObjectiveFromUserInput($event)'}"
@@ -198,6 +200,7 @@
                                    ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                                 <span class="editButton" ng-click="addObjectiveFromUserInput($event)"><i class="icon-plus icon-white"></i> </span>
                                 <span class="clearfix"></span>
+                                <span class="multiValue">Puoi inserire più di un valore</span>
 
                             <div id="objectiveTags" class="formTag">
                                 <ul ng-repeat="objective in selectedObjectives" class="zeroMargin objectives">
@@ -215,7 +218,7 @@
 		                            <span id="prereqLengthErr" class="errorTipModal" ng-show="LdCreateForm.ldRequisite.$error.maxlength">Massimo 255 caratteri.</span>
 		                        </div>
 		                        <label class="formLabel"><i class="icon-backward"></i> Prerequisiti:</label>
-		                        <input class="formInputMulti" type="text" name="ldRequisite" ng-model="ldRequisite"
+		                        <input class="formInputMultiple" type="text" name="ldRequisite" ng-model="ldRequisite"
 		                        	   typeahead="suggestion for suggestion in getObjectives($viewValue)"
                                        typeahead-on-select="addPrerequisiteFromSuggestion()"
                                        ui-keypress="{13:'addPrerequisiteFromUserInput($event)'}"
@@ -223,6 +226,7 @@
                                        ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                                 <span class="editButton" ng-click="addPrerequisiteFromUserInput($event)"><i class="icon-plus icon-white"></i> </span>
                                 <span class="clearfix"></span>
+                                <span class="multiValue">Puoi inserire più di un valore</span>
 
 		                        <div class="formTag">
 		                            <ul ng-repeat="prerequisite in selectedPrerequisites" class="zeroMargin prerequisites">

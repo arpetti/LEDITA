@@ -36,7 +36,7 @@
                     <span id="topicLengthErr" class="errorTipSidebar" ng-show="LdTopicForm.ldTopic.$error.maxlength">)Massimo 255 caratteri.</span>
                     <span class="clearfix"></span>
                 </div>
-                <input class="sidebarInput" type="text" ng-model="ldTopic" name="ldTopic"
+                <input class="sidebarInputMultiple" type="text" ng-model="ldTopic" name="ldTopic"
                        typeahead="suggestion for suggestion in getSubjects($viewValue)"
                        typeahead-on-select="addTopic()"
                        ui-keypress="{13:'addTopic()'}"
@@ -44,6 +44,7 @@
                        ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                 <span id="addTopicIcon" class="editButton" ng-click="addTopic()"><i
                         class="icon-plus icon-white"></i></span>
+                <span class="multiValueSidebar">Puoi inserire più di un valore</span>
 
                 <div id="topicTagsEdit">
                     <ul ng-repeat="topic in selectedTopics" class="zeroMargin subjects">
@@ -68,7 +69,7 @@
                           ng-show="LdObjectiveForm.ldObjective.$error.maxlength">Massimo 255 caratteri.</span>
                     <span class="clearfix"></span>
                 </div>
-                <input class="sidebarInput" type="text" ng-model="ldObjective" name="ldObjective"
+                <input class="sidebarInputMultiple" type="text" ng-model="ldObjective" name="ldObjective"
                        typeahead="suggestion for suggestion in getObjectives($viewValue)"
                        typeahead-on-select="addObjective()"
                        ui-keypress="{13:'addObjective()'}"
@@ -76,6 +77,7 @@
                        ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                 <span id="addObjectiveIcon" class="editButton" ng-click="addObjective()"><i
                         class="icon-plus icon-white"></i> </span>
+                <span class="multiValueSidebar">Puoi inserire più di un valore</span>
 
                 <div id="objectiveTagsEdit">
                     <ul ng-repeat="objective in selectedObjectives" class="zeroMargin objectives">
@@ -98,7 +100,7 @@
                     <span id="prereqLengthErr" class="errorTipSidebar"
                           ng-show="LdPrereqForm.ldRequisite.$error.maxlength">Massimo 255 caratteri.</span>
                 </div>
-                <input class="sidebarInput" type="text" ng-model="ldRequisite" name="ldRequisite"
+                <input class="sidebarInputMultiple" type="text" ng-model="ldRequisite" name="ldRequisite"
                        typeahead="suggestion for suggestion in getObjectives($viewValue)"
                        typeahead-on-select="addPrerequisite()"
                        ui-keypress="{13:'addPrerequisite()'}"
@@ -106,6 +108,7 @@
                        ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                 <span id="addPrerequisiteIcon" class="editButton" ng-click="addPrerequisite()"><i
                         class="icon-plus icon-white"></i> </span>
+                <span class="multiValueSidebar">Puoi inserire più di un valore</span>
 
                 <div id="prerequisiteTagsEdit">
                     <ul ng-repeat="prereq in selectedPrerequisites" class="zeroMargin prerequisites">
@@ -668,6 +671,8 @@
                            ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
                     <span id="addTechnologyIcon" class="editButton" ng-click="addTechnologyFromUserInput($event)"><i
                             class="icon-plus icon-white"></i></span>
+                    <span class="multiValue">Puoi inserire più di un valore</span>
+
                     <div class="formTag">
                         <ul ng-repeat="tech in selectedTechnologies" class="zeroMargin subjects">
                             <li class="modalEditItem"><span class="modalEditItemLink">{{tech}} 
