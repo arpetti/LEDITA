@@ -9,51 +9,61 @@ function($scope, $log, $routeParams, $location, $timeout, TypeaheadHelper, LDSer
   $scope.selectedObjectives = [];
   $scope.selectedPrerequisites = [];
 
-  LDEditService.getLearningDesign($scope.ldid, function(res) {
-  	LDEditService.setCurrentLdId($scope.ldid);
-    $scope.learningDesign = res;
-    initLdPublicationFlag();
-    initMultiSelections();
-    Home.getQcers(function(res) {
-      $scope.qceropts = res;
-    	initSelectedQcers()
-    }, function(err) {
-        $scope.qcerError = err;
-    });
-  }, function(err) {
-      $location.path('/');
-  });
+  var initPageData = function() {
+  	initLd();
+  	initLdStructure();
+  };
+
+  var initLd = function() {
+	  LDEditService.getLearningDesign($scope.ldid, function(res) {
+	  	LDEditService.setCurrentLdId($scope.ldid);
+	    $scope.learningDesign = res;
+	    initLdPublicationFlag();
+	    initMultiSelections();
+	    Home.getQcers(function(res) {
+	      $scope.qceropts = res;
+	    	initSelectedQcers()
+	    }, function(err) {
+	        $scope.qcerError = err;
+	    });
+	  }, function(err) {
+	      $location.path('/');
+	  });
+  };
+
+  var initLdStructure = function() {
+	  LDService.getActivities($scope.ldid, function(res) {
+	      $scope.levels = res;
+	  }, function(err) {
+	      $scope.error = "Failed to fetch learning design activities.";
+	      $scope.alertMsg = err;
+	  });
+  }
+
+  initPageData();
 
   $scope.$on('activityCreated', function (event) {
     $timeout(function () {
-      $log.warn('Activity Created, need to fetch updated structure');
+      initLdStructure();
     }, 10);
   });
 
-  // TODO #34 wrap this in a function so it can be called both from controller init, and on activityCreated event
-  LDService.getActivities($scope.ldid, function(res) {
-      $scope.levels = res;
-  }, function(err) {
-      $scope.error = "Failed to fetch learning design activities.";
-      $scope.alertMsg = err;
-  });
-
-    $scope.dropped = function(dragSource, dropTarget) {
-    	console.log('dropped: dragSource.id = ' + dragSource.id + ', dropTarget.id = ' + dropTarget.id);
-    	var data = {
-    		dragSourceId: dragSource.id,
-    		dropTargetId: dropTarget.id
-    	};
-    	LDEditService.updateActivityLevelPosition($scope.ldid, data,
-	        function(res) {
-	        	$scope.levels = res;
-	        },
-	        function(err) {
-	        	$log.error(err);
-	        	$scope.ldUpdateErrors = err; // TODO UI to display these
-	        }
+  $scope.dropped = function(dragSource, dropTarget) {
+  	console.log('dropped: dragSource.id = ' + dragSource.id + ', dropTarget.id = ' + dropTarget.id);
+  	var data = {
+  		dragSourceId: dragSource.id,
+  		dropTargetId: dropTarget.id
+  	};
+  	LDEditService.updateActivityLevelPosition($scope.ldid, data,
+      function(res) {
+      	$scope.levels = res;
+      },
+      function(err) {
+      	$log.error(err);
+      	$scope.ldUpdateErrors = err; // TODO UI to display these
+      }
 		);
-    };
+  };
 
     initLdPublicationFlag = function() {
     	if ($scope.learningDesign.ld_publication === 0) {
