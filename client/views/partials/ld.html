@@ -79,11 +79,14 @@
                 <h5 class="btnModel">USA PROGETTO COME MODELLO</h5>
             </a>
         </div>
-        <div ng-show=" learningDesign.user_id  ==  ">
-            <a ng-href="/ldedit/{{learningDesign.ld_id}}">
-                <h4 class="editingMode">Modifica questo progetto </h4>
-            </a>
+        
+        <!-- FIXME: Only show the edit link when user is owner of current LD -->
+        <div>
+          <a id="editLdLink" ng-href="/ldedit/{{learningDesign.ld_id}}">
+            <h4 class="editingMode">Modifica questo progetto </h4>
+          </a>
         </div>
+
         <!--Sidebar content-->
     </div>
 </div>
