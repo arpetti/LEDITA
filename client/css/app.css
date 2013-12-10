@@ -925,6 +925,13 @@ input.scopeLDInput {
     padding: 0;
     width: 24%;
     display: inline-block;
+    text-align: center;
+}
+
+.durationName {
+    text-align: center;
+    display: block;
+    padding-top:5px;
 }
 .orgGroupBox {
     margin: 10px auto 0;
@@ -982,10 +989,17 @@ input.formInputDuration[type=number]::-webkit-inner-spin-button:after {
 }
 
 .checkModality {
-    margin-right: 15px;
+    margin-right: 20px;
 }
 
-
+input[type="text"].formInputMultiple {
+    text-align: left;
+    float: none;
+    width: 60%;
+    border: 2px dashed #dddddd !important;
+    margin-left: 10px;
+    line-height: 14px;
+}
 
 /* activities diagram
 ===================== */
@@ -2881,6 +2895,10 @@ border: 1px solid #0099CC;
         float: none;
         width: 100%;
     }
+
+
+
+
     .titleRight {
         float: none;
         text-align: center;

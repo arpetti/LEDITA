@@ -466,8 +466,8 @@
                     <div class="errorBox">
                                     <span class="errorTipModal"
                                           ng-show="AddResourceForm.resourceName.$dirty && AddResourceForm.resourceName.$error.required">Necessario!</span>
-                        <span class="errorTipModal" ng-show="AddResourceForm.resourceName.$error.pattern">The resource name Simbolo non permesso.</span>
-                        <span class="errorTipModal" ng-show="AddResourceForm.resourceName.$error.maxlength">The resource name Massimo 50 caratteri..</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.resourceName.$error.pattern">Simbolo non permesso.</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.resourceName.$error.maxlength">Massimo 50 caratteri..</span>
                     </div>
                     <label class="formLabel"><i class="icon-ok"></i> Nome della risorsa*:</label>
                     <input class="formInput" type="text" name="resourceName" ng-model="resourceName" required
@@ -478,8 +478,8 @@
                     <div class="errorBox">
                                     <span class="errorTipModal"
                                           ng-show="AddResourceForm.type.$dirty && AddResourceForm.type.$error.required">Necessario!</span>
-                        <span class="errorTipModal" ng-show="AddResourceForm.type.$error.pattern">The type name Simbolo non permesso.</span>
-                        <span class="errorTipModal" ng-show="AddResourceForm.type.$error.maxlength">The type name Massimo 50 caratteri..</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.type.$error.pattern">Simbolo non permesso.</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.type.$error.maxlength">Massimo 50 caratteri..</span>
                     </div>
                     <label class="formLabel"><i class="icon-ok"></i> Tipo*:</label>
                     <input class="formInput" type="text" ng-model="type" name="type"
@@ -520,7 +520,7 @@
                 <div class="formLevel">
                     <div class="errorBox">
                         <span class="errorTipModal"
-                              ng-show="AddResourceForm.url.$dirty && AddResourceForm.url.$error.url">Inserisci un url valido che inizia con http://</span>
+                              ng-show="AddResourceForm.url.$dirty && AddResourceForm.url.$error.url">Inserisci un url valido che inizi con http://</span>
                         <span class="errorTipModal" ng-show="AddResourceForm.url.$error.maxlength">Massimo 255 caratteri.</span>
                     </div>
                     <label class="formLabel"><i class="icon-ok"></i> Link:</label>
@@ -592,23 +592,22 @@
                         <span class="durationBox">
                                 <input class="formInputDuration" type="number" name="dur_mon" ng-model="dur_mon"
                                        required
-                                       min="0" max="60" maxlength="2" placeholder="0"> m.
+                                       min="0" max="60" maxlength="2" placeholder="0"> <span class="durationName">Mesi</span>
                         </span>
                         <span class="durationBox">
                                 <input class="formInputDuration" type="number" name="dur_d" ng-model="dur_d"
                                        required
-                                       min="0" max="30" maxlength="2" placeholder="0"> g.
+                                       min="0" max="30" maxlength="2" placeholder="0"> <span class="durationName">Giorni</span>
                         </span>
                         <span class="durationBox">
                                 <input class="formInputDuration" type="number" name="dur_h" ng-model="dur_h"
                                        required
-                                       min="0" max="23" maxlength="2" placeholder="0"> h.
+                                       min="0" max="23" maxlength="2" placeholder="0"> <span class="durationName">Ore</span>
                         </span>
                         <span class="durationBox">
                                 <input class="formInputDuration" type="number" name="dur_min" ng-model="dur_min"
                                        required
-                                       min="0" max="59" maxlength="2" placeholder="0"> min.
-                        </span>
+                                       min="0" max="59" maxlength="2" placeholder="0"> <span class="durationName">Minuti</span>                        </span>
                     </div>
                     <span class="clearfix"></span>
                 </div>
@@ -661,12 +660,14 @@
                         <span class="clearfix"></span>
                     </div>
                     <label class="formLabel"><i class="icon-facetime-video"></i> Tecnologie:</label>
-                    <input class="formInput" type="text" ng-model="technology" name="technology"
+                    <input class="formInputMultiple" type="text" ng-model="technology" name="technology"
                            typeahead="suggestion for suggestion in getTechnologies($viewValue)"
                            typeahead-on-select="addTechnologyFromSuggestion()"
                            ui-keypress="{13:'addTechnologyFromUserInput($event)'}"
                            placeholder="pc, lavagna, cd..." ng-maxlength="50"
                            ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
+                    <span id="addTechnologyIcon" class="editButton" ng-click="addTechnologyFromUserInput($event)"><i
+                            class="icon-plus icon-white"></i></span>
                     <div class="formTag">
                         <ul ng-repeat="tech in selectedTechnologies" class="zeroMargin subjects">
                             <li class="modalEditItem"><span class="modalEditItemLink">{{tech}} 
@@ -680,7 +681,9 @@
                 <div class="formLevel">
                     <label class="formLabel"><i class="icon-briefcase"></i> Risorse didattiche:</label>
                     <span class="formInput">
-                    	<button class="btn-mini btn" ng-click="createResource()"><i class="icon-plus"></i> Aggiungi una risorsa</button>
+                    	<a class="btn-mini btn" ng-click="createResource()"><i class="icon-plus"></i> Aggiungi una risorsa</a>
+                    	<!-- <button class="btn-mini btn" ng-click="createResource()"><i class="icon-plus"></i> Aggiungi una risorsa</button>
+                    	-->
                     </span>
                     <span class="clearfix"></span>
                 </div>

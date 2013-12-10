@@ -153,34 +153,38 @@
                             <!-- Topics -->
                             <div id="topicSection" class="formLevel">
                                 <div class="errorBox">
-                                    <span id="topicReqErr" class="errorTipModal" ng-show="LdCreateForm.ldTopic.$dirty && LdCreateForm.ldTopic.$error.required">Necessario!</span>
-                                    <span id="topicPatternErr" class="errorTipModal" ng-show="LdCreateForm.ldTopic.$error.pattern">Simbolo non permesso.</span>
-                                    <span id="topicLengthErr" class="errorTipModal" ng-show="LdCreateForm.ldTopic.$error.maxlength">Massimo 255 caratteri.</span>
-                                    <span class="clearfix"></span>
-                                </div>
-                                <label class="formLabel"><i class="icon-map-marker"></i> Argomenti*:</label>
-                                <input class="formInputMulti" type="text" ng-model="ldTopic" name="ldTopic"
-                                       typeahead="suggestion for suggestion in getSubjects($viewValue)"
-                                       typeahead-on-select="addTopicFromSuggestion()"
-                                       ui-keypress="{13:'addTopicFromUserInput($event)'}"
-                                       placeholder="es. articoli determinativi..." required ng-maxlength="255"
-                                       ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
-                                <span class="editButton" ng-click="addTopicFromUserInput($event)"><i class="icon-plus icon-white"></i> </span>
-                                <span class="clearfix"></span>
+                                    <!-- Removed for usability test
+                                <span id="topicReqErr" class="errorTipModal" ng-show="LdCreateForm.ldTopic.$dirty && LdCreateForm.ldTopic.$error.required">Necessario!</span>
+                                -->
+                                  <span id="topicPatternErr" class="errorTipModal" ng-show="LdCreateForm.ldTopic.$error.pattern">Simbolo non permesso.</span>
+                                  <span id="topicLengthErr" class="errorTipModal" ng-show="LdCreateForm.ldTopic.$error.maxlength">Massimo 255 caratteri.</span>
+                                  <span class="clearfix"></span>
+                              </div>
+                              <label class="formLabel"><i class="icon-map-marker"></i> Argomenti*:</label>
+                              <input class="formInputMulti" type="text" ng-model="ldTopic" name="ldTopic"
+                                     typeahead="suggestion for suggestion in getSubjects($viewValue)"
+                                     typeahead-on-select="addTopicFromSuggestion()"
+                                     ui-keypress="{13:'addTopicFromUserInput($event)'}"
+                                     placeholder="es. articoli determinativi..." required ng-maxlength="255"
+                                     ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
+                              <span class="editButton" ng-click="addTopicFromUserInput($event)"><i class="icon-plus icon-white"></i> </span>
+                              <span class="clearfix"></span>
 
-                                <div id="topicTags" class="formTag">
-                                    <ul ng-repeat="topic in selectedTopics" class="zeroMargin subjects">
-                                        <li class="modalEditItem"><span class="modalEditItemLink">{{topic}} 
-                                        	<a ng-click="removeTopic(topic)"><i class="icon-remove-circle"></i> </a></span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                              <div id="topicTags" class="formTag">
+                                  <ul ng-repeat="topic in selectedTopics" class="zeroMargin subjects">
+                                      <li class="modalEditItem"><span class="modalEditItemLink">{{topic}}
+                                          <a ng-click="removeTopic(topic)"><i class="icon-remove-circle"></i> </a></span>
+                                      </li>
+                                  </ul>
+                              </div>
+                          </div>
 
-                            <!-- Objectives -->
+                          <!-- Objectives -->
                             <div id="objectiveSection" class="formLevel">
                                 <div class="errorBox">
+                                    <!-- Removed for usability test
                                     <span id="objectiveReqErr" class="errorTipModal" ng-show="LdCreateForm.ldObjective.$dirty && LdCreateForm.ldObjective.$error.required">Necessario!</span>
+                                    -->
                                     <span id="objectivePatternErr" class="errorTipModal" ng-show="LdCreateForm.ldObjective.$error.pattern">Simbolo non permesso.</span>
                                     <span id="objectiveLengthErr" class="errorTipModal" ng-show="LdCreateForm.ldObjective.$error.maxlength">Massimo 255 caratteri.</span>
                                     <span class="clearfix"></span>

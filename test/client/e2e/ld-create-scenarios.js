@@ -327,8 +327,8 @@ describe('Create a new Learning Design', function() {
 	        // Now that all the fields are filled out, blank them out and verify required (except prereq)
 	        verify('ldName', "", goodPatternText, '#ldNameReqErr', 'Necessario');
 	        verify('ldScope', "", goodPatternText, '#ldScopeReqErr', 'Necessario');
-	        verify('ldTopic', "", goodPatternText, '#topicReqErr', 'Necessario');
-	        verify('ldObjective', "", goodPatternText, '#objectiveReqErr', 'Necessario');
+//	        verify('ldTopic', "", goodPatternText, '#topicReqErr', 'Necessario');
+//	        verify('ldObjective', "", goodPatternText, '#objectiveReqErr', 'Necessario');
 	        verify('ldStudentsDescr', "", goodPatternText, '#studentsDescrReqErr', 'Necessario');
 
 	        element("#cancelCreateLd").click();
