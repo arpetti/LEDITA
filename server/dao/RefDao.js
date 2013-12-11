@@ -9,6 +9,7 @@ var GET_TECHNOLOGY_MATCHING	= 'select name from technology where name like ? ord
 
 var FIND_SUBJECTS_BY_NAME = "select id, name from subject where name in (?)";
 var FIND_OBJECTIVES_BY_NAME = "select id, descr from objective where descr in (?)";
+var FIND_TECHNOLOGIES_BY_NAME = "select id, name from technology where name in (?)";
 var FIND_SCOPE_BY_NAME = "select id, name from scope where ?";
 
 var addWildCard = function(partial) {
@@ -65,14 +66,18 @@ module.exports = {
 
 	findSubjectsByName: function(subjectNames, callback) {
 		handleByNameResults(FIND_SUBJECTS_BY_NAME, [subjectNames], callback);
-  	},
+	},
 
-  	findObjectivesByName: function(objectiveNames, callback) {
+	findObjectivesByName: function(objectiveNames, callback) {
 		handleByNameResults(FIND_OBJECTIVES_BY_NAME, [objectiveNames], callback);
-  	},
+	},
 
-  	findScopeByName: function(scopeName, callback) {
+	findScopeByName: function(scopeName, callback) {
 		handleByNameResults(FIND_SCOPE_BY_NAME, [scopeName], callback);
-  	}
+	},
+
+	findTechnologiesByName: function(technologyName, callback) {
+		handleByNameResults(FIND_TECHNOLOGIES_BY_NAME, [technologyName], callback);
+	}
 
 };

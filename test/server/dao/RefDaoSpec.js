@@ -277,6 +277,39 @@ describe('Reference Data Dao', function() {
 			});
 		});
 
+		it('Finds technology by name', function(done) {
+			var existTechnology1 = 'Whiteboard';
+			var existTechnology2 = 'Smartphone';
+			var notExistTechnology = 'Warp Drive';
+			var technologyNames = [existTechnology1, existTechnology2, notExistTechnology];
+			RefDao.findTechnologiesByName(technologyNames, function(err, results) {
+				expect(err).to.be.null;
+				expect(results).to.have.length(2);
+				expect(_.contains(_.pluck(results, "name"), existTechnology1)).to.be.true;
+				expect(_.contains(_.pluck(results, "name"), existTechnology2)).to.be.true;
+				expect(_.contains(_.pluck(results, "name"), notExistTechnology)).to.be.false;
+				done();
+			});
+		});
+
+		it('Find technology by name returns empty list when none found', function(done) {
+			var technologyNames = ['Steam Engine', 'Battery'];
+			RefDao.findTechnologiesByName(technologyNames, function(err, results) {
+				expect(err).to.be.null;
+				expect(results).to.have.length(0);
+				done();
+			});
+		});
+
+		it('Find technology by name returns error when given empty input', function(done) {
+			var technologyNames = [];
+			RefDao.findTechnologiesByName(technologyNames, function(err, results) {
+				expect(err).not.to.be.null;
+				expect(results).to.be.undefined;
+				done();
+			});
+		});
+
 	});
 
 });
