@@ -285,6 +285,9 @@
 
 <div class="tabContent">
 <div>
+    <div id="updateErrors" ng-show="ldUpdateErrors" class="updateErrors">
+        {{ ldUpdateErrors }}
+    </div>
     <button id="createActivity" type="button" class="newActButton1" href ng-click="createActivity()" class="newActBox" tooltip="Premi questo bottone per aggiungere un'attività al progetto." tooltip-trigger="mouseenter" tooltip-placement="right">
         <i class="icon-plus icon-white"></i><br>Attività
     </button>

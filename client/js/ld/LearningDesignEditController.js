@@ -49,20 +49,25 @@ function($scope, $log, $routeParams, $location, $timeout, TypeaheadHelper, LDSer
   });
 
   $scope.dropped = function(dragSource, dropTarget) {
-  	console.log('dropped: dragSource.id = ' + dragSource.id + ', dropTarget.id = ' + dropTarget.id);
+      
+      console.log('dropped: dragSource.id = ' + dragSource.id + ', dropTarget.id = ' + dropTarget.id);
   	var data = {
   		dragSourceId: dragSource.id,
   		dropTargetId: dropTarget.id
   	};
   	LDEditService.updateActivityLevelPosition($scope.ldid, data,
+
       function(res) {
       	$scope.levels = res;
+
       },
       function(err) {
       	$log.error(err);
       	$scope.ldUpdateErrors = err; // TODO UI to display these
       }
 		);
+      $scope.ldUpdateErrors = null;
+
   };
 
     initLdPublicationFlag = function() {
@@ -106,10 +111,12 @@ function($scope, $log, $routeParams, $location, $timeout, TypeaheadHelper, LDSer
 
   	// #28 wip - only add to the selected items list if not already there
   	$scope.addTopic = function() {
+        $scope.ldUpdateErrors = null;
 	  		LDEditService.addTopic($scope.ldid, {topic: $scope.ldTopic},
 	        function(res) {
 	        	$scope.selectedTopics.push($scope.ldTopic);
 	        	$scope.ldTopic = " ";
+                $scope.ldUpdateErrors = "Modifica salvata!";
 	        },
 	        function(err) {
 	        	$log.error(err);
@@ -119,9 +126,11 @@ function($scope, $log, $routeParams, $location, $timeout, TypeaheadHelper, LDSer
   	};
 
   	$scope.removeTopic = function(topic) {
+        $scope.ldUpdateErrors = null;
   		LDEditService.removeTopic($scope.ldid, {topic: topic},
 	        function(res) {
 	        	removeItem(topic, $scope.selectedTopics);
+                $scope.ldUpdateErrors = "Modifica salvata!";
 	        },
 	        function(err) {
 	        	$log.error(err);
@@ -132,10 +141,12 @@ function($scope, $log, $routeParams, $location, $timeout, TypeaheadHelper, LDSer
 
   	// #28 wip - only add to the selected items list if not already there
   	$scope.addObjective = function() {
+        $scope.ldUpdateErrors = null;
   		LDEditService.addObjective($scope.ldid, {objective: $scope.ldObjective},
         function(res) {
         	$scope.selectedObjectives.push($scope.ldObjective);
         	$scope.ldObjective = " ";
+            $scope.ldUpdateErrors = "Modifica salvata!";
         },
         function(err) {
         	$log.error(err);
@@ -144,9 +155,11 @@ function($scope, $log, $routeParams, $location, $timeout, TypeaheadHelper, LDSer
   	};
 
   	$scope.removeObjective = function(objective) {
+        $scope.ldUpdateErrors = null;
   		LDEditService.removeObjective($scope.ldid, {objective: objective},
 	        function(res) {
 	        	removeItem(objective, $scope.selectedObjectives);
+                $scope.ldUpdateErrors = "Modifica salvata!";
 	        },
 	        function(err) {
 	        	$log.error(err);
@@ -157,10 +170,12 @@ function($scope, $log, $routeParams, $location, $timeout, TypeaheadHelper, LDSer
 
   	// #28 wip - only add to the selected items list if not already there
   	$scope.addPrerequisite = function() {
+        $scope.ldUpdateErrors = null;
   		LDEditService.addPrerequisite($scope.ldid, {prerequisite: $scope.ldRequisite},
         function(res) {
         	$scope.selectedPrerequisites.push($scope.ldRequisite);
         	$scope.ldRequisite = " ";
+            $scope.ldUpdateErrors = "Modifica salvata!";
         },
         function(err) {
         	$log.error(err);
@@ -169,9 +184,11 @@ function($scope, $log, $routeParams, $location, $timeout, TypeaheadHelper, LDSer
   	};
 
   	$scope.removePrerequisite = function(prerequisite) {
+        $scope.ldUpdateErrors = null;
   		LDEditService.removePrerequisite($scope.ldid, {prerequisite: prerequisite},
 	        function(res) {
 	        	removeItem(prerequisite, $scope.selectedPrerequisites);
+                $scope.ldUpdateErrors = "Modifica salvata!";
 	        },
 	        function(err) {
 	        	$log.error(err);
@@ -182,9 +199,11 @@ function($scope, $log, $routeParams, $location, $timeout, TypeaheadHelper, LDSer
 
   	// TODO: client-side validation: if all are false, display error instead of calling service
   	$scope.updateQcer = function() {
+        $scope.ldUpdateErrors = null;
   		LDEditService.updateLdQcers($scope.ldid, {ldQcers: $scope.selectedQcers},
         function(res) {
         	$log.info('updateQcer successful');
+            $scope.ldUpdateErrors = "Modifica salvata!";
         },
         function(err) {
         	$log.error(err);
@@ -193,11 +212,13 @@ function($scope, $log, $routeParams, $location, $timeout, TypeaheadHelper, LDSer
   	};
 
     $scope.updateLdName = function() {
+        $scope.ldUpdateErrors = null;
     	var modifiedLdName = $scope.learningDesign.ld_name;
     	if (modifiedLdName && modifiedLdName.length > 0) {
     		LDEditService.updateLdName($scope.ldid, {ldName: modifiedLdName},
 	        function(res) {
 	        	$log.info('updateLdName successful');
+                $scope.ldUpdateErrors = "Modifica salvata!";
 	        },
 	        function(err) {
 	        	$log.error(err);
@@ -207,11 +228,13 @@ function($scope, $log, $routeParams, $location, $timeout, TypeaheadHelper, LDSer
     };
 
     $scope.updateLdScope = function() {
+        $scope.ldUpdateErrors = null;
     	var modifiedLdScope = $scope.learningDesign.ld_scope;
     	if (modifiedLdScope && modifiedLdScope.length > 0) {
     		LDEditService.updateLdScope($scope.ldid, {ldScope: modifiedLdScope},
 	        function(res) {
 	        	$log.info('updateLdScope successful');
+                $scope.ldUpdateErrors = "Modifica salvata!";
 	        },
 	        function(err) {
 	        	$log.error(err);
@@ -221,11 +244,13 @@ function($scope, $log, $routeParams, $location, $timeout, TypeaheadHelper, LDSer
     };
 
     $scope.updateStudentsDescr = function() {
+        $scope.ldUpdateErrors = null;
     	var modifiedStudentsDescr = $scope.learningDesign.ld_students_profile;
     	if (modifiedStudentsDescr && modifiedStudentsDescr.length > 0) {
     		LDEditService.updateStudentsDescr($scope.ldid, {studentsDescr: modifiedStudentsDescr},
 	        function(res) {
 	        	$log.info('updateStudentsDescr successful');
+                $scope.ldUpdateErrors = "Modifica salvata!";
 	        },
 	        function(err) {
 	        	$log.error(err);
@@ -235,9 +260,11 @@ function($scope, $log, $routeParams, $location, $timeout, TypeaheadHelper, LDSer
     };
 
     $scope.updateLdPublication = function() {
+        $scope.ldUpdateErrors = null;
     	if ($scope.ldPublicationFlag) {
     		LDEditService.updateLdPublic($scope.ldid,
 	        function(res) {
+                $scope.ldUpdateErrors = "Modifica salvata!";
 	        },
 	        function(err) {
 	            $scope.ldUpdateErrors = err; // TODO UI to display these
@@ -246,12 +273,14 @@ function($scope, $log, $routeParams, $location, $timeout, TypeaheadHelper, LDSer
     		LDEditService.updateLdPrivate($scope.ldid,
 	        function(res) {
 	        	$log.info('updateLdPublication successful');
+                $scope.ldUpdateErrors = "Modifica salvata!";
 	        },
 	        function(err) {
 	        	$log.error(err);
 	            $scope.ldUpdateErrors = err; // TODO UI to display these
 	        });
     	}
+
     };
 
     $scope.getBoxClass = function(node) {
