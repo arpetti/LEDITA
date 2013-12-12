@@ -70,6 +70,29 @@ angular.module('ledita-app')
                 $scope.alertMsg = err;
             });
     };
+
+    $scope.openTerms = function (node) {
+        $scope.terms = true;
+       };
+
+    $scope.closeTerms = function () {
+        $scope.terms = false;
+    };
+
+    $scope.openPrivacy = function (node) {
+        $scope.privacy = true;
+       };
+
+    $scope.closePrivacy = function () {
+        $scope.privacy = false;
+    };
+
+    $scope.opts = {
+        backdropFade: true,
+        dialogFade:true
+    };
+
+
 }]);
 
 angular.module('ledita-app')
