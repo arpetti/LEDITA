@@ -442,7 +442,7 @@ width: 98%;
     width: 25%;
 }
 .formInput {
-width: 70%;
+width: 67%;
     float: right;
 }
 .formInputMulti {
@@ -1723,27 +1723,6 @@ ul.listNode li {
 }
 
 
-.tooltip.in {
-    opacity: 0;
-    filter: alpha(opacity=0);
-}
-
-.tooltip.in {
-    animation: hiding 5s cubic-bezier(0,0,1,1) 1;
-    -webkit-animation: hiding 5s cubic-bezier(0.8,0.1,0.7,1) 1;
-}
-
-@keyframes hiding
-{
-    from {opacity: 1;}
-    to {opacity: 0;}
-}
-
-@-webkit-keyframes hiding /* Safari and Chrome */
-{
-    from {opacity: 1;}
-    to {opacity: 0;}
-}
 /* ldTable
 ===================== */
 .ldTable {
