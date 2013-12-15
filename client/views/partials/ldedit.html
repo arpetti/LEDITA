@@ -476,9 +476,11 @@
 
         <div class="clearfix"></div>
     </div>
-    <div ng-controller="AddResourceCtrl">
-        <form novalidate class="createLdForm" name="AddResourceForm" ng-submit="AddResource()">
+    <div ng-controller="ActCreateCtrl">
+        <form novalidate class="createLdForm" name="AddResourceForm" ng-submit="addResource()">
             <div class="modal-body">
+                
+								<!-- Resource Name -->
                 <div class="formLevel">
                     <div class="errorBox">
                                     <span class="errorTipModal"
@@ -491,6 +493,8 @@
                            ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                     <span class="clearfix"></span>
                 </div>
+
+                <!-- Resource Type -->
                 <div class="formLevel">
                     <div class="errorBox">
                                     <span class="errorTipModal"
@@ -513,6 +517,8 @@
                             </span>
                     </div>
                 </div>
+
+                <!-- Resource Copyright -->
                 <div class="formLevel">
                     <div class="errorBox">
                         <span class="errorTipModal" ng-show="AddResourceForm.copy.$error.pattern">Simbolo non permesso.</span>
@@ -523,6 +529,8 @@
                            ng-maxlength="255" ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                     <span class="clearfix"></span>
                 </div>
+
+                <!-- Resource Description -->
                 <div class="formLevel">
                     <div class="errorBox">
                         <span class="errorTipModal" ng-show="AddResourceForm.descr.$error.pattern">Simbolo non permesso.</span>

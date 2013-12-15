@@ -47,7 +47,6 @@ angular.module('ledita-app')
     	};
     };
 
-    // #34 wip...
     $scope.submitActivity = function() {
     	var currentLdId = LDEditService.getCurrentLdId();
     	ActivityService.createActivity(currentLdId, $scope.buildActivityData(),
@@ -79,7 +78,7 @@ angular.module('ledita-app')
     		edu_descr: getValueOrNull($scope.edu_descr)
     	};
     	return activityData;
-    }
+    };
 
     var getValueOrNull = function(value) {
     	return getValueOrDefault(value, null);
@@ -88,5 +87,9 @@ angular.module('ledita-app')
     var getValueOrDefault = function(value, defaultVal) {
     	return value ? value : defaultVal;
     }
+
+    $scope.addResource = function() {
+    	$log.info('Add resource is called');
+    };
 
 }]);
