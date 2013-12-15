@@ -4,6 +4,12 @@ angular.module('ledita-app')
 	function($scope, $rootScope, TypeaheadHelper, $log, LDEditService, ActivityService) {
 
 	$scope.selectedTechnologies = [];
+	$scope.resources = [];
+
+	var addResourceToList = function(resourceData) {
+		$scope.resources.push(resourceData);
+		$log.info('addResourceToList: ' + JSON.stringify($scope.resources));
+	};
     
     $scope.getTechnologies = function(technology) {
     	return TypeaheadHelper.getTechnologies(technology);
@@ -95,6 +101,7 @@ angular.module('ledita-app')
     		descr: getValueOrNull($scope.resourceDescr),
     		link: getValueOrNull($scope.resourceLink)
     	}
+    	addResourceToList(resourceData);
     	$log.info('Add resource is called: ' + JSON.stringify(resourceData));
     };
 

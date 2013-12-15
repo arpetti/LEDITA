@@ -71,4 +71,65 @@ describe('Activity Controller', function() {
 
   });
 
+	describe('Build Resource Data', function() {
+
+		it('Adds a single resource to the resource list', function() {
+			scope.resourceName = 'Basic Pronounciation';
+			scope.resourceType = 'Podcast';
+			scope.resourceDescr = 'Helpful listening for proper pronounciation';
+			scope.resourceLink = 'http://itunes.com/awesome/pronounciation';
+
+			// Before adding the resource, list should be empty
+			expect(scope.resources.length).toEqual(0);
+			
+			scope.addResource();
+			
+			// After adding resource, list should contain one item
+			expect(scope.resources.length).toEqual(1);
+			expect(scope.resources[0].name).toEqual(scope.resourceName);
+			expect(scope.resources[0].type).toEqual(scope.resourceType);
+			expect(scope.resources[0].descr).toEqual(scope.resourceDescr);
+			expect(scope.resources[0].link).toEqual(scope.resourceLink);
+		});
+
+		it('Adds multiple resources to the resource list', function() {
+			
+			// First Resource
+			scope.resourceName = 'Basic Pronounciation';
+			scope.resourceType = 'Podcast';
+			scope.resourceDescr = 'Helpful listening for proper pronounciation';
+			scope.resourceLink = 'http://itunes.com/awesome/pronounciation';
+
+			// Before adding the resource, list should be empty
+			expect(scope.resources.length).toEqual(0);
+			
+			scope.addResource();
+
+			// After adding first resource, list should contain one item
+			expect(scope.resources.length).toEqual(1);
+
+			// Second Resource
+			scope.resourceName = 'Resource 2';
+			scope.resourceType = 'Whitepaper';
+			scope.resourceDescr = 'Advanced research topic';
+			scope.resourceLink = 'http://whitepapers.edu';
+
+			scope.addResource();
+
+			// After adding second resource, list should contain two items
+			expect(scope.resources.length).toEqual(2);
+
+			// Verify list contents
+			expect(scope.resources[0].name).toEqual('Basic Pronounciation');
+			expect(scope.resources[0].type).toEqual('Podcast');
+			expect(scope.resources[0].descr).toEqual('Helpful listening for proper pronounciation');
+			expect(scope.resources[0].link).toEqual('http://itunes.com/awesome/pronounciation');
+			expect(scope.resources[1].name).toEqual('Resource 2');
+			expect(scope.resources[1].type).toEqual('Whitepaper');
+			expect(scope.resources[1].descr).toEqual('Advanced research topic');
+			expect(scope.resources[1].link).toEqual('http://whitepapers.edu');
+		});
+
+	});
+
 });
