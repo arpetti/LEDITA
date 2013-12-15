@@ -45,6 +45,7 @@
                        ui-keypress="{13:'addTopic()'}"
                        required ng-maxlength="255"
                        ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
+
                 <span id="addTopicIcon" class="editButton" ng-click="addTopic()" tooltip="Clicca qui per aggiungere un argomento." tooltip-trigger="mouseenter" tooltip-placement="right"><i
                         class="icon-plus icon-white"></i></span>
                 <span class="multiValueSidebar">Puoi inserire più di un valore <i class="icon-question-sign"  tooltip="Scrivi uno o più argomenti del progetto, ad esempio: articoli, presentarsi, i saluti, ecc. Per inserirli, premi dopo ogni argomento 'Invio' o il bottone '+' a destra." tooltip-trigger="mouseenter" tooltip-placement="top"></i> </span>
@@ -79,7 +80,7 @@
                       typeahead="suggestion for suggestion in getObjectives($viewValue)"
                       typeahead-on-select="addObjective()"
                       ui-keypress="{13:'addObjective()'}"
-                      placeholder="obiettivi..." required ng-maxlength="255"
+                      required ng-maxlength="255"
                       ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                <span id="addObjectiveIcon" class="editButton" ng-click="addObjective()" tooltip="Clicca qui per aggiungere un obiettivo." tooltip-trigger="mouseenter" tooltip-placement="right"><i
                        class="icon-plus icon-white"></i> </span>
@@ -89,7 +90,7 @@
                    <ul ng-repeat="objective in selectedObjectives" class="zeroMargin objectives">
                        <li class="sidebarEditItem">
                        <span class="sidebarEditItemLink">{{objective}}
-                       <a ng-click="removeObjective(objective)" class="hand"><i class="icon-remove-circle"></i></a></span>
+                       <a ng-click="removeObjective(objective)" class="hand" tooltip="Clicca qui per cancellare questo obiettivo." tooltip-trigger="mouseenter" tooltip-placement="right"><i class="icon-remove-circle"></i></a></span>
                        </li>
                    </ul>
                </div>
@@ -113,7 +114,7 @@
                    typeahead="suggestion for suggestion in getObjectives($viewValue)"
                    typeahead-on-select="addPrerequisite()"
                    ui-keypress="{13:'addPrerequisite()'}"
-                   placeholder="prerequisiti..." required ng-maxlength="255"
+                   required ng-maxlength="255"
                    ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
             <span id="addPrerequisiteIcon" class="editButton" ng-click="addPrerequisite()" tooltip="Clicca qui per aggiungere un prerequisito." tooltip-trigger="mouseenter" tooltip-placement="right"><i
                     class="icon-plus icon-white"></i> </span>
@@ -123,7 +124,7 @@
                 <ul ng-repeat="prereq in selectedPrerequisites" class="zeroMargin prerequisites">
                     <li class="sidebarEditItem">
                     <span class="sidebarEditItemLink">{{prereq}}
-                    <a ng-click="removePrerequisite(prereq)" class="hand"><i class="icon-remove-circle"></i> </a></span>
+                    <a ng-click="removePrerequisite(prereq)" class="hand" tooltip="Clicca qui per cancellare questo prerequisito." tooltip-trigger="mouseenter" tooltip-placement="right"><i class="icon-remove-circle"></i> </a></span>
                     </li>
                 </ul>
             </div>
@@ -507,30 +508,13 @@
                            typeahead="suggestion for suggestion in getSubjects($viewValue)"
                            typeahead-on-select="addTopicFromSuggestion()"
                            ui-keypress="{13:'addTopicFromUserInput($event)'}"
-                           placeholder="tipo..." ng-maxlength="50"
+                           ng-maxlength="50"
                            ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
 
-                    <div class="formTag">
-                            <span class="modalEditItem" ng-show="type"><span class="modalEditItemLink">{{resourceType}} <a
-                                    ng-href="#"><i
-                                    class="icon-remove-circle"></i> </a></span>
-                            </span>
-                    </div>
+
                 </div>
 
-                <!-- Resource Copyright -->
-                <div class="formLevel">
-                    <div class="errorBox">
-                        <span class="errorTipModal" ng-show="AddResourceForm.resourceCopy.$error.pattern">Simbolo non permesso.</span>
-                        <span class="errorTipModal" ng-show="AddResourceForm.resourceCopy.$error.maxlength">Massimo 255 caratteri.</span>
-                    </div>
-                    <label class="formLabel"><i class="icon-ok"></i> Copyright:</label>
-                    <input class="formInput" type="text" name="resourceCopy" ng-model="resourceCopy"
-                           ng-maxlength="255" ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
-                    <span class="clearfix"></span>
-                </div>
-
-                <!-- Resource Description -->
+               <!-- Resource Description -->
                 <div class="formLevel">
                     <div class="errorBox">
                         <span class="errorTipModal" ng-show="AddResourceForm.resourceDescr.$error.pattern">Simbolo non permesso.</span>
@@ -538,7 +522,7 @@
 
                     </div>
                     <label class="formLabel"><i class="icon-ok"></i> Descrizione:</label>
-                    <textarea class="formInput" name="resourceDescr" ng-model="resourceDescr" rows="10"
+                    <textarea class="formInput" name="resourceDescr" ng-model="resourceDescr" rows="6"
                               ng-maxlength="500" ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/"></textarea>
                     <span class="clearfix"></span>
                 </div>
@@ -551,7 +535,7 @@
                         <span class="errorTipModal" ng-show="AddResourceForm.resourceLink.$error.maxlength">Massimo 255 caratteri.</span>
                     </div>
                     <label class="formLabel"><i class="icon-ok"></i> Link:</label>
-                    <input class="formInput" type="url" placeholder="don't forget http://" name="resourceLink" ng-model="resourceLink"
+                    <input class="formInput" type="url" placeholder="inizia con http://" name="resourceLink" ng-model="resourceLink"
                            ng-maxlength="255">
                     <span class="clearfix"></span>
                 </div>
@@ -715,11 +699,57 @@
                     <label class="formLabel"><i class="icon-briefcase"></i> Risorse didattiche:   <i class="icon-question-sign" tooltip="Clicca sul bottone a fianco per aggiungere risorse didattiche da utilizzare durante l'attività." tooltip-trigger="mouseenter" tooltip-placement="bottom"></i>
                     </label>
                     <span class="formInput">
-                    	<a class="btn-mini btn" ng-click="createResource()"><i class="icon-plus"></i> Aggiungi una risorsa</a>
+                    	<a class="btn-mini btn resBtn" ng-click="createResource()"><i class="icon-plus icon-white"></i> Aggiungi una risorsa</a>
                     	<!-- <button class="btn-mini btn" ng-click="createResource()"><i class="icon-plus"></i> Aggiungi una risorsa</button>
                     	-->
                     </span>
                     <span class="clearfix"></span>
+
+
+                    <div class="resTable">
+                        <div class="headerResTable">
+                            <div class="colTable colRes1">
+                                <p>Nome</p>
+                            </div>
+                            <div class="colTable colRes2">
+                                <p>Tipo</p>
+                            </div>
+                            <div class="colTable colRes3">
+                                <p>Descrizione</p>
+                            </div>
+                            <div class="colTable colRes4">
+                                <p>Link</p>
+                            </div>
+                            <div class="colTable colRes5">
+                                <p></p>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="rowTable" >
+                           <!-- Add here a ng-repeat for resources -->
+                            <div class="rowResLink">
+                                <a ng-href="">
+                                    <div class="colTable colRes1">
+                                        <p>Fumetto</p>
+                                    </div>
+                                    <div class="colTable colRes2">
+                                        <p>immagine</p>
+                                    </div>
+                                    <div class="colTable colRes3">
+                                        <p>Striscia di fumetto di Lupo Alberto</p>
+                                    </div>
+                                    <div class="colTable colRes4">
+                                        <p><a href="">Link</a></p>
+                                    </div>
+                                    <div class="colTable colRes5">
+                                        <p><a href="" tooltip="Cancella questa risorsa" tooltip-trigger="mouseenter" tooltip-placement="bottom"><i class="icon-remove"></i></a></p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+
                 </div>
 
                 <!-- Activity Description -->

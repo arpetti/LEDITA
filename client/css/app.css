@@ -1031,6 +1031,55 @@ input[type="text"].sidebarInputMultiple {
     padding: 0;
     color: #0099CC;
 }
+
+
+.resourceRow {
+    background-color: #dddddd;
+    border-radius: 6px;
+    padding: 3px;
+    margin: 3px 0;
+}
+
+.resCol1 {
+}
+.resCol2 {
+}
+.resCol3 {
+}
+.resCol4 {
+}
+
+.resourceCol1{
+    width: 80%;
+}
+
+.resourceCol2 {
+    width: 20%;
+    float: right;
+    background-color: #666666;
+    font-size: 12px;
+    text-align: center;
+    border-radius: 6px;
+    height: 100%;
+}
+
+.resourceCol2 a{
+    color: #ffffff;
+;
+}
+
+.resBtn {
+    background-color: #0099cc;
+    background-image: none;
+    color: #ffffff;
+    text-shadow: none;
+    border: none;
+    padding: 3px;
+}
+.resBtn:hover {
+    background-color: #990000;
+    color: #ffffff;
+}
 /* activities diagram
 ===================== */
 #activityErrors {
@@ -1730,6 +1779,11 @@ ul.listNode li {
     margin: 10px;
     border-radius: 6px;
 }
+.resTable {
+    background-color: #dddddd;
+    margin: 10px 0;
+    border-radius: 6px;
+}
 
 .rowTable {
     padding: 5px;
@@ -1773,6 +1827,23 @@ ul.listNode li {
 }
 
 .headerUserTable p {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.headerResTable {
+    padding: 2px;
+    border-bottom: 1px solid #999;
+    background-color: #666;
+    border-radius: 6px 6px 0 0;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    font-size: 12px;
+}
+
+.headerResTable p {
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -2314,6 +2385,45 @@ margin: 10px;
     text-align: center;
 
 }
+
+.rowResLink {
+    padding: 0;
+    margin: 0;
+}
+
+.rowResLink p {
+    color: #666666;
+    font-weight: normal;
+    line-height: 14px;
+    text-align: center;
+    font-size: 12px;
+    padding: 0;
+
+}
+
+.colRes1 {
+    width: 20%;
+}
+
+.colRes2 {
+    width: 15%;
+}
+
+.colRes3 {
+    width: 39%;
+}
+
+.colRes4 {
+    width: 10%;
+    text-align: center;
+}
+
+.colRes5 {
+    border-right: none;
+    text-align: center;
+    width: 5%;
+}
+
 
 .rowUserLink a:hover .colUser1, .rowUserLink a:hover .colUser2, .rowUserLink a:hover .colUser3, .rowUserLink a:hover .colUser4, .rowUserLink a:hover .colUser5  {
     color: #0099CC;
