@@ -4,6 +4,7 @@ var dao = require('./Dao');
 var INSERT_ACTIVITY = 'INSERT INTO activity SET ?';
 var BULK_INSERT_SUPPORTS = 'INSERT INTO supports (technology_id, activity_id) VALUES ?';
 var INSERT_SUPPORT = 'INSERT INTO supports SET ?';
+var INSERT_TECHNOLOGY = "INSERT INTO technology SET ?";
 
 var handleResult = function(cb, err, result) {
 	if(err) {
@@ -21,7 +22,7 @@ module.exports = {
 		});
 	},
 
-	bulkInserSuports: function(supportss, callback) {
+	bulkInsertSupports: function(supportss, callback) {
 		dao.bulkInsert(BULK_INSERT_SUPPORTS, supportss, function(err, result) {
 			handleResult(callback, err, result);
 		});
@@ -31,6 +32,12 @@ module.exports = {
 		dao.insertOrUpdateRecord(INSERT_SUPPORT, supportsObj, function(err, result) {
 			handleResult(callback, err, result);
 		});
-	}
+	},
+
+	insertTechnology: function(technologyObj, callback) {
+		dao.insertOrUpdateRecord(INSERT_TECHNOLOGY, technologyObj, function(err, technologyId) {
+			handleResult(callback, err, technologyId);
+		});
+	},
 
 };

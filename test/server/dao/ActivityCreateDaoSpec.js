@@ -60,7 +60,7 @@ describe('Activity Create DAO', function() {
 		var technologyId1 = 1;
 		var technologyId2 = 2;
 		var supportss = [[technologyId1, activityId], [technologyId2, activityId]];
-		fixture.bulkInserSuports(supportss, function(err, results) {
+		fixture.bulkInsertSupports(supportss, function(err, results) {
 			expect(err).to.be.null;
 			expect(results).not.to.be.null;
 			expect(results.affectedRows).to.equal(supportss.length);

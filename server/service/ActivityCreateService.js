@@ -2,6 +2,7 @@ var async = require('async');
 var studentsService = require('./StudentsService');
 var activityCreateDao = require('../dao/ActivityCreateDao');
 var composesService = require('./ComposesService');
+var technologyService = require('./TechnologyService');
 var messages = require('../validate/ValidationMessages');
 var logger = require('../util/LogWrapper');
 
@@ -55,7 +56,7 @@ module.exports = {
 		    },
 				
 				// Step 2: Insert ACTIVITY
-		    function(studentsId, callback){
+		    function(studentsId, callback) {
 		    	var activityObj = createActivityObj(studentsId, activityData)
 		    	activityCreateDao.insertActivity(activityObj, function(err, activityId) {
 		    		if(err) {
@@ -68,7 +69,7 @@ module.exports = {
 		    },
 				
 				// Step 3: Insert COMPOSES
-		    function(activityId, studentsId, callback){
+		    function(activityId, studentsId, callback) {
 		      composesService.addActivity(ldId, activityId, function(err, composesId, message) {
 		      	if(err) {
 		    			callback(new Error(message));
@@ -78,9 +79,16 @@ module.exports = {
 		    				students_id : studentsId,
 		    				composes_id : composesId
 		    			};
-		      		callback(null, successInfo);
+		      		callback(null, activityId, successInfo);
 		    		}
 		      });
+		    },
+
+		    // Step 4: Insert or Connect Technologies
+		    function(activityId, successInfo, callback) {
+		    	technologyService.insertSupports(activityId, activityData.technologies, function() {
+		    		callback(null, successInfo);
+		    	})
 		    }
 
 		], function (err, successInfo) {
