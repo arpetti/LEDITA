@@ -115,8 +115,9 @@
                                     <span id="ldNamePatternErr" class="errorTipModal" ng-show="LdCreateForm.ldName.$error.pattern">Simbolo non permesso.</span>
                                     <span id="ldNameLengthErr" class="errorTipModal" ng-show="LdCreateForm.ldName.$error.maxlength">Massimo 50 caratteri.</span>
                                 </div>
-                                <label class="formLabel"><i class="icon-book"></i> Nome del progetto*:</label>
+                                <label class="formLabel" ><i class="icon-book"></i> Nome del progetto*: </label>
                                 <input class="formInput" type="text" name="ldName" ng-model="ldName" required ng-maxlength="50" ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
+                                <i class="icon-question-sign float-right" tooltip="Scegli un titolo da dare all'intero progetto. Questo nome è quello che apparirà nella pagina principale di LEDITA." tooltip-trigger="mouseenter" tooltip-placement="bottom"></i>
                                 <span class="clearfix"></span>
                             </div>
 
@@ -125,8 +126,9 @@
                                 <div class="errorBox">
                                     <span class="errorTipModal" ng-show="LdCreateForm.qcer.$dirty && LdCreateForm.qcer.$error.required">Necessario!</span>
                                 </div>
-                                <label class="formLabel formLabel"><i class="icon-tasks"></i> Livelli QCER*:</label>
+                                <label class="formLabel" ><i class="icon-tasks"></i> Livelli QCER*: </label>
                                 <div class="formCheck">
+                                    <i class="icon-question-sign" tooltip="Scegli uno o più livelli del Quadro Comune Europeo. I livelli vanno dall'A1, principiante, al C2, avanzato." tooltip-trigger="mouseenter" tooltip-placement="bottom"></i>
                                     <span ng-show="qcerError">{{ qcerError }}</span>
 				                	<span ng-repeat="qceropt in qceropts" class="qcerOptData" >
 				                    	<input type="checkbox" ng-model="selectedQcers[qceropt.id]" name="qcer"> {{ qceropt.name }}
@@ -143,11 +145,18 @@
                                     <span id="ldScopeLengthErr" class="errorTipModal" ng-show="LdCreateForm.ldScope.$error.maxlength">Massimo 50 caratteri.</span>
                                     <span class="clearfix"></span>
                                 </div>
-                                <label class="formLabel"><i class="icon-bell"></i> Ambito del progetto*:</label>
+
+                                <!-- INSERT IN LABEL TO ADD TOOLTIP FOR SCOPE
+                                tooltip="Scrivi qui la tipologia di progetto, indicando non la durata temporale in ore, minuti, ecc., ma l'ambito di applicazione. Per esempio: Unità Didattica, Lezione, Unità di Apprendimento, Modulo, Singola Attività o Semestre." tooltip-trigger="mouseenter" tooltip-placement="bottom"
+                                -->
+
+                                <label class="formLabel" ><i class="icon-bell"></i> Ambito di applicazione*: </label>
                                 <input class="formInput" type="text" name="ldScope" ng-model="ldScope"
-                                	   typeahead="suggestion for suggestion in getScopes($viewValue)"
-                                       placeholder="es. lezione..." required ng-maxlength="50"
-                                       ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
+                                	  typeahead="suggestion for suggestion in getScopes($viewValue)"
+                                      required ng-maxlength="50"
+                                       ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/" >
+                                <i class="icon-question-sign float-right"  tooltip="Scrivi qui la tipologia di progetto, indicando non la durata temporale in ore, minuti, ecc., ma l'ambito di applicazione. Per esempio: Unità Didattica, Lezione, Unità di Apprendimento, Modulo, Singola Attività o Semestre." tooltip-trigger="mouseenter" tooltip-placement="bottom"
+                                        ></i>
                             </div>
 
                             <!-- Topics -->
@@ -160,28 +169,31 @@
                                   <span id="topicLengthErr" class="errorTipModal" ng-show="LdCreateForm.ldTopic.$error.maxlength">Massimo 255 caratteri.</span>
                                   <span class="clearfix"></span>
                               </div>
-                              <label class="formLabel"><i class="icon-map-marker"></i> Argomenti*:</label>
-                              <input class="formInputMultiple" type="text" ng-model="ldTopic" name="ldTopic"
-                                     typeahead="suggestion for suggestion in getSubjects($viewValue)"
-                                     typeahead-on-select="addTopicFromSuggestion()"
-                                     ui-keypress="{13:'addTopicFromUserInput($event)'}"
-                                     placeholder="es. articoli determinativi..." required ng-maxlength="255"
-                                     ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
-                              <span class="editButton" ng-click="addTopicFromUserInput($event)"><i class="icon-plus icon-white"></i> </span>
+                                <!-- INSERT IN LABEL TO ADD TOOLTIP FOR topic
+                               tooltip="Scrivi uno o più argomenti del progetto, ad esempio: articoli, presentarsi, i saluti, ecc. Per inserirli, premi dopo ogni argomento 'Invio' o il bottone '+' a destra." tooltip-trigger="mouseenter" tooltip-placement="bottom"
+                               -->
+                                <label class="formLabel"  ><i class="icon-map-marker"></i> Argomenti*: </label>
+                               <input class="formInputMultiple" type="text" ng-model="ldTopic" name="ldTopic"
+                                      typeahead="suggestion for suggestion in getSubjects($viewValue)"
+                                      typeahead-on-select="addTopicFromSuggestion()"
+                                      ui-keypress="{13:'addTopicFromUserInput($event)'}"
+                                       required ng-maxlength="255"
+                                      ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
+                               <span class="editButton" ng-click="addTopicFromUserInput($event)"><i class="icon-plus icon-white" tooltip="Clicca qui o premi 'Invio' per aggiungere un argomento." tooltip-trigger="mouseenter" tooltip-placement="bottom"></i> </span>
 
-                                <span class="clearfix"></span>
-                                <span class="multiValue">Puoi inserire più di un valore</span>
+                                 <span class="clearfix"></span>
+                                 <span class="multiValue">Puoi inserire più di un valore <i class="icon-question-sign"  tooltip="Scrivi uno o più argomenti del progetto, ad esempio: articoli, presentarsi, i saluti, ecc. Per inserirli, premi dopo ogni argomento 'Invio' o il bottone '+' a destra." tooltip-trigger="mouseenter" tooltip-placement="top"></i> </span>
 
-                              <div id="topicTags" class="formTag">
-                                  <ul ng-repeat="topic in selectedTopics" class="zeroMargin subjects">
-                                      <li class="modalEditItem"><span class="modalEditItemLink">{{topic}}
-                                          <a ng-click="removeTopic(topic)"><i class="icon-remove-circle"></i> </a></span>
-                                      </li>
-                                  </ul>
-                              </div>
-                          </div>
+                               <div id="topicTags" class="formTag">
+                                   <ul ng-repeat="topic in selectedTopics" class="zeroMargin subjects">
+                                       <li class="modalEditItem"><span class="modalEditItemLink">{{topic}}
+                                           <a ng-click="removeTopic(topic)"><i class="icon-remove-circle"></i> </a></span>
+                                       </li>
+                                   </ul>
+                               </div>
+                           </div>
 
-                          <!-- Objectives -->
+                           <!-- Objectives -->
                             <div id="objectiveSection" class="formLevel">
                                 <div class="errorBox">
                                     <!-- Removed for usability test
@@ -191,42 +203,45 @@
                                     <span id="objectiveLengthErr" class="errorTipModal" ng-show="LdCreateForm.ldObjective.$error.maxlength">Massimo 255 caratteri.</span>
                                     <span class="clearfix"></span>
                                 </div>
-                            <label class="formLabel"><i class="icon-screenshot"></i> Obiettivi*:</label>
-                            <input class="formInputMultiple" type="text" name="ldObjective" ng-model="ldObjective"
-                                   typeahead="suggestion for suggestion in getObjectives($viewValue)"
-                                   typeahead-on-select="addObjectiveFromSuggestion()"
-                                   ui-keypress="{13:'addObjectiveFromUserInput($event)'}"
-                                   placeholder="es. articoli determinativi plurali..." required ng-maxlength="255"
-                                   ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
-                                <span class="editButton" ng-click="addObjectiveFromUserInput($event)"><i class="icon-plus icon-white"></i> </span>
-                                <span class="clearfix"></span>
-                                <span class="multiValue">Puoi inserire più di un valore</span>
+                                <!-- INSERT IN LABEL TO ADD TOOLTIP FOR SCOPE
+                              tooltip="Scrivi uno o più obiettivi didattici del progetto, ad esempio: gli articoli determinativi, salutare formalmente, presentare un amico, ecc. Per inserirli, premi dopo ogni obiettivo 'Invio' o il bottone '+' a destra." tooltip-trigger="mouseenter" tooltip-placement="bottom"
+                              -->
+                                <label class="formLabel"  ><i class="icon-screenshot"></i> Obiettivi*:</label>
+                              <input class="formInputMultiple" type="text" name="ldObjective" ng-model="ldObjective"
+                                     typeahead="suggestion for suggestion in getObjectives($viewValue)"
+                                     typeahead-on-select="addObjectiveFromSuggestion()"
+                                     ui-keypress="{13:'addObjectiveFromUserInput($event)'}"
+                                     required ng-maxlength="255"
+                                     ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
+                                  <span class="editButton" ng-click="addObjectiveFromUserInput($event)"><i class="icon-plus icon-white" tooltip="Clicca qui o premi 'Invio' per aggiungere un obiettivo." tooltip-trigger="mouseenter" tooltip-placement="bottom"></i> </span>
+                                  <span class="clearfix"></span>
+                                  <span class="multiValue">Puoi inserire più di un valore <i class="icon-question-sign"  tooltip="Scrivi uno o più obiettivi del progetto, ad esempio: articoli, presentarsi, i saluti, ecc. Per inserirli, premi dopo ogni argomento 'Invio' o il bottone '+' a destra." tooltip-trigger="mouseenter" tooltip-placement="top"></i> </span>
 
-                            <div id="objectiveTags" class="formTag">
-                                <ul ng-repeat="objective in selectedObjectives" class="zeroMargin objectives">
-                                    <li class="modalEditItem"><span class="modalEditItemLink">{{objective}} 
-                                    	<a ng-click="removeObjective(objective)"><i class="icon-remove-circle"></i> </a></span>
-                                    </li>
-                                </ul>
-                            </div>
-                    		</div>
+                              <div id="objectiveTags" class="formTag">
+                                  <ul ng-repeat="objective in selectedObjectives" class="zeroMargin objectives">
+                                      <li class="modalEditItem"><span class="modalEditItemLink">{{objective}}
+                                          <a ng-click="removeObjective(objective)"><i class="icon-remove-circle"></i> </a></span>
+                                      </li>
+                                  </ul>
+                              </div>
+                              </div>
 
-                    		<!-- Pre-requisites -->
+                              <!-- Pre-requisites -->
 		                    <div class="formLevel">
 		                        <div class="errorBox">
 		                            <span id="prereqPatternErr" class="errorTipModal" ng-show="LdCreateForm.ldRequisite.$error.pattern">Simbolo non permesso.</span>
 		                            <span id="prereqLengthErr" class="errorTipModal" ng-show="LdCreateForm.ldRequisite.$error.maxlength">Massimo 255 caratteri.</span>
 		                        </div>
-		                        <label class="formLabel"><i class="icon-backward"></i> Prerequisiti:</label>
+		                        <label class="formLabel"  tooltip="Scrivi uno o più prerequisiti necessari per svolgere le attività del progetto, ad esempio: maschile e femminile dei nomi, registro formale e informale, verbi indicativo presente, ecc. Per inserirli, premi dopo ogni prerequisito 'Invio' o il bottone '+' a destra." tooltip-trigger="mouseenter" tooltip-placement="bottom"><i class="icon-backward"></i> Prerequisiti:</label>
 		                        <input class="formInputMultiple" type="text" name="ldRequisite" ng-model="ldRequisite"
 		                        	   typeahead="suggestion for suggestion in getObjectives($viewValue)"
                                        typeahead-on-select="addPrerequisiteFromSuggestion()"
                                        ui-keypress="{13:'addPrerequisiteFromUserInput($event)'}"
-		                               placeholder="es. articoli determinativi singolari..."  ng-maxlength="255"
+		                               ng-maxlength="255"
                                        ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
-                                <span class="editButton" ng-click="addPrerequisiteFromUserInput($event)"><i class="icon-plus icon-white"></i> </span>
+                                <span class="editButton" ng-click="addPrerequisiteFromUserInput($event)"><i class="icon-plus icon-white" tooltip="Clicca qui o premi 'Invio' per aggiungere un prerequisito." tooltip-trigger="mouseenter" tooltip-placement="bottom"></i> </span>
                                 <span class="clearfix"></span>
-                                <span class="multiValue">Puoi inserire più di un valore</span>
+                                <span class="multiValue">Puoi inserire più di un valore <i class="icon-question-sign"  tooltip="Scrivi uno o più prerequisiti del progetto, ad esempio: articoli, presentarsi, i saluti, ecc. Per inserirli, premi dopo ogni argomento 'Invio' o il bottone '+' a destra." tooltip-trigger="mouseenter" tooltip-placement="top"></i> </span>
 
 		                        <div class="formTag">
 		                            <ul ng-repeat="prerequisite in selectedPrerequisites" class="zeroMargin prerequisites">
@@ -245,7 +260,7 @@
                                     <span id="ldStudentDescrPatternErr" class="errorTipModal" ng-show="LdCreateForm.ldStudentsDescr.$error.pattern">Simbolo non permesso.</span>
 		                            <span id="ldStudentDescrLengthErr" class="errorTipModal" ng-show="LdCreateForm.ldStudentsDescr.$error.maxlength">Massimo 500 caratteri.</span>
 		                        </div>
-		                        <label class="formLabel"><i class="icon-user"></i> Descrizione degli studenti*:</label>
+		                        <label class="formLabel"  ><i class="icon-user"></i> Descrizione degli studenti*: <i class="icon-question-sign" tooltip="Descrivi gli studenti e il contesto per al quale il progetto è destinato." tooltip-trigger="mouseenter" tooltip-placement="top"></i></label>
 		                        <textarea class="formInput" name="ldStudentsDescr" ng-model="ldStudentsDescr" required="" rows="4" ng-maxlength="500"  ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/"></textarea>
 		                        <span class="clearfix"></span>
 		                    </div>

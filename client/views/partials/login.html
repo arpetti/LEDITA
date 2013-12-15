@@ -1,84 +1,575 @@
 <div class="row">
-  <div class="span6 top-margin">
-    <h1 class="homeHeader">La progettazione didattica per linsegnamento dell'italiano L2/LS</h1>
+<div class="span6 top-margin">
+    <h1 class="homeHeader">La progettazione didattica per l'insegnamento dell'italiano L2/LS</h1>
+
     <p class="centered"><img src="../img/toolbox.png" class="toolbox"></p>
-     <p>Ledita &egrave; un'applicazione web gratuita sviluppata per gli insegnanti di italiano come lingua seconda / straniera. L'obiettivo di LEDITA è supportare la progettazione didattica e la riflessione sulla propria pratica professionale da parte degli insegnanti, per mezzo di un semplice, rapido e intuitivo processo di design.</p>
-      <p>Con Ledita, gli insegnanti possono creare progetti didattici e renderli visibili ai colleghi in tutto il mondo, per condividere esperienze educative e apprendere dal dialogo e dalla collaborazione con altri professionisti.</p>
-  </div>  <div class="span6">
 
-    <!-- The RegisterCtrl is specified here because this partial also has login form in top nav
-          and the route provides it with LoginCtrl -->
-    <div ng-controller="RegisterCtrl" class="login-border">
-      <form name="registrationForm" novalidate ng-submit="register()" class="form-horizontal">
-        <div>
+    <p>Ledita &egrave; un'applicazione web gratuita sviluppata per gli insegnanti di italiano come lingua seconda /
+        straniera. L'obiettivo di LEDITA è supportare la progettazione didattica e la riflessione sulla propria pratica
+        professionale da parte degli insegnanti, per mezzo di un semplice, rapido e intuitivo processo di design.</p>
 
-          <legend id="signUpHeader">Crea un nuovo Account</legend>
-            <div id="registrationErrors" ng-show="alertMsg" class="alert alert-error">
-                           {{ alertMsg }}
-                </div>
-          <div class="control-group">
+    <p>Con Ledita, gli insegnanti possono creare progetti didattici e renderli visibili ai colleghi in tutto il mondo,
+        per condividere esperienze educative e apprendere dal dialogo e dalla collaborazione con altri
+        professionisti.</p>
+</div>
+<div class="span6">
+
+<!-- The RegisterCtrl is specified here because this partial also has login form in top nav
+      and the route provides it with LoginCtrl -->
+<div ng-controller="RegisterCtrl" class="login-border">
+
+<!-- BEGIN TERMS CONTENT (Modal View) -->
+<div id="modalTerms" modal="terms" close="closeTerms()" options="opts">
+<div class="modal-header">
+    <h4>Termini di Servizio</h4>
+    <button id="activityModalClose" class="btn modalButton float-right" ng-click="closeTerms()">x</button>
+    <div class="clearfix"></div>
+</div>
+
+<div class="modal-body">
+<h4>1. Il rapporto contrattuale con LEDITA</h4>
+
+<p>1.1 L'uso del sito web LEDITA (il "Sito web") e di qualsiasi prodotto, canale, software, data feed e
+    servizio LEDITA che vengono forniti all'utente sul, o dal, o tramite il, Sito web da parte di LEDITA
+    (complessivamente denominati il "Servizio" nel presente documento), sono soggetti ai termini di un contratto
+    giuridicamente vincolante tra l'utente e LEDITA. "LEDITA" identifica un progetto di ricerca sviluppato da
+    Alessandro Arpetti. L'applicazione LEDITA è stata sviluppata e rilasciata da Alessandro Arpetti e Daniela Baron con
+    licenza MIT.</p>
+
+<p>1.2 Il contratto tra l'utente e LEDITA è costituito da (A) i termini e le condizioni indicati nel presente
+    documento; (B) la Privacy Policy di LEDITA (complessivamente definiti i "Termini").</p>
+
+<p>1.3 I Termini costituiscono un accordo giuridicamente vincolante tra LEDITA e l'utente in relazione all'uso
+    del Servizio da parte di quest'ultimo. E' importante prendere il tempo necessario per leggerli con
+    attenzione.</p>
+
+<p>1.4 I Termini si applicano a tutti gli utenti del Servizio, compresi gli utenti che, tra l’altro,
+    inseriscono Contenuti sul Servizio. Il termine “Contenuti” comprende contenuti testuali, software, script,
+    elementi grafici, foto, contenuti sonori, musicali, video, combinazioni audiovisive, funzionalità
+    interattive e altro materiale visualizzabile sul, o accessibile mediante il, o inseribile nel, Servizio da
+    parte dell’utente.</p>
+</p><h4>2. Accettazione dei Termini
+</h4>
+
+<p> 2.1 Prima di poter usare il Servizio, l'utente dovrà accettare i Termini. Il Servizio può essere utilizzato
+    solo previa accettazione dei Termini.
+</p>
+
+<p> 2.2 I Termini potranno essere accettati semplicemente utilizzando il Servizio. L'utente riconosce e accetta
+    che LEDITA considererà l'uso del Servizio da parte sua come accettazione dei Termini da quel momento in poi.
+</p>
+
+<p> 2.3 Non potranno utilizzare il Servizio ed accettare i Termini gli utenti: (a) che non abbiano l'età
+    prevista dalla legge per stipulare un contratto con LEDITA, o (b) ai quali sia vietato o in altro modo
+    legalmente inibito utilizzare o ricevere il Servizio ai sensi della legge italiana nonché delle leggi del
+    paese in cui sono residenti o da cui accedono o utilizzano il Servizio.
+</p>
+
+<p> 2.4 Consigliamo di stampare o salvare una copia dei Termini per il proprio archivio.
+</p>
+
+<h4> 3. Modifiche ai Termini
+</h4>
+
+<p> 3.1 LEDITA potrà effettuare periodicamente modifiche ai Termini, per esempio conseguentemente a modifiche a
+    livello legislativo o normativo o delle funzioni offerte attraverso il Servizio. Di conseguenza, è
+    consigliabile controllare periodicamente i Termini per verificare eventuali modifiche. In caso di mancata
+    accettazione dei Termini Modificati, è necessario interrompere l'uso del Servizio. Nel caso in cui si
+    continui ad usare il Servizio successivamente alla pubblicazione dei Termini Modificati, tale uso costituirà
+    accettazione implicita dei Termini Modificati.
+</p>
+
+<h4> 4. Account di LEDITA
+</h4>
+
+<p> 4.1 Per poter accedere ad alcuni particolari applicazioni del Sito web o altri elementi del Servizio, è
+    necessario creare un account di LEDITA. Al momento della creazione dell'account, l'utente dovrà fornire
+    informazioni precise e complete. E' importante mantenere la password dell'account di LEDITA segreta e
+    riservata.
+</p>
+
+<p> 4.2 L'utente dovrà comunicare immediatamente a LEDITA qualsiasi violazione della sicurezza o uso non
+    autorizzato del proprio account di LEDITA di cui venisse a conoscenza.
+</p>
+
+<p> 4.3 L'utente accetta di essere l'unico responsabile (nei confronti di LEDITA, e nei confronti di terzi) per
+    ogni attività che avvenga tramite il proprio account LEDITA.
+</p>
+
+<h4> 5. Limitazioni generali sull’utilizzo
+</h4>
+
+<p> 5.1 LEDITA con il presente accordo autorizza l’utente ad accedere e utilizzare il Servizio, subordinatamente
+    alle seguenti condizioni, e l'utente accetta che la sua mancata adesione ad una qualsiasi di queste
+    condizioni costituirà una violazione dei presenti Termini da parte sua:
+
+    non è consentito distribuire alcuna parte o parti del Sito web o del Servizio, compresi a titolo
+    esemplificativo, ma non esaustivo, i Contenuti, con alcun mezzo senza la previa autorizzazione scritta di
+    LEDITA, salvo il caso in cui LEDITA renda disponibili i mezzi per tale distribuzione mediante funzioni
+    offerte dal Servizio;
+    non è consentito apportare modifiche o alterazioni ad alcuna parte del Sito web o ad alcun Servizio;
+    non è consentito accedere ai Contenuti tramite alcuna tecnologia o mezzo diverso dalle pagine del Sito web
+    stesso o altri mezzi che LEDITA eventualmente indichi espressamente per tale scopo;
+    non è consentito eludere (o tentare di eludere), disabilitare, o in altro modo interferire con alcun
+    elemento legato alla sicurezza del Servizio od elementi che (i) impediscano o limitino l'uso o la copia di
+    Contenuti di LEDITA o (ii) diano applicazione a limitazioni relative all'uso del Servizio od al contenuto
+    accessibile tramite il Servizio;
+    non è consentito usare il Servizio per alcuno dei seguenti usi commerciali, senza la previa autorizzazione
+    scritta di LEDITA:
+    la vendita dell'accesso al Servizio;
+    la vendita di pubblicità, sponsorizzazioni o promozioni posizionati su, o all'interno del, Servizio, o
+    Contenuti;
+    la vendita di pubblicità, sponsorizzazioni o promozioni su qualunque pagina di un blog abilitato agli
+    annunci pubblicitari o di un sito web contenente i Contenuti diffusi attraverso il Servizio, fatto salvo il
+    caso in cui materiali diversi, ottenuti non a mezzo di LEDITA, appaiano nella stessa pagina e abbiano un
+    valore tale da giustificare tali vendite.
+    l’utilizzo commerciale non autorizzato non include (i) il caricamento di un CONTENUTO originale su LEDITA,
+    (ii) il mantenimento di un account originale del Sito web per promuovere un'impresa artistica o commerciale,
+    (iii) l'esibizione dei contenuti di LEDITA su un blog od un sito web abilitati agli annunci pubblicitari,
+    subordinatamente a quelle restrizioni per la pubblicità previste al precedente articolo 5.1 (E) (iii) e (iv)
+    qualsiasi uso che sia espressamente autorizzato da LEDITA per iscritto;
+    non è consentito usare o lanciare alcun sistema computerizzato (inclusi, senza limitazioni, robot, spider o
+    lettori offline) che acceda al Servizio in modo tale da inviare più messaggi di richiesta ai server di
+    LEDITA in un dato periodo di tempo rispetto a quanto un essere umano possa ragionevolmente effettuare nello
+    stesso periodo di tempo utilizzando un web browser standard (ovvero, non modificato) pubblicamente
+    disponibile;
+    non è consentito raccogliere o riunire alcun dato personale degli utenti del Sito web o di alcun Servizio (e
+    l'utente riconosce che sarà considerato dato personale anche l'account name di LEDITA);
+    non è consentito usare il Sito web od il Servizio (compresi i commenti e le configurazioni delle e-mail sul
+    Sito web) per sollecitare affari di tipo commerciale od in connessione ad un’attività commerciale;
+    non è consentito sollecitare, per finalità commerciali, utenti del Sito web con riferimento ai loro
+    Contenuti;
+    non è consentito accedere ai Contenuti per qualsiasi ragione diversa dall'uso esclusivamente personale,
+    didattico e non commerciale come inteso tramite, e permesso dalla, normale funzionalità del Servizio;
+    non è consentito copiare, riprodurre, distribuire, trasmettere, diffondere, visualizzare, vendere, concedere
+    in licenza o comunque sfruttare i Contenuti per alcuna altra finalità senza il previo consenso scritto di
+    LEDITA o dei rispettivi concedenti di licenza dei Contenuti.
+</p>
+
+<p> 5.2 L'utente accetta di conformarsi a tutte le altre disposizioni dei Termini di LEDITA per tutta la durata
+    dell'utilizzo del Servizio.
+</p>
+
+<p> 5.3 LEDITA concede agli operatori di motori di ricerca pubblici il permesso di usare gli spider per copiare
+    materiale dal Sito web al solo fine di creare indici di ricerca dei materiali pubblicamente disponibili, ma
+    non per creare copie cache o archivi di tali materiali. LEDITA si riserva il diritto di revocare queste
+    eccezioni sia in generale che in casi specifici.
+</p>
+
+<p> 5.4 LEDITA è oggetto di innovazione continua in modo da fornire la miglior esperienza possibile ai suoi
+    utenti. L'utente riconosce ed accetta che la forma e la natura del Servizio che LEDITA fornisce potrà
+    cambiare di volta in volta senza preventiva comunicazione.
+</p>
+
+<p> 5.5 Come parte di questa continua innovazione, l'utente riconosce ed accetta che LEDITA possa interrompere
+    (in maniera temporanea o permanente) la fornitura del Servizio (o di qualsiasi elemento all'interno del
+    Servizio) nei suoi confronti o nei confronti degli utenti in generale ad esclusiva discrezione di LEDITA,
+    senza che ciò venga previamente comunicato. E' possibile smettere di usare il Servizio in qualsiasi momento.
+    L'utente non dovrà informare in via specifica LEDITA in caso smetta di utilizzare il Servizio.
+</p>
+
+<p> 5.6 L'utente accetta di essere esclusivamente responsabile per (e che LEDITA non ha responsabilità nei suoi
+    confronti o nei confronti di terzi per) qualsiasi violazione delle sue obbligazioni ai sensi dei Termini e
+    per le conseguenze (compresa qualsiasi perdita o danno che LEDITA possa soffrire) di tale violazione.
+</p>
+
+<h4> 6. Policy in materia di copyright
+</h4>
+
+<p> 6.1 LEDITA adotta una chiara policy in materia di copyright in relazione a Contenuti che siano
+    presumibilmente in violazione del copyright di un terzo. I dettagli di tale policy possono essere consultati
+    al seguente indirizzo http://it.LEDITA.com/t/copyright_notice.
+</p>
+
+<p> 6.2 Come parte della policy sul copyright di LEDITA, LEDITA potrà interrompere l'accesso di un utente al
+    Servizio qualora tale utente sia stato individuato come contravventore abituale. Un contravventore abituale
+    è un utente cui sia stato comunicato di avere commesso una violazione per più di due volte.
+</p>
+
+<h4> 7. Contenuti
+</h4>
+
+<p> 7.1 Ogni titolare di un account LEDITA potrà inserire Contenuti. L'utente comprende che, a prescindere dal
+    fatto che i suoi Contenuti siano pubblicati o meno, LEDITA non garantisce alcuna riservatezza con
+    riferimento ai Contenuti.
+</p>
+
+<p> 7.2 L'utente detiene tutti i diritti di proprietà sui propri Contenuti, ma deve concedere diritti limitati
+    di licenza a LEDITA e agli altri utenti del Servizio. Questi sono descritti all'articolo 8 dei presenti
+    Termini (Diritti concessi in licenza dall'utente).
+</p>
+
+<p> 7.3 L'utente riconosce ed accetta di essere l'unico responsabile dei propri Contenuti e delle conseguenze
+    del loro caricamento online o pubblicazione. LEDITA non avalla Contenuti o opinioni, raccomandazioni o
+    consigli in essi contenuti, e declina espressamente ogni e qualsiasi responsabilità in relazione ai
+    Contenuti.
+</p>
+
+<p> 7.4 L'utente riconosce e garantisce di avere (e di continuare ad avere durante l’utilizzo del Servizio)
+    tutte le necessarie licenze, diritti, consensi, e permessi richiesti per consentire a LEDITA di utilizzare i
+    propri Contenuti per gli scopi della fornitura del Servizio da parte di LEDITA, e per usare altrimenti i
+    Contenuti nel modo previsto dal Servizio e da questi Termini.
+
+</p>
+
+<p> 7.5 Non è consentito pubblicare o caricare Contenuti che contengano materiali che sia illegale possedere in
+    Italia nonché nel paese in cui l’utente è residente, o che sarebbe illegale per LEDITA usare o possedere in
+    relazione alla fornitura del Servizio.
+</p>
+
+<p> 7.6 I Contenuti presentati nel Servizio non possono contenere alcun materiale coperto da copyright di terzi
+    o soggetto ad altri diritti proprietari di terzi (compresi diritti di privacy o diritti di pubblicazione), a
+    meno che l'utente non abbia una licenza formale od un permesso da parte del titolare legittimo, ovvero sia
+    in altro modo legalmente autorizzato, a pubblicare il materiale in questione ed a concedere a LEDITA la
+    licenza di cui al successivo articolo 8.1.
+</p>
+
+<p> 7.7 Nel momento in cui dovesse venire a conoscenza di qualsiasi potenziale violazione dei presenti Termini,
+    LEDITA si riserva il diritto (ma non ha l'obbligo) di decidere se i Contenuti si conformino con i requisiti
+    previsti nei presenti Termini e potrà rimuovere tali Contenuti e/o inibire l'accesso di un utente al
+    caricamento dei Contenuti che siano in violazione dei presenti Termini in qualsiasi momento, senza preavviso
+    ed a sua esclusiva discrezione.
+</p>
+
+<p> 7.8 L’utente inoltre riconosce ed accetta che durante l'utilizzo del Servizio potrà essere esposto a
+    Contenuti che siano di fatto imprecisi, offensivi, indecenti, o in altro modo per esso riprovevoli. L'utente
+    accetta di rinunciare e con il presente accordo rinuncia a qualsiasi diritto o rimedio legale o secondo
+    equità che ha o potrebbe avere nei confronti di LEDITA con riferimento ad uno qualsiasi di tali Contenuti.
+</p>
+
+<h4> 8. Diritti concessi in licenza dall'utente
+</h4>
+
+<p> 8.1 Quando l'utente carica o pubblica Contenuti su LEDITA, contestualmente concede:
+
+    a LEDITA, una licenza per il mondo intero, non esclusiva, gratuita, trasferibile (con diritto a concedere
+    sub-licenze) ad usare, riprodurre, distribuire, preparare opere derivate, visualizzare ed eseguire tali
+    Contenuti in connessione alla fornitura del Servizio ed in altro modo in connessione con la fornitura del
+    Servizio e dell'attività commerciale di LEDITA, comprese, a titolo meramente esemplificativo, la promozione
+    e la ridistribuzione di tutto o parte del Servizio (e delle relative opere derivate) [in qualsiasi formato e
+    tramite qualsiasi canale di comunicazione];
+    a ciascun utente del Servizio, una licenza per il mondo intero, non esclusiva, gratuita, ad accedere ai suoi
+    Contenuti tramite il Servizio e ad usare, riprodurre, distribuire, preparare opere derivate, visualizzare ed
+    eseguire tali Contenuti nella misura permessa dalla funzionalità del Servizio ed ai sensi dei presenti
+    Termini.
+</p>
+
+<p> 8.2 Le licenze di cui sopra concesse da parte dell'utente relative ai Contenuti dell'Utente cesseranno nel
+    momento in cui l'utente rimuova o elimini i suoi Contenuti dell'Utente dal Sito web. Le licenze di cui sopra
+    relative ai Commenti degli Utenti sono concesse dall'utente per un periodo di tempo indefinito, ma non
+    pregiudicano in altro modo i suoi diritti di proprietà, che rimangono di sua titolarità come previsto al
+    precedente articolo 7.2.
+</p>
+
+<h4> 9. Contenuto di LEDITA sul Sito web
+</h4>
+
+<p> 9.1 Con l'eccezione dei Contenuti sottoposti nel Servizio dall’utente, tutti gli altri Contenuti presenti
+    sul Servizio sono, alternativamente, di proprietà di LEDITA o concessi in licenza a LEDITA, e sono oggetto
+    di copyright, diritti di marchio e degli altri diritti di proprietà intellettuale di LEDITA o dei
+    licenzianti di LEDITA. Qualsiasi marchio o marchio di servizio di terzi presente sui Contenuti, non caricato
+    né pubblicato dall’utente, resta un marchio o marchio di servizio dei rispettivi titolari. Tali contenuti
+    non potranno essere scaricati, copiati, riprodotti, distribuiti, trasmessi, diffusi, visualizzati, venduti,
+    concessi in licenza o in altro modo sfruttati per qualsiasi altra finalità senza il previo consenso scritto
+    di LEDITA o, ove applicabile, dei licenzianti di LEDITA. LEDITA ed i suoi licenzianti si riservano tutti i
+    diritti non espressamente concessi sui, e rispetto ai, loro Contenuti.
+</p>
+
+<h4> 10. Collegamenti ipertestuali da LEDITA
+</h4>
+
+<p> 10.1 Il Servizio può includere collegamenti ipertestuali ad altri siti web che non sono posseduti o
+    controllati da LEDITA. LEDITA non ha il controllo su, e non si assume alcuna responsabilità per, il
+    contenuto, le privacy policy o le condizioni di alcun sito web di terzi.
+</p>
+
+<p> 10.2 L'utente riconosce ed accetta che LEDITA non è responsabile per la disponibilità di nessun sito o
+    risorsa esterna, e non avalla alcuna pubblicità, prodotto o altri materiali esistenti o disponibili su tali
+    siti web o risorse.
+</p>
+
+<p> 10.3 L'utente riconosce ed accetta che LEDITA non è responsabile per nessuna perdita o danno che lo stesso
+    potrebbe subire come conseguenza della accessibilità di tali siti o risorse esterne, od in relazione
+    all'affidamento fatto sulla completezza, accuratezza od esistenza di una qualsiasi pubblicità, prodotto o
+    altro materiale presente su o reso disponibile da tali siti web o risorse.
+</p>
+
+<p> 10.4 LEDITA invita gli utenti ad essere consapevoli del momento in cui lasciano il Servizio ed a leggere i
+    termini e le condizioni e le privacy policy di ogni altro sito web che visitano.
+</p>
+
+<h4> 11. Cessazione del rapporto con LEDITA
+</h4>
+
+<p> 11.1 I Termini continueranno ad essere in vigore fino alla loro cessazione da parte dell'utente o di LEDITA
+    come di seguito stabilito.
+</p>
+
+<p> 11.2 Qualora l'utente intenda recedere dal suo contratto con LEDITA, lo potrà fare nei seguenti modi: (a)
+    comunicandolo a LEDITA in qualsiasi momento e (b) chiudendo il suo account di LEDITA. Tale comunicazione
+    dovrà essere inviata, per iscritto, all'indirizzo email di LEDITA indicato all'inizio dei presenti Termini.
+</p>
+
+<p> 11.3 LEDITA potrà in qualsiasi momento risolvere il presente contratto con l'utente, qualora:
+
+    l'utente abbia violato una qualunque delle disposizioni dei Termini (o abbia agito in un modo che
+    chiaramente indichi che non ha intenzione di, o non è in grado di, conformarsi alle disposizioni dei
+    Termini); o
+    LEDITA sia obbligata a farlo perché così richiesto dalla legge (ad esempio, laddove la fornitura del
+    Servizio nei confronti dell'utente sia, o divenga, illegittima).
+</p>
+
+<p> 11.4 LEDITA potrà in qualsiasi momento sciogliere il presente contratto con l'utente, qualora:
+
+    LEDITA non sia più intenzionata a fornire il Servizio agli utenti in Italia nonché nel paese in cui l'utente
+    è residente o dal quale usa il Servizio; o
+    la fornitura del Servizio nei confronti dell'utente da parte di LEDITA sia, secondo LEDITA, non più
+    vantaggiosa dal punto di vista commerciale
+    e in entrambi i casi A e B di questo articolo 11.4 LEDITA dovrà, ove possibile, inviare comunicazione di
+    tale scioglimento con ragionevole preavviso.
+</p>
+
+<p> 11.5 Nel momento in cui i presenti Termini vengano a cessare, tutti i diritti legali, gli obblighi e le
+    responsabilità di cui l'utente e LEDITA abbiano beneficiato, o ai quali siano stati soggetti (o che siano
+    maturati durante il periodo di validità dei Termini) o per i quali è espressamente prevista la prosecuzione
+    di durata indefinita, non saranno inficiati da tale cessazione, e le disposizioni dell'articolo 14.6
+    continueranno ad applicarsi a tali diritti, obbligazioni e responsabilità indefinitamente.
+</p>
+
+<h4> 12. Esclusione di Garanzie
+</h4>
+
+<p> 12.1 Nulla di quanto previsto dai Termini potrà inficiare alcun diritto previsto dalla legge, a cui l’utente
+    abbia diritto in qualità di consumatore e che non possa essere modificato o rinunciato convenzionalmente.
+</p>
+
+<p> 12.2 Il Servizio è fornito "così come è" e LEDITA non rilascia alcuna garanzia o dichiarazione con
+    riferimento ad esso.
+</p>
+
+<p> 12.3 In particolare LEDITA non dichiara o garantisce che:
+
+    l'uso del Servizio soddisfi le esigenze dell'utente,
+    l'uso del Servizio sia ininterrotto, tempestivo, sicuro o privo di errori,
+    qualsiasi informazione ottenuta dall'utente come risultato del proprio uso del Servizio sia precisa o
+    affidabile, e
+    i difetti nell'operatività o funzionalità di qualsiasi software fornito all'utente come parte del Servizio
+    saranno riparati.
+</p>
+
+<p> 12.4 Nessuna condizione, garanzia o altro termine (compreso qualsiasi termine implicito di qualità
+    soddisfacente, idoneità ad uno scopo o conformità con la descrizione) si applica al Servizio salvo che ciò
+    sia espressamente stabilito nei Termini.
+</p>
+
+<h4> 13. Limitazione di Responsabilità
+</h4>
+
+<p> 13.1 Nessuna previsione nei presenti Termini potrà escludere o limitare la responsabilità di LEDITA in caso
+    di dolo o colpa grave da parte di LEDITA e per perdite che non possono essere legittimamente escluse o
+    limitate ai sensi della legge applicabile.
+
+</p>
+
+<p> 13.2 Subordinatamente alla previsione generale contenuta nel precedente articolo 13.1, LEDITA non sarà
+    responsabile nei confronti dell'utente per:
+
+    le perdite che l'utente possa subire. Questo include qualsiasi perdita di profitto (avvenuta sia
+    direttamente che indirettamente), qualsiasi perdita di avviamento o di reputazione commerciale, o qualsiasi
+    perdita di dati subita dall'utente;
+    le perdite od i danni che l'utente potrebbe subire:
+    per aver fatto affidamento sulla completezza, correttezza o esistenza di una qualsiasi pubblicità, o come
+    risultato di una qualsiasi relazione o transazione tra l'utente ed un qualsiasi sponsor o advertiser la cui
+    pubblicità appaia sul Servizio;
+    a seguito delle modifiche che LEDITA possa apportare al Servizio, o per una qualsiasi cessazione temporanea
+    o permanente nella fornitura del Servizio (o qualsiasi elemento all'interno dei Servizi);
+    per la cancellazione di, corruzione di, o mancata memorizzazione, di Contenuti e altre comunicazioni di dati
+    mantenuti o trasmessi da, o tramite, l'uso del Servizio;
+    per la mancata fornitura da parte dell'utente a LEDITA di informazioni accurate sull'account;
+    per l'inadempienza dell'utente nel mantenere la password od i dettagli dell'account di LEDITA segreti e
+    riservati.
+</p>
+
+<p> 13.3 Le limitazioni alla responsabilità di LEDITA nei confronti dell'utente di cui al precedente articolo
+</p>
+
+<p> 13.2 si applicheranno sia nel caso in cui LEDITA fosse a conoscenza o avrebbe dovuto essere a conoscenza
+    della possibilità dell'insorgere di una tale perdita sia nel caso contrario.
+</p>
+
+<h4> 14. Varie
+</h4>
+
+<p> 14.1 I Termini costituiscono l'intero contratto giuridicamente vincolante tra l'utente e LEDITA e
+    disciplinano l'uso del Servizio e sostituiscono completamente qualsiasi precedente accordo tra l'utente e
+    LEDITA in relazione al Servizio.
+</p>
+
+<p> 14.2 L’utente accetta che LEDITA potrà fornire all'utente comunicazioni, comprese quelle relative alle
+    modifiche dei Termini, tramite e-mail, posta ordinaria, o comunicazioni pubblicate sul Servizio.
+</p>
+
+<p> 14.3 L’utente accetta che qualora LEDITA non eserciti o metta in esecuzione uno qualsiasi dei diritti o
+    rimedi legali previsti dai Termini (o di cui LEDITA benefici ai sensi della legge italiana) ciò non potrà
+    essere considerato come una rinuncia formale dei diritti di LEDITA e tali diritti o rimedi saranno ancora
+    disponibili per LEDITA.
+</p>
+
+<p> 14.4 Qualora un Tribunale italiano, avente la giurisdizione per decidere su tale questione, decida che una
+    qualunque delle previsioni incluse nei presenti Termini sia invalida, tale disposizione verrà eliminata dai
+    Termini senza invalidare le restanti previsioni dei Termini, che continueranno ad essere validi ed
+    applicabili.
+</p>
+
+<p> 14.5 L’utente riconosce ed accetta che ciascun società del gruppo al quale appartiene LEDITA sarà
+    considerata terza beneficiaria rispetto ai Termini e tale società avrà il diritto di dare diretta
+    applicazione, e fare affidamento su, qualsiasi disposizione dei Termini che conferisca loro un beneficio (o
+    diritti a loro favore). Al di fuori di tale disposizione, nessun'altra persona o società sarà considerata un
+    terzo beneficiario dei Termini.
+</p>
+
+<p> 14.6 I presenti Termini e la relazione dell’utente con LEDITA sono soggetti alla legge italiana. Le parti
+    concordano che qualsiasi questione legale derivante dai Termini sarà devoluta alla competenza esclusiva dei
+    Tribunali italiani. Fatto salvo quanto sopra, LEDITA sarà comunque autorizzata a richiedere provvedimenti
+    monitori o cautelari (od equivalenti provvedimenti d’urgenza) in qualsiasi giurisdizione.
+</p>
+
+<h4> [ACCETTO]
+</h4>
+
+<p> Ai sensi degli articoli 1341 e 1342 del Codice Civile, l'utente accetta le seguenti disposizioni dei
+    Termini: 3 (Modifiche ai Termini); 4 (Account di LEDITA); 5 (Limitazioni generali all'uso); 6 (Policy in
+    materia di copyright); 7 (Contenuti); 8 (Diritti concessi in licenza dall'utente); 10 (Collegamenti
+    ipertestuali da LEDITA); 11 (Cessazione del rapporto con LEDITA); 12 (Esclusione di Garanzie); 13
+    (Limitazione di Responsabilità) e 14 (Varie).
+</p>
+
+<h4> [ACCETTO]
+</h4>
+
+<p> Data: 12 dicembre 2013
+</p>
+</div>
+<div class="modal-footer">
+    <a id="closeTerms" class="btn btnFormCancel" ng-click="closeTerms()">Chiudi</a>
+</div>
+</div>
+<!-- END TERMS CONTENT (Modal)-->
+
+<!-- BEGIN PRIVACY POLICY CONTENT (Modal View) -->
+<div id="modalPrivacy" modal="privacy" close="closePrivacy()" options="opts">
+    <div class="modal-header">
+        <h4>Notifiche di violazione del copyright</h4>
+        <button id="activityModalClose" class="btn modalButton float-right" ng-click="closePrivacy()">x</button>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="modal-body">
+        <p>Se ritieni che la tua opera protetta da copyright sia stata pubblicata su LEDITA senza autorizzazione, puoi
+            inviare una notifica di violazione del copyright. Tali richieste devono essere presentate solo dal titolare
+            del copyright o da un agente autorizzato ad agire per conto del titolare.</p>
+
+        <p>Se scegli di richiedere la rimozione di contenuti inviando una notifica di violazione, ricorda che stai
+            avviando un procedimento legale. Non presentare false rivendicazioni. L'uso improprio di questa procedura
+            potrebbe comportare la sospensione del tuo account o altre conseguenze legali.</p>
+
+        <p>Accettiamo notifiche di violazione del copyright in formato libero, inviate tramite email, fax e posta
+            ordinaria.</p>
+    </div>
+    <div class="modal-footer">
+        <a id="closePrivacy" class="btn btnFormCancel" ng-click="closePrivacy()">Chiudi</a>
+    </div>
+</div>
+<!-- END TERMS CONTENT (Modal)-->
+
+<form name="registrationForm" novalidate ng-submit="register()" class="form-horizontal">
+    <div>
+
+        <legend id="signUpHeader">Crea un nuovo Account</legend>
+        <div id="registrationErrors" ng-show="alertMsg" class="alert alert-error">
+            {{ alertMsg }}
+        </div>
+        <div class="control-group">
             <div class="controls">
-                <span class="errorTip" ng-show="registrationForm.firstname.$dirty && registrationForm.firstname.$error.required">Necessario!</span>
+                <span class="errorTip"
+                      ng-show="registrationForm.firstname.$dirty && registrationForm.firstname.$error.required">Necessario!</span>
                 <span id="firstNameLetters" class="errorTip" ng-show="registrationForm.firstname.$error.pattern">Il tuo nome può contenere solo lettere.</span>
                 <span class="errorTip" ng-show="registrationForm.firstname.$error.minlength">Minimo 2 caratteri.</span>
-                <span class="errorTip" ng-show="registrationForm.firstname.$error.maxlength">Massimo 20 caratteri.</span><br>
-                <input ng-model="firstname" name="firstname" type="text" placeholder="Nome" class="input-xlarge" required ng-minlength="2" ng-maxlength="20" ng-pattern="/^[a-zA-Z]+$/"  />
-                </div>
-          </div>
+                <span class="errorTip"
+                      ng-show="registrationForm.firstname.$error.maxlength">Massimo 20 caratteri.</span><br>
+                <input ng-model="firstname" name="firstname" type="text" placeholder="Nome" class="input-xlarge"
+                       required ng-minlength="2" ng-maxlength="20" ng-pattern="/^[a-zA-Z]+$/"/>
+            </div>
+        </div>
 
-          <div class="control-group">
+        <div class="control-group">
             <div class="controls">
-                <span class="errorTip" ng-show="registrationForm.surname.$dirty && registrationForm.surname.$error.required">Necessario!</span>
+                <span class="errorTip"
+                      ng-show="registrationForm.surname.$dirty && registrationForm.surname.$error.required">Necessario!</span>
                 <span id="surnameLetters" class="errorTip" ng-show="registrationForm.surname.$error.pattern">Il tuo cognome può contenere solo lettere.</span>
                 <span class="errorTip" ng-show="registrationForm.surname.$error.minlength">Minimo 2 caratteri.</span>
-                <span class="errorTip" ng-show="registrationForm.surname.$error.maxlength">Massimo 20 caratteri.</span><br>
-                <input ng-model="surname" name="surname" type="text" placeholder="Cognome" class="input-xlarge" required="" ng-minlength="2" ng-maxlength="20" ng-pattern="/^[a-zA-Z]+$/" />
+                <span class="errorTip"
+                      ng-show="registrationForm.surname.$error.maxlength">Massimo 20 caratteri.</span><br>
+                <input ng-model="surname" name="surname" type="text" placeholder="Cognome" class="input-xlarge"
+                       required="" ng-minlength="2" ng-maxlength="20" ng-pattern="/^[a-zA-Z]+$/"/>
             </div>
-          </div>
+        </div>
 
-          <div class="control-group">
+        <div class="control-group">
             <div class="controls">
-                <span class="errorTip" ng-show="registrationForm.email.$dirty && registrationForm.email.$error.required">Necessario!</span>
+                <span class="errorTip"
+                      ng-show="registrationForm.email.$dirty && registrationForm.email.$error.required">Necessario!</span>
                 <span id="emailFormat" class="errorTip" ng-show="registrationForm.email.$error.email">Per favore, inserisci un email valido.</span><br>
-                <input ng-model="username" name="email" type="email" placeholder="E-mail" class="input-xlarge" required="" />
+                <input ng-model="username" name="email" type="email" placeholder="E-mail" class="input-xlarge"
+                       required=""/>
             </div>
-          </div>
+        </div>
 
-          <div class="control-group">
+        <div class="control-group">
             <div class="controls">
-                <span class="errorTip" ng-show="registrationForm.password.$dirty && registrationForm.password.$error.required">Necessario!</span>
+                <span class="errorTip"
+                      ng-show="registrationForm.password.$dirty && registrationForm.password.$error.required">Necessario!</span>
                 <span id="passwordMinLength" class="errorTip" ng-show="registrationForm.password.$error.minlength">Minimo 8 caratteri.</span>
                 <span class="errorTip" ng-show="registrationForm.password.$error.maxlength">Massimo 40 caratteri.</span><br>
-                <input ng-model="password" name="password" type="password" placeholder="Password" class="input-xlarge" required="" ng-minlength="8" ng-maxlength="40" />
+                <input ng-model="password" name="password" type="password" placeholder="Password" class="input-xlarge"
+                       required="" ng-minlength="8" ng-maxlength="40"/>
             </div>
-          </div>
+        </div>
 
-          <div class="control-group">
+        <div class="control-group">
             <div class="controls">
-                <span id="passwordNotMatch" class="errorTip" ng-show="registrationForm.retypepassword.$error.passwordVerify">Le Passwords non coincidono.</span><br>
-                <input ng-model="retypepassword" name="retypepassword" type="password" placeholder="Ridigita Password" class="input-xlarge" required="" data-password-verify="password" />
+                <span id="passwordNotMatch" class="errorTip"
+                      ng-show="registrationForm.retypepassword.$error.passwordVerify">Le Passwords non coincidono.</span><br>
+                <input ng-model="retypepassword" name="retypepassword" type="password" placeholder="Ridigita Password"
+                       class="input-xlarge" required="" data-password-verify="password"/>
             </div>
-          </div>
+        </div>
 
-          <div class="control-group">
+        <div class="control-group">
             <div class="controls">
-                <span class="errorTip" ng-show="registrationForm.terms.$dirty && registrationForm.terms.$error.required">Necessario!</span><br>
+                <span class="errorTip"
+                      ng-show="registrationForm.terms.$dirty && registrationForm.terms.$error.required">Necessario!</span><br>
                 <label class="checkbox, whiteText">
-                <input type="checkbox" ng-model="terms"  name="terms"  required="" class="checkbox"  />
-                Accetto <a href="#">i Termini d'uso</a> e <a href="#">la Politica sulla Privacy</a>
-              </label>
+                    <input type="checkbox" ng-model="terms" name="terms" required="" class="checkbox"/>
+                    Accetto <a href="#" ng-click="openTerms()">i Termini d'uso</a> e <a href="#"
+                                                                                        ng-click="openPrivacy()">la
+                    Politica sulla
+                    Privacy</a>
+                </label>
 
-          </div>
+            </div>
 
         </div>
 
         <div class="form-actions">
-          <button id="signup" type="submit" ng-disabled="registrationForm.$invalid" class="btn signup btn-large btn-signup">Registrati</button>
+            <button id="signup" type="submit" ng-disabled="registrationForm.$invalid"
+                    class="btn signup btn-large btn-signup">Registrati
+            </button>
         </div>
 
-      </div>
-    </form>
-  </div>
+    </div>
+</form>
+</div>
 
 </div>
 </div>

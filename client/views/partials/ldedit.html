@@ -27,8 +27,11 @@
         </div>
 
         <!-- Topics -->
-        <div id="editTopics" class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-map-marker"></i>
-            Argomenti:</h5>
+        <div id="editTopics" class="clear marginTopSidebar">
+            <!-- INSERT INTO H5 BELOW TO ADD TOPICS TOOLTIP
+            tooltip="Scrivi uno o più argomenti del progetto, ad esempio: articoli, presentarsi, i saluti, ecc. Per inserirli, premi dopo ogni argomento 'Invio' o il bottone '+' a destra." tooltip-trigger="mouseenter" tooltip-placement="top"
+            -->
+            <h5 class="zeroMargin" ><i class="icon-map-marker"></i> Argomenti:</h5>
 
             <form novalidate class="sidebarForm" name="LdTopicForm">
                 <div class="errorBoxSidebar">
@@ -40,17 +43,17 @@
                        typeahead="suggestion for suggestion in getSubjects($viewValue)"
                        typeahead-on-select="addTopic()"
                        ui-keypress="{13:'addTopic()'}"
-                       placeholder="argomenti..." required ng-maxlength="255"
+                       required ng-maxlength="255"
                        ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
-                <span id="addTopicIcon" class="editButton" ng-click="addTopic()"><i
+                <span id="addTopicIcon" class="editButton" ng-click="addTopic()" tooltip="Clicca qui per aggiungere un argomento." tooltip-trigger="mouseenter" tooltip-placement="right"><i
                         class="icon-plus icon-white"></i></span>
-                <span class="multiValueSidebar">Puoi inserire più di un valore</span>
+                <span class="multiValueSidebar">Puoi inserire più di un valore <i class="icon-question-sign"  tooltip="Scrivi uno o più argomenti del progetto, ad esempio: articoli, presentarsi, i saluti, ecc. Per inserirli, premi dopo ogni argomento 'Invio' o il bottone '+' a destra." tooltip-trigger="mouseenter" tooltip-placement="top"></i> </span>
 
                 <div id="topicTagsEdit">
                     <ul ng-repeat="topic in selectedTopics" class="zeroMargin subjects">
                         <li class="sidebarEditItem">
 	                	<span class="sidebarEditItemLink">{{topic}} 
-	                	<a ng-click="removeTopic(topic)" class="hand"><i class="icon-remove-circle"></i> </a></span>
+	                	<a ng-click="removeTopic(topic)" class="hand" tooltip="Clicca qui per cancellare questo argomento." tooltip-trigger="mouseenter" tooltip-placement="right"><i class="icon-remove-circle" ></i> </a></span>
                         </li>
                     </ul>
                 </div>
@@ -58,72 +61,78 @@
         </div>
 
         <!-- Objectives -->
-        <div id="editObjectives" class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-screenshot"></i>
-            Obiettivi:</h5>
+        <div id="editObjectives" class="clear marginTopSidebar">
+            <!-- INSERT INTO H5 BELOW TO ADD TOPICS TOOLTIP
+          tooltip="Scrivi uno o più obiettivi didattici del progetto, ad esempio: gli articoli determinativi, salutare formalmente, presentare un amico, ecc. Per inserirli, premi dopo ogni obiettivo 'Invio' o il bottone '+' a destra." tooltip-trigger="mouseenter" tooltip-placement="top"
+          -->
+           <h5 class="zeroMargin" ><i class="icon-screenshot"></i> Obiettivi:</h5>
 
-            <form novalidate class="sidebarForm" name="LdObjectiveForm">
-                <div class="errorBoxSidebar">
-                  <span id="objectivePatternErr" class="errorTipSidebar"
-                          ng-show="LdObjectiveForm.ldObjective.$error.pattern">Simbolo non permesso.</span>
-                    <span id="objectiveLengthErr" class="errorTipSidebar"
-                          ng-show="LdObjectiveForm.ldObjective.$error.maxlength">Massimo 255 caratteri.</span>
-                    <span class="clearfix"></span>
-                </div>
-                <input class="sidebarInputMultiple" type="text" ng-model="ldObjective" name="ldObjective"
-                       typeahead="suggestion for suggestion in getObjectives($viewValue)"
-                       typeahead-on-select="addObjective()"
-                       ui-keypress="{13:'addObjective()'}"
-                       placeholder="obiettivi..." required ng-maxlength="255"
-                       ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
-                <span id="addObjectiveIcon" class="editButton" ng-click="addObjective()"><i
-                        class="icon-plus icon-white"></i> </span>
-                <span class="multiValueSidebar">Puoi inserire più di un valore</span>
+           <form novalidate class="sidebarForm" name="LdObjectiveForm">
+               <div class="errorBoxSidebar">
+                 <span id="objectivePatternErr" class="errorTipSidebar"
+                         ng-show="LdObjectiveForm.ldObjective.$error.pattern">Simbolo non permesso.</span>
+                   <span id="objectiveLengthErr" class="errorTipSidebar"
+                         ng-show="LdObjectiveForm.ldObjective.$error.maxlength">Massimo 255 caratteri.</span>
+                   <span class="clearfix"></span>
+               </div>
+               <input class="sidebarInputMultiple" type="text" ng-model="ldObjective" name="ldObjective"
+                      typeahead="suggestion for suggestion in getObjectives($viewValue)"
+                      typeahead-on-select="addObjective()"
+                      ui-keypress="{13:'addObjective()'}"
+                      placeholder="obiettivi..." required ng-maxlength="255"
+                      ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
+               <span id="addObjectiveIcon" class="editButton" ng-click="addObjective()" tooltip="Clicca qui per aggiungere un obiettivo." tooltip-trigger="mouseenter" tooltip-placement="right"><i
+                       class="icon-plus icon-white"></i> </span>
+               <span class="multiValueSidebar">Puoi inserire più di un valore <i class="icon-question-sign"  tooltip="Scrivi uno o più obiettivi del progetto, ad esempio: articoli, presentarsi, i saluti, ecc. Per inserirli, premi dopo ogni argomento 'Invio' o il bottone '+' a destra." tooltip-trigger="mouseenter" tooltip-placement="top"></i> </span>
 
-                <div id="objectiveTagsEdit">
-                    <ul ng-repeat="objective in selectedObjectives" class="zeroMargin objectives">
-                        <li class="sidebarEditItem">
-	                	<span class="sidebarEditItemLink">{{objective}} 
-	                	<a ng-click="removeObjective(objective)" class="hand"><i class="icon-remove-circle"></i></a></span>
-                        </li>
-                    </ul>
-                </div>
-            </form>
-        </div>
+               <div id="objectiveTagsEdit">
+                   <ul ng-repeat="objective in selectedObjectives" class="zeroMargin objectives">
+                       <li class="sidebarEditItem">
+                       <span class="sidebarEditItemLink">{{objective}}
+                       <a ng-click="removeObjective(objective)" class="hand"><i class="icon-remove-circle"></i></a></span>
+                       </li>
+                   </ul>
+               </div>
+           </form>
+       </div>
 
-        <!-- Prerequisites -->
-        <div id="editPrerequisites" class="clear marginTopSidebar"><h5 class="zeroMargin"><i class="icon-backward"></i>
-            Prerequisiti:</h5>
+       <!-- Prerequisites -->
+        <div id="editPrerequisites" class="clear marginTopSidebar">
+            <!-- INSERT INTO H5 BELOW TO ADD TOPICS TOOLTIP
+    tooltip="Scrivi uno o più prerequisiti necessari per svolgere le attività del progetto, ad esempio: maschile e femminile dei nomi, registro formale e informale, verbi indicativo presente, ecc. Per inserirli, premi dopo ogni prerequisito 'Invio' o il bottone '+' a destra." tooltip-trigger="mouseenter" tooltip-placement="top"
+    -->
+        <h5 class="zeroMargin" ><i class="icon-backward"></i> Prerequisiti:</h5>
 
-            <form novalidate class="sidebarForm" name="LdPrereqForm">
-                <div class="errorBoxSidebar">
-                    <span id="prereqPatternErr" class="errorTipSidebar" ng-show="LdPrereqForm.ldRequisite.$error.pattern">Simbolo non permesso.</span>
-                    <span id="prereqLengthErr" class="errorTipSidebar"
-                          ng-show="LdPrereqForm.ldRequisite.$error.maxlength">Massimo 255 caratteri.</span>
-                </div>
-                <input class="sidebarInputMultiple" type="text" ng-model="ldRequisite" name="ldRequisite"
-                       typeahead="suggestion for suggestion in getObjectives($viewValue)"
-                       typeahead-on-select="addPrerequisite()"
-                       ui-keypress="{13:'addPrerequisite()'}"
-                       placeholder="prerequisiti..." required ng-maxlength="255"
-                       ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
-                <span id="addPrerequisiteIcon" class="editButton" ng-click="addPrerequisite()"><i
-                        class="icon-plus icon-white"></i> </span>
-                <span class="multiValueSidebar">Puoi inserire più di un valore</span>
+        <form novalidate class="sidebarForm" name="LdPrereqForm">
+            <div class="errorBoxSidebar">
+                <span id="prereqPatternErr" class="errorTipSidebar" ng-show="LdPrereqForm.ldRequisite.$error.pattern">Simbolo non permesso.</span>
+                <span id="prereqLengthErr" class="errorTipSidebar"
+                      ng-show="LdPrereqForm.ldRequisite.$error.maxlength">Massimo 255 caratteri.</span>
+            </div>
+            <input class="sidebarInputMultiple" type="text" ng-model="ldRequisite" name="ldRequisite"
+                   typeahead="suggestion for suggestion in getObjectives($viewValue)"
+                   typeahead-on-select="addPrerequisite()"
+                   ui-keypress="{13:'addPrerequisite()'}"
+                   placeholder="prerequisiti..." required ng-maxlength="255"
+                   ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
+            <span id="addPrerequisiteIcon" class="editButton" ng-click="addPrerequisite()" tooltip="Clicca qui per aggiungere un prerequisito." tooltip-trigger="mouseenter" tooltip-placement="right"><i
+                    class="icon-plus icon-white"></i> </span>
+            <span class="multiValueSidebar">Puoi inserire più di un valore <i class="icon-question-sign"  tooltip="Scrivi uno o più prerequisiti del progetto, ad esempio: articoli, presentarsi, i saluti, ecc. Per inserirli, premi dopo ogni argomento 'Invio' o il bottone '+' a destra." tooltip-trigger="mouseenter" tooltip-placement="top"></i> </span>
 
-                <div id="prerequisiteTagsEdit">
-                    <ul ng-repeat="prereq in selectedPrerequisites" class="zeroMargin prerequisites">
-                        <li class="sidebarEditItem">
-	                	<span class="sidebarEditItemLink">{{prereq}} 
-	                	<a ng-click="removePrerequisite(prereq)" class="hand"><i class="icon-remove-circle"></i> </a></span>
-                        </li>
-                    </ul>
-                </div>
-            </form>
-        </div>
+            <div id="prerequisiteTagsEdit">
+                <ul ng-repeat="prereq in selectedPrerequisites" class="zeroMargin prerequisites">
+                    <li class="sidebarEditItem">
+                    <span class="sidebarEditItemLink">{{prereq}}
+                    <a ng-click="removePrerequisite(prereq)" class="hand"><i class="icon-remove-circle"></i> </a></span>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
 
-        <!-- LD Students Description -->
+    <!-- LD Students Description -->
         <div class="clear marginTopSidebar">
-            <h5 class="zeroMargin"><i class="icon-user"></i> Descrizione degli studenti:</h5>
+            <h5 class="zeroMargin" ><i class="icon-user"></i> Descrizione degli studenti: <i class="icon-question-sign" tooltip="Descrivi gli studenti e il contesto per al quale il progetto è destinato." tooltip-trigger="mouseenter" tooltip-placement="top"></i></h5>
 
             <form class="sidebarForm">
                 <textarea
@@ -157,7 +166,7 @@
         <div class="clear marginTopSidebar">
 
             <!-- LD Publication -->
-            <h5 class="zeroMargin"><i class="icon-bullhorn"></i> Pubblicazione:</h5>
+            <h5 class="zeroMargin" ><i class="icon-bullhorn"></i> Pubblicazione: <i class="icon-question-sign" tooltip="Premi questo bottone per scegliere se rendere pubblico il tuo progetto o mantenerlo privato." tooltip-trigger="mouseenter" tooltip-placement="top"></i></h5>
 
             <div class="onoffswitch">
                 <input type="checkbox"
@@ -212,14 +221,14 @@
         <div>
             <form name="LdName" novalidate="" class="singleForm">
                 <div>
-                    <label class="editLabel"><i class="icon-book icon-white"></i> Nome del progetto: </label>
+                    <label class="editLabel"><i class="icon-book icon-white" ></i> Nome del progetto: </label>
                     <input class="editInputName" type="text"
                            name="ldName"
                            ng-model="learningDesign.ld_name" required
                            ui-Blur="updateLdName()"
                            ng-maxlength="50"
                            ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
-
+                    <i class="icon-question-sign icon-white" tooltip="Scegli un titolo da dare all'intero progetto. Questo nome è quello che apparirà nella pagina principale di LEDITA." tooltip-trigger="mouseenter" tooltip-placement="bottom"></i>
                     <div class="errorBoxTab">
                         <span class="errorTipTab"
                               ng-show="(learningDesign.ld_name == '') || (LdName.ldName.$dirty && LdName.ldName.$error.required)">Necessario!</span>
@@ -233,7 +242,7 @@
         <div>
             <!-- LD Qcer -->
             <div class="titleQcer">
-                <label class="editLabel"><i class="icon-tasks icon-white"></i> Livelli QCER:</label>
+                <label class="editLabel"><i class="icon-tasks icon-white"></i> Livelli QCER: </label>
                 <span ng-show="qcerError">{{ qcerError }}</span>
             	<span ng-repeat="qceropt in qceropts" class="qcerOptData">
                 	<input type="checkbox"
@@ -241,20 +250,22 @@
                            ng-change="updateQcer()"
                            name="qcer"> {{ qceropt.name }}
             	</span>
+                <i class="icon-question-sign icon-white" tooltip="Scegli uno o più livelli del Quadro Comune Europeo. I livelli vanno dall'A1, principiante, al C2, avanzato." tooltip-trigger="mouseenter" tooltip-placement="bottom"></i>
             </div>
 
             <!-- LD Scope -->
             <div class="titleScope">
                 <form name="ScopeForm" novalidate="" class="singleForm">
                     <div id="scopeFormSection">
-                        <label class="editLabel"><i class="icon-bell icon-white"></i> Ambito:</label>
+                        <label class="editLabel" ><i class="icon-bell icon-white"></i> Ambito: </label>
                         <input class="editInputScocpe" type="text" name="ldScope"
                                ng-model="learningDesign.ld_scope"
                                typeahead="suggestion for suggestion in getScopes($viewValue)"
                                ui-Blur="updateLdScope()"
                                required ng-maxlength="50"
                                ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
-
+                        <i class="icon-question-sign icon-white"  tooltip="Scrivi qui la tipologia di progetto, indicando non la durata temporale in ore, minuti, ecc., ma l'ambito di applicazione. Per esempio: Unità Didattica, Lezione, Unità di Apprendimento, Modulo, Singola Attività o Semestre." tooltip-trigger="mouseenter" tooltip-placement="bottom"
+                                ></i>
                         <div class="errorBoxTab">
                             <span class="errorTipTab"
                                   ng-show="(learningDesign.ld_scope == '') || (ScopeForm.ldScope.$dirty && ScopeForm.ldScope.$error.required)">Necessario!</span>
@@ -275,8 +286,11 @@
 
 
 <div class="tabContent">
-<div class="newActBox">
-    <button id="createActivity" type="button" class="newActButton1" href ng-click="createActivity()">
+<div>
+    <div id="updateErrors" ng-show="ldUpdateErrors" class="updateErrors">
+        {{ ldUpdateErrors }}
+    </div>
+    <button id="createActivity" type="button" class="newActButton1" href ng-click="createActivity()" class="newActBox" tooltip="Premi questo bottone per aggiungere un'attività al progetto." tooltip-trigger="mouseenter" tooltip-placement="right">
         <i class="icon-plus icon-white"></i><br>Attività
     </button>
 
@@ -292,7 +306,7 @@
 </div>
 
 <!-- BEGIN DYNAMIC ACTIVITY CONTENT (Global View) -->
-<div ng-repeat="(level, nodes) in levels" class="levelBoxEdit">
+<div ng-repeat="(level, nodes) in levels" class="levelBoxEdit" >
     
     <!-- Level Drop Target -->
     <div id="level-{{level}}" class="lvl-target dropHorizontal dropWidth" 
@@ -300,17 +314,17 @@
 
     <!-- Every node is a Drag Source --> 
     <div id="{{node.node_id}}-{{node.type}}-{{node.level}}-{{node.position}}" ng-repeat="node in nodes"
-         x-lvl-draggable="true" ng-class="getBoxEditClass(node)">
+         x-lvl-draggable="true" ng-class="getBoxEditClass(node)" >
         
         <!-- If it's a group:  -->
-        <div ng-show="node.children" class="groupName">{{ node.node_name }}</div>
+        <div ng-show="node.children" class="groupName" >{{ node.node_name }}</div>
         <div class="clearfix"></div>
         
         <!-- TODO: add drop directives - This drop zone always has position == 1 -->
-        <div ng-show="node.children " class="leftGroupDrop"> 1</div>
+        <div ng-show="node.children " class="leftGroupDrop" > 1</div>
 
         <!-- Children are also in levels: Create unstyled div for each level -->
-        <div ng-repeat="(childLevel, subChildren) in node.children" class="levelBoxChildEdit">
+        <div ng-repeat="(childLevel, subChildren) in node.children" class="levelBoxChildEdit" tooltip="Fai un click per vedere i dettagli dell'attività o clicca e trascina per spostare l'attività in un'altra posizione." tooltip-trigger="mouseenter" tooltip-placement="right">
             <!-- TODO: add drop directives -->
             <div class="dropHorizontal">Group Level {{childLevel}}</div>
             <div ng-repeat="child in subChildren" ng-class="getGroupEditBoxClass(child)">
@@ -351,7 +365,7 @@
         <!-- End Children -->
         
         <!-- If it's NOT a group:  -->
-        <div ng-show="!node.children" class="actNameEditSingle">
+        <div ng-show="!node.children" class="actNameEditSingle" class="newActBox" tooltip="Fai un click per vedere i dettagli dell'attività o clicca e trascina per spostare l'attività in un'altra posizione." tooltip-trigger="mouseenter" tooltip-placement="right">
             
         	<!-- Left Position Drop Target -->
             <div id="levelPosition-{{level}}-{{node.position}}" class="lvl-target leftActDrop"
@@ -565,7 +579,7 @@
                         <span class="errorTipModal" ng-show="ActCreateForm.actName.$error.pattern">Simbolo non permesso.</span>
                         <span class="errorTipModal" ng-show="ActCreateForm.actName.$error.maxlength">Massimo 255 caratteri.</span>
                     </div>
-                    <label class="formLabel"><i class="icon-file"></i> Nome dell'attività*:</label>
+                    <label class="formLabel"><i class="icon-file"></i> Nome dell'attività*: <i class="icon-question-sign" tooltip="Inserisci un nome come titolo dell'attività." tooltip-trigger="mouseenter" tooltip-placement="bottom"></i></label>
                     <input class="formInput" type="text" name="actName" ng-model="actName" required
                            ng-maxlength="255" ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                     <span class="clearfix"></span>
@@ -574,7 +588,8 @@
                 <!-- Activity Modality -->
                 <div class="formLevel">
                     <div class="errorBox"></div>
-                    <label class="formLabel"><i class="icon-home"></i> Modalità*:</label>
+                    <label class="formLabel"><i class="icon-home"></i> Modalità*:   <i class="icon-question-sign" tooltip="Scegli se l'attività è svolta faccia a faccia, a distanza o in modalità mista, ovvero una parte presenzialmente e una parte online." tooltip-trigger="mouseenter" tooltip-placement="bottom"></i>
+                    </label>
                     <div class="formInput">
                     		<!-- FIXME description & values should come from service rather than hard-coded -->
                         <span class="checkModality"><input type="radio" name="f2f" ng-model="modality" value="1"
@@ -590,7 +605,8 @@
                 <!-- Activity Duration -->
                 <div class="formLevel">
                     <div class="errorBox"></div>
-                    <label class="formLabel formLabel"><i class="icon-time"></i> Durata:</label>
+                    <label class="formLabel formLabel"><i class="icon-time"></i> Durata:   <i class="icon-question-sign" tooltip="Scegli la durata dell'attività. Se non selezioni nessuna durata, la durata sarà libera." tooltip-trigger="mouseenter" tooltip-placement="bottom"></i>
+                    </label>
                     <div class="formInput">
                         <span class="durationBox">
                                 <input class="formInputDuration" type="number" name="dur_mon" ng-model="dur_mon"
@@ -623,7 +639,8 @@
                         <span class="errorTipModal" ng-show="LdCreateForm.ldScope.$error.maxlength">Massimo 50 caratteri.</span>
                         <span class="clearfix"></span>
                     </div>
-                    <label class="formLabel"><i class="icon-th-large"></i> Organizzazione degli studenti*:</label>
+                    <label class="formLabel"><i class="icon-th-large"></i> Organizzazione degli studenti*:   <i class="icon-question-sign " tooltip="Scegli come organizzare gli studenti: tutti insieme, in attività individuale, in coppie o in gruppi. I gruppi possono essere definiti o con il numero di gruppi, o con il numero di studenti per gruppo, o con il numero di gruppi e il numero di studenti per ogni gruppo ." tooltip-trigger="mouseenter" tooltip-placement="bottom"></i>
+                    </label>
                     <div class="formInput">
                     		<!-- FIXME description and value should come from service rather than hard-coded -->
                         <span class="checkModality"><input type="radio" name="org_all" ng-model="org" value="1"
@@ -670,8 +687,9 @@
                            placeholder="pc, lavagna, cd..." ng-maxlength="50"
                            ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
                     <span id="addTechnologyIcon" class="editButton" ng-click="addTechnologyFromUserInput($event)"><i
-                            class="icon-plus icon-white"></i></span>
-                    <span class="multiValue">Puoi inserire più di un valore</span>
+                            class="icon-plus icon-white" tooltip="Clicca qui o premi 'Invio' per aggiungere una tecnologia."></i></span>
+                    <span class="multiValue">Puoi inserire più di un valore   <i class="icon-question-sign" tooltip="Scrivi una o più tecnologie necessarie per svolgere l'attività, ad esempio: PC, lavagna, CD, ecc. Per inserirle, premi dopo ogni tecnologia 'Invio' o il bottone '+' a destra." tooltip-trigger="mouseenter" tooltip-placement="bottom"></i>
+                  </span>
 
                     <div class="formTag">
                         <ul ng-repeat="tech in selectedTechnologies" class="zeroMargin subjects">
@@ -684,7 +702,8 @@
 
                 <!-- Activity Resources -->
                 <div class="formLevel">
-                    <label class="formLabel"><i class="icon-briefcase"></i> Risorse didattiche:</label>
+                    <label class="formLabel"><i class="icon-briefcase"></i> Risorse didattiche:   <i class="icon-question-sign" tooltip="Clicca sul bottone a fianco per aggiungere risorse didattiche da utilizzare durante l'attività." tooltip-trigger="mouseenter" tooltip-placement="bottom"></i>
+                    </label>
                     <span class="formInput">
                     	<a class="btn-mini btn" ng-click="createResource()"><i class="icon-plus"></i> Aggiungi una risorsa</a>
                     	<!-- <button class="btn-mini btn" ng-click="createResource()"><i class="icon-plus"></i> Aggiungi una risorsa</button>
@@ -699,7 +718,8 @@
                         <span class="errorTipModal" ng-show="ActCreateForm.pract_descr.$error.pattern">Simbolo non permesso.</span>
                         <span class="errorTipModal" ng-show="ActCreateForm.pract_descr.$error.maxlength">Massimo 2000 caratteri.</span>
                     </div>
-                    <label class="formLabel"><i class="icon-info-sign"></i> Descrizione dell'attività:</label>
+                    <label class="formLabel"><i class="icon-info-sign"></i> Descrizione dell'attività:   <i class="icon-question-sign" tooltip="Descrivi dettagliatamente come svolgere l'attività, indicando tutti gli elementi necessari per " tooltip-trigger="mouseenter" tooltip-placement="bottom"></i>
+                    </label>
                     <textarea class="formInput" name="pract_descr" ng-model="pract_descr" rows="5"
                               ng-maxlength="200" ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/"></textarea>
                     <span class="clearfix"></span>
@@ -711,7 +731,8 @@
                         <span class="errorTipModal" ng-show="ActCreateForm.edu_descr.$error.pattern">Simbolo non permesso.</span>
                         <span class="errorTipModal" ng-show="ActCreateForm.edu_descr.$error.maxlength">Massimo 2000 caratteri.</span>
                     </div>
-                    <label class="formLabel"><i class="icon-question-sign"></i> Suggerimenti pedagogici:</label>
+                    <label class="formLabel"><i class="icon-question-sign"></i> Suggerimenti e consigli:   <i class="icon-question-sign" tooltip="Scrivi qui i suggerimenti pedagogici, i consigli didattici, i possibili problemi e tutto ciò che credi possa essere utile per svolgere al meglio l'attività." tooltip-trigger="mouseenter" tooltip-placement="bottom"></i>
+                    </label>
                     <textarea class="formInput" name="edu_descr" ng-model="edu_descr" rows="5"
                               ng-maxlength="200" ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/"></textarea>
                     <span class="clearfix"></span>
