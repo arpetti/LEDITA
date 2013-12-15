@@ -89,7 +89,13 @@ angular.module('ledita-app')
     }
 
     $scope.addResource = function() {
-    	$log.info('Add resource is called');
+    	var resourceData = {
+    		name: getValueOrNull($scope.resourceName),
+    		type: getValueOrNull($scope.resourceType),
+    		descr: getValueOrNull($scope.resourceDescr),
+    		link: getValueOrNull($scope.resourceLink)
+    	}
+    	$log.info('Add resource is called: ' + JSON.stringify(resourceData));
     };
 
 }]);

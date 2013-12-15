@@ -498,12 +498,12 @@
                 <div class="formLevel">
                     <div class="errorBox">
                                     <span class="errorTipModal"
-                                          ng-show="AddResourceForm.type.$dirty && AddResourceForm.type.$error.required">Necessario!</span>
-                        <span class="errorTipModal" ng-show="AddResourceForm.type.$error.pattern">Simbolo non permesso.</span>
-                        <span class="errorTipModal" ng-show="AddResourceForm.type.$error.maxlength">Massimo 50 caratteri..</span>
+                                          ng-show="AddResourceForm.resourceType.$dirty && AddResourceForm.resourceType.$error.required">Necessario!</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.resourceType.$error.pattern">Simbolo non permesso.</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.resourceType.$error.maxlength">Massimo 50 caratteri..</span>
                     </div>
                     <label class="formLabel"><i class="icon-ok"></i> Tipo*:</label>
-                    <input class="formInput" type="text" ng-model="type" name="type"
+                    <input class="formInput" type="text" ng-model="resourceType" name="resourceType"
                            typeahead="suggestion for suggestion in getSubjects($viewValue)"
                            typeahead-on-select="addTopicFromSuggestion()"
                            ui-keypress="{13:'addTopicFromUserInput($event)'}"
@@ -511,7 +511,7 @@
                            ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
 
                     <div class="formTag">
-                            <span class="modalEditItem" ng-show="type"><span class="modalEditItemLink">{{type}} <a
+                            <span class="modalEditItem" ng-show="type"><span class="modalEditItemLink">{{resourceType}} <a
                                     ng-href="#"><i
                                     class="icon-remove-circle"></i> </a></span>
                             </span>
@@ -521,11 +521,11 @@
                 <!-- Resource Copyright -->
                 <div class="formLevel">
                     <div class="errorBox">
-                        <span class="errorTipModal" ng-show="AddResourceForm.copy.$error.pattern">Simbolo non permesso.</span>
-                        <span class="errorTipModal" ng-show="AddResourceForm.copy.$error.maxlength">Massimo 255 caratteri.</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.resourceCopy.$error.pattern">Simbolo non permesso.</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.resourceCopy.$error.maxlength">Massimo 255 caratteri.</span>
                     </div>
                     <label class="formLabel"><i class="icon-ok"></i> Copyright:</label>
-                    <input class="formInput" type="text" name="copy" ng-model="copy"
+                    <input class="formInput" type="text" name="resourceCopy" ng-model="resourceCopy"
                            ng-maxlength="255" ng-pattern="/^[a-zA-Z0-9.,!?:;... òàùèéì/'/-//@#*]+$/">
                     <span class="clearfix"></span>
                 </div>
@@ -533,23 +533,25 @@
                 <!-- Resource Description -->
                 <div class="formLevel">
                     <div class="errorBox">
-                        <span class="errorTipModal" ng-show="AddResourceForm.descr.$error.pattern">Simbolo non permesso.</span>
-                        <span class="errorTipModal" ng-show="AddResourceForm.descr.$error.maxlength">Massimo 500 caratteri.</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.resourceDescr.$error.pattern">Simbolo non permesso.</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.resourceDescr.$error.maxlength">Massimo 500 caratteri.</span>
 
                     </div>
                     <label class="formLabel"><i class="icon-ok"></i> Descrizione:</label>
-                    <textarea class="formInput" name="descr" ng-model="descr" rows="10"
+                    <textarea class="formInput" name="resourceDescr" ng-model="resourceDescr" rows="10"
                               ng-maxlength="500" ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/"></textarea>
                     <span class="clearfix"></span>
                 </div>
+
+                <!-- Resource Link -->
                 <div class="formLevel">
                     <div class="errorBox">
                         <span class="errorTipModal"
-                              ng-show="AddResourceForm.url.$dirty && AddResourceForm.url.$error.url">Inserisci un url valido che inizi con http://</span>
-                        <span class="errorTipModal" ng-show="AddResourceForm.url.$error.maxlength">Massimo 255 caratteri.</span>
+                              ng-show="AddResourceForm.resourceLink.$dirty && AddResourceForm.resourceLink.$error.url">Inserisci un url valido che inizi con http://</span>
+                        <span class="errorTipModal" ng-show="AddResourceForm.resourceLink.$error.maxlength">Massimo 255 caratteri.</span>
                     </div>
                     <label class="formLabel"><i class="icon-ok"></i> Link:</label>
-                    <input class="formInput" type="url" placeholder="don't forget http://" name="url" ng-model="url"
+                    <input class="formInput" type="url" placeholder="don't forget http://" name="resourceLink" ng-model="resourceLink"
                            ng-maxlength="255">
                     <span class="clearfix"></span>
                 </div>
