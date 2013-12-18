@@ -4,13 +4,7 @@ angular.module('ledita-app')
 	function($scope, $rootScope, TypeaheadHelper, $log, LDEditService, ActivityService) {
 
 	$scope.selectedTechnologies = [];
-	$scope.resources = [];
 
-	var addResourceToList = function(resourceData) {
-		$scope.resources.push(resourceData);
-		$log.info('addResourceToList: ' + JSON.stringify($scope.resources));
-	};
-    
     $scope.getTechnologies = function(technology) {
     	return TypeaheadHelper.getTechnologies(technology);
   	};
@@ -57,6 +51,7 @@ angular.module('ledita-app')
     	var currentLdId = LDEditService.getCurrentLdId();
     	ActivityService.createActivity(currentLdId, $scope.buildActivityData(),
 	        function(res) {
+	        	ActivityService.resetResources();
 	        	$log.info('Activity created successfully');
 	        	$rootScope.$broadcast('closeActivityModal');
 	        	$rootScope.$broadcast('activityCreated');
@@ -81,8 +76,10 @@ angular.module('ledita-app')
     		people_per_group: getValueOrNull($scope.people_per_group),
     		technologies: $scope.appendInputToItems($scope.technology, $scope.selectedTechnologies),
     		pract_descr: getValueOrNull($scope.pract_descr),
-    		edu_descr: getValueOrNull($scope.edu_descr)
+    		edu_descr: getValueOrNull($scope.edu_descr),
+    		resources: ActivityService.getResources()
     	};
+    	$log.info('buildActivityData: ' + JSON.stringify(activityData));
     	return activityData;
     };
 
@@ -101,8 +98,7 @@ angular.module('ledita-app')
     		descr: getValueOrNull($scope.resourceDescr),
     		link: getValueOrNull($scope.resourceLink)
     	}
-    	addResourceToList(resourceData);
-    	$log.info('Add resource is called: ' + JSON.stringify(resourceData));
+    	ActivityService.addResource(resourceData);
     };
 
 }]);

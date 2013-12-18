@@ -42,4 +42,46 @@ describe('Activity Service', function() {
 
   });
 
+  it('Adds a resource to an empty list', function() {
+  	var resource = {
+  		name : "resource name",
+  		type : "reource type",
+  		descr : "resource description",
+  		link : "http://resource.link"
+  	}
+  	expect(service.getResources().length).toEqual(0);
+  	service.addResource(resource);
+  	expect(service.getResources().length).toEqual(1);
+  });
+
+  it('Adds multiple resources', function() {
+  	var resource1 = {
+  		name : "resource name",
+  		type : "reource type",
+  		descr : "resource description",
+  		link : "http://resource.link"
+  	}
+  	expect(service.getResources().length).toEqual(0);
+  	service.addResource(resource1);
+  	expect(service.getResources().length).toEqual(1);
+
+  	var resource2 = {
+  		name : "resource name 2",
+  		type : "reource type 2",
+  		descr : "resource description 2",
+  		link : "http://resource.link.2"
+  	}
+  	service.addResource(resource2);
+  	expect(service.getResources().length).toEqual(2);
+  });
+
+  it('Resets resources', function() {
+  	var resource = {name: "something"};
+  	expect(service.getResources().length).toEqual(0);
+  	service.addResource(resource);
+  	expect(service.getResources().length).toEqual(1);
+  	service.resetResources();
+  	expect(service.getResources().length).toEqual(0);
+  });
+
 });
