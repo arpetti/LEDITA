@@ -4,6 +4,7 @@ angular.module('ledita-app')
 	function($scope, $rootScope, TypeaheadHelper, $log, LDEditService, ActivityService) {
 
 	$scope.selectedTechnologies = [];
+	$scope.resourcesForDisplay = ActivityService.getResources();
 
     $scope.getTechnologies = function(technology) {
     	return TypeaheadHelper.getTechnologies(technology);
@@ -99,6 +100,7 @@ angular.module('ledita-app')
     		link: getValueOrNull($scope.resourceLink)
     	}
     	ActivityService.addResource(resourceData);
+    	$rootScope.$broadcast('closeResourceModal');
     };
 
 }]);

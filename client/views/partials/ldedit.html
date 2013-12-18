@@ -727,19 +727,19 @@
                         </div>
                         <div class="rowTable" >
                            <!-- Add here a ng-repeat for resources -->
-                            <div class="rowResLink">
+                            <div ng-repeat="resource in resourcesForDisplay" class="rowResLink">
                                 <a ng-href="">
                                     <div class="colTable colRes1">
-                                        <p>Fumetto</p>
+                                        <p>{{resource.name}}</p>
                                     </div>
                                     <div class="colTable colRes2">
-                                        <p>immagine</p>
+                                        <p>{{resource.type}}</p>
                                     </div>
                                     <div class="colTable colRes3">
-                                        <p>Striscia di fumetto di Lupo Alberto</p>
+                                        <p>{{resource.descr}}</p>
                                     </div>
                                     <div class="colTable colRes4">
-                                        <p><a href="">Link</a></p>
+                                        <p><a href="resource.link">Link</a></p>
                                     </div>
                                     <div class="colTable colRes5">
                                         <p><a href="" tooltip="Cancella questa risorsa" tooltip-trigger="mouseenter" tooltip-placement="bottom"><i class="icon-remove"></i></a></p>

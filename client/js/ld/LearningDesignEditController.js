@@ -381,6 +381,12 @@ function($scope, $log, $routeParams, $location, $timeout, TypeaheadHelper, LDSer
         backdropClick:false
     };
 
+    $scope.$on('closeResourceModal', function (event) {
+      $timeout(function () {
+        $scope.closeAddResource();
+      }, 10);
+    });
+
     $scope.getBoxEditClass = function(node) {
         return LDEditService.getBoxEditClass(node);
     };
