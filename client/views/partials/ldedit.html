@@ -725,7 +725,7 @@
                             </div>
                             <div class="clearfix"></div>
                         </div>
-                        <div class="rowTable" >
+                        <div ng-show="resourcesForDisplay.length" class="rowTable" >
                            <!-- Add here a ng-repeat for resources -->
                             <div ng-repeat="resource in resourcesForDisplay" class="rowResLink">
                                 <a ng-href="">
@@ -739,7 +739,7 @@
                                         <p>{{resource.descr}}</p>
                                     </div>
                                     <div class="colTable colRes4">
-                                        <p><a href="resource.link">Link</a></p>
+                                        <p><a href="{{resource.link}}" target="_blank">Link</a></p>
                                     </div>
                                     <div class="colTable colRes5">
                                         <p><a href="" tooltip="Cancella questa risorsa" tooltip-trigger="mouseenter" tooltip-placement="bottom"><i class="icon-remove"></i></a></p>
