@@ -6,7 +6,6 @@ var _ = require('underscore');
 
 describe('Activity Create DAO', function() {
 
-
 	it('Inserts a new activity', function(done) {
 		var cleanupActivity = 'delete from activity where id = ?';
 		var activityObj = {
@@ -53,7 +52,7 @@ describe('Activity Create DAO', function() {
 		});
 	});
 
-	it('Bulk inserts multiple SUPPORTS records at once', function(done) {
+	it('Bulk inserts multiple SUPPORTS records', function(done) {
 		var cleanupSupports = 'delete from supports where activity_id = ?';
 		var verifySupports = 'select technology_id, activity_id from supports where activity_id = ?';
 		var activityId = 56; // known from demo data not to have any technologies
@@ -74,6 +73,29 @@ describe('Activity Create DAO', function() {
 					done();
 				});
 			});
+		});
+	});
+
+	it('Bulk inserts multiple RESOURCE records', function(done) {
+		var cleanupResource = 'delete from resource where activity_id = ?';
+		var verifyResource = 'select id, activity_id, name, type, descr, link from resource where activity_id = ?';
+		var activityId = 3; // known from demo data not to have any resources
+		var resource1 = [activityId, 'res name 1', 'res type 1', 'res descr 1', 'http://res.1'];
+		var resource2 = [activityId, 'res name 2', 'res type 2', 'res descr 2', 'http://res.2'];
+		var resources = [resource1, resource2];
+		fixture.bulkInsertResource(resources, function(err, result) {
+			expect(result.affectedRows).to.equal(resources.length);
+			expect(err).to.be.null;
+			dao.findAll(verifyResource, [activityId], function(err, result) {
+				expect(err).to.be.null;
+				expect(result).to.have.length(resources.length);
+				expect(result[0].id).to.be.above(40);
+				expect(result[1].id).to.be.above(40);
+				dao.deleteRecord(cleanupResource, [activityId], function(err, result) {
+					expect(err).to.be.null;
+					done();
+				});
+			})
 		});
 	});
 

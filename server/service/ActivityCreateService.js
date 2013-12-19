@@ -24,6 +24,7 @@ module.exports = {
 
 	// cb(err, {activity_id : activityId, composes_id : composesId}, message)
 	createActivity: function(ldId, activityData, cb) {
+		logger.log().info('ActivityCreateService: ' + JSON.stringify(activityData));
 		// Sample Data:
 		// {
 		// 	"actName":"my activity name",										name
@@ -37,7 +38,11 @@ module.exports = {
 		//	"people_per_group":6,														--> insert: students.people_per_group
 		// 	"technologies":["Whiteboard","touch screen"],		--> get activity.id after insert, pass to TechnologyService
 		// 	"pract_descr":"long description",								pract_descr
-		// 	"edu_descr":"pedagogical long description"			edu_descr
+		// 	"edu_descr":"pedagogical long description",			edu_descr
+		//	"resources":[
+		//		{"name":"res1","type":"restype1","descr":"res descr 1","link":"http://res.1"},
+		//		{"name":"res2","type":"restype2","descr":"res 2 description","link":"http://res.2"}
+		//	]
 		// }
 
 		async.waterfall([
