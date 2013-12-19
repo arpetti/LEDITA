@@ -71,15 +71,15 @@ angular.module('ledita-app')
             });
     };
 
-    $scope.openTerms = function (node) {
-        $scope.terms = true;
+    $scope.openTerms = function () {
+        $scope.termsModal = true;
        };
 
     $scope.closeTerms = function () {
-        $scope.terms = false;
+        $scope.termsModal = false;
     };
 
-    $scope.openPrivacy = function (node) {
+    $scope.openPrivacy = function () {
         $scope.privacy = true;
        };
 
