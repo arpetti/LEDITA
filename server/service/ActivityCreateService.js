@@ -3,6 +3,7 @@ var studentsService = require('./StudentsService');
 var activityCreateDao = require('../dao/ActivityCreateDao');
 var composesService = require('./ComposesService');
 var technologyService = require('./TechnologyService');
+var resourceService = require('./Resourceservice');
 var messages = require('../validate/ValidationMessages');
 var logger = require('../util/LogWrapper');
 
@@ -21,6 +22,10 @@ var createActivityObj = function(studentsId, activityData) {
 };
 
 module.exports = {
+
+	hasResources: function(activityData) {
+		return activityData.resources && activityData.resources.length > 0;
+	},
 
 	// cb(err, {activity_id : activityId, composes_id : composesId}, message)
 	createActivity: function(ldId, activityData, cb) {
@@ -90,11 +95,18 @@ module.exports = {
 		    // Step 4: Insert or Connect Technologies
 		    function(activityId, successInfo, callback) {
 		    	technologyService.insertSupports(activityId, activityData.technologies, function() {
-		    		callback(null, successInfo);
+		    		callback(null, activityId, successInfo);
 		    	})
-		    }
+		    },
 
-		    // TODO Step 5: Delegate to resource service if have resources, passing activityId and activityData.resources
+		    // Step 5: Add Resources
+		    function(activityId, successInfo, callback) {
+		    	if(module.exports.hasResources(activityData)) {
+		    		resourceService.addResources(activityId, activityData.resources, function() {
+		    			callback(null, successInfo);
+		    		});
+		    	}
+		    }
 
 		], function (err, successInfo) {
 		   if(err) {
