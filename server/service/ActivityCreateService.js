@@ -47,8 +47,6 @@ module.exports = {
 
 		async.waterfall([
 				
-				// TODO - Add: Step 4: get activity.id and delegate to TechnologyService, passing tchnologies
-				
 				// Step 1: Insert STUDENTS
 		    function(callback){
 		    	studentsService.insertStudents(activityData.org, activityData.group_number, activityData.people_per_group, function(err, studentsId, message) {
@@ -95,6 +93,8 @@ module.exports = {
 		    		callback(null, successInfo);
 		    	})
 		    }
+
+		    // TODO Step 5: Delegate to resource service if have resources, passing activityId and activityData.resources
 
 		], function (err, successInfo) {
 		   if(err) {

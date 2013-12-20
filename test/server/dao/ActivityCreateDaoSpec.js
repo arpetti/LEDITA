@@ -95,7 +95,7 @@ describe('Activity Create DAO', function() {
 					expect(err).to.be.null;
 					done();
 				});
-			})
+			});
 		});
 	});
 
