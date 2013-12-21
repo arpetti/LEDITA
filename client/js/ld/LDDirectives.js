@@ -26,10 +26,10 @@ angular.module('ledita-app')
             "    <span class='nodeBodyText'>{{ node.org_label }}</span> " +
             "</p> " +
             "<p class='tabText' ng-show='node.technologies'><i class='icon-facetime-video'></i> Tecnologie usate: " +
-            "    <span ng-repeat='tech in node.technologies' class='nodeBodyText border'>{{ tech.technology_name }}</span> " +
+            "    <span ng-repeat='tech in node.technologies' class='nodeBodyText border techRepeater'>{{ tech.technology_name }}</span> " +
             "</p> " +
             "<p class='tabText' ng-show='node.resources'><i class='icon-briefcase'></i> Risorse didattiche: " +
-            "    <ul ng-repeat='resource in node.resources' class='listNode'> " +
+            "    <ul ng-repeat='resource in node.resources' class='listNode resourceRepeater'> " +
             "        <li><i class='icon-chevron-right'></i> " +
             "            Nome: <span class='nodeBodyText'>{{ resource.resource_name }}</span> " +
             "            | Tipo:<span class='nodeBodyText'>{{ resource.resource_type }}</span><span ng-show='resource.resource_copy'> | " +

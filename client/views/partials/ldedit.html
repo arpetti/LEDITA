@@ -372,7 +372,7 @@
             <div id="levelPosition-{{level}}-{{node.position}}" class="lvl-target leftActDrop"
             	x-lvl-drop-target="true" x-on-drop="dropped(dragEl, dropEl)"></div>
             
-            <a class="whiteText" ng-click="open(node)">
+            <a class="whiteText openNodeModal" ng-click="open(node)">
                 <h6 class="actNameEdit noClear">{{ node.node_name }}</h6>
 
                 <div class="separator"></div>
@@ -643,7 +643,7 @@
                     <span class="clearfix"></span>
 
                     <!-- Activity Organization Group Additional Input -->
-                    <div class="formInput" ng-show="org=='4'">
+                    <div id="actOrgGroupDetails" class="formInput" ng-show="org=='4'">
                   		<span class="orgGroupBox">
                                 <input class="formInputDuration org" type="number" name="group_number"
                                        ng-model="group_number"
@@ -693,7 +693,7 @@
                     <label class="formLabel"><i class="icon-briefcase"></i> Risorse didattiche:   <i class="icon-question-sign" tooltip="Clicca sul bottone a fianco per aggiungere risorse didattiche da utilizzare durante l'attività." tooltip-trigger="mouseenter" tooltip-placement="bottom"></i>
                     </label>
                     <span class="formInput">
-                    	<a class="btn-mini btn resBtn" ng-click="createResource()"><i class="icon-plus icon-white"></i> Aggiungi una risorsa</a>
+                    	<a id="addResource" class="btn-mini btn resBtn" ng-click="createResource()"><i class="icon-plus icon-white"></i> Aggiungi una risorsa</a>
                     </span>
                     <span class="clearfix"></span>
 
@@ -771,7 +771,7 @@
             </div>
             <div class="modal-footer">
             		<a id="cancelCreateActivity" class="btn btnFormCancel" ng-click="closeAddActivity()">Cancella</a>
-                <button id="confirmCreateLD" type="submit" class="btn btnForm " ng-disabled="LdCreateForm.$invalid">
+                <button id="confirmCreateActivity" type="submit" class="btn btnForm " ng-disabled="LdCreateForm.$invalid">
                     Crea
                 </button>
             </div>
