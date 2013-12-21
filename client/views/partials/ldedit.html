@@ -505,13 +505,8 @@
                     </div>
                     <label class="formLabel"><i class="icon-ok"></i> Tipo*:</label>
                     <input class="formInput" type="text" ng-model="resourceType" name="resourceType"
-                           typeahead="suggestion for suggestion in getSubjects($viewValue)"
-                           typeahead-on-select="addTopicFromSuggestion()"
-                           ui-keypress="{13:'addTopicFromUserInput($event)'}"
                            ng-maxlength="50"
                            ng-pattern="/^[a-zA-Z0-9.,:;... òàùèéì/'/-//@#*]+$/">
-
-
                 </div>
 
                <!-- Resource Description -->
