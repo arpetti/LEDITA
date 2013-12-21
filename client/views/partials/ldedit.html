@@ -537,9 +537,8 @@
 
             </div>
             <div class="modal-footer">
-                <button id="cancelAddResource" class="btn btnFormCancel" ng-click="closeAddResource()">Cancella</button>
-                <button id="confirmAddResource" type="submit" class="btn btnForm "
-                        ng-disabled="AddResourceForm.$invalid">
+            	<a id="cancelAddResource" class="btn btnFormCancel" ng-click="closeAddResource()">Cancella</a>
+                <button id="confirmAddResource" type="submit" class="btn btnForm " ng-disabled="AddResourceForm.$invalid">
                     Aggiungi questa risorsa
                 </button>
             </div>
@@ -695,11 +694,8 @@
                     </label>
                     <span class="formInput">
                     	<a class="btn-mini btn resBtn" ng-click="createResource()"><i class="icon-plus icon-white"></i> Aggiungi una risorsa</a>
-                    	<!-- <button class="btn-mini btn" ng-click="createResource()"><i class="icon-plus"></i> Aggiungi una risorsa</button>
-                    	-->
                     </span>
                     <span class="clearfix"></span>
-
 
                     <div class="resTable">
                         <div class="headerResTable">
@@ -721,7 +717,6 @@
                             <div class="clearfix"></div>
                         </div>
                         <div ng-show="resourcesForDisplay.length" class="rowTable" >
-                           <!-- Add here a ng-repeat for resources -->
                             <div ng-repeat="resource in resourcesForDisplay" class="rowResLink">
                                 <a ng-href="">
                                     <div class="colTable colRes1">
@@ -776,7 +771,6 @@
             </div>
             <div class="modal-footer">
             		<a id="cancelCreateActivity" class="btn btnFormCancel" ng-click="closeAddActivity()">Cancella</a>
-                <!-- <button id="cancelCreateLd" class="btn btnFormCancel" ng-click="closeAddActivity()">Cancella</button> -->
                 <button id="confirmCreateLD" type="submit" class="btn btnForm " ng-disabled="LdCreateForm.$invalid">
                     Crea
                 </button>
