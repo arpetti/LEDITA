@@ -105,6 +105,8 @@ module.exports = {
 		    		resourceService.addResources(activityId, activityData.resources, function() {
 		    			callback(null, successInfo);
 		    		});
+		    	} else {
+		    		callback(null, successInfo);
 		    	}
 		    }
 
