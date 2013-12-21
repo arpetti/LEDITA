@@ -3,7 +3,7 @@ var studentsService = require('./StudentsService');
 var activityCreateDao = require('../dao/ActivityCreateDao');
 var composesService = require('./ComposesService');
 var technologyService = require('./TechnologyService');
-var resourceService = require('./Resourceservice');
+var resourceService = require('./ResourceService');
 var messages = require('../validate/ValidationMessages');
 var logger = require('../util/LogWrapper');
 
@@ -110,6 +110,7 @@ module.exports = {
 
 		], function (err, successInfo) {
 		   if(err) {
+		   	logger.log().error('Activity NOT created.', err);
 		   	cb(err, null, err.message);
 		   } else {
 		   	logger.log().info('Activity successfully created: ' + JSON.stringify(successInfo));
