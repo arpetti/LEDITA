@@ -6,6 +6,7 @@ var activityCreateDao = require('../../../server/dao/ActivityCreateDao');
 var composesService = require('../../../server/service/ComposesService');
 var technologyService = require('../../../server/service/TechnologyService');
 var resourceService = require('../../../server/service/ResourceService');
+var messages = require('../../../server/validate/ValidationMessages');
 var fixture = require('../../../server/service/ActivityCreateService');
 
 describe('Activity Create Service', function() {
@@ -184,6 +185,50 @@ describe('Activity Create Service', function() {
 
 			assert.isTrue(studentsServiceStub.withArgs(activityData.org, activityData.group_number, activityData.people_per_group).calledOnce);
 			assert.equal(activityCreateDaoStub.callCount, 0);
+			assert.equal(composesServiceStub.callCount, 0);
+			assert.equal(technologyServiceStub.callCount, 0);
+			assert.equal(resourceServiceStub.callCount, 0);
+			done();
+		};
+
+		fixture.createActivity(ldId, activityData, fixtureCb);
+	});
+
+	it('Calls back with error if Insert Activity DAO errors', function(done) {
+		var ldId = 1;
+
+		var insertedStudentsId = 101;
+  	var studentsServiceStub = sandbox.stub(studentsService, 'insertStudents', function(studentsType, groupNumber, peoplePerGroup, cb) {
+  		cb(null, insertedStudentsId, null);
+  	});		
+
+  	var activityCreateDaoError = new Error('something went wrong inserting activity');
+  	var activityCreateDaoStub = sandbox.stub(activityCreateDao, 'insertActivity', function(activityObj, cb) {
+  		cb(activityCreateDaoError);
+  	});
+
+  	var composesServiceStub = sandbox.stub(composesService, 'addActivity');
+  	var technologyServiceStub = sandbox.stub(technologyService, 'insertSupports');
+  	var resourceServiceStub = sandbox.stub(resourceService, 'addResources');
+
+  	var activityObjMatcher = sinon.match({
+  		students_id: insertedStudentsId,
+  		name: activityDataNoResource.actName,
+  		dur_min: activityDataNoResource.dur_min,
+  		dur_hh: activityDataNoResource.dur_h,
+  		dur_dd: activityDataNoResource.dur_d,
+  		pract_descr: activityDataNoResource.pract_descr,
+  		edu_descr: activityDataNoResource.edu_descr,
+  		modality: activityDataNoResource.modality
+  	});
+
+  	var fixtureCb = function(err, successInfo, message) {
+			expect(err).not.to.be.null;
+			expect(successInfo).to.be.null;
+			expect(message).to.equal(messages.ACTIVITY_INSERT_FAIL);
+
+			assert.isTrue(studentsServiceStub.withArgs(activityData.org, activityData.group_number, activityData.people_per_group).calledOnce);
+			assert.isTrue(activityCreateDaoStub.withArgs(activityObjMatcher).calledOnce);
 			assert.equal(composesServiceStub.callCount, 0);
 			assert.equal(technologyServiceStub.callCount, 0);
 			assert.equal(resourceServiceStub.callCount, 0);
