@@ -27,29 +27,9 @@ module.exports = {
 		return activityData.resources && activityData.resources.length > 0;
 	},
 
-	// cb(err, {activity_id : activityId, composes_id : composesId}, message)
+	// cb(err, successInfo, message)
 	createActivity: function(ldId, activityData, cb) {
-		logger.log().info('ActivityCreateService: ' + JSON.stringify(activityData));
-		// Sample Data:
-		// {
-		// 	"actName":"my activity name",										name
-		// 	"modality":"1",																	modality
-		//	"dur_mon":1,																		dur_mon
-		// 	"dur_d":2,																			dur_dd
-		// 	"dur_h":3,																			dur_hh
-		// 	"dur_min":4,																		dur_min
-		// 	"org":"1",																			--> ref: students_type.type
-		//	"group_number":5,																--> insert: students.group_number
-		//	"people_per_group":6,														--> insert: students.people_per_group
-		// 	"technologies":["Whiteboard","touch screen"],		--> get activity.id after insert, pass to TechnologyService
-		// 	"pract_descr":"long description",								pract_descr
-		// 	"edu_descr":"pedagogical long description",			edu_descr
-		//	"resources":[
-		//		{"name":"res1","type":"restype1","descr":"res descr 1","link":"http://res.1"},
-		//		{"name":"res2","type":"restype2","descr":"res 2 description","link":"http://res.2"}
-		//	]
-		// }
-
+		
 		async.waterfall([
 				
 				// Step 1: Insert STUDENTS
