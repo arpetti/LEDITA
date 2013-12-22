@@ -19,6 +19,7 @@
   },
   "scripts": {
     "test": "mocha test/server -R spec --recursive",
+    "test-cov": "mocha --require blanket test/server -R html-cov --recursive > coverage.html",
     "client-test": "karma start test/client/config/karma.config.js",
     "client-e2e-test": "karma start test/client/config/karma-e2e.conf.js"
   },
@@ -36,6 +37,12 @@
     "grunt-contrib-jshint": "~0.6.4",
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-uglify": "~0.2.7"
+    "grunt-contrib-uglify": "~0.2.7",
+    "blanket": "~1.1.6"
+  },
+  "config": {
+    "blanket": {
+      "pattern": "server"
+    }
   }
 }
