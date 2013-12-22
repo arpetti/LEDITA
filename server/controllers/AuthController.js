@@ -33,7 +33,16 @@ module.exports = {
                         }
                         req.logIn(addedUser, function(err) {
                             if(err)     { next(err); }
-                            else        { res.json(200, { "role": addedUser.role, "username": addedUser.username }); }
+                            // This must return same structured response as res.cookie set in routes.js
+                            else        { res.json(200, 
+                            	{ 
+                            		"role": addedUser.role, 
+                            		"username": addedUser.username,
+                            		"id": addedUser.id,
+                								"name": addedUser.name,
+                								"last_name": addedUser.last_name
+                            	}); 
+                          	}
                         });
                     });
                 });
@@ -57,7 +66,15 @@ module.exports = {
                 if(req.body.rememberme) {
                     req.session.cookie.maxAge = config.remember_me_ms;
                 }
-                res.json(200, { "role": user.role, "username": user.username });
+                // This must return same structured response as res.cookie set in routes.js
+                res.json(200, 
+                	{
+                		"role": user.role, 
+                		"username": user.username,
+                		"id": user.id,
+                		"name": user.name,
+                		"last_name": user.last_name
+                	});
             });
         })(req, res, next);
     },

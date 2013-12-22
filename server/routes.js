@@ -237,14 +237,20 @@ var routes = [
         path: '/*',
         httpMethod: 'GET',
         middleware: [function(req, res) {
-            var role = userRoles.public, username = '';
+            var role = userRoles.public, username = '', id = '', name = '', last_name = '';
             if(req.user) {
                 role = req.user.role;
-                username = req.user.username;
+                username = req.user.username; 	// eg: mario@email.it
+                id = req.user.id;								// eg: 1
+                name = req.user.name;						// eg: Mario
+                last_name = req.user.last_name;	// eg: Rossie
             }
             res.cookie('user', JSON.stringify({
                 'username': username,
-                'role': role
+                'role': role,
+                'id': id,
+                'name': name,
+                'last_name': last_name
             }));
             res.render('index.html');
         }],

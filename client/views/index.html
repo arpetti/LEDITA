@@ -79,15 +79,13 @@
                     <ul class="nav pull-right">
                         <a id="userActionsMenu" href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <li class="dropdown">
-
-                            <li id="loggedInUserName" class="nav-username">{{ user.username }}</li>
+                            <li id="loggedInUserName" class="nav-username">{{ user.name }} {{ user.last_name }}</li>
                             <img ng-src="/img/pics/user.png" alt="User Avatar" class="img-rounded user-pic"/>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <!-- FIXME: add dynamic links -->
-                            <li><a href="/useredit/1"><i class="icon-cog"></i> Il mio profilo</a></li>
-                            <li><a href="/userlds/1"><i class="icon-pencil"></i> I miei progetti</a></li>
+                            <li><a href="/useredit/{{user.id}}"><i class="icon-cog"></i> Il mio profilo</a></li>
+                            <li><a href="/userlds/{{user.id}}"><i class="icon-pencil"></i> I miei progetti</a></li>
                             <li class="divider"></li>
                             <li><a id="logoutLink" ng-click="logout()" href=""><i class="icon-off"></i> Esci</a></li>
                         </ul>
@@ -296,11 +294,14 @@
         <a href="https://github.com/danielabar" target="_blank">Daniela Baron</a></div>
 </div>
 
-<!-- TODO: Consider hosting angular libs locally so it can work even when offline -->
-<!-- Vendor Lib -->
+<!-- Vendor Lib: For development use locally hosted versions so it can work even when not wifi connected -->
 <script src="/js/lib/underscore-min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-cookies.js"></script>
+<script src="/js/lib/angular/angular.min.js"></script>
+<script src="/js/lib/angular/angular-cookies.js"></script>
+
+<!-- For production, use cdn -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.js"></script> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-cookies.js"></script> -->
 
 <!-- Client MVC -->
 <script src="/js/auth/AuthRoutingConfig.js"></script>

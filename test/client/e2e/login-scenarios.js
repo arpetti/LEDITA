@@ -19,6 +19,7 @@ describe('Login Flow', function() {
     it('Existing user can login', function() {
         var existingUserName = testUsers.getUserName;
         var existingUserPassword = testUsers.getUserPassword;
+        var existingUserDisplayName = testUsers.getUserDisplayName;
 
         browser().navigateTo('/login');
         expect(browser().location().url()).toBe('/login');
@@ -29,7 +30,7 @@ describe('Login Flow', function() {
         // Verify logged in view
         expect(element('#navBarUser', 'user nav is displayed for logged in user').css('display')).toBe('block');
         expect(element('#navBarAnon', 'anon nav is hidden for logged in user').css('display')).toBe('none');
-        expect(element('#loggedInUserName', 'user name is displayed for logged in user').text()).toBe(existingUserName);
+        expect(element('#loggedInUserName', 'user name is displayed for logged in user').text()).toBe(existingUserDisplayName);
 
         // Logout
         element('#userActionsMenu').click();

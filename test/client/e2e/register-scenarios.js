@@ -10,6 +10,7 @@ describe('Registration', function() {
 
 	it('New user can register', function() {
 		var userNameToRegister = 'john.smith@test.com';
+		var expectedUserDisplayName = 'John Smith';
 
     	// Register
 		browser().navigateTo('/login');
@@ -24,7 +25,7 @@ describe('Registration', function() {
 	    // Verify logged in view
 	    expect(element('#navBarUser', 'user nav is displayed for logged in user').css('display')).toBe('block');
 	    expect(element('#navBarAnon', 'anon nav is hidden for logged in user').css('display')).toBe('none');
-	    expect(element('#loggedInUserName', 'user name is displayed for logged in user').text()).toBe(userNameToRegister);
+	    expect(element('#loggedInUserName', 'user name is displayed for logged in user').text()).toBe(expectedUserDisplayName);
 
 	    // Logout
 	    element('#userActionsMenu').click();

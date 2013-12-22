@@ -5,10 +5,14 @@
 		{
 			username:   "sara@email.it",
 			password:   "passw0rD",
+			name: 			"Sara", 
+			last_name: 	"Neri"
 		},
 		{
 			username:   "mario@email.it",
 			password:   "passw0rD",
+			name: 			"Mario", 
+			last_name: 	"Rossi"
 		}
 	];
 
@@ -18,9 +22,11 @@
 
 	exports.getUserName = getUserName(users[0]);
 	exports.getUserPassword = getUserPassword(users[0]);
+	exports.getUserDisplayName = getUserDisplayName(users[0]);
 
 	exports.getMarioUserName = getUserName(users[1]);
 	exports.getMarioUserPassword = getUserPassword(users[1]);
+	exports.getMarioUserDisplayName = getUserDisplayName(users[1]);
 	
 	exports.buildLongEmailAddress = buildLongEmailAddress();
 
@@ -39,6 +45,10 @@
 
 	function getUserPassword(user) {
 		return user.password;
+	};
+
+	function getUserDisplayName(user) {
+		return [user.name, user.last_name].join(" ");
 	};
 
 	function buildLongEmailAddress() {
