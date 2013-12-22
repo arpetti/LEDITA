@@ -66,7 +66,10 @@ describe('Auth controller', function() {
             res.json = function(httpStatus, user) {
                 expect(httpStatus).to.equal(200);
                 expect(user.username).to.equal(addedUser.username);
-                expect(user.role).to.exist;
+                expect(user.role).to.equal(addedUser.role);
+                expect(user.id).to.equal(addedUser.id);
+                expect(user.name).to.equal(addedUser.name);
+                expect(user.last_name).to.equal(addedUser.last_name);
                 
                 assert.isTrue(userValidateStub.withArgs(req.body).calledOnce);
                 assert.isTrue(userValidateExistsStub.withArgs(req.body.username).calledOnce);
