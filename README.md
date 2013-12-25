@@ -193,6 +193,7 @@ If you're having a test failure, you can insert a breakpoint to figure out what'
 * ```coverage.html``` will be generated in the root project directory, open it in a browser
 * You may see stacktrace/error info, click on overview from top right corner to see the coverage stats
 * Click on any individual file to see uncovered lines
+* The coverage report is built using the [blanket](https://github.com/alex-seville/blanket) node module
 
 ## Production Deployment
 
