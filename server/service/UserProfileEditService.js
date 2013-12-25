@@ -11,7 +11,7 @@ module.exports = {
 				logger.log().error('Error occurred finding user profile by userId: ' + userId, err);
 				callback(err, null, messages.USER_FIND_FAIL);
 			} else if (result.length === 0) {
-					callback(err, null, messages.USER_NOT_FOUND);
+					callback(null, null, messages.USER_NOT_FOUND);
 			} else {
 					callback(null, result[0], null);
 			}

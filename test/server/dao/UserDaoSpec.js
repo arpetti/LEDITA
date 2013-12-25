@@ -26,6 +26,7 @@ describe('User DAO', function() {
         UserDao.getUserById(userId, function(err, results){
             expect(results).to.have.length(1);
             expect(results[0].id).to.equal(userId);
+            expect(results[0].image_id).not.to.be.null;
             expect(results[0].email).to.equal('antonio@email.it');
             expect(results[0].name).to.equal('Antonio');
             expect(results[0].last_name).to.equal('Verdi');
