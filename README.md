@@ -187,13 +187,21 @@ If you're having a test failure, you can insert a breakpoint to figure out what'
 
 * Click resume in the browser to continue the test
 
-### Run the Test Coverage Report
+### Run Test Coverage Report (server side)
 
 * ```npm run-script test-cov```
 * ```coverage.html``` will be generated in the root project directory, open it in a browser
 * You may see stacktrace/error info, click on overview from top right corner to see the coverage stats
 * Click on any individual file to see uncovered lines
 * The coverage report is built using the [blanket](https://github.com/alex-seville/blanket) node module
+
+### Run Tests on Mobile Devices (client side)
+
+* Make sure the mobile device(s) are connected on the same network as your computer
+* Determine your computer's IP address, for example on a mac ```ifconfig | grep inet```, on a PC ```ipconfig```
+* From the mobile device, open the browser and navigate to ```http://your-ip-address:9876``` (it may say page not available, that's ok for now)
+* From your computer, run ```npm run-script client-test```, and refresh the browser on the mobile device
+* Repeat for ```npm run-script client-e2e-test```
 
 ## Production Deployment
 
