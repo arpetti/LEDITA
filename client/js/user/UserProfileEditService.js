@@ -4,6 +4,10 @@ angular.module('ledita-app')
 
 			getUserProfile: function(success, error) {
 				$http.get('/userprofile').success(success).error(error);
+			},
+
+			shouldUpdate: function(modifiedField) {
+				return modifiedField && modifiedField.length > 0;
 			}
 
 		};
