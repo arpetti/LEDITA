@@ -3,9 +3,9 @@
 
         <div class="span3  centered top-margin ">
             <!-- FIXME: GET REAL PICTURE FROM DB -->
-            <img ng-src="../img/pics/user{{ user.image_id }}.png" class="user-pic-big">
+            <img ng-src="../img/pics/user{{ userProfile.image_id }}.png" class="user-pic-big">
             <div>
-                <a ng-href="/userlds/{{user.user_id}}">
+                <a ng-href="/userlds/{{userProfile.id}}">
                     <h4 class="userDesignsButton">I miei progetti</h4>
                 </a>
             </div>
@@ -13,116 +13,123 @@
         <!-- FIXME: GET REAL USER DATA FROM DB -->
         <div class="span1"></div>
         <div class="span8 top-margin userData">
+
+        		<!-- User First Name -->
             <form name="UserName" novalidate="" class="singleForm">
                 <div>
                     <label class="userLabel">Nome: </label>
                     <input class="userForm" type="text"
                            name="userName"
-                           ng-model="user.user_name" required
+                           ng-model="userProfile.name" required
                            ui-Blur="updateLdName()"
                            ng-maxlength="50"
                            ng-pattern="/^[a-zA-Zòàùèéì ]+$/">
 
                     <div class="errorBoxTab">
                         <span class="errorTipTab"
-                              ng-show="(learningDesign.ld_name == '') || (LdName.ldName.$dirty && LdName.ldName.$error.required)">Necessario!</span>
-                        <span class="errorTipTab" ng-show="LdName.ldName.$error.pattern">Simbolo non permesso.</span>
-                        <span class="errorTipTab" ng-show="LdName.ldName.$error.maxlength">Massimo 50 caratteri .</span>
+                              ng-show="(userProfile.name == '') || (userProfile.name.$dirty && userProfile.name.$error.required)">Necessario!</span>
+                        <span class="errorTipTab" ng-show="userProfile.name.$error.pattern">Simbolo non permesso.</span>
+                        <span class="errorTipTab" ng-show="userProfile.name.$error.maxlength">Massimo 50 caratteri .</span>
                     </div>
                 </div>
             </form>
 
+						<!-- User Last Name -->
             <form name="UserLastName" novalidate="" class="singleForm">
                 <div>
                     <label class="userLabel">Cognome: </label>
                     <input class="userForm" type="text"
                            name="userLastName"
-                           ng-model="user.last_name" required
+                           ng-model="userProfile.last_name" required
                            ui-Blur="updateLdName()"
                            ng-maxlength="100"
                            ng-pattern="/^[a-zA-Zòàùèéì ]+$/">
 
                     <div class="errorBoxTab">
                         <span class="errorTipTab"
-                              ng-show="(learningDesign.ld_name == '') || (LdName.ldName.$dirty && LdName.ldName.$error.required)">Necessario!</span>
-                        <span class="errorTipTab" ng-show="LdName.ldName.$error.pattern">Simbolo non permesso.</span>
-                        <span class="errorTipTab" ng-show="LdName.ldName.$error.maxlength">Massimo 50 caratteri .</span>
+                              ng-show="(userProfile.last_name == '') || (userProfile.last_name.$dirty && userProfile.last_name.$error.required)">Necessario!</span>
+                        <span class="errorTipTab" ng-show="userProfile.last_name.$error.pattern">Simbolo non permesso.</span>
+                        <span class="errorTipTab" ng-show="userProfile.last_name.$error.maxlength">Massimo 50 caratteri .</span>
                     </div>
                 </div>
             </form>
 
- <form name="UserEmail" novalidate="" class="singleForm">
+						<!-- User Email -->
+ 						<form name="UserEmail" novalidate="" class="singleForm">
                 <div>
                     <label class="userLabel">E-mail: </label>
                     <input class="userForm" type="text"
                            name="userEmail"
-                           ng-model="user.email" required
+                           ng-model="userProfile.email" required
                            ui-Blur="updateLdName()"
                            ng-maxlength="255"
                            ng-pattern="/^[a-zA-Z0-9@.]+$/">
 
                     <div class="errorBoxTab">
                         <span class="errorTipTab"
-                              ng-show="(learningDesign.ld_name == '') || (LdName.ldName.$dirty && LdName.ldName.$error.required)">Necessario!</span>
-                        <span class="errorTipTab" ng-show="LdName.ldName.$error.pattern">Simbolo non permesso.</span>
-                        <span class="errorTipTab" ng-show="LdName.ldName.$error.maxlength">Massimo 50 caratteri .</span>
+                              ng-show="(learningDesign.email == '') || (userprofile.email.$dirty && userProfile.email.$error.required)">Necessario!</span>
+                        <span class="errorTipTab" ng-show="userProfile.email.$error.pattern">Simbolo non permesso.</span>
+                        <span class="errorTipTab" ng-show="userProfile.email.$error.maxlength">Massimo 50 caratteri .</span>
                     </div>
                 </div>
             </form>
 
-        <form name="UserWorkplace" novalidate="" class="singleForm">
+						<!-- User Workplace -->
+        		<form name="UserWorkplace" novalidate="" class="singleForm">
                 <div>
                     <label class="userLabel">Luogo di lavoro: </label>
                     <input class="userForm" type="text"
                            name="userWorkplace"
-                           ng-model="user.workplace"
+                           ng-model="userProfile.workplace"
                            ui-Blur="updateLdName()"
                            ng-maxlength="50"
                            ng-pattern="/^[a-zA-Zòàùèéì ]+$/">
 
                     <div class="errorBoxTab">
                         <span class="errorTipTab"
-                              ng-show="(learningDesign.ld_name == '') || (LdName.ldName.$dirty && LdName.ldName.$error.required)">Necessario!</span>
-                        <span class="errorTipTab" ng-show="LdName.ldName.$error.pattern">Simbolo non permesso.</span>
-                        <span class="errorTipTab" ng-show="LdName.ldName.$error.maxlength">Massimo 50 caratteri .</span>
+                              ng-show="(userProfile.workplace == '') || (userProfile.workplace.$dirty && userProfile.workplace.$error.required)">Necessario!</span>
+                        <span class="errorTipTab" ng-show="userProfile.workplace.$error.pattern">Simbolo non permesso.</span>
+                        <span class="errorTipTab" ng-show="userProfile.workplace.$error.maxlength">Massimo 50 caratteri .</span>
                     </div>
                 </div>
             </form>
-
+	
+						<!-- User City -->
             <form name="City" novalidate="" class="singleForm">
                 <div>
                     <label class="userLabel">Citt&agrave;: </label>
                     <input class="userForm" type="text"
                            name="city"
-                           ng-model="user.city"
+                           ng-model="userProfile.city"
                            ui-Blur="updateLdName()"
                            ng-maxlength="50"
                            ng-pattern="/^[a-zA-Zòàùèéì ]+$/">
 
                     <div class="errorBoxTab">
                         <span class="errorTipTab"
-                              ng-show="(learningDesign.ld_name == '') || (LdName.ldName.$dirty && LdName.ldName.$error.required)">Necessario!</span>
-                        <span class="errorTipTab" ng-show="LdName.ldName.$error.pattern">Simbolo non permesso.</span>
-                        <span class="errorTipTab" ng-show="LdName.ldName.$error.maxlength">Massimo 50 caratteri .</span>
+                              ng-show="(userProfile.city == '') || (userProfile.city.$dirty && userProfile.city.$error.required)">Necessario!</span>
+                        <span class="errorTipTab" ng-show="userProfile.city.$error.pattern">Simbolo non permesso.</span>
+                        <span class="errorTipTab" ng-show="userProfile.city.$error.maxlength">Massimo 50 caratteri .</span>
                     </div>
                 </div>
             </form>
 
+						<!-- User Country -->
             <form name="Country" novalidate="" class="singleForm">
                 <div>
                     <label class="userLabel">Paese: </label>
                     <input class="userForm" type="text"
                            name="country"
-                           ng-model="user.country"
+                           ng-model="userProfile.country"
                            ui-Blur="updateLdName()"
                            ng-maxlength="50"
                            ng-pattern="/^[a-zA-Zòàùèéì ]+$/">
 
                     <div class="errorBoxTab">
                         <span class="errorTipTab"
-                              ng-show="(learningDesign.ld_name == '') || (LdName.ldName.$dirty && LdName.ldName.$error.required)">Necessario!</span>
-                        <span class="errorTipTab" ng-show="LdName.ldName.$error.pattern">Simbolo non permesso.</span>
-                        <span class="errorTipTab" ng-show="LdName.ldName.$error.maxlength">Massimo 50 caratteri .</span>
+                              ng-show="(userProfile.country == '') || (userProfile.country.$dirty && userProfile.country.$error.required)">Necessario!</span>
+                        <span class="errorTipTab" ng-show="userProfile.country.$error.pattern">Simbolo non permesso.</span>
+                        <span class="errorTipTab" ng-show="userProfile.country.$error.maxlength">Massimo 50 caratteri .</span>
                     </div>
                 </div>
             </form>

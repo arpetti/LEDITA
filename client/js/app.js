@@ -30,10 +30,10 @@ angular.module('ledita-app', ['ngCookies', 'infinite-scroll', 'ui.bootstrap', 'u
                 controller: 'UserProfileCtrl',
                 access: access.user
             });
-        $routeProvider.when('/useredit/:userid',
+        $routeProvider.when('/useredit',
             {
                 templateUrl: '/partials/useredit',
-                controller: 'UserProfileCtrl',
+                controller: 'UserProfileEditCtrl',
                 access: access.user
             });
         $routeProvider.when('/users',

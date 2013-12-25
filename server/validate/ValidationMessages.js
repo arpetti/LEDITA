@@ -41,6 +41,7 @@ module.UNABLE_TO_RETRIEVE_TECHNOLOGIES = "Impossibile recuperare le tecnologie i
 // User Profile
 module.exports.USER_DETAIL_NOT_FOUND = "Impossibile trovare i dettagli del profilo utente";
 module.exports.USER_NOT_FOUND = "Impossibile trovare l\'utente.";
+module.exports.USER_FIND_FAIL = 'An error occurred retrieving user profile.';
 
 // Learning Design Creation - nome
 module.exports.LD_NAME_REQUIRED = 'Il nome del progetto è necessario.';

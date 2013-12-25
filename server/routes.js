@@ -7,6 +7,7 @@ var LdController = require('./controllers/LdController');
 var LdEditController = require('./controllers/LdEditController');
 var MoveNodeController = require('./controllers/MoveNodeController');
 var UserProfileController = require('./controllers/UserProfileController');
+var UserProfileEditController = require('./controllers/UserProfileEditController');
 var ActivityController = require('./controllers/ActivityController');
 var RefController = require('./controllers/RefController');
 var User = require('./models/User.js');
@@ -168,6 +169,14 @@ var routes = [
         accessLevel: accessLevels.user
     },
 
+    // User Profile Edit (don't need :id in path because these operate on currently logged in user)
+    {
+    	path: '/userprofile',
+    	httpMethod: 'GET',
+      middleware: [ensureAuthenticated, ensureAuthorized, UserProfileEditController.getUserProfile],
+      accessLevel: accessLevels.user
+    },
+
     // User Profile
     {
         path: '/userprofiles',
@@ -311,4 +320,15 @@ function ensureOwner(req, res, next) {
 			return next();
 		}
 	});
+
+	// #47 may not need this, remove :id from private user profile path
+	function ensureOwnerProfile(req, res, next) {
+		var requestUserId = req.params.id;
+		var loggedInUserId = req.user.id;
+		if(requestUserId !== loggedInUserId) {
+			return res.send(401);
+		} else {
+			return next();
+		}
+	}
 }

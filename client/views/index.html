@@ -84,7 +84,7 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/useredit/{{user.id}}"><i class="icon-cog"></i> Il mio profilo</a></li>
+                            <li><a href="/useredit"><i class="icon-cog"></i> Il mio profilo</a></li>
                             <li><a href="/userlds/{{user.id}}"><i class="icon-pencil"></i> I miei progetti</a></li>
                             <li class="divider"></li>
                             <li><a id="logoutLink" ng-click="logout()" href=""><i class="icon-off"></i> Esci</a></li>
@@ -303,7 +303,7 @@
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.js"></script> -->
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-cookies.js"></script> -->
 
-<!-- Client MVC -->
+<!-- Development Client MVC (for production, use concat version) -->
 <script src="/js/auth/AuthRoutingConfig.js"></script>
 <script src="/js/app.js"></script>
 <script src="/js/auth/AuthService.js"></script>
@@ -323,6 +323,8 @@
 <script src="/js/activity/lvl-drag-and-drop.js"></script>
 <script src="/js/activity/ActivityController.js"></script>
 <script src="/js/activity/ActivityService.js"></script>
+<script src="/js/user/UserProfileEditService.js"></script>
+<script src="/js/user/UserProfileEditController.js"></script>
 <script src="/js/user/UserController.js"></script>
 <script src="/js/user/UserService.js"></script>
 
