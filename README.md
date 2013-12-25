@@ -187,6 +187,13 @@ If you're having a test failure, you can insert a breakpoint to figure out what'
 
 * Click resume in the browser to continue the test
 
+### Run the Test Coverage Report
+
+* ```npm run-script test-cov```
+* ```coverage.html``` will be generated in the root project directory, open it in a browser
+* You may see stacktrace/error info, click on overview from top right corner to see the coverage stats
+* Click on any individual file to see uncovered lines
+
 ## Production Deployment
 
 These instructions are a work in progress. Grunt.js should be considered for automating some of these steps where possible.
