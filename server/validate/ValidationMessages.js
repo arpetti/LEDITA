@@ -18,6 +18,10 @@ module.exports.UNABLE_TO_RETRIEVE_USER = 'Impossibile recuperare i dettagli dell
 module.exports.INVALID_USERNAME_PASSWORD = 'Email o password invalidi.';
 module.exports.LOGIN_SUCCESS = "Login effetuato con successo.";
 
+// User Profile Updates
+module.exports.USER_PROFILE_UPDATE_FIRST_NAME_FAIL = 'Unable to update first name.';
+module.exports.USER_PROFILE_UPDATE_LAST_NAME_FAIL = 'Unable to update last name.';
+
 // Learning Design Retrieval
 module.exports.UNABLE_TO_RETRIEVE_LDS = 'Impossibile recuperare i progetti in questo momento, per favore, tenta più tardi.';
 module.exports.LD_NOT_FOUND = "Impossibile trovare questo progetto.";

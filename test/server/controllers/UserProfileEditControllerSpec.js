@@ -21,7 +21,9 @@ describe('User Profile Edit Controller', function() {
 		});
 
 		it('Sends 500 if service calls back with error', function(done) {
-			req.user = {id: 32};
+			req.user = {
+				id: 32
+			};
 			var serviceError = new Error('something went wrong getting user profile');
 			var serviceMessage = 'user find failure';
 			var serviceStub = sandbox.stub(userProfileEditService, 'getUserProfile', function(userId, cb) {
@@ -38,7 +40,9 @@ describe('User Profile Edit Controller', function() {
 		});
 
 		it('Sends 404 if user not found', function(done) {
-			req.user = {id: 33};
+			req.user = {
+				id: 33
+			};
 			var serviceMessage = 'user not found';
 			var serviceStub = sandbox.stub(userProfileEditService, 'getUserProfile', function(userId, cb) {
 				cb(null, null, serviceMessage);
@@ -54,8 +58,14 @@ describe('User Profile Edit Controller', function() {
 		});
 
 		it('Sends 200 with user when found', function(done) {
-			req.user = {id: 33};
-			var serviceResponse = {id: 33, name: 'Joe', last_name: 'Schmoe'};
+			req.user = {
+				id: 33
+			};
+			var serviceResponse = {
+				id: 33,
+				name: 'Joe',
+				last_name: 'Schmoe'
+			};
 			var serviceStub = sandbox.stub(userProfileEditService, 'getUserProfile', function(userId, cb) {
 				cb(null, serviceResponse, null);
 			});
@@ -68,6 +78,62 @@ describe('User Profile Edit Controller', function() {
 			};
 			fixture.getUserProfile(req, res);
 		})
+
+	});
+
+	describe('Update First Name', function() {
+
+		var req = {};
+		var res = {};
+		var sandbox = sinon.sandbox.create();
+
+		beforeEach(function() {
+
+		});
+
+		afterEach(function() {
+			sandbox.restore();
+		});
+
+		it('Sends 500 with message when service calls back with error', function(done) {
+			req.user = {
+				id: 32
+			};
+			req.body = {
+				firstName: 'Janice'
+			};
+			var serviceError = new Error('something went wrong with service updating user profile first name');
+			var serviceMessage = 'update first name failed';
+			var serviceStub = sandbox.stub(userProfileEditService, 'updateFirstName', function(userId, firstName, cb) {
+				cb(serviceError, serviceMessage);
+			});
+			res.send = function(httpStatus, responseData) {
+				expect(httpStatus).to.equal(500);
+				expect(responseData).to.equal(serviceMessage);
+				assert.isTrue(serviceStub.withArgs(req.user.id, req.body.firstName).calledOnce);
+				done();
+			};
+			fixture.updateFirstName(req, res);
+		});
+
+		it('Sends 200 with empty response when successful', function(done) {
+			req.user = {
+				id: 32
+			};
+			req.body = {
+				firstName: 'Janice'
+			};
+			var serviceStub = sandbox.stub(userProfileEditService, 'updateFirstName', function(userId, firstName, cb) {
+				cb();
+			});
+			res.json = function(httpStatus, responseData) {
+				expect(httpStatus).to.equal(200);
+				expect(responseData).to.be.empty;
+				assert.isTrue(serviceStub.withArgs(req.user.id, req.body.firstName).calledOnce);
+				done();
+			}
+			fixture.updateFirstName(req, res);
+		});
 
 	});
 

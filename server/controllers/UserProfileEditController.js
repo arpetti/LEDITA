@@ -3,8 +3,8 @@ var userProfileEditService = require('../service/UserProfileEditService');
 module.exports = {
 
 	getUserProfile: function(req, res) {
-		var currentlyLoggedInUserId = req.user.id;
-		userProfileEditService.getUserProfile(currentlyLoggedInUserId, function(err, user, message) {
+		var userId = req.user.id;
+		userProfileEditService.getUserProfile(userId, function(err, user, message) {
 			if(err) {
 				return res.send(500, message);
 			} else if (!user) {
@@ -15,12 +15,17 @@ module.exports = {
 		});
 	},
 
-	// #47 wip...
+	// TODO #47 validate userData.firstName before passing it on to service
 	updateFirstName: function(req, res) {
-		var currentlyLoggedInUserId = req.user.id;
+		var userId = req.user.id;
 		var userData = req.body;
-		// TODO validate userData.firstName before passing it on to service
-		res.json(200, {});
+		userProfileEditService.updateFirstName(userId, userData.firstName, function(err, message) {
+			if(err){
+				return res.send(500, message);
+			} else {
+				res.json(200, {});
+			}
+		});
 	}
 
 };

@@ -1,4 +1,5 @@
 var userDao = require('../dao/UserDao');
+var userProfileEditDao = require('../dao/UserProfileEditDao');
 var messages = require('../validate/ValidationMessages');
 var logger = require('../util/LogWrapper');
 
@@ -14,6 +15,18 @@ module.exports = {
 					callback(null, null, messages.USER_NOT_FOUND);
 			} else {
 					callback(null, result[0], null);
+			}
+		});
+	},
+
+	// callback(err, message)
+	updateFirstName: function(userId, firstName, callback) {
+		userProfileEditDao.updateFirstName(userId, firstName, function(err, result) {
+			if(err) {
+				logger.log().error('Error occurred updating user profile first name for userId: ' + userId, err);
+				callback(err, messages.USER_PROFILE_UPDATE_FIRST_NAME_FAIL);
+			} else {
+				callback();
 			}
 		});
 	}
