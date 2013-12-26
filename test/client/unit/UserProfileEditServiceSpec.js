@@ -37,6 +37,48 @@ describe('User Profile Edit Service', function() {
 		$httpBackend.flush();
 	});
 
+	it('Updates First Name', function() {
+		var userData = {firstName: 'johnny'};
+		var serverResponseSuccess = {};
+		var success = function(res) {
+			expect(res).toEqual(serverResponseSuccess);
+		};
+		var error = function() {
+			expect(false).toBe(true); // should not get here
+		};
+		$httpBackend.when('PUT', '/userprofile/firstname', userData).respond(serverResponseSuccess);
+    service.updateFirstName(userData, success, error);
+    $httpBackend.flush();
+	});
+
+	it('Updates Last Name Success', function() {
+		var userData = {lastName: 'brown'};
+		var serverResponseSuccess = {};
+		var success = function(res) {
+			expect(res).toEqual(serverResponseSuccess);
+		};
+		var error = function() {
+			expect(false).toBe(true); // should not get here
+		};
+		$httpBackend.when('PUT', '/userprofile/lastname', userData).respond(200, serverResponseSuccess);
+    service.updateLastName(userData, success, error);
+    $httpBackend.flush();
+	});
+
+	it('Updates Last Name Error', function() {
+		var userData = {lastName: 'brown'};
+		var serverResponseError = 'update failed';
+		var success = function(res) {
+			expect(false).toBe(true); // should not get here
+		};
+		var error = function(err) {
+			expect(err).toEqual(serverResponseError);
+		};
+		$httpBackend.when('PUT', '/userprofile/lastname', userData).respond(500, serverResponseError);
+    service.updateLastName(userData, success, error);
+    $httpBackend.flush();
+	});
+
 	describe('Should Update Field', function() {
 
 		it('Is truthy if modified field is populated', function() {

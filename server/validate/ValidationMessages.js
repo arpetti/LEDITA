@@ -18,6 +18,11 @@ module.exports.UNABLE_TO_RETRIEVE_USER = 'Impossibile recuperare i dettagli dell
 module.exports.INVALID_USERNAME_PASSWORD = 'Email o password invalidi.';
 module.exports.LOGIN_SUCCESS = "Login effetuato con successo.";
 
+// User Profile
+module.exports.USER_DETAIL_NOT_FOUND = "Impossibile trovare i dettagli del profilo utente";
+module.exports.USER_NOT_FOUND = "Impossibile trovare l\'utente.";
+module.exports.USER_FIND_FAIL = 'An error occurred retrieving user profile.';
+
 // User Profile Updates
 module.exports.USER_PROFILE_UPDATE_FIRST_NAME_FAIL = 'Unable to update first name.';
 module.exports.USER_PROFILE_UPDATE_LAST_NAME_FAIL = 'Unable to update last name.';
@@ -41,11 +46,6 @@ module.UNABLE_TO_RETRIEVE_SCOPES= "Impossibile recuperare gli ambiti in questo m
 module.UNABLE_TO_RETRIEVE_SUBJECTS = "Impossibile recuperare gli argomenti in questo momento, per favore, tenta più tardi.";
 module.UNABLE_TO_RETRIEVE_OBJECTIVES = "Impossibile recuperare gli obiettivi in questo momento, per favore, tenta più tardi.";
 module.UNABLE_TO_RETRIEVE_TECHNOLOGIES = "Impossibile recuperare le tecnologie in questo momento, per favore, tenta più tardi.";
-
-// User Profile
-module.exports.USER_DETAIL_NOT_FOUND = "Impossibile trovare i dettagli del profilo utente";
-module.exports.USER_NOT_FOUND = "Impossibile trovare l\'utente.";
-module.exports.USER_FIND_FAIL = 'An error occurred retrieving user profile.';
 
 // Learning Design Creation - nome
 module.exports.LD_NAME_REQUIRED = 'Il nome del progetto è necessario.';

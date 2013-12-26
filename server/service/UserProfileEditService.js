@@ -29,6 +29,18 @@ module.exports = {
 				callback();
 			}
 		});
+	},
+
+	// callback(err, message)
+	updateLastName: function(userId, lastName, callback) {
+		userProfileEditDao.updateLastName(userId, lastName, function(err, result) {
+			if(err) {
+				logger.log().error('Error occurred updating user profile last name for userId: ' + userId, err);
+				callback(err, messages.USER_PROFILE_UPDATE_LAST_NAME_FAIL);
+			} else {
+				callback();
+			}
+		});
 	}
 
 };

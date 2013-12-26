@@ -182,6 +182,12 @@ var routes = [
       middleware: [ensureAuthenticated, ensureAuthorized, UserProfileEditController.updateFirstName],
       accessLevel: accessLevels.user
     },
+    {
+    	path: '/userprofile/lastname',
+    	httpMethod: 'PUT',
+      middleware: [ensureAuthenticated, ensureAuthorized, UserProfileEditController.updateLastName],
+      accessLevel: accessLevels.user
+    },
 
     // User Profile
     {
@@ -327,14 +333,4 @@ function ensureOwner(req, res, next) {
 		}
 	});
 
-	// #47 may not need this, remove :id from private user profile path
-	function ensureOwnerProfile(req, res, next) {
-		var requestUserId = req.params.id;
-		var loggedInUserId = req.user.id;
-		if(requestUserId !== loggedInUserId) {
-			return res.send(401);
-		} else {
-			return next();
-		}
-	}
 }

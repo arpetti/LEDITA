@@ -118,6 +118,51 @@ describe('User Profile Edit Service', function() {
 			};
 			fixture.updateFirstName(userId, firstName, serviceCB);
 		});
+		
+	});
+
+	describe('Update Last Name', function() {
+
+		beforeEach(function() {
+
+		});
+
+		afterEach(function() {
+			sandbox.restore();
+		});
+
+		it('Calls back with error when user dao errors', function(done) {
+			var userId = 45;
+			var lastName = 'Smiths';
+			var daoErr = new Error('something went wrong updating user profile last name');
+			var daoStub = sandbox.stub(userProfileEditDao, 'updateLastName', function(userId, lastName, cb) {
+				cb(daoErr);
+			});
+			var serviceCB = function(err, message) {
+				expect(err).to.equal(daoErr);
+				expect(message).to.equal(messages.USER_PROFILE_UPDATE_LAST_NAME_FAIL);
+				assert.isTrue(daoStub.withArgs(userId, lastName).calledOnce);
+				done();
+			};
+			fixture.updateLastName(userId, lastName, serviceCB);
+		});
+
+		it('Calls back with nothing when successful', function(done) {
+			var userId = 45;
+			var lastName = 'Smiths';
+			var daoResult = 0;
+			var daoStub = sandbox.stub(userProfileEditDao, 'updateLastName', function(userId, lastName, cb) {
+				cb(null, daoResult);
+			});
+			var serviceCB = function(err, message) {
+				expect(err).to.be.undefined;
+				expect(message).to.be.undefined;
+				assert.isTrue(daoStub.withArgs(userId, lastName).calledOnce);
+				done();
+			};
+			fixture.updateLastName(userId, lastName, serviceCB);
+		});
+
 	});
 
 });
