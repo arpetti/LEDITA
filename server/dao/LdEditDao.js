@@ -17,61 +17,53 @@ var buildLdData = function(item, ldId) {
 	return [item, new Date(), ldId];
 };
 
-var handleResult = function(cb, err, result) {
-	if(err) {
-		cb(err);
-	} else {
-		cb(null, result);
-	}
-};
-
 module.exports = {
 
 	updateLdName: function(ldName, ldId, callback) {
 		dao.insertOrUpdateRecord(UPDATE_LD_NAME, buildLdData(ldName, ldId), function(err, result) {
-			handleResult(callback, err, result);
+			dao.handleResult(callback, err, result);
 		});
 	},
 
 	updateLdScope: function(scopeId, ldId, callback) {
 		dao.insertOrUpdateRecord(UPDATE_LD_SCOPE, buildLdData(scopeId, ldId), function(err, result) {
-			handleResult(callback, err, result);
+			dao.handleResult(callback, err, result);
 		});
 	},
 
 	updateLdPublication: function(publication, ldId, callback) {
 		dao.insertOrUpdateRecord(UPDATE_LD_PUBLICATION, buildLdData(publication, ldId), function(err, result) {
-			handleResult(callback, err, result);
+			dao.handleResult(callback, err, result);
 		});
 	},
 
 	updateLdStudentsDescr: function(ldStudentsDescr, ldId, callback) {
 		dao.insertOrUpdateRecord(UPDATE_STUDENTS_DESCR, buildLdData(ldStudentsDescr, ldId), function(err, result) {
-			handleResult(callback, err, result);
+			dao.handleResult(callback, err, result);
 		});
 	},
 
 	deleteClassificates: function(ldId, callback) {
 		dao.deleteRecord(DELETE_CLASSIFICATES, [ldId], function(err, result) {
-			handleResult(callback, err, result);
+			dao.handleResult(callback, err, result);
 		});
 	},
 
 	deleteConcern: function(ldId, subjectId, callback) {
 		dao.deleteRecord(DELETE_CONCERN, [ldId, subjectId], function(err, result) {
-			handleResult(callback, err, result);
+			dao.handleResult(callback, err, result);
 		});
 	},
 
 	deleteAim: function(ldId, objectiveId, callback) {
 		dao.deleteRecord(DELETE_AIM, [ldId, objectiveId], function(err, result) {
-			handleResult(callback, err, result);
+			dao.handleResult(callback, err, result);
 		});
 	},
 
 	deleteNeed: function(ldId, objectiveId, callback) {
 		dao.deleteRecord(DELETE_NEED, [ldId, objectiveId], function(err, result) {
-			handleResult(callback, err, result);
+			dao.handleResult(callback, err, result);
 		});
 	}
 
