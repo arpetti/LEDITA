@@ -13,6 +13,14 @@ module.exports = {
 				res.json(200, user);
 			}
 		});
+	},
+
+	// #47 wip...
+	updateFirstName: function(req, res) {
+		var currentlyLoggedInUserId = req.user.id;
+		var userData = req.body;
+		// TODO validate userData.firstName before passing it on to service
+		res.json(200, {});
 	}
 
 };

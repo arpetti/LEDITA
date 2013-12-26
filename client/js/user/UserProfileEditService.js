@@ -8,6 +8,12 @@ angular.module('ledita-app')
 
 			shouldUpdate: function(modifiedField) {
 				return modifiedField && modifiedField.length > 0;
+			},
+
+			updateFirstName: function(userData, success, error) {
+				$http.put('/userprofile/firstname', userData).success(function(res) {
+					success(res);
+				}).error(error);
 			}
 
 		};

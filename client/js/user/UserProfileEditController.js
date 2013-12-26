@@ -14,8 +14,16 @@ angular.module('ledita-app')
 
 			$scope.updateUserProfileFirstName = function() {
 				var modifiedFirstName = $scope.userProfile.name;
-				if(UserProfileEditService.shouldUpdate(modifiedFirstName)) {
-					$log.info('User Profile First Name will be updated: ' + modifiedFirstName);
+				if (UserProfileEditService.shouldUpdate(modifiedFirstName)) {
+					UserProfileEditService.updateFirstName({firstName: modifiedFirstName},
+						function(res) {
+							$log.info('updateUserProfile firstName successful');
+							$scope.userProfileUpdateErrors = "Modifica salvata!";
+						},
+						function(err) {
+							$log.error(err);
+							$scope.userProfileUpdateErrors = err; 
+						});
 				};
 			};
 
