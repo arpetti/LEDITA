@@ -187,11 +187,18 @@ If you're having a test failure, you can insert a breakpoint to figure out what'
 
 * Click resume in the browser to continue the test
 
+### View Client side Test Coverage Reports
+
+* Run the unit and e2e tests, karma has been configured to generate coverage reports
+* Open unit test report in browser ```your-project-root/test/client/coverage/unit/Chrome-generated-version-stuff/lcov-report/index.html```
+* Open e2e test report in browser ```your-project-root/test/client/coverage/e2e/Chrome-generated-version-stuff/lcov-report/index.html```
+* [karma-coverage](https://github.com/karma-runner/karma-coverage) is used to generate coverage reports for client side unit and e2e tests
+
 ### Run Test Coverage Report (server side)
 
 * ```npm run-script test-cov```
-* ```coverage.html``` will be generated in the root project directory, open it in a browser
-* You may see stacktrace/error info, click on overview from top right corner to see the coverage stats
+* ```coverage.html``` will be generated in ```test/server/coverage.html```, open it in a browser
+* You may see stacktrace/error info, click on ```overview``` from top right corner to see the coverage stats
 * Click on any individual file to see uncovered lines
 * The coverage report is built using the [blanket](https://github.com/alex-seville/blanket) node module
 

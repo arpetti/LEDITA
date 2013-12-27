@@ -4,7 +4,6 @@ module.exports = function(config) {
   sharedConfig(config);
 
   config.set({
-  	basePath: '../',
   	proxyValidateSSL: false,
   	singleRun: true,
     frameworks: [],
@@ -23,6 +22,12 @@ module.exports = function(config) {
     junitReporter: {
       outputFile: 'test_out/e2e.xml',
       suite: 'E2E'
+    },
+
+    coverageReporter: {
+      type : 'lcov',
+      dir : 'coverage/e2e/'
     }
+
   });
 };

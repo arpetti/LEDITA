@@ -4,7 +4,6 @@ module.exports = function(config) {
     sharedConfig(config);
   
     config.set({
-        basePath: '../',
 
         // list of files / patterns to load in the browser
         files: [
@@ -33,6 +32,11 @@ module.exports = function(config) {
         captureTimeout: 60000,
 
         // Continuous Integration mode, if true, it capture browsers, run tests and exit
-        singleRun: true
+        singleRun: true,
+
+        coverageReporter: {
+		      type : 'lcov',
+		      dir : 'coverage/unit/'
+		    }
     });
 };
