@@ -27,6 +27,8 @@
 	exports.getMarioUserName = getUserName(users[1]);
 	exports.getMarioUserPassword = getUserPassword(users[1]);
 	exports.getMarioUserDisplayName = getUserDisplayName(users[1]);
+	exports.getMarioFirstName = getUserFirstName(users[1]);
+	exports.getMarioLastName = getUserLastName(users[1]);
 	
 	exports.buildLongEmailAddress = buildLongEmailAddress();
 
@@ -50,6 +52,14 @@
 	function getUserDisplayName(user) {
 		return [user.name, user.last_name].join(" ");
 	};
+
+	function getUserFirstName(user) {
+		return user.name;
+	};
+
+	function getUserLastName(user) {
+		return user.last_name;
+	}
 
 	function buildLongEmailAddress() {
 		var tempArray = [];

@@ -17,7 +17,7 @@
             <form name="UserName" novalidate="" class="singleForm">
                 <div>
                     <label class="userLabel">Nome: </label>
-                    <input class="userForm" type="text"
+                    <input id="userProfileFirstName" class="userForm" type="text"
                            name="userName"
                            ng-model="userProfile.name" required
                            ui-Blur="updateUserProfileFirstName()"
@@ -37,7 +37,7 @@
             <form name="UserLastName" novalidate="" class="singleForm">
                 <div>
                     <label class="userLabel">Cognome: </label>
-                    <input class="userForm" type="text"
+                    <input id="userProfileLastName" class="userForm" type="text"
                            name="userLastName"
                            ng-model="userProfile.last_name" required
                            ui-Blur="updateUserProfileLastName()"

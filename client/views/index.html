@@ -295,6 +295,8 @@
 </div>
 
 <!-- Vendor Lib: For development use locally hosted versions so it can work even when not wifi connected -->
+<!-- Important: load jquery BEFORE angular so it will be used instead of JQLite -->
+<script src="/js/lib/jquery.js"></script>
 <script src="/js/lib/underscore-min.js"></script>
 <script src="/js/lib/angular/angular.min.js"></script>
 <script src="/js/lib/angular/angular-cookies.js"></script>
@@ -329,14 +331,12 @@
 <script src="/js/user/UserService.js"></script>
 
 <!-- Bootstrap -->
-<script src="/js/lib/jquery.js"></script>
 <script src="/js/lib/bootstrap.js"></script>
 <script src="/js/lib/ui-bootstrap-tpls-0.4.0.min.js"></script>
 
 <!-- Util -->
 <script src="/js/lib/ng-infinite-scroll.min.js"></script>
 <script src="/js/lib/ui-utils.min.js"></script>
-
 
 <script>
 
