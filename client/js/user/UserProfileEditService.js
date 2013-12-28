@@ -20,6 +20,12 @@ angular.module('ledita-app')
 				$http.put('/userprofile/lastname', userData).success(function(res) {
 					success(res);
 				}).error(error);
+			},
+
+			updateEmail: function(userData, success, error) {
+				$http.put('/userprofile/email', userData).success(function(res) {
+					success(res);
+				}).error(error);
 			}
 
 		};

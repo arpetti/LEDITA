@@ -79,6 +79,34 @@ describe('User Profile Edit Service', function() {
     $httpBackend.flush();
 	});
 
+	it('Updates Email Success', function() {
+		var userData = {email: 'a@b.c'};
+		var serverResponseSuccess = {};
+		var success = function(res) {
+			expect(res).toEqual(serverResponseSuccess);
+		};
+		var error = function() {
+			expect(false).toBe(true); // should not get here
+		};
+		$httpBackend.when('PUT', '/userprofile/email', userData).respond(200, serverResponseSuccess);
+    service.updateEmail(userData, success, error);
+    $httpBackend.flush();
+	});
+
+	it('Updates Email Error', function() {
+		var userData = {email: 'a@b.c'};
+		var serverResponseError = 'update failed';
+		var success = function(res) {
+			expect(false).toBe(true); // should not get here
+		};
+		var error = function(err) {
+			expect(err).toEqual(serverResponseError);
+		};
+		$httpBackend.when('PUT', '/userprofile/email', userData).respond(500, serverResponseError);
+    service.updateEmail(userData, success, error);
+    $httpBackend.flush();
+	});
+
 	describe('Should Update Field', function() {
 
 		it('Is truthy if modified field is populated', function() {
