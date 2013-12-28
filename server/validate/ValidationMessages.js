@@ -24,8 +24,9 @@ module.exports.USER_NOT_FOUND = "Impossibile trovare l\'utente.";
 module.exports.USER_FIND_FAIL = 'An error occurred retrieving user profile.';
 
 // User Profile Updates
-module.exports.USER_PROFILE_UPDATE_FIRST_NAME_FAIL = 'Unable to update first name.';
-module.exports.USER_PROFILE_UPDATE_LAST_NAME_FAIL = 'Unable to update last name.';
+module.exports.USER_PROFILE_UPDATE_FIRST_NAME_FAIL = 'Unable to update user profile first name.';
+module.exports.USER_PROFILE_UPDATE_LAST_NAME_FAIL = 'Unable to update user profile last name.';
+module.exports.USER_PROFILE_UPDATE_EMAIL_FAIL = 'Unable to update user profile email.';
 
 // Learning Design Retrieval
 module.exports.UNABLE_TO_RETRIEVE_LDS = 'Impossibile recuperare i progetti in questo momento, per favore, tenta più tardi.';

@@ -165,4 +165,48 @@ describe('User Profile Edit Service', function() {
 
 	});
 
+	describe('Update Email', function() {
+
+		beforeEach(function() {
+
+		});
+
+		afterEach(function() {
+			sandbox.restore();
+		});
+
+		it('Calls back with error when user dao errors', function(done) {
+			var userId = 45;
+			var email = 'roger.rabbit@luney.org';
+			var daoErr = new Error('something went wrong updating user profile email');
+			var daoStub = sandbox.stub(userProfileEditDao, 'updateEmail', function(userId, email, cb) {
+				cb(daoErr);
+			});
+			var serviceCB = function(err, message) {
+				expect(err).to.equal(daoErr);
+				expect(message).to.equal(messages.USER_PROFILE_UPDATE_EMAIL_FAIL);
+				assert.isTrue(daoStub.withArgs(userId, email).calledOnce);
+				done();
+			};
+			fixture.updateEmail(userId, email, serviceCB);
+		});
+
+		it('Calls back with nothing when successful', function(done) {
+			var userId = 45;
+			var email = 'roger.rabbit@luney.org';
+			var daoResult = 0;
+			var daoStub = sandbox.stub(userProfileEditDao, 'updateEmail', function(userId, email, cb) {
+				cb(null, daoResult);
+			});
+			var serviceCB = function(err, message) {
+				expect(err).to.be.undefined;
+				expect(message).to.be.undefined;
+				assert.isTrue(daoStub.withArgs(userId, email).calledOnce);
+				done();
+			};
+			fixture.updateEmail(userId, email, serviceCB);
+		});
+
+	});
+
 });

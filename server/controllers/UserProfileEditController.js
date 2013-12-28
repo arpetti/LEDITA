@@ -39,6 +39,19 @@ module.exports = {
 				res.json(200, {});
 			}
 		});
+	},
+
+	// TODO #47 validate userData.email before passing it on to service
+	updateEmail: function(req, res) {
+		var userId = req.user.id;
+		var userData = req.body;
+		userProfileEditService.updateEmail(userId, userData.email, function(err, message) {
+			if(err){
+				return res.send(500, message);
+			} else {
+				res.json(200, {});
+			}
+		});
 	}
 
 };

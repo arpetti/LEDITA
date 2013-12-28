@@ -188,6 +188,12 @@ var routes = [
       middleware: [ensureAuthenticated, ensureAuthorized, UserProfileEditController.updateLastName],
       accessLevel: accessLevels.user
     },
+    {
+    	path: '/userprofile/email',
+    	httpMethod: 'PUT',
+      middleware: [ensureAuthenticated, ensureAuthorized, UserProfileEditController.updateEmail],
+      accessLevel: accessLevels.user
+    },
 
     // User Profile
     {

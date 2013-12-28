@@ -41,6 +41,18 @@ module.exports = {
 				callback();
 			}
 		});
+	},
+
+		// callback(err, message)
+	updateEmail: function(userId, email, callback) {
+		userProfileEditDao.updateEmail(userId, email, function(err, result) {
+			if(err) {
+				logger.log().error('Error occurred updating user profile email for userId: ' + userId, err);
+				callback(err, messages.USER_PROFILE_UPDATE_EMAIL_FAIL);
+			} else {
+				callback();
+			}
+		});
 	}
 
 };

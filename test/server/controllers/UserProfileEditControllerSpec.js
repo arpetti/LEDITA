@@ -100,7 +100,7 @@ describe('User Profile Edit Controller', function() {
 				id: 32
 			};
 			req.body = {
-				lastName: 'Janice'
+				firstName: 'Janice'
 			};
 			var serviceError = new Error('something went wrong with service updating user profile last name');
 			var serviceMessage = 'update first name failed';
@@ -189,6 +189,62 @@ describe('User Profile Edit Controller', function() {
 				done();
 			}
 			fixture.updateLastName(req, res);
+		});
+
+	});
+
+	describe('Update Email', function() {
+
+		var req = {};
+		var res = {};
+		var sandbox = sinon.sandbox.create();
+
+		beforeEach(function() {
+
+		});
+
+		afterEach(function() {
+			sandbox.restore();
+		});
+
+		it('Sends 500 with message when service calls back with error', function(done) {
+			req.user = {
+				id: 32
+			};
+			req.body = {
+				email: 'j.j@test.test'
+			};
+			var serviceError = new Error('something went wrong with service updating user profile email');
+			var serviceMessage = 'update email failed';
+			var serviceStub = sandbox.stub(userProfileEditService, 'updateEmail', function(userId, email, cb) {
+				cb(serviceError, serviceMessage);
+			});
+			res.send = function(httpStatus, responseData) {
+				expect(httpStatus).to.equal(500);
+				expect(responseData).to.equal(serviceMessage);
+				assert.isTrue(serviceStub.withArgs(req.user.id, req.body.email).calledOnce);
+				done();
+			};
+			fixture.updateEmail(req, res);
+		});
+
+		it('Sends 200 with empty response when successful', function(done) {
+			req.user = {
+				id: 32
+			};
+			req.body = {
+				email: 'j.j@test.test'
+			};
+			var serviceStub = sandbox.stub(userProfileEditService, 'updateEmail', function(userId, email, cb) {
+				cb();
+			});
+			res.json = function(httpStatus, responseData) {
+				expect(httpStatus).to.equal(200);
+				expect(responseData).to.be.empty;
+				assert.isTrue(serviceStub.withArgs(req.user.id, req.body.email).calledOnce);
+				done();
+			}
+			fixture.updateEmail(req, res);
 		});
 
 	});
