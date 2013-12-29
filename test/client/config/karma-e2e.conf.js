@@ -8,7 +8,6 @@ module.exports = function(config) {
   	singleRun: true,
     frameworks: [],
     files: [
-      'lib/jquery.js',
       '../../node_modules/karma-ng-scenario/lib/angular-scenario.js',
       '../../node_modules/karma-ng-scenario/lib/adapter.js',
       'lib/custom/**/*.js',
