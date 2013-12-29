@@ -1,27 +1,22 @@
 'use strict';
 
-/*
-*		Reference: How to trigger jquery events in Angular scenario runner:
-*  	http://stackoverflow.com/questions/16804924/how-to-trigger-enter-in-an-input-in-angular-scenario-test
-*
-*		This is required because UI will auto-update modified fields on blur event. However, simply using
-*		Angular scenario input(selector).enter(value) does not trigger the blur event.
-*/
-angular.scenario.dsl('appElement', function() {
-	return function(selector, fn) {
-    return this.addFutureAction('element ' + selector, function($window, $document, done) {
-      fn.call(this, $window.angular.element(selector));
-      done();
-    });
-  };
-});
-
 describe('User Profile', function() {
 
+	/*
+	*	 Reference: How to trigger browser events in Angular scenario runner:
+	*  http://stackoverflow.com/questions/16804924/how-to-trigger-enter-in-an-input-in-angular-scenario-test
+	*
+	*	 Required because UI will auto-update modified fields on blur event. However, simply using
+	*	 Angular scenario input(selector).enter(value) does not trigger the blur event.
+	*/
 	var modifyField = function(ngModel, dataValue, selectorId) {
 		input(ngModel).enter(dataValue);
-		appElement(selectorId, function(elm) {
-  		elm.trigger('blur');
+		element(selectorId).query(function($el, done) {
+			var event = new CustomEvent('blur');
+			event.keyCode = 9; //http://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
+			$el.val(2);
+			$el.get(0).dispatchEvent(event);
+			done();
 		});
 	};
 
