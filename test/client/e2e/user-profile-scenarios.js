@@ -8,6 +8,10 @@ describe('User Profile', function() {
 	*
 	*	 Required because UI will auto-update modified fields on blur event. However, simply using
 	*	 Angular scenario input(selector).enter(value) does not trigger the blur event.
+	*
+	*  Unfortunately, this does NOT work with PhantomJS, even with polyfill:
+	*		https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent#Polyfill
+	*  Therefore, this test is excluded from Travis CI (see .travis.yml)
 	*/
 	var modifyField = function(ngModel, dataValue, selectorId) {
 		input(ngModel).enter(dataValue);
