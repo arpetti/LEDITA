@@ -14,4 +14,4 @@ before_script:
 script:
   - NODE_ENV=ci npm test
   - karma start test/client/config/karma.config.js --no-auto-watch --single-run --reporters=progress --browsers=PhantomJS
-  - karma start test/client/config/karma-e2e.conf.js --exclude=e2e/activity-create-scenarios.js --reporters=progress --browsers=PhantomJS
+  - karma start test/client/config/karma-e2e-travis.conf.js --reporters=progress --browsers=PhantomJS
