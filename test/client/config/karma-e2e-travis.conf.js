@@ -4,6 +4,7 @@ module.exports = function(config) {
   sharedConfigE2E(config);
 
   config.set({
-  	exclude: ['e2e/activity-create-scenarios.js'],
+  	exclude: ['e2e/user-profile-scenarios.js'],
   });
+  
 };
