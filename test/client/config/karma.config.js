@@ -22,6 +22,8 @@ module.exports = function(config) {
             '../../client/js/lib/angular/angular-mocks.js',
             'unit/**/*.js'
         ],
+
+        autoWatch: true,
         
         // web server port
         port: 9876,
@@ -32,7 +34,7 @@ module.exports = function(config) {
         captureTimeout: 60000,
 
         // Continuous Integration mode, if true, it capture browsers, run tests and exit
-        singleRun: true,
+        singleRun: false,
 
         coverageReporter: {
 		      type : 'lcov',

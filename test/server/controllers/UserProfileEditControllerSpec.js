@@ -4,7 +4,7 @@ var sinon = require('sinon');
 var fixture = require('../../../server/controllers/UserProfileEditController');
 var userProfileEditService = require('../../../server/service/UserProfileEditService');
 
-describe.only('User Profile Edit Controller', function() {
+describe('User Profile Edit Controller', function() {
 
 	describe('Get User Profile', function() {
 

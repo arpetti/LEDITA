@@ -33,9 +33,16 @@ describe('User Profile', function() {
 		var marioPswd = testUsers.getMarioUserPassword;
 		var originalFirstName = testUsers.getMarioFirstName;
 		var originalLastName = testUsers.getMarioLastName;
+		var originalWorkplace = 'Scuola A';
+		var originalCity = 'Roma';
+		var originalCountry = 'Italia';
 
 		var modifiedFirstName = 'SuperMario';
 		var modifiedLastName = 'RossiBrothers';
+		var modifiedEmail = 'super.hero@test.edu';
+		var modifiedWorkplace = 'Mushroom Factory';
+		var modifiedCity = 'Mushroomville';
+		var modifiedCountry = 'Mushroom';
 
 		// Login
 		browser().navigateTo('/login');
@@ -53,13 +60,17 @@ describe('User Profile', function() {
 		expect(input('userProfile.name').val()).toEqual(originalFirstName);
 		expect(input('userProfile.last_name').val()).toEqual(originalLastName);
 		expect(input('userProfile.email').val()).toEqual(marioUser);
-		expect(input('userProfile.workplace').val()).toEqual('Scuola A');
-		expect(input('userProfile.city').val()).toEqual('Roma');
-		expect(input('userProfile.country').val()).toEqual('Italia');
+		expect(input('userProfile.workplace').val()).toEqual(originalWorkplace);
+		expect(input('userProfile.city').val()).toEqual(originalCity);
+		expect(input('userProfile.country').val()).toEqual(originalCountry);
 
 		// Modify profile data
 		modifyField('userProfile.name', modifiedFirstName, '#userProfileFirstName');
 		modifyField('userProfile.last_name', modifiedLastName, '#userProfileLastName');
+		modifyField('userProfile.email', modifiedEmail, '#userProfileEmail');
+		modifyField('userProfile.workplace', modifiedWorkplace, '#userProfileWorkplace');
+		modifyField('userProfile.city', modifiedCity, '#userProfileCity');
+		modifyField('userProfile.country', modifiedCountry, '#userProfileCountry');
 		
 		// Verify profile changes were saved
 		browser().reload();
@@ -67,15 +78,27 @@ describe('User Profile', function() {
 		expect(browser().location().url()).toBe('/useredit');
 		expect(input('userProfile.name').val()).toEqual(modifiedFirstName);
 		expect(input('userProfile.last_name').val()).toEqual(modifiedLastName);
+		expect(input('userProfile.email').val()).toEqual(modifiedEmail);
+		expect(input('userProfile.workplace').val()).toEqual(modifiedWorkplace);
+		expect(input('userProfile.city').val()).toEqual(modifiedCity);
+		expect(input('userProfile.country').val()).toEqual(modifiedCountry);
 
 		// Put things back the way they were and verify
 		modifyField('userProfile.name', originalFirstName, '#userProfileFirstName');
 		modifyField('userProfile.last_name', originalLastName, '#userProfileLastName');
+		modifyField('userProfile.email', marioUser, '#userProfileEmail');
+		modifyField('userProfile.workplace', originalWorkplace, '#userProfileWorkplace');
+		modifyField('userProfile.city', originalCity, '#userProfileCity');
+		modifyField('userProfile.country', originalCountry, '#userProfileCountry');
 		browser().reload();
 		sleep(1);
 		expect(browser().location().url()).toBe('/useredit');
 		expect(input('userProfile.name').val()).toEqual(originalFirstName);
 		expect(input('userProfile.last_name').val()).toEqual(originalLastName);
+		expect(input('userProfile.email').val()).toEqual(marioUser);
+		expect(input('userProfile.workplace').val()).toEqual(originalWorkplace);
+		expect(input('userProfile.city').val()).toEqual(originalCity);
+		expect(input('userProfile.country').val()).toEqual(originalCountry);
 
 		// Logout
 		element('#userActionsMenu').click();

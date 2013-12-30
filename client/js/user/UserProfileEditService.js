@@ -26,6 +26,24 @@ angular.module('ledita-app')
 				$http.put('/userprofile/email', userData).success(function(res) {
 					success(res);
 				}).error(error);
+			},
+
+			updateWorkplace: function(userData, success, error) {
+				$http.put('/userprofile/workplace', userData).success(function(res) {
+					success(res);
+				}).error(error);
+			},
+
+			updateCity: function(userData, success, error) {
+				$http.put('/userprofile/city', userData).success(function(res) {
+					success(res);
+				}).error(error);
+			},
+
+			updateCountry: function(userData, success, error) {
+				$http.put('/userprofile/country', userData).success(function(res) {
+					success(res);
+				}).error(error);
 			}
 
 		};

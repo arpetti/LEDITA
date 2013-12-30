@@ -21,6 +21,7 @@
     "test": "mocha test/server -R spec --recursive",
     "test-cov": "mocha --require blanket test/server -R html-cov --recursive > test/server/coverage.html",
     "client-test": "karma start test/client/config/karma.config.js",
+    "client-test-local-ci": "karma start test/client/config/karma.config.js --single-run",
     "client-e2e-test": "karma start test/client/config/karma-e2e.conf.js"
   },
   "engines": {

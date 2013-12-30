@@ -36,7 +36,7 @@ NODE_ENV=dev npm test
 serverTestStatus=$?
 
 echo "Running client side unit tests..."
-NODE_ENV=dev npm run-script client-test
+NODE_ENV=dev npm run-script client-test-local-ci
 clientUnitTestStatus=$?
 
 echo "Recreating database in preparation for end to end tests..."
@@ -50,7 +50,7 @@ echo "Running client side end to end tests..."
 npm run-script client-e2e-test
 clientE2ETestStatus=$?
 
-echo "Restting database to original state..."
+echo "Resetting database to original state..."
 database/local/create-db.sh
 
 echo "Stopping node web server..."

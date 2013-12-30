@@ -36,5 +36,23 @@ angular.module('ledita-app')
 				};
 			};
 
+			$scope.updateUserProfileWorkplace = function() {
+				if (UserProfileEditService.shouldUpdate($scope.userProfile.workplace)) {
+					UserProfileEditService.updateWorkplace({workplace: $scope.userProfile.workplace}, handleUpdateSuccess, handleUpdateError);
+				};
+			};
+
+			$scope.updateUserProfileCity = function() {
+				if (UserProfileEditService.shouldUpdate($scope.userProfile.city)) {
+					UserProfileEditService.updateCity({city: $scope.userProfile.city}, handleUpdateSuccess, handleUpdateError);
+				};
+			};
+
+			$scope.updateUserProfileCountry = function() {
+				if (UserProfileEditService.shouldUpdate($scope.userProfile.country)) {
+					UserProfileEditService.updateCountry({country: $scope.userProfile.country}, handleUpdateSuccess, handleUpdateError);
+				};
+			};
+
 		}
 	]);
