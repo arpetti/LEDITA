@@ -1,3 +1,4 @@
+var userProfileEditValidator = require('../validate/UserProfileEditValidator');
 var userProfileEditService = require('../service/UserProfileEditService');
 
 var updateProfile = function(updateFunc, userId, dataValue, res) {
@@ -25,9 +26,13 @@ module.exports = {
 		});
 	},
 
-	// TODO #47 validate userData.firstName before passing it on to service
 	updateFirstName: function(req, res) {
-		updateProfile(userProfileEditService.updateFirstName, req.user.id, req.body.firstName, res);
+		var vmessages = userProfileEditValidator.validateFirstName(req.body.firstName);
+		if (vmessages.length > 0) {
+			return res.send(400, vmessages);
+		} else {
+			updateProfile(userProfileEditService.updateFirstName, req.user.id, req.body.firstName, res);
+		}
 	},
 
 	// TODO #47 validate userData.lastName before passing it on to service
