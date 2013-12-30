@@ -27,6 +27,9 @@ module.exports.USER_FIND_FAIL = 'An error occurred retrieving user profile.';
 module.exports.USER_PROFILE_UPDATE_FIRST_NAME_FAIL = 'Unable to update user profile first name.';
 module.exports.USER_PROFILE_UPDATE_LAST_NAME_FAIL = 'Unable to update user profile last name.';
 module.exports.USER_PROFILE_UPDATE_EMAIL_FAIL = 'Unable to update user profile email.';
+module.exports.USER_PROFILE_UPDATE_WORKPLACE_FAIL = 'Unable to update user profile workplace.';
+module.exports.USER_PROFILE_UPDATE_CITY_FAIL = 'Unable to update user profile city.';
+module.exports.USER_PROFILE_UPDATE_COUNTRY_FAIL = 'Unable to update user profile country.';
 
 // Learning Design Retrieval
 module.exports.UNABLE_TO_RETRIEVE_LDS = 'Impossibile recuperare i progetti in questo momento, per favore, tenta più tardi.';

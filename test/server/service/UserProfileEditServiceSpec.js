@@ -209,4 +209,136 @@ describe('User Profile Edit Service', function() {
 
 	});
 
+	describe('Update Workplace', function() {
+
+		beforeEach(function() {
+
+		});
+
+		afterEach(function() {
+			sandbox.restore();
+		});
+
+		it('Calls back with error when user dao errors', function(done) {
+			var userId = 45;
+			var workplace = 'Looney Tunes Inc.';
+			var daoErr = new Error('something went wrong updating user profile workplace');
+			var daoStub = sandbox.stub(userProfileEditDao, 'updateWorkplace', function(userId, workplace, cb) {
+				cb(daoErr);
+			});
+			var serviceCB = function(err, message) {
+				expect(err).to.equal(daoErr);
+				expect(message).to.equal(messages.USER_PROFILE_UPDATE_WORKPLACE_FAIL);
+				assert.isTrue(daoStub.withArgs(userId, workplace).calledOnce);
+				done();
+			};
+			fixture.updateWorkplace(userId, workplace, serviceCB);
+		});
+
+		it('Calls back with nothing when successful', function(done) {
+			var userId = 45;
+			var workplace = 'Looney Tunes Inc.';
+			var daoResult = 0;
+			var daoStub = sandbox.stub(userProfileEditDao, 'updateWorkplace', function(userId, workplace, cb) {
+				cb(null, daoResult);
+			});
+			var serviceCB = function(err, message) {
+				expect(err).to.be.undefined;
+				expect(message).to.be.undefined;
+				assert.isTrue(daoStub.withArgs(userId, workplace).calledOnce);
+				done();
+			};
+			fixture.updateWorkplace(userId, workplace, serviceCB);
+		});
+
+	});
+
+	describe('Update City', function() {
+
+		beforeEach(function() {
+
+		});
+
+		afterEach(function() {
+			sandbox.restore();
+		});
+
+		it('Calls back with error when user dao errors', function(done) {
+			var userId = 45;
+			var city = 'Versailles';
+			var daoErr = new Error('something went wrong updating user profile city');
+			var daoStub = sandbox.stub(userProfileEditDao, 'updateCity', function(userId, city, cb) {
+				cb(daoErr);
+			});
+			var serviceCB = function(err, message) {
+				expect(err).to.equal(daoErr);
+				expect(message).to.equal(messages.USER_PROFILE_UPDATE_CITY_FAIL);
+				assert.isTrue(daoStub.withArgs(userId, city).calledOnce);
+				done();
+			};
+			fixture.updateCity(userId, city, serviceCB);
+		});
+
+		it('Calls back with nothing when successful', function(done) {
+			var userId = 45;
+			var city = 'Versailles';
+			var daoResult = 0;
+			var daoStub = sandbox.stub(userProfileEditDao, 'updateCity', function(userId, city, cb) {
+				cb(null, daoResult);
+			});
+			var serviceCB = function(err, message) {
+				expect(err).to.be.undefined;
+				expect(message).to.be.undefined;
+				assert.isTrue(daoStub.withArgs(userId, city).calledOnce);
+				done();
+			};
+			fixture.updateCity(userId, city, serviceCB);
+		});
+
+	});
+
+	describe('Update Country', function() {
+
+		beforeEach(function() {
+
+		});
+
+		afterEach(function() {
+			sandbox.restore();
+		});
+
+		it('Calls back with error when user dao errors', function(done) {
+			var userId = 45;
+			var country = 'Never Never Land';
+			var daoErr = new Error('something went wrong updating user profile country');
+			var daoStub = sandbox.stub(userProfileEditDao, 'updateCountry', function(userId, country, cb) {
+				cb(daoErr);
+			});
+			var serviceCB = function(err, message) {
+				expect(err).to.equal(daoErr);
+				expect(message).to.equal(messages.USER_PROFILE_UPDATE_COUNTRY_FAIL);
+				assert.isTrue(daoStub.withArgs(userId, country).calledOnce);
+				done();
+			};
+			fixture.updateCountry(userId, country, serviceCB);
+		});
+
+		it('Calls back with nothing when successful', function(done) {
+			var userId = 45;
+			var country = 'Never Never Land';
+			var daoResult = 0;
+			var daoStub = sandbox.stub(userProfileEditDao, 'updateCountry', function(userId, country, cb) {
+				cb(null, daoResult);
+			});
+			var serviceCB = function(err, message) {
+				expect(err).to.be.undefined;
+				expect(message).to.be.undefined;
+				assert.isTrue(daoStub.withArgs(userId, country).calledOnce);
+				done();
+			};
+			fixture.updateCountry(userId, country, serviceCB);
+		});
+
+	});
+
 });

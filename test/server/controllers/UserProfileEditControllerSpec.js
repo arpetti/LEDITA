@@ -4,7 +4,7 @@ var sinon = require('sinon');
 var fixture = require('../../../server/controllers/UserProfileEditController');
 var userProfileEditService = require('../../../server/service/UserProfileEditService');
 
-describe('User Profile Edit Controller', function() {
+describe.only('User Profile Edit Controller', function() {
 
 	describe('Get User Profile', function() {
 
@@ -245,6 +245,174 @@ describe('User Profile Edit Controller', function() {
 				done();
 			}
 			fixture.updateEmail(req, res);
+		});
+
+	});
+
+	describe('Update Workplace', function() {
+
+		var req = {};
+		var res = {};
+		var sandbox = sinon.sandbox.create();
+
+		beforeEach(function() {
+
+		});
+
+		afterEach(function() {
+			sandbox.restore();
+		});
+
+		it('Sends 500 with message when service calls back with error', function(done) {
+			req.user = {
+				id: 32
+			};
+			req.body = {
+				workplace: 'Acme Corporation'
+			};
+			var serviceError = new Error('something went wrong with service updating user profile workplace');
+			var serviceMessage = 'update workplace failed';
+			var serviceStub = sandbox.stub(userProfileEditService, 'updateWorkplace', function(userId, workplace, cb) {
+				cb(serviceError, serviceMessage);
+			});
+			res.send = function(httpStatus, responseData) {
+				expect(httpStatus).to.equal(500);
+				expect(responseData).to.equal(serviceMessage);
+				assert.isTrue(serviceStub.withArgs(req.user.id, req.body.workplace).calledOnce);
+				done();
+			};
+			fixture.updateWorkplace(req, res);
+		});
+
+		it('Sends 200 with empty response when successful', function(done) {
+			req.user = {
+				id: 32
+			};
+			req.body = {
+				workplace: 'Acme Corporation'
+			};
+			var serviceStub = sandbox.stub(userProfileEditService, 'updateWorkplace', function(userId, workplace, cb) {
+				cb();
+			});
+			res.json = function(httpStatus, responseData) {
+				expect(httpStatus).to.equal(200);
+				expect(responseData).to.be.empty;
+				assert.isTrue(serviceStub.withArgs(req.user.id, req.body.workplace).calledOnce);
+				done();
+			}
+			fixture.updateWorkplace(req, res);
+		});
+
+	});
+
+	describe('Update City', function() {
+
+		var req = {};
+		var res = {};
+		var sandbox = sinon.sandbox.create();
+
+		beforeEach(function() {
+
+		});
+
+		afterEach(function() {
+			sandbox.restore();
+		});
+
+		it('Sends 500 with message when service calls back with error', function(done) {
+			req.user = {
+				id: 32
+			};
+			req.body = {
+				city: 'Acmeville'
+			};
+			var serviceError = new Error('something went wrong with service updating user profile city');
+			var serviceMessage = 'update city failed';
+			var serviceStub = sandbox.stub(userProfileEditService, 'updateCity', function(userId, city, cb) {
+				cb(serviceError, serviceMessage);
+			});
+			res.send = function(httpStatus, responseData) {
+				expect(httpStatus).to.equal(500);
+				expect(responseData).to.equal(serviceMessage);
+				assert.isTrue(serviceStub.withArgs(req.user.id, req.body.city).calledOnce);
+				done();
+			};
+			fixture.updateCity(req, res);
+		});
+
+		it('Sends 200 with empty response when successful', function(done) {
+			req.user = {
+				id: 32
+			};
+			req.body = {
+				city: 'Acmeville'
+			};
+			var serviceStub = sandbox.stub(userProfileEditService, 'updateCity', function(userId, city, cb) {
+				cb();
+			});
+			res.json = function(httpStatus, responseData) {
+				expect(httpStatus).to.equal(200);
+				expect(responseData).to.be.empty;
+				assert.isTrue(serviceStub.withArgs(req.user.id, req.body.city).calledOnce);
+				done();
+			}
+			fixture.updateCity(req, res);
+		});
+
+	});
+
+	describe('Update Country', function() {
+
+		var req = {};
+		var res = {};
+		var sandbox = sinon.sandbox.create();
+
+		beforeEach(function() {
+
+		});
+
+		afterEach(function() {
+			sandbox.restore();
+		});
+
+		it('Sends 500 with message when service calls back with error', function(done) {
+			req.user = {
+				id: 32
+			};
+			req.body = {
+				country: 'Iceland'
+			};
+			var serviceError = new Error('something went wrong with service updating user profile country');
+			var serviceMessage = 'update country failed';
+			var serviceStub = sandbox.stub(userProfileEditService, 'updateCountry', function(userId, country, cb) {
+				cb(serviceError, serviceMessage);
+			});
+			res.send = function(httpStatus, responseData) {
+				expect(httpStatus).to.equal(500);
+				expect(responseData).to.equal(serviceMessage);
+				assert.isTrue(serviceStub.withArgs(req.user.id, req.body.country).calledOnce);
+				done();
+			};
+			fixture.updateCountry(req, res);
+		});
+
+		it('Sends 200 with empty response when successful', function(done) {
+			req.user = {
+				id: 32
+			};
+			req.body = {
+				country: 'Iceland'
+			};
+			var serviceStub = sandbox.stub(userProfileEditService, 'updateCountry', function(userId, country, cb) {
+				cb();
+			});
+			res.json = function(httpStatus, responseData) {
+				expect(httpStatus).to.equal(200);
+				expect(responseData).to.be.empty;
+				assert.isTrue(serviceStub.withArgs(req.user.id, req.body.country).calledOnce);
+				done();
+			}
+			fixture.updateCountry(req, res);
 		});
 
 	});

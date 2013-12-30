@@ -1,5 +1,15 @@
 var userProfileEditService = require('../service/UserProfileEditService');
 
+var updateProfile = function(updateFunc, userId, dataValue, res) {
+	updateFunc.apply(null, [userId, dataValue, function(err, message) {
+		if(err){
+			return res.send(500, message);
+		} else {
+			res.json(200, {});
+		}
+	}]);
+};
+
 module.exports = {
 
 	getUserProfile: function(req, res) {
@@ -17,41 +27,32 @@ module.exports = {
 
 	// TODO #47 validate userData.firstName before passing it on to service
 	updateFirstName: function(req, res) {
-		var userId = req.user.id;
-		var userData = req.body;
-		userProfileEditService.updateFirstName(userId, userData.firstName, function(err, message) {
-			if(err){
-				return res.send(500, message);
-			} else {
-				res.json(200, {});
-			}
-		});
+		updateProfile(userProfileEditService.updateFirstName, req.user.id, req.body.firstName, res);
 	},
 
 	// TODO #47 validate userData.lastName before passing it on to service
 	updateLastName: function(req, res) {
-		var userId = req.user.id;
-		var userData = req.body;
-		userProfileEditService.updateLastName(userId, userData.lastName, function(err, message) {
-			if(err){
-				return res.send(500, message);
-			} else {
-				res.json(200, {});
-			}
-		});
+		updateProfile(userProfileEditService.updateLastName, req.user.id, req.body.lastName, res);
 	},
 
 	// TODO #47 validate userData.email before passing it on to service
 	updateEmail: function(req, res) {
-		var userId = req.user.id;
-		var userData = req.body;
-		userProfileEditService.updateEmail(userId, userData.email, function(err, message) {
-			if(err){
-				return res.send(500, message);
-			} else {
-				res.json(200, {});
-			}
-		});
+		updateProfile(userProfileEditService.updateEmail, req.user.id, req.body.email, res);
+	},
+
+	// TODO #47 validate userData.workplace before passing it on to service
+	updateWorkplace: function(req, res) {
+		updateProfile(userProfileEditService.updateWorkplace, req.user.id, req.body.workplace, res);
+	},
+
+	// TODO #47 validate userData.city before passing it on to service
+	updateCity: function(req, res) {
+		updateProfile(userProfileEditService.updateCity, req.user.id, req.body.city, res);
+	},
+
+	// TODO #47 validate userData.country before passing it on to service
+	updateCountry: function(req, res) {
+		updateProfile(userProfileEditService.updateCountry, req.user.id, req.body.country, res);
 	}
 
 };

@@ -194,6 +194,24 @@ var routes = [
       middleware: [ensureAuthenticated, ensureAuthorized, UserProfileEditController.updateEmail],
       accessLevel: accessLevels.user
     },
+    {
+    	path: '/userprofile/workplace',
+    	httpMethod: 'PUT',
+      middleware: [ensureAuthenticated, ensureAuthorized, UserProfileEditController.updateWorkplace],
+      accessLevel: accessLevels.user
+    },
+    {
+    	path: '/userprofile/city',
+    	httpMethod: 'PUT',
+      middleware: [ensureAuthenticated, ensureAuthorized, UserProfileEditController.updateCity],
+      accessLevel: accessLevels.user
+    },
+    {
+    	path: '/userprofile/country',
+    	httpMethod: 'PUT',
+      middleware: [ensureAuthenticated, ensureAuthorized, UserProfileEditController.updateCountry],
+      accessLevel: accessLevels.user
+    },
 
     // User Profile
     {

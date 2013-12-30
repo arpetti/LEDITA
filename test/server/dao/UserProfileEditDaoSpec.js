@@ -110,4 +110,103 @@ describe('User Profile Edit DAO', function() {
 			});
 	});
 
+	it('Updates workplace', function(done) {
+		var modifiedWorkplace = 'University of Toronto';
+		async.series([
+				function(callback) {
+					fixture.updateWorkplace(userIdToEdit, modifiedWorkplace, function(err, result) {
+						expect(err).to.be.null;
+						callback(null, 'Step 1: Updated User Profile Workplace');
+					});
+				},
+				function(callback) {
+					dao.findAll(verifyUserUpdated, [userIdToEdit], function(err, result) {
+						expect(err).to.be.null;
+						expect(result).to.have.length(1);
+						expect(result[0].id).to.equal(userIdToEdit);
+						expect(result[0].workplace).to.equal(modifiedWorkplace);
+						callback(null, 'Step 2: Verified Workplace Updated');
+					});
+				},
+				function(callback) {
+					dao.insertOrUpdateRecord(resetUser, resetUserData, function(err, result) {
+						expect(err).to.be.null;
+						callback(null, 'Step 3: Reset User Profile');
+					});
+				}
+			],
+			function(err, results) {
+				console.log('results: ' + JSON.stringify(results));
+				expect(err).to.be.null;
+				expect(results).to.have.length(3);
+				done();
+			});
+	});
+
+	it('Updates city', function(done) {
+		var modifiedCity = 'Toronto';
+		async.series([
+				function(callback) {
+					fixture.updateCity(userIdToEdit, modifiedCity, function(err, result) {
+						expect(err).to.be.null;
+						callback(null, 'Step 1: Updated User Profile City');
+					});
+				},
+				function(callback) {
+					dao.findAll(verifyUserUpdated, [userIdToEdit], function(err, result) {
+						expect(err).to.be.null;
+						expect(result).to.have.length(1);
+						expect(result[0].id).to.equal(userIdToEdit);
+						expect(result[0].city).to.equal(modifiedCity);
+						callback(null, 'Step 2: Verified City Updated');
+					});
+				},
+				function(callback) {
+					dao.insertOrUpdateRecord(resetUser, resetUserData, function(err, result) {
+						expect(err).to.be.null;
+						callback(null, 'Step 3: Reset User Profile');
+					});
+				}
+			],
+			function(err, results) {
+				console.log('results: ' + JSON.stringify(results));
+				expect(err).to.be.null;
+				expect(results).to.have.length(3);
+				done();
+			});
+	});
+
+	it('Updates country', function(done) {
+		var modifiedCountry = 'Canada';
+		async.series([
+				function(callback) {
+					fixture.updateCountry(userIdToEdit, modifiedCountry, function(err, result) {
+						expect(err).to.be.null;
+						callback(null, 'Step 1: Updated User Profile country');
+					});
+				},
+				function(callback) {
+					dao.findAll(verifyUserUpdated, [userIdToEdit], function(err, result) {
+						expect(err).to.be.null;
+						expect(result).to.have.length(1);
+						expect(result[0].id).to.equal(userIdToEdit);
+						expect(result[0].country).to.equal(modifiedCountry);
+						callback(null, 'Step 2: Verified country Updated');
+					});
+				},
+				function(callback) {
+					dao.insertOrUpdateRecord(resetUser, resetUserData, function(err, result) {
+						expect(err).to.be.null;
+						callback(null, 'Step 3: Reset User Profile');
+					});
+				}
+			],
+			function(err, results) {
+				console.log('results: ' + JSON.stringify(results));
+				expect(err).to.be.null;
+				expect(results).to.have.length(3);
+				done();
+			});
+	});
+
 });
