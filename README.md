@@ -115,6 +115,11 @@ Project Website: http://www.professoreitaliano.com
 
     This project is using [log4js-node](https://github.com/nomiddlename/log4js-node). This module expects that the configured logs directory already exists. Switch to project root directory, then ```mkdir logs```
 
+* Create user upload directory, this is excluded from version control but required for user profile service
+
+		* ```mkdir user-upload && cd user-upload```
+		* ```mkdir avatar```
+
 * From project root directory, run
 
     ```
@@ -221,6 +226,8 @@ These instructions are a work in progress. Grunt.js should be considered for aut
 * Copy the ```client``` directory to ```LEDITA```.
 
 * Create the ```logs``` directory inside ```LEDITA```.
+
+* Create the ```user-upload/avatar``` directory inside ```LEDITA```.
 
 * Copy ```env.json``` from root of git project, to ```LEDITA``` and add ```prod``` section, for example:
     ```

@@ -1,5 +1,6 @@
 var userProfileEditValidator = require('../validate/UserProfileEditValidator');
 var userProfileEditService = require('../service/UserProfileEditService');
+var fs = require('fs');
 
 var updateProfile = function(updateFunc, userId, dataValue, res) {
 	updateFunc.apply(null, [userId, dataValue, function(err, message) {
@@ -61,9 +62,31 @@ module.exports = {
 	},
 
 	// #48 wip...
+	// TODO: Validation on file size, type?
+	// TODO: Delegate file handling to service
+	// TODO: Determine file extension for rename
+	// TODO: Insert into image table and update user.image_id with inserted image id
+	//		--> Also add columns creation_date and ip to image table for tracking
 	updateAvatar: function(req, res) {
-		console.log('server updateAvatar: ' + JSON.stringify(req.files));
-		res.json(200, {});
+
+		// experiment for tracking client IP
+		var ip = req.headers['x-forwarded-for'] || 
+     req.connection.remoteAddress || 
+     req.socket.remoteAddress ||
+     req.connection.socket.remoteAddress;
+    console.log('***************** updateAvatar ip: ' + ip);
+    console.log('***************** updateAvatar req.ip: ' + req.ip);
+
+		var oldPath = req.files.file.path;
+		var newPath = __dirname + '/../../user-upload/avatar/avatar-' + req.user.id + '.png';
+		fs.rename(oldPath, newPath, function(err) {
+			if(err) {
+				console.log('updateAvatar err: ' + JSON.stringify(err));
+				return res.send(500, 'Avatar upload failed');
+			} else {
+				res.json(200, {});
+			}
+		});
 	}
 
 };

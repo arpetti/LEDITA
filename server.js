@@ -34,6 +34,7 @@ app.use(express.cookieParser());
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.set("view options", {layout: false});
+app.use(express.static(path.join(__dirname, 'user-upload')));
 app.use(express.static(path.join(__dirname, 'client')));
 
 // Security Headers

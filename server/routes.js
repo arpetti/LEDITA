@@ -16,6 +16,17 @@ var accessLevels = require('../client/js/auth/AuthRoutingConfig').accessLevels;
 
 var routes = [
 
+		// User Avatar Images
+		// {
+		// 	path: '/user-upload/*',
+		// 	httpMethod: 'GET',
+		// 	middleware: [ function (req, res) {
+		// 		console.log('user-upload req.url: ' + req.url);
+		// 		res.send(req.url);
+		// 	}],
+		// 	accessLevel: accessLevels.public
+		// },
+
     // Views
     {
         path: '/partials/*',
@@ -288,6 +299,8 @@ var routes = [
         path: '/*',
         httpMethod: 'GET',
         middleware: [function(req, res) {
+        	// temp debug - do not commit
+        	console.log('all other get request: ' + req.url);
             var role = userRoles.public, username = '', id = '', name = '', last_name = '';
             if(req.user) {
                 role = req.user.role;
