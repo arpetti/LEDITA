@@ -30,10 +30,10 @@
                        ng-pattern="/^[a-zA-Z]+$/">
 
                 <div class="errorBoxTab">
-                  <span class="errorTipTab" ng-show="userProfile.name == '' || (UserNameForm.firstname.$dirty && UserNameForm.firstname.$error.required)">Necessario!</span>
-                  <span class="errorTipTab" ng-show="UserNameForm.firstname.$error.pattern">Simbolo non permesso.</span>
-                  <span class="errorTipTab" ng-show="UserNameForm.firstname.$error.minlength">Minimo 2 caratteri.</span>
-                  <span class="errorTipTab" ng-show="UserNameForm.firstname.$error.maxlength">Massimo 20 caratteri.</span>
+                  <span id="firstNameReqErr" class="errorTipTab" ng-show="userProfile.name == '' || (UserNameForm.firstname.$dirty && UserNameForm.firstname.$error.required)">Necessario!</span>
+                  <span id="firstNamePatternErr" class="errorTipTab" ng-show="UserNameForm.firstname.$error.pattern">Simbolo non permesso.</span>
+                  <span id="firstNameMinErr" class="errorTipTab" ng-show="UserNameForm.firstname.$error.minlength">Minimo 2 caratteri.</span>
+                  <span id="firstNameMaxErr" class="errorTipTab" ng-show="UserNameForm.firstname.$error.maxlength">Massimo 20 caratteri.</span>
                 </div>
               </div>
             </form>
@@ -51,10 +51,10 @@
                        ng-pattern="/^[a-zA-Z]+$/">
 
                 <div class="errorBoxTab">
-                  <span class="errorTipTab" ng-show="userProfile.last_name == '' || (UserLastNameForm.lastname.$dirty && UserNameForm.lastname.$error.required)">Necessario!</span>
-                  <span class="errorTipTab" ng-show="UserLastNameForm.lastname.$error.pattern">Simbolo non permesso.</span>
-                  <span class="errorTipTab" ng-show="UserLastNameForm.lastname.$error.minlength">Minimo 2 caratteri.</span>
-                  <span class="errorTipTab" ng-show="UserLastNameForm.lastname.$error.maxlength">Massimo 20 caratteri.</span>
+                  <span id="lastNameReqErr" class="errorTipTab" ng-show="userProfile.last_name == '' || (UserLastNameForm.lastname.$dirty && UserLastNameForm.lastname.$error.required)">Necessario!</span>
+                  <span id="lastNamePatternErr" class="errorTipTab" ng-show="UserLastNameForm.lastname.$error.pattern">Simbolo non permesso.</span>
+                  <span id="lastNameMinErr" class="errorTipTab" ng-show="UserLastNameForm.lastname.$error.minlength">Minimo 2 caratteri.</span>
+                  <span id="lastNameMaxErr" class="errorTipTab" ng-show="UserLastNameForm.lastname.$error.maxlength">Massimo 20 caratteri.</span>
                 </div>
               </div>
             </form>
@@ -70,9 +70,9 @@
                        ng-maxlength="255">
 
                 <div class="errorBoxTab">
-                  <span class="errorTipTab" ng-show="userProfile.email == '' || (UserEmailForm.userEmail.$dirty && UserEmailForm.userEmail.$error.required)">Necessario!</span>
-                  <span class="errorTipTab" ng-show="UserEmailForm.userEmail.$error.email">Per favore, inserisci un email valido.</span>
-                  <span class="errorTipTab" ng-show="UserEmailForm.userEmail.$error.maxlength">Massimo 255 caratteri.</span>
+                  <span id="emailReqErr" class="errorTipTab" ng-show="userProfile.email == '' || (UserEmailForm.userEmail.$dirty && UserEmailForm.userEmail.$error.required)">Necessario!</span>
+                  <span id="emailPatternErr" class="errorTipTab" ng-show="UserEmailForm.userEmail.$error.email">Per favore, inserisci un email valido.</span>
+                  <span id="emailMaxErr" class="errorTipTab" ng-show="UserEmailForm.userEmail.$error.maxlength">Massimo 255 caratteri.</span>
                 </div>
               </div>
             </form>
@@ -89,8 +89,8 @@
                        ng-pattern="/^[a-zA-Zòàùèéì ]+$/">
 
                 <div class="errorBoxTab">
-                  <span class="errorTipTab" ng-show="UserWorkplaceForm.userWorkplace.$error.pattern">Simbolo non permesso.</span>
-                  <span class="errorTipTab" ng-show="UserWorkplaceForm.userWorkplace.$error.maxlength">Massimo 50 caratteri.</span>
+                  <span id="workplacePatternErr" class="errorTipTab" ng-show="UserWorkplaceForm.userWorkplace.$error.pattern">Simbolo non permesso.</span>
+                  <span id="workplaceMaxErr" class="errorTipTab" ng-show="UserWorkplaceForm.userWorkplace.$error.maxlength">Massimo 50 caratteri.</span>
                 </div>
               </div>
             </form>
@@ -107,8 +107,8 @@
                        ng-pattern="/^[a-zA-Zòàùèéì ]+$/">
 
                 <div class="errorBoxTab">
-                  <span class="errorTipTab" ng-show="CityForm.city.$error.pattern">Simbolo non permesso.</span>
-                  <span class="errorTipTab" ng-show="CityForm.city.$error.maxlength">Massimo 50 caratteri.</span>
+                  <span id="cityPatternErr" class="errorTipTab" ng-show="CityForm.city.$error.pattern">Simbolo non permesso.</span>
+                  <span id="cityMaxErr" class="errorTipTab" ng-show="CityForm.city.$error.maxlength">Massimo 50 caratteri.</span>
                 </div>
               </div>
             </form>
@@ -125,8 +125,8 @@
                        ng-pattern="/^[a-zA-Zòàùèéì ]+$/">
 
                 <div class="errorBoxTab">
-                  <span class="errorTipTab" ng-show="CountryForm.country.$error.pattern">Simbolo non permesso.</span>
-                  <span class="errorTipTab" ng-show="CountryForm.country.$error.maxlength">Massimo 50 caratteri.</span>
+                  <span id="countryPatternErr" class="errorTipTab" ng-show="CountryForm.country.$error.pattern">Simbolo non permesso.</span>
+                  <span id="countryMaxErr" class="errorTipTab" ng-show="CountryForm.country.$error.maxlength">Massimo 50 caratteri.</span>
                 </div>
               </div>
             </form>

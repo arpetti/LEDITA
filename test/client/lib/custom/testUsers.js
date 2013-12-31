@@ -17,6 +17,7 @@
 	];
 
 	var MAX_LD_NAME = 50;
+	var MAX_USER_FIRST_NAME = 20;
 	var MAX_TOPIC = 255;
 	var MAX_STUDENTS_DESCR = 500;
 
@@ -34,6 +35,9 @@
 
 	exports.buildLongLdName = buildLongString(MAX_LD_NAME + 1);
 	exports.buildMaxLdName = buildLongString(MAX_LD_NAME);
+	
+	exports.buildLongFirstName = buildLongString(MAX_USER_FIRST_NAME +1);
+	exports.buildMaxFirstName = buildLongString(MAX_USER_FIRST_NAME);
 
 	exports.buildLongTopic = buildLongString(MAX_TOPIC + 1);
 	exports.buildMaxTopic = buildLongString(MAX_TOPIC);
