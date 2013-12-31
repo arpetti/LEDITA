@@ -9,6 +9,7 @@ module.exports = function(config) {
         files: [
             '../../client/js/lib/underscore-min.js',
             '../../client/js/lib/angular/angular.js',
+            '../../client/js/lib/angular-file-upload.min.js',
             '../../client/js/lib/angular/angular-cookies.js',
             '../../client/js/lib/ng-infinite-scroll.min.js',
             '../../client/js/lib/ui-bootstrap-tpls-0.4.0.min.js',

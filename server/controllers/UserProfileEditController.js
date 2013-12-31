@@ -58,6 +58,12 @@ module.exports = {
 	// TODO #47 validate userData.country before passing it on to service
 	updateCountry: function(req, res) {
 		updateProfile(userProfileEditService.updateCountry, req.user.id, req.body.country, res);
+	},
+
+	// #48 wip...
+	updateAvatar: function(req, res) {
+		console.log('server updateAvatar: ' + JSON.stringify(req.files));
+		res.json(200, {});
 	}
 
 };

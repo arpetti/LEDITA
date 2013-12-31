@@ -212,6 +212,12 @@ var routes = [
       middleware: [ensureAuthenticated, ensureAuthorized, UserProfileEditController.updateCountry],
       accessLevel: accessLevels.user
     },
+    {
+    	path: '/userprofile/avatar',
+    	httpMethod: 'POST',
+      middleware: [ensureAuthenticated, ensureAuthorized, UserProfileEditController.updateAvatar],
+      accessLevel: accessLevels.user
+    },
 
     // User Profile
     {

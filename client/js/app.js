@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ledita-app', ['ngCookies', 'infinite-scroll', 'ui.bootstrap', 'ui.keypress', 'activityDurationDisplay', 'underscore'])
+angular.module('ledita-app', ['ngCookies', 'infinite-scroll', 'ui.bootstrap', 'ui.keypress', 'activityDurationDisplay', 'underscore', 'angularFileUpload'])
 
     .config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 

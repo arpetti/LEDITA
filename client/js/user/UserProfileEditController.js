@@ -1,6 +1,6 @@
 angular.module('ledita-app')
-	.controller('UserProfileEditCtrl', ['$scope', 'UserProfileEditService', '$log',
-		function($scope, UserProfileEditService, $log) {
+	.controller('UserProfileEditCtrl', ['$scope', 'UserProfileEditService', '$log', '$upload',
+		function($scope, UserProfileEditService, $log, $upload) {
 
 			UserProfileEditService.getUserProfile(function(res) {
 				$scope.userProfile = res;
@@ -52,6 +52,20 @@ angular.module('ledita-app')
 				if (UserProfileEditService.shouldUpdate($scope.userProfile.country)) {
 					UserProfileEditService.updateCountry({country: $scope.userProfile.country}, handleUpdateSuccess, handleUpdateError);
 				};
+			};
+
+			// #48 wip...
+			$scope.onFileSelect = function($files) {
+					var avatarFile = $files[0];
+					console.dir(avatarFile);
+					$scope.upload = $upload.upload({
+						url: '/userprofile/avatar', 
+						method: 'POST',
+						headers: {'Content-Type': avatarFile.type},
+						file: avatarFile,
+					}).success(function(res) {
+						console.log('File Upload Success: ' + JSON.stringify(res));
+					});
 			};
 
 		}
