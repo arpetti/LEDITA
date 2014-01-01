@@ -36,7 +36,7 @@ module.exports.USER_PROFILE_AVATAR_MISSING = 'Please specify a profile image.';
 module.exports.USER_PROFILE_AVATAR_EMPTY = 'Profile image cannot be empty.';
 module.exports.USER_PROFILE_AVATAR_INVALID_TYPE = 'Please upload a valid image type.';
 module.exports.USER_PROFILE_AVATAR_SIZE = 'Please upload a profile image smaller than 20K';
-module.exports.USER_PROFILE_UPDATE_AVATAR_FAIL = 'Unale to update user profile avatar.';
+module.exports.USER_PROFILE_UPDATE_AVATAR_FAIL = 'Unable to update user profile avatar.';
 
 // Learning Design Retrieval
 module.exports.UNABLE_TO_RETRIEVE_LDS = 'Impossibile recuperare i progetti in questo momento, per favore, tenta più tardi.';

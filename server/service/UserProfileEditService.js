@@ -62,10 +62,15 @@ module.exports = {
 		updateProfile(userProfileEditDao.updateCountry, userId, country, messages.USER_PROFILE_UPDATE_COUNTRY_FAIL, callback);
 	},
 
-	// #48 wip...
 	// callback(err, userImageUri)
 	updateAvatar: function(userId, userProfileImage, callback) {
-
+		userProfileAvatarService.updateAvatar(userId, userProfileImage, function(err, userImageUri) {
+			if(err){
+				callback(err);
+			} else {
+				callback(null, userImageUri);
+			}
+		});
 	}
 
 };

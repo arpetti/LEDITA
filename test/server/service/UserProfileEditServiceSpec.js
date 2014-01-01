@@ -4,6 +4,7 @@ var sinon = require('sinon');
 var fixture = require('../../../server/service/UserProfileEditService');
 var userDao = require('../../../server/dao/UserDao');
 var userProfileEditDao = require('../../../server/dao/UserProfileEditDao');
+var userProfileAvatarService = require('../../../server/service/UserProfileAvatarService');
 var messages = require('../../../server/validate/ValidationMessages');
 
 describe('User Profile Edit Service', function() {
@@ -300,7 +301,6 @@ describe('User Profile Edit Service', function() {
 	describe('Update Country', function() {
 
 		beforeEach(function() {
-
 		});
 
 		afterEach(function() {
@@ -337,6 +337,49 @@ describe('User Profile Edit Service', function() {
 				done();
 			};
 			fixture.updateCountry(userId, country, serviceCB);
+		});
+
+	});
+
+	describe('Update Avatar', function() {
+
+		beforeEach(function() {
+		});
+
+		afterEach(function() {
+			sandbox.restore();
+		});
+
+		it('Calls back with error when user profile avatar service errors', function(done) {
+			var userId = 45;
+			var userProfileImage = {name: 'foo'};
+			var serviceError = new Error('something went wrong with suer profile avatar service');
+			var serviceStub = sandbox.stub(userProfileAvatarService, 'updateAvatar', function(userId, userProfileImage, cb) {
+				cb(serviceError);
+			});
+			var serviceCB= function(err, userImageUri) {
+				expect(err).to.equal(serviceError);
+				expect(userImageUri).to.be.undefined;
+				assert.isTrue(serviceStub.withArgs(userId, userProfileImage).calledOnce);
+				done();
+			}
+			fixture.updateAvatar(userId, userProfileImage, serviceCB);
+		});
+
+		it('Calls back with error image uri when successful', function(done) {
+			var userId = 45;
+			var userProfileImage = {name: 'foo'};
+			var serviceResult = 'image/uri';
+			var serviceStub = sandbox.stub(userProfileAvatarService, 'updateAvatar', function(userId, userProfileImage, cb) {
+				cb(null, serviceResult);
+			});
+			var serviceCB= function(err, userImageUri) {
+				expect(err).to.be.null;
+				expect(userImageUri).to.equal(serviceResult);
+				assert.isTrue(serviceStub.withArgs(userId, userProfileImage).calledOnce);
+				done();
+			}
+			fixture.updateAvatar(userId, userProfileImage, serviceCB);
 		});
 
 	});
