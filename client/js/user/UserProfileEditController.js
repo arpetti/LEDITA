@@ -57,7 +57,6 @@ angular.module('ledita-app')
 			// #48 wip...
 			$scope.onFileSelect = function($files) {
 					var avatarFile = $files[0];
-					console.dir(avatarFile);
 					$scope.upload = $upload.upload({
 						url: '/userprofile/avatar', 
 						method: 'POST',
@@ -66,8 +65,11 @@ angular.module('ledita-app')
 						file: avatarFile,
 					}).success(function(res) {
 						$log.info('File uploaded successfully, res: ' + JSON.stringify(res));
+						// TEST
+						$scope.userImageUri = res;
 					}).error(function(err) {
 						$log.error(err);
+						$scope.userProfileUpdateErrors = err;
 					});
 			};
 

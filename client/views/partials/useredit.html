@@ -2,11 +2,13 @@
     <div class="row-fluid">
 
         <div class="span3  centered top-margin ">
-            <!-- FIXME: GET REAL PICTURE FROM DB -->
+            <!-- #48 TODO use profile image uri -->
             <img ng-src="../img/pics/user{{ userProfile.image_id }}.png" class="user-pic-big">
 
-            <!-- TEST -->
-            <!-- <img ng-src="avatar/avatar-1.png" class="user-pic-big"/> -->
+            <!-- #48 TEST -->
+            <div ng-show="userImageUri">
+            	<img ng-src="{{userImageUri}}" class="user-pic-big"/>
+            </div>
 
             <input type="file" ng-file-select="onFileSelect($files)" >
             <div>

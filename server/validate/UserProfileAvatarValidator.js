@@ -2,19 +2,8 @@ var m = require('../validate/ValidationMessages');
 var _ = require('underscore');
 
 var ACCEPTED_MIME_TYPES = ['image/gif', 'image/jpeg', 'image/pjpeg', 'image/png'];
-var MAX_AVATAR_SIZE = 20 * 1024; // 20K
+var MAX_AVATAR_SIZE = 200 * 1024; // 200K
 
-/*
-req.files: {
-	"userProfileImage": {
-		"size":14453,
-		"path":"/var/folders/my/jlsr4qxn4fb3y_ds0kvk0yhm0000gn/T/ff01287dc50d8ccff7082239b35165c3",
-		"name":"sample-avatar-1.png",
-		"type":"image/png",
-		"mtime":"2013-12-31T20:34:46.872Z"
-		}
-	}
-*/
 module.exports = {
 	
 	validate: function(req) {
