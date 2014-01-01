@@ -898,6 +898,19 @@ CREATE OR REPLACE VIEW vw_group AS
   INNER JOIN scope
   	on ld.scope_id = scope.id);
 
+CREATE OR REPLACE VIEW vw_user_profile_image AS
+	(SELECT user.id AS id
+		, user.name as name
+		, user.last_name as last_name
+		, user.email as email
+		, user.workplace as workplace
+		, user.city as city
+		, user.country as country
+		, image.uri as image_uri
+	FROM user
+	LEFT OUTER JOIN image
+		ON user.image_id = image.id);
+
 CREATE OR REPLACE VIEW vw_user_profile AS
 	(SELECT user.id as user_id
 		, user.image_id

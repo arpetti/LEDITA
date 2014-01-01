@@ -1,13 +1,12 @@
 USE `ledita-test` ;
 
--- FIXME #48 modify name and uri to match what code is actually doing
 INSERT INTO `image` (`id`, `name`, `size`, `uri`, `mime`)
-VALUES ('1', 'mario.png', '287', 'http://localhost/ledita/img/usr/mario.png', 'png'),
-        ('2', 'lucia.png', '347', 'http://localhost/ledita/img/usr/lucia.png', 'png'),
-('3', 'antonio.png', '287', 'http://localhost/ledita/img/usr/antonio.png', 'jpg'),
-('4', 'sara.png', '287', 'http://localhost/ledita/img/usr/sara.png', 'gif'),
-('5', 'silvia.png', '287', 'http://localhost/ledita/img/usr/silvia.png', 'png'),
-('6', 'alessandro.png', '287', 'http://localhost/ledita/img/usr/alessandro.png', 'png');
+VALUES ('1', 'user1.png', '287', 'avatar/user1.png', 'image/png'),
+        ('2', 'user2.png', '347', 'avatar/user2.png', 'image/png'),
+('3', 'user3.png', '287', 'avatar/user3.png', 'image/jpg'),
+('4', 'user4.png', '287', 'avatar/user4.png', 'gif'),
+('5', 'user5.png', '287', 'avatar/user5.png', 'image/png'),
+('6', 'user6.png', '287', 'avatar/user6.png', 'image/png');
 
 INSERT INTO `user` (`id`, `image_id`, `name`, `last_name`, `email`, `hash`, `workplace`, `city`, `country`)
 VALUES ('1', '1', 'Mario', 'Rossi', 'mario@email.it', '$2a$10$/MWGZW7cmwNdle.jiFJb9OiWqVZjxbgJxYNpEraHkwzZ2muBHL7Gm', 'Scuola A', 'Roma', 'Italia'),

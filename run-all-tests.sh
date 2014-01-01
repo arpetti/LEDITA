@@ -25,6 +25,10 @@ if [[ -n "$nodepid" ]]; then
 	sleep 2
 fi
 
+echo "Refreshing user-upload dir..."
+rm user-upload/avatar/*.*
+cp client/img/pics/user*.png user-upload/avatar
+
 echo "Cleaning log files..."
 rm logs/*.log
 

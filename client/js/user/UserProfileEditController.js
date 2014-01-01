@@ -65,8 +65,7 @@ angular.module('ledita-app')
 						file: avatarFile,
 					}).success(function(res) {
 						$log.info('File uploaded successfully, res: ' + JSON.stringify(res));
-						// TEST
-						$scope.userImageUri = res;
+						$scope.userProfile.image_uri = res;
 					}).error(function(err) {
 						$log.error(err);
 						$scope.userProfileUpdateErrors = err;

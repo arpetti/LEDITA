@@ -43,13 +43,11 @@ module.exports = {
 		};
 	},
 	
-	buildImageRecord: function(userId, userProfileImage) {
-		var imgName = buildImageName(userId, userProfileImage);
-		var imgUri = buildImageUri(imgName);
+	buildImageRecord: function(imageDetails, userProfileImage) {
 		return {
-			name: imgName,
+			name: imageDetails.name,
 			size: userProfileImage.size,
-			uri: imgUri,
+			uri: imageDetails.uri,
 			mime: userProfileImage.type
 		}
 	}

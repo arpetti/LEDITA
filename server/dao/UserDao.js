@@ -2,7 +2,7 @@ var mysql = require('mysql')
   , dao = require('./Dao.js');
 
 var GET_USER_BY_EMAIL = 'SELECT id, name, last_name, email, hash, workplace, city, country FROM user WHERE email = ?';
-var GET_USER_BY_ID = 'SELECT id, name, last_name, email, workplace, city, country, image_id FROM user WHERE id = ?';
+var GET_USER_BY_ID = 'SELECT id, name, last_name, email, workplace, city, country, image_uri FROM vw_user_profile_image WHERE id = ?';
 var ADD_USER = 'INSERT INTO user SET ?';
 var DELETE_USER = 'DELETE FROM user WHERE ?';
 

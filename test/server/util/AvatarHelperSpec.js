@@ -16,7 +16,6 @@ describe('Avatar Helper', function() {
   });
 
 	it('Builds Image Record', function() {
-		var userId = 123456;
 		var userProfileImage = {
 			size: 14453,
 			path: '/temp/path/foo',
@@ -24,15 +23,18 @@ describe('Avatar Helper', function() {
 			type: 'image/gif',
 			mtime: '2013-12-31T20:34:46.872Z'
 		};
-		var uuidResult = '8aa544e1';
-		var uuidStub = sandbox.stub(uuid, 'v4').returns(uuidResult);
+		var imageDetails = {
+			name: 'avatar-876-9aa544e1.gif',
+			uri: 'avatar/avatar-876-9aa544e1.gif',
+			sourcePath: '/temp/path/foo/bar',
+			targetPath: '/server/path/to/user/upload/dir'
+		};
 		
-		var result = fixture.buildImageRecord(userId, userProfileImage);
-		assert.isTrue(uuidStub.calledOnce);
+		var result = fixture.buildImageRecord(imageDetails, userProfileImage);
 
-		expect(result.name).to.equal('avatar-123456-8aa544e1.gif');
+		expect(result.name).to.equal(imageDetails.name);
 		expect(result.size).to.equal(userProfileImage.size);
-		expect(result.uri).to.equal('avatar/avatar-123456-8aa544e1.gif');
+		expect(result.uri).to.equal(imageDetails.uri);
 		expect(result.mime).to.equal(userProfileImage.type);
 	});
 

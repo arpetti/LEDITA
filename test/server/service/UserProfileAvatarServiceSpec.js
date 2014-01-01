@@ -68,7 +68,7 @@ describe('User Profile Avatar Service', function() {
 
   			assert.isTrue(avatarHelperDetailsStub.withArgs(userId, userProfileImage).calledOnce);
   			assert.isTrue(fsStub.withArgs(imgDetails.sourcePath, imgDetails.targetPath).calledOnce);
-  			assert.isTrue(avatarHeperRecordStub.withArgs(userId, userProfileImage).calledOnce);
+  			assert.isTrue(avatarHeperRecordStub.withArgs(imgDetails, userProfileImage).calledOnce);
   			assert.isTrue(imageDaoStub.withArgs(imgRecord).calledOnce);
   			assert.isTrue(userProfileEditDaoStub.withArgs(userId, insertedImageId).calledOnce);
   			done();
@@ -162,7 +162,7 @@ describe('User Profile Avatar Service', function() {
 
   			assert.isTrue(avatarHelperDetailsStub.withArgs(userId, userProfileImage).calledOnce);
   			assert.isTrue(fsStub.withArgs(imgDetails.sourcePath, imgDetails.targetPath).calledOnce);
-  			assert.isTrue(avatarHeperRecordStub.withArgs(userId, userProfileImage).calledOnce);
+  			assert.isTrue(avatarHeperRecordStub.withArgs(imgDetails, userProfileImage).calledOnce);
   			assert.isTrue(imageDaoStub.withArgs(imgRecord).calledOnce);
   			assert.equal(userProfileEditDaoStub.callCount, 0);
   			done();
@@ -218,7 +218,7 @@ describe('User Profile Avatar Service', function() {
 
   			assert.isTrue(avatarHelperDetailsStub.withArgs(userId, userProfileImage).calledOnce);
   			assert.isTrue(fsStub.withArgs(imgDetails.sourcePath, imgDetails.targetPath).calledOnce);
-  			assert.isTrue(avatarHeperRecordStub.withArgs(userId, userProfileImage).calledOnce);
+  			assert.isTrue(avatarHeperRecordStub.withArgs(imgDetails, userProfileImage).calledOnce);
   			assert.isTrue(imageDaoStub.withArgs(imgRecord).calledOnce);
   			assert.isTrue(userProfileEditDaoStub.withArgs(userId, insertedImageId).calledOnce);
   			done();

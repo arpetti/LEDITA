@@ -8,6 +8,11 @@ before_script:
   - mysql < database/ci/test-data.sql --verbose  
   - npm install -g node-gyp
   - mkdir logs
+  - mkdir user-upload
+  - cd user-upload
+  - mkdir avatar
+  - cd ../../
+  - cp client/img/pics/user*.png user-upload/avatar
   - NODE_ENV=ci node server.js > /dev/null &
   - sleep 3
 

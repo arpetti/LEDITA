@@ -29,7 +29,7 @@ module.exports = {
 	    
 	    // Step 2: Insert image
 	    function(callback){
-	    	imageDao.insertImage(avatarHelper.buildImageRecord(userId, userProfileImage), function(err, imageId) {
+	    	imageDao.insertImage(avatarHelper.buildImageRecord(imgDetails, userProfileImage), function(err, imageId) {
 	    		if(err) {
 	    			logger.log().error('Error occurred inserting avatar image.', err);
 	    			callback(err);
