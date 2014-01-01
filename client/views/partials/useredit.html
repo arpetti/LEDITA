@@ -3,8 +3,12 @@
 
         <div class="span3  centered top-margin ">
             
-            <!-- #48 FIXME show default user image if have no profile image -->
-            <img id="userProfileImage" ng-src="{{userProfile.image_uri}}" class="user-pic-big">
+            <div ng-show="userProfile.image_uri">
+            	<img id="userProfileImage" ng-src="{{userProfile.image_uri}}" alt="User Profile Image" class="user-pic-big">
+          	</div>
+          	<div ng-show="!userProfile.image_uri">
+          		<img id="userProfileDefaultImage" ng-src="/img/pics/user.png" alt="User Default Profile Image" class="user-pic-big">
+          	</div>
 
             <input type="file" ng-file-select="onFileSelect($files)" >
             <div>
