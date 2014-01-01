@@ -38,6 +38,9 @@ describe('User Profile', function() {
 		sleep(1);
 		expect(browser().location().url()).toBe('/useredit');
 
+		// Verify profile image is displayed
+		expect(element('#userProfileImage').attr('src')).toMatch('avatar/user1.png');
+
 		// Verify first name
 		verifyField('userProfile.name', '', 'John', '#firstNameReqErr', 'Necessario');
 		verifyField('userProfile.name', 'John123', 'John', '#firstNamePatternErr', 'Simbolo non permesso');
@@ -70,6 +73,12 @@ describe('User Profile', function() {
 		// Logout
 		element('#userActionsMenu').click();
 		element('#logoutLink').click();
+	});
+
+	it('User profile avatar images are publicly visible', function() {
+		browser().navigateTo('/avatar/user1.png');
+		sleep(0.2);
+		expect(element('img').attr('src')).toMatch('avatar/user1.png');
 	});
 
 });
