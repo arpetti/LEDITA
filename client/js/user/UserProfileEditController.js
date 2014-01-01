@@ -62,9 +62,12 @@ angular.module('ledita-app')
 						url: '/userprofile/avatar', 
 						method: 'POST',
 						headers: {'Content-Type': avatarFile.type},
+						fileFormDataName: 'userProfileImage',
 						file: avatarFile,
 					}).success(function(res) {
-						console.log('File Upload Success: ' + JSON.stringify(res));
+						$log.info('File uploaded successfully');
+					}).error(function(err) {
+						$log.error(err);
 					});
 			};
 

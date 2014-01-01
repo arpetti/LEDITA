@@ -1,4 +1,5 @@
 var userProfileEditValidator = require('../validate/UserProfileEditValidator');
+var userProfileAvatarValidator = require('../validate/UserProfileAvatarValidator');
 var userProfileEditService = require('../service/UserProfileEditService');
 var fs = require('fs');
 
@@ -67,26 +68,41 @@ module.exports = {
 	// TODO: Determine file extension for rename
 	// TODO: Insert into image table and update user.image_id with inserted image id
 	//		--> Also add columns creation_date and ip to image table for tracking
+	// Consider ImageMagik for resizing?
+	// updateAvatar: function(req, res) {
+
+	// 	console.log('************** req.files: ' + JSON.stringify(req.files));
+
+	// 	// experiment for tracking client IP
+	// 	// var ip = req.headers['x-forwarded-for'] || 
+ //  //    req.connection.remoteAddress || 
+ //  //    req.socket.remoteAddress ||
+ //  //    req.connection.socket.remoteAddress;
+ //  //   console.log('***************** updateAvatar ip: ' + ip);
+ //  //   console.log('***************** updateAvatar req.ip: ' + req.ip);
+
+ //  	// 'userProfileImage' comes from client side UserProfileEditController.js
+	// 	var oldPath = req.files.userProfileImage.path;
+	// 	var newPath = __dirname + '/../../user-upload/avatar/avatar-' + req.user.id + '.png';
+	// 	fs.rename(oldPath, newPath, function(err) {
+	// 		if(err) {
+	// 			console.log('updateAvatar err: ' + JSON.stringify(err));
+	// 			return res.send(500, 'Avatar upload failed');
+	// 		} else {
+	// 			res.json(200, {});
+	// 		}
+	// 	});
+	// }
+
+	// #48 wip...
 	updateAvatar: function(req, res) {
-
-		// experiment for tracking client IP
-		var ip = req.headers['x-forwarded-for'] || 
-     req.connection.remoteAddress || 
-     req.socket.remoteAddress ||
-     req.connection.socket.remoteAddress;
-    console.log('***************** updateAvatar ip: ' + ip);
-    console.log('***************** updateAvatar req.ip: ' + req.ip);
-
-		var oldPath = req.files.file.path;
-		var newPath = __dirname + '/../../user-upload/avatar/avatar-' + req.user.id + '.png';
-		fs.rename(oldPath, newPath, function(err) {
-			if(err) {
-				console.log('updateAvatar err: ' + JSON.stringify(err));
-				return res.send(500, 'Avatar upload failed');
-			} else {
-				res.json(200, {});
-			}
-		});
+		var validationMessages = userProfileAvatarValidator.validate(req);
+		if (validationMessages.length > 0) {
+			res.send(400, validationMessages);
+		} else {
+			// TODO delegate to service to handle file upload and user profile update
+			res.json(200, {});
+		}
 	}
 
 };

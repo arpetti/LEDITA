@@ -31,6 +31,12 @@ module.exports.USER_PROFILE_UPDATE_WORKPLACE_FAIL = 'Unable to update user profi
 module.exports.USER_PROFILE_UPDATE_CITY_FAIL = 'Unable to update user profile city.';
 module.exports.USER_PROFILE_UPDATE_COUNTRY_FAIL = 'Unable to update user profile country.';
 
+// User Profile Avatar
+module.exports.USER_PROFILE_AVATAR_MISSING = 'Please specify a profile image.';
+module.exports.USER_PROFILE_AVATAR_EMPTY = 'Profile image cannot be empty.';
+module.exports.USER_PROFILE_AVATAR_INVALID_TYPE = 'Please upload a valid image type.';
+module.exports.USER_PROFILE_AVATAR_SIZE = 'Please upload a profile image smaller than 20K';
+
 // Learning Design Retrieval
 module.exports.UNABLE_TO_RETRIEVE_LDS = 'Impossibile recuperare i progetti in questo momento, per favore, tenta più tardi.';
 module.exports.LD_NOT_FOUND = "Impossibile trovare questo progetto.";
