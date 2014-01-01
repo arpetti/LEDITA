@@ -7,6 +7,7 @@ var UPDATE_EMAIL = 'update user set email = ? where id = ?';
 var UPDATE_WORKPLACE = 'update user set workplace = ? where id = ?';
 var UPDATE_CITY = 'update user set city = ? where id = ?';
 var UPDATE_COUNTRY = 'update user set country = ? where id = ?';
+var UPDATE_IMAGE = 'update user set image_id = ? where id = ?';
 
 var updateProfile = function(userId, updateQuery, dataValue, callback) {
 	dao.insertOrUpdateRecord(updateQuery, [dataValue, userId], function(err, result) {
@@ -39,5 +40,9 @@ module.exports = {
 	updateCountry: function(userId, country, callback) {
 		updateProfile(userId, UPDATE_COUNTRY, country, callback);
 	},
+
+	updateImage: function(userId, imageId, callback) {
+		updateProfile(userId, UPDATE_IMAGE, imageId, callback);
+	}
 
 }

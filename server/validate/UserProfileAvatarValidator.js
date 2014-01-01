@@ -1,8 +1,8 @@
 var m = require('../validate/ValidationMessages');
 var _ = require('underscore');
 
-// http://reference.sitepoint.com/html/mime-types-full
 var ACCEPTED_MIME_TYPES = ['image/gif', 'image/jpeg', 'image/pjpeg', 'image/png'];
+var MAX_AVATAR_SIZE = 20 * 1024; // 20K
 
 /*
 req.files: {
@@ -48,7 +48,7 @@ module.exports = {
 	validateSize: function(req) {
 		if (req.files.userProfileImage) {
 			var imgSize = req.files.userProfileImage.size;
-			if (imgSize > (20 * 1024)) {
+			if (imgSize > MAX_AVATAR_SIZE) {
 				return m.USER_PROFILE_AVATAR_SIZE;
 			}
 		}

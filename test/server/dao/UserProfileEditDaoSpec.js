@@ -7,7 +7,7 @@ var dao = require('../../../server/dao/Dao');
 describe('User Profile Edit DAO', function() {
 
 	var userIdToEdit = 5;
-	var verifyUserUpdated = 'select id, name, last_name, email, workplace, city, country from user where id = ?';
+	var verifyUserUpdated = 'select id, image_id, name, last_name, email, workplace, city, country from user where id = ?';
 	var resetUser = 'update user set name = ?, last_name = ?, email = ?, workplace = ?, city = ?, country = ? where id = ?';
 	var resetUserData = ['Silvia', 'Rosa', 'silvia@email.it', 'Scuola E', 'Pechino', 'Cina', userIdToEdit];
 
@@ -192,6 +192,39 @@ describe('User Profile Edit DAO', function() {
 						expect(result[0].id).to.equal(userIdToEdit);
 						expect(result[0].country).to.equal(modifiedCountry);
 						callback(null, 'Step 2: Verified country Updated');
+					});
+				},
+				function(callback) {
+					dao.insertOrUpdateRecord(resetUser, resetUserData, function(err, result) {
+						expect(err).to.be.null;
+						callback(null, 'Step 3: Reset User Profile');
+					});
+				}
+			],
+			function(err, results) {
+				console.log('results: ' + JSON.stringify(results));
+				expect(err).to.be.null;
+				expect(results).to.have.length(3);
+				done();
+			});
+	});
+
+	it('Updates image', function(done) {
+		var modifiedImageId = 1; // known from demo data to be valid image
+		async.series([
+				function(callback) {
+					fixture.updateImage(userIdToEdit, modifiedImageId, function(err, result) {
+						expect(err).to.be.null;
+						callback(null, 'Step 1: Updated User Profile image');
+					});
+				},
+				function(callback) {
+					dao.findAll(verifyUserUpdated, [userIdToEdit], function(err, result) {
+						expect(err).to.be.null;
+						expect(result).to.have.length(1);
+						expect(result[0].id).to.equal(userIdToEdit);
+						expect(result[0].image_id).to.equal(modifiedImageId);
+						callback(null, 'Step 2: Verified image Updated');
 					});
 				},
 				function(callback) {
