@@ -1,5 +1,6 @@
 var userDao = require('../dao/UserDao');
 var userProfileEditDao = require('../dao/UserProfileEditDao');
+var userProfileAvatarService = require('./UserProfileAvatarService');
 var messages = require('../validate/ValidationMessages');
 var logger = require('../util/LogWrapper');
 
@@ -16,6 +17,7 @@ var updateProfile = function(updateFunc, userId, dataValue, message, cb) {
 
 module.exports = {
 
+	// #48 userDao should be modified to also retrieve profile image uri (create new db view to join user and image tables)
 	// callback(err, user, message)
 	getUserProfile: function(userId, callback) {
 		userDao.getUserById(userId, function(err, result) {
@@ -58,6 +60,12 @@ module.exports = {
 	// callback(err, message)
 	updateCountry: function(userId, country, callback) {
 		updateProfile(userProfileEditDao.updateCountry, userId, country, messages.USER_PROFILE_UPDATE_COUNTRY_FAIL, callback);
+	},
+
+	// #48 wip...
+	// callback(err, userImageUri)
+	updateAvatar: function(userId, userProfileImage, callback) {
+
 	}
 
 };

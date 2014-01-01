@@ -1,4 +1,4 @@
-var mysql = require('mysql')
+var mysql = require('mysql');
 var dao = require('./Dao.js');
 
 var CREATE_LD = 'INSERT INTO ld SET ?';

@@ -100,7 +100,7 @@ module.exports = {
 		if (validationMessages.length > 0) {
 			res.send(400, validationMessages);
 		} else {
-			// TODO delegate to service to handle file upload and user profile update
+			// userProfileAvatarService.updateAvatar(req.user.id, req.files.userProfileImage, function(err, userImageUri){//do something});
 			res.json(200, {});
 		}
 	}

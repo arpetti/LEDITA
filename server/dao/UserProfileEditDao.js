@@ -38,6 +38,6 @@ module.exports = {
 
 	updateCountry: function(userId, country, callback) {
 		updateProfile(userId, UPDATE_COUNTRY, country, callback);
-	}	
+	},
 
 }
