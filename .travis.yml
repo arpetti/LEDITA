@@ -11,7 +11,7 @@ before_script:
   - mkdir user-upload
   - cd user-upload
   - mkdir avatar
-  - cd ../../
+  - cd ../
   - cp client/img/pics/user*.png user-upload/avatar
   - NODE_ENV=ci node server.js > /dev/null &
   - sleep 3
