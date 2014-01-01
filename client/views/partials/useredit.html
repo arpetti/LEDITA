@@ -4,6 +4,10 @@
         <div class="span3  centered top-margin ">
             <!-- FIXME: GET REAL PICTURE FROM DB -->
             <img ng-src="../img/pics/user{{ userProfile.image_id }}.png" class="user-pic-big">
+
+            <!-- TEST -->
+            <!-- <img ng-src="avatar/avatar-1.png" class="user-pic-big"/> -->
+
             <input type="file" ng-file-select="onFileSelect($files)" >
             <div>
                 <a ng-href="/userlds/{{userProfile.id}}">
