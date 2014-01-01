@@ -1,47 +1,19 @@
 var expect = require('chai').expect;
+var sinon = require('sinon');
 var assert = require('chai').assert;
 var fixture = require('../../../server/util/AvatarHelper');
+var uuid = require('node-uuid');
 
 describe('Avatar Helper', function() {
 
-	it('Builds Image Name', function() {
-		var userId = 23;
-		var userProfileImage = {
-			size: 14453,
-			path: '/temp/path/foo',
-			name: 'sample.jpg',
-			type: 'image/jpeg',
-			mtime: '2013-12-31T20:34:46.872Z'
-		};
-		var result = fixture.buildImageName(userId, userProfileImage);
-		expect(result).to.equal('avatar-23.jpg')
-	});
+	var sandbox = sinon.sandbox.create();
 
-	it('Builds Image URI', function() {
-		var userId = 23;
-		var userProfileImage = {
-			size: 14453,
-			path: '/temp/path/foo',
-			name: 'sample.png',
-			type: 'image/png',
-			mtime: '2013-12-31T20:34:46.872Z'
-		};
-		var result = fixture.buildImageUri(userId, userProfileImage);
-		expect(result).to.equal('avatar/avatar-23.png');
-	});
+  beforeEach(function() {
+  });
 
-	it('Builds Image Target Path', function() {
-		var userId = 23;
-		var userProfileImage = {
-			size: 14453,
-			path: '/temp/path/foo',
-			name: 'sample.png',
-			type: 'image/png',
-			mtime: '2013-12-31T20:34:46.872Z'
-		};
-		var result = fixture.buildImageTargetPath(userId, userProfileImage);
-		expect(result).to.contain('/../../user-upload/avatar/avatar-23.png');
-	});
+  afterEach(function() {
+      sandbox.restore();
+  });
 
 	it('Builds Image Record', function() {
 		var userId = 123456;
@@ -52,10 +24,15 @@ describe('Avatar Helper', function() {
 			type: 'image/gif',
 			mtime: '2013-12-31T20:34:46.872Z'
 		};
+		var uuidResult = '8aa544e1';
+		var uuidStub = sandbox.stub(uuid, 'v4').returns(uuidResult);
+		
 		var result = fixture.buildImageRecord(userId, userProfileImage);
-		expect(result.name).to.equal('avatar-123456.gif');
+		assert.isTrue(uuidStub.calledOnce);
+
+		expect(result.name).to.equal('avatar-123456-8aa544e1.gif');
 		expect(result.size).to.equal(userProfileImage.size);
-		expect(result.uri).to.equal('avatar/avatar-123456.gif');
+		expect(result.uri).to.equal('avatar/avatar-123456-8aa544e1.gif');
 		expect(result.mime).to.equal(userProfileImage.type);
 	});
 
@@ -68,12 +45,16 @@ describe('Avatar Helper', function() {
 			type: 'image/pjpeg',
 			mtime: '2013-12-31T20:34:46.872Z'
 		};
+		var uuidResult = '9aa544e1';
+		var uuidStub = sandbox.stub(uuid, 'v4').returns(uuidResult);
 		
 		var result = fixture.getImageDetails(userId, userProfileImage);
-		expect(result.name).to.equal('avatar-876.jpg');
-		expect(result.uri).to.equal('avatar/avatar-876.jpg');
+		assert.isTrue(uuidStub.calledOnce);
+
+		expect(result.name).to.equal('avatar-876-9aa544e1.jpg');
+		expect(result.uri).to.equal('avatar/avatar-876-9aa544e1.jpg');
 		expect(result.sourcePath).to.equal(userProfileImage.path);
-		expect(result.targetPath).to.contain('/../../user-upload/avatar/avatar-876.jpg')
+		expect(result.targetPath).to.contain('/../../user-upload/avatar/avatar-876-9aa544e1.jpg')
 	});
 
 });

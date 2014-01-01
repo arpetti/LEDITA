@@ -65,7 +65,7 @@ angular.module('ledita-app')
 						fileFormDataName: 'userProfileImage',
 						file: avatarFile,
 					}).success(function(res) {
-						$log.info('File uploaded successfully');
+						$log.info('File uploaded successfully, res: ' + JSON.stringify(res));
 					}).error(function(err) {
 						$log.error(err);
 					});

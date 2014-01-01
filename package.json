@@ -16,7 +16,8 @@
     "validator": "~1.1.1",
     "when": "~2.3.0",
     "async": "*",
-    "underscore.string": "~2.3.3"
+    "underscore.string": "~2.3.3",
+    "node-uuid": "~1.4.1"
   },
   "scripts": {
     "test": "mocha test/server -R spec --recursive",
