@@ -27,6 +27,11 @@ describe('Registration', function() {
 		expect(element('#navBarAnon', 'anon nav is hidden for logged in user').css('display')).toBe('none');
 		expect(element('#loggedInUserName', 'user name is displayed for logged in user').text()).toBe(expectedUserDisplayName);
 
+		// Verify default avatar is displayed in top nav
+		expect(element('#defaultAvatarImage').attr('src')).toMatch('img/pics/user.png');
+		expect(element('#defaultAvatarImage').css('display')).toBe("inline");
+		expect(element('#userAvatarImage').css('display')).toBe("none");
+
 		// Navigate to My Profile
 		element('#myProfileLink').click();
 		sleep(1);
