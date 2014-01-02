@@ -17,6 +17,8 @@ describe('User DAO', function() {
         UserDao.getUserByEmail(email, function(err, results){
             expect(results).to.have.length(1);
             expect(results[0].email).to.equal(email);
+            expect(results[0].hash).to.have.length(60);
+            expect(results[0].image_uri).to.equal('avatar/user4.png'); // known from demo data
             done();
         });
     });

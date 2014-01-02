@@ -55,7 +55,8 @@ describe('Auth controller', function() {
                 last_name: "Smith",
                 email: "john.smith@test.com",
                 role: {"bitMask":2,"title":"user"},
-                username: "john.smith@test.com"
+                username: "john.smith@test.com",
+                image_uri: "avatar/avatar-999-v77d66.png"
             };
             var userServiceStub = sandbox.stub(UserService, "addNewUser", function(user, hash, callback) {
                 callback(null, addedUser);
@@ -70,6 +71,7 @@ describe('Auth controller', function() {
                 expect(user.id).to.equal(addedUser.id);
                 expect(user.name).to.equal(addedUser.name);
                 expect(user.last_name).to.equal(addedUser.last_name);
+                expect(user.image_uri).to.equal(addedUser.image_uri);
                 
                 assert.isTrue(userValidateStub.withArgs(req.body).calledOnce);
                 assert.isTrue(userValidateExistsStub.withArgs(req.body.username).calledOnce);

@@ -905,6 +905,7 @@ CREATE OR REPLACE VIEW vw_user_profile_image AS
 		, user.email as email
 		, user.workplace as workplace
 		, user.city as city
+		, user.hash as hash
 		, user.country as country
 		, image.uri as image_uri
 	FROM user

@@ -13,7 +13,8 @@ var buildUserResponse = function(userObj) {
 		"username": userObj.username,
 		"id": userObj.id,
 		"name": userObj.name,
-		"last_name": userObj.last_name
+		"last_name": userObj.last_name,
+		"image_uri": userObj.image_uri
 	};
 }
 

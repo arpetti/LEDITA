@@ -906,6 +906,7 @@ CREATE OR REPLACE VIEW vw_user_profile_image AS
 		, user.workplace as workplace
 		, user.city as city
 		, user.country as country
+		, user.hash as hash
 		, image.uri as image_uri
 	FROM user
 	LEFT OUTER JOIN image
