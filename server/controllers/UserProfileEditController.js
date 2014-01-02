@@ -66,7 +66,6 @@ module.exports = {
 		updateProfile(userProfileEditService.updateCountry, req.user.id, req.body.country, res);
 	},
 
-	// TOOD #48 unit test
 	updateAvatar: function(req, res) {
 		var validationMessages = userProfileAvatarValidator.validate(req);
 		if (validationMessages.length > 0) {

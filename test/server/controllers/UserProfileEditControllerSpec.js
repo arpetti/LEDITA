@@ -4,6 +4,7 @@ var sinon = require('sinon');
 var fixture = require('../../../server/controllers/UserProfileEditController');
 var userProfileEditService = require('../../../server/service/UserProfileEditService');
 var userProfileEditValidator = require('../../../server/validate/UserProfileEditValidator');
+var userProfileAvatarValidator = require('../../../server/validate/UserProfileAvatarValidator');
 
 describe('User Profile Edit Controller', function() {
 
@@ -445,7 +446,6 @@ describe('User Profile Edit Controller', function() {
 		var sandbox = sinon.sandbox.create();
 
 		beforeEach(function() {
-
 		});
 
 		afterEach(function() {
@@ -490,6 +490,92 @@ describe('User Profile Edit Controller', function() {
 				done();
 			}
 			fixture.updateCountry(req, res);
+		});
+
+	});
+
+	describe('Update Avatar', function() {
+
+		var req = {};
+		var res = {};
+		var sandbox = sinon.sandbox.create();
+
+		beforeEach(function() {
+		});
+
+		afterEach(function() {
+			sandbox.restore();
+		});
+
+		it('Sends 400 with error messages if validation fails', function(done) {
+
+			var validationResult = ['image too big'];
+			var avatarValidatorStub = sandbox.stub(userProfileAvatarValidator, 'validate').returns(validationResult);			
+
+			var serviceStub = sandbox.stub(userProfileEditService, 'updateAvatar');
+
+			res.send = function(httpStatus, responseData) {
+				expect(httpStatus).to.equal(400);
+				expect(responseData).to.equal(validationResult);
+				assert.isTrue(avatarValidatorStub.withArgs(req).calledOnce);
+				assert.equal(serviceStub.callCount, 0, 'service not called when validation fails');
+				done();
+			}
+			fixture.updateAvatar(req, res);
+		});
+
+		it('Sends 500 with error message if service errors', function(done) {
+			req.user = {
+				id: 32
+			};
+			req.files = {
+				userProfileImage: {
+					name: 'myfile.jpg'
+				}
+			};
+			var validationResult = [];
+			var avatarValidatorStub = sandbox.stub(userProfileAvatarValidator, 'validate').returns(validationResult);			
+
+			var serviceError = new Error('something went wrong updating avatar');
+			var serviceStub = sandbox.stub(userProfileEditService, 'updateAvatar', function(userId, userProfileImage, cb) {
+				cb(serviceError);
+			});
+
+			res.send = function(httpStatus, responseData) {
+				expect(httpStatus).to.equal(500);
+				expect(responseData).to.equal(serviceError.message);
+				assert.isTrue(avatarValidatorStub.withArgs(req).calledOnce);
+				assert.isTrue(serviceStub.withArgs(req.user.id, req.files.userProfileImage).calledOnce);
+				done();
+			}
+			fixture.updateAvatar(req, res);
+		});
+
+		it('Sends 200 with image uri when successful', function(done) {
+			req.user = {
+				id: 32
+			};
+			req.files = {
+				userProfileImage: {
+					name: 'myfile.jpg'
+				}
+			};
+			var validationResult = [];
+			var avatarValidatorStub = sandbox.stub(userProfileAvatarValidator, 'validate').returns(validationResult);			
+
+			var imageUri = '/avatar/avatar-32-g8777-y62865.jpg';
+			var serviceStub = sandbox.stub(userProfileEditService, 'updateAvatar', function(userId, userProfileImage, cb) {
+				cb(null, imageUri);
+			});
+
+			res.send = function(httpStatus, responseData) {
+				expect(httpStatus).to.equal(200);
+				expect(responseData).to.equal(imageUri);
+				assert.isTrue(avatarValidatorStub.withArgs(req).calledOnce);
+				assert.isTrue(serviceStub.withArgs(req.user.id, req.files.userProfileImage).calledOnce);
+				done();
+			}
+			fixture.updateAvatar(req, res);
 		});
 
 	});
