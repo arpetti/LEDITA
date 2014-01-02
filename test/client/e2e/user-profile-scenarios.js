@@ -38,8 +38,10 @@ describe('User Profile', function() {
 		sleep(1);
 		expect(browser().location().url()).toBe('/useredit');
 
-		// Verify profile image is displayed
+		// Verify profile image is displayed and default is hidden
 		expect(element('#userProfileImage').attr('src')).toMatch('avatar/user1.png');
+		expect(element('#userProfileImage').css('display')).toBe("inline");
+		expect(element('#userProfileDefaultImage').css('display')).toBe("none");
 
 		// Verify first name
 		verifyField('userProfile.name', '', 'John', '#firstNameReqErr', 'Necessario');

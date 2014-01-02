@@ -8,45 +8,63 @@ describe('Registration', function() {
 		browser().navigateTo('/logout');
 	});
 
-	it('New user can register', function() {
+	it('New user can register and view their profile', function() {
 		var userNameToRegister = 'john.smith@test.com';
 		var expectedUserDisplayName = 'John Smith';
 
-    	// Register
+		// Register
 		browser().navigateTo('/login');
-	    input('firstname').enter('John');
-	    input('surname').enter('Smith');
-	    input('username').enter(userNameToRegister);
-	    input('password').enter('12345678');
-	    input('retypepassword').enter('12345678');
-	    input('terms').check();
-	    element('#signup').click();
+		input('firstname').enter('John');
+		input('surname').enter('Smith');
+		input('username').enter(userNameToRegister);
+		input('password').enter('12345678');
+		input('retypepassword').enter('12345678');
+		input('terms').check();
+		element('#signup').click();
 
-	    // Verify logged in view
-	    expect(element('#navBarUser', 'user nav is displayed for logged in user').css('display')).toBe('block');
-	    expect(element('#navBarAnon', 'anon nav is hidden for logged in user').css('display')).toBe('none');
-	    expect(element('#loggedInUserName', 'user name is displayed for logged in user').text()).toBe(expectedUserDisplayName);
+		// Verify logged in view
+		expect(element('#navBarUser', 'user nav is displayed for logged in user').css('display')).toBe('block');
+		expect(element('#navBarAnon', 'anon nav is hidden for logged in user').css('display')).toBe('none');
+		expect(element('#loggedInUserName', 'user name is displayed for logged in user').text()).toBe(expectedUserDisplayName);
 
-	    // Logout
-	    element('#userActionsMenu').click();
-	    element('#logoutLink').click();
+		// Navigate to My Profile
+		element('#myProfileLink').click();
+		sleep(1);
+		expect(browser().location().url()).toBe('/useredit');
 
-	    // Verify anon view
-	    expect(element('#navBarAnon', 'anon nav is displayed after user logs out').css('display')).toBe('block');
-	    expect(element('#navBarUser', 'user nav is hidden after user logs out').css('display')).toBe('none');
+		// Verify default profile image
+		expect(element('#userProfileDefaultImage').attr('src')).toMatch('img/pics/user.png');
+		expect(element('#userProfileDefaultImage').css('display')).toBe("inline");
+		expect(element('#userProfileImage').css('display')).toBe("none");
+
+		// Verify My Profile data
+		expect(input('userProfile.name').val()).toEqual('John');
+		expect(input('userProfile.last_name').val()).toEqual('Smith');
+		expect(input('userProfile.email').val()).toEqual(userNameToRegister);
+		expect(input('userProfile.workplace').val()).toEqual('');
+		expect(input('userProfile.city').val()).toEqual('');
+		expect(input('userProfile.country').val()).toEqual('');
+
+		// Logout
+		element('#userActionsMenu').click();
+		element('#logoutLink').click();
+
+		// Verify anon view
+		expect(element('#navBarAnon', 'anon nav is displayed after user logs out').css('display')).toBe('block');
+		expect(element('#navBarUser', 'user nav is hidden after user logs out').css('display')).toBe('none');
 	});
 
 	describe('Client side validation', function() {
 
 		var verify = function(field, invalidInput, validInput, fieldErrorId, expectedErrorMessage) {
 			input(field).enter(invalidInput);
-		    sleep(0.3);
-		    expect(element('#signup').attr('disabled')).toBe("disabled");
-		    expect(element(fieldErrorId).css('display')).toBe("inline");
-		    expect(element(fieldErrorId).text()).toMatch(expectedErrorMessage);
-		    input(field).enter(validInput);
-		    sleep(0.3);
-		    expect(element(fieldErrorId).css('display')).toBe("none");
+			sleep(0.3);
+			expect(element('#signup').attr('disabled')).toBe("disabled");
+			expect(element(fieldErrorId).css('display')).toBe("inline");
+			expect(element(fieldErrorId).text()).toMatch(expectedErrorMessage);
+			input(field).enter(validInput);
+			sleep(0.3);
+			expect(element(fieldErrorId).css('display')).toBe("none");
 		}
 
 		it('Invalid input is not allowed', function() {
@@ -97,16 +115,16 @@ describe('Registration', function() {
 			browser().navigateTo('/login');
 			expect(element('#registrationErrors').css('display')).toBe("none");
 
-		    input('firstname').enter('John');
-		    input('surname').enter('Smith');
-		    input('username').enter(existingUserName);
-		    input('password').enter('12345678');
-		    input('retypepassword').enter('12345678');
-		    input('terms').check();
-		    element('#signup').click();
-		    sleep(2);
-		    expect(element('#registrationErrors').css('display')).toBe("block");
-		    expect(element('#registrationErrors').text()).toMatch('Questo indirizzo email è già registrato.');
+			input('firstname').enter('John');
+			input('surname').enter('Smith');
+			input('username').enter(existingUserName);
+			input('password').enter('12345678');
+			input('retypepassword').enter('12345678');
+			input('terms').check();
+			element('#signup').click();
+			sleep(2);
+			expect(element('#registrationErrors').css('display')).toBe("block");
+			expect(element('#registrationErrors').text()).toMatch('Questo indirizzo email è già registrato.');
 
 		});
 
@@ -115,19 +133,19 @@ describe('Registration', function() {
 			browser().navigateTo('/login');
 			expect(element('#registrationErrors').css('display')).toBe("none");
 
-		    input('firstname').enter('Tweety');
-		    input('surname').enter('Bird');
-		    input('username').enter(testUsers.buildLongEmailAddress);
-		    input('password').enter('12345678');
-		    input('retypepassword').enter('12345678');
-		    input('terms').check();
-		    element('#signup').click();
-		    sleep(2);
-		    expect(element('#registrationErrors').css('display')).toBe("block");
-		    expect(element('#registrationErrors').text()).toMatch('L\'indirizzo email deve essere lungo meno di 255 caratteri.');
+			input('firstname').enter('Tweety');
+			input('surname').enter('Bird');
+			input('username').enter(testUsers.buildLongEmailAddress);
+			input('password').enter('12345678');
+			input('retypepassword').enter('12345678');
+			input('terms').check();
+			element('#signup').click();
+			sleep(2);
+			expect(element('#registrationErrors').css('display')).toBe("block");
+			expect(element('#registrationErrors').text()).toMatch('L\'indirizzo email deve essere lungo meno di 255 caratteri.');
 
 		});
 
 	});
 
-}); 	
+});
