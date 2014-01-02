@@ -3,6 +3,7 @@ var assert = require('chai').assert;
 var sinon = require('sinon');
 var fixture = require('../../../server/controllers/UserProfileEditController');
 var userProfileEditService = require('../../../server/service/UserProfileEditService');
+var userProfileEditValidator = require('../../../server/validate/UserProfileEditValidator');
 
 describe('User Profile Edit Controller', function() {
 
@@ -102,17 +103,48 @@ describe('User Profile Edit Controller', function() {
 			req.body = {
 				firstName: 'Janice'
 			};
+
+			var validationResult = [];
+			var validatorStub = sandbox.stub(userProfileEditValidator, 'validateFirstName').returns(validationResult);
+			
 			var serviceError = new Error('something went wrong with service updating user profile last name');
 			var serviceMessage = 'update first name failed';
 			var serviceStub = sandbox.stub(userProfileEditService, 'updateFirstName', function(userId, firstName, cb) {
 				cb(serviceError, serviceMessage);
 			});
+			
 			res.send = function(httpStatus, responseData) {
 				expect(httpStatus).to.equal(500);
 				expect(responseData).to.equal(serviceMessage);
+				
+				assert.isTrue(validatorStub.withArgs(req.body.firstName).calledOnce);
 				assert.isTrue(serviceStub.withArgs(req.user.id, req.body.firstName).calledOnce);
 				done();
 			};
+			fixture.updateFirstName(req, res);
+		});
+
+		it('Sends 400 with error messages when validator fails', function(done) {
+			req.user = {
+				id: 32
+			};
+			req.body = {
+				firstName: 'Janice123'
+			};
+
+			var validationResult = ['invalid first name'];
+			var validatorStub = sandbox.stub(userProfileEditValidator, 'validateFirstName').returns(validationResult);
+
+			var serviceStub = sandbox.stub(userProfileEditService, 'updateFirstName');
+
+			res.send = function(httpStatus, responseData) {
+				expect(httpStatus).to.equal(400);
+				expect(responseData).to.equal(validationResult);
+
+				assert.isTrue(validatorStub.withArgs(req.body.firstName).calledOnce);
+				assert.equal(serviceStub.callCount, 0);
+				done();
+			}
 			fixture.updateFirstName(req, res);
 		});
 
@@ -123,12 +155,19 @@ describe('User Profile Edit Controller', function() {
 			req.body = {
 				firstName: 'Janice'
 			};
+
+			var validationResult = [];
+			var validatorStub = sandbox.stub(userProfileEditValidator, 'validateFirstName').returns(validationResult);
+
 			var serviceStub = sandbox.stub(userProfileEditService, 'updateFirstName', function(userId, firstName, cb) {
 				cb();
 			});
+
 			res.json = function(httpStatus, responseData) {
 				expect(httpStatus).to.equal(200);
 				expect(responseData).to.be.empty;
+
+				assert.isTrue(validatorStub.withArgs(req.body.firstName).calledOnce);
 				assert.isTrue(serviceStub.withArgs(req.user.id, req.body.firstName).calledOnce);
 				done();
 			}
@@ -158,17 +197,48 @@ describe('User Profile Edit Controller', function() {
 			req.body = {
 				lastName: 'Smiths'
 			};
+
+			var validationResult = [];
+			var validatorStub = sandbox.stub(userProfileEditValidator, 'validateLastName').returns(validationResult);
+
 			var serviceError = new Error('something went wrong with service updating user profile first name');
 			var serviceMessage = 'update first name failed';
 			var serviceStub = sandbox.stub(userProfileEditService, 'updateLastName', function(userId, lastName, cb) {
 				cb(serviceError, serviceMessage);
 			});
+
 			res.send = function(httpStatus, responseData) {
 				expect(httpStatus).to.equal(500);
 				expect(responseData).to.equal(serviceMessage);
+				
+				assert.isTrue(validatorStub.withArgs(req.body.lastName).calledOnce);
 				assert.isTrue(serviceStub.withArgs(req.user.id, req.body.lastName).calledOnce);
 				done();
 			};
+			fixture.updateLastName(req, res);
+		});
+
+		it('Sends 400 with error messages when validator fails', function(done) {
+			req.user = {
+				id: 32
+			};
+			req.body = {
+				lastName: 'Smith123'
+			};
+
+			var validationResult = ['invalid last name'];
+			var validatorStub = sandbox.stub(userProfileEditValidator, 'validateLastName').returns(validationResult);
+
+			var serviceStub = sandbox.stub(userProfileEditService, 'updateLastName');
+
+			res.send = function(httpStatus, responseData) {
+				expect(httpStatus).to.equal(400);
+				expect(responseData).to.equal(validationResult);
+
+				assert.isTrue(validatorStub.withArgs(req.body.lastName).calledOnce);
+				assert.equal(serviceStub.callCount, 0);
+				done();
+			}
 			fixture.updateLastName(req, res);
 		});
 
@@ -179,12 +249,19 @@ describe('User Profile Edit Controller', function() {
 			req.body = {
 				lastName: 'Smiths'
 			};
+
+			var validationResult = [];
+			var validatorStub = sandbox.stub(userProfileEditValidator, 'validateLastName').returns(validationResult);
+
 			var serviceStub = sandbox.stub(userProfileEditService, 'updateLastName', function(userId, lastName, cb) {
 				cb();
 			});
+
 			res.json = function(httpStatus, responseData) {
 				expect(httpStatus).to.equal(200);
 				expect(responseData).to.be.empty;
+
+				assert.isTrue(validatorStub.withArgs(req.body.lastName).calledOnce);
 				assert.isTrue(serviceStub.withArgs(req.user.id, req.body.lastName).calledOnce);
 				done();
 			}

@@ -62,4 +62,59 @@ describe('User Profile Edit Validator', function() {
 
 	});
 
+	describe('Last Name', function() {
+
+		it('Cannot be empty', function() {
+			var lastName = '';
+			var results = fixture.validateLastName(lastName);
+			expect(results).to.have.length(3);
+			expect(results[0]).to.equal(messages.SURNAME_REQUIRED);
+			expect(results[1]).to.equal(messages.SURNAME_LENGTH);
+			expect(results[2]).to.equal(messages.SURNAME_ALLOWED_CHARS);
+		});
+
+		it('Cannot be null', function() {
+			var lastName = null;
+			var results = fixture.validateLastName(lastName);
+			expect(results).to.have.length(3);
+			expect(results[0]).to.equal(messages.SURNAME_REQUIRED);
+			expect(results[1]).to.equal(messages.SURNAME_LENGTH);
+			expect(results[2]).to.equal(messages.SURNAME_ALLOWED_CHARS);
+		});
+
+		it('Cannot be less than 2 characters', function() {
+			var lastName = 'a';
+			var results = fixture.validateLastName(lastName);
+			expect(results).to.have.length(1);
+			expect(results[0]).to.equal(messages.SURNAME_LENGTH);
+		});
+
+		it('Cannot be more than 20 characters', function() {
+			var lastName = testUtils.buildString(21, 'a');
+			var results = fixture.validateLastName(lastName);
+			expect(results).to.have.length(1);
+			expect(results[0]).to.equal(messages.SURNAME_LENGTH);
+		});
+
+		it('Can be exactly 20 characters', function() {
+			var lastName = testUtils.buildString(20, 'a');
+			var results = fixture.validateLastName(lastName);
+			expect(results).to.have.length(0);
+		});
+
+		it('Can be between 2 and 20 characters, all alpha chars', function() {
+			var lastName = 'Smith';
+			var results = fixture.validateLastName(lastName);
+			expect(results).to.have.length(0);
+		});
+
+		it('Cannot be numeric', function() {
+			var lastName = 'Smith5';
+			var results = fixture.validateLastName(lastName);
+			expect(results).to.have.length(1);
+			expect(results[0]).to.equal(messages.SURNAME_ALLOWED_CHARS);
+		});
+
+	});
+
 });

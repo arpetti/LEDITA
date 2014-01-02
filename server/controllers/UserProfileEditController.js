@@ -37,9 +37,13 @@ module.exports = {
 		}
 	},
 
-	// TODO #47 validate userData.lastName before passing it on to service
 	updateLastName: function(req, res) {
-		updateProfile(userProfileEditService.updateLastName, req.user.id, req.body.lastName, res);
+		var vmessages = userProfileEditValidator.validateLastName(req.body.lastName);
+		if (vmessages.length > 0) {
+			return res.send(400, vmessages);
+		} else {
+			updateProfile(userProfileEditService.updateLastName, req.user.id, req.body.lastName, res);
+		}
 	},
 
 	// TODO #47 validate userData.email before passing it on to service
