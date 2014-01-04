@@ -38,6 +38,10 @@ module.exports.USER_PROFILE_AVATAR_INVALID_TYPE = 'Please upload a valid image t
 module.exports.USER_PROFILE_AVATAR_SIZE = 'Please upload a profile image smaller than 20K';
 module.exports.USER_PROFILE_UPDATE_AVATAR_FAIL = 'Unable to update user profile avatar.';
 
+// User Projects
+module.exports.USER_PROJECTS_ERROR = 'An error occurred trying to find user projects.';
+module.exports.USER_PROJECTS_USER_NOT_FOUND = 'This user could not be found.';
+
 // Learning Design Retrieval
 module.exports.UNABLE_TO_RETRIEVE_LDS = 'Impossibile recuperare i progetti in questo momento, per favore, tenta più tardi.';
 module.exports.LD_NOT_FOUND = "Impossibile trovare questo progetto.";
