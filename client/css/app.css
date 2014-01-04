@@ -1016,6 +1016,38 @@ input[type="text"].sidebarInputMultiple {
     padding: 0 5px;
 }
 
+.upload-btn {
+    width: 130px;
+    height: 25px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 5px;
+    background: #0099CC;
+    margin: 10px auto 0;
+    border: 1px dashed #ffffff;
+
+}
+.upload-btn:hover {
+    background: #990000;
+}
+.upload-btn__txt {
+    z-index: 1;
+    position: relative;
+    color: #fff;
+    line-height: 24px;
+    text-align: center;
+font-weight: bold;
+}
+.upload-btn input {
+    top: -10px;
+    right: -40px;
+    z-index: 2;
+    position: absolute;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    font-size: 50px;
+}
 
 .multiValue {
     font-size: 12px;
@@ -2477,6 +2509,10 @@ input.searchBoxInput {
     width: 180px;
     border-radius: 8px;
     border: 1px dashed #ffffff;
+}
+
+.userDesignsButton:hover{
+    background-color: #990000;
 }
 
 .userLabel {
