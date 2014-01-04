@@ -663,6 +663,24 @@ CREATE OR REPLACE VIEW vw_ld_user AS
   INNER JOIN scope
   	on ld.scope_id = scope.id;
 
+CREATE OR REPLACE VIEW vw_ld_user_qcer AS
+	SELECT ld.id as ld_id
+		, ld.name as ld_name
+		, scope.name as ld_scope
+		, ld.publication as ld_publication
+		, ld.creation_date as ld_creation_date
+		, user.id as user_id
+		, qcer.name as qcer_name
+	FROM ld
+	INNER JOIN user
+		ON ld.user_id = user.id
+	INNER JOIN scope
+		on ld.scope_id = scope.id
+	INNER JOIN classificates
+    on ld.id = classificates.ld_id
+  INNER JOIN qcer
+    on classificates.qcer_id = qcer.id;
+
 CREATE OR REPLACE VIEW vw_ld_subject AS
   SELECT ld.id as ld_id
     , ld.name as ld_name
