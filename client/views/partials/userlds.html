@@ -32,7 +32,7 @@
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="rowTable" ng-repeat="learningDesign in learningDesigns | filter:search | orderBy:predicate:reverse">
+                    <div class="rowTable" ng-repeat="learningDesign in learningDesigns | filter:search | filter:user.name:learningDesign.user_name | orderBy:predicate:reverse">
                         <div class="rowUserLink">
                             <a ng-href="/ld/{{ learningDesign.ld_id }}">
                                 <div class="colTable colLD1">
@@ -50,6 +50,7 @@
                                 </div>
                                 <div class="colTable colLD5">
                                     <p>{{ learningDesign.ld_creation_date | date:'d-M-yyyy' }} </p>
+
                                 </div>
                             </a>
                         </div>
