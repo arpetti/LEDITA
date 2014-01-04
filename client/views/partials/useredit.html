@@ -4,7 +4,7 @@
         <div class="span3  centered top-margin ">
 
 						<!-- Avatar -->            
-            <img id="userProfileImage" ng-show="userProfile.image_uri" ng-src="{{userProfile.image_uri}}" alt="User Profile Image" class="user-pic-big">
+            <img id="userProfileImage" ng-show="userProfile.image_uri" ng-src="/{{userProfile.image_uri}}" alt="User Profile Image" class="user-pic-big">
           	<img id="userProfileDefaultImage" ng-show="!userProfile.image_uri" ng-src="/img/pics/user.png" alt="User Default Profile Image" class="user-pic-big">
             <input type="file" ng-file-select="onFileSelect($files)" >
 

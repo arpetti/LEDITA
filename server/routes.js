@@ -7,6 +7,7 @@ var LdController = require('./controllers/LdController');
 var LdEditController = require('./controllers/LdEditController');
 var MoveNodeController = require('./controllers/MoveNodeController');
 var UserProfileController = require('./controllers/UserProfileController');
+var UserProjectsController = require('./controllers/UserProjectsController');
 var UserProfileEditController = require('./controllers/UserProfileEditController');
 var ActivityController = require('./controllers/ActivityController');
 var RefController = require('./controllers/RefController');
@@ -197,6 +198,14 @@ var routes = [
 		accessLevel: accessLevels.user
 	},
 
+	// User Projects
+	{
+		path: '/userprojects/:id',
+		httpMethod: 'GET',
+		middleware: [ensureAuthenticated, ensureAuthorized, UserProjectsController.getPublicProjects],
+		accessLevel: accessLevels.user
+	},
+
 	// User Profile
 	{
 		path: '/userprofiles',
@@ -265,8 +274,6 @@ var routes = [
 		httpMethod: 'GET',
 		middleware: [
 			function(req, res) {
-				// temp debug - do not commit
-				console.log('all other get request: ' + req.url);
 				var role = userRoles.public,
 					username = '',
 					id = '',

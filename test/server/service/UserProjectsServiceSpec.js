@@ -6,7 +6,7 @@ var userDao = require('../../../server/dao/UserDao');
 var userProjectsDao = require('../../../server/dao/UserProjectsDao');
 var messages = require('../../../server/validate/ValidationMessages');
 
-describe.only('User Projects Service', function() {
+describe('User Projects Service', function() {
 
 	describe('Get Public Projects', function() {
 
@@ -19,10 +19,8 @@ describe.only('User Projects Service', function() {
 			sandbox.restore();
 		});
 
-
 		it('Returns user profile and projects when successful', function(done) {
 			var userId = 34;
-
 			var userResults = [
 				{
 					name: 'joe', 
@@ -59,6 +57,72 @@ describe.only('User Projects Service', function() {
 				expect(results.userProjects).to.have.length(projectResults.length);
 				expect(results.userProjects).to.equal(projectResults);
 				
+				assert.isTrue(userDaoStub.withArgs(userId).calledOnce);
+				assert.isTrue(userProjectsDaoStub.withArgs(userId).calledOnce);
+				done();
+			};
+			fixture.getPublicProjects(userId, serviceCB);
+		});
+
+		it('Calls back with error when user dao errors', function(done) {
+			var userId = 34;
+			var userDaoError = new Error('something went wrong finding user');
+			var userDaoStub = sandbox.stub(userDao, 'getUserById', function(userId, cb) {
+				cb(userDaoError);
+			});
+
+			var userProjectsDaoStub = sandbox.stub(userProjectsDao, 'getPublicProjects');
+
+			var serviceCB = function(err, results) {
+				expect(err).not.to.be.null;
+				expect(err.message).to.equal(messages.USER_PROJECTS_ERROR);
+				expect(results).to.be.undefined;
+
+				assert.isTrue(userDaoStub.withArgs(userId).calledOnce);
+				assert.equal(userProjectsDaoStub.callCount, 0);
+				done();
+			};
+			fixture.getPublicProjects(userId, serviceCB);
+		});
+
+		it('Calls back with error when user not found', function(done) {
+			var userId = 34;
+			var userResults = [];
+			var userDaoStub = sandbox.stub(userDao, 'getUserById', function(userId, cb) {
+				cb(null, userResults);
+			});
+
+			var userProjectsDaoStub = sandbox.stub(userProjectsDao, 'getPublicProjects');
+
+			var serviceCB = function(err, results) {
+				expect(err).not.to.be.null;
+				expect(err.message).to.equal(messages.USER_PROJECTS_USER_NOT_FOUND);
+				expect(results).to.be.undefined;
+
+				assert.isTrue(userDaoStub.withArgs(userId).calledOnce);
+				assert.equal(userProjectsDaoStub.callCount, 0);
+				done();
+			};
+			fixture.getPublicProjects(userId, serviceCB);
+		});
+
+		it('Calls back with error when user projects dao error occurs', function(done) {
+			var userId = 34;
+			var userResults = [{name: 'JOe'}];
+			var userDaoStub = sandbox.stub(userDao, 'getUserById', function(userId, cb) {
+				cb(null, userResults);
+			});
+
+			var userProjectsDaoError = new Error('something went wrong finding user projects');
+			var userProjectsDaoStub = sandbox.stub(userProjectsDao, 'getPublicProjects', function(userId, cb) {
+				cb(userProjectsDaoError);
+			});
+
+			var serviceCB = function(err, results) {
+				expect(err).not.to.be.null;
+				expect(err.message).to.equal(messages.USER_PROJECTS_ERROR);
+				expect(results).to.be.undefined;
+
 				assert.isTrue(userDaoStub.withArgs(userId).calledOnce);
 				assert.isTrue(userProjectsDaoStub.withArgs(userId).calledOnce);
 				done();

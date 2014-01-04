@@ -1,22 +1,24 @@
 <div class="container top-margin">
     <div class="row-fluid">
 
+        <!-- User Avatar -->
         <div class="span3  centered top-margin ">
-            <!-- FIXME: GET REAL PICTURE FROM DB -->
-            <img ng-src="../img/pics/user{{ user.image_id }}.png" class="user-pic-big">
-
+            <img ng-show="userInfo.image_uri" ng-src="/{{userInfo.image_uri}}" alt="User Profile Image" class="user-pic-big">
+						<img ng-show="!userInfo.image_uri" ng-src="/img/pics/user.png" alt="User Default Profile Image" class="user-pic-big">
         </div>
-        <!-- FIXME: GET REAL USER DATA FROM DB -->
+        
+        <!-- User Profile Information -->
         <div class="span9 top-margin userData">
-            <h1>{{ user.user_name }} {{ user.last_name }}</h1>
-            <h4>{{ user.workplace }}</h4>
-            <h4>{{ user.city }}, {{ user.country }}</h4>
+            <h1>{{ userInfo.name }} {{ userInfo.last_name }}</h1>
+            <h4>{{ userInfo.workplace }}</h4>
+            <h4>{{ userInfo.city }}, {{ userInfo.country }}</h4>
         </div>
         <div class="clearfix"></div>
+        
+				<!-- User Projects -->
         <div class="top-margin zero">
             <div class="btnContent btnActive btnTitle">
-                <!-- FIXME: GET REAL USER DATA FROM DB -->
-                <h3>Progetti di {{ user.user_name }}</h3>
+                <h3>Progetti di {{ userInfo.name }}</h3>
             </div>
             <div id="contentBodyUser">
                 <div class="ldTable">
@@ -25,31 +27,30 @@
                             <p><a href="" ng-click="predicate = 'ld_name'; reverse=!reverse" class="whiteText">Nome del progetto <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
                         </div>
                         <div class="colTable col2">
-                            <p><a href="" ng-click="predicate = 'qcers[0].qcer_name'; reverse=!reverse" class="whiteText">Livelli QCER <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
+                            <p><a href="" ng-click="predicate = 'ld_qcers'; reverse=!reverse" class="whiteText">Livelli QCER <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
                         </div>
                         <div class="colTable col3">
-                            <p><a href="" ng-click="predicate = 'scope'; reverse=!reverse" class="whiteText">Ambito <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
+                            <p><a href="" ng-click="predicate = 'ld_scope'; reverse=!reverse" class="whiteText">Ambito <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
                         </div>
                         <div class="colTable col4">
-                            <p><a href="" ng-click="predicate = 'creation_date'; reverse=!reverse" class="whiteText">Creato il <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
+                            <p><a href="" ng-click="predicate = 'ld_creation_date'; reverse=!reverse" class="whiteText">Creato il <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="rowTable" ng-repeat="profile in userProfiles | orderBy:predicate:reverse " >
+                    <div class="rowTable" ng-repeat="project in userProjects | orderBy:predicate:reverse " >
                         <div class="rowLink">
-                            <a ng-href="/ld/{{ profile.ld_id }}">
+                            <a ng-href="/ld/{{ project.ld_id }}">
                                 <div class="colTable col1">
-                                    <p>{{ profile.ld_name }}</p>
+                                    <p>{{ project.ld_name }}</p>
                                 </div>
                                 <div class="colTable col2">
-                                    <p ng-repeat="qcer in profile.qcers" class="qcerList">{{ qcer.qcer_name }}</p> <p ng-show="!profile.qcers">Non definito </p>
-
+                                    <p class="qcerList">{{ project.ld_qcers }}</p>
                                 </div>
                                 <div class="colTable col3">
-                                    <p>{{ profile.scope }}</p>
+                                    <p>{{ project.ld_scope }}</p>
                                 </div>
                                 <div class="colTable col4">
-                                    <p>{{ profile.creation_date | date:'d-m-yyyy' }} </p>
+                                    <p>{{ project.ld_creation_date | date:'d-m-yyyy' }} </p>
                                 </div>
                             </a>
                         </div>

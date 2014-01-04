@@ -20,6 +20,7 @@ module.exports = function(config) {
             '../../client/js/ld/*.js',
             '../../client/js/activity/*.js',
             '../../client/js/user/*.js',
+            '../../client/js/userprojects/*.js',
             '../../client/js/lib/angular/angular-mocks.js',
             'unit/**/*.js'
         ],

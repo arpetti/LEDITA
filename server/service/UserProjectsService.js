@@ -30,7 +30,7 @@ module.exports = {
 		    			logger.log().error('Error occurred finding user by id: ' + userId, err);
 		    			callback(new Error(messages.USER_PROJECTS_ERROR));
 		    		} else if(results.length === 0) {
-		    			logger.log().warn('getPublicProjects could nto find user by id: ' + userId);
+		    			logger.log().warn('getPublicProjects could not find user by id: ' + userId);
 		    			callback(new Error(messages.USER_PROJECTS_USER_NOT_FOUND));
 		    		} else {
 		    			callback(null, extractPublicUserProfile(results[0]));
