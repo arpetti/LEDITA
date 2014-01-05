@@ -67,6 +67,10 @@ describe('Learning Design', function() {
         expect(repeater('.prerequisites li').count()).toBe(2);
         expect(repeater('.prerequisites li').column('prereq.prereq_name')).toEqual(["Objective 1", "Objective 2"]);
 
+        // Verify Edit button visibility
+        expect(element('#editLdButton').css('display')).toBe('none');
+
+
         // Verify Global View
         expect(repeater('.levelBox').count()).toBe(6);
         expect(repeater('.groupBox2').count()).toBe(2);
