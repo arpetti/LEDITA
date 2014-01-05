@@ -26,6 +26,7 @@ describe('Activity Create Scenarios', function() {
     expect(browser().location().url()).toBe('/ld/23');
     
     // Edit this LD
+        expect(element('#editLdButton').css('display')).toBe('block');
     element('#editLdLink').click();
     sleep(0.5);
     expect(browser().location().url()).toBe('/ldedit/23');
