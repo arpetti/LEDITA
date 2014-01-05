@@ -19,11 +19,9 @@
         <div class="ld-bottom">
 
             <div class="authorName">
-
-                <!-- FIXME: add dynamic link to LD author profile page -->
-                <a ng-href="/user/{{ learningDesign.user_id }}"> <i class="icon-user icon-white"></i> {{ learningDesign.user_name }}&nbsp;{{
-                    learningDesign.user_last_name
-                    }} </a>
+                <a ng-href="/user/{{ learningDesign.user_id }}"> <i class="icon-user icon-white"></i>
+                	{{ learningDesign.user_name }}&nbsp;{{learningDesign.user_last_name}} 
+                </a>
             </div>
             <!-- TODO: Like button. If the LD is already liked, put class 'liked'. Else, put class 'likes'.
             <div class="likes">

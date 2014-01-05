@@ -3,8 +3,8 @@
 
         <!-- User Avatar -->
         <div class="span3  centered top-margin ">
-            <img ng-show="userInfo.image_uri" ng-src="/{{userInfo.image_uri}}" alt="User Profile Image" class="user-pic-big">
-						<img ng-show="!userInfo.image_uri" ng-src="/img/pics/user.png" alt="User Default Profile Image" class="user-pic-big">
+            <img id="userProfileImage" ng-show="userInfo.image_uri" ng-src="/{{userInfo.image_uri}}" alt="User Profile Image" class="user-pic-big">
+						<img id="userProfileDefaultImage" ng-show="!userInfo.image_uri" ng-src="/img/pics/user.png" alt="User Default Profile Image" class="user-pic-big">
         </div>
         
         <!-- User Profile Information -->
@@ -33,11 +33,11 @@
                             <p><a href="" ng-click="predicate = 'ld_scope'; reverse=!reverse" class="whiteText">Ambito <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
                         </div>
                         <div class="colTable col4">
-                            <p><a href="" ng-click="predicate = 'ld_creation_date'; reverse=!reverse" class="whiteText">Creato il <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
+                            <p><a id="sortUserProjectsByCreationDate" href="" ng-click="predicate = 'ld_creation_date'; reverse=!reverse" class="whiteText">Creato il <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="rowTable" ng-repeat="project in userProjects | orderBy:predicate:reverse " >
+                    <div class="rowTable user-projects" ng-repeat="project in userProjects | orderBy:predicate:reverse " >
                         <div class="rowLink">
                             <a ng-href="/ld/{{ project.ld_id }}">
                                 <div class="colTable col1">
@@ -50,7 +50,7 @@
                                     <p>{{ project.ld_scope }}</p>
                                 </div>
                                 <div class="colTable col4">
-                                    <p>{{ project.ld_creation_date | date:'d-m-yyyy' }} </p>
+                                    <p>{{ project.ld_creation_date | date:'d-M-yyyy' }} </p>
                                 </div>
                             </a>
                         </div>
