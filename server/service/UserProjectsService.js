@@ -55,6 +55,18 @@ module.exports = {
 		    	callback(null, results);
 		    }
 		});
+	},
+
+	// callback(err, results)
+	getPublicAndPrivateProjects: function(userId, callback) {
+		userProjectsDao.getPublicAndPrivateProjects(userId, function(err, results) {
+			if(err) {
+				logger.log().error('Error occurred finding public and private projects for userId: ' + userId, err);
+				callback(new Error(messages.USER_PROJECTS_ERROR));
+			} else {
+				callback(null, results);
+			}
+		});
 	}
 
 };

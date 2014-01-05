@@ -132,4 +132,52 @@ describe('User Projects Service', function() {
 
 	});
 
+	describe('Get Public and Private Projects', function() {
+
+		var sandbox = sinon.sandbox.create();
+
+		beforeEach(function() {
+		});
+
+		afterEach(function() {
+			sandbox.restore();
+		});
+		
+		it('Calls back with results when successful', function(done) {
+			var userId = 23;
+			var daoResults = [{ld_name: 'LD1'}, {ld_name: 'LD2'}];
+			var daoStub = sandbox.stub(userProjectsDao, 'getPublicAndPrivateProjects', function(userId, cb) {
+				cb(null, daoResults);
+			});
+
+			var serviceCB = function(err, results) {
+				expect(err).to.be.null;
+				expect(results).to.equal(daoResults);
+				assert.isTrue(daoStub.withArgs(userId).calledOnce);
+				done();
+			}		
+
+			fixture.getPublicAndPrivateProjects(userId, serviceCB);
+		});
+
+		it('Calls back with error and message when dao errors', function(done) {
+			var userId = 23;
+			var daoError = new Error('something went wrong getting public and private projects');
+			var daoStub = sandbox.stub(userProjectsDao, 'getPublicAndPrivateProjects', function(userId, cb) {
+				cb(daoError);
+			});
+
+			var serviceCB = function(err, results) {
+				expect(err).not.to.be.null;
+				expect(err.message).to.equal(messages.USER_PROJECTS_ERROR);
+				expect(results).to.be.undefined;
+				assert.isTrue(daoStub.withArgs(userId).calledOnce);
+				done();
+			}		
+
+			fixture.getPublicAndPrivateProjects(userId, serviceCB);
+		});
+
+	});
+
 });
