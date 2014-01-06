@@ -51,7 +51,7 @@ angular.module('ledita-app', ['ngCookies', 'infinite-scroll', 'ui.bootstrap', 'u
           $routeProvider.when('/userlds',
             {
                 templateUrl: '/partials/userlds',
-                controller: 'HomeCtrl',
+                controller: 'MyProjectsCtrl',
                 access: access.user
             });
         $routeProvider.when('/login',
@@ -61,12 +61,6 @@ angular.module('ledita-app', ['ngCookies', 'infinite-scroll', 'ui.bootstrap', 'u
                 access: access.anon
             });
         $routeProvider.when('/register',
-            {
-                templateUrl: '/partials/register',
-                controller: 'RegisterCtrl',
-                access: access.anon
-            });
-        $routeProvider.when('/auth/twitter',
             {
                 templateUrl: '/partials/register',
                 controller: 'RegisterCtrl',
