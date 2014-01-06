@@ -198,11 +198,18 @@ var routes = [
 		accessLevel: accessLevels.user
 	},
 
-	// User Projects
+	// User Projects owned by user with id
 	{
 		path: '/userprojects/:id',
 		httpMethod: 'GET',
 		middleware: [ensureAuthenticated, ensureAuthorized, UserProjectsController.getPublicProjects],
+		accessLevel: accessLevels.user
+	},
+	// User Projects owned by currently logged in user
+	{
+		path: '/userprojects',
+		httpMethod: 'GET',
+		middleware: [ensureAuthenticated, ensureAuthorized, UserProjectsController.getPublicAndPrivateProjects],
 		accessLevel: accessLevels.user
 	},
 

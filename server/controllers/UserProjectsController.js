@@ -11,6 +11,17 @@ module.exports = {
 				res.json(200, results);
 			}
 		});
+	},
+
+	getPublicAndPrivateProjects: function(req, res) {
+		var userId = req.user.id;
+		userProjectsService.getPublicAndPrivateProjects(userId, function(err, results) {
+			if (err) {
+				res.send(500, err.message);
+			} else {
+				res.json(200, results);
+			}
+		});
 	}
 
 };

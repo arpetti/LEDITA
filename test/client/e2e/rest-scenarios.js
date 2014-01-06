@@ -1,7 +1,7 @@
 'use strict';
 
 
-describe('REST resources require authorization', function() {
+describe('REST HTTP GET resources require authorization', function() {
 
 	describe('Learning Design', function() {
 
@@ -69,5 +69,19 @@ describe('REST resources require authorization', function() {
 		});
 
 	});
+
+	describe('User Projects', function() {
+
+		it('GET user projects for user id', function() {
+			browser().navigateTo('/userprojects/1');
+			expect(element('pre').text()).toBe('Unauthorized');
+		});
+
+		it('GET user projects for logged in user', function() {
+			browser().navigateTo('/userprojects');
+			expect(element('pre').text()).toBe('Unauthorized');
+		});
+
+	})
 
 }); 
