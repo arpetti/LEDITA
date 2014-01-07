@@ -29,16 +29,6 @@ describe('REST HTTP GET resources require authorization', function() {
 
 	describe('User Information', function() {
 
-		it('GET user profiles', function() {
-			browser().navigateTo('/userprofiles');
-			expect(element('pre').text()).toBe('Unauthorized');
-		});
-
-		it('GET user profile by id', function() {
-			browser().navigateTo('/userprofiles/1');
-			expect(element('pre').text()).toBe('Unauthorized');
-		});
-
 		it('GET unique users', function() {
 			browser().navigateTo('/uniqueusers');
 			expect(element('pre').text()).toBe('Unauthorized');

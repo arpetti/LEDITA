@@ -215,16 +215,6 @@ var routes = [
 
 	// User Profile
 	{
-		path: '/userprofiles',
-		httpMethod: 'GET',
-		middleware: [ensureAuthenticated, ensureAuthorized, UserProfileController.index],
-		accessLevel: accessLevels.user
-	}, {
-		path: '/userprofiles/:id',
-		httpMethod: 'GET',
-		middleware: [ensureAuthenticated, ensureAuthorized, UserProfileController.findById],
-		accessLevel: accessLevels.user
-	}, {
 		path: '/uniqueusers',
 		httpMethod: 'GET',
 		middleware: [ensureAuthenticated, ensureAuthorized, UserProfileController.getUniqueUsers],
