@@ -52,4 +52,30 @@ describe('User Projects Service', function() {
 		$httpBackend.flush();
 	});
 
+	it('Gets my projects - success', function() {
+		var serverResposeSuccess = [{ld_name: 'LD1'}, {ld_name: 'LD2'}];
+		var success = function(res) {
+			expect(res).toEqual(serverResposeSuccess);
+		};
+		var error = function() {
+			expect(false).toBe(true); // should not get here
+		};
+		$httpBackend.when('GET', '/userprojects').respond(serverResposeSuccess);
+		service.getMyProjects(success, error);
+		$httpBackend.flush();
+	});
+
+	it('Gets my projects - error', function() {
+		var serverResponseError = 'get failed';
+		var success = function(res) {
+			expect(false).toBe(true); // should not get here
+		};
+		var error = function(err) {
+			expect(err).toEqual(serverResponseError);
+		};
+		$httpBackend.when('GET', '/userprojects').respond(500, serverResponseError);
+		service.getMyProjects(success, error);
+		$httpBackend.flush();
+	});
+
 });

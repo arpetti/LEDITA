@@ -28,11 +28,11 @@
                             <p><a href="" ng-click="predicate = 'ld_publication'; reverse=!reverse" class="whiteText">Pubblicazione <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
                         </div>
                         <div class="colTable colLD5">
-                            <p><a href="" ng-click="predicate = 'ld_creation_date'; reverse=!reverse" class="whiteText">Creato il <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
+                            <p><a id="sortMyProjectsByCreationDate" href="" ng-click="predicate = 'ld_creation_date'; reverse=!reverse" class="whiteText">Creato il <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="rowTable" ng-repeat="project in myProjects | filter:search | orderBy:predicate:reverse">
+                    <div class="rowTable my-projects" ng-repeat="project in myProjects | filter:search | orderBy:predicate:reverse">
                         <div class="rowUserLink">
                             <a ng-href="/ld/{{ project.ld_id }}">
                                 <div class="colTable colLD1">

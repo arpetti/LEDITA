@@ -60,4 +60,52 @@ describe('User Projects', function() {
     element('#logoutLink').click();
 	});
 
+	it('User can view their own public and private projects', function() {
+
+		// Login Sara
+		browser().navigateTo('/login');
+		input('username').enter(testUsers.getUserName);
+		input('password').enter(testUsers.getUserPassword);
+		element('#loginButton').click();
+		sleep(2);
+
+		// Navigate to My Projects
+		element('#myProjectsLink').click();
+		sleep(1);
+		expect(browser().location().url()).toBe('/userlds');
+
+		// Verify Sara's projects are displayed (default sort is by descending date)
+		expect(repeater('.my-projects').count()).toBe(9);
+    expect(repeater('.my-projects').row(0)).toEqual(['Learning Design Title Demo 5','A1 A2 B1 B2 C1 C2','Semester','1','12-8-2012']);
+    expect(repeater('.my-projects').row(1)).toEqual(['Learning Design Title Demo 6','C2','Module','0','11-8-2012']);
+    expect(repeater('.my-projects').row(2)).toEqual(['Learning Design Title Demo 13','B1','Semester','1','16-5-2012']);
+    expect(repeater('.my-projects').row(3)).toEqual(['Learning Design Title Demo 14','A2','Module','0','16-4-2012']);
+    expect(repeater('.my-projects').row(4)).toEqual(['Learning Design Title Demo 15','C2','Lesson','1','16-3-2012']);
+    expect(repeater('.my-projects').row(5)).toEqual(['Learning Design Title Demo 21','B1','Semester','1','12-1-2012']);
+    expect(repeater('.my-projects').row(6)).toEqual(['Learning Design Title Demo 22','B1','Module','0','11-1-2012']);
+    expect(repeater('.my-projects').row(7)).toEqual(['Learning Design Title Demo 23','B2','Lesson','1','10-1-2012']);
+    expect(repeater('.my-projects').row(8)).toEqual(['Learning Design Title Demo 29','C1','Semester','1','4-1-2012']);
+
+    // Verify sort by ascending date (have to click on it twice to sort)
+    element('#sortMyProjectsByCreationDate').click();
+    sleep(0.1);
+    element('#sortMyProjectsByCreationDate').click();
+    sleep(0.1);
+
+    expect(repeater('.my-projects').count()).toBe(9);
+    expect(repeater('.my-projects').row(0)).toEqual(['Learning Design Title Demo 29','C1','Semester','1','4-1-2012']);
+    expect(repeater('.my-projects').row(1)).toEqual(['Learning Design Title Demo 23','B2','Lesson','1','10-1-2012']);
+    expect(repeater('.my-projects').row(2)).toEqual(['Learning Design Title Demo 22','B1','Module','0','11-1-2012']);
+    expect(repeater('.my-projects').row(3)).toEqual(['Learning Design Title Demo 21','B1','Semester','1','12-1-2012']);
+    expect(repeater('.my-projects').row(4)).toEqual(['Learning Design Title Demo 15','C2','Lesson','1','16-3-2012']);
+    expect(repeater('.my-projects').row(5)).toEqual(['Learning Design Title Demo 14','A2','Module','0','16-4-2012']);
+    expect(repeater('.my-projects').row(6)).toEqual(['Learning Design Title Demo 13','B1','Semester','1','16-5-2012']);
+    expect(repeater('.my-projects').row(7)).toEqual(['Learning Design Title Demo 6','C2','Module','0','11-8-2012']);
+		expect(repeater('.my-projects').row(8)).toEqual(['Learning Design Title Demo 5','A1 A2 B1 B2 C1 C2','Semester','1','12-8-2012']);
+
+		// Logout
+    element('#userActionsMenu').click();
+    element('#logoutLink').click();
+	});
+
 });
