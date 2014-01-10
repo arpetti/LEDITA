@@ -1,7 +1,7 @@
 angular.module('ledita-app')
 .controller('LdEditCtrl',
-['$scope', '$log', '$routeParams', '$location', '$timeout', 'TypeaheadHelper', 'LDService', 'LDEditService', 'Home', 
-function($scope, $log, $routeParams, $location, $timeout, TypeaheadHelper, LDService, LDEditService, Home) {
+['$scope', '$log', '$routeParams', '$location', '$timeout', 'TypeaheadHelper', 'LDService', 'LDEditService', 'Home', 'ngDialog',
+function($scope, $log, $routeParams, $location, $timeout, TypeaheadHelper, LDService, LDEditService, Home, ngDialog) {
 
 	$scope.ldid = $routeParams.ldid;
 	$scope.selectedQcers = {};
@@ -394,5 +394,28 @@ function($scope, $log, $routeParams, $location, $timeout, TypeaheadHelper, LDSer
         return LDEditService.getGroupEditBoxClass(node);
     };
 
+    // #57 wip - consider a separate controller for remove node popup functions
+    $scope.removeNode = function(node) {
+    	$scope.nodeConfirm = node;
+    	ngDialog.open(
+    		{ 
+    			template: 'removeNodeConfirm',
+    			className: 'ngdialog-theme-default',
+    			controller: 'LdEditCtrl',
+    			scope: $scope
+    		}
+    	);
+    };
+
+    $scope.cancelDeleteNode = function() {
+    	$log.info('cancelDeleteNode');
+    	ngDialog.close();
+    };
+
+    // #57 wip - call service with confirmNode.node_id and confirmNode.type
+    $scope.okDeleteNode = function(confirmNode) {
+    	$log.info('okDeleteNode');
+    	ngDialog.close();
+    };
 
 }]);

@@ -393,7 +393,7 @@
 
             <div class="toolsEdit">
                 <a class="editEdit" ng-href="#"><i class="icon-edit icon-white"></i> </a>
-                <a class="deleteEdit" ng-href="#"><i class="icon-remove icon-white"></i> </a>
+                <a class="deleteEdit" ng-click="removeNode(node)"><i class="icon-remove icon-white"></i> </a>
             </div>
 
         </div>
@@ -987,3 +987,15 @@
 </div>
 </div>
 </div>
+
+<!-- Reference: https://github.com/likeastore/ngDialog/blob/master/example/index.html -->
+<script type="text/ng-template" id="removeNodeConfirm">
+	<div class="ngdialog-message">
+		<h3>Remove Node</h3>
+		<p>Are you sure you want to delete {{nodeConfirm.node_name}}?</p>
+	</div>
+	<div class="ngdialog-buttons">
+		<button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="okDeleteNode(nodeConfirm)">OK</button>
+		<button type="button" class="ngdialog-button" ng-click="cancelDeleteNode()">Cancel</button>
+	</div>
+</script>
