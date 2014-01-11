@@ -4,322 +4,395 @@ describe('Learning Design Edit Service', function() {
 
 	beforeEach(module('ledita-app'));
 
-    var service;
-    var $httpBackend;
+	var service;
+	var $httpBackend;
 
-    beforeEach(inject(function (LDEditService) {
-        service = LDEditService;
-    }));
+	beforeEach(inject(function(LDEditService) {
+		service = LDEditService;
+	}));
 
-    beforeEach(inject(function($injector) {
-  		$httpBackend = $injector.get('$httpBackend');
+	beforeEach(inject(function($injector) {
+		$httpBackend = $injector.get('$httpBackend');
 	}));
 
 	afterEach(function() {
-	  $httpBackend.verifyNoOutstandingExpectation();
-	  $httpBackend.verifyNoOutstandingRequest();
+		$httpBackend.verifyNoOutstandingExpectation();
+		$httpBackend.verifyNoOutstandingRequest();
 	});
 
-    it('Service is defined', function () {
-        expect(service).toBeDefined();
-    });
+	it('Service is defined', function() {
+		expect(service).toBeDefined();
+	});
 
-    it('Stores the current LD ID', function() {
-    	var myLdId = 97;
-    	service.setCurrentLdId(myLdId);
-    	var storedLdId = service.getCurrentLdId();
-    	expect(storedLdId).toEqual(myLdId);
-    });
+	it('Stores the current LD ID', function() {
+		var myLdId = 97;
+		service.setCurrentLdId(myLdId);
+		var storedLdId = service.getCurrentLdId();
+		expect(storedLdId).toEqual(myLdId);
+	});
 
-    it('Gets a Learning Design by ID', function() {
-    	var ldId = 7;
-    	var ldData = {"ld_id": 7};
+	it('Gets a Learning Design by ID', function() {
+		var ldId = 7;
+		var ldData = {
+			"ld_id": 7
+		};
 
-    	var success = function(res) {
-    		expect(res.ld_id).toEqual(ldData.ld_id);
-    	};
-			var error = function() {
-				expect(false).toBe(true); // should not get here
-			};
+		var success = function(res) {
+			expect(res.ld_id).toEqual(ldData.ld_id);
+		};
+		var error = function() {
+			expect(false).toBe(true); // should not get here
+		};
 
-			$httpBackend.when('GET', '/learningdesign/' + ldId).respond(ldData);
-	    service.getLearningDesign(ldId, success, error);
-	    $httpBackend.flush();
-    });
+		$httpBackend.when('GET', '/learningdesign/' + ldId).respond(ldData);
+		service.getLearningDesign(ldId, success, error);
+		$httpBackend.flush();
+	});
 
-    it('Updates LD Name', function() {
-    	var ldId = 7;
-    	var ldName = {ldName: "update name"};
+	it('Updates LD Name', function() {
+		var ldId = 7;
+		var ldName = {
+			ldName: "update name"
+		};
 
-    	var success = function(res) {
-    		expect(res.ldName).toEqual(ldName.ldName);
-    	};
+		var success = function(res) {
+			expect(res.ldName).toEqual(ldName.ldName);
+		};
 		var error = function() {
 			expect(false).toBe(true); // should not get here
 		};
 
 		$httpBackend.when('PUT', '/learningdesign/name/' + ldId, ldName).respond(ldName);
-    	service.updateLdName(ldId, ldName, success, error);
-    	$httpBackend.flush();
-    })
+		service.updateLdName(ldId, ldName, success, error);
+		$httpBackend.flush();
+	})
 
 	it('Updates LD Scope', function() {
-    	var ldId = 7;
-    	var ldScope = {ldScope: "update scope"};
+		var ldId = 7;
+		var ldScope = {
+			ldScope: "update scope"
+		};
 
-    	var success = function(res) {
-    		expect(res.ldScope).toEqual(ldScope.ldScope);
-    	};
+		var success = function(res) {
+			expect(res.ldScope).toEqual(ldScope.ldScope);
+		};
 		var error = function() {
 			expect(false).toBe(true); // should not get here
 		};
 
 		$httpBackend.when('POST', '/learningdesign/scope/' + ldId, ldScope).respond(ldScope);
-    	service.updateLdScope(ldId, ldScope, success, error);
-    	$httpBackend.flush();
-    });
+		service.updateLdScope(ldId, ldScope, success, error);
+		$httpBackend.flush();
+	});
 
-    it('Updates Activity Level Position', function() {
-    	var ldId = 7;
-    	var sourceTargetData = {
-    		dragSource: {"nodeId":"41","nodeType":"ACTIVITY","level":1,"position":1},
-    		dropTarget: {"level":1,"position":2}
-    	};
-    	var serviceResponse = {};
+	it('Updates Activity Level Position', function() {
+		var ldId = 7;
+		var sourceTargetData = {
+			dragSource: {
+				"nodeId": "41",
+				"nodeType": "ACTIVITY",
+				"level": 1,
+				"position": 1
+			},
+			dropTarget: {
+				"level": 1,
+				"position": 2
+			}
+		};
+		var serviceResponse = {};
 
-    	var success = function(res) {
-    		expect(res).toEqual(serviceResponse);
-    	};
+		var success = function(res) {
+			expect(res).toEqual(serviceResponse);
+		};
 		var error = function() {
 			expect(false).toBe(true); // should not get here
 		};
 
 		$httpBackend.when('PUT', '/learningdesign/composes/nodetonode/' + ldId, sourceTargetData).respond(serviceResponse);
-    	service.updateActivityLevelPosition(ldId, sourceTargetData, success, error);
-    	$httpBackend.flush();
-    });	
+		service.updateActivityLevelPosition(ldId, sourceTargetData, success, error);
+		$httpBackend.flush();
+	});
 
-    it('Updates LD Qcers', function() {
-    	var ldId = 7;
-    	var qcers = {"1":true,"2":true};
-    	var qcerResponse = {};
+	it('Updates LD Qcers', function() {
+		var ldId = 7;
+		var qcers = {
+			"1": true,
+			"2": true
+		};
+		var qcerResponse = {};
 
-    	var success = function(res) {
-    		expect(res).toEqual(qcerResponse);
-    	};
+		var success = function(res) {
+			expect(res).toEqual(qcerResponse);
+		};
 		var error = function() {
 			expect(false).toBe(true); // should not get here
 		};
 
 		$httpBackend.when('POST', '/learningdesign/qcer/' + ldId, qcers).respond(qcerResponse);
-    	service.updateLdQcers(ldId, qcers, success, error);
-    	$httpBackend.flush();
-    });
+		service.updateLdQcers(ldId, qcers, success, error);
+		$httpBackend.flush();
+	});
 
-    it('Updates Students Description', function() {
-    	var ldId = 7;
-    	var ldData = {studentsDescr: "this is a description"};
-    	var serviceResponse = {studentsDescr: "this is a description"};
+	it('Updates Students Description', function() {
+		var ldId = 7;
+		var ldData = {
+			studentsDescr: "this is a description"
+		};
+		var serviceResponse = {
+			studentsDescr: "this is a description"
+		};
 
-    	var success = function(res) {
-    		expect(res).toEqual(serviceResponse);
-    	};
+		var success = function(res) {
+			expect(res).toEqual(serviceResponse);
+		};
 		var error = function() {
 			expect(false).toBe(true); // should not get here
 		};
 
 		$httpBackend.when('PUT', '/learningdesign/studentsDescr/' + ldId, ldData).respond(serviceResponse);
-    	service.updateStudentsDescr(ldId, ldData, success, error);
-    	$httpBackend.flush();
-    });
+		service.updateStudentsDescr(ldId, ldData, success, error);
+		$httpBackend.flush();
+	});
 
-    it('Adds a Topic', function() {
-    	var ldId = 7;
-    	var ldData = {topic: "add this topic"};
-    	var serviceResponse = {};
+	it('Adds a Topic', function() {
+		var ldId = 7;
+		var ldData = {
+			topic: "add this topic"
+		};
+		var serviceResponse = {};
 
-    	var success = function(res) {
-    		expect(res).toEqual(serviceResponse);
-    	};
+		var success = function(res) {
+			expect(res).toEqual(serviceResponse);
+		};
 		var error = function() {
 			expect(false).toBe(true); // should not get here
 		};
 
 		$httpBackend.when('POST', '/learningdesign/addtopic/' + ldId, ldData).respond(serviceResponse);
-    	service.addTopic(ldId, ldData, success, error);
-    	$httpBackend.flush();
-    });
+		service.addTopic(ldId, ldData, success, error);
+		$httpBackend.flush();
+	});
 
-    it('Removes a Topic', function() {
-    	var ldId = 7;
-    	var ldData = {topic: "remove this topic"};
-    	var serviceResponse = {};
+	it('Removes a Topic', function() {
+		var ldId = 7;
+		var ldData = {
+			topic: "remove this topic"
+		};
+		var serviceResponse = {};
 
-    	var success = function(res) {
-    		expect(res).toEqual(serviceResponse);
-    	};
+		var success = function(res) {
+			expect(res).toEqual(serviceResponse);
+		};
 		var error = function() {
 			expect(false).toBe(true); // should not get here
 		};
 
 		$httpBackend.when('POST', '/learningdesign/removetopic/' + ldId, ldData).respond(serviceResponse);
-    	service.removeTopic(ldId, ldData, success, error);
-    	$httpBackend.flush();
-    });
+		service.removeTopic(ldId, ldData, success, error);
+		$httpBackend.flush();
+	});
 
-    it('Adds an Objective', function() {
-    	var ldId = 7;
-    	var ldData = {objective: "add this objective"};
-    	var serviceResponse = {};
+	it('Adds an Objective', function() {
+		var ldId = 7;
+		var ldData = {
+			objective: "add this objective"
+		};
+		var serviceResponse = {};
 
-    	var success = function(res) {
-    		expect(res).toEqual(serviceResponse);
-    	};
+		var success = function(res) {
+			expect(res).toEqual(serviceResponse);
+		};
 		var error = function() {
 			expect(false).toBe(true); // should not get here
 		};
 
 		$httpBackend.when('POST', '/learningdesign/addobjective/' + ldId, ldData).respond(serviceResponse);
-    	service.addObjective(ldId, ldData, success, error);
-    	$httpBackend.flush();
-    });
+		service.addObjective(ldId, ldData, success, error);
+		$httpBackend.flush();
+	});
 
-    it('Removes an Objective', function() {
-    	var ldId = 7;
-    	var ldData = {objective: "remove this objective"};
-    	var serviceResponse = {};
+	it('Removes an Objective', function() {
+		var ldId = 7;
+		var ldData = {
+			objective: "remove this objective"
+		};
+		var serviceResponse = {};
 
-    	var success = function(res) {
-    		expect(res).toEqual(serviceResponse);
-    	};
+		var success = function(res) {
+			expect(res).toEqual(serviceResponse);
+		};
 		var error = function() {
 			expect(false).toBe(true); // should not get here
 		};
 
 		$httpBackend.when('POST', '/learningdesign/removeobjective/' + ldId, ldData).respond(serviceResponse);
-    	service.removeObjective(ldId, ldData, success, error);
-    	$httpBackend.flush();
-    });
+		service.removeObjective(ldId, ldData, success, error);
+		$httpBackend.flush();
+	});
 
-    it('Adds a Prerequisite', function() {
-    	var ldId = 7;
-    	var ldData = {prerequisite: "add this prerequisite"};
-    	var serviceResponse = {};
+	it('Adds a Prerequisite', function() {
+		var ldId = 7;
+		var ldData = {
+			prerequisite: "add this prerequisite"
+		};
+		var serviceResponse = {};
 
-    	var success = function(res) {
-    		expect(res).toEqual(serviceResponse);
-    	};
+		var success = function(res) {
+			expect(res).toEqual(serviceResponse);
+		};
 		var error = function() {
 			expect(false).toBe(true); // should not get here
 		};
 
 		$httpBackend.when('POST', '/learningdesign/addprerequisite/' + ldId, ldData).respond(serviceResponse);
-    	service.addPrerequisite(ldId, ldData, success, error);
-    	$httpBackend.flush();
-    });
+		service.addPrerequisite(ldId, ldData, success, error);
+		$httpBackend.flush();
+	});
 
-    it('Removes a Prerequisite', function() {
-    	var ldId = 7;
-    	var ldData = {prerequisite: "remove this prerequisite"};
-    	var serviceResponse = {};
+	it('Removes a Prerequisite', function() {
+		var ldId = 7;
+		var ldData = {
+			prerequisite: "remove this prerequisite"
+		};
+		var serviceResponse = {};
 
-    	var success = function(res) {
-    		expect(res).toEqual(serviceResponse);
-    	};
+		var success = function(res) {
+			expect(res).toEqual(serviceResponse);
+		};
 		var error = function() {
 			expect(false).toBe(true); // should not get here
 		};
 
 		$httpBackend.when('POST', '/learningdesign/removeprerequisite/' + ldId, ldData).respond(serviceResponse);
-    	service.removePrerequisite(ldId, ldData, success, error);
-    	$httpBackend.flush();
-    });
+		service.removePrerequisite(ldId, ldData, success, error);
+		$httpBackend.flush();
+	});
 
-    it('Makes LD Public', function() {
-    	var ldId = 7;
-    	var serviceResponse = {};
+	it('Makes LD Public', function() {
+		var ldId = 7;
+		var serviceResponse = {};
 
-    	var success = function(res) {
-    		expect(res).toEqual(serviceResponse);
-    	};
+		var success = function(res) {
+			expect(res).toEqual(serviceResponse);
+		};
 		var error = function() {
 			expect(false).toBe(true); // should not get here
 		};
 
 		$httpBackend.when('PUT', '/learningdesign/public/' + ldId).respond(serviceResponse);
-    	service.updateLdPublic(ldId, success, error);
-    	$httpBackend.flush();
-    });
+		service.updateLdPublic(ldId, success, error);
+		$httpBackend.flush();
+	});
 
-    it('Makes LD Private', function() {
-    	var ldId = 7;
-    	var serviceResponse = {};
+	it('Makes LD Private', function() {
+		var ldId = 7;
+		var serviceResponse = {};
 
-    	var success = function(res) {
-    		expect(res).toEqual(serviceResponse);
-    	};
+		var success = function(res) {
+			expect(res).toEqual(serviceResponse);
+		};
 		var error = function() {
 			expect(false).toBe(true); // should not get here
 		};
 
 		$httpBackend.when('PUT', '/learningdesign/private/' + ldId).respond(serviceResponse);
-    	service.updateLdPrivate(ldId, success, error);
-    	$httpBackend.flush();
-    });
+		service.updateLdPrivate(ldId, success, error);
+		$httpBackend.flush();
+	});
 
-    describe('Generate selected qcers', function() {
+	it('Deletes Activity', function() {
+		var ldId = 7;
+		var activityId = 5;
+		var serviceResponse = {};
 
-    	var qcerOpts = [
-    		{"id":1,"name":"A1"},
-    		{"id":2,"name":"A2"},
-    		{"id":3,"name":"B1"},
-    		{"id":4,"name":"B2"},
-    		{"id":5,"name":"C1"},
-    		{"id":6,"name":"C2"}
-    	];
+		var success = function(res) {
+			expect(res).toEqual(serviceResponse);
+		};
+		var error = function() {
+			expect(false).toBe(true); // should not get here
+		};
 
-    	it('Maps multiple selected qcer names to their corresponding qcer IDs', function() {
-    		var ldQcers = [{"qcer_name": "A1"}, {"qcer_name": "C1"}, {"qcer_name": "B2"}];
-    		var results = service.generateSelectedQcers(ldQcers, qcerOpts);
-    		
-    		expect(results[1]).toBe(true);
-    		expect(results[2]).toBe(undefined);
-    		expect(results[3]).toBe(undefined);
-    		expect(results[4]).toBe(true);
-    		expect(results[5]).toBe(true);
-    		expect(results[6]).toBe(undefined);
-    	});
+		$httpBackend.when('DELETE', '/learningdesign/' + ldId + '/activity/' + activityId).respond(serviceResponse);
+		service.deleteActivity(ldId, activityId, success, error);
+		$httpBackend.flush();
+	});
 
-    	it('Maps a single selected qcer name to its corresponding qcer ID', function() {
-    		var ldQcers = [{"qcer_name": "C2"}];
-    		var results = service.generateSelectedQcers(ldQcers, qcerOpts);
-    		
-    		expect(results[1]).toBe(undefined);
-    		expect(results[2]).toBe(undefined);
-    		expect(results[3]).toBe(undefined);
-    		expect(results[4]).toBe(undefined);
-    		expect(results[5]).toBe(undefined);
-    		expect(results[6]).toBe(true);
-    	});
+	describe('Generate selected qcers', function() {
 
-    	it('Handles LD with no selected qcers', function() {
-    		var ldQcers = [];
-    		var results = service.generateSelectedQcers(ldQcers, qcerOpts);
-    		
-    		expect(results[1]).toBe(undefined);
-    		expect(results[2]).toBe(undefined);
-    		expect(results[3]).toBe(undefined);
-    		expect(results[4]).toBe(undefined);
-    		expect(results[5]).toBe(undefined);
-    		expect(results[6]).toBe(undefined);
-    	});
+		var qcerOpts = [{
+			"id": 1,
+			"name": "A1"
+		}, {
+			"id": 2,
+			"name": "A2"
+		}, {
+			"id": 3,
+			"name": "B1"
+		}, {
+			"id": 4,
+			"name": "B2"
+		}, {
+			"id": 5,
+			"name": "C1"
+		}, {
+			"id": 6,
+			"name": "C2"
+		}];
 
-    });
+		it('Maps multiple selected qcer names to their corresponding qcer IDs', function() {
+			var ldQcers = [{
+				"qcer_name": "A1"
+			}, {
+				"qcer_name": "C1"
+			}, {
+				"qcer_name": "B2"
+			}];
+			var results = service.generateSelectedQcers(ldQcers, qcerOpts);
+
+			expect(results[1]).toBe(true);
+			expect(results[2]).toBe(undefined);
+			expect(results[3]).toBe(undefined);
+			expect(results[4]).toBe(true);
+			expect(results[5]).toBe(true);
+			expect(results[6]).toBe(undefined);
+		});
+
+		it('Maps a single selected qcer name to its corresponding qcer ID', function() {
+			var ldQcers = [{
+				"qcer_name": "C2"
+			}];
+			var results = service.generateSelectedQcers(ldQcers, qcerOpts);
+
+			expect(results[1]).toBe(undefined);
+			expect(results[2]).toBe(undefined);
+			expect(results[3]).toBe(undefined);
+			expect(results[4]).toBe(undefined);
+			expect(results[5]).toBe(undefined);
+			expect(results[6]).toBe(true);
+		});
+
+		it('Handles LD with no selected qcers', function() {
+			var ldQcers = [];
+			var results = service.generateSelectedQcers(ldQcers, qcerOpts);
+
+			expect(results[1]).toBe(undefined);
+			expect(results[2]).toBe(undefined);
+			expect(results[3]).toBe(undefined);
+			expect(results[4]).toBe(undefined);
+			expect(results[5]).toBe(undefined);
+			expect(results[6]).toBe(undefined);
+		});
+
+	});
 
 	describe('Extract Topic Names', function() {
 
 		it('Extracts names from list with multiple items', function() {
-			var ldTopics = [{"subject_name":"Topic 1"},{"subject_name":"Topic 5"}];
+			var ldTopics = [{
+				"subject_name": "Topic 1"
+			}, {
+				"subject_name": "Topic 5"
+			}];
 			var results = service.extractTopicNames(ldTopics);
 
 			expect(results.length).toEqual(2);
@@ -328,7 +401,9 @@ describe('Learning Design Edit Service', function() {
 		});
 
 		it('Extracts name from list with single item', function() {
-			var ldTopics = [{"subject_name":"Topic 5"}];
+			var ldTopics = [{
+				"subject_name": "Topic 5"
+			}];
 			var results = service.extractTopicNames(ldTopics);
 
 			expect(results.length).toEqual(1);
@@ -345,7 +420,11 @@ describe('Learning Design Edit Service', function() {
 	describe('Extract Objective Names', function() {
 
 		it('Extracts names from list with multiple items', function() {
-			var ldObjectives = [{"objective_descr":"Objective 1"},{"objective_descr":"Objective 6"}];
+			var ldObjectives = [{
+				"objective_descr": "Objective 1"
+			}, {
+				"objective_descr": "Objective 6"
+			}];
 			var results = service.extractObjectiveNames(ldObjectives);
 
 			expect(results.length).toEqual(2);
@@ -354,7 +433,9 @@ describe('Learning Design Edit Service', function() {
 		});
 
 		it('Extracts name from list with single item', function() {
-			var ldObjectives = [{"objective_descr":"Objective 6"}];
+			var ldObjectives = [{
+				"objective_descr": "Objective 6"
+			}];
 			var results = service.extractObjectiveNames(ldObjectives);
 
 			expect(results.length).toEqual(1);
@@ -371,10 +452,13 @@ describe('Learning Design Edit Service', function() {
 	describe('Extract Prerequisite Names', function() {
 
 		it('Extracts names from list with multiple items', function() {
-			var ldPrerequisites = [
-				{"prereq_name":"Objective 1","prereq_type":"OBJECTIVE"},
-				{"prereq_name":"Objective 2","prereq_type":"OBJECTIVE"}
-			];
+			var ldPrerequisites = [{
+				"prereq_name": "Objective 1",
+				"prereq_type": "OBJECTIVE"
+			}, {
+				"prereq_name": "Objective 2",
+				"prereq_type": "OBJECTIVE"
+			}];
 			var results = service.extractPrerequisiteNames(ldPrerequisites);
 
 			expect(results.length).toEqual(2);
@@ -383,9 +467,10 @@ describe('Learning Design Edit Service', function() {
 		});
 
 		it('Extracts name from list with single item', function() {
-			var ldPrerequisites = [
-				{"prereq_name":"Objective 1","prereq_type":"OBJECTIVE"}
-			];
+			var ldPrerequisites = [{
+				"prereq_name": "Objective 1",
+				"prereq_type": "OBJECTIVE"
+			}];
 			var results = service.extractPrerequisiteNames(ldPrerequisites);
 
 			expect(results.length).toEqual(1);

@@ -10,6 +10,7 @@ var UserProfileController = require('./controllers/UserProfileController');
 var UserProjectsController = require('./controllers/UserProjectsController');
 var UserProfileEditController = require('./controllers/UserProfileEditController');
 var ActivityController = require('./controllers/ActivityController');
+var ActivityEditController = require('./controllers/ActivityEditController');
 var RefController = require('./controllers/RefController');
 var User = require('./models/User.js');
 var userRoles = require('../client/js/auth/AuthRoutingConfig').userRoles;
@@ -22,6 +23,7 @@ var routes = [
 		path: '/partials/*',
 		httpMethod: 'GET',
 		middleware: [
+
 			function(req, res) {
 				var requestedView = req.url.slice(1, req.url.length) + '.html';
 				res.render(requestedView);
@@ -155,6 +157,14 @@ var routes = [
 		accessLevel: accessLevels.user
 	},
 
+	// Activity Maintenance
+	{
+		path: '/learningdesign/:id/activity/:actid',
+		httpMethod: 'DELETE',
+		middleware: [ensureAuthenticated, ensureAuthorized, ensureOwner, ensureLdToAct, ActivityEditController.deleteActivity],
+		accessLevel: accessLevels.user
+	},
+
 	// User Profile Edit (don't need :id in path because these operate on currently logged in user)
 	{
 		path: '/userprofile',
@@ -270,6 +280,7 @@ var routes = [
 		path: '/*',
 		httpMethod: 'GET',
 		middleware: [
+
 			function(req, res) {
 				var role = userRoles.public,
 					username = '',
@@ -279,9 +290,9 @@ var routes = [
 					image_uri = '';
 				if (req.user) {
 					role = req.user.role;
-					username = req.user.username; 	// eg: mario@email.it
-					id = req.user.id; 							// eg: 1
-					name = req.user.name; 					// eg: Mario
+					username = req.user.username; // eg: mario@email.it
+					id = req.user.id; // eg: 1
+					name = req.user.name; // eg: Mario
 					last_name = req.user.last_name; // eg: Rossi
 					image_uri = req.user.image_uri; // eg: avatar/avatar-1-a77d55.png
 				}
@@ -355,5 +366,13 @@ function ensureOwner(req, res, next) {
 			return next();
 		}
 	});
+}
 
+// #57 wip
+function ensureLdToAct(req, res, next) {
+	var ldId = req.params.id;
+	var activityId = req.params.actid;
+	console.log('routes.ensureLdToAct: ldId = ' + ldId + ', activityId = ' + activityId);
+	// TODO call dao to verify activityId belongs to ldId, return 401 if not
+	return next();
 }
