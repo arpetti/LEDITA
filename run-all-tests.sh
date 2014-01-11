@@ -72,9 +72,15 @@ if [[ $serverTestStatus != 0 ]] || [[ $clientUnitTestStatus != 0 ]] || [[ $clien
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
 	echo "ERROR: There were test failures"
 	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+	if [ "$1" == "audio" ]; then
+		say "tests failed"
+	fi
 	exit 1
 else
 	echo "SUCCESS: All tests passed"
+	if [ "$1" == "audio" ]; then
+		say "tests passed"
+	fi
 fi
 exit 0
 
