@@ -2,6 +2,7 @@ var _ = require('underscore');
 var path = require('path');
 var passport = require('passport');
 var LdGetService = require('./service/LdGetService');
+var activityEditService = require('./service/ActivityEditService');
 var AuthController = require('./controllers/AuthController');
 var LdController = require('./controllers/LdController');
 var LdEditController = require('./controllers/LdEditController');
@@ -368,11 +369,14 @@ function ensureOwner(req, res, next) {
 	});
 }
 
-// #57 wip
 function ensureLdToAct(req, res, next) {
 	var ldId = req.params.id;
 	var activityId = req.params.actid;
-	console.log('routes.ensureLdToAct: ldId = ' + ldId + ', activityId = ' + activityId);
-	// TODO call dao to verify activityId belongs to ldId, return 401 if not
-	return next();
+	activityEditService.doesActivityBelongToLD(ldId, activityId, function(result) {
+		if (!result) {
+			return res.send(401);
+		} else {
+			return next();
+		}
+	});
 }
