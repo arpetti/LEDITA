@@ -64,7 +64,7 @@ angular.module('ledita-app')
             },
             function() {
                 $scope.alertMsg = null; // clear the error message on successful registration
-                $location.path('/');
+                $location.path('/useredit');
             },
             function(err) {
                 $scope.alertMsg = err;
