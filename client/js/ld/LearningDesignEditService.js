@@ -139,6 +139,7 @@ angular.module('ledita-app')
 				}).error(error);
 			},
 
+			//
 			deleteActivity: function(ldId, activityId, success, error) {
 				var url = '/learningdesign/' + ldId + '/activity/' + activityId;
 				$http.delete(url).success(function(res) {

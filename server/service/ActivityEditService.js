@@ -15,7 +15,7 @@ module.exports = {
 			}
 		});
 	},
-
+//
     deleteActivity: function(ldId, activityId, callback){
         dao.deleteRecord(DELETE_ACTIVITY, [ldId, activityId], function(err, result) {
             dao.handleResult(callback, err, result);

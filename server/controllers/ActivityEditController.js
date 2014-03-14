@@ -15,7 +15,7 @@ module.exports = {
                 res.send(200);
             }}
             );
-
+//
 		//console.log('ActivityEditController.deleteActivity: activityId = ' + activityId);
 		//TODO: call service to delete activity
 		//res.send(200);
