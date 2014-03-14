@@ -2,7 +2,7 @@ var m = require('../validate/ValidationMessages');
 var _ = require('underscore');
 
 var ACCEPTED_MIME_TYPES = ['image/gif', 'image/jpeg', 'image/pjpeg', 'image/png'];
-var MAX_AVATAR_SIZE = 200 * 1024; // 200K
+var MAX_AVATAR_SIZE = 2000 * 1024; // 200K
 
 module.exports = {
 	
