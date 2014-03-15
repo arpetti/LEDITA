@@ -442,14 +442,15 @@ angular.module('ledita-app')
 			var handleDeleteActivity = function(ldId, activityId) {
 				LDEditService.deleteActivity(ldId, activityId,
 					function(res) {
-						// FIXME ngDialog.close might be interfering so this never gets displayed
-						$scope.ldUpdateErrors = "Modifica salvata!";
                         $scope.levels = res;
-					},
+
+						// FIXME ngDialog.close might be interfering so this never gets displayed
+                    },
 					function(err) {
 						$log.error(err);
 						$scope.ldUpdateErrors = err; // TODO UI to display these
 					});
+
 			};
 
 		}

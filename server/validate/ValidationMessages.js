@@ -121,3 +121,6 @@ module.exports.DRAG_DROP_INVALID = 'Spostamento non valido.';
 module.exports.INVALID_MOVE_MAX_POSITION = 'Non è possibile muovere nella posizione massima quando il livello è pieno.';
 module.exports.INVALID_MOVE_LEVEL_POSITION_LEFT = 'Non è possibile spostare un\'attività alla sua immediata sinistra.';
 module.exports.INVALID_MOVE_LEVEL_POSITION_RIGHT = 'Non è possibile spostare un\'attività alla sua immediata destra.';
+
+// Delete Activity
+module.exports.DELETE_ACTIVITY_FAIL = 'Non è possibile rimuovere questa attività, per favore, tenta più tardi.';
