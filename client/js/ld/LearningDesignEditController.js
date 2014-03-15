@@ -444,6 +444,7 @@ angular.module('ledita-app')
 					function(res) {
 						// FIXME ngDialog.close might be interfering so this never gets displayed
 						$scope.ldUpdateErrors = "Modifica salvata!";
+                        $scope.levels = res;
 					},
 					function(err) {
 						$log.error(err);

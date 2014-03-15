@@ -1,6 +1,7 @@
 var activityEditDao = require('../dao/ActivityEditDao');
-var mysql = require('mysql')
+var mysql = require('mysql');
 var dao = require('../dao/Dao.js');
+var activityService = require('../service/ActivityService.js');
 
 var DELETE_ACTIVITY = 'DELETE FROM composes WHERE ld_id = ? AND activity_id = ?';
 
@@ -18,7 +19,9 @@ module.exports = {
 //
     deleteActivity: function(ldId, activityId, callback){
         dao.deleteRecord(DELETE_ACTIVITY, [ldId, activityId], function(err, result) {
-            dao.handleResult(callback, err, result);
+            activityService.getLDActivityStructure(ldId, function(err, result) {
+                callback(null, result)
+            });
         });
 
 }}
