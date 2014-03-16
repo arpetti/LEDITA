@@ -35,9 +35,10 @@
                         </div>
                         <div class="rowTable" ng-repeat="profile in uniqueUsers | filter:search | orderBy:predicate:reverse" >
                             <div class="rowUserLink">
-                                <a ng-href="/user/{{ profile.user_id }}">
+                                <a ng-href="/user/{{ profile.id }}">
                                     <div class="colTable colUser0">
-                                        <img id="picPng" ng-src="../img/pics/user{{ profile.id }}.png" class="user-pic">
+                                        <img ng-show="profile.uri" id="userAvatarImage" ng-src="/{{profile.uri}}" alt="User Avatar" class="img-rounded user-pic"/>
+                                        <img ng-show="!profile.uri" id="userAvatarNullImage" ng-src="/img/user.png" alt="User Avatar" class="img-rounded user-pic"/>
                                     </div>
                                     <div class="colTable colUser1">
                                         <p>{{ profile.name }}</p>
