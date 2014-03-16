@@ -44,8 +44,11 @@
                                 <div class="colTable colLD3">
                                     <p>{{ project.ld_scope }}</p>
                                 </div>
-                                <div class="colTable colLD4">
-                                    <p>{{ project.ld_publication }}  </p>
+                                <div class="colTable colLD4" ng-show="project.ld_publication == 1">
+                                    <p>Pubblico</p>
+                                </div>
+                                <div class="colTable colLD4" ng-show="project.ld_publication == 0">
+                                    <p>Privato</p>
                                 </div>
                                 <div class="colTable colLD5">
                                     <p>{{ project.ld_creation_date | date:'d-M-yyyy' }} </p>
