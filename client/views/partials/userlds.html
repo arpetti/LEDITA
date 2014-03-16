@@ -13,7 +13,7 @@
 
             </div>
             <div id="contentBodyUser">
-                <div class="ldTable">
+                <div class="ldTable" ng-show="myProjects != '' ">
                     <div class="headerUserTable">
                         <div class="colTable colLD1">
                             <p><a href="" ng-click="predicate = 'ld_name'; reverse=!reverse" class="whiteText">Nome del progetto <i class="icon-arrow-up icon-white"></i><i class="icon-arrow-down icon-white"></i></a></p>
@@ -54,8 +54,15 @@
                             </a>
                         </div>
                         <div class="clearfix"></div>
+
                     </div>
                 </div>
+                <div ng-show="myProjects == '' ">
+                   <br>
+                    <h4 class="centered">Non hai ancora creato nessun progetto.</h4>
+                <br>
+                </div>
+
                 <div class="clearfix"></div>
             </div>
         </div>
