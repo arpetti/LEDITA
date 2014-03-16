@@ -1,6 +1,6 @@
 angular.module('ledita-app')
 .controller('ActCreateCtrl',
-['$scope', '$rootScope', 'TypeaheadHelper', '$log', 'LDEditService', 'ActivityService', 
+['$scope', '$rootScope', 'TypeaheadHelper', '$log', 'LDEditService', 'ActivityService',
 	function($scope, $rootScope, TypeaheadHelper, $log, LDEditService, ActivityService) {
 
 	$scope.selectedTechnologies = [];
@@ -55,7 +55,7 @@ angular.module('ledita-app')
 	        	ActivityService.resetResources();
 	        	$log.info('Activity created successfully');
 	        	$rootScope.$broadcast('closeActivityModal');
-	        	$rootScope.$broadcast('activityCreated');
+	        	$rootScope.$broadcast('refreshLDActivityStructure');
 	        },
 	        function(err) {
 	        	$log.error(err);

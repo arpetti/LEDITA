@@ -38,7 +38,7 @@ describe('User Profile Avatar Validator', function() {
 	it('Validates max size', function() {
 		var req = {files: {
 			userProfileImage: {
-				size: 500000,
+				size: 2058000,
 				type: 'image/gif'
 			}
 		}};

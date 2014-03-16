@@ -1,6 +1,6 @@
 angular.module('ledita-app')
-	.controller('LdEditCtrl', ['$scope', '$log', '$routeParams', '$location', '$timeout', 'TypeaheadHelper', 'LDService', 'LDEditService', 'Home', 'ngDialog',
-		function($scope, $log, $routeParams, $location, $timeout, TypeaheadHelper, LDService, LDEditService, Home, ngDialog) {
+	.controller('LdEditCtrl', ['$scope', '$rootScope', '$log', '$routeParams', '$location', '$timeout', 'TypeaheadHelper', 'LDService', 'LDEditService', 'Home', 'ngDialog',
+		function($scope, $rootScope, $log, $routeParams, $location, $timeout, TypeaheadHelper, LDService, LDEditService, Home, ngDialog) {
 
 			$scope.ldid = $routeParams.ldid;
 			$scope.selectedQcers = {};
@@ -41,7 +41,7 @@ angular.module('ledita-app')
 
 			initPageData();
 
-			$scope.$on('activityCreated', function(event) {
+			$scope.$on('refreshLDActivityStructure', function(event) {
 				$timeout(function() {
 					initLdStructure();
 				}, 10);
@@ -442,10 +442,8 @@ angular.module('ledita-app')
 			var handleDeleteActivity = function(ldId, activityId) {
 				LDEditService.deleteActivity(ldId, activityId,
 					function(res) {
-                        $scope.levels = res;
-
-						// FIXME ngDialog.close might be interfering so this never gets displayed
-                    },
+            $rootScope.$broadcast('refreshLDActivityStructure');
+          },
 					function(err) {
 						$log.error(err);
 						$scope.ldUpdateErrors = err; // TODO UI to display these

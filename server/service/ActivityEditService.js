@@ -7,7 +7,7 @@ var activityService = require('../service/ActivityService.js');
 var DELETE_ACTIVITY = 'DELETE FROM composes WHERE ld_id = ? AND activity_id = ?';
 
 module.exports = {
-	
+
 	doesActivityBelongToLD: function(ldId, activityId, callback) {
 		activityEditDao.getComposesCount(ldId, activityId, function(err, result) {
 			if(err || result[0].count_id !== 1){
@@ -17,7 +17,7 @@ module.exports = {
 			}
 		});
 	},
-//
+
     deleteActivity: function(ldId, activityId, callback){
         dao.deleteRecord(DELETE_ACTIVITY, [ldId, activityId], function(err, result){
             if(err){
