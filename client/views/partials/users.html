@@ -37,10 +37,10 @@
                             <div class="rowUserLink">
                                 <a ng-href="/user/{{ profile.user_id }}">
                                     <div class="colTable colUser0">
-                                        <img ng-src="../img/pics/user{{ profile.user_id }}.png" class="user-pic">
+                                        <img id="picPng" ng-src="../img/pics/user{{ profile.id }}.png" class="user-pic">
                                     </div>
                                     <div class="colTable colUser1">
-                                        <p>{{ profile.user_name }}</p>
+                                        <p>{{ profile.name }}</p>
                                     </div>
                                     <div class="colTable colUser2">
                                         <p>{{ profile.last_name }}</p>
